@@ -9,6 +9,13 @@ Requirements:
 - Apache or IIS
 - cgminer (for monitoring rigs)
 - MPOS Mining Pool account (many pools support this)
+- BTC-e account (for obtaining currency rates)
+
+Planned:
+--
+- cgminer remote control
+- Streaming feed of Subreddits
+- Links to CryptoCurrency resources/news/tuts/etc.
 
 Installation:
 --
