@@ -1,7 +1,7 @@
 rigWatch
 ========
 
-Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other APIs, all in one responsive UI.
+Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other APIs, all in one responsive UI. Protected with a login, but also offers a read-only/public view (if desired).
 
 Requirements:
 --
@@ -21,7 +21,8 @@ Installation:
 --
 
 1. Install (if required) a web server such as Apache or Microsoft IIS. 
-  1.  If you're running Windows, and have neither IIS nor PHP installed, there is a simple tool from Microsoft called [Web Platform Installer](http://www.microsoft.com/web/downloads/platform.aspx) that can do this painlessly. 
+  1. If you're running Windows, and have neither IIS nor PHP installed, there is a simple tool from Microsoft called [Web Platform Installer](http://www.microsoft.com/web/downloads/platform.aspx) that can do this painlessly. 
+  1. Windows/IIS users may also need to add the '.woff' MIME type, which has a value of 'application/font-woff'
 
 2. Setup a new site and point the home/root directory to this project. 
 
@@ -39,3 +40,7 @@ You'll want to ensure you're running cgminer with API-Access enabled, here's an 
 Hope you enjoy what we're trying to do here, and thanks to all of the other similar OSS projects like this for help and inspiration.
 
 Our own measly rigs would appreciate any catalyst donations to **[TODO] WALLET ADDRESS [/TODO] - Thanks in advance!**
+
+We owe thanks to the following projects:
+--
+- [Messenger jQuery plugin](http://github.hubspot.com/messenger/docs/welcome/)
