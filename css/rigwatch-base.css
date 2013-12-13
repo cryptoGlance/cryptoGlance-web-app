@@ -2,12 +2,47 @@
 	by George Merlocco (george@merloc.co) // https://github.com/scar45/
 */
 
+html {
+   background: url(../images/dark_mosaic.png) repeat fixed #272B30;
+}
+
 body {
-   background: url(../images/rigwatch-watermark.png) no-repeat bottom right fixed #272B30;
+   background: url(../images/rigwatch-watermark.png) no-repeat bottom right fixed transparent;
+   font-family: robotolight, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   font-family: captureit, sans-serif;
+   color: #33b5e5;
+}
+
+.green {
+    color: #62C462;
+}
+
+.orange {
+    color: #F89406;
+}
+
+.red {
+    color: #EE5F5B;
+}
+
+.label {
+    font-size: 85%;
+    border-radius: 0.25em;
+    text-shadow: 0 1px 0 #000;
+    font-family: robotoblack;
+    font-weight: normal;
+}
+
+.navbar {
+    box-shadow: 0 5px 10px rgba(0,0,0,0.8);
+    border-bottom: 1px solid #555;
 }
 
 a.navbar-brand {
-   padding: 0 15px 4px;
+   padding: 5px 15px 4px;
 }
 
 a.navbar-brand img {
@@ -18,6 +53,61 @@ a.navbar-brand img {
 .navbar-nav {
     margin: 15px 0 15px 15px;
     float: right;
+    width: 100%;
+}
+
+.navbar-collapse {
+    max-height: 420px;
+    box-shadow: inset 0px 0px 20px #111;
+}
+
+.nav-pills > li {
+    float: none;
+}
+
+.nav-pills li a {
+    font-size: 23px;
+    font-family: robotolight;
+}
+
+a.dropdown-toggle:active, a.dropdown-toggle:focus {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-image: -webkit-linear-gradient(#2f7d2f, #379337 40%, #3da23d);
+    background-image: linear-gradient(#2f7d2f, #379337 40%, #3da23d);
+    background-repeat: no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2f7d2f', endColorstr='#ff3da23d', GradientType=0);
+    filter: none;
+}
+
+.navbar-nav i {
+    color: #999;
+    font-size: 24px;
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+}
+
+.navbar-nav li.open .dropdown-menu li:hover i, .navbar-nav li.open i {
+    color: #fff;
+}
+
+.navbar-toggle {
+    color: #888;
+    margin-top: 12px;
+    padding: 0px 9px;
+    font-size: 28px;
+}
+
+.navbar-toggle:active, .navbar-toggle:focus {
+    color: #ddd;
+}
+
+.navbar-nav li.open .dropdown-menu i {
+    color: #999;
+    margin: 0px 7px 0px -8px;
 }
 
 .navbar-nav > li > a {
@@ -25,22 +115,225 @@ a.navbar-brand img {
     padding-bottom: 10px;
 }
 
+.dropdown-header {
+    font-size: 16px;
+}
+
+.navbar-nav .open .dropdown-menu > li > a {
+    line-height: 32px;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: inherit;
+    box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.7)
+}
+
+.navbar-nav .open .dropdown-menu {
+    background: #222;
+}
+
+
+.container.sub-nav {
+    padding-top: 100px;
+}
+
+.container h1 {
+    padding: 0 20px;
+}
+
+#icon-litecoin {
+    max-height: 48px;
+    width: auto;
+}
+
+.panel-primary > .panel-heading {
+    background: #047195;
+    background: -moz-linear-gradient(left, #047195 0%, #33b5e5 49%, #faec03 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#047195), color-stop(49%,#33b5e5), color-stop(100%,#faec03));
+    background: -webkit-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
+    background: -o-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
+    background: -ms-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
+    background: linear-gradient(to right, #047195 0%,#33b5e5 49%,#faec03 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#faec03',GradientType=1 );
+}
+
 .panel-title {
     font-size: 26px;
-    text-shadow: 0px 1px 0 #000;
+    text-shadow: 0px 2px 0 #000;
+    letter-spacing: 1px;
+}
+
+.panel-title i {
+    margin-right: 5px;
 }
 
 .panel-body {
-    padding: 15px 15px 32px;
+    padding: 10px;
+    overflow: auto;
+}
+.panel-body-stats {
+    text-align: center;
 }
 
-.panel .progress {
+.panel-body .stat-pair {
+    border: 1px solid #33b5e5;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+}
+
+.panel-body .stat-pair .stat-label, .panel-body .stat-pair .stat-value {
+    background: #555;
+    border-radius: 4px 4px 0 0;
+    display: block;
+    padding: 3px 15px;
+    font-size: 24px;
+    font-family: bebas, robotocondensed, sans-serif;
+    text-shadow: 0 1px 0 #000;
+}
+
+.panel-body .stat-pair .stat-label {
+    background: url(../images/darkdenim3.png) repeat #424750;
+    font-family: robotocondensed;
+    text-transform: lowercase;
+    color: #aaa;
+}
+
+.panel-body .stat-pair .stat-value {
+    background: url(../images/inflicted.png) repeat #111;
+    border-top: 1px dotted #33b5e5;
+    font-size: 42px;
+    border-radius: 0;
+}
+
+.panel-body .stat-pair .stat-value i {
+    font-size: 30px;
+}
+
+.panel-body .stat-pair .stat-value i.health-good {
+    color: #62c462;
+}
+
+.panel-body .stat-pair .stat-value i.health-warn {
+    color: #f89406;
+}
+
+.panel-body .stat-pair .stat-value i.health-danger {
+    color: #EE5F5B;
+}
+
+.panel-body .progress {
+    height: 10px;
     margin-bottom: 0;
+    border-radius: 0 0 3px 3px;
 }
 
 .panel-footer {
    overflow: auto;
 }
+
+.panel-footer .pull-left, .panel-footer .pull-right {
+    width: 50%;
+}
+
+.panel-footer .pull-right {
+    text-align: right;
+}
+
+.panel-footer h3 {
+    margin: 7px 0 0;
+    font-family: bebas, sans-serif;
+    text-shadow: 0 2px 0 #000;
+}
+
+.panel-footer button {
+   margin-left: 10px;
+   font-size: 17px;
+   padding: 1px 10px 5px;
+}
+
+.panel-footer i {
+   margin-right: 4px;
+   font-size: 20px;
+   position: relative;
+   top: 3px;
+}
+
+.panel-footer h3 i {
+   top: 1px;
+}
+
+.panel-footer .label {
+    margin: 11px 10px 0 0;
+    color: #040;
+    text-shadow: 0 -1px 0 #ddd;
+    float: left;
+}
+
+.panel-footer .label i {
+    font-size: 85%;
+    top: 0;
+}
+
+
+#footer {
+    margin-top: 50px;
+}
+
+#footer .well {
+    text-align: center;
+    color: #777;
+    text-shadow: 0 1px 0 #000;
+}
+
+
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .navbar-collapse {
+        box-shadow: none;
+    }
+
+    .navbar-nav {
+        width: auto;
+        float: right;
+        margin: 14px 0px 13px 20px;
+    }
+
+    .nav-pills > li {
+        float: left;
+    }
+    
+    .navbar-nav .open .dropdown-menu {
+        background: #3A3F44;
+    }
+    
+    .navbar-nav .open .dropdown-menu > li > a {
+        line-height: 24px;
+        font-size: 19px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+
+
+
+
 	
 /* Font Support 
 
