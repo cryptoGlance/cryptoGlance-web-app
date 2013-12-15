@@ -10,8 +10,8 @@
             <big>This will remove %RIGNAME% // %POOLNAME% from your dashboard if you continue.</big>
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> No, keep it!</button>
            <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal"><i class="icon icon-circledelete"></i> Yes, good riddance!</button>
+           <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> No, keep it!</button>
          </div>
       </form>
     </div><!-- /.modal-content -->

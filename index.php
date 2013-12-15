@@ -402,12 +402,12 @@
 
             <div class="panel-footer">
                <div class="pull-left">
-                  <span class="label label-success"><i class="icon icon-ok"></i> Healthy</span> 
+                  <!-- <span class="label label-success"><i class="icon icon-ok"></i> Healthy</span> -->
                   <h3><i class="icon icon-uptime"></i> Uptime: 7m 01s</h3>
                </div>
                <div class="pull-right">
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editRig" data-backdrop="static"><i class="icon icon-edit"></i> Edit Rig</button>
-                  <button type="button" class="btn btn-default"><i class="icon icon-statistics"></i> View All Stats</button>
+                  <!-- <button type="button" class="btn btn-default"><i class="icon icon-statistics"></i> View All Stats</button> -->
                </div>
             </div>
         </div>
