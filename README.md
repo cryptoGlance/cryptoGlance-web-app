@@ -14,6 +14,7 @@ Requirements:
 Planned:
 --
 - cgminer remote control
+- Switching of currencies (for first panel group, showing rates, etc.)
 - Streaming feed of Subreddits
 - Links to CryptoCurrency resources/news/tuts/etc.
 

@@ -19,6 +19,29 @@ function externalLinks() {
 //
 $(document).ready(function() {
 
-    externalLinks();
+   externalLinks();
+   
+   $(".alert").alert();
 
+   $('#btnSaveHost').click(function() {
+      $("#alert-saved-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+   })    
+
+   $('#btnAddHost').click(function() {
+      $("#alert-added-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+   })    
+
+   $('#btnSaveHost').click(function() {
+      $("#alert-saved-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+   })    
+
+   $('#btnAddPool').click(function() {
+      $("#alert-added-pool").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+   })    
+
+   $('#myTab a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+   })    
+    
 });

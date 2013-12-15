@@ -9,7 +9,7 @@ Currency.prototype.getLtcUsd = function() {
         url: '/rigwatch/includes/ltc_usd.php',
         dataType: 'json',
         success: function(data) {
-            $('#ltc-usd').find('div.stat-value').html('$' + data.ticker.low);
+            $('.ltc-usd').find('div.stat-value').html('$' + data.ticker.low);
         }
     });
 };
@@ -32,7 +32,7 @@ Currency.prototype.getLctBtc = function() {
         url: '/rigwatch/includes/ltc_btc.php',
         dataType: 'json',
         success: function(data) {
-            $('#ltc-btc').find('div.stat-value').html(data.ticker.low);
+            $('.ltc-btc').find('div.stat-value').html(data.ticker.low);
         }
     });
 };

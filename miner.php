@@ -46,7 +46,7 @@ $poolinputs = false;
 #
 # Set $rigs to an array of your cgminer rigs that are running
 #  format: 'IP:Port' or 'Host:Port' or 'Host:Port:Name'
-$rigs = array('192.168.1.42:3001');
+$rigs = array('127.0.0.1:3001');
 #
 # Set $mcast to true to look for your rigs and ignore $rigs
 $mcast = false;

@@ -16,16 +16,72 @@ h1, h2, h3, h4, h5, h6 {
    color: #33b5e5;
 }
 
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
 .green {
-    color: #62C462;
+    color: #62C462 !important;
 }
 
 .orange {
-    color: #F89406;
+    color: #F89406 !important;
 }
 
 .red {
-    color: #EE5F5B;
+    color: #EE5F5B !important;
+}
+
+.blue {
+    color: #33b5e5 !important;
+}
+
+.btn-lg {
+    padding: 9px 16px;
+    font-family: robotoblack;
+}
+
+.btn-lg i {
+    margin-right: 3px;
+}
+
+.alert {
+    padding: 5px 15px;
+    font-size: 19px;
+    text-shadow: 0 1px 0 #444;
+    font-family: robotoblack;
+}
+
+.alert-dismissable .close {
+    top: 2px;
+    right: -3px;
+}
+
+.close {
+    opacity: 0.5;
+}
+
+.panel-heading .close {
+    position: relative;
+    top: 7px;
+}
+    
+.form-control {
+    background: #aaa;
+    color: #444;
+}
+
+.form-control:active, .form-control:focus {
+    background: #eee;
+    color: #111;
 }
 
 .label {
@@ -34,6 +90,67 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: 0 1px 0 #000;
     font-family: robotoblack;
     font-weight: normal;
+}
+
+.modal {
+    outline: 0;
+}
+
+.modal-dialog {
+    margin: 30px 20px;
+}
+
+.modal-content {
+    background-color: #414c57;
+    border: 1px solid #33b5e5;
+    box-shadow: 0 0 40px rgba(51, 181, 229, 0.6);
+}
+
+.modal-header {
+    border-bottom: 1px solid #111;
+    padding: 10px 15px;
+}
+
+.modal-header i {
+    margin-right: 5px;
+}
+
+.modal-body {
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #111;
+    background: #29313a;
+}
+
+.modal-body .alert {
+    display: none;
+}
+
+.modal-footer {
+    text-align: center;
+    border-top: 1px solid #777;
+    line-height: 60px;
+}
+
+.modal-body label.control-label {
+    font-size: 23px;
+    padding-top: 2px;
+    font-family: robotolight;
+    font-weight: normal;
+}
+
+.modal-body input.form-control, 
+.modal-body textarea.form-control {
+    font-size: 23px;
+    padding: 8px 8px 7px;
+    font-family: roboto;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #000;
+}
+
+.modal-footer {
+    margin-top: 0;
+    padding: 13px 20px 15px;
+    border-top: 1px solid #
 }
 
 .navbar {
@@ -57,7 +174,7 @@ a.navbar-brand img {
 }
 
 .navbar-collapse {
-    max-height: 420px;
+    max-height: 100%;
     box-shadow: inset 0px 0px 20px #111;
 }
 
@@ -68,6 +185,10 @@ a.navbar-brand img {
 .nav-pills li a {
     font-size: 23px;
     font-family: robotolight;
+}
+
+.nav-pills li a:focus {
+    outline: 0;
 }
 
 a.dropdown-toggle:active, a.dropdown-toggle:focus {
@@ -140,11 +261,23 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 .container h1 {
     padding: 0 20px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.container h1 button {
+    font-size: 20px;
+    letter-spacing: 2px;
 }
 
 #icon-litecoin {
     max-height: 48px;
     width: auto;
+}
+
+.panel-nobg {
+    background: none;
+    border: none;
 }
 
 .panel-primary > .panel-heading {
@@ -168,10 +301,119 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     margin-right: 5px;
 }
 
+.panel-rig ul {
+    margin: 20px 20px 0;
+}
+
+.panel-rig ul li {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+}
+
+.panel-rig ul li a {
+    font-family: roboto;
+    font-weight: bold;
+    font-size: 18px;
+    color: #bbb;
+}
+
+
+.panel-rig ul li a.pill-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(122, 130, 136);
+    border-color: rgb(122, 130, 136);
+    background-image: linear-gradient(rgb(138, 145, 150), rgb(122, 130, 136) 60%, rgb(112, 120, 125));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+.panel-rig ul li a.pill-primary:hover, .panel-rig ul li.active a.pill-primary {
+    background-image: linear-gradient(rgb(64, 68, 72), rgb(78, 84, 88) 40%, rgb(88, 94, 98));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+
+.panel-rig ul li a.pill-info {
+    color: rgb(255, 255, 255);
+    background-color: rgb(91, 192, 222);
+    border-color: rgb(91, 192, 222);
+    background-image: linear-gradient(rgb(116, 202, 227), rgb(91, 192, 222) 60%, rgb(74, 185, 219));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+.panel-rig ul li a.pill-info:hover, .panel-rig ul li.active a.pill-info {
+    background-image: linear-gradient(rgb(32, 130, 159), rgb(37, 150, 184) 40%, rgb(40, 164, 201));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+
+.panel-rig ul li a.pill-success {
+    color: rgb(255, 255, 255);
+    background-color: rgb(98, 196, 98);
+    border-color: rgb(98, 196, 98);
+    background-image: linear-gradient(rgb(120, 204, 120), rgb(98, 196, 98) 60%, rgb(83, 190, 83));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+.panel-rig ul li a.pill-success:hover, .panel-rig ul li.active a.pill-success {
+    background-image: linear-gradient(rgb(47, 125, 47), rgb(55, 147, 55) 40%, rgb(61, 162, 61));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+
+.panel-rig ul li a.pill-warning {
+    color: rgb(255, 255, 255);
+    background-color: rgb(248, 148, 6);
+    border-color: rgb(248, 148, 6);
+    background-image: linear-gradient(rgb(250, 161, 35), rgb(248, 148, 6) 60%, rgb(228, 136, 6));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+.panel-rig ul li a.pill-warning:hover, .panel-rig ul li.active a.pill-warning {
+    background-image: linear-gradient(rgb(128, 77, 3), rgb(158, 95, 4) 40%, rgb(178, 106, 4));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+.panel-rig ul li a.pill-danger {
+    color: rgb(255, 255, 255);
+    background-color: rgb(238, 95, 91);
+    border-color: rgb(238, 95, 91);
+    background-image: linear-gradient(rgb(241, 122, 119), rgb(238, 95, 91) 60%, rgb(236, 77, 73));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+.panel-rig ul li a.pill-danger:hover, .panel-rig ul li.active a.pill-danger {
+    background-image: linear-gradient(rgb(187, 24, 19), rgb(215, 28, 22) 40%, rgb(231, 32, 26));
+    background-repeat: no-repeat;
+    filter: none;
+}
+
+.panel-rig ul li a.pill-danger {
+}
+
+.panel-rig ul li i {
+    margin: 0 0 0 9px;
+}
+
 .panel-body {
     padding: 10px;
     overflow: auto;
 }
+
+.panel-pool .panel-body {
+    background: #072935;
+}
+
 .panel-body-stats {
     text-align: center;
 }
@@ -181,15 +423,15 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     border-radius: 4px;
     display: inline-block;
     text-align: center;
-    margin: 10px;
+    margin: 5px 0;
 }
 
 .panel-body .stat-pair .stat-label, .panel-body .stat-pair .stat-value {
     background: #555;
     border-radius: 4px 4px 0 0;
     display: block;
-    padding: 3px 15px;
-    font-size: 24px;
+    padding: 5px 15px 0;
+    font-size: 14px;
     font-family: bebas, robotocondensed, sans-serif;
     text-shadow: 0 1px 0 #000;
 }
@@ -199,17 +441,17 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     font-family: robotocondensed;
     text-transform: lowercase;
     color: #aaa;
+    padding: 0px 15px 5px;
 }
 
 .panel-body .stat-pair .stat-value {
     background: url(../images/inflicted.png) repeat #111;
-    border-top: 1px dotted #33b5e5;
-    font-size: 42px;
+    font-size: 22px;
     border-radius: 0;
 }
 
 .panel-body .stat-pair .stat-value i {
-    font-size: 30px;
+    font-size: 18px;
 }
 
 .panel-body .stat-pair .stat-value i.health-good {
@@ -243,9 +485,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-footer h3 {
-    margin: 7px 0 0;
+    margin: 15px 0 0;
     font-family: bebas, sans-serif;
     text-shadow: 0 2px 0 #000;
+    display: inline-block;
 }
 
 .panel-footer button {
@@ -288,13 +531,21 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     text-shadow: 0 1px 0 #000;
 }
 
+/* X-Small devices (small tablets, 680px and up) */
+@media (min-width: 680px) {
 
+    .panel-footer h3 {
+        margin: 8px 0 0;
+    }
 
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
+}    
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+
+    .modal-dialog {
+        margin: 40px auto;
+    }
 
     .navbar-collapse {
         box-shadow: none;
@@ -317,6 +568,35 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     .navbar-nav .open .dropdown-menu > li > a {
         line-height: 24px;
         font-size: 19px;
+    }
+
+    .container h1 {
+        font-size: 54px;
+    }
+
+    .container h1 button {
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+
+    .panel-body .stat-pair {
+        margin: 10px;
+    }
+
+    .panel-body .stat-pair .stat-label, .panel-body .stat-pair .stat-value {
+        font-size: 24px;
+    }
+    
+    .panel-body .stat-pair .stat-value {
+        font-size: 42px;
+    }
+    
+    .panel-body .stat-pair .stat-value i {
+        font-size: 30px;
+    }
+    
+    .panel-footer h3 {
+        margin: 7px 0 0;
     }
 }
 
