@@ -2,7 +2,7 @@
 
       
       <div class="container sub-nav">
-      
+
          <h1>Litecoin <img id="icon-litecoin" src="images/icon-litecoin.png" alt="" /> Stats</h1>
          
          <div id="top-ltc-panel" class="panel panel-primary panel-nobg">
@@ -69,6 +69,8 @@
          <?php require_once("includes/modal-add_pool.php"); ?>
          <?php require_once("includes/modal-edit_pool.php"); ?>
 
+         <?php require_once("includes/modal-switch_pool.php"); ?>
+         
          <?php require_once("includes/modal-delete_prompt.php"); ?>
 
          <div id="rig-hostname-1" class="panel panel-primary panel-rig">
@@ -554,7 +556,7 @@
             </div><!-- / .panel-body -->
             <div class="panel-footer text-right">
                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-edit"></i> Edit Pool</button>
-               <button type="button" class="btn btn-default"><i class="icon icon-refresh"></i> Switch Pool</button>
+               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#switchPool" data-backdrop="static"><i class="icon icon-refreshalt"></i> Switch Pool</button>
             </div>
          </div>
          <h1><button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPool" data-backdrop="static"><i class="icon icon-circleadd"></i> Add Pool &raquo;</button></h1>

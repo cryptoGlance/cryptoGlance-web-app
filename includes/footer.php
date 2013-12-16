@@ -15,6 +15,7 @@
       <script src="js/bootstrap.min.js"></script>
       <script src="js/messenger.min.js"></script>
       <script src="js/messenger-theme-flat.js"></script>
+      <script src="js/prettyCheckable.min.js"></script>
       <script src="js/currency.js"></script>
       <script src="js/rigwatch-ui.js"></script>
    </body>

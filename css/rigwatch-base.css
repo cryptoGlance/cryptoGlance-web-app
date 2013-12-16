@@ -125,6 +125,17 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
 }
 
+.modal-body .checkbox label {
+    display: block;
+}
+
+.modal-body .checkbox label span {
+    position: relative;
+    top: -6px;
+    font-size: 23px;
+    left: -8px;
+}
+
 .modal-footer {
     text-align: center;
     border-top: 1px solid #777;

@@ -20,7 +20,11 @@ function externalLinks() {
 $(document).ready(function() {
 
    externalLinks();
-   
+
+   $('input[type=checkbox], input[type=radio]').prettyCheckable({
+      color: 'blue'
+   });
+  
    $(".alert").alert();
 
    $('#btnSaveHost').click(function() {

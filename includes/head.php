@@ -14,8 +14,8 @@
       <link href="css/messenger-theme-flat.css" rel="stylesheet">
       <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
       <link href="css/whhg.css" rel="stylesheet">
-      <!-- CSS3 Fresh Animations from daneden (https://github.com/daneden/animate.css) styles -->
-      <link href="css/animate.css" rel="stylesheet">
+      <!-- jQuery PrettyCheckable by arthurgouveia (http://arthurgouveia.com/prettyCheckable/) styles -->
+      <link href="css/prettyCheckable.css" rel="stylesheet">
       <!-- Custom RigWatch styles -->
       <link href="css/rigwatch-base.css" rel="stylesheet">
       

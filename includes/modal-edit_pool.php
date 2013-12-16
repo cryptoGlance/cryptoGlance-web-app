@@ -5,37 +5,31 @@
       <form class="form-horizontal" role="form">
          <div class="modal-header">
            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-           <h2 class="modal-title" id="editPoolLabel"><i class="icon icon-edit"></i> Edit This Mining Pool</h2>
+           <h2 class="modal-title" id="editPoolLabel"><i class="icon icon-edit"></i> Edit This Pool</h2>
          </div>
          <div class="modal-body">
-               <div id="alert-saved-pool" class="alert alert-success alert-dismissable">
-                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                 <strong>Success!</strong> You've saved this pool.
-               </div>         
-              <div class="form-group">
-                <label for="inputRigLabel" class="col-sm-3 control-label">Label</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="inputRigLabel">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputRigIP" class="col-sm-5 control-label">IP Address</label>
-                <div class="col-sm-5">
-                  <input type="text" class="form-control" id="inputRigIP">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputRigPort" class="col-sm-5 control-label">cgminer Port</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" id="inputRigPort" maxLength="5">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputRigHashrate" class="col-sm-5 control-label">Desired Hashrate <small>(MH/s)</small></label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" id="inputRigHashrate" maxLength="5">
-                </div>
-              </div>
+            <div id="alert-saved-pool" class="alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <strong>Success!</strong> You've saved this pool.
+            </div>         
+           <div class="form-group">
+             <label for="inputPoolLabel" class="col-sm-3 control-label">Label</label>
+             <div class="col-sm-9">
+               <input type="text" class="form-control" id="inputPoolLabel">
+             </div>
+           </div>
+           <div class="form-group">
+             <label for="inputPoolIP" class="col-sm-3 control-label">Pool URL</label>
+             <div class="col-sm-9">
+               <input type="text" class="form-control" id="inputPoolIP">
+             </div>
+           </div>
+           <div class="form-group">
+             <label for="inputPoolPort" class="col-sm-3 control-label">API Key</label>
+             <div class="col-sm-9">
+               <input type="text" class="form-control" id="inputPoolPort" maxLength="5">
+             </div>
+           </div>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static"><i class="icon icon-circledelete"></i> Delete</button> 
