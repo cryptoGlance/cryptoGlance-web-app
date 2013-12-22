@@ -71,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .panel-heading .close {
     position: relative;
-    top: 7px;
+    top: 3px;
 }
     
 .form-control {
@@ -174,8 +174,9 @@ a.navbar-brand {
 }
 
 a.navbar-brand img {
-   height: 64px;
-   width: auto;
+    height: 58px;
+    width: auto;
+    position: absolute;
 }
 
 .navbar-nav {
@@ -187,6 +188,19 @@ a.navbar-brand img {
 .navbar-collapse {
     max-height: 100%;
     box-shadow: inset 0px 0px 20px #111;
+}
+
+#dash-add-panel {
+    margin: 0 15px 0 -5px;
+}
+
+#dash-add-panel a i {
+    margin-right: 0;
+    color: #fff;
+}
+
+#nav-login-button {
+    display: none;
 }
 
 .nav-pills > li {
@@ -228,9 +242,9 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 .navbar-toggle {
     color: #888;
-    margin-top: 12px;
-    padding: 0px 9px;
     font-size: 28px;
+    margin: -2px 15px 2px;
+    padding: 5px 10px 0;
 }
 
 .navbar-toggle:active, .navbar-toggle:focus {
@@ -267,14 +281,18 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 
 .container.sub-nav {
-    padding-top: 100px;
+    padding-top: 140px;
 }
 
 .container h1 {
-    padding: 0 20px;
-    font-size: 36px;
-    text-align: center;
+    padding: 0px 10px 0 100px;
+    text-align: left;
+    font-size: 27px;
+    letter-spacing: 0px;
+    line-height: 0px;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
+
 
 .container h1 button {
     font-size: 20px;
@@ -284,6 +302,18 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 #icon-litecoin {
     max-height: 48px;
     width: auto;
+}
+
+.panel {
+    position: relative;
+    margin-bottom: 90px;
+    border: 1px solid;
+    border-color: #33b5e5 #FAEC03 #C2DD43 #33b5e5;
+}
+
+.panel h1 {
+    position: absolute;
+    top: -37px;
 }
 
 .panel-nobg {
@@ -300,20 +330,30 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     background: -ms-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
     background: linear-gradient(to right, #047195 0%,#33b5e5 49%,#faec03 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#faec03',GradientType=1 );
+    padding: 5px 15px 4px;
 }
 
 .panel-title {
+    position: relative;
     font-size: 26px;
     text-shadow: 0px 2px 0 #000;
     letter-spacing: 1px;
+    padding-left: 95px;
 }
 
 .panel-title i {
-    margin-right: 5px;
+    position: absolute;
+    font-size: 80px;
+    left: 0;
+    top: -43px;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 0 #222;
 }
 
 .panel-rig ul {
-    margin: 20px 20px 0;
+    margin: 0;
+    padding: 10px 0 0;
+    background: #3E444C;
 }
 
 .panel-rig ul li {
@@ -328,6 +368,11 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     font-weight: bold;
     font-size: 18px;
     color: #bbb;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    margin: 0 1px;
+    padding: 3px 15px;
+
 }
 
 
@@ -363,7 +408,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 
-.panel-rig ul li a.pill-success {
+.panel-rig ul li a.pill-success, #dash-add-panel a {
     color: rgb(255, 255, 255);
     background-color: rgb(98, 196, 98);
     border-color: rgb(98, 196, 98);
@@ -372,7 +417,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     filter: none;
 }
 
-.panel-rig ul li a.pill-success:hover, .panel-rig ul li.active a.pill-success {
+.panel-rig ul li a.pill-success:hover, .panel-rig ul li.active a.pill-success, #dash-add-panel a:hover {
     background-image: linear-gradient(rgb(47, 125, 47), rgb(55, 147, 55) 40%, rgb(61, 162, 61));
     background-repeat: no-repeat;
     filter: none;
@@ -417,7 +462,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-body {
-    padding: 10px;
+    padding: 1px;
     overflow: auto;
 }
 
@@ -425,16 +470,38 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     background: #072935;
 }
 
-.panel-body-stats {
+.panel-body-stats, .panel-body-coins {
     text-align: center;
 }
 
-.panel-body .stat-pair {
+.panel-body-stats {
+    background: #047195;
+    background: -moz-linear-gradient(top, #191B1D 0%, #090909 100%);
+    background: -webkit-gradient(linear, top, bottom, color-stop(0%,#191B1D), (100%,#090909));
+    background: -webkit-linear-gradient(top, #191B1D 0%,#090909 100%);
+    background: -o-linear-gradient(top, #191B1D 0%,#090909 100%);
+    background: -ms-linear-gradient(top, #191B1D 0%,#090909 100%);
+    background: linear-gradient(to bottom, #191B1D 0%,#090909 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191B1D', endColorstr='#090909',GradientType=0 );
+}
+
+.panel-body .stat-pair, .panel-body .stat-pair-dropzone {
     border: 1px solid #33b5e5;
     border-radius: 4px;
     display: inline-block;
     text-align: center;
-    margin: 5px 0;
+    margin: 0 0 2px;
+}
+
+.panel-body .stat-pair-dropzone {
+    background: #555;
+    border-color: #0f0;
+    height: 90px;
+    width: 120px;
+}
+
+.panel-body .stat-pair:hover {
+    cursor: move;
 }
 
 .panel-body .stat-pair .stat-label, .panel-body .stat-pair .stat-value {
@@ -461,6 +528,57 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     border-radius: 0;
 }
 
+
+.panel-body.panel-body-coins .stat-pair .stat-value {
+    text-align: center;
+    padding: 20px;
+    overflow: auto;
+}
+
+.panel-body-coins input, .panel-body-coins select {
+    display: block;
+    float: left;
+    width: 62%;
+    padding: 2px 5px;
+    margin: 0 1%;
+    height: 39px;
+}
+
+.panel-body-coins select {
+    width: 34%;
+    text-align: right;
+}
+
+.panel-body-coins .stat-label select {
+    display: inline-block;
+    float: none;
+    width: auto;
+}
+
+.panel-body-coins i {
+    display: block;
+    text-align: right;
+    padding-right: 40px;
+}
+
+.panel-body-addresses .stat-pair .stat-label {
+    text-transform: none;
+}
+
+.panel-body-addresses img {
+    max-height: 24px;
+    width: auto;
+    margin-right: 5px;
+}
+
+.panel-in-footer .panel-body .stat-pair {
+    overflow: auto;
+}
+
+.panel-in-footer .panel-body .stat-pair .stat-label, .panel-in-footer .panel-body .stat-pair .stat-value {
+    float: left;
+}
+
 .panel-body .stat-pair .stat-value i {
     font-size: 18px;
 }
@@ -483,8 +601,22 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     border-radius: 0 0 3px 3px;
 }
 
+.panel-body .feed-headlines {
+    padding-right: 15px;
+    overflow: auto;
+    max-height: 200px;
+    margin-bottom: 0;
+}
+
+.panel-body .feed-headlines li {
+    text-align: left;
+    margin: 15px 0;
+    font-size: 18px;
+}
+
 .panel-footer {
    overflow: auto;
+   padding: 6px 6px 6px 10px;
 }
 
 .panel-footer .pull-left, .panel-footer .pull-right {
@@ -503,7 +635,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-footer button {
-   margin-left: 10px;
+   margin-left: 4px;
    font-size: 17px;
    padding: 1px 10px 5px;
 }
@@ -561,11 +693,15 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     .navbar-collapse {
         box-shadow: none;
     }
+    
+    a.navbar-brand img {
+       height: 64px;
+    }
 
     .navbar-nav {
         width: auto;
         float: right;
-        margin: 14px 0px 13px 20px;
+        margin: 5px 0px 5px 20px;
     }
 
     .nav-pills > li {
@@ -582,28 +718,29 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     }
 
     .container h1 {
-        font-size: 54px;
+        font-size: 40px;
+        letter-spacing: 1px;
+        line-height: 1px;
     }
-
+    
     .container h1 button {
         font-size: 22px;
         letter-spacing: 2px;
     }
 
     .panel-body .stat-pair {
-        margin: 10px;
     }
 
     .panel-body .stat-pair .stat-label, .panel-body .stat-pair .stat-value {
-        font-size: 24px;
+        font-size: 20px;
     }
     
     .panel-body .stat-pair .stat-value {
-        font-size: 42px;
+        font-size: 30px;
     }
     
     .panel-body .stat-pair .stat-value i {
-        font-size: 30px;
+        font-size: 24px;
     }
     
     .panel-footer h3 {
@@ -613,14 +750,21 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    
+    #coin-watcher, .panel-news-feed {
+    }
 
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 
-}
+    .container {
+        width: 90%;
+        margin: 0 5%;
+    }
 
+}
 
 
 
