@@ -460,3 +460,17 @@ ul.messenger-theme-flat .messenger-spinner {
   width: 32px;
   z-index: 10;
 }
+
+ul.messenger {
+    box-shadow: 0 0 20px #33b5e5;
+    margin-bottom: 20px;
+    opacity: 0.95;
+    border: 1px solid #444;
+    background: #eee;
+}
+
+ul.messenger .messenger-message-inner {
+    font-size: 24px;
+    font-family: robotolight, sans-serif;
+    color: #333;
+}

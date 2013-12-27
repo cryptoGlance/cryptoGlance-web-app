@@ -18,20 +18,24 @@
 <?php require_once("includes/modal-delete_prompt.php"); ?>
 
          
-      <div class="container sub-nav">
+      <div id="dashboard-wrap" class="container sub-nav">
 
          
          <div id="coin-watcher" class="panel panel-primary">
            <h1>CoinWatcher</h1>
            <div class="panel-heading">
+               <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
                <h2 class="panel-title"><i class="icon icon-value-coins"></i> Realtime Conversion Rates</h2>
             </div>
             <div class="panel-body panel-body-coins">
+
+
                <div class="stat-pair ltc-usd" id="coin-compare-1">
                   <form class="form" role="form">
                      <div class="stat-value">
-                        <input type="text" value="0.00" />
-                        <select>
+                        <input class="form-control" type="text" value="0.00" />
+                        <select class="form-control">
                            <option value="BTC" selected>BTC</option>
                            <option value="dBTC">dBTC</option>
                            <option value="cBTC">cBTC</option>
@@ -65,8 +69,8 @@
                         
                         <i class="icon icon-chevron-down"></i>
                         
-                        <input type="text" value="0.00" />
-                        <select>
+                        <input class="form-control" type="text" value="0.00" />
+                        <select class="form-control">
                            <option value="BTC" selected>BTC</option>
                            <option value="dBTC">dBTC</option>
                            <option value="cBTC">cBTC</option>
@@ -100,7 +104,91 @@
                      </div>
                      <div class="stat-label">
                         Source:
-                        <select>
+                        <select class="form-control">
+                           <option value="mtgox">Mt.Gox</option>
+                           <option value="vircurex">Vircurex</option>
+                           <option value="btce"  selected>BTC-E</option>
+                        </select>
+                        <a class="red pull-right" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></a> 
+                     </div>
+                  </form>
+               </div>               
+
+
+               <div class="stat-pair ltc-usd" id="coin-compare-2">
+                  <form class="form" role="form">
+                     <div class="stat-value">
+                        <input class="form-control" type="text" value="0.00" />
+                        <select class="form-control">
+                           <option value="BTC" selected>BTC</option>
+                           <option value="dBTC">dBTC</option>
+                           <option value="cBTC">cBTC</option>
+                           <option value="mBTC">mBTC</option>
+                           <option value="uBTC">uBTC</option>
+                           <option value="satoshi">satoshi</option>
+                           <option value="LTC">LTC</option>
+                           <option value="FTC">FTC</option>
+                           <option value="CNC">CNC</option>
+                           <option value="DVC">DVC</option>
+                           <option value="FRC">FRC</option>
+                           <option value="IXC">IXC</option>
+                           <option value="NMC">NMC</option>
+                           <option value="FTC">FTC</option>
+                           <option value="PPC">PPC</option>
+                           <option value="SC">SC</option>
+                           <option value="TRC">TRC</option>
+                           <option disabled>---</option>
+                           <option value="USD">USD</option>
+                           <option value="EUR">EUR</option>
+                           <option value="PLN">PLN</option>
+                           <option value="GBP">GBP</option>
+                           <option value="CNY">CNY</option>
+                           <option value="CAD">CAD</option>
+                           <option value="CHF">CHF</option>
+                           <option value="DKK">DKK</option>
+                           <option value="JPY">JPY</option>
+                           <option value="SEK">SEK</option>
+                           <option value="RUB">RUB</option>                       
+                        </select>
+                        
+                        <i class="icon icon-chevron-down"></i>
+                        
+                        <input class="form-control" type="text" value="0.00" />
+                        <select class="form-control">
+                           <option value="BTC" selected>BTC</option>
+                           <option value="dBTC">dBTC</option>
+                           <option value="cBTC">cBTC</option>
+                           <option value="mBTC">mBTC</option>
+                           <option value="uBTC">uBTC</option>
+                           <option value="satoshi">satoshi</option>
+                           <option value="LTC">LTC</option>
+                           <option value="FTC">FTC</option>
+                           <option value="CNC">CNC</option>
+                           <option value="DVC">DVC</option>
+                           <option value="FRC">FRC</option>
+                           <option value="IXC">IXC</option>
+                           <option value="NMC">NMC</option>
+                           <option value="FTC">FTC</option>
+                           <option value="PPC">PPC</option>
+                           <option value="SC">SC</option>
+                           <option value="TRC">TRC</option>
+                           <option disabled>---</option>
+                           <option value="USD">USD</option>
+                           <option value="EUR">EUR</option>
+                           <option value="PLN">PLN</option>
+                           <option value="GBP">GBP</option>
+                           <option value="CNY">CNY</option>
+                           <option value="CAD">CAD</option>
+                           <option value="CHF">CHF</option>
+                           <option value="DKK">DKK</option>
+                           <option value="JPY">JPY</option>
+                           <option value="SEK">SEK</option>
+                           <option value="RUB">RUB</option>                       
+                        </select>
+                     </div>
+                     <div class="stat-label">
+                        Source:
+                        <select class="form-control">
                            <option value="mtgox">Mt.Gox</option>
                            <option value="vircurex">Vircurex</option>
                            <option value="btce"  selected>BTC-E</option>
@@ -108,185 +196,21 @@
                      </div>
                   </form>
                </div>               
-                              
-               <div class="stat-pair ltc-usd" id="coin-compare-1">
-                  <form class="form" role="form">
-                     <div class="stat-value">
-                        <input type="text" value="0.00" />
-                        <select>
-                           <option value="BTC" selected>BTC</option>
-                           <option value="dBTC">dBTC</option>
-                           <option value="cBTC">cBTC</option>
-                           <option value="mBTC">mBTC</option>
-                           <option value="uBTC">uBTC</option>
-                           <option value="satoshi">satoshi</option>
-                           <option value="LTC">LTC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="CNC">CNC</option>
-                           <option value="DVC">DVC</option>
-                           <option value="FRC">FRC</option>
-                           <option value="IXC">IXC</option>
-                           <option value="NMC">NMC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="PPC">PPC</option>
-                           <option value="SC">SC</option>
-                           <option value="TRC">TRC</option>
-                           <option disabled>---</option>
-                           <option value="USD">USD</option>
-                           <option value="EUR">EUR</option>
-                           <option value="PLN">PLN</option>
-                           <option value="GBP">GBP</option>
-                           <option value="CNY">CNY</option>
-                           <option value="CAD">CAD</option>
-                           <option value="CHF">CHF</option>
-                           <option value="DKK">DKK</option>
-                           <option value="JPY">JPY</option>
-                           <option value="SEK">SEK</option>
-                           <option value="RUB">RUB</option>                       
-                        </select>
-                        
-                        <i class="icon icon-chevron-down"></i>
-                        
-                        <input type="text" value="0.00" />
-                        <select>
-                           <option value="BTC" selected>BTC</option>
-                           <option value="dBTC">dBTC</option>
-                           <option value="cBTC">cBTC</option>
-                           <option value="mBTC">mBTC</option>
-                           <option value="uBTC">uBTC</option>
-                           <option value="satoshi">satoshi</option>
-                           <option value="LTC">LTC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="CNC">CNC</option>
-                           <option value="DVC">DVC</option>
-                           <option value="FRC">FRC</option>
-                           <option value="IXC">IXC</option>
-                           <option value="NMC">NMC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="PPC">PPC</option>
-                           <option value="SC">SC</option>
-                           <option value="TRC">TRC</option>
-                           <option disabled>---</option>
-                           <option value="USD">USD</option>
-                           <option value="EUR">EUR</option>
-                           <option value="PLN">PLN</option>
-                           <option value="GBP">GBP</option>
-                           <option value="CNY">CNY</option>
-                           <option value="CAD">CAD</option>
-                           <option value="CHF">CHF</option>
-                           <option value="DKK">DKK</option>
-                           <option value="JPY">JPY</option>
-                           <option value="SEK">SEK</option>
-                           <option value="RUB">RUB</option>                       
-                        </select>
-                     </div>
-                     <div class="stat-label">
-                        Source:
-                        <select>
-                           <option value="mtgox">Mt.Gox</option>
-                           <option value="vircurex">Vircurex</option>
-                           <option value="btce"  selected>BTC-E</option>
-                        </select>
-                     </div>
-                  </form>
-               </div>               
-                              
-               <div class="stat-pair ltc-usd" id="coin-compare-1">
-                  <form class="form" role="form">
-                     <div class="stat-value">
-                        <input type="text" value="0.00" />
-                        <select>
-                           <option value="BTC" selected>BTC</option>
-                           <option value="dBTC">dBTC</option>
-                           <option value="cBTC">cBTC</option>
-                           <option value="mBTC">mBTC</option>
-                           <option value="uBTC">uBTC</option>
-                           <option value="satoshi">satoshi</option>
-                           <option value="LTC">LTC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="CNC">CNC</option>
-                           <option value="DVC">DVC</option>
-                           <option value="FRC">FRC</option>
-                           <option value="IXC">IXC</option>
-                           <option value="NMC">NMC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="PPC">PPC</option>
-                           <option value="SC">SC</option>
-                           <option value="TRC">TRC</option>
-                           <option disabled>---</option>
-                           <option value="USD">USD</option>
-                           <option value="EUR">EUR</option>
-                           <option value="PLN">PLN</option>
-                           <option value="GBP">GBP</option>
-                           <option value="CNY">CNY</option>
-                           <option value="CAD">CAD</option>
-                           <option value="CHF">CHF</option>
-                           <option value="DKK">DKK</option>
-                           <option value="JPY">JPY</option>
-                           <option value="SEK">SEK</option>
-                           <option value="RUB">RUB</option>                       
-                        </select>
-                        
-                        <i class="icon icon-chevron-down"></i>
-                        
-                        <input type="text" value="0.00" />
-                        <select>
-                           <option value="BTC" selected>BTC</option>
-                           <option value="dBTC">dBTC</option>
-                           <option value="cBTC">cBTC</option>
-                           <option value="mBTC">mBTC</option>
-                           <option value="uBTC">uBTC</option>
-                           <option value="satoshi">satoshi</option>
-                           <option value="LTC">LTC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="CNC">CNC</option>
-                           <option value="DVC">DVC</option>
-                           <option value="FRC">FRC</option>
-                           <option value="IXC">IXC</option>
-                           <option value="NMC">NMC</option>
-                           <option value="FTC">FTC</option>
-                           <option value="PPC">PPC</option>
-                           <option value="SC">SC</option>
-                           <option value="TRC">TRC</option>
-                           <option disabled>---</option>
-                           <option value="USD">USD</option>
-                           <option value="EUR">EUR</option>
-                           <option value="PLN">PLN</option>
-                           <option value="GBP">GBP</option>
-                           <option value="CNY">CNY</option>
-                           <option value="CAD">CAD</option>
-                           <option value="CHF">CHF</option>
-                           <option value="DKK">DKK</option>
-                           <option value="JPY">JPY</option>
-                           <option value="SEK">SEK</option>
-                           <option value="RUB">RUB</option>                       
-                        </select>
-                     </div>
-                     <div class="stat-label">
-                        Source:
-                        <select>
-                           <option value="mtgox">Mt.Gox</option>
-                           <option value="vircurex">Vircurex</option>
-                           <option value="btce"  selected>BTC-E</option>
-                        </select>
-                     </div>
-                  </form>
-               </div>
+
+
             </div>
             <div class="panel-footer text-right">
-               <button type="button" class="btn btn-default"><i class="icon icon-refresh"></i> Update All</button>
+               <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>
                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-selectionadd"></i> Add Comparison</button>
             </div>
          </div>
 
          
-         <div class="clearfix"></div>
-            
-
          <div id="rig-hostname-1" class="panel panel-primary panel-rig">
             <h1>Mining Rig Stats</h1>
             <div class="panel-heading">
-               <button type="button" class="close" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
+               <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
                <h2 class="panel-title"><i class="icon icon-server"></i> HOSTNAME-ONE</h2>
             </div>
             <ul class="nav nav-pills">
@@ -1400,6 +1324,7 @@
                   <h3><i class="icon icon-uptime"></i> Uptime: 7m 01s</h3>
                </div>
                <div class="pull-right">
+                  <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editRig" data-backdrop="static"><i class="icon icon-edit"></i> Edit Rig</button>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#switchPool" data-backdrop="static"><i class="icon icon-refreshalt"></i> Switch Pool</button>
                   <!-- <button type="button" class="btn btn-default"><i class="icon icon-statistics"></i> View All Stats</button> -->
@@ -1411,7 +1336,8 @@
          <div id="pool-1" class="panel panel-primary panel-pool">
             <h1>Pool Stats</h1>
             <div class="panel-heading">
-               <button type="button" class="close" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
+               <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
                <h2 class="panel-title"><i class="icon icon-groups-friends"></i> CoinHuntr</h2>
             </div>
             <div class="panel-body panel-body-stats">
@@ -1569,6 +1495,7 @@
                </div>
             </div><!-- / .panel-body -->
             <div class="panel-footer text-right">
+               <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>
                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-edit"></i> Edit Pool</button>
             </div>
          </div>        
@@ -1576,13 +1503,14 @@
          <div id="wallet-1" class="panel panel-primary panel-wallet">
             <h1>Addresses</h1>
             <div class="panel-heading">
-               <button type="button" class="close" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
+               <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
                <h2 class="panel-title"><i class="icon icon-walletalt"></i> Balances</h2>
             </div>
             <div class="panel-body panel-body-addresses">
                <div class="stat-pair pool-conf-payout" id="pool-1-pool-conf-payout">
                   <div class="stat-value">
-                     4.48508539 LTC in %ADDRESS_LABEL%
+                     <span class="green">4.48508539 LTC</span> in <span class="blue">%ADDRESS_LABEL%</span>
                   </div>
                   <div class="stat-label">
                      <img src="images/icon-litecoin.png" alt="Litecoin" /> LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
@@ -1590,7 +1518,7 @@
                </div>
                <div class="stat-pair pool-conf-payout" id="pool-1-pool-conf-payout">
                   <div class="stat-value">
-                     4.48508539 LTC in %ADDRESS_LABEL%
+                     <span class="green">4.48508539 LTC</span> in <span class="blue">%ADDRESS_LABEL%</span>
                   </div>
                   <div class="stat-label">
                      <img src="images/icon-litecoin.png" alt="Litecoin" /> LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
@@ -1598,7 +1526,7 @@
                </div>
                <div class="stat-pair pool-conf-payout" id="pool-1-pool-conf-payout">
                   <div class="stat-value">
-                     4.48508539 LTC in %ADDRESS_LABEL%
+                     <span class="green">4.48508539 LTC</span> in <span class="blue">%ADDRESS_LABEL%</span>
                   </div>
                   <div class="stat-label">
                      <img src="images/icon-litecoin.png" alt="Litecoin" /> LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
@@ -1606,35 +1534,123 @@
                </div>
             </div><!-- / .panel-body -->
             <div class="panel-footer text-right">
+               <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>
                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-edit"></i> Edit Addresses</button>
+            </div>
+         </div>
+                     
+         <div id="overview-1" class="panel panel-primary panel-overview">
+            <h1>Overview</h1>
+            <div class="panel-heading">
+               <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <h2 class="panel-title"><i class="icon icon-servers"></i> Current Rigs</h2>
+            </div>
+            <div class="panel-body panel-body-overview">
+               <div class="table-responsive">
+                 <table class="table table-hover">
+                  <thead>
+                     <tr>
+                        <th>Name</th>
+                        <th>IP</th>
+                        <th>Hashrate</th>
+                        <th>Active Pool</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr class="success">
+                        <td>HOSTNAME-ONE</td>
+                        <td>192.168.1.2</td>
+                        <td>450 KH/s</td>
+                        <td>CoinHuntr</td>
+                     </tr>
+                     <tr class="success">
+                        <td>HOSTNAME-TWO</td>
+                        <td>192.168.1.5</td>
+                        <td>650 KH/s</td>
+                        <td>Middlecoin</td>
+                     </tr>
+                     <tr>
+                        <td>HOSTNAME-THREE</td>
+                        <td>192.168.1.15</td>
+                        <td>650 KH/s</td>
+                        <td>Middlecoin</td>
+                     </tr>
+                     <tr class="danger">
+                        <td>HOSTNAME-FOUR</td>
+                        <td>192.168.1.3</td>
+                        <td>450 KH/s</td>
+                        <td>CoinHuntr</td>
+                     </tr>
+                  </tbody>
+                 </table>
+               </div>
+            </div><!-- / .panel-body -->
+            <div class="panel-footer text-right">
+               <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>
             </div>
          </div>
                      
          
          <div id="news-feed-1" class="panel panel-primary panel-news-feed">
-            <h1>News Feed Headlines</h1>
+            <h1>Feed Headlines</h1>
             <div class="panel-heading">
-               <button type="button" class="close" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
+               <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
                <h2 class="panel-title"><i class="icon icon-rss"></i><a href="http://coindesk.com" rel="external">CoinDesk.com</a></h2>
             </div>
-            <div class="panel-body panel-body-coins">
-               <ul class="feed-headlines">
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-               </ul>
+            <div class="panel-body panel-body-feed">
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
             </div>
             <div class="panel-footer text-right">
-               <button type="button" class="btn btn-default"><i class="icon icon-refresh"></i> Update Feed</button>
+               <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>
                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-rss"></i> Edit Feed</button>
             </div>
          </div>
@@ -1643,60 +1659,65 @@
          <div id="subreddit-feed-1" class="panel panel-primary panel-news-feed">
             <h1>Subreddit Reader</h1>
             <div class="panel-heading">
-               <button type="button" class="close" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
+               <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
                <h2 class="panel-title"><i class="icon icon-reddit"></i><a href="http://reddit.com/r/litecoinmining" rel="external">/r/litecoinmining</a></h2>
             </div>
-            <div class="panel-body panel-body-coins">
-               <ul class="feed-headlines">
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-               </ul>
+            <div class="panel-body panel-body-feed">
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
+               <div class="stat-pair feed-item">
+                  <div class="stat-value">
+                     <a href="#" rel="external">Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a>
+                  </div>
+                  <div class="stat-label">
+                     December 10, 2013
+                  </div>
+               </div>
             </div>
             <div class="panel-footer text-right">
-               <button type="button" class="btn btn-default"><i class="icon icon-refresh"></i> Update Feed</button>
+               <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>
                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-rss"></i> Edit Feed</button>
             </div>
          </div>
-         
-          
-         <div id="subreddit-feed-2" class="panel panel-primary panel-news-feed">
-            <h1>Subreddit Reader</h1>
-            <div class="panel-heading">
-               <button type="button" class="close" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
-               <h2 class="panel-title"><i class="icon icon-reddit"></i><a href="http://reddit.com/r/litecoin" rel="external">/r/litecoin</a></h2>
-            </div>
-            <div class="panel-body panel-body-coins">
-               <ul class="feed-headlines">
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-                  <li><a href="#" rel="external"><span>December 10, 2013</span> - Chinese Bitcoin Exchange OKCoin Accused of Faking Trading Data</a></li>
-                  <li><a href="#" rel="external"><span>December 9, 2013</span> - Bitcoin Exchange Startup Bex.io Recieves $525,000 in Funding</a></li>
-                  <li><a href="#" rel="external"><span>December 7, 2013</span> - Overstock.com CEO Unveils More Details About Bitcoin Adoption</a></li>
-                  <li><a href="#" rel="external"><span>December 4, 2013</span> - Polish Finance Official: Bitcoin is Not Illegal</a></li>
-               </ul>
-            </div>
-            <div class="panel-footer text-right">
-               <button type="button" class="btn btn-default"><i class="icon icon-refresh"></i> Update Feed</button>
-               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-rss"></i> Edit Feed</button>
-            </div>
-         </div>
-
 
       </div>
       <!-- /container -->

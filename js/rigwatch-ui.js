@@ -125,6 +125,43 @@ function restoreRig1GPU0() {
 
 
 
+
+
+
+
+
+$(function() {
+   $( "#dashboard-wrap" ).sortable({
+      placeholder: "dashboard-dropzone",
+      opacity: 0.75,
+      scrollSpeed: 50,
+      handle: '.panel-heading',
+      forcePlaceholderSize: true,
+      scroll: true,
+      scrollSensitivity: 100,
+      update: function(event, ui) {
+         var cooked = [];
+         $("#dashboard-wrap").each(function(index, domEle){ cooked[index]=    $(domEle).sortable('toArray');});
+         $.cookie('cookie_dashboard_layout', 'x'+cooked.join('|'), { expires: 31, path: '/'});
+      }
+   });
+});
+
+
+function restoreDashboard() {
+    var cookie = $.cookie('cookie_dashboard_layout');
+    if (!cookie) return;
+    var SavedID = cookie.split('|');
+    for ( var u=0, ul=SavedID.length; u < ul; u++ ){ SavedID[u] = SavedID[u].split(',');}
+    for (var Scolumn=0, n = SavedID.length; Scolumn < n; Scolumn++) {
+        for (var Sitem=0, m = SavedID[Scolumn].length; Sitem < m; Sitem++) {
+            $("#dashboard-wrap").eq(Scolumn).append($("#dashboard-wrap").children("#" + SavedID[Scolumn][Sitem]));
+        }
+    }
+}
+
+
+
 $(function() {
    $( "#rig-hostname-1-gpu1 .panel-body" ).sortable({
       placeholder: "stat-pair-dropzone",
@@ -157,18 +194,91 @@ function restoreRig1GPU1() {
 
 
 
+
+
+function callAlert() {
+      $(function(){
+
+        Messenger.options = {
+          extraClasses: "messenger-fixed messenger-on-bottom",
+          theme: "flat"
+        };
+
+        var steps = [
+          function() {
+            var msg = Messenger().post({
+              message: 'Refreshing Content...',
+              type: 'info',
+              actions: false
+            });
+            setTimeout(function(){
+              msg.update({
+                message: 'Update Complete!',
+                type: 'success',
+                actions: false
+              });
+            }, 4000);
+            setTimeout(function(){ msg.hide(); }, 8000);
+          }
+        ];
+
+        var i = 1;
+
+        steps[0]();
+        setInterval(function(){
+          steps[i]();
+          i = (i + 1) % steps.length;
+        }, 6000);
+
+      });
+}
+
+
 // Execute when the DOM is ready
 //
 $(document).ready(function() {
 
    externalLinks();
    
+   restoreDashboard();
    restoreStatPairOrder();
-
+   
    $('input[type=checkbox], input[type=radio]').prettyCheckable({
       color: 'blue'
    });
   
+   $('.toggle-panel-body').click(function() {
+      var $toggleButton = $(this);
+      
+      $(this).parent().nextAll('.panel-body, .panel-footer, .tab-content, .nav-pills').slideToggle('slow');
+      
+      $toggleButton.toggleClass("minimized");
+
+      if ($toggleButton.hasClass("minimized")) {
+         $toggleButton.html("<i class='icon icon-download-alt'></i>");
+      } else {
+         $toggleButton.html("<i class='icon icon-uploadalt'></i>");
+      }
+   })
+
+      
+   $('button.btn-updater').click(function() {
+      var $currentButton = $(this);
+      
+      $currentButton.html("<i class='icon icon-refresh'></i> Updating...");
+      $currentButton.children().addClass('icon-spin');
+      $currentButton.prop({
+        disabled: true
+      });
+      setTimeout(function() { 
+         $currentButton.html("<i class='icon icon-refresh'></i> Update Now");
+         $currentButton.prop({
+           disabled: false
+         });
+      }, 3000);
+
+   })    
+
    $('#btnSaveHost').click(function() {
       $("#alert-saved-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
    })    

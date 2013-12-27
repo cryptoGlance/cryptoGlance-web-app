@@ -34,6 +34,10 @@
                         <li><a href="help.php" rel="external">Help using RigWatch</a></li>
                         <li><a href="https://github.com/scar45/rigwatch" rel="external">Source on Github</a></li>
                         <li class="divider"></li>
+                        <li class="dropdown-header">RigWatch Discussion</li>
+                        <li><a href="help.php" rel="external">Bitcointalk.org Forum Thread</a></li>
+                        <li><a href="https://github.com/scar45/rigwatch" rel="external">Reddit Post</a></li>
+                        <li class="divider"></li>
                         <li class="dropdown-header">Litecoin Resources</li>
                         <li><a href="https://litecoin.org/" rel="external">Litecoin.org</a></li>
                         <li><a href="https://litecoin.info/Mining_hardware_comparison" rel="external">Mining Hardware Comparison</a></li>
