@@ -714,6 +714,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     padding: 3px 10px;
 }
 
+.panel-body-overview .table tr td:nth-child(3), .panel-body-overview .table tr th:nth-child(3) {
+    display: none;
+}
+
 .panel-body-overview .table thead th {
     text-align: center;
     padding: 0 10px;
@@ -923,6 +927,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
     .panel-body-overview .table tr th, .panel-body-overview .table tr td {
         font-size: 20px;
+    }
+    
+    .panel-body-overview .table tr td:nth-child(3), .panel-body-overview .table tr th:nth-child(3) {
+        display: table-cell;
     }
 
     .panel-footer h3 {

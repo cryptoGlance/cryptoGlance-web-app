@@ -329,6 +329,17 @@
                         <div class="progress-bar progress-bar-success" style="width: 100%"></div>
                      </div>
                   </div>
+                  <div class="stat-pair stat-ip-address" id="rig-hostname-1-summary-stat-ip-address">
+                     <div class="stat-value">
+                        192.168.1.32
+                     </div>
+                     <div class="stat-label">
+                       Current IP
+                     </div>
+                     <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-default" style="width: 0%"></div>
+                     </div>
+                  </div>
                 </div><!-- / .panel-body -->
               </div>
               
@@ -1551,6 +1562,7 @@
                  <table class="table table-hover">
                   <thead>
                      <tr>
+                        <th></th>
                         <th>Name</th>
                         <th>IP</th>
                         <th>Hashrate</th>
@@ -1559,24 +1571,28 @@
                   </thead>
                   <tbody>
                      <tr class="success">
+                        <td><i class="icon icon-thumbs-up"></i></td>
                         <td>HOSTNAME-ONE</td>
                         <td>192.168.1.2</td>
                         <td>450 KH/s</td>
                         <td>CoinHuntr</td>
                      </tr>
                      <tr class="success">
+                        <td><i class="icon icon-thumbs-up"></i></td>
                         <td>HOSTNAME-TWO</td>
                         <td>192.168.1.5</td>
                         <td>650 KH/s</td>
                         <td>Middlecoin</td>
                      </tr>
                      <tr>
+                        <td><i class="icon icon-warning-sign"></i></td>
                         <td>HOSTNAME-THREE</td>
                         <td>192.168.1.15</td>
                         <td>650 KH/s</td>
                         <td>Middlecoin</td>
                      </tr>
                      <tr class="danger">
+                        <td><i class="icon icon-erroralt"></i></td>
                         <td>HOSTNAME-FOUR</td>
                         <td>192.168.1.3</td>
                         <td>450 KH/s</td>
