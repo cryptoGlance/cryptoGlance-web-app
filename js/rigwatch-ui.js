@@ -234,6 +234,14 @@ function callAlert() {
 }
 
 
+function expandAllPanels() {
+   $('.panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideDown();
+}
+
+function collapseAllPanels() {
+   $('.panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideUp('slow');
+}
+
 // Execute when the DOM is ready
 //
 $(document).ready(function() {
@@ -246,18 +254,31 @@ $(document).ready(function() {
    $('input[type=checkbox], input[type=radio]').prettyCheckable({
       color: 'blue'
    });
+   
   
+   $('#collapse-all-panels').click(function() {
+      collapseAllPanels();
+      $('.toggle-panel-body').addClass("minimized");
+      $('.toggle-panel-body').html("<i class='icon icon-chevron-down'></i>");
+   })
+
+   $('#expand-all-panels').click(function() {
+      expandAllPanels();
+      $('.toggle-panel-body').removeClass("minimized");
+      $('.toggle-panel-body').html("<i class='icon icon-chevron-up'></i>");
+   })
+
    $('.toggle-panel-body').click(function() {
       var $toggleButton = $(this);
       
-      $(this).parent().nextAll('.panel-body, .panel-footer, .tab-content, .nav-pills').slideToggle('slow');
+      $(this).parent().nextAll('.panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideToggle('slow');
       
       $toggleButton.toggleClass("minimized");
 
       if ($toggleButton.hasClass("minimized")) {
-         $toggleButton.html("<i class='icon icon-download-alt'></i>");
+         $toggleButton.html("<i class='icon icon-chevron-down'></i>");
       } else {
-         $toggleButton.html("<i class='icon icon-uploadalt'></i>");
+         $toggleButton.html("<i class='icon icon-chevron-up'></i>");
       }
    })
 

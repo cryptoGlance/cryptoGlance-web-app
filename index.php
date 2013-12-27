@@ -25,7 +25,7 @@
            <h1>CoinWatcher</h1>
            <div class="panel-heading">
                <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
                <h2 class="panel-title"><i class="icon icon-value-coins"></i> Realtime Conversion Rates</h2>
             </div>
             <div class="panel-body panel-body-coins">
@@ -210,7 +210,7 @@
             <h1>Mining Rig Stats</h1>
             <div class="panel-heading">
                <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
                <h2 class="panel-title"><i class="icon icon-server"></i> HOSTNAME-ONE</h2>
             </div>
             <ul class="nav nav-pills">
@@ -1348,7 +1348,7 @@
             <h1>Pool Stats</h1>
             <div class="panel-heading">
                <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
                <h2 class="panel-title"><i class="icon icon-groups-friends"></i> CoinHuntr</h2>
             </div>
             <div class="panel-body panel-body-stats">
@@ -1515,7 +1515,7 @@
             <h1>Addresses</h1>
             <div class="panel-heading">
                <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
                <h2 class="panel-title"><i class="icon icon-walletalt"></i> Balances</h2>
             </div>
             <div class="panel-body panel-body-addresses">
@@ -1554,7 +1554,7 @@
             <h1>Overview</h1>
             <div class="panel-heading">
                <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
                <h2 class="panel-title"><i class="icon icon-servers"></i> Current Rigs</h2>
             </div>
             <div class="panel-body panel-body-overview">
@@ -1612,7 +1612,7 @@
             <h1>Feed Headlines</h1>
             <div class="panel-heading">
                <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
                <h2 class="panel-title"><i class="icon icon-rss"></i><a href="http://coindesk.com" rel="external">CoinDesk.com</a></h2>
             </div>
             <div class="panel-body panel-body-feed">
@@ -1676,7 +1676,7 @@
             <h1>Subreddit Reader</h1>
             <div class="panel-heading">
                <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-uploadalt"></i></button> 
+               <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
                <h2 class="panel-title"><i class="icon icon-reddit"></i><a href="http://reddit.com/r/litecoinmining" rel="external">/r/litecoinmining</a></h2>
             </div>
             <div class="panel-body panel-body-feed">

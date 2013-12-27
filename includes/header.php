@@ -50,6 +50,8 @@
                   </li>
                   <li id="nav-login-button"><a href="login.php"><i class="icon icon-enteralt"></i> Login</a></li>
                   <li id="nav-logout-button"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>
+                  <li><a id="expand-all-panels" href="#" title="Expand ALL Panels"><i class="icon icon-fastdown"></i></a></li>
+                  <li><a id="collapse-all-panels" href="#" title="Collapse ALL Panels"><i class="icon icon-fastup"></i></a></li>
                </ul>
             </div>
             <!--/.nav-collapse -->
