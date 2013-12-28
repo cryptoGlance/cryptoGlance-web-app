@@ -1,7 +1,21 @@
-rigWatch
-========
+What is RigWatch?
+--
 
 Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other APIs, all in one responsive UI. Protected with a login, but also offers a read-only/public view (if desired).
+
+Features:
+--
+- Add multiple rigs which display data from cgminer
+- Add multiple pools to watch that support MPOS frontends (ask your pool op if you're unsure, or look in their site's footer)
+- Mobile optimized design
+- Customizable via:
+ - Add/Remove/Edit Panels and move them around
+ - Collapse or Expand a panels
+ - Drag n' drop certain stat-pairs to the position you prefer
+ - These preferences are saved to a local browser cookie (for now)
+- Monitor RSS feeds and Subreddits
+- Create exchange/conversion rate pairs that display fresh data
+- Add your addresses to keep on top of their current balance (determined from the public blockchain)
 
 Requirements:
 --
@@ -13,8 +27,9 @@ Requirements:
 
 Planned:
 --
-- cgminer remote control
-- Switching of currencies (for first panel group, showing rates, etc.)
+- cgminer remote control (write access)
+- Read-only version
+ - Toggle panels with 'allow on read-only view'
 - Streaming feed of Subreddits
 - Links to CryptoCurrency resources/news/tuts/etc.
 
@@ -30,7 +45,7 @@ Installation:
 You'll want to ensure you're running cgminer with API-Access enabled, here's an example excerpt from the .conf:
 
     ...
-    "api-allow" : "W:127.0.0.1,192.168.1.0/24",
+    "api-allow" : "127.0.0.1,192.168.1.0/24",
     "api-listen" : true,
     "api-mcast-port" : "4028",
     "api-port" : "4028",

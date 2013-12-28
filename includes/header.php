@@ -16,42 +16,36 @@
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav">
                   <li class="active"><a href="index.php"><i class="icon icon-speed"></i> Dashboard</a></li>
-                  <li id="dash-add-panel" class="grad-green"><a data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-newwindow"></i></a> </li>
+                  <li id="dash-add-panel" class="grad-green"><a title="Add Panel" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-newwindow"></i></a> </li>
                   <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsandroid"></i> Settings <b class="caret"></b></a>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                        <li><a href="settings-general.php"><i class="icon icon-settingsthree-gears"></i> General</a></li>
-                        <li><a href="settings-rigs.php"><i class="icon icon-servers"></i> Rigs/Miners <span class="badge">3</span></a></li>
-                        <li><a href="settings-pools.php"><i class="icon icon-groups-friends"></i> Pools <span class="badge">2</span></a></li>
-                        <li><a href="settings-addresses.php"><i class="icon icon-walletalt"></i> Addresses <span class="badge">12</span></a></li>
-                        <li><a href="settings-feeds.php"><i class="icon icon-rss"></i> News Feeds <span class="badge">4</span></a></li>
+                        <li class="dropdown-header site-width-slider">Panel Width</li>
+                        <li class="site-width-slider">
+                           <span class="tooltip"></span> <!-- Tooltip -->
+                           <span class="width-reading">90%</span> <!-- width-reading -->
+                           <div id="slider"></div> <!-- the Slider -->
+                        </li>
+                        <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> RigWatch Settings</a></li>
+                        <div class="divider"></div> <!-- the Slider -->
+                        <?php require_once("includes/menu-active_panels.php"); ?>
                      </ul>
                   </li>
                   <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-lifepreserver"></i> Help <b class="caret"></b></a>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-header">RigWatch</li>
-                        <li><a href="help.php" rel="external">Help using RigWatch</a></li>
+                        <li><a href="help.php">Help using RigWatch</a></li>
                         <li><a href="https://github.com/scar45/rigwatch" rel="external">Source on Github</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">RigWatch Discussion</li>
                         <li><a href="help.php" rel="external">Bitcointalk.org Forum Thread</a></li>
                         <li><a href="https://github.com/scar45/rigwatch" rel="external">Reddit Post</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Litecoin Resources</li>
-                        <li><a href="https://litecoin.org/" rel="external">Litecoin.org</a></li>
-                        <li><a href="https://litecoin.info/Mining_hardware_comparison" rel="external">Mining Hardware Comparison</a></li>
-                        <li><a href="https://litecoin.info/Mining_pool_comparison" rel="external">Pool Comparison</a></li>
-                        <li><a href="http://bitcoinwisdom.com/litecoin/calculator" rel="external">Litecoin Calculator</a></li>
-                        <li><a href="http://www.ltc-charts.com/" rel="external">LTC Charts</a></li>
-                        <li><a href="http://www.reddit.com/r/litecoin/" rel="external">/r/litecoin (Reddit)</a></li>
-                        <li><a href="http://www.reddit.com/r/litecoinmining/" rel="external">/r/litecoinmining (Reddit)</a></li>
                      </ul>
                   </li>
-                  <li id="nav-login-button"><a href="login.php"><i class="icon icon-enteralt"></i> Login</a></li>
-                  <li id="nav-logout-button"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>
-                  <li><a id="expand-all-panels" href="#" title="Expand ALL Panels"><i class="icon icon-fastdown"></i></a></li>
-                  <li><a id="collapse-all-panels" href="#" title="Collapse ALL Panels"><i class="icon icon-fastup"></i></a></li>
+                  <li id="nav-login-button"><a href="login.php">Login</a></li>
+                  <li id="nav-logout-button"><a href="logout.php">Logout</a></li>
+                  <li class="panel-controls"><a id="collapse-all-panels" href="#" title="Collapse ALL Panels"><i class="icon icon-fastup"></i><span>Collapse All</span></a><a id="expand-all-panels" href="#" title="Expand ALL Panels"><i class="icon icon-fastdown"></i><span>Expand All</span></a></li>
                </ul>
             </div>
             <!--/.nav-collapse -->

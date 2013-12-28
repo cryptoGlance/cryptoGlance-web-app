@@ -3,9 +3,12 @@
                <div class="stat-pair stat-pair-qr">
                   <div class="stat-value">
                      <img src="images/qrcode-ltc-donate.png" />                            
+                     <img src="images/qrcode-btc-donate.png" />                            
                   </div>
                   <div class="stat-label">
-                     LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
+                     <img src="images/icon-litecoin.png" alt="Litecoin" /> LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
+                     <br>
+                     <img src="images/icon-bitcoin.png" alt="Bitcoin" /> 1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS
                   </div>
                </div>               
                <div class="stat-pair stat-pair-devs">
@@ -17,14 +20,6 @@
                   </div>
                   <div class="stat-label">
                      Long live crypto-currency!
-                  </div>
-               </div>
-               <div class="stat-pair stat-pair-qr">
-                  <div class="stat-value">
-                     <img src="images/qrcode-btc-donate.png" />                            
-                  </div>
-                  <div class="stat-label">
-                     1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS
                   </div>
                </div>
             </div><!-- / .panel-body -->
@@ -43,12 +38,14 @@
       <script src="js/jquery-1.10.2.min.js"></script>
       <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
       <script src="js/jquery.cookie.js"></script>
+      <script src="js/jquery.scrollTo.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/messenger.min.js"></script>
       <script src="js/messenger-theme-flat.js"></script>
       <script src="js/prettyCheckable.min.js"></script>
       <!-- <script src="js/currency.js"></script> -->
       <script src="js/rigwatch-ui.js"></script>
-   </body>
+
+
    </body>
 </html>

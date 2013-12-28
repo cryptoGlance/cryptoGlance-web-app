@@ -8,12 +8,22 @@ html {
 
 body {
    background: url(../images/rigwatch-watermark.png) no-repeat bottom right fixed transparent;
+   background-size: contain;
    font-family: robotolight, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
    font-family: captureit, sans-serif;
    color: #33b5e5;
+}
+
+table a, table a:visited {
+    border-bottom: 1px dotted #fff;
+}
+
+table a:hover {
+    border-bottom: 1px solid #fff;
+    text-decoration: none;
 }
 
 .text-left {
@@ -55,6 +65,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn:focus, .btn:active {
     outline: none;
+}
+
+.panel-footer h3.helpful-tip {
+    font-style: italic;
+    color: #bbb;
+    text-transform: lowercase;
+    font-family: robotolight, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .alert {
@@ -185,7 +204,7 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
 }
 
 a.navbar-brand {
-   padding: 5px 15px 4px;
+   padding: 0 15px 4px;
 }
 
 a.navbar-brand img {
@@ -207,7 +226,7 @@ a.navbar-brand img {
 }
 
 #dash-add-panel {
-    margin: 0px 15px 0px -5px;
+    margin: 0px 5px 0px -5px;
     position: absolute;
     top: 0;
     right: 0;
@@ -232,8 +251,37 @@ a.navbar-brand img {
     font-family: robotolight;
 }
 
+.nav-pills li.panel-controls {
+    padding: 15px 0px 0px;
+    float: right;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-pills li.panel-controls a {
+    padding: 0 10px 4px;
+    display: inline-block;
+    width: 50%;
+}
+
+.nav-pills li.panel-controls a i {
+    font-size: 13px;
+}
+
+.nav-pills li.panel-controls a span {
+    font-size: 15px;
+    font-family: robotocondensed;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
+
 .nav-pills li a:focus {
     outline: 0;
+}
+
+.dropdown-menu .divider {
+    height: 1px;
+    background-color: #33b5e5;
 }
 
 a.dropdown-toggle:active, a.dropdown-toggle:focus {
@@ -300,6 +348,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     padding-left: 25px;
 }
 
+.site-width-slider {
+    display: none;
+}
+
 .container.sub-nav {
     padding-top: 140px;
 }
@@ -336,9 +388,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 }
 
+
 .panel {
     position: relative;
-    margin-bottom: 90px;
+    margin-bottom: 70px;
     border: 1px solid;
     border-color: #33b5e5 #FAEC03 #C2DD43 #33b5e5;
     background: rgba(255,255,255,0.2);
@@ -443,6 +496,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 
 .panel-rig ul li a.pill-success, #dash-add-panel a {
+    cursor: pointer;
     color: rgb(255, 255, 255);
     background-color: rgb(98, 196, 98);
     border-color: rgb(98, 196, 98);
@@ -496,7 +550,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-body {
-    padding: 1px;
+    padding: 5px;
     overflow: auto;
     text-align: center;
 }
@@ -522,6 +576,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 .panel-body .stat-pair, .panel-body .stat-pair-dropzone {
     border: 1px solid #33b5e5;
+    border-color: #33b5e5 #07a #069 #33b5e5;
     border-radius: 4px;
     display: inline-block;
     text-align: center;
@@ -529,13 +584,18 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-body .stat-pair-dropzone {
-    background: #555;
-    border-color: #0f0;
+    background: rgba(0,255,0,0.3);
+    border: 1px dashed #0f0;
     height: 90px;
     width: 120px;
 }
 
-.panel-body .stat-pair:hover {
+.panel-wallet .stat-pair-dropzone {
+    height: 100px;
+    width: 360px;
+}
+
+.panel-body.ui-sortable .stat-pair:hover {
     cursor: move;
 }
 
@@ -554,13 +614,14 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     font-family: robotocondensed;
     text-transform: lowercase;
     color: #aaa;
-    padding: 2px 15px 4px;
+    padding: 0 15px 1px;
 }
 
 .panel-body .stat-pair .stat-value {
     background: url(../images/inflicted.png) repeat #111;
     font-size: 22px;
     border-radius: 0;
+    padding: 2px 10px 0;
 }
 
 .panel-body .stat-pair.feed-item {
@@ -626,14 +687,22 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     text-transform: none;
 }
 
+.panel-body-addresses .stat-pair .address-label {
+    display: block;
+    font-size: 20px;
+    color: #888;
+    margin-top: -10px;
+}
+
 .panel-body-addresses img {
-    max-height: 24px;
+    max-height: 48px;
     width: auto;
-    margin-right: 5px;
+    margin: 5px 20px 0 0;
+    float: left;
 }
 
 .panel-in-footer {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .panel-in-footer .panel-body .stat-pair {
@@ -644,8 +713,12 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     text-transform: none;
 }
 
+.panel-in-footer .panel-body .stat-pair-qr .stat-label img {
+    max-height: 24px;
+    width: auto;
+}
+
 .panel-in-footer .panel-body .stat-pair-qr .stat-value {
-    height: 110px;
 }
 
 .panel-in-footer .panel-body .stat-pair-qr .stat-value img {
@@ -686,7 +759,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-body .progress {
-    height: 10px;
+    height: 5px;
     margin-bottom: 0;
     border-radius: 0 0 3px 3px;
 }
@@ -714,7 +787,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     padding: 3px 10px;
 }
 
-.panel-body-overview .table tr td:nth-child(3), .panel-body-overview .table tr th:nth-child(3) {
+.panel-body-overview .table tr td:nth-child(3), .panel-body-overview .table tr th:nth-child(3), .panel-body-overview .table tr td:nth-child(6), .panel-body-overview .table tr th:nth-child(6) {
     display: none;
 }
 
@@ -856,11 +929,23 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     .navbar-nav {
         width: auto;
         float: right;
-        margin: 5px 0px 5px 20px;
+        margin: -1px 0px 5px 20px;
     }
 
     .nav-pills > li {
         float: left;
+    }
+
+    .nav .nav-pills > li:first-child a {
+        font-weight: normal;
+        font-family: robotoblack;
+        font-size: 25px;
+        padding: 7px 10px 10px;
+        color: #bbb !important;
+    }
+    
+    .nav .nav-pills > li:first-child a:hover {
+        color: #fff !important;
     }
 
     #dash-add-panel {
@@ -877,6 +962,27 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
         line-height: 24px;
         font-size: 19px;
     }
+    
+    .nav-pills li.panel-controls {
+        padding: 0;
+        float: right;
+        width: auto;
+        margin-left: 5px;
+    }
+
+    .nav-pills li.panel-controls a {
+        padding: 15px 11px 5px;
+        display: inline;
+        width: auto;
+    }
+
+    .nav-pills li.panel-controls a i {
+        font-size: 13px;
+    }
+
+    .nav-pills li.panel-controls a span {
+        display: none;
+    }
 
     .container h1 {
         font-size: 40px;
@@ -890,6 +996,16 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
         letter-spacing: 2px;
     }
 
+    .panel {
+        margin-bottom: 90px;
+    }
+
+    .panel-in-footer {
+        margin-bottom: 0px;
+        border-radius: 4px 4px 0 0;
+        border-bottom: 0;
+    }
+    
     .panel-title {
         padding-left: 95px;
     }
@@ -905,12 +1021,16 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
         font-size: 20px;
     }
     
+    .panel-body .stat-pair .stat-label {
+        padding: 2px 15px 4px;
+    }
+
     .panel-body .stat-pair .stat-value {
         font-size: 30px;
     }
 
     .panel-in-footer .panel-body .stat-pair-qr .stat-value {
-        height: 150px;
+        height: auto;
     }
     
     .panel-body .stat-pair.feed-item .stat-value {
@@ -929,8 +1049,12 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
         font-size: 20px;
     }
     
-    .panel-body-overview .table tr td:nth-child(3), .panel-body-overview .table tr th:nth-child(3) {
+    .panel-body-overview .table tr td:nth-child(3), .panel-body-overview .table tr th:nth-child(3), .panel-body-overview .table tr td:nth-child(6), .panel-body-overview .table tr th:nth-child(6) {
         display: table-cell;
+    }
+    
+    .panel-overview .panel-footer .pull-left {
+        display: none;
     }
 
     .panel-footer h3 {
@@ -944,34 +1068,36 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     #coin-watcher, .panel-news-feed {
     }
     
-    
     .panel-in-footer .panel-body .stat-pair-qr .stat-value img {
-        height: 150px;
-        width: 150px;
-        position: absolute;
-        bottom: 0;
-        margin: 0 auto 95px -74px;
+        height: 120px;
+        width: 120px;
+        margin: 0 10px;
         -webkit-transition: all 500ms ease-in-out;
         -moz-transition: all 500ms ease-in-out;
         -ms-transition: all 500ms ease-in-out;
         -o-transition: all 500ms ease-in-out;
         transition: all 500ms ease-in-out;
+-moz-transform: scale(1);
+-webkit-transform: scale(1);
+-o-transform: scale(1);
+-ms-transform: scale(1);
+transform: scale(1);
     }
 
     .panel-in-footer .panel-body .stat-pair-qr .stat-value img:hover, .panel-in-footer .panel-body .stat-pair .stat-value img:focus {
         cursor: crosshair;
-        height: 280px;
-        width: 280px;
-        margin: 0 auto 120px -140px;
         box-shadow: 0 4px 30px #000;
         -webkit-transition: all 1s ease-in-out;
         -moz-transition: all 1s ease-in-out;
         -ms-transition: all 1s ease-in-out;
         -o-transition: all 1s ease-in-out;
         transition: all 1s ease-in-out;
+        -moz-transform: scale(1.3);
+-webkit-transform: scale(1.3);
+-o-transform: scale(1.3);
+-ms-transform: scale(1.3);
+transform: scale(1.3);
     }
-
-
 
 }
 
@@ -980,7 +1106,20 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
     .container {
         width: 90%;
-        margin: 0 5%;
+        margin: 0 auto;
+    }
+    
+    .site-width-slider {
+        display: inline-block;
+        width: 100%;
+    }
+    
+    .width-reading {
+        float: right;
+        font-weight: bold;
+        color: #33b5e5;
+        margin: -5px 8px 0 0;
+        font-size: 17px;
     }
 
 }

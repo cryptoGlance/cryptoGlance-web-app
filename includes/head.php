@@ -12,6 +12,8 @@
       <link href="css/messenger.css" rel="stylesheet">
       <link href="css/messenger-spinner.css" rel="stylesheet">
       <link href="css/messenger-theme-flat.css" rel="stylesheet">
+      <!-- jQuery Slider styles -->
+      <link href="css/slider.css" rel="stylesheet">
       <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
       <link href="css/whhg.css" rel="stylesheet">
       <!-- jQuery PrettyCheckable by arthurgouveia (http://arthurgouveia.com/prettyCheckable/) styles -->
