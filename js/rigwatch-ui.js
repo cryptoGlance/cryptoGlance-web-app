@@ -266,7 +266,7 @@ $(function() {
 
          var value  = slider.slider('value'),
             actualWidth = $('.width-reading'),
-            container = $('#dashboard-wrap, #help-wrap'),
+            container = $('#dashboard-wrap, .full-content'),
             viewportWidth  = $(window).width();
         
          // tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly
@@ -289,7 +289,7 @@ $(function() {
 function restorePanelWidth() {
     var panelWidth = $.cookie('cookie_panel_width');
    if (!panelWidth) return;
-       $('#dashboard-wrap, #help-wrap').css('width', panelWidth + '%');
+       $('#dashboard-wrap, .full-content').css('width', panelWidth + '%');
        $('.width-reading').html(panelWidth + '%');
        $('.width-reading').html(panelWidth + '%');
        $('#slider').slider("value", panelWidth);
@@ -298,7 +298,7 @@ function restorePanelWidth() {
 
 function mobileWidthFixer() {
    var viewportWidth  = $(window).width(),
-      container = $('#dashboard-wrap');
+      container = $('#dashboard-wrap, .full-content');
       currentWidth = $('#slider').slider("option", "value");
       
    if(viewportWidth < 770) {

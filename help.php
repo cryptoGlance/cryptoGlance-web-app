@@ -24,9 +24,9 @@ $html = Markdown::defaultTransform($text);
       
 -->
          
-   <div id="help-wrap" class="container sub-nav">
+   <div id="help-wrap" class="container sub-nav full-content">
       <div class="markdown-body">
-         <div id="readme" class="panel panel-primary">
+         <div id="readme" class="panel panel-default">
            <h1>RigWatch Help</h1>
            <div class="panel-heading">
                <h2 class="panel-title"><i class="icon icon-document"></i> README.md</h2>

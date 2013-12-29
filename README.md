@@ -1,3 +1,9 @@
+<br>
+
+_[Skip to FAQ](#faq)_ &bull; <a href="http://rigwat.ch" rel="external">http://rigwat.ch</a>
+
+----
+
 What is RigWatch?
 --
 
@@ -10,7 +16,7 @@ Features:
 - Mobile optimized design
 - Customizable via:
  - Add/Remove/Edit Panels and move them around
- - Collapse or Expand a panels
+ - Collapse or Expand panels
  - Drag n' drop certain stat-pairs to the position you prefer
  - These preferences are saved to a local browser cookie (for now)
 - Monitor RSS feeds and Subreddits
@@ -53,10 +59,17 @@ You'll want to ensure you're running cgminer with API-Access enabled, here's an 
 
 ...and you should be good to go. 
 
-Hope you enjoy what we're trying to do here, and thanks to all of the other similar OSS projects like this for help and inspiration.
+<a name="faq"></a>FAQ:
+--
+Q. I am careful with my crypto-currency. Can I trust RigWatch?
 
-Our own measly rigs would appreciate any catalyst donations to **[TODO] WALLET ADDRESS [/TODO] - Thanks in advance!**
+A. Most definitely! The code is completely open source, and you run RigWatch on your own web server.
 
 We owe thanks to the following projects:
 --
 - [Messenger jQuery plugin](http://github.hubspot.com/messenger/docs/welcome/)
+
+Hope you enjoy what we're trying to do here, and thanks to all of the other similar OSS projects like this for help and inspiration.
+
+Our own measly rigs would appreciate any catalyst donations to **[TODO] WALLET ADDRESS [/TODO] - Thanks in advance!**
+

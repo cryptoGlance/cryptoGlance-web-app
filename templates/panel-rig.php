@@ -146,6 +146,74 @@
                <div class="progress-bar progress-bar-default" style="width: 0%"></div>
             </div>
          </div>
+         <div class="table-summary table-responsive">
+           <table class="table table-hover table-striped">
+            <thead>
+               <tr>
+                  <th></th>
+                  <th>GPU #</th>
+                  <th>Load</th>
+                  <th>Hashrate (5s)</th>
+                  <th>Temperature</th>
+                  <th>Fan %</th>
+                  <th>GPU Clock</th>
+                  <th>Memory Clock</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><i class="icon icon-cpu-processor green"></i></td>
+                  <td class="green">gpu0</td>
+                  <td>99%</td>
+                  <td>440 KH/s</td>
+                  <td>76 &deg;C</td>
+                  <td>100%</td>
+                  <td>950 mhz</td>
+                  <td>1375 mhz</td>
+               </tr>
+               <tr>
+                  <td><i class="icon icon-cpu-processor green"></i></td>
+                  <td class="green">gpu1</td>
+                  <td>99%</td>
+                  <td>390 KH/s</td>
+                  <td>76 &deg;C</td>
+                  <td>100%</td>
+                  <td>950 mhz</td>
+                  <td>1375 mhz</td>
+               </tr>
+               <tr>
+                  <td><i class="icon icon-cpu-processor orange"></i></td>
+                  <td class="orange">gpu2</td>
+                  <td>99%</td>
+                  <td>40 KH/s</td>
+                  <td>76 &deg;C</td>
+                  <td>100%</td>
+                  <td>950 mhz</td>
+                  <td>1375 mhz</td>
+               </tr>
+               <tr>
+                  <td><i class="icon icon-cpu-processor green"></i></td>
+                  <td class="green">gpu3</td>
+                  <td>99%</td>
+                  <td>430 KH/s</td>
+                  <td>76 &deg;C</td>
+                  <td>100%</td>
+                  <td>950 mhz</td>
+                  <td>1375 mhz</td>
+               </tr>
+               <tr>
+                  <td><i class="icon icon-cpu-processor red"></i></td>
+                  <td class="red">gpu4</td>
+                  <td>99%</td>
+                  <td>30 KH/s</td>
+                  <td>76 &deg;C</td>
+                  <td>100%</td>
+                  <td>950 mhz</td>
+                  <td>1375 mhz</td>
+               </tr>
+            </tbody>
+           </table>
+         </div>
        </div><!-- / .panel-body -->
      </div>
      

@@ -1,16 +1,5 @@
          <div class="panel panel-primary panel-in-footer">
             <div class="panel-body">
-               <div class="stat-pair stat-pair-qr">
-                  <div class="stat-value">
-                     <img src="images/qrcode-ltc-donate.png" />                            
-                     <img src="images/qrcode-btc-donate.png" />                            
-                  </div>
-                  <div class="stat-label">
-                     <img src="images/icon-litecoin.png" alt="Litecoin" /> LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
-                     <br>
-                     <img src="images/icon-bitcoin.png" alt="Bitcoin" /> 1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS
-                  </div>
-               </div>               
                <div class="stat-pair stat-pair-devs">
                   <div class="stat-label">
                      Made with <i class="icon icon-pixelheart"></i> by:
@@ -22,6 +11,16 @@
                      Long live crypto-currency!
                   </div>
                </div>
+               <div class="stat-pair stat-pair-qr">
+                  <div class="stat-label">
+                     Donations make us feel like champs <i class="icon icon-medal"></i>
+                  </div>
+                  <div class="stat-value">
+                     <a href="images/LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT.png" rel="external"><img src="images/icon-litecoin.png" alt="Litecoin" /></a> LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
+                     <br>
+                     <a href="images/1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS.png" rel="external"><img src="images/icon-bitcoin.png" alt="Bitcoin" /></a> 1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS
+                  </div>
+               </div>               
             </div><!-- / .panel-body -->
 
             <div class="panel-footer">

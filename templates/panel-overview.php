@@ -8,7 +8,7 @@
    </div>
    <div class="panel-body panel-body-overview">
       <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover table-striped">
          <thead>
             <tr>
                <th></th>
@@ -20,33 +20,33 @@
             </tr>
          </thead>
          <tbody>
-            <tr class="success">
-               <td><i class="icon icon-thumbs-up"></i></td>
-               <td><a href="#rig-hostname-1" class="anchor-offset">HOSTNAME-ONE</a></td>
+            <tr>
+               <td><i class="icon icon-check green"></i></td>
+               <td><a href="#rig-hostname-1" class="anchor-offset green">HOSTNAME-ONE</a></td>
                <td>192.168.1.2</td>
                <td>450 KH/s</td>
                <td>CoinHuntr</td>
                <td>32h 15m 04s</td>
             </tr>
-            <tr class="success">
-               <td><i class="icon icon-thumbs-up"></i></td>
-               <td><a href="#rig-hostname-1" class="anchor-offset">HOSTNAME-TWO</a></td>
+            <tr>
+               <td><i class="icon icon-check green"></i></td>
+               <td><a href="#rig-hostname-1" class="anchor-offset green">HOSTNAME-TWO</a></td>
                <td>192.168.1.5</td>
                <td>650 KH/s</td>
                <td>Middlecoin</td>
                <td>12h 48m 05s</td>
             </tr>
             <tr>
-               <td><i class="icon icon-warning-sign"></i></td>
-               <td><a href="#rig-hostname-1" class="anchor-offset">HOSTNAME-THREE</a></td>
+               <td><i class="icon icon-warning-sign orange"></i></td>
+               <td><a href="#rig-hostname-1" class="anchor-offset orange">HOSTNAME-THREE</a></td>
                <td>192.168.1.15</td>
                <td>650 KH/s</td>
                <td>Middlecoin</td>
                <td>26h 35m 02s</td>
             </tr>
-            <tr class="danger">
-               <td><i class="icon icon-erroralt"></i></td>
-               <td><a href="#rig-hostname-1" class="anchor-offset">HOSTNAME-FOUR</a></td>
+            <tr>
+               <td><i class="icon icon-erroralt red"></i></td>
+               <td><a href="#rig-hostname-1" class="anchor-offset red">HOSTNAME-FOUR</a></td>
                <td>192.168.1.3</td>
                <td>450 KH/s</td>
                <td>CoinHuntr</td>
