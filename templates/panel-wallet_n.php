@@ -1,5 +1,5 @@
 
-<?php require_once("templates/modal-edit_addresses.php"); ?>
+<?php require_once("templates/modals/edit_addresses.php"); ?>
 
 <div id="wallet-1" class="panel panel-primary panel-wallet">
    <h1>Address</h1>

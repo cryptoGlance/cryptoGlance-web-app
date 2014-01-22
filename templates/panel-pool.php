@@ -1,5 +1,5 @@
 
-<?php require_once("includes/modal-edit_pool.php"); ?>
+<?php require_once("templates/modals/edit_pool.php"); ?>
 
 <div id="pool-1" class="panel panel-primary panel-pool">
    <h1>Pool Stats</h1>

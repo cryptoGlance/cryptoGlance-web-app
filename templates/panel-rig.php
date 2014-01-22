@@ -1,5 +1,5 @@
 
-<?php require_once("includes/modal-edit_host.php"); ?>
+<?php require_once("templates/modals/edit_host.php"); ?>
 
 <div id="rig-hostname-1" class="panel panel-primary panel-rig">
    <h1>Mining Rig Stats</h1>

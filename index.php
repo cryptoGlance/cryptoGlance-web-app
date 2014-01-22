@@ -9,9 +9,9 @@
       
 -->
 
-<?php require_once("includes/modal-switch_pool.php"); ?>
+<?php require_once("templates/modals/switch_pool.php"); ?>
 
-<?php require_once("includes/modal-delete_prompt.php"); ?>
+<?php require_once("templates/modals/delete_prompt.php"); ?>
 
          
    <div id="dashboard-wrap" class="container sub-nav">
