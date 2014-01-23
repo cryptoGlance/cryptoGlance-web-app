@@ -7,6 +7,7 @@ Requirements:
 --
 - PHP v5.2+
 - Apache or IIS
+ - or use XAMPP (http://www.apachefriends.org/en/xampp.html)
 - cgminer (for monitoring rigs)
 - MPOS Mining Pool account (many pools support this)
 
