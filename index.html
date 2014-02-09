@@ -7,7 +7,7 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="shortcut icon" href="favicon.png">
-      <title>RigWatch - Dashboard</title>
+      <title>RigWatch - Multi-Rig Monitor</title>
       <!-- Bootstrap core CSS -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
@@ -24,94 +24,179 @@
    <body>
       <a href="https://plus.google.com/110896112995796953409" rel="publisher"></a>
       <div class="page-container">
-      <!-- Fixed navbar -->
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-         <div class="container">
-            <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-               <span class="sr-only">Toggle navigation</span>
-               <i class="icon icon-dropmenu"></i>
-               </button>
-               <a class="navbar-brand" href="index.php"><img src="images/rigwatch-logo-landscape.png" alt="RigWatch" /></a>
+         <!-- Fixed navbar -->
+         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <i class="icon icon-dropmenu"></i>
+                  </button>
+                  <a class="navbar-brand anchor-offset" href="#top"><img src="images/rigwatch-logo-landscape-shadow.png" alt="RigWatch" /></a>
+               </div>
+               <div class="navbar-collapse collapse">
+                  <ul class="nav nav-pills navbar-nav">
+                     <li class="active"><a href="#top" class="anchor-offset"><i class="icon icon-speed"></i> Dashboard<span id="dashboard-tag">monitoring console</span><span id="dash-add-panel" class="grad-green" data-toggle="modal" data-target="#editPool" data-backdrop="static">+ add new panel</span></a></li>
+                     <li><a href="#panel-features" class="anchor-offset"><i class="icon icon-managedhosting"></i> Features<span>you'll love (we hope)</span></a></li>
+                     <li><a href="#panel-source" class="anchor-offset"><i class="icon icon-code"></i> Source<span>available on Github!</span></a></li>
+                     <li><a href="#panel-chat" class="anchor-offset"><i class="icon icon-chat"></i> Chat<span>Support + Dev Ideas</span></a></li>
+                     <li><a href="#panel-social" class="anchor-offset"><i class="icon icon-groups-friends"></i> Social<span>spread the word</span></a></li>
+                     <li><a href="#panel-donations" class="anchor-offset"><i class="icon icon-bitcoin"></i> Donations<span>are greatly appreciated!</span></a></li>
+                  </ul>
+               </div>
+               <!--/.nav-collapse -->
             </div>
-            <div class="navbar-collapse collapse">
-               <ul class="nav nav-pills navbar-nav">
-                  <li class="active"><a href="index.php"><i class="icon icon-speed"></i> Dashboard</a></li>
-                  <li id="dash-add-panel" class="grad-green"><a title="Add Panel" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-newwindow"></i></a> </li>
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
-                     <ul class="dropdown-menu">
-                        <li class="dropdown-header site-width-slider">Panel Width</li>
-                        <li class="site-width-slider">
-                           <span class="tooltip"></span> <!-- Tooltip -->
-                           <span class="width-reading">90%</span> <!-- width-reading -->
-                           <div id="slider"></div> <!-- the Slider -->
-                        </li>
-                        <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> RigWatch Settings</a></li>
-                        <div class="divider"></div> <!-- the Slider -->
-                     </ul>
-                  </li>
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
-                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">RigWatch</li>
-                        <li><a href="help.php">Help using RigWatch</a></li>
-                        <li><a href="https://github.com/scar45/rigwatch" rel="external">Source on Github</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">RigWatch Discussion</li>
-                        <li><a href="help.php" rel="external">Bitcointalk.org Forum Thread</a></li>
-                        <li><a href="https://github.com/scar45/rigwatch" rel="external">Reddit Post</a></li>
-                     </ul>
-                  </li>
-                  <li id="nav-login-button"><a href="login.php">Login</a></li>
-                  <li id="nav-logout-button"><a href="logout.php">Logout</a></li>
-                  <li class="panel-controls"><a id="collapse-all-panels" href="#" title="Collapse ALL Panels"><i class="icon icon-fastup"></i><span>Collapse All</span></a><a id="expand-all-panels" href="#" title="Expand ALL Panels"><i class="icon icon-fastdown"></i><span>Expand All</span></a></li>
-               </ul>
-            </div>
-            <!--/.nav-collapse -->
          </div>
-      </div>
-         <div class="panel panel-primary panel-in-footer">
+         <div id="top" class="jumbotron">
+            <img src="images/rigwatch-devices.png" />
+            <h1>Real-time updates in one spot, for all of your mining rigs <i class="icon icon-pixelpickaxe"></i></h1>
+            <p class="jumbo-desc">RigWatch is an open-source, self-hosted PHP webapp that can be used to monitor and control your mining rigs and pools, complete with a responsive UI.</p>
+            <p class="jumbo-cta">
+               <a class="btn btn-warning btn-lg" href="https://github.com/scar45/rigWatch/archive/master.zip" role="button"><i class="icon icon-download-alt"></i> Download Now &raquo;<span>latest master branch from Github</span></a>
+               <a class="btn btn-default btn-lg" href="#installation" role="button"><i class="icon icon-install"></i> Installation Guide<span>for multiple web servers</span></a>
+               <br>
+            </p>
+            <p class="jumbo-copy container">Installation is easy. If you've ever setup websites on a server, you'll be up and running in a few minutes. On the other hand, if you don't have that experience under your belt, don't fret. A simple-to-follow installation guide is just above, how convenient!</p>
+         </div>
+         <div id="panel-features" class="panel panel-primary">
+            <div class="panel-lighter">
+               <h1>Features</h1>
+            </div>         
             <div class="panel-body">
-               <div class="stat-pair stat-pair-devs">
-                  <h1>RigWatch is coming soon!</h1>
-                  <div class="stat-label">
-                     Made with <i class="icon icon-pixelheart"></i> by:
-                  </div>
-                  <div class="stat-value">
-                     <a href="http://github.com/scar45" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/75ef5c7e71725a216433547ad93fbc0c?d=https%3A%2F%2Fidenticons.github.com%2Fc78bf60d254e1947a636d8152e588691.png"><br>scar45</a> / <a href="http://github.com/Stoyvo" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/12885e27b0f7be03e5d398d0f4ad3b5c?d=https%3A%2F%2Fidenticons.github.com%2F97711c22cd4fe16127b6c1bf98c926a3.png"><br>Stoyvo</a> / <a href="http://github.com/DChaykas" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/76517ae0a2c5ded3f7365d13b849eaab?d=https%3A%2F%2Fidenticons.github.com%2Fc858c1bf532f19e2f976c6233a3be279.png"><br>DChaykas</a>
-                  </div>
-                  <div class="stat-label">
-                     Long live crypto-currency!
+               <div class="feature">
+                  <img src="images/feature-overview.jpg" />
+                  <div class="feature-desc">
+                     <h2>Overview</h2>
+                     <span>At one glance, see a concise listing of your rigs, and their current performance + health status.</span>
                   </div>
                </div>
-               <div class="stat-pair stat-pair-qr">
+               <div class="feature">
+                  <img src="images/feature-address.jpg" />
+                  <div class="feature-desc">
+                     <h2>Balance</h2>
+                     <span>Keep an eye on the balance of your addresses, as they're verified against the blockchain.</span>
+                  </div>
+               </div>
+               <div class="feature">
+                  <img src="images/feature-rig.jpg" />
+                  <div class="feature-desc">
+                     <h2>Rigs.</h2>
+                     <span>Each rig shows a summary which can easy be expanded upon via tabs. Detailed status of each device/GPU shows you everything.</span>
+                  </div>
+               </div>
+               <div class="stat-pair">
                   <div class="stat-label">
-                     Donations make us feel like champs <i class="icon icon-medal"></i>
+                     We're in the early, yet release-worthy stages of RigWatch development, so you can be sure that new features will be added as time goes on.
+                  </div>
+               </div>
+            </div><!-- / .panel-body -->
+         </div>
+         <div id="panel-source" class="panel panel-primary">
+            <div class="panel-lighter">
+               <h1>Source</h1>
+            </div>         
+            <div class="panel-body">
+               <img src="images/splash-source.png" />
+               <br>
+               <div class="stat-pair stat-pair-devs">
+                  <div class="stat-label">
+                     Don't hesitate to fork RigWatch and submit pull requests!
+                  </div>
+               </div>
+               <br>
+               <a id="btn-sauce" href="https://github.com/scar45/rigwatch" rel="external"><button type="button" class="btn btn-lg btn-default"><i class="icon icon-github"></i> &nbsp;Grab the sauce on Github</button></a>
+            </div><!-- / .panel-body -->
+         </div>
+         <div id="panel-social" class="panel panel-primary">
+            <div class="panel-lighter">
+               <h1>find RigWatch elsewhere</h1>
+            </div>         
+            <div class="panel-body social-icons">
+               <div class="stat-pair stat-pair-devs">
+                  <div class="stat-label">
+                     follow the project, get in touch, and/or help spread the word!
+                  </div>
+
+               </div>
+               <div class="container">
+                  <div class="social-box">
+                     <a class="social-icon" href="https://plus.google.com/u/0/b/110896112995796953409/110896112995796953409/posts" rel="external"><img src="images/icon-google-plus.png" />Google+</a>
+                     <div class="social-count">
+                        <div class="g-follow" data-annotation="bubble" data-height="20" data-href="//plus.google.com/110896112995796953409" data-rel="publisher"></div>
+                     </div>
+                  </div>
+                  <div class="social-box">
+                     <a class="social-icon" href="http://reddit.com/r/rigwatch" rel="external"><img src="images/icon-reddit.png" />(sub)Reddit</a>
+                  </div>
+                  <div class="social-box">
+                     <a class="social-icon" href="http://twitter.com/rigwatch" rel="external"><img src="images/icon-twitter.png" />Twitter</a>
+                     <a class="twitter-follow-button social-count" href="https://twitter.com/rigwatch" data-show-count="true" data-show-screen-name="false" data-width="80px" data-lang="en">Follow @rigwatch</a>
+                  </div>
+               </div>
+            </div><!-- / .panel-body -->
+         </div>
+         <div id="panel-chat" class="panel panel-primary">
+            <div class="panel-lighter">
+               <h1>Chat (support + dev ideas)</h1>
+            </div>         
+            <div class="panel-body">
+               <div class="stat-pair stat-pair-devs">
+                  <div class="stat-label">
+                     Please be respectful and patient when waiting for answers&hellip;Thanks!
+                  </div>
+               </div>
+               <div class="container social-icons">
+                  <a class="social-icon" href="http://webchat.freenode.net?channels=%23RigWatch&uio=OT10cnVlJjExPTIwNQa5" rel="external"><h3>Enter IRC Chatroom</h3><img src="images/icon-chat.png" /></a>
+                  <p>...or, connect to <span class="orange">Freenode</span> and join <span class="orange">#RigWatch</span> with your favourite mobile IRC client.</p>
+                  <iframe src="http://webchat.freenode.net?channels=%23RigWatch&uio=OT10cnVlJjExPTIwNQa5"></iframe>
+               </div>
+            </div><!-- / .panel-body -->
+         </div>
+         <div id="panel-donations" class="panel panel-primary panel-in-footer">
+            <div class="panel-lighter">
+               <h1>&lt;3 to all donators</h1>
+            </div>         
+            <div class="panel-body">
+               <div class="stat-pair stat-pair-devs">
+                  <div class="stat-value">
+                     Made with <i class="icon icon-pixelheart"></i> by:
+                  </div>
+                  <div class="stat-label">
+                     <a href="http://github.com/scar45" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/75ef5c7e71725a216433547ad93fbc0c?d=https%3A%2F%2Fidenticons.github.com%2Fc78bf60d254e1947a636d8152e588691.png"><br>scar45</a> / <a href="http://github.com/Stoyvo" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/12885e27b0f7be03e5d398d0f4ad3b5c?d=https%3A%2F%2Fidenticons.github.com%2F97711c22cd4fe16127b6c1bf98c926a3.png"><br>Stoyvo</a> / <a href="http://github.com/DChaykas" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/76517ae0a2c5ded3f7365d13b849eaab?d=https%3A%2F%2Fidenticons.github.com%2Fc858c1bf532f19e2f976c6233a3be279.png"><br>DChaykas</a>
                   </div>
                   <div class="stat-value">
+                     Donations make us feel like champs <i class="icon icon-medal"></i>
+                  </div>
+                  <div class="stat-label">
                      <a href="images/LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT.png" rel="external"><img src="images/icon-litecoin.png" alt="Litecoin" /></a> LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT
                      <br>
                      <a href="images/1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS.png" rel="external"><img src="images/icon-bitcoin.png" alt="Bitcoin" /></a> 1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS
                   </div>
-               </div>               
+                  <div class="stat-value">
+                     Long live crypto-currency!
+                  </div>
+               </div>
+               <h3>Licensed under GPLv2</h3>
+               <a href="https://github.com/scar45/rigWatch/tree/gh-pages" rel="external"><button type="button" class="btn btn-default"><i class="icon icon-github"></i> this site's source on Github</button></a>
+               <br>
+               <br>
             </div><!-- / .panel-body -->
-
-            <div class="panel-footer">
-               <div class="pull-left">
-                  <!-- <span class="label label-success"><i class="icon icon-ok"></i> Healthy</span> -->
-                  <h3>Licensed under GPLv2</h3>
-               </div>
-               <div class="pull-right">
-                  <a href="https://github.com/scar45/rigwatch" rel="external"><button type="button" class="btn btn-default"><i class="icon icon-github"></i> Source on Github</button></a>
-               </div>
-            </div>
          </div>
       </div>      
       <script src="js/jquery-1.10.2.min.js"></script>
       <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+      <script src="js/jquery.easing.1.3.js"></script>
       <script src="js/jquery.scrollTo.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/rigwatch-ui.js"></script>
+      <script type="text/javascript">
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/platform.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+      </script>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
    </body>
 </html>
