@@ -120,7 +120,7 @@ class Class_Miners_Cgminer {
         
         $data = array(
             'type' => 'cgminer',
-            'uptime' => intval(($summaryData['Elapsed']) / 3600) . 'H ' . bcmod((intval(time() - $summaryData['Elapsed']) / 60),60) . 'M ' . bcmod((time() - $summaryData['Elapsed']),60) . 'S',
+            'uptime' => gmdate('H:i:s', $summaryData['Elapsed']),
             'hashrate_avg' => $summaryData['MHS av'] . ' MH/s',
             'hashrate_5s' => $summaryData['MHS 5s'] . ' MH/s',
             'blocks_found' => $summaryData['Found Blocks'],
