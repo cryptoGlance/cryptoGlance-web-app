@@ -17,7 +17,7 @@ class Class_Wallets_Dogecoin extends Class_Wallets_Abstract {
                 'wallets/dogecoin/' . sha1($this->_address) . '.json'
         );
 
-        if ($cached == false || $fileHandler->lastTimeModified() >= 1800) { // updates every 30 minutes. How much are you being paid out that this must change? We take donations :)
+        if ($cached == false || $fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
             $curl = curl_init($this->_apiURL);
             curl_setopt($curl, CURLOPT_FAILONERROR, true);
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);

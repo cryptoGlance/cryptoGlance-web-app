@@ -2,7 +2,8 @@
 require_once('includes/inc.php');
 
 $type = ucwords(strtolower($_GET['type']));
-$action = ucwords(strtolower($_GET['action']));
+
+$action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($_GET['action'])));
 
 
 if (empty($type) || empty($action)) {

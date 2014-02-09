@@ -1,21 +1,22 @@
 var ajaxCall;
-var gpuHeatWarning = 69;
-var gpuHeatDanger = 73;
+var devHeatWarning = 70;
+var devHeatDanger = 75;
+var devHWWarning = 10;
+var updateTime = 2500;
 /*
  *
  * Update functionality
  *
  */
- // On Load Ajax Call
- ajaxUpdateCall('all');
+// On Load Ajax Call
+ajaxUpdateCall('all');
  
-// 5 second Update call
+// Update call by seconds
 setInterval(function() {
     ajaxUpdateCall('all');
-}, 5000);
+}, updateTime);
 
 // BTN Updates
-// this needs to be fixed for the current btn-updater
 $('.btn-updater').click(function() {
     if ($(this).attr('data-type') == 'all') {
         ajaxUpdateCall('all');
@@ -71,10 +72,10 @@ function updateRigs (data) {
         var rigNavElm = $(rigElm).find('.nav');
         var rigTabContentElm = $(rigElm).find('.tab-content');
         var rigTitle = $(rigElm).find('.panel-title span');
-        var gpuWarning = false;
-        var gpuDanger = false;
+        var devWarning = false;
+        var devDanger = false;
         
-        if (typeof rig.summary == 'undefined' || typeof rig.gpus == 'undefined') {
+        if (typeof rig.summary == 'undefined' || typeof rig.devs == 'undefined') {
             $(rigElm).find('.toggle-panel-body').hide();
             $(rigNavElm).hide();
             $(rigTabContentElm).hide();
@@ -93,7 +94,7 @@ function updateRigs (data) {
     
         // Clear nav items
         var selectedNav = $(rigNavElm).find('.active').index();
-        console.log(selectedNav);
+        if (selectedNav == -1) selectedNav = 0;
         $(rigNavElm).find('li').remove();
         
         // Update Summary
@@ -117,42 +118,54 @@ function updateRigs (data) {
             
             $(summaryContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div><div class="progress progress-striped"><div class="progress-bar progress-bar-'+progressStyle+'" style="width: '+sharePercent+'%"></div></div></div>');
         });
-        var summaryContentTabTable = $(rigTabContentElm).find('#rig' + rigId + '-summary').find('.table-summary').find('tbody');
-        $(summaryContentTabTable).find('tr').remove();
+        var summaryContentTabTable = $(rigTabContentElm).find('#rig' + rigId + '-summary').find('.table-summary');
+        var summaryContentTabTableHead = $(rigTabContentElm).find('thead');
+        var summaryContentTabTableBody = $(rigTabContentElm).find('tbody');
+        $(summaryContentTabTableHead).find('tr').remove();
+        $(summaryContentTabTableBody).find('tr').remove();
+        var removeTable = false;
+        if (rig.summary.type == 'cgminer') {
+            $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Temperature</th><th>Fan Speed</th><th>Fan %</th><th>Hashrate (5s)</th><th>Utility</th></tr>');
+        } else if (rig.summary.type == 'dualminer') {
+            $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Hashrate 5s</th><th>Accepted</th><th>Rejected</th><th>Utility</th><th>HW Errors</th></tr>');
+        } else {
+            removeTable = true;
+            $(summaryContentTabTable).remove();
+        }
         
         var rigStatus = 'green';
         var rigIcon = 'check';
         
-        // Update GPUs
-        $.each(rig.gpus, function (gpuIndex, gpu) {
+        // Update Devices
+        $.each(rig.devs, function (devIndex, dev) {
             // Status colours
-            var status = gpu.health;
+            var status = dev.health;
             var icon = '';
-            if (gpu.enabled == 'N') {
+            if (dev.enabled == 'N') {
                 status = 'grey';
-                icon = 'stop';
-            } else if (status == 'Dead') {
+                icon = 'ban-circle';
+            } else if (status == 'Dead' || dev.hw_errors > 10) {
                 status = 'red';
                 icon = 'danger';
                 rigStatus = 'red';
                 rigIcon = 'danger';
-            } else if (status == 'Sick') {
+            } else if (status == 'Sick' || (dev.hw_errors > 0 && dev.hw_errors <= devHWWarning)) {
                 status = 'orange';
                 icon = 'warning-sign';
                 if (rigIcon != 'danger') {
                     rigStatus = 'orange';
                     rigIcon = 'warning-sign';
                 }
-            } else if (gpuHeatDanger <= gpu.temperature) {
+            } else if (devHeatDanger <= dev.temperature) {
                 status = 'red';
                 icon = 'fire';
                 if (rigIcon != 'danger' && rigIcon != 'warning-sign') {
                     rigStatus = 'red';
                     rigIcon = 'fire';
                 }                icon = 'fire';
-            } else if (gpuHeatWarning <= gpu.temperature) {
+            } else if (devHeatWarning <= dev.temperature) {
                 status = 'orange';
-                icon = 'fire';
+                icon = 'hot';
                 if (rigIcon != 'danger' && rigIcon != 'warning-sign') {
                     rigStatus = 'orange';
                     rigIcon = 'fire';
@@ -162,25 +175,31 @@ function updateRigs (data) {
                 icon = 'cpu-processor';
             }
             
-            // add gpu to Nav
-            $(rigNavElm).append('<li><a class="rig'+ rigId +'-gpu'+ gpuIndex +' '+ status +'" href="#rig'+ rigId +'-gpu'+ gpuIndex +'" data-toggle="tab">GPU '+ gpuIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
-            $(rigTabContentElm).find('#rig'+ rigId +'-gpu'+ gpuIndex).remove();
-            $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig'+ rigId +'-gpu'+ gpuIndex +'"><div class="panel-body panel-body-stats"></div></div>');
+            // add dev to Nav
+            $(rigNavElm).append('<li><a class="rig'+ rigId +'-dev'+ devIndex +' '+ status +'" href="#rig'+ rigId +'-dev'+ devIndex +'" data-toggle="tab">DEV '+ devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
+            $(rigTabContentElm).find('#rig'+ rigId +'-dev'+ devIndex).remove();
+            $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig'+ rigId +'-dev'+ devIndex +'"><div class="panel-body panel-body-stats"></div></div>');
             
-            // Updating GPU Content Tab
-            var gpuContentTab = $(rigTabContentElm).find('#rig' + rigId + '-gpu' + gpu.id).find('.panel-body-stats');
-            $(gpuContentTab).find('div').remove();
-            $.each(gpu, function(k, v) {
+            // Updating DEV Content Tab
+            var devContentTab = $(rigTabContentElm).find('#rig' + rigId + '-dev' + dev.id).find('.panel-body-stats');
+            $(devContentTab).find('div').remove();
+            $.each(dev, function(k, v) {
                 if (k != 'id' && k != 'enabled') {
                     if (k == 'temperature') {
                         v = v + '&deg;C';
                     }
-                    $(gpuContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
+                    $(devContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
                 }
             });
             
-            // Update Sumamry Page of GPUs
-            $(summaryContentTabTable).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">gpu'+gpu.id+'</td><td>'+gpu.temperature+'&deg;C</td><td>'+gpu.fan_speed+'</td><td>'+gpu.fan_percent+'</td><td>'+gpu.hashrate_5s+'</td><td>'+gpu.utility+'</td></tr>');
+            // Update Sumamry Page of DEVs
+            if (!removeTable) {
+                if (rig.summary.type == 'cgminer') {
+                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
+                } else if(rig.summary.type == 'dualminer') {
+                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
+                }
+            }
             
         });
         

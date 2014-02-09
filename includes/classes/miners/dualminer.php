@@ -1,11 +1,10 @@
 <?php
 
-/**
- * This class is not final... This was the first attempt of retrieving cgminer data.
+/*
  *
  * @author Stoyvo
  */
-class Class_Miners_Cgminer {
+class Class_Miners_Dualminer {
 
     protected $_host;
     protected $_port;
@@ -72,26 +71,17 @@ class Class_Miners_Cgminer {
         $devId = intval($devId); // simple sanitizing
         $devData = $this->_devs[$devId];
         
-        // TODO:
-        // Return NULL if the gpuId exist or not
-        //
-        
+        // Building Summary stats
+        $this->_summary[0]['MHS 5s'] += (float) $devData['MHS 5s'];
+
         $data = array();
 
         $data = array(
-            'id' => $devData['GPU'],
+            'id' => $devId,
             'enabled' => $devData['Enabled'],
             'health' => $devData['Status'],
             'hashrate_avg' => $devData['MHS av']  . ' MH/S',
             'hashrate_5s' => $devData['MHS 5s']  . ' MH/S',
-            'intensity' => $devData['Intensity'],
-            'temperature' => $devData['Temperature'],
-            'fan_speed' => $devData['Fan Speed'] . ' RPM',
-            'fan_percent' => $devData['Fan Percent'] . '%',
-            'engine_clock' => $devData['GPU Clock'],
-            'memory_clock' => $devData['Memory Clock'],
-            'gpu_voltage' => $devData['GPU Voltage']  . 'V',
-            'powertune' => $devData['Powertune']  . '%',
             'accepted' => $devData['Accepted'],
             'rejected' => $devData['Rejected'],
             'hw_errors' => $devData['Hardware Errors'],
@@ -119,7 +109,7 @@ class Class_Miners_Cgminer {
         }
         
         $data = array(
-            'type' => 'cgminer',
+            'type' => 'dualminer',
             'uptime' => intval(($summaryData['Elapsed']) / 3600) . 'H ' . bcmod((intval(time() - $summaryData['Elapsed']) / 60),60) . 'M ' . bcmod((time() - $summaryData['Elapsed']),60) . 'S',
             'hashrate_avg' => $summaryData['MHS av'] . ' MH/s',
             'hashrate_5s' => $summaryData['MHS 5s'] . ' MH/s',
@@ -138,19 +128,15 @@ class Class_Miners_Cgminer {
     private function getAllData() {
         $data = array();
         
+        // Get All Device data
+        foreach ($this->_devs as $dev) {
+            $data['devs'][] = $this->getDevData($dev['PGA']);
+        }
+        
         // Get GPU Summary
         $data['summary'] = $this->getSummaryData();
         
-        // Get All Device data
-        foreach ($this->_devs as $dev) {
-            $data['devs'][] = $this->getDevData($dev['GPU']);
-        }
-        
         return $data;
-    }
-    
-    public function switchPool($poolId) {
-        return $this->getData('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
 
     public function update() {

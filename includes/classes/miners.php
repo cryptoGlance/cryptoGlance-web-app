@@ -36,12 +36,16 @@ class Class_Miners {
         $obj = new $class($host, $port);
         $this->_miners[] = $obj;
     }
-
-    public function getData() {
-        // Requires param for type of data:
-        foreach ($this->_miners as $miner) {
-            $miner->$_GET['funct']();
+    
+    public function switchPool() {
+        $minerId = intval($_GET['miner']);
+        $poolId = intval($_GET['pool']);
+        
+        if ($minerId == 0 || $poolId == 0) {
+            return array();
         }
+    
+        $something = $this->_miners[$minerId-1]->switchPool($poolId-1);
     }
 
     public function update($minerId = null) {

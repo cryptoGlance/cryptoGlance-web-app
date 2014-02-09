@@ -1,25 +1,24 @@
-<?php require_once("includes/header.php"); ?>
-       
-<!-- ### Below is where the modals are defined for adding or editing a host. 
-         There are two modals/include files now, but this can be changed to a single one, 
-         as the EDIT would have the information pre-populated. The only other 
-         difference is the <h3> label at the top!
-            
-      ### Same goes for the POOL ones below
-      
--->
-
-<?php require_once("templates/modals/switch_pool.php"); ?>
-
-<?php require_once("templates/modals/delete_prompt.php"); ?>
-
+<?php
+require_once('includes/inc.php');
+require_once("includes/header.php");
+?>
          
    <div id="dashboard-wrap" class="container sub-nav">
    
-
-      <?php require_once("templates/panel-overview.php"); ?>
-      
-      <?php require_once("templates/panel-rig.php"); ?>
+    <?php
+    require_once ('includes/rigwatch.php');
+    $rigWatch = new RigWatch();
+    
+    // Overview
+    require_once("templates/panel-overview.php");
+    
+    // Miners
+    foreach ($rigWatch->getMiners() as $minerId => $miner) {
+        $minerId++; // Doing this because minerID 0 means all devices in ajax calls
+        include("templates/panel-rig.php");
+    }
+   
+    ?>
 
       <?php //require_once("templates/panel-pool.php"); ?>
 
@@ -38,3 +37,7 @@
       <?php require_once("includes/footer.php"); ?>
    </div>
       
+
+<?php require_once("templates/modals/switch_pool.php"); ?>
+
+<?php require_once("templates/modals/delete_prompt.php"); ?>
