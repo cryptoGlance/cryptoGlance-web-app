@@ -33,3 +33,5 @@ You'll want to ensure you're running cgminer with API-Access enabled, here's an 
 Hope you enjoy what we're trying to do here, and thanks to all of the other similar OSS projects like this for help and inspiration.
 
 Our own measly rigs would appreciate any catalyst donations to **[TODO] WALLET ADDRESS [/TODO] - Thanks in advance!**
+
+Reference: https://www.cryptsy.com/pages/api
