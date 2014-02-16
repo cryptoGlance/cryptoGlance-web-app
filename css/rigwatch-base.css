@@ -17,6 +17,10 @@ h1, h2, h3, h4, h5, h6 {
    color: #33b5e5;
 }
 
+h1 {
+    letter-spacing: 1px;
+}
+
 hr {
     border-width: 1px 0px 1px;
     border-style: solid none solid;
@@ -67,7 +71,8 @@ table a:hover {
 [class^="icon-"], [class*=" icon-"] {
     font-weight: normal !important;
 }
-    
+
+ 
 .btn-lg {
     padding: 9px 16px;
     font-family: robotoblack;
@@ -263,6 +268,24 @@ a.navbar-brand img {
 .nav-pills li a {
     font-size: 23px;
     font-family: robotolight;
+    -webkit-border-radius: 9px;
+    border-radius: 9px;
+    border-width: 1px;
+    padding: 7px 13px 3px;
+    text-align: right;
+}
+
+.nav-pills li a:hover, .nav-pills li a:active, .nav-pills li a:hover * {
+    border-width: 0 1px 1px;
+    color: #fff;
+}
+
+.nav-pills li a span {
+    display: block;
+    padding-top: 2px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #999;
 }
 
 .nav-pills li.panel-controls {
@@ -369,7 +392,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     padding: 0px 10px 0 72px;
     text-align: left;
     font-size: 27px;
-    letter-spacing: 0px;
+    letter-spacing: 1px;
     line-height: 0px;
     text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
@@ -988,6 +1011,12 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     
     .nav .nav-pills > li:first-child a:hover {
         color: #fff !important;
+    }
+
+	.nav-pills li a {
+        -webkit-border-radius: 0 0 9px 9px;
+        border-radius: 0 0 9px 9px;
+        border-width: 0 1px 1px;
     }
 
     #dash-add-panel {
