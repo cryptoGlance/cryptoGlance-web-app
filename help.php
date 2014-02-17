@@ -4,6 +4,9 @@
 # through the Markdown filter. You can adapt this sample code in any way
 # you like.
 
+# PHP Markdown Lib Copyright © 2004-2013 Michel Fortin http://michelf.ca/
+# All rights reserved.
+
 # Install PSR-0-compatible class autoloader
 spl_autoload_register(function($class){
 	require preg_replace('{\\\\|_(?!.*\\\\)}', DIRECTORY_SEPARATOR, ltrim($class, '\\')).'.php';

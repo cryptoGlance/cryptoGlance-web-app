@@ -67,6 +67,8 @@ A. Most definitely! The code is completely open source, and you run RigWatch on 
 
 We owe thanks to the following projects:
 --
+- [WebhostingHub Glyphs](http://www.webhostinghub.com/glyphs/)
+- [PHP Markdown by Michel Fortin](http://michelf.ca/projects/php-markdown/)
 - [Messenger jQuery plugin](http://github.hubspot.com/messenger/docs/welcome/)
 
 Hope you enjoy what we're trying to do here, and thanks to all of the other similar OSS projects like this for help and inspiration.

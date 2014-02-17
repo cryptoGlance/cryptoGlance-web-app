@@ -103,7 +103,7 @@ function updateRigs (data) {
     var overview = $('#overview');
     var overviewTable = $(overview).find('.panel-body-overview div table tbody');
     $(overviewTable).find('tr').remove();
-        
+
     $.each(data, function( rigIndex, rig ) {
         var rigId = (rigIndex+1);
         var rigElm = $('#rig'+rigId);
@@ -246,6 +246,24 @@ function updateRigs (data) {
                         
         // Update Overview Panel
         $(overviewTable).append('<tr><td><i class="icon rig'+ rigId +' icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig'+ rigId +'" class="anchor-offset rig'+ rigId +' '+ rigStatus +'">'+ $(rigElm).find('.panel-title span').html() +'</a></td><td>'+ rig.summary.hashrate_5s +'</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
-        
+                
     });
+    
+    
+    // Smooth scroll to active rig from the Overview panel
+    // TODO: Bug - when the Tools --> Active Panel link is clicked, it animates down, but then 'locks' the user there when they try to scroll
+    // possibly caused by where this function is (just below) and the fact that is also exists in 'rigwatch-ui.js'
+    
+    $('.anchor-offset').click(function() {
+      var target = $(this).attr('href');
+      $('body').scrollTo(target, 750, { margin: true, offset: -120 });
+   })    
+
+   $('.anchor').click(function() {
+      var target = $(this).attr('href');
+      $('body').scrollTo(target, 750, { margin: true });
+   })    
+
+    
 }
+
