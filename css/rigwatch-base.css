@@ -41,6 +41,7 @@ table a, table a:visited {
 table a:hover {
     border-bottom: 1px solid #fff;
     text-decoration: none;
+    color: #fff !important;
 }
 
 .text-left {
@@ -260,15 +261,22 @@ a.navbar-brand img {
     float: none;
 }
 
-.nav-pills li a {
+.nav-pills > li > a {
     font-size: 23px;
     font-family: robotolight;
     -webkit-border-radius: 9px;
     border-radius: 9px;
     border-width: 1px;
     padding: 7px 13px 3px;
-    text-align: right;
+    text-align: left;
+    background: rgba(0,0,0,0.3);
 }
+
+/*
+.nav-pills li #slider a {
+    background: none;
+}
+*/
 
 .nav-pills li a:hover, .nav-pills li a:active, .nav-pills li a:hover * {
     border-width: 0 1px 1px;
@@ -327,6 +335,11 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     filter: none;
 }
 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    font-size: 19px;
+    font-family: robotolight;
+}
+
 .navbar-nav i {
     color: #999;
     font-size: 24px;
@@ -364,10 +377,6 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     font-size: 16px;
 }
 
-.navbar-nav .open .dropdown-menu > li > a {
-    line-height: 32px;
-}
-
 .dropdown-menu {
     right: 0;
     left: inherit;
@@ -376,7 +385,9 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 .navbar-nav .open .dropdown-menu {
     background: #222;
-    padding-left: 25px;
+    margin: 0 15px;
+    -webkit-border-radius: 0;
+    border-radius: 0;    
 }
 
 a#dash-add-panel {
@@ -385,6 +396,22 @@ a#dash-add-panel {
 
 .site-width-slider {
     display: none;
+}
+
+#total-hashrate {
+    height: 100%;
+    font-size: 31px;
+    font-family: bebas;
+    padding: 12px 20px 10px;
+    border-width: 0 1px;
+    box-shadow: inset 0 0 20px rgba(51,181,225,0.3);
+    background: rgba(51,181,225,0.1);
+    text-shadow: 2px 2px 0 #000;
+    color: #8f8;
+}
+
+#total-hashrate * {
+    color: #8f8;
 }
 
 .container.sub-nav {
@@ -490,7 +517,7 @@ a#dash-add-panel {
 
 .panel-rig ul {
     margin: 0;
-    padding: 10px 0 0;
+    padding: 0;
     background: #3E444C;
 }
 
@@ -510,7 +537,6 @@ a#dash-add-panel {
     border-radius: 4px 4px 0 0;
     margin: 0 1px;
     padding: 3px 15px;
-
 }
 
 
@@ -759,6 +785,16 @@ a#dash-add-panel {
 
 .panel-in-footer {
     margin-bottom: 15px;
+    border: 0;
+}
+
+.panel-in-footer h1 {
+    position: relative;
+    top: 0;
+    margin: 0;
+    padding: 5px 0;
+    background: rgba(0,0,0,0.25);
+    font-size: 27px;
 }
 
 .panel-in-footer .panel-body .stat-pair {
@@ -840,7 +876,7 @@ a#dash-add-panel {
 }
 
 .panel-body .table-summary {
-    margin: 10px 0;
+    margin: 0;
 }
 
 .panel-body .table tr th, .panel-body .table tr td {
@@ -993,6 +1029,10 @@ a#dash-add-panel {
         box-shadow: none;
     }
     
+    .mobile-icon {
+        display: none;
+    }
+    
     a.navbar-brand img {
        height: 56px;
     }
@@ -1006,7 +1046,15 @@ a#dash-add-panel {
         float: right;
         margin: -1px 0px 0px 20px;
     }
+    
+    .navbar-nav .open .dropdown-menu > li > a {
+        line-height: 32px;
+    }
 
+    #total-hashrate {
+        margin-right: 8px;
+    }
+    
     .nav-pills > li {
         float: left;
     }
@@ -1048,12 +1096,12 @@ a#dash-add-panel {
         padding: 4px 13px 5px;
     }
     
-    .nav-pills li:nth-child(2) a {
+    .navbar .nav-pills > li:nth-child(3) > a {
         -webkit-border-radius: 0 0 0 9px;
         border-radius: 0 0 0 9px;
     }
     
-    .nav-pills li:last-child a {
+    .navbar .nav-pills > li:last-child > a {
         -webkit-border-radius: 0 0 9px 0;
         border-radius: 0 0 9px 0;
     }
@@ -1156,10 +1204,15 @@ a#dash-add-panel {
 
     .panel-in-footer {
         margin-bottom: 0px;
-        border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 0;
+        border-radius: 0;
         border-bottom: 0;
     }
-    
+
+    .panel-in-footer h1 {
+        font-size: 40px;
+    }
+
     .panel-title {
         padding-left: 95px;
     }
@@ -1190,6 +1243,7 @@ a#dash-add-panel {
     .panel-in-footer .panel-body .stat-pair-qr .stat-value {
         height: auto;
         min-height: 147px;
+        text-align: left;
     }
     
     .panel-body .stat-pair.feed-item .stat-value {
@@ -1243,6 +1297,14 @@ a#dash-add-panel {
     .site-width-slider {
         display: inline-block;
         width: 100%;
+    }
+    
+    .site-width-slider a, .site-width-slider a:hover {
+        -webkit-transition: none !important;
+        -moz-transition: none !important;
+        -ms-transition: none !important;
+        -o-transition: none !important;
+        transition: none !important;
     }
     
     .width-reading {
