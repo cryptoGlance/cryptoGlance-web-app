@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 json/configs/
 json/currencies/
 json/dev/
 json/pools/
 json/wallets/
-=======
-json/
-Michelf/
->>>>>>> origin/ui-navbar-alert
 pure-assets/
 vectorstock/
 web.config
