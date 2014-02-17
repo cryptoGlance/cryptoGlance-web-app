@@ -9,13 +9,13 @@
          <div class="modal-body">
            <div class="checkbox">
              <label for="pool1">
-               <input type="radio" name="switchPoolList" id="pool1"> <span>CoinHuntr</span>
+               <input type="radio" name="switchPoolList" class="pretty-input" id="pool1"> <span>CoinHuntr</span>
              </label>
              <label for="pool2">
-               <input type="radio" name="switchPoolList" id="pool2"> <span>Hashco.ws</span>
+               <input type="radio" name="switchPoolList" class="pretty-input" id="pool2"> <span>Hashco.ws</span>
              </label>
              <label for="pool3">
-               <input type="radio" name="switchPoolList" id="pool3"> <span>MultiPool</span>
+               <input type="radio" name="switchPoolList" class="pretty-input" id="pool3"> <span>MultiPool</span>
              </label>
            </div>
          </div>

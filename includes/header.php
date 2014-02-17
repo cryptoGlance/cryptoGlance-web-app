@@ -47,6 +47,9 @@
                   <!-- <li id="nav-logout-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li> -->
                </ul>
             </div>
+            <div id="alert-update" class="top-alert">
+               <span><b>Update available!</b> You are running <b>v0.1.2445</b>, but the latest release is <b>v0.2.4954</b>.</span> <a href="https://github.com/scar45/rigWatch/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a id="alert-dismiss" href="#dismiss"><i class="icon icon-buttonx"></i></a>
+            </div>
             <!--/.nav-collapse -->
          </div>
       </div>

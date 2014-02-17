@@ -337,18 +337,31 @@ $(function(){
    });
 });
    
+   
+// Pretty checkable styling
+function prettifyInputs() {
+    var inputs = $('input[type=radio], input[type=checkbox]').each(function() {
+        $(this).prettyCheckable({
+            color: 'blue'
+        });
+    });
+}
+
+
 // Smooth scrolling
 //
   
 function scrollTo(id){
    $('html,body').animate({scrollTop: $(id).offset().top},'slow');
 };
+      
    
 // Only change custom width (via slider) for viewports over 1200px
 //
 
 $(window).resize(function() {
    mobileWidthFixer();
+   
 });
    
 // Execute when the DOM is ready
@@ -356,17 +369,14 @@ $(window).resize(function() {
 $(document).ready(function() {
 
    externalLinks();
+   prettifyInputs();
    
    restoreDashboard();
    restoreWalletOrder();
    
    restorePanelWidth();
-   
-   $('input[type=checkbox], input[type=radio]').prettyCheckable({
-      color: 'blue'
-   });
 
- 
+   
    $('#collapse-all-panels').click(function(event) {
       event.preventDefault();
       collapseAllPanels();

@@ -27,11 +27,11 @@ hr {
 }
 
 a, a:hover, a *, a:hover * {
-    -webkit-transition: all 500ms ease-in-out !important;
-    -moz-transition: all 500ms ease-in-out !important;
-    -ms-transition: all 500ms ease-in-out !important;
-    -o-transition: all 500ms ease-in-out !important;
-    transition: all 500ms ease-in-out !important;
+    -webkit-transition: color 500ms ease-in-out !important;
+    -moz-transition: color 500ms ease-in-out !important;
+    -ms-transition: color 500ms ease-in-out !important;
+    -o-transition: color 500ms ease-in-out !important;
+    transition: color 500ms ease-in-out !important;
 }
 
 table a, table a:visited {
@@ -116,6 +116,48 @@ table a:hover {
     right: -3px;
 }
 
+.top-alert {
+    position: absolute;
+    left: 15px;
+    text-align: center;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+    border: 1px solid #0c0;
+    border-top: 0;
+    z-index: -1;
+    padding: 4px 10px;
+    text-shadow: 1px 1px 5px #000;
+}
+
+.top-alert #alert-dismiss, .top-alert #alert-dismiss:hover {
+    color: #f77;
+    position: relative;
+    top: 3px;
+    margin-left: 20px;
+    border: 0;
+    text-decoration: none;
+}
+
+.top-alert span {
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+}
+
+.top-alert span b {
+    color: #afa;
+}
+
+.top-alert .btn {
+    font-weight: bold;
+}
+
+#alert-update {
+    background: rgba(0,255,0,0.3);
+    color: #0f0;
+}
+
+
 .panel-header-button {
     opacity: 0.5;
 }
@@ -165,11 +207,16 @@ table a:hover {
 
 .modal-header {
     border-bottom: 1px solid #111;
-    padding: 10px 15px;
+    padding: 0 15px;
+}
+
+.modal-header h2 {
+    margin: 8px 0 3px;
 }
 
 .modal-header i {
-    margin-right: 5px;
+    margin: -2px 0 0 5px;
+    float: right;
 }
 
 .modal-body {
@@ -188,9 +235,8 @@ table a:hover {
 
 .modal-body .checkbox label span {
     position: relative;
-    top: -6px;
     font-size: 23px;
-    left: -8px;
+    margin-left: 15px;
 }
 
 .modal-footer {
@@ -222,8 +268,7 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
 
 .modal-footer {
     margin-top: 0;
-    padding: 13px 20px 15px;
-    border-top: 1px solid #
+    padding: 6px 10px 10px;
 }
 
 .navbar {

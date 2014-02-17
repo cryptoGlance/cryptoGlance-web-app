@@ -1,6 +1,6 @@
 var ajaxCall;
-var devHeatWarning = 75;
-var devHeatDanger = 80;
+var devHeatWarning = 80;
+var devHeatDanger = 90;
 var devHWWarning = 15;
 var updateTime = 2500;
 /*
