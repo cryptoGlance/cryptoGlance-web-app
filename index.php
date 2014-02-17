@@ -33,9 +33,7 @@ require_once("includes/header.php");
    </div>
    <!-- /container -->
 
-   <div class="container">
-      <?php require_once("includes/footer.php"); ?>
-   </div>
+   <?php require_once("includes/footer.php"); ?>
       
 
 <?php require_once("templates/modals/switch_pool.php"); ?>

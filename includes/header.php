@@ -15,9 +15,10 @@
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav">
-                  <li class="active topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-newtab"></i></a></li>
+                  <li><a id="total-hashrate">3.93 <small>MH/s</small></a></li>
+                  <li class="active topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-newtab"></i></a></li>
                   <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsthree-gears mobile-icon"></i> Tools <b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-header site-width-slider">Panel Width</li>
                         <li class="site-width-slider">
@@ -30,8 +31,8 @@
                         <?php require_once("includes/menu-active_panels.php"); ?>
                      </ul>
                   </li>
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+                  <li class="dropdown topnav">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-question-sign mobile-icon"></i> Help <b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-header">RigWatch</li>
                         <li><a href="help.php">Help using RigWatch</a></li>
@@ -42,8 +43,8 @@
                         <li><a href="https://github.com/scar45/rigwatch" rel="external">Reddit Post</a></li>
                      </ul>
                   </li>
-                  <li id="nav-login-button" class="topnav-icon"><a href="login.php"><i class="icon icon-enteralt"></i> Login</a></li>
-                  <!-- <li id="nav-logout-button" class="topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li> -->
+                  <li id="nav-login-button" class="topnav topnav-icon"><a href="login.php"><i class="icon icon-enteralt"></i> Login</a></li>
+                  <!-- <li id="nav-logout-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li> -->
                </ul>
             </div>
             <!--/.nav-collapse -->
