@@ -17,7 +17,7 @@ class Class_Wallets_Litecoin extends Class_Wallets_Abstract {
                 'wallets/litecoin/' . sha1($this->_address) . '.json'
         );
 
-        if ($cached == false || $fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
+        if ($fileHandler->lastTimeModified() >= 3600 || $cached == false) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
             $curl = curl_init($this->_apiURL);
             curl_setopt($curl, CURLOPT_FAILONERROR, true);
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);

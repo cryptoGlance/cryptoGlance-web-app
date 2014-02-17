@@ -1,4 +1,8 @@
-json/
+json/configs/
+json/currencies/
+json/dev/
+json/pools/
+json/wallets/
 pure-assets/
 vectorstock/
 web.config

@@ -1,21 +1,25 @@
 <?php
-require_once('includes/inc.php');
-require_once("includes/header.php");
+include('includes/inc.php');
+include("includes/header.php");
 ?>
          
    <div id="dashboard-wrap" class="container sub-nav">
    
     <?php
-    require_once ('includes/rigwatch.php');
+    require_once('includes/rigwatch.php');
     $rigWatch = new RigWatch();
     
     // Overview
-    require_once("templates/panel-overview.php");
+    if (count($rigWatch->getMiners()) > 0) {
+        include("templates/panel-overview.php");
     
-    // Miners
-    foreach ($rigWatch->getMiners() as $minerId => $miner) {
-        $minerId++; // Doing this because minerID 0 means all devices in ajax calls
-        include("templates/panel-rig.php");
+        // Miners
+        foreach ($rigWatch->getMiners() as $minerId => $miner) {
+            $minerId++; // Doing this because minerID 0 means all devices in ajax calls
+            include("templates/panel-rig.php");
+        }
+        
+        include("templates/modals/switch-pool.php");
     }
    
     ?>
@@ -28,7 +32,11 @@ require_once("includes/header.php");
                            
       <?php //require_once("templates/panel-coinwatcher.php"); ?>
 
-      <?php require_once("templates/panel-wallet.php"); ?>
+      <?php
+      if (count($rigWatch->getWallets()) > 0) {
+        include("templates/panel-wallet.php");
+      }
+      ?>
       
    </div>
    <!-- /container -->
@@ -38,6 +46,6 @@ require_once("includes/header.php");
    </div>
       
 
-<?php require_once("templates/modals/switch_pool.php"); ?>
+<?php //require_once("templates/modals/switch_pool.php"); ?>
 
-<?php require_once("templates/modals/delete_prompt.php"); ?>
+<?php //require_once("templates/modals/delete_prompt.php"); ?>

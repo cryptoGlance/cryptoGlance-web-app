@@ -91,26 +91,42 @@ class Class_Miners_Dualminer {
         return $data;
     }
     
-    private function getSummaryData() {
-        $summaryData = $this->_summary[0];
-        $data = array();
-
-        $activePool = null;
+    private function getActivePool() {
+        $activePool = array();
         $lastShareTime = null;
         foreach ($this->_pools as $pool) {
             $poolData = $pool;
             if (is_null($lastShareTime)) {
-                $activePool = $poolData['Stratum URL'];
+                $activePool['id'] = $poolData['POOL'];
+                $activePool['url'] = $poolData['Stratum URL'];
                 $lastShareTime = $poolData['Last Share Time'];
             } else if ($lastShareTime < $poolData['Last Share Time']) {
-                $activePool = $poolData['Stratum URL'];
+                $activePool['id'] = $poolData['POOL'];
+                $activePool['url'] = $poolData['Stratum URL'];
                 $lastShareTime = $poolData['Last Share Time'];                
             }
         }
         
+        return $activePool;
+    }
+    
+    private function getSummaryData() {
+        $summaryData = $this->_summary[0];
+        $data = array();
+        
+        $activePool = $this->getActivePool();
+                
+        if ($summaryData['Elapsed'] <= 86400) { // Less than a day
+            $upTime = gmdate('H\H i\M s\S', $summaryData['Elapsed']);
+        } else if ($summaryData['Elapsed'] <= 604800) { // Less than a week
+            $upTime = gmdate('d\D H\H i\M', $summaryData['Elapsed']);
+        } else {  // A Month!?
+            $upTime = gmdate('W\W d\D H\H', $summaryData['Elapsed']);
+        }
+        
         $data = array(
             'type' => 'dualminer',
-            'uptime' => intval(($summaryData['Elapsed']) / 3600) . 'H ' . bcmod((intval(time() - $summaryData['Elapsed']) / 60),60) . 'M ' . bcmod((time() - $summaryData['Elapsed']),60) . 'S',
+            'uptime' => $upTime,
             'hashrate_avg' => $summaryData['MHS av'] . ' MH/s',
             'hashrate_5s' => $summaryData['MHS 5s'] . ' MH/s',
             'blocks_found' => $summaryData['Found Blocks'],
@@ -119,7 +135,7 @@ class Class_Miners_Dualminer {
             'stale' => $summaryData['Stale'],
             'hw_errors' => $summaryData['Hardware Errors'],
             'utility' => $summaryData['Utility'] . '/m',
-            'active_mining_pool' => $activePool,
+            'active_mining_pool' => $activePool['url'],
         );
         
         return $data;
@@ -137,6 +153,29 @@ class Class_Miners_Dualminer {
         $data['summary'] = $this->getSummaryData();
         
         return $data;
+    }
+    
+    // Pools
+    public function getPools() {
+        $pools = json_decode($this->getData('{"command":"pools"}'), true);
+        $this->_pools = $pools['POOLS'];
+        
+        $activePool = $this->getActivePool();
+        
+        $poolData = array();
+        foreach ($this->_pools as $pool) {
+            $poolData[] = array(
+                'id' => $pool['POOL'],
+                'active' => ($pool['POOL'] == $activePool['id']) ? 1 : 0,
+                'url' => $pool['URL'],
+                'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
+            );
+        }
+        
+        return $poolData;
+    }
+    public function switchPool($poolId) {
+        return $this->getData('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
 
     public function update() {

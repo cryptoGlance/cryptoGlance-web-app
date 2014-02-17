@@ -17,22 +17,22 @@ class Class_Pools {
 
     public function __construct() {
         $fh = new Class_FileHandler('configs/pools.json');
-        $pools = json_decode($fh->read());
+        $pools = json_decode($fh->read(), true);
 
         if (!empty($pools)) {
             foreach ($pools as $poolType => $pool) {
-                $this->addPool($poolType, $pool[0]->apiKey, $pool[0]->apiURL);
+                $this->addPool($poolType, $pool[0]);
             }
         }
     }
 
-    private function addPool($type, $apiKey, $apiURL) {
-        if (empty($type) || empty($apiKey) || empty($apiURL)) {
+    private function addPool($type, $params) {
+        if (empty($type) || empty($params)) {
             return false;
         }
 
         $class = 'Class_Pools_' . ucwords(strtolower($type));
-        $obj = new $class($apiKey, $apiURL);
+        $obj = new $class($params);
         $this->_pools[] = $obj;
     }
 

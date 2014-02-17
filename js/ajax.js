@@ -1,7 +1,7 @@
 var ajaxCall;
-var devHeatWarning = 70;
-var devHeatDanger = 75;
-var devHWWarning = 10;
+var devHeatWarning = 75;
+var devHeatDanger = 80;
+var devHWWarning = 15;
 var updateTime = 2500;
 /*
  *
@@ -22,6 +22,44 @@ $('.btn-updater').click(function() {
         ajaxUpdateCall('all');
     } else {
         ajaxUpdateCall($(this).attr('data-type'), $(this).attr('data-attr'));
+    }
+});
+
+// Switch Pools
+$('.switchPoolBtn').click(function() {
+    var minerId = $(this).attr('data-attr');
+    var switchPoolModal = $('#switchPool .checkbox');
+    $(switchPoolModal).html('');
+    $.ajax({
+        type: 'post',
+        url: 'ajax.php?type=miners&action=get-pools&miner=' + minerId,
+        dataType: 'json'
+    }).done(function(data) {
+        if (typeof data != 'undefined') {
+            $('#switchPool').attr('data-minerId', minerId);
+            $.each(data, function(v,k) {
+                var poolUrl = k.url;
+                poolUrl = poolUrl.replace (/\:[0-9]{1,4}/, '');
+                poolUrl = poolUrl.substring(poolUrl.indexOf("/") + 2);
+                
+                $(switchPoolModal).append('<label for="rig'+ minerId +'-pool'+ k.id +'"><input type="radio" name="switchPoolList" id="rig'+ minerId +'-pool'+ k.id +'" value="'+ k.id +'"><span>'+ poolUrl +'</span></label>');
+                if (k.active == 1) {
+                    $('input:radio[id=rig'+ minerId +'-pool'+ k.id +']', switchPoolModal).prop('checked', true);
+                }
+            });
+            
+        }
+    });
+});
+$('#switchPool .btn-success').click(function() {
+    var minerId =  $('#switchPool').attr('data-minerId');
+    var selectedPoolId = $('input[name=switchPoolList]:checked', '#switchPool .checkbox').val();
+    if (typeof selectedPoolId != 'undefined') {
+        $.ajax({
+            type: 'post',
+            url: 'ajax.php?type=miners&action=switch-pool&miner=' + minerId + '&pool=' + (parseInt(selectedPoolId)+1),
+            dataType: 'json'
+        });
     }
 });
 

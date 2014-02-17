@@ -10,7 +10,7 @@ $( document ).ready(function() {
         }).done(function(data) {
             console.log('--- VERSION ---------------------');
             console.log('Current: ' + CURRENT_VERSION);
-            console.log('Latest: ' + data.tag_name);
+            console.log('Latest: ' + data[0].tag_name);
             console.log('-----------------------------------------');
             if (data.tag_name != CURRENT_VERSION) {
                 $.cookie('rigwatch_version', true, { expires: 3, path: '/' });

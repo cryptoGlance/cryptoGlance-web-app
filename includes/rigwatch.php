@@ -18,18 +18,13 @@ class RigWatch {
             $this->_configs[$configType] = json_decode($fh->read(), true);
         }
     }
-
-    public function getPanels() {
-    
-        echo "<pre>";
-        print_r($this->_configs);
-        die();
-    
-        return array();
-    }
     
     public function getMiners() {
         return $this->_configs['miners'];
+    }
+    
+    public function getWallets() {
+        return $this->_configs['wallets'];
     }
 
 }

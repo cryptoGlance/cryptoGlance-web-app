@@ -37,17 +37,30 @@ class Class_Miners {
         $this->_miners[] = $obj;
     }
     
+    // Sending Data to view
+    public function getPools() {
+        $minerId = intval($_GET['miner']);
+        
+        if ($minerId == 0) {
+            return null;
+        }
+        
+        echo json_encode($this->_miners[$minerId-1]->getPools());
+    }
+    
+    // Setters
     public function switchPool() {
         $minerId = intval($_GET['miner']);
         $poolId = intval($_GET['pool']);
         
         if ($minerId == 0 || $poolId == 0) {
-            return array();
+            return null;
         }
     
-        $something = $this->_miners[$minerId-1]->switchPool($poolId-1);
+        $this->_miners[$minerId-1]->switchPool($poolId-1);
     }
 
+    // Automatic Update function
     public function update($minerId = null) {
         $data = array();
         if (!empty($minerId) && $minerId != 0) {
@@ -65,3 +78,4 @@ class Class_Miners {
     }
 
 }
+

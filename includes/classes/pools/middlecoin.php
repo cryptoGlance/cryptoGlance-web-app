@@ -4,20 +4,12 @@
  *
  * @author Stoyvo
  */
-class Class_Pools_Mpos {
+class Class_Pools_Middlecoin {
 
     // Pool Information
-    protected $_apiKey;
     protected $_apiURL;
-    protected $_actions = array(
-        'public',
-        'getuserstatus',
-        'getuserworkers',
-        'getpoolstatus',
-    );
 
     public function __construct($params) {
-        $this->_apiKey = $params['apiKey'];
         $this->_apiURL = $params['apiURL'];
     }
 
@@ -27,7 +19,7 @@ class Class_Pools_Mpos {
 
     public function getData($fileName) {
         $fileHandler = new Class_FileHandler(
-                'pools/mpos/' . sha1($this->_apiURL . '.' . $this->_apiKey) . '/' . $fileName . '.json'
+                'pools/middlecoin/' . sha1($this->_apiURL . '.' . $this->_apiKey) . '/' . $fileName . '.json'
         );
 
         return $fileHandler->read();

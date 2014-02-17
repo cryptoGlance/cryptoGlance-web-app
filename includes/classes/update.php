@@ -7,21 +7,21 @@ class Class_Update {
     public function all() {
         $data = array();
 //        $data[] = $this->pools();
-        $data['rigs'] = $this->getMiners();
+        $data['rigs'] = $this->getRigs();
 //        $data[] = $this->currencies();
         $data['wallets'] = $this->getWallets();
 
         echo json_encode($data);
     }
     
-    public function miner() {
+    public function rig() {
         // Handling the notice PHP spits out.
         $id = null;
         if (isset($_GET['attr'])) {
             $id = intval($_GET['attr']);
         }
         
-        $data['rigs'] = $this->getMiners($id);
+        $data['rigs'] = $this->getRigs($id);
         
         echo json_encode($data);
     }
@@ -45,9 +45,9 @@ class Class_Update {
         return $data;
     }
 
-    private function getMiners($minerId = null) {
-        $miners = new Class_Miners();
-        $data = $miners->update($minerId);
+    private function getRigs($rigId = null) {
+        $rigs = new Class_Miners(); // Rigs have Miners
+        $data = $rigs->update($rigId);
 
         return $data;
     }
