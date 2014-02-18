@@ -2,7 +2,7 @@ var ajaxCall;
 var devHeatWarning = 80;
 var devHeatDanger = 90;
 var devHWWarning = 15;
-var updateTime = 2500;
+var updateTime = 3000;
 /*
  *
  * Update functionality
@@ -100,6 +100,8 @@ function updateWallets (data) {
 }
 
 function updateRigs (data) {
+    var overallHashrate = 0;
+    
     var overview = $('#overview');
     var overviewTable = $(overview).find('.panel-body-overview div table tbody');
     $(overviewTable).find('tr').remove();
@@ -152,6 +154,11 @@ function updateRigs (data) {
                 progressStyle = 'danger';
             } else if (k == 'stale') {
                 progressStyle = 'danger';
+            } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
+                if (k == 'hashrate_5s') {
+                    overallHashrate += v;
+                }
+                v = v + ' MH/S';
             }
             
             $(summaryContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div><div class="progress progress-striped"><div class="progress-bar progress-bar-'+progressStyle+'" style="width: '+sharePercent+'%"></div></div></div>');
@@ -225,7 +232,10 @@ function updateRigs (data) {
                 if (k != 'id' && k != 'enabled') {
                     if (k == 'temperature') {
                         v = v + '&deg;C';
+                    } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
+                        v = v + ' MH/S';
                     }
+                    
                     $(devContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
                 }
             });
@@ -246,24 +256,24 @@ function updateRigs (data) {
                         
         // Update Overview Panel
         $(overviewTable).append('<tr><td><i class="icon rig'+ rigId +' icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig'+ rigId +'" class="anchor-offset rig'+ rigId +' '+ rigStatus +'">'+ $(rigElm).find('.panel-title span').html() +'</a></td><td>'+ rig.summary.hashrate_5s +'</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
-                
     });
     
-    
-    // Smooth scroll to active rig from the Overview panel
-    // TODO: Bug - when the Tools --> Active Panel link is clicked, it animates down, but then 'locks' the user there when they try to scroll
-    // possibly caused by where this function is (just below) and the fact that is also exists in 'rigwatch-ui.js'
-    
-    $('.anchor-offset').click(function() {
-      var target = $(this).attr('href');
-      $('body').scrollTo(target, 750, { margin: true, offset: -120 });
-   })    
-
-   $('.anchor').click(function() {
-      var target = $(this).attr('href');
-      $('body').scrollTo(target, 750, { margin: true });
-   })    
-
+    // Total amount of hash power
+    $('#total-hashrate').html(overallHashrate.toFixed(2) + ' <small>MH/s</small>');
     
 }
 
+
+// Smooth scroll to active rig from the Overview panel
+// TODO: Bug - when the Tools --> Active Panel link is clicked, it animates down, but then 'locks' the user there when they try to scroll
+// possibly caused by where this function is (just below) and the fact that is also exists in 'rigwatch-ui.js'
+
+$('.anchor-offset').click(function() {
+    var target = $(this).attr('href');
+    $('body').scrollTo(target, 750, { margin: true, offset: -120 });
+});
+
+$('.anchor').click(function() {
+    var target = $(this).attr('href');
+    $('body').scrollTo(target, 750, { margin: true });
+});

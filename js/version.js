@@ -1,4 +1,5 @@
-$( document ).ready(function() {
+$( window ).ready(function() {
+setTimeout(function() {
     var cookie = $.cookie('rigwatch_version');
     
     if (typeof cookie == 'undefined') {    
@@ -8,16 +9,15 @@ $( document ).ready(function() {
             dataType: 'json',
             crossDomain: 'true'
         }).done(function(data) {
-            console.log('--- VERSION ---------------------');
-            console.log('Current: ' + CURRENT_VERSION);
-            console.log('Latest: ' + data[0].tag_name);
-            console.log('-----------------------------------------');
             if (data.tag_name != CURRENT_VERSION) {
-                $.cookie('rigwatch_version', true, { expires: 3, path: '/' });
-                alert('Out of date! George needs to make a popup for this!');
+//                $.cookie('rigwatch_version', true, { expires: 3, path: '/' });
+                $('.current', '#alert-update').html(CURRENT_VERSION);
+                $('.latest', '#alert-update').html(data[0].tag_name);
+                $('#alert-update').slideDown('fast');
             } else {
                 $.removeCookie('rigwatch_version', { path: '/' });
             }
         });
     }
+}, 2500);
 });

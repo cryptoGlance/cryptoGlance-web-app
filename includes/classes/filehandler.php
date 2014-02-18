@@ -25,7 +25,7 @@ class Class_FileHandler {
             if (!is_dir($dirPath)) {
                 mkdir($dirPath, 0777, true);
             }
-            chmod($this->_fullFilePath, 777);
+            chmod($this->_fullFilePath, 0777);
             file_put_contents($this->_fullFilePath, $content);
         }
     }

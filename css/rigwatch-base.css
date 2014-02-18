@@ -129,11 +129,11 @@ table a:hover {
     text-shadow: 1px 1px 5px #000;
 }
 
-.top-alert #alert-dismiss, .top-alert #alert-dismiss:hover {
+#alert-update .alert-dismiss, #alert-update .alert-dismiss:hover {
     color: #f77;
     position: relative;
     top: 3px;
-    margin-left: 20px;
+    margin-left: 10px;
     border: 0;
     text-decoration: none;
 }
@@ -155,6 +155,7 @@ table a:hover {
 #alert-update {
     background: rgba(0,255,0,0.3);
     color: #0f0;
+    display: none;
 }
 
 

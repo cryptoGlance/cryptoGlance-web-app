@@ -40,7 +40,8 @@ class Class_Miners_Cgminer {
     private function getSock($addr, $port) {
         $socket = null;
         $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 2, 'usec' => 0));
+        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));
+        
         if ($socket === false || $socket === null) {
             return null;
         }
@@ -82,8 +83,8 @@ class Class_Miners_Cgminer {
             'id' => $devData['GPU'],
             'enabled' => $devData['Enabled'],
             'health' => $devData['Status'],
-            'hashrate_avg' => $devData['MHS av']  . ' MH/S',
-            'hashrate_5s' => $devData['MHS 5s']  . ' MH/S',
+            'hashrate_avg' => $devData['MHS av'],
+            'hashrate_5s' => $devData['MHS 5s'],
             'intensity' => $devData['Intensity'],
             'temperature' => $devData['Temperature'],
             'fan_speed' => $devData['Fan Speed'] . ' RPM',
@@ -137,8 +138,8 @@ class Class_Miners_Cgminer {
         $data = array(
             'type' => 'cgminer',
             'uptime' => $upTime,
-            'hashrate_avg' => $summaryData['MHS av'] . ' MH/s',
-            'hashrate_5s' => $summaryData['MHS 5s'] . ' MH/s',
+            'hashrate_avg' => $summaryData['MHS av'],
+            'hashrate_5s' => $summaryData['MHS 5s'],
             'blocks_found' => $summaryData['Found Blocks'],
             'accepted' => $summaryData['Accepted'],
             'rejected' => $summaryData['Rejected'],

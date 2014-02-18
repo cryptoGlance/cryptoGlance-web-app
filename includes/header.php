@@ -15,7 +15,7 @@
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav">
-                  <li><a id="total-hashrate">3.93 <small>MH/s</small></a></li>
+                  <li><a id="total-hashrate">0 <small>MH/s</small></a></li>
                   <li class="active topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-newtab"></i></a></li>
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsthree-gears mobile-icon"></i> Tools <b class="caret"></b></a>
@@ -48,7 +48,7 @@
                </ul>
             </div>
             <div id="alert-update" class="top-alert">
-               <span><b>Update available!</b> You are running <b>v0.1.2445</b>, but the latest release is <b>v0.2.4954</b>.</span> <a href="https://github.com/scar45/rigWatch/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a id="alert-dismiss" href="#dismiss"><i class="icon icon-buttonx"></i></a>
+               <span><b>Update available!</b> You are running <b class="current"></b>, but the latest release is <b class="latest"></b>.</span> <a href="https://github.com/scar45/rigWatch/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a class="alert-dismiss" href="#"><i class="icon icon-buttonx"></i></a>
             </div>
             <!--/.nav-collapse -->
          </div>
