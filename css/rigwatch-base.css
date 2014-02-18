@@ -211,7 +211,7 @@ table a:hover {
 }
 
 .modal-header h2 {
-    margin: 8px 0 3px;
+    margin: 10px 0 5px;
 }
 
 .modal-header i {
@@ -1199,6 +1199,7 @@ a#dash-add-panel {
     .navbar-nav .open .dropdown-menu {
         background: #3A3F44;
         padding-left: 0;
+        margin: 0;
     }
     
     .navbar-nav .open .dropdown-menu > li > a {

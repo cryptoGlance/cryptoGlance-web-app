@@ -19,6 +19,15 @@
                 </div>
               </div>
               <div class="form-group">
+                <label for="inputRigType" class="col-sm-5 control-label">Type</label>
+                <div class="col-sm-5">
+                  <select class="form-control" id="selectRigType">
+                     <option>cgminer</option>
+                     <option>dualminer</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
                 <label for="inputRigIP" class="col-sm-5 control-label">IP Address</label>
                 <div class="col-sm-5">
                   <input type="text" class="form-control" id="inputRigIP">
