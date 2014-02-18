@@ -243,9 +243,9 @@ function updateRigs (data) {
             // Update Sumamry Page of DEVs
             if (!removeTable) {
                 if (rig.summary.type == 'cgminer') {
-                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
+                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+' MH/S</td><td>'+dev.utility+'</td></tr>');
                 } else if(rig.summary.type == 'dualminer') {
-                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
+                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.hashrate_5s+'  MH/S</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
                 }
             }
             
@@ -255,7 +255,7 @@ function updateRigs (data) {
         $(rigTabContentElm).find('.tab-pane:eq('+ selectedNav +')').addClass('active');
                         
         // Update Overview Panel
-        $(overviewTable).append('<tr><td><i class="icon rig'+ rigId +' icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig'+ rigId +'" class="anchor-offset rig'+ rigId +' '+ rigStatus +'">'+ $(rigElm).find('.panel-title span').html() +'</a></td><td>'+ rig.summary.hashrate_5s +'</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
+        $(overviewTable).append('<tr><td><i class="icon rig'+ rigId +' icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig'+ rigId +'" class="anchor-offset rig'+ rigId +' '+ rigStatus +'">'+ $(rigElm).find('.panel-title span').html() +'</a></td><td>'+ rig.summary.hashrate_5s +' MH/S</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
     });
     
     // Total amount of hash power
