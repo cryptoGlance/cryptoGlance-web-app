@@ -4,12 +4,14 @@
 
 html {
    background: url(../images/dark_mosaic.png) repeat fixed #272B30;
+   height: 100%;
 }
 
 body {
    background: url(../images/rigwatch-watermark.png) no-repeat bottom right fixed transparent;
    background-size: contain;
    font-family: robotolight, sans-serif;
+   height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -256,9 +258,7 @@ table a:hover {
 input.form-control, select.form-control, textarea.form-control, .modal-body input.form-control, .modal-body textarea.form-control {
     font-size: 23px;
     padding: 8px 8px 7px;
-    font-family: roboto;
-    font-weight: bold;
-    text-shadow: 0 1px 0 #000;
+    font-family: robotolight;
 }
 
 .stat-label select.form-control {
@@ -270,6 +270,39 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
 .modal-footer {
     margin-top: 0;
     padding: 6px 10px 10px;
+}
+
+.login-container {
+    width: 50% !important;
+}
+
+.login-container .panel-footer p {
+    text-align: center;
+    text-shadow: 0 1px 0 #000;
+    font-family: robotolight;
+    font-size: 22px;
+    margin: 5px 0;
+}
+
+.login-container .panel-footer hr {
+    margin: 10px 0;
+    border-color: #777;
+}
+
+.login-container .panel-footer span {
+    font-family: robotoblack;
+    font-size: 17px;
+}
+
+#panel-login form {
+    margin: 15px;
+}
+
+#panel-login i {
+    font-size: 30px;
+    position: relative;
+    top: -10px;
+    right: -15px;
 }
 
 .navbar {
