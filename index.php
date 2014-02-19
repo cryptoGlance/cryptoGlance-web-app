@@ -1,5 +1,11 @@
 <?php
 include('includes/inc.php');
+
+if (empty($_SESSION['login_string'])) {
+    header('Location: login.php');
+    exit();
+}
+
 include("includes/header.php");
 ?>
          

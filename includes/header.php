@@ -43,7 +43,7 @@
                         <li><a href="https://github.com/scar45/rigwatch" rel="external">Reddit Post</a></li>
                      </ul>
                   </li>
-                  <li id="nav-login-button" class="topnav topnav-icon"><a href="login.php"><i class="icon icon-enteralt"></i> Login</a></li>
+                  <li id="nav-login-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-enteralt"></i> Logout</a></li>
                   <!-- <li id="nav-logout-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li> -->
                </ul>
             </div>

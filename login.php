@@ -1,4 +1,23 @@
 <?php
+require_once('includes/inc.php');
+
+if (!empty($_SESSION['login_string'])) {
+    header('Location: index.php');
+    exit();
+} else if (!empty($_POST['username']) && !empty($_POST['password'])) {
+    require_once('includes/classes/login.php');
+    
+    $loginObj = new Login();
+    if ($loginObj->login(trim($_POST['username']), trim($_POST['password'])) !== FALSE) {
+        $_SESSION['login_string'] = hash('sha512', $_POST['password'] . $_SERVER['HTTP_USER_AGENT']);
+        header('Location: index.php');
+        exit();
+    } else {
+        unset($_SESSION['login_string']);
+        $error = true;
+    }
+}
+
 include("includes/login-header.php");
 ?>
          
@@ -33,7 +52,7 @@ include("includes/login-header.php");
                </div>
             </div><!-- / .panel-body -->
             <div class="panel-footer">
-               <p>If you've forgotten your login credentials, you'll need access to the files on the server that is hosting this website, then delete the file that Tim says should be deleted.</p>
+               <p>If you've forgotten your login credentials, you'll need access to the files on the server that is hosting this website, then delete the file "/<?php echo DATA_FOLDER; ?>/configs/account.json".</p>
                <hr>
                <p><span>Still having trouble? Touch base with us on &nbsp;<a href="https://plus.google.com/u/0/b/110896112995796953409/communities/111042089628113521779" rel="external"><i class="icon icon-googleplus"></i></a> <a href="http://reddit.com/r/rigwatch" rel="external"><i class="icon icon-reddit"></i></a> <a href="http://twitter.com/rigwatch" rel="external"><i class="icon icon-twitter"></i></a> or <a href="http://webchat.freenode.net/?channels=%23RigWatch&uio=OT10cnVlJjExPTIwNQa5" rel="external">join our IRC chat</a>.</span></p>
             </div>

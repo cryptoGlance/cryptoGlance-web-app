@@ -2,10 +2,14 @@
 error_reporting(E_ERROR);
 //error_reporting(E_ALL);
 
+require_once('functions.php');
+
+rigwatch_session();
+
 require_once('config.php');
 
-
 define('DATA_PATH', getcwd() . '/' . DATA_FOLDER . '/');
+
 
 //
 //// DEV ONLY:
@@ -20,8 +24,6 @@ define('CURRENT_VERSION', 'v0.0.' . $newVersion);
 //// END DEV ONLY
 //
 
-
 // PRODUCTION:
 //define('CURRENT_VERSION', 'v0.0.');
-
 ?>
