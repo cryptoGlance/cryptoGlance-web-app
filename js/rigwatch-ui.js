@@ -20,7 +20,7 @@ function externalLinks() {
 //
 
 $(function() {
-   $( "#dashboard-wrap" ).sortable({
+   $( "#dashboard-wrap:not(.login-container)" ).sortable({
       placeholder: "dashboard-dropzone",
       opacity: 0.75,
       scrollSpeed: 50,
@@ -30,7 +30,7 @@ $(function() {
       scrollSensitivity: 100,
       update: function(event, ui) {
          var cooked = [];
-         $("#dashboard-wrap").each(function(index, domEle){ cooked[index]=    $(domEle).sortable('toArray');});
+         $("#dashboard-wrap:not(.login-container)").each(function(index, domEle){ cooked[index]=    $(domEle).sortable('toArray');});
          $.cookie('cookie_dashboard_layout', 'x'+cooked.join('|'), { expires: 31, path: '/'});
       }
    });
@@ -44,7 +44,7 @@ function restoreDashboard() {
     for ( var u=0, ul=SavedID.length; u < ul; u++ ){ SavedID[u] = SavedID[u].split(',');}
     for (var Scolumn=0, n = SavedID.length; Scolumn < n; Scolumn++) {
         for (var Sitem=0, m = SavedID[Scolumn].length; Sitem < m; Sitem++) {
-            $("#dashboard-wrap").eq(Scolumn).append($("#dashboard-wrap").children("#" + SavedID[Scolumn][Sitem]));
+            $("#dashboard-wrap:not(.login-container)").eq(Scolumn).append($("#dashboard-wrap:not(.login-container)").children("#" + SavedID[Scolumn][Sitem]));
         }
     }
 }

@@ -28,12 +28,25 @@ hr {
     border-style: solid none solid;
 }
 
-a, a:hover, a *, a:hover * {
+a, a:visited, a:hover {
     -webkit-transition: color 500ms ease-in-out !important;
     -moz-transition: color 500ms ease-in-out !important;
     -ms-transition: color 500ms ease-in-out !important;
     -o-transition: color 500ms ease-in-out !important;
     transition: color 500ms ease-in-out !important;
+}
+
+a, a:visited {
+    color: #33b5e5;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: #FBEE03;
+}
+
+a:active {
+    color: #0d0;
 }
 
 table a, table a:visited {
@@ -272,16 +285,17 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
     padding: 6px 10px 10px;
 }
 
-.login-container {
-    width: 50% !important;
-}
-
 .login-container .panel-footer p {
     text-align: center;
     text-shadow: 0 1px 0 #000;
     font-family: robotolight;
     font-size: 22px;
     margin: 5px 0;
+}
+
+.login-container .panel-footer p b, .login-container .panel-footer p em {
+    font-family: robotoblack;
+    font-weight: normal;
 }
 
 .login-container .panel-footer hr {
@@ -294,8 +308,40 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
     font-size: 17px;
 }
 
+#panel-login #login-failure {
+    border: 1px dashed #d00;
+    border-width: 2px 0;
+    color: #fdd;
+    text-shadow: 1px 1px 0 #400;
+    background: #b00;
+    background: rgba(255,0,0,0.3);
+    margin: 10px -5px;
+    font-size: 16px;
+    font-family: roboto;
+    font-weight: bold;
+    padding: 5px 15px 10px;
+}
+
+#panel-login #login-failure p {
+    margin: 0;
+    line-height: 20px;
+    padding-bottom: 4px;
+}
+
+#panel-login #login-failure p big {
+    font-size: 140%;
+}
+
+#panel-login #login-failure p i {
+    top: 5px;
+    right: 0;
+    font-size: 28px;
+    margin: 0 10px 10px 0;
+}
+
 #panel-login form {
     margin: 15px;
+    clear: both;
 }
 
 #panel-login i {
@@ -502,7 +548,7 @@ a#dash-add-panel {
     text-align: left;
     font-size: 27px;
     letter-spacing: 1px;
-    line-height: 0px;
+    line-height: 25px;
     text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
 
@@ -540,7 +586,7 @@ a#dash-add-panel {
 
 .panel h1 {
     position: absolute;
-    top: -37px;
+    top: -65px;
 }
 
 .panel-nobg {
@@ -559,6 +605,10 @@ a#dash-add-panel {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#faec03',GradientType=1 );
     padding: 5px 4px 4px 15px;
     cursor: move;
+}
+
+.login-container > .panel-primary > .panel-heading {
+    cursor: auto;
 }
 
 .no-icon h1 {
@@ -1264,6 +1314,7 @@ a#dash-add-panel {
 
     .container h1 {
         font-size: 40px;
+        top: -38px;
         letter-spacing: 1px;
         line-height: 1px;
         padding-left: 100px;
@@ -1357,6 +1408,10 @@ a#dash-add-panel {
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+
+    .login-container {
+        width: 75% !important;
+    }
    
     .panel-in-footer .panel-body .stat-pair-qr .stat-value img {
         height: 48px;
@@ -1373,7 +1428,7 @@ a#dash-add-panel {
         width: 90%;
         margin: 0 auto;
     }
-    
+        
     .site-width-slider {
         display: inline-block;
         width: 100%;
