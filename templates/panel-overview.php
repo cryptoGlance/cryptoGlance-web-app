@@ -4,7 +4,7 @@
    <div class="panel-heading">
       <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
       <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
-      <h2 class="panel-title"><i class="icon icon-servers"></i> Current Rigs</h2>
+      <h2 class="panel-title"><i class="icon icon-eye-view"></i> Current Rigs</h2>
    </div>
    <div class="panel-body panel-body-overview">
       <div class="table-responsive">

@@ -28,12 +28,12 @@ hr {
     border-style: solid none solid;
 }
 
-a, a:visited, a:hover {
-    -webkit-transition: color 500ms ease-in-out !important;
-    -moz-transition: color 500ms ease-in-out !important;
-    -ms-transition: color 500ms ease-in-out !important;
-    -o-transition: color 500ms ease-in-out !important;
-    transition: color 500ms ease-in-out !important;
+a, a:visited, a:hover, a i, a:hover i {
+    -webkit-transition: color 300ms ease-in-out !important;
+    -moz-transition: color 300ms ease-in-out !important;
+    -ms-transition: color 300ms ease-in-out !important;
+    -o-transition: color 300ms ease-in-out !important;
+    transition: color 300ms ease-in-out !important;
 }
 
 a, a:visited {
@@ -227,12 +227,30 @@ table a:hover {
 }
 
 .modal-header h2 {
-    margin: 10px 0 5px;
+    margin: 10px 0 5px 10px;
+    line-height: 30px;
 }
 
 .modal-header i {
-    margin: -2px 0 0 5px;
+    margin: -2px 3px 0px 5px;
     float: right;
+    text-shadow: -1px 1px 0 #777;
+    font-size: 28px;
+    color: #29313A;
+}
+
+.modal-header .close {
+    position: absolute;
+    top: -7px;
+    right: 0px;
+    color: #29313A;
+    text-shadow: -1px 1px 0 #777;
+    font-size: 29px;
+    opacity: 0.7;
+}
+
+.modal-header .close:hover {
+    opacity: 1;
 }
 
 .modal-body {
@@ -255,6 +273,47 @@ table a:hover {
     margin-left: 15px;
 }
 
+.new-panel-choices {
+    text-align: center;
+}
+
+.new-panel-choices a {
+    display: inline-block;
+    background: #414C57;
+    border-radius: 4px;
+    box-shadow: -1px 1px 0px #000;
+    padding: 2px 9px;
+    margin: 0px 4px 11px;
+    min-width: 78px;
+    font-size: 1.9em;
+    font-family: bebas, sans-serif;
+    box-shadow: inset -1px 1px 0px #777, -1px 1px 0px #111;
+}
+
+.new-panel-choices a:hover {
+    cursor: pointer;
+}
+
+.new-panel-choices a:active {
+    box-shadow: inset -1px 1px 0px #111, 0px 1px 0px #777;
+}
+
+.new-panel-choices a i {
+    display: block;
+    font-size: 36px;
+    color: #29313A;
+    text-shadow: -1px 1px 0 #888;
+}
+
+.new-panel-choices a:hover i {
+    color: #33b5e5;
+    text-shadow: 1px -1px 0 #222;    
+}
+
+.new-panel-choices a:active i {
+    text-shadow: ` -1px 0 #777;
+}
+
 .modal-footer {
     text-align: center;
     border-top: 1px solid #777;
@@ -272,6 +331,10 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
     font-size: 23px;
     padding: 8px 8px 7px;
     font-family: robotolight;
+}
+
+select.form-control {
+    padding: 0 4px;
 }
 
 .stat-label select.form-control {
@@ -376,10 +439,6 @@ a.navbar-brand img {
 .navbar-collapse {
     max-height: 100%;
     box-shadow: inset 0px 0px 20px #111;
-}
-
-#dash-add-panel {
-    display: none;
 }
 
 .nav-pills > li {
@@ -516,7 +575,21 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 a#dash-add-panel {
-    display: none;
+    float: right;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    padding: 7px 2px 7px 6px;
+}
+
+.nav-pills li a#dash-add-panel i {
+    color: #050;
+    text-shadow: 0px -1px 0 #bdb;
+}
+
+.nav-pills li a#dash-add-panel:hover i {
+    color: #fff;
+    text-shadow: 0px 1px 0 #050;
 }
 
 .site-width-slider {
@@ -701,7 +774,7 @@ a#dash-add-panel {
 }
 
 
-.panel-rig ul li a.pill-success, #dash-add-panel {
+.panel-rig ul li a.pill-success, a#dash-add-panel {
     cursor: pointer;
     color: rgb(255, 255, 255);
     background-color: rgb(98, 196, 98);
@@ -1149,7 +1222,25 @@ a#dash-add-panel {
     .modal-dialog {
         margin: 40px auto;
     }
+    
+    .modal-header h2 {
+        line-height: normal;
+    }
+    
+    .modal-header i {
+        margin: -6px 5px 0px 5px;
+        font-size: 36px;
+    }
 
+    .new-panel-choices a {
+        padding: 5px 16px 10px;
+        margin: 0 10px 20px;
+    }
+
+    .new-panel-choices a i {
+        font-size: 54px;
+    }
+    
     .navbar {
         min-height: 45px;
     }
@@ -1270,15 +1361,7 @@ a#dash-add-panel {
         top: -1px;
         left: 0;
         margin-right: 0;
-        color: #050;
-        text-shadow: 0px -1px 0 #bdb;
     }
-
-    .nav-pills li a#dash-add-panel:hover i {
-        color: #fff;
-        text-shadow: 0px 1px 0 #050;
-    }
-
 
     .navbar-nav .open .dropdown-menu {
         background: #3A3F44;

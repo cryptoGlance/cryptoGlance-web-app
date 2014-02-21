@@ -6,7 +6,7 @@
    <div class="panel-heading">
       <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
       <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
-      <h2 class="panel-title"><i class="icon icon-groups-friends"></i> CoinHuntr</h2>
+      <h2 class="panel-title"><i class="icon icon-communitysmall"></i> CoinHuntr</h2>
    </div>
    <div class="panel-body panel-body-stats">
       <div class="stat-pair pool-conf-payout" id="pool-1-pool-conf-payout">

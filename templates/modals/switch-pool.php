@@ -4,6 +4,7 @@
     <div class="modal-content">
       <form role="form">
          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h2><i class="icon icon-refreshalt"></i> Switch Active Mining Pool</h2>
          </div>
          <div class="modal-body">

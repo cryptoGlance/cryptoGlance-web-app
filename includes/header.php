@@ -2,6 +2,7 @@
 <html lang="en">
 <?php require_once("includes/head.php"); ?>
    <body>
+      <?php require_once("templates/modals/add_panel.php"); ?>
       <div class="page-container">
       <!-- Fixed navbar -->
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -16,7 +17,7 @@
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav">
                   <li><a id="total-hashrate">0 <small>MH/s</small></a></li>
-                  <li class="active topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-newtab"></i></a></li>
+                  <li class="active topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel" data-backdrop="static"><i class="icon icon-newtab"></i></a></li>
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsthree-gears mobile-icon"></i> Tools <b class="caret"></b></a>
                      <ul class="dropdown-menu">
