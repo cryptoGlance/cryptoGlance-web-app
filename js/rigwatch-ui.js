@@ -323,6 +323,10 @@ $(document).ready(function() {
 
    $('#btnAddHost').click(function() {
       $("#alert-added-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+   }); 
+   
+   $('#btnSaveWallets').click(function() {
+      $("#alert-saved-wallet").fadeIn('slow').delay( 4000 ).fadeOut(3000);
    });   
 
 //   $('#btnSavePool').click(function() {

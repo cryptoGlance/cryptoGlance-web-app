@@ -20,9 +20,9 @@
                   Donations make us feel like champs <i class="icon icon-medal"></i>
                </div>
                <div class="stat-value">
-                  <a href="litecoin:LYMjhwCeVvhmGHC66QtaEpvaL9RHxBo4kZ?label=RigWatch" rel="external"><img src="images/icon-litecoin.png" alt="Litecoin" /></a> LYMjhwCeVvhmGHC66QtaEpvaL9RHxBo4kZ
+                  <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=RigWatch" data-toggle="modal" data-target="#qrDonateBTC"><img src="images/icon-bitcoin.png" alt="Bitcoin" /></a> 12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE
                   <br>
-                  <a href="bitcoin:1GeG9JeJSgUnJjPQDYcHMbkVjG9N2g6L9N?label=RigWatch" rel="external"><img src="images/icon-bitcoin.png" alt="Bitcoin" /></a> 1GeG9JeJSgUnJjPQDYcHMbkVjG9N2g6L9N
+                  <a href="litecoin:LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M?label=RigWatch" data-toggle="modal" data-target="#qrDonateLTC"><img src="images/icon-litecoin.png" alt="Litecoin" /></a> LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M
                </div>
             </div>               
          </div><!-- / .panel-body -->

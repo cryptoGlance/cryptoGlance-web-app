@@ -95,7 +95,7 @@ function updateWallets (data) {
     $(addressesPanel).html('');
     $.each(data, function( walletIndex, wallet) {
         var walletId = (walletIndex+1);
-        $(addressesPanel).append('<div class="stat-pair" id="wallet-address-'+ walletId +'"><div class="stat-value"><img src="images/icon-'+ wallet.currency +'.png" alt="'+ wallet.currency +'" /><span class="green">'+ wallet.balance +' '+ wallet.currency_code +'</span><span class="address-label">in '+ wallet.label +'</span></div><div class="stat-label">'+ wallet.address +'</div></div>');
+        $(addressesPanel).append('<div class="stat-pair" id="wallet-address-'+ walletId +'"><div class="stat-value"><img src="images/icon-'+ wallet.currency +'.png" alt="'+ wallet.currency +'" /><span class="green">'+ wallet.balance +' '+ wallet.currency_code +'</span><span class="address-label">in '+'<b>2</b> address(es)</span></div><div class="stat-label">'+ wallet.label +' <a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#editWallet" data-backdrop="static"><i class="icon icon-edit"></i></a><a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#removeWalletPrompt" data-backdrop="static"><i class="icon icon-remove"></i></a></div></div>');
     });
 }
 

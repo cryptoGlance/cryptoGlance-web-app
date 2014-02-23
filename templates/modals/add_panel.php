@@ -9,28 +9,28 @@
       </div>
       <div class="modal-body">
          <div class="new-panel-choices">
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addOverview" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#addOverview" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-eye-view"></i>Overview
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addHost" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#addRig" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-server"></i>Rig
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addPool" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#addPool" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-communitysmall"></i>Pool
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addAddress" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#addAddress" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-walletalt"></i>Address
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addGraph" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-barchartalt"></i>Graph
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addCoinValues" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-value-coins"></i>Coin Values
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addRSS" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-rss"></i>RSS
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addReddit" data-backdrop="static">
+            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-reddit"></i>(sub)Reddit
             </a>
          </div>

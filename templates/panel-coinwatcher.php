@@ -2,6 +2,7 @@
   <h1>CoinWatcher</h1>
   <div class="panel-heading">
       <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
+      <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
       <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
       <h2 class="panel-title"><i class="icon icon-value-coins"></i> Realtime Conversion Rates</h2>
    </div>

@@ -11,7 +11,12 @@ body {
    background: url(../images/rigwatch-watermark.png) no-repeat bottom right fixed transparent;
    background-size: contain;
    font-family: robotolight, sans-serif;
+   font-size: 16px;
    height: 100%;
+}
+
+b, strong {
+    font-family: roboto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -215,6 +220,13 @@ table a:hover {
     margin: 30px 20px;
 }
 
+.modal-qrcode img {
+    max-height: 200px;
+    width: auto;
+    display: block;
+    margin: 0 0 20px;
+}
+
 .modal-content {
     background-color: #414c57;
     border: 1px solid #33b5e5;
@@ -285,17 +297,21 @@ table a:hover {
     padding: 2px 9px;
     margin: 0px 4px 11px;
     min-width: 78px;
-    font-size: 1.9em;
+    font-size: 1.4em;
     font-family: bebas, sans-serif;
     box-shadow: inset -1px 1px 0px #777, -1px 1px 0px #111;
+    color: #aaa;
+    line-height: 1em;
 }
 
 .new-panel-choices a:hover {
     cursor: pointer;
+    color: #33b5e5;
 }
 
 .new-panel-choices a:active {
     box-shadow: inset -1px 1px 0px #111, 0px 1px 0px #777;
+    color: #F9EB03;
 }
 
 .new-panel-choices a i {
@@ -303,6 +319,7 @@ table a:hover {
     font-size: 36px;
     color: #29313A;
     text-shadow: -1px 1px 0 #888;
+    margin: 17px 0;
 }
 
 .new-panel-choices a:hover i {
@@ -331,6 +348,14 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
     font-size: 23px;
     padding: 8px 8px 7px;
     font-family: robotolight;
+}
+
+.addressInputs input.form-control {
+    font-size: 15px;
+    font-family: roboto;
+    font-weight: bold;
+    padding: 4px;
+    height: auto;
 }
 
 select.form-control {
@@ -985,16 +1010,23 @@ a#dash-add-panel {
     float: left;
 }
 
+#inputNewAddress {
+    margin-top: 5px;
+}
+
 .panel-in-footer {
     margin-bottom: 15px;
-    border: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border: 10px solid #33b5e5;
+    border-width: 0 0 10px;
 }
 
 .panel-in-footer h1 {
     position: relative;
     top: 0;
     margin: 0;
-    padding: 5px 0;
+    padding: 15px 0;
     background: rgba(0,0,0,0.25);
     font-size: 27px;
 }
@@ -1221,24 +1253,37 @@ a#dash-add-panel {
 
     .modal-dialog {
         margin: 40px auto;
+        width: 720px;
     }
     
+    .modal-qrcode img {
+        max-height: 300px;
+        float: left;
+        margin: 0 20px 0 0;
+    }
+
     .modal-header h2 {
         line-height: normal;
+        letter-spacing: 1px;
     }
     
     .modal-header i {
         margin: -6px 5px 0px 5px;
         font-size: 36px;
     }
+    
+    .modal-body {
+        font-size: 1.3em;
+    }
 
     .new-panel-choices a {
         padding: 5px 16px 10px;
-        margin: 0 10px 20px;
+        margin: 10px;
     }
 
     .new-panel-choices a i {
         font-size: 54px;
+        margin-bottom: 30px;
     }
     
     .navbar {
@@ -1366,7 +1411,10 @@ a#dash-add-panel {
     .navbar-nav .open .dropdown-menu {
         background: #3A3F44;
         padding-left: 0;
+        padding-right: 10px;
         margin: 0;
+        max-height: 420px;
+        overflow-x: hidden;
     }
     
     .navbar-nav .open .dropdown-menu > li > a {
@@ -1418,9 +1466,6 @@ a#dash-add-panel {
 
     .panel-in-footer {
         margin-bottom: 0px;
-        -webkit-border-radius: 0;
-        border-radius: 0;
-        border-bottom: 0;
     }
 
     .panel-in-footer h1 {
@@ -1444,6 +1489,12 @@ a#dash-add-panel {
     
     .panel-body .stat-pair .stat-label {
         padding: 2px 15px 4px;
+    }
+    
+    .panel-body .stat-pair .stat-label .stat-pair-icon {
+        margin-left: 5px;
+        position: relative;
+        top: 3px;
     }
 
     .panel-body .stat-pair .stat-value {
