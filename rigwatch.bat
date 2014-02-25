@@ -1,0 +1,1 @@
+php -a rigwatch-daemon.php
