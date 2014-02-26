@@ -21,7 +21,7 @@
            </div>
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel and stay in current pool</button>
+           <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> Stay in current pool</button>
            <button type="button" class="btn btn-lg btn-success" data-dismiss="modal"><i class="icon icon-refreshalt"></i> Switch to this pool</button>
          </div>
       </form>

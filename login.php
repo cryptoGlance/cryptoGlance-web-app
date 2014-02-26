@@ -1,5 +1,6 @@
 <?php
 require_once('includes/inc.php');
+$error = false;
 
 if (!empty($_SESSION['login_string'])) {
     header('Location: index.php');
@@ -30,9 +31,15 @@ include("includes/login-header.php");
             </div>
             <div class="panel-body panel-body-overview">
                <div id="panel-login">
+                  <?php
+                  if ($error) {
+                  ?>
                   <div id="login-failure">
                      <p><i class="icon icon-fbdislike"></i> <big>You shall <b>NOT</b> pass!</big> You've entered incorrect credentials. (If you're having trouble, read the notes below the login button.)</p>
                   </div>
+                  <?php
+                  }
+                  ?>
                   <form action="" method="POST" class="form-horizontal" role="form">
                     <div class="form-group">
                       <label for="username" class="col-sm-offset-1 col-sm-3 control-label"><i class="icon icon-user"></i></label>

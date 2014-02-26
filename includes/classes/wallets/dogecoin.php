@@ -5,19 +5,15 @@
  */
 class Class_Wallets_Dogecoin extends Class_Wallets_Abstract {
 
-    protected $_apiURL;
-
     public function __construct($label, $address) {
         parent::__construct($label, $address);
         $this->_apiURL = 'http://dogechain.info/chain/Dogecoin/q/addressbalance/' . $address;
+        $this->_fileHandler = new Class_FileHandler('wallets/dogecoin/' . $this->_address . '.json');
     }
     
     public function update($cached) {
-        $fileHandler = new Class_FileHandler(
-                'wallets/dogecoin/' . sha1($this->_address) . '.json'
-        );
 
-        if ($cached == false || $fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
+        if ($cached == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
             $curl = curl_init($this->_apiURL);
             curl_setopt($curl, CURLOPT_FAILONERROR, true);
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
@@ -28,17 +24,15 @@ class Class_Wallets_Dogecoin extends Class_Wallets_Abstract {
             $walletBalance = curl_exec($curl); // this comes back as a single value (total doge in the wallet)
             
             $data = array (
-                'currency' => 'dogecoin',
-                'currency_code' => 'DOGE',
                 'label' => $this->_label,
                 'address' => $this->_address,
                 'balance' => (float) $walletBalance
             );
             
-            $fileHandler->write(json_encode($data));
+            $this->_fileHandler->write(json_encode($data));
         }
         
-        return json_decode($fileHandler->read());
+        return json_decode($this->_fileHandler->read(), true);
     }
 
 }

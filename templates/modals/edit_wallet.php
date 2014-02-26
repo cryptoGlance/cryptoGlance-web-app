@@ -24,7 +24,7 @@
                <select class="form-control">
                  <option>Bitcoin (BTC)</option>
                  <option>Litecoin (LTC)</option>
-                 <option>Dogecoin (DGC)</option>
+                 <option>Dogecoin (DOGE)</option>
                </select>
              </div>
            </div>
@@ -65,6 +65,7 @@
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> Close</button>
            <button type="button" class="btn btn-lg btn-success" id="btnSaveWallets"><i class="icon icon-save-floppy"></i> Save</button>
+           <button type="button" class="btn btn-lg btn-danger" id="btnDeleteWallet"><i class="icon icon-circledelete"></i> Delete</button>
          </div>
       </form>
     </div><!-- /.modal-content -->

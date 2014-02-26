@@ -9,7 +9,7 @@ setTimeout(function() {
             dataType: 'json',
             crossDomain: 'true'
         }).done(function(data) {
-            if (data.tag_name != CURRENT_VERSION) {
+            if (data[0].tag_name != CURRENT_VERSION) {
 //                $.cookie('rigwatch_version', true, { expires: 3, path: '/' });
                 $('.current', '#alert-update').html(CURRENT_VERSION);
                 $('.latest', '#alert-update').html(data[0].tag_name);

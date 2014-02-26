@@ -59,6 +59,15 @@ class Class_Miners {
     
         $this->_miners[$minerId-1]->switchPool($poolId-1);
     }
+    public function restart() {
+        $minerId = intval($_GET['miner']);
+        
+        if ($minerId == 0) {
+            return null;
+        }
+    
+        $this->_miners[$minerId-1]->restart();
+    }
 
     // Automatic Update function
     public function update($minerId = null) {

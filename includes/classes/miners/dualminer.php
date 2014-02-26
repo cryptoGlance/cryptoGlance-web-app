@@ -24,50 +24,26 @@ class Class_Miners_Dualminer {
     }
 
     private function getData($cmd) {
-        $socket = $this->getSock($this->_host, $this->_port);
-        if (empty($socket)) {
-            return null;
-        }
+        $response = '';
+        $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, 1);
         
-        // This will cause the page to load not load quickly if miner is offline. Need to handle this somehow.
-        socket_write($socket, $cmd, strlen($cmd));
-        $line = $this->readSockLine($socket);
-        socket_close($socket);
-        return $line;
-    }
-
-    private function getSock($addr, $port) {
-        $socket = null;
-        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 2, 'usec' => 0));
-        if ($socket === false || $socket === null) {
+        if (!$socket) {
             return null;
-        }
-        
-        if (!socket_connect($socket, $addr, $port)) {
-            socket_close($socket);
-            return null;
-        }
-        
-        return $socket;
-    }
-
-    private function readSockLine($socket) {
-        $line = '';
-        while (true) {
-            $byte = socket_read($socket, 1);
-            if ($byte === false || $byte === '') {
-                break;
+        } else {
+            fwrite($socket, $cmd);
+            while (!feof($socket)) {
+                $response .= fgets($socket, 1024);
             }
-            if ($byte === "\0") {
-                break;
-            }
-            $line .= $byte;
+            fclose($socket);
         }
-        return $line;
+        
+        return str_replace("\0", '', $response); // It took 4+ hours to find this solution... JSON response has ASCII BOM at the begining. 
     }
     
     private function getDevData ($devId) {
+        if (is_null($devId)) {
+            return null;
+        }
         $devId = intval($devId); // simple sanitizing
         $devData = $this->_devs[$devId];
         
@@ -92,22 +68,19 @@ class Class_Miners_Dualminer {
     }
     
     private function getActivePool() {
-        $activePool = array();
-        $lastShareTime = null;
         foreach ($this->_pools as $pool) {
-            $poolData = $pool;
-            if (is_null($lastShareTime)) {
-                $activePool['id'] = $poolData['POOL'];
-                $activePool['url'] = $poolData['Stratum URL'];
-                $lastShareTime = $poolData['Last Share Time'];
-            } else if ($lastShareTime < $poolData['Last Share Time']) {
-                $activePool['id'] = $poolData['POOL'];
-                $activePool['url'] = $poolData['Stratum URL'];
-                $lastShareTime = $poolData['Last Share Time'];                
+            if ($pool['Priority'] == 0) {
+                return array(
+                    'id' => $pool['POOL'],
+                    'url' => $pool['Stratum URL'],
+                );
             }
         }
         
-        return $activePool;
+        return array(
+            'id' => $this->_pools[0]['POOL'],
+            'url' => $this->_pools[0]['Stratum URL'],
+        );
     }
     
     private function getSummaryData() {
@@ -155,43 +128,57 @@ class Class_Miners_Dualminer {
         return $data;
     }
     
+    private function onlineCheck() {
+        return $this->getData('{"command":"version"}');
+    }
+    
     // Pools
     public function getPools() {
-        $pools = json_decode($this->getData('{"command":"pools"}'), true);
-        $this->_pools = $pools['POOLS'];
-        
-        $activePool = $this->getActivePool();
-        
-        $poolData = array();
-        foreach ($this->_pools as $pool) {
-            $poolData[] = array(
-                'id' => $pool['POOL'],
-                'active' => ($pool['POOL'] == $activePool['id']) ? 1 : 0,
-                'url' => $pool['URL'],
-                'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
-            );
+        if ($this->onlineCheck() != null) {
+            $pools = json_decode($this->getData('{"command":"pools"}'), true);
+            $this->_pools = $pools['POOLS'];
+            
+            $activePool = $this->getActivePool();
+            
+            $poolData = array();
+            foreach ($this->_pools as $pool) {
+                $poolData[] = array(
+                    'id' => $pool['POOL'],
+                    'active' => ($pool['POOL'] == $activePool['id']) ? 1 : 0,
+                    'url' => $pool['URL'],
+                    'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
+                );
+            }
+            
+            return $poolData;
         }
         
-        return $poolData;
+        return null;
     }
     public function switchPool($poolId) {
         return $this->getData('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
+        
+    // Restart
+    public function restart() {
+        return $this->getData('{"command":"restart"}');
+    }
 
     public function update() {
-        // TODO:
-        // - Determin if we need to update a json file or just do socket data returns. we dont have limitations on the amount of calls we make
+        if ($this->onlineCheck() != null) {
+            $summary = json_decode($this->getData('{"command":"summary"}'), true);
+            $this->_summary = $summary['SUMMARY'];
+            
+            $dev = json_decode($this->getData('{"command":"devs"}'), true);
+            $this->_devs = $dev['DEVS'];
+            
+            $pools = json_decode($this->getData('{"command":"pools"}'), true);
+            $this->_pools = $pools['POOLS'];
+            
+            return $this->getAllData();
+        }
         
-        $summary = json_decode($this->getData('{"command":"summary"}'), true);
-        $this->_summary = $summary['SUMMARY'];
-        
-        $dev = json_decode($this->getData('{"command":"devs"}'), true);
-        $this->_devs = $dev['DEVS'];
-        
-        $pools = json_decode($this->getData('{"command":"pools"}'), true);
-        $this->_pools = $pools['POOLS'];
-        
-        return $this->getAllData();
+        return null;
     }
 
 }

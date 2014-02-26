@@ -5,19 +5,15 @@
  */
 class Class_Wallets_Litecoin extends Class_Wallets_Abstract {
 
-    protected $_apiURL;
-
     public function __construct($label, $address) {
         parent::__construct($label, $address);
         $this->_apiURL = 'http://ltc.blockr.io/api/v1/address/balance/' . $address;
+        $this->_fileHandler = new Class_FileHandler('wallets/litecoin/' . $this->_address . '.json');
     }
     
     public function update($cached) {
-        $fileHandler = new Class_FileHandler(
-                'wallets/litecoin/' . sha1($this->_address) . '.json'
-        );
 
-        if ($fileHandler->lastTimeModified() >= 3600 || $cached == false) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
+        if ($cached == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
             $curl = curl_init($this->_apiURL);
             curl_setopt($curl, CURLOPT_FAILONERROR, true);
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
@@ -28,17 +24,15 @@ class Class_Wallets_Litecoin extends Class_Wallets_Abstract {
             $walletData = json_decode(curl_exec($curl), true);
             
             $data = array (
-                'currency' => 'litecoin',
-                'currency_code' => 'LTC',
                 'label' => $this->_label,
                 'address' => $this->_address,
                 'balance' => (float) $walletData['data']['balance']
             );
             
-            $fileHandler->write(json_encode($data));
+            $this->_fileHandler->write(json_encode($data));
         }
         
-        return json_decode($fileHandler->read());
+        return json_decode($this->_fileHandler->read(), true);
     }
 
 }

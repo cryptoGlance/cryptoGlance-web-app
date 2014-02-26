@@ -1,8 +1,8 @@
 var ajaxCall;
-var devHeatWarning = 80;
-var devHeatDanger = 90;
+var devHeatWarning = 75;
+var devHeatDanger = 80;
 var devHWWarning = 15;
-var updateTime = 3000;
+var updateTime = 2500;
 /*
  *
  * Update functionality
@@ -25,9 +25,17 @@ $('.btn-updater').click(function() {
     }
 });
 
-// Switch Pools
-$('.switchPoolBtn').click(function() {
+// Manage Rig
+$('.btn-manage-rig').click(function() {
     var minerId = $(this).attr('data-attr');
+    var manageRig = $('#manageRig');
+    $(manageRig).attr('data-attr', minerId);
+    $('.rig-name', manageRig).html($('.panel-title .value', '#rig'+minerId).text());
+});
+
+// Switch Pools
+$('.btn-switchpool', '#manageRig').click(function() {
+    var minerId = $('#manageRig').attr('data-attr');
     var switchPoolModal = $('#switchPool .checkbox');
     $(switchPoolModal).html('');
     $.ajax({
@@ -60,7 +68,19 @@ $('#switchPool .btn-success').click(function() {
             url: 'ajax.php?type=miners&action=switch-pool&miner=' + minerId + '&pool=' + (parseInt(selectedPoolId)+1),
             dataType: 'json'
         });
+        
+        ajaxUpdateCall('all');
     }
+});
+
+// Restart
+$('.btn-restart', '#manageRig').click(function() {
+    var minerId = $('#manageRig').attr('data-attr');
+    $.ajax({
+        type: 'post',
+        url: 'ajax.php?type=miners&action=restart&miner=' + minerId,
+        dataType: 'json'
+    });
 });
 
 
@@ -95,7 +115,7 @@ function updateWallets (data) {
     $(addressesPanel).html('');
     $.each(data, function( walletIndex, wallet) {
         var walletId = (walletIndex+1);
-        $(addressesPanel).append('<div class="stat-pair" id="wallet-address-'+ walletId +'"><div class="stat-value"><img src="images/icon-'+ wallet.currency +'.png" alt="'+ wallet.currency +'" /><span class="green">'+ wallet.balance +' '+ wallet.currency_code +'</span><span class="address-label">in '+'<b>2</b> address(es)</span></div><div class="stat-label">'+ wallet.label +' <a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#editWallet" data-backdrop="static"><i class="icon icon-edit"></i></a><a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#removeWalletPrompt" data-backdrop="static"><i class="icon icon-remove"></i></a></div></div>');
+        $(addressesPanel).append('<div class="stat-pair" id="wallet-address-'+ walletId +'"><div class="stat-value"><img src="images/icon-'+ wallet.currency +'.png" alt="'+ wallet.currency +'" /><span class="green">'+ wallet.balance +' '+ wallet.currency_code +'</span><span class="address-label">in '+'<b>'+ wallet.total_addresses +'</b> address(es)</span></div><div class="stat-label">'+ wallet.label +' <a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#editWallet" data-backdrop="static"><i class="icon icon-edit"></i></a><a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#removeWalletPrompt" data-backdrop="static"></a></div></div>');
     });
 }
 
@@ -114,8 +134,8 @@ function updateRigs (data) {
         var rigTitle = $(rigElm).find('.panel-title span');
         var devWarning = false;
         var devDanger = false;
-        
-        if (typeof rig.summary == 'undefined' || typeof rig.devs == 'undefined') {
+
+        if (rig == null || typeof rig.summary == 'undefined' || typeof rig.devs == 'undefined') {
             $(rigElm).find('.toggle-panel-body').hide();
             $(rigNavElm).hide();
             $(rigTabContentElm).hide();

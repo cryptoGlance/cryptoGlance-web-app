@@ -21,6 +21,7 @@ $currentVersion = intval($fileHandler->read());
 $newVersion = intval($currentVersion + 1);
 $fileHandler->write($newVersion);
 define('CURRENT_VERSION', 'v0.0.' . $newVersion);
+//define('CURRENT_VERSION', 'v0.1-test');
 //// END DEV ONLY
 //
 

@@ -28,10 +28,8 @@
     
     <div class="panel-footer">
         <div class="text-right">
-            <button type="button" class="btn btn-default" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-server"></i> Manage Rig</button>
-            <button type="button" class="btn btn-default btn-updater" data-type="rig" data-attr="<?php echo $minerId?>"><i class="icon icon-refresh"></i> Update Now</button>
-            <!--         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editRig" data-backdrop="static" data-id="1"><i class="icon icon-edit"></i> Edit Rig</button>-->
-            <!-- <button type="button" class="btn btn-default switchPoolBtn" data-toggle="modal" data-target="#switchPool" data-backdrop="static" data-type="rig" data-attr="<?php echo $minerId?>"><i class="icon icon-refreshalt"></i> Switch Pool</button> -->
+            <button type="button" class="btn btn-default btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-server"></i> Manage Rig</button>
+<!--            <button type="button" class="btn btn-default btn-updater" data-type="rig" data-attr="<?php echo $minerId?>"><i class="icon icon-refresh"></i> Update Now</button>-->
             <!-- <button type="button" class="btn btn-default"><i class="icon icon-statistics"></i> View All Stats</button> -->
         </div>
     </div>
