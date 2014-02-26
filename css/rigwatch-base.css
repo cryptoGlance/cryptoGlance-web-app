@@ -464,6 +464,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     padding: 5px 15px;
 }
 
+.panel-body .stat-pair .stat-label-donate {
+    text-transform: none;
+}
+
 .panel-body .stat-pair .stat-value {
     background: url(../images/black-denim.png) repeat #111;
     font-size: 22px;
