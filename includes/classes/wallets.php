@@ -15,6 +15,7 @@ class Class_Wallets {
         'bitcoin' => 'BTC',
         'litecoin' => 'LTC',
         'dogecoin' => 'DOGE',
+        'vertcoin' => 'VTC',
     );
 
     public function __construct() {
