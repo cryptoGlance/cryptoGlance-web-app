@@ -9,6 +9,8 @@
       <?php require_once("templates/modals/manage_rig.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-ltc.php"); ?>
+      <?php require_once("templates/modals/qrcode-donate-vtc.php"); ?>
+      <?php require_once("templates/modals/qrcode-donate-doge.php"); ?>
       <?php require_once("templates/modals/manage_rig.php"); ?>
       <?php require_once("templates/modals/manage_wallet.php"); ?>
       <?php require_once("templates/modals/prompt_remove_wallet.php"); ?>
@@ -47,13 +49,13 @@
                   <li class="dropdown topnav">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-question-sign mobile-icon"></i> Help <b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                        <li class="dropdown-header">RigWatch</li>
-                        <li><a href="help.php">Help using RigWatch</a></li>
-                        <li><a href="https://github.com/scar45/rigwatch" rel="external">Source on Github</a></li>
+                        <li class="dropdown-header">Learn more</li>
+                        <li><a href="help.php"><i class="icon icon-question-sign"></i> Help using RigWatch</a></li>
+                        <li><a href="https://github.com/scar45/rigwatch" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">RigWatch Discussion</li>
-                        <li><a href="help.php" rel="external">Bitcointalk.org Forum Thread</a></li>
-                        <li><a href="https://github.com/scar45/rigwatch" rel="external">Reddit Post</a></li>
+                        <li><a href="help.php" rel="external"><i class="icon icon-postalt"></i> Bitcointalk.org Forum Thread</a></li>
+                        <li><a href="http://reddit.com/r/rigwatch" rel="external"><i class="icon icon-reddit"></i> /r/RigWatch Subreddit</a></li>
                      </ul>
                   </li>
                   <li id="nav-login-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>

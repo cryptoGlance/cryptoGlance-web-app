@@ -7,7 +7,10 @@
             <h2><i class="icon icon-value-coins"></i> Donate Litecoin</h2>
          </div>
          <div class="modal-body">
-            <img src="images/qr-donate-ltc.png" />The RigWatch team greatly appreciates any amount of Litecoin that you are able to donate. It really helps us to continue development!
+            <img src="images/qr-donate-ltc.png" alt="Litecoin QRCode (Rigwatch Donations)" />
+            <p>The RigWatch team greatly appreciates any amount of Litecoin that you are able to donate. It really helps us to continue development!</p>
+            <h3>Our Litecoin Address</h3>
+            <p class="modal-donate-address">LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M</p>
          </div>
          <div class="modal-footer">
          </div>

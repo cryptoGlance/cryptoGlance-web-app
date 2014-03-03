@@ -3,7 +3,7 @@
 */
 
 html {
-   background: url(../images/dark_mosaic.png) repeat fixed #272B30;
+   background: url(../images/dark_mosaic.png) repeat #272B30;
    height: 100%;
 }
 
@@ -12,8 +12,47 @@ body {
    background-size: contain;
    font-family: robotolight, sans-serif;
    font-size: 16px;
-   height: 100%;
+    scrollbar-base-color: #999;
+    scrollbar-3dlight-color: #999;
+    scrollbar-highlight-color: #999;
+    scrollbar-track-color: #000;
+    scrollbar-arrow-color: #000;
+    scrollbar-shadow-color: #999;
+    scrollbar-dark-shadow-color: #999;
 }
+
+::-webkit-scrollbar { width: 7px; height: 3px;}
+::-webkit-scrollbar-button {  background-color: #666; }
+::-webkit-scrollbar-track {  background-color: #999;}
+::-webkit-scrollbar-track-piece { background-color: #000;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #999;}}
+::-webkit-resizer { background-color: #666;}
+
+@-moz-document url-prefix(http://),url-prefix(https://) {
+    scrollbar {
+       -moz-appearance: none !important;
+       background: rgb(0,0,0) !important;
+    }
+    thumb,scrollbarbutton {
+       -moz-appearance: none !important;
+       background-color: rgb(102,102,102) !important;
+    }
+
+    thumb:hover,scrollbarbutton:hover {
+       -moz-appearance: none !important;
+       background-color: rgb(120,120,120) !important;
+    }
+
+    scrollbarbutton {
+       display: none !important;
+    }
+
+    scrollbar[orient="vertical"] {
+      min-width: 7px !important;
+    }
+}
+
 
 b, strong {
     font-family: roboto;
@@ -22,10 +61,14 @@ b, strong {
 h1, h2, h3, h4, h5, h6 {
    font-family: captureit, sans-serif;
    color: #33b5e5;
+    letter-spacing: 1px;
+    text-shadow: -1px 2px 0px rgba(0, 0, 0, 0.6);
 }
 
-h1 {
-    letter-spacing: 1px;
+#settings-wrap h3 {
+    text-align: center;
+    font-size: 1.6em;
+    margin-bottom: 20px;
 }
 
 hr {
@@ -101,14 +144,19 @@ table a:hover {
     font-weight: normal !important;
 }
 
+.btn {
+    font-family: robotoblack;
+    text-transform: uppercase;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.btn i {
+    margin-right: 4px;
+}
  
 .btn-lg {
     padding: 9px 16px;
     font-family: robotoblack;
-}
-
-.btn-lg i {
-    margin-right: 3px;
 }
 
 .btn:focus, .btn:active {
@@ -178,6 +226,9 @@ table a:hover {
     display: none;
 }
 
+#settings-wrap .panel-heading {
+    margin-bottom: 10px;
+}
 
 .panel-header-button {
     opacity: 0.5;
@@ -204,6 +255,15 @@ table a:hover {
     color: #111;
 }
 
+.help-block {
+    font-weight: bold;
+    font-family: roboto;
+    font-style: italic;
+    color: rgb(170, 170, 170);
+    font-size: 0.9em;
+    line-height: 1.2em;
+}
+
 .label {
     font-size: 85%;
     border-radius: 0.25em;
@@ -225,6 +285,11 @@ table a:hover {
     width: auto;
     display: block;
     margin: 0 0 20px;
+}
+
+.modal-donate-address {
+    font-size: 0.8em;
+    font-family: robotoblack;
 }
 
 .modal-content {
@@ -283,6 +348,10 @@ table a:hover {
     position: relative;
     font-size: 23px;
     margin-left: 15px;
+}
+
+.checkbox.has-pretty-child {
+    padding: 6px 0 0;
 }
 
 .new-panel-choices {
@@ -344,9 +413,27 @@ table a:hover {
     font-weight: normal;
 }
 
+form fieldset {
+    border-bottom: 3px dotted #666;
+    margin-bottom: 20px;
+}
+
+form fieldset:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-horizontal .control-label {
+    font-family: robotolight;
+    font-weight: normal;
+    font-size: 1.3em;
+    line-height: 1em;
+    text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);
+}
+
 input.form-control, select.form-control, textarea.form-control, .modal-body input.form-control, .modal-body textarea.form-control {
     font-size: 23px;
-    padding: 8px 8px 7px;
+    padding: 0 8px;
     font-family: robotolight;
 }
 
@@ -356,6 +443,10 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
     font-weight: bold;
     padding: 4px;
     height: auto;
+}
+
+#inputMailPort {
+    width: 80px;
 }
 
 select.form-control {
@@ -584,6 +675,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
 .dropdown-header {
     font-size: 16px;
+    padding: 3px 20px 3px 13px;
 }
 
 .dropdown-menu {
@@ -719,10 +811,10 @@ a#dash-add-panel {
 
 .no-icon .panel-heading .panel-title i {
     position: relative;
-    top: 0;
-    left: 0;
+    top: 2px;
+    left: 0px;
     font-size: 22px;
-    margin-right: 14px;
+    margin-right: 2px;
 }
 
 .panel-title {
@@ -731,6 +823,7 @@ a#dash-add-panel {
     text-shadow: 0px 2px 0 #000;
     letter-spacing: 1px;
     padding-left: 0px;
+    color: #eee;
 }
 
 .panel-title i {
@@ -926,6 +1019,10 @@ a#dash-add-panel {
     padding: 0 15px 1px;
 }
 
+.panel-body .stat-pair .stat-label-donate {
+    text-transform: none;
+}
+
 .panel-body .stat-pair .stat-value {
     background: url(../images/inflicted.png) repeat #111;
     font-size: 22px;
@@ -1033,6 +1130,28 @@ a#dash-add-panel {
 
 .panel-in-footer .panel-body .stat-pair {
     overflow: auto;
+}
+
+.panel-in-footer .panel-body, .panel-in-footer .panel-body .stat-label {
+    background: url(../images/black-denim.png) repeat #111;
+}
+
+.panel-in-footer .panel-body .stat-pair, .donate-address {
+    padding: 2px 0;
+    margin: 6px 0 0;
+    border-bottom: 1px solid #444;
+}
+
+.donate-address {
+    text-align:left;
+}
+
+.panel-in-footer .panel-body .stat-pair-qr .stat-label .donate-address:last-child {
+    border-bottom: 0;
+}
+
+.panel-in-footer .panel-body .stat-pair-devs .stat-label {
+    padding: 15px 15px 10px;
 }
 
 .panel-in-footer .panel-body .stat-pair-qr .stat-label {
@@ -1259,7 +1378,7 @@ a#dash-add-panel {
     .modal-qrcode img {
         max-height: 300px;
         float: left;
-        margin: 0 20px 0 0;
+        margin: 0 20px 10px 0;
     }
 
     .modal-header h2 {
@@ -1302,9 +1421,9 @@ a#dash-add-panel {
        height: 56px;
     }
 
-	.navbar .container {
-		width: 100%;
-	}
+    .navbar .container {
+      width: 100%;
+    }
 
     .navbar-nav {
         width: auto;
@@ -1314,6 +1433,7 @@ a#dash-add-panel {
     
     .navbar-nav .open .dropdown-menu > li > a {
         line-height: 32px;
+        padding-right: 10px;
     }
 
     #total-hashrate {
@@ -1411,7 +1531,6 @@ a#dash-add-panel {
     .navbar-nav .open .dropdown-menu {
         background: #3A3F44;
         padding-left: 0;
-        padding-right: 10px;
         margin: 0;
         max-height: 420px;
         overflow-x: hidden;
@@ -1420,6 +1539,7 @@ a#dash-add-panel {
     .navbar-nav .open .dropdown-menu > li > a {
         line-height: 24px;
         font-size: 19px;
+        padding-right: 20px;
     }
     
     .nav-pills li.panel-controls {
@@ -1448,7 +1568,7 @@ a#dash-add-panel {
         top: -38px;
         letter-spacing: 1px;
         line-height: 1px;
-        padding-left: 100px;
+        padding-left: 65px;
     }
     
     .no-icon h1 {
@@ -1473,11 +1593,11 @@ a#dash-add-panel {
     }
 
     .panel-title {
-        padding-left: 95px;
+        padding-left: 4px;
     }
 
     .panel-title i {
-        font-size: 72px;
+        font-size: 35px;
     }
 
     .panel-body .stat-pair {
@@ -1502,10 +1622,10 @@ a#dash-add-panel {
     }
     
     .panel-in-footer .panel-body .stat-pair {
-        min-height: 187px;
+        min-height: 213px;
     }
 
-    .panel-in-footer .panel-body .stat-pair-qr .stat-value {
+    .panel-in-footer .panel-body .stat-pair-qr .stat-label {
         height: auto;
         min-height: 147px;
         text-align: left;
