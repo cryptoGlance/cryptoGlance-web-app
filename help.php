@@ -27,25 +27,28 @@ $html = Markdown::defaultTransform($text);
       
 -->
          
-   <div id="help-wrap" class="container sub-nav full-content">
-      <div class="markdown-body">
-         <div id="readme" class="panel panel-default">
-           <h1>RigWatch Help</h1>
-           <div class="panel-heading">
-               <h2 class="panel-title"><i class="icon icon-document"></i> README.md</h2>
-            </div>
-            <div class="panel-body panel-body-markdown">
-            <?php
-               # Put rendered README markdown in the document
-               echo $html;
-            ?>
-            </div>
-         </div>
+      <div id="help-wrap" class="container sub-nav full-content">
+        <div class="markdown-body">
+           <div id="readme" class="panel panel-default">
+             <h1>RigWatch Help</h1>
+             <div class="panel-heading">
+                 <h2 class="panel-title"><i class="icon icon-document"></i> README.md</h2>
+              </div>
+              <div class="panel-body panel-body-markdown">
+              <?php
+                 # Put rendered README markdown in the document
+                 echo $html;
+              ?>
+              </div>
+           </div>
+        </div>
       </div>
-   </div>
-   <!-- /container -->
+      <!-- /container -->
 
-   <div class="container">
       <?php require_once("includes/footer.php"); ?>
-   </div>
+      </div>
+      <!-- /page-container -->
       
+      <?php require_once("includes/scripts.php"); ?>
+   </body>
+</html>

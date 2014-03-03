@@ -1,11 +1,11 @@
 <div id="rig<?php echo $minerId?>" class="panel panel-primary panel-rig">
-    <h1>Mining Rig Stats</h1>
+    <h1><?php echo (empty($miner['name'])) ? $miner['host'] : $miner['name']?></h1>
     
     <div class="panel-heading">
         <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
         <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
         <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
-        <h2 class="panel-title"><i class="icon icon-server"></i> <span class="value"><?php echo (empty($miner['name'])) ? $miner['host'] : $miner['name']?></span></h2>
+        <h2 class="panel-title"><i class="icon icon-server"></i> <span class="value">Mining Rig Stats</span></h2>
     </div>
     
     <ul class="nav nav-pills"></ul>

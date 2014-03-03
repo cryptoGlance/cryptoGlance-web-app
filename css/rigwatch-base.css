@@ -216,10 +216,6 @@ table a:hover {
     color: #afa;
 }
 
-.top-alert .btn {
-    font-weight: bold;
-}
-
 #alert-update {
     background: rgba(0,255,0,0.3);
     color: #0f0;
@@ -734,9 +730,9 @@ a#dash-add-panel {
 }
 
 .container h1 {
-    padding: 0px 10px 0 72px;
+    padding: 0px 0px 0px 60px;
     text-align: left;
-    font-size: 27px;
+    font-size: 36px;
     letter-spacing: 1px;
     line-height: 25px;
     text-shadow: 2px 2px 0px rgb(0, 0, 0);
@@ -765,7 +761,6 @@ a#dash-add-panel {
 
 }
 
-
 .panel {
     position: relative;
     margin-bottom: 70px;
@@ -776,7 +771,7 @@ a#dash-add-panel {
 
 .panel h1 {
     position: absolute;
-    top: -65px;
+    top: -48px;
 }
 
 .panel-nobg {
@@ -807,6 +802,10 @@ a#dash-add-panel {
 
 .no-icon .panel-heading .panel-title {
     padding-left: 0;
+}
+
+#settings-wrap .no-icon .panel-heading .panel-title {
+    text-align: center;
 }
 
 .no-icon .panel-heading .panel-title i {
@@ -992,9 +991,19 @@ a#dash-add-panel {
     width: 120px;
 }
 
+.panel-body-addresses .icon-walletalt {
+    margin-left: 4px;
+    position: relative;
+    top: 2px;
+}
+
+.panel-wallet .stat-pair {
+    min-width: 200px;
+}
+
 .panel-wallet .stat-pair-dropzone {
     height: 100px;
-    width: 360px;
+    width: 260px;
 }
 
 .panel-body.ui-sortable .stat-pair:hover {
@@ -1101,7 +1110,7 @@ a#dash-add-panel {
 }
 
 .panel-body-addresses img {
-    max-height: 48px;
+    max-height: 32px;
     width: auto;
     margin: 5px 20px 0 0;
     float: left;
@@ -1132,17 +1141,17 @@ a#dash-add-panel {
     overflow: auto;
 }
 
-.panel-in-footer .panel-body, .panel-in-footer .panel-body .stat-label {
+.panel-in-footer .panel-body .stat-label {
     background: url(../images/black-denim.png) repeat #111;
 }
 
 .panel-in-footer .panel-body .stat-pair, .donate-address {
     padding: 2px 0;
     margin: 6px 0 0;
-    border-bottom: 1px solid #444;
 }
 
 .donate-address {
+    border-bottom: 1px solid #444;
     text-align:left;
 }
 
@@ -1497,7 +1506,7 @@ a#dash-add-panel {
         border-radius: 0 0 0 9px;
     }
 
-	.nav-pills li a#dash-add-panel {
+    .nav-pills li a#dash-add-panel {
         margin: 0px 5px 0px -5px;
         padding: 9px 6px 0;
         height: 100%;
@@ -1583,6 +1592,7 @@ a#dash-add-panel {
     .panel {
         margin-bottom: 90px;
     }
+    
 
     .panel-in-footer {
         margin-bottom: 0px;
@@ -1600,15 +1610,24 @@ a#dash-add-panel {
         font-size: 35px;
     }
 
-    .panel-body .stat-pair {
-    }
-
     .panel-body .stat-pair .stat-label, .panel-body .stat-pair .stat-value {
         font-size: 20px;
     }
     
     .panel-body .stat-pair .stat-label {
         padding: 2px 15px 4px;
+    }
+
+    .panel-wallet .panel-body .stat-pair .stat-label {
+      padding: 0 10px 6px;
+    }
+    
+    .panel-wallet .stat-pair {
+        min-width: 260px;
+    }
+
+    .panel-body-addresses img {
+        max-height: 48px;
     }
     
     .panel-body .stat-pair .stat-label .stat-pair-icon {

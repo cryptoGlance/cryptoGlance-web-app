@@ -115,7 +115,7 @@ function updateWallets (data) {
     $(addressesPanel).html('');
     $.each(data, function( walletIndex, wallet) {
         var walletId = (walletIndex+1);
-        $(addressesPanel).append('<div class="stat-pair" id="wallet-address-'+ walletId +'"><div class="stat-value"><img src="images/icon-'+ wallet.currency +'.png" alt="'+ wallet.currency +'" /><span class="green">'+ wallet.balance +' '+ wallet.currency_code +'</span><span class="address-label">in '+'<b>'+ wallet.total_addresses +'</b> address(es)</span></div><div class="stat-label">'+ wallet.label +' <a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#editWallet" data-backdrop="static"><i class="icon icon-edit"></i></a><a href="#" class="stat-pair-icon" data-toggle="modal" data-target="#removeWalletPrompt" data-backdrop="static"></a></div></div>');
+        $(addressesPanel).append('<div class="stat-pair" id="wallet-address-'+ walletId +'"><div class="stat-value"><img src="images/icon-'+ wallet.currency +'.png" alt="'+ wallet.currency +'" /><span class="green">'+ wallet.balance +' '+ wallet.currency_code +'</span><span class="address-label">in '+'<b>'+ wallet.total_addresses +'</b> address(es)</span></div><div class="stat-label"><a href="#" class="stat-pair-icon">'+ wallet.label +' <i class="icon icon-walletalt"></i></a></div></div>');
     });
 }
 
@@ -241,7 +241,7 @@ function updateRigs (data) {
             }
             
             // add dev to Nav
-            $(rigNavElm).append('<li><a class="rig'+ rigId +'-dev'+ devIndex +' '+ status +'" href="#rig'+ rigId +'-dev'+ devIndex +'" data-toggle="tab">DEV '+ devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
+            $(rigNavElm).append('<li><a class="rig'+ rigId +'-dev'+ devIndex +' '+ status +'" href="#rig'+ rigId +'-dev'+ devIndex +'" data-toggle="tab">dev'+ devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
             $(rigTabContentElm).find('#rig'+ rigId +'-dev'+ devIndex).remove();
             $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig'+ rigId +'-dev'+ devIndex +'"><div class="panel-body panel-body-stats"></div></div>');
             
@@ -260,7 +260,7 @@ function updateRigs (data) {
                 }
             });
             
-            // Update Sumamry Page of DEVs
+            // Update Summary Page of DEVs
             if (!removeTable) {
                 if (rig.summary.type == 'cgminer') {
                     $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+' MH/S</td><td>'+dev.utility+'</td></tr>');
@@ -275,7 +275,7 @@ function updateRigs (data) {
         $(rigTabContentElm).find('.tab-pane:eq('+ selectedNav +')').addClass('active');
                         
         // Update Overview Panel
-        $(overviewTable).append('<tr><td><i class="icon rig'+ rigId +' icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig'+ rigId +'" class="anchor-offset rig'+ rigId +' '+ rigStatus +'">'+ $(rigElm).find('.panel-title span').html() +'</a></td><td>'+ rig.summary.hashrate_5s +' MH/S</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
+        $(overviewTable).append('<tr><td><i class="icon rig'+ rigId +' icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig'+ rigId +'" class="anchor-offset rig'+ rigId +' '+ rigStatus +'">'+ $(rigElm).find('h1').html() +'</a></td><td>'+ rig.summary.hashrate_5s +' MH/S</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
     });
     
     // Total amount of hash power

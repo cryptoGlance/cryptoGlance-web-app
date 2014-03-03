@@ -1,4 +1,3 @@
-      </div>      
       <div class="panel panel-primary panel-in-footer">
          <div class="panel-header">
             <h1 class="text-center">&lt;3 to all donators!</h1>
@@ -46,16 +45,3 @@
             </div>
          </div>
       </div>
-      <script src="js/jquery-1.10.2.min.js"></script>
-      <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-      <script src="js/jquery.cookie.js"></script>
-      <script src="js/jquery.scrollTo.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/messenger.min.js"></script>
-      <script src="js/messenger-theme-flat.js"></script>
-      <script src="js/prettyCheckable.min.js"></script>
-      <script src="js/ajax.js"></script> 
-      <script src="js/rigwatch-ui.js"></script>
-      <script src="js/version.js"></script> 
-   </body>
-</html>

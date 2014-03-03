@@ -27,7 +27,7 @@ Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other API
 - PHP v5.2+
 - Apache or IIS
 - cgminer / bfgminer / cudaminer / sgminer with API access allowed
-- MPOS Mining Pool account with your API key (for certain pool stats)
+- MPOS Mining Pool account with your API key (for certain pool stats -- ask your pool operatir)
 
 ## Installation:
 
@@ -100,6 +100,7 @@ A. Double-check that you've entered information accurately. Note that RigWatch w
 - [WebhostingHub Glyphs](http://www.webhostinghub.com/glyphs/)
 - [PHP Markdown by Michel Fortin](http://michelf.ca/projects/php-markdown/)
 - [Flat icon social media by Guilherme Spigolan](https://www.iconfinder.com/search/?q=iconset%3Aflat-icon-social-media)
+- [(elements of) PHPMailer](https://github.com/PHPMailer/PHPMailer)
 
 Hope you enjoy what we're trying to do here, and thanks to all of the other similar OSS projects like this for help and inspiration (we give extra special thanks to **Anubis** for that!).
 
