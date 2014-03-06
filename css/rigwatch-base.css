@@ -107,6 +107,10 @@ table a:hover {
   color: #fff !important;
 }
 
+table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
+  border-bottom: 0;
+}
+
 .text-left {
   text-align: left;
 }
@@ -251,6 +255,10 @@ table a:hover {
   color: #111;
 }
 
+.form-horizontal .form-group {
+  margin: 15px 0;
+}
+
 .form-horizontal .form-group.temp-thresholds {
   width: 320px;
   margin: 0 auto 20px;
@@ -359,6 +367,8 @@ table a:hover {
 }
 
 .modal-header .close {
+  display: none;
+  
   position: absolute;
   top: -7px;
   right: 0px;
@@ -477,14 +487,6 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
   font-size: 23px;
   padding: 0 8px;
   font-family: robotolight;
-}
-
-.addressInputs input.form-control {
-  font-size: 15px;
-  font-family: roboto;
-  font-weight: bold;
-  padding: 4px;
-  height: auto;
 }
 
 #inputMailPort {
@@ -871,13 +873,19 @@ a#dash-add-panel {
   color: #eee;
 }
 
-.panel-title i {
+.panel-title i, .panel-title img {
   position: absolute;
   font-size: 40px;
   left: 0;
   top: -43px;
   color: #33b5e5;
   text-shadow: 1px 1px 0 #222;
+}
+
+.panel-title img {
+  width: 40px;
+  height: 40px;
+  top: -47px;
 }
 
 .panel-rig ul {
