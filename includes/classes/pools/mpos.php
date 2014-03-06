@@ -1,70 +1,98 @@
 <?php
 
 /*
- *
  * @author Stoyvo
  */
-class Class_Pools_Mpos {
+class Class_Pools_Mpos extends Class_Pools_Abstract {
 
     // Pool Information
     protected $_apiKey;
-    protected $_apiURL;
+    protected $_userId;
+    
+    // api calls to make
     protected $_actions = array(
         'public',
-        'getuserstatus',
-        'getuserworkers',
         'getpoolstatus',
+        'getuserbalance',
+        'getuserstatus',
     );
 
     public function __construct($params) {
-        $this->_apiKey = $params['apiKey'];
-        $this->_apiURL = $params['apiURL'];
+        parent::__construct($params);
+        $this->_apiKey = $params['apikey'];
+        $this->_userId = $params['userid'];
+        $this->_fileHandler = new Class_FileHandler('pools/mpos/'. $params['apikey'] .'.json');
     }
 
-    /*
-     * TODO: REFACTOR! getData to be extended, pass pool type 'mpos'
-     */
-
-    public function getData($fileName) {
-        $fileHandler = new Class_FileHandler(
-                'pools/mpos/' . sha1($this->_apiURL . '.' . $this->_apiKey) . '/' . $fileName . '.json'
-        );
-
-        return $fileHandler->read();
-    }
-
-    public function getUserStatus() {
-        echo $this->getData('getuserstatus');
-    }
-
-    public function getUserWorkers() {
-        echo $this->getData('getuserworkers');
-    }
-
-    public function getPoolStatus() {
-        echo $this->getData('getpoolstatus');
-    }
-
-    public function update() {
-        foreach ($this->_actions as $action) {
-            $fileHandler = new Class_FileHandler(
-                    'pools/mpos/' . sha1($this->_apiURL . '.' . $this->_apiKey) . '/' . $action . '.json'
-            );
-
-            if ($fileHandler->lastTimeModified() >= 30) {
-                $url = $this->_apiURL
-                        . '/index.php?page=api'
-                        . '&api_key=' . $this->_apiKey
-                        . '&action=' . $action;
-                $curl = curl_init($url);
+    public function update($cached = true) {
+        if ($cached == false || $this->_fileHandler->lastTimeModified() >= 300) { // updates every 5 minutes
+            $poolData = array();
+            foreach ($this->_actions as $action) {
+                $curl = curl_init($this->_apiURL  . '/index.php?page=api&id='. $this->_userId .'&api_key='. $this->_apiKey . '&action=' . $action);
                 curl_setopt($curl, CURLOPT_FAILONERROR, true);
                 curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                $fileHandler->write(curl_exec($curl));
+                curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; RigWatch ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
+                $poolData[$action] = json_decode(curl_exec($curl), true);
+                
+                if ($action == 'getpoolstatus') {
+                    $poolData[$action] = $poolData[$action]['getpoolstatus']['data'];
+                } else if ($action == 'getuserbalance') {
+                    $poolData[$action] = $poolData[$action]['getuserbalance']['data'];
+                } else if ($action == 'getuserstatus') {
+                    $poolData[$action] = $poolData[$action]['getuserstatus']['data'];
+                }
             }
+            
+            // Math Stuffs
+            $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
+            $units2 = array('KB', 'MB', 'GB', 'TB'); 
+            
+            // Data Order
+            $data['type'] = 'mpos';
+//            $data['pool_name'] = $poolData['public']['pool_name'];
+            $data['balance'] = $poolData['getuserbalance']['confirmed'];
+            $data['unconfirmed_balance'] = $poolData['getuserbalance']['unconfirmed'];
+            
+            $pow = min(floor(($poolData['getpoolstatus']['nethashrate'] ? log($poolData['getpoolstatus']['nethashrate']) : 0) / log(1024)), count($units) - 1);
+            $poolData['getpoolstatus']['nethashrate'] /= pow(1024, $pow);
+            $data['network_hashrate'] = round($poolData['getpoolstatus']['nethashrate'], 2) . ' ' . $units[$pow] . '/s';
+            
+            $pow = min(floor(($poolData['getpoolstatus']['hashrate'] ? log($poolData['getpoolstatus']['hashrate']) : 0) / log(1024)), count($units2) - 1);
+            $poolData['getpoolstatus']['hashrate'] /= pow(1024, $pow);
+            $data['pool_hashrate'] = round($poolData['getpoolstatus']['hashrate'], 2) . ' ' . $units2[$pow] . '/s';
+            
+            $pow = min(floor(($poolData['getuserstatus']['hashrate'] ? log($poolData['getuserstatus']['hashrate']) : 0) / log(1024)), count($units2) - 1);
+            $poolData['getuserstatus']['hashrate'] /= pow(1024, $pow);
+            $data['user_hashrate'] = round($poolData['getuserstatus']['hashrate'], 2) . ' ' . $units2[$pow] . '/s';
+            
+            $data['pool_workers'] = $poolData['getpoolstatus']['workers'];
+            $data['efficiency'] = $poolData['getpoolstatus']['efficiency'] . '%';
+            $data['accepted'] = $poolData['public']['shares_this_round'];
+            $data['rejected'] = round($poolData['public']['shares_this_round'] - ($poolData['public']['shares_this_round'] * ($poolData['getpoolstatus']['efficiency']/100)));
+            $data['difficulty'] = round($poolData['getpoolstatus']['networkdiff'], 5);
+            
+            if ($poolData['getpoolstatus']['timesincelast'] <= 86400) { // Less than a day
+                $timeSinceLastBlock = gmdate('H\H i\M s\S', $poolData['getpoolstatus']['timesincelast']);
+            } else if ($poolData['getpoolstatus']['timesincelast'] <= 604800) { // Less than a week
+                $timeSinceLastBlock = gmdate('d\D H\H i\M', $poolData['getpoolstatus']['timesincelast']);
+            }
+            $data['time_since_last_block'] = $timeSinceLastBlock;
+            $data['%_of_expected'] = round(($poolData['public']['shares_this_round'] / $poolData['getpoolstatus']['estshares']) * 100, 2) . '%';
+            $data['current_block'] = $poolData['getpoolstatus']['currentnetworkblock'];
+            $data['last_block'] = $poolData['getpoolstatus']['lastblock'];
+            $data['blocks_pool_found'] = 'TODO';
+            $data['next_(est.)_difficulty'] = $poolData['getpoolstatus']['nextnetworkblock'];
+            $data['url'] = $this->_apiURL;
+            $data['username'] = $poolData['getuserstatus']['username'];
+            
+            $this->_fileHandler->write(json_encode($data));
+            return $data;
         }
+        
+        return json_decode($this->_fileHandler->read(), true);
     }
 
 }

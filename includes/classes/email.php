@@ -26,7 +26,6 @@ class Email {
 	// Return true on success or false (with message) on failure
 	public function sendNotification($status, $time) {
 		try {
-
 			$mail = new PHPMailer(true);
 			$mail->IsSMTP();
 			$mail->SMTPSecure = ($this->_tls == 1) ? 'tls' : '';

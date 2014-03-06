@@ -21,18 +21,18 @@
             <a class="new-panel-btn" data-toggle="modal" data-target="#addAddress" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-walletalt"></i>Address
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-barchartalt"></i>Graph
-            </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-value-coins"></i>Coin Values
-            </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-rss"></i>RSS
-            </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-reddit"></i>(sub)Reddit
-            </a>
+<!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">-->
+<!--               <i class="icon icon-barchartalt"></i>Graph-->
+<!--            </a>-->
+<!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">-->
+<!--               <i class="icon icon-value-coins"></i>Coin Values-->
+<!--            </a>-->
+<!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">-->
+<!--               <i class="icon icon-rss"></i>RSS-->
+<!--            </a>-->
+<!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">-->
+<!--               <i class="icon icon-reddit"></i>(sub)Reddit-->
+<!--            </a>-->
          </div>
       </div>
       <div class="modal-footer">

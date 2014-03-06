@@ -6,9 +6,8 @@ class Class_Update {
 
     public function all() {
         $data = array();
-//        $data[] = $this->pools();
         $data['rigs'] = $this->getRigs();
-//        $data[] = $this->currencies();
+        $data['pools'] = $this->getPools();
         $data['wallets'] = $this->getWallets();
 
         echo json_encode($data);
@@ -26,6 +25,12 @@ class Class_Update {
         echo json_encode($data);
     }
     
+    public function pool() {
+        $data['pools'] = $this->getPools();
+        
+        echo json_encode($data);
+    }
+    
     public function wallet() {
         $cached = null;
         if (isset($_GET['attr'])) {
@@ -38,9 +43,9 @@ class Class_Update {
     }
 
     // Private
-    private function getPools() {
+    private function getPools($poolId = null) {
         $pools = new Class_Pools();
-        $data = array('pools' => $pools->update());
+        $data = $pools->update($poolId);
         
         return $data;
     }
@@ -48,13 +53,6 @@ class Class_Update {
     private function getRigs($rigId = null) {
         $rigs = new Class_Miners(); // Rigs have Miners
         $data = $rigs->update($rigId);
-
-        return $data;
-    }
-
-    private function getCurrencies() {
-        $currencies = new Class_Currency();
-        $data = array('currencies' => $currencies->update());
 
         return $data;
     }

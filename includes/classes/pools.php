@@ -18,36 +18,37 @@ class Class_Pools {
     public function __construct() {
         $fh = new Class_FileHandler('configs/pools.json');
         $pools = json_decode($fh->read(), true);
-
+        
         if (!empty($pools)) {
-            foreach ($pools as $poolType => $pool) {
-                $this->addPool($poolType, $pool[0]);
+            foreach ($pools as $pool) {
+                $this->addPool($pool);
             }
         }
     }
 
-    private function addPool($type, $params) {
-        if (empty($type) || empty($params)) {
+    private function addPool($pool) {
+        if (empty($pool['type']) || empty($pool['apiurl']) || empty($pool['apikey']) || empty($pool['userid'])) {
             return false;
         }
 
-        $class = 'Class_Pools_' . ucwords(strtolower($type));
-        $obj = new $class($params);
+        $class = 'Class_Pools_' . ucwords(strtolower($pool['type']));
+        $obj = new $class($pool);
         $this->_pools[] = $obj;
     }
-
-    public function getData() {
-        // Requires param for type of data:
-        foreach ($this->_pools as $pool) {
-            $pool->$_GET['funct']();
+    
+    public function update($poolId = null) {
+        if (!empty($poolId) && $poolId != 0) {
+            $poolId -= 1; // Arrays start at 0... 1 less than the ID on frontend
+            if (!empty($this->_pools[$poolId])) {
+                $data[] = $this->_pools[$poolId]->update(false);
+            }
+        } else {        
+            foreach ($this->_pools as $pool) {
+                $data[] = $pool->update(true);
+            }
         }
-    }
-
-    public function update() {
-
-        foreach ($this->_pools as $pool) {
-            $pool->update();
-        }
+        
+        return $data;
     }
 
 }

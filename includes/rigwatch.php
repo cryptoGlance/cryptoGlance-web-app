@@ -21,6 +21,9 @@ class RigWatch {
     
     public function getMiners() {
         return $this->_configs['miners'];
+    }    
+    public function getPools() {
+        return $this->_configs['pools'];
     }
     
     public function getWallets() {

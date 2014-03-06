@@ -28,8 +28,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-     
     <script type="text/javascript">
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
-    </script>
+        var devHeatWarning = 75;
+        var devHeatDanger = 80;
+        var devHWWarning = 15;
+        var rigUpdateTime = 2500;
+        var poolUpdateTime = 7200;
+        var walletUpdateTime = 18000;
+    </script>     
 </head>

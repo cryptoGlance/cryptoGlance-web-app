@@ -30,6 +30,7 @@ class Class_Wallets_Vertcoin extends Class_Wallets_Abstract {
             );
             
             $this->_fileHandler->write(json_encode($data));
+            return $data;
         }
         
         return json_decode($this->_fileHandler->read(), true);

@@ -34,17 +34,17 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputRigPort" class="col-sm-5 control-label">cgminer Port</label>
+                <label for="inputRigPort" class="col-sm-5 control-label">API Port</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" id="inputRigPort" maxLength="5">
                 </div>
               </div>
-              <div class="form-group">
-                <label for="inputRigHashrate" class="col-sm-5 control-label">Desired Hashrate <small>(MH/s)</small></label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" id="inputRigHashrate" maxLength="5">
-                </div>
-              </div>
+<!--              <div class="form-group">-->
+<!--                <label for="inputRigHashrate" class="col-sm-5 control-label">Desired Hashrate <small>(MH/s)</small></label>-->
+<!--                <div class="col-sm-3">-->
+<!--                  <input type="text" class="form-control" id="inputRigHashrate" maxLength="5">-->
+<!--                </div>-->
+<!--              </div>-->
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
