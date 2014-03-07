@@ -1,6 +1,6 @@
 <?php require_once("includes/header.php"); ?>
        
-<!-- ### Below is the Settings page which contains common/site-wide preferences
+<!-- ### Below is the Wallet page which contains wallet balances for children addresses, and allows for adding new addresses, and editing/deleting the entire wallet
       
 -->
          
