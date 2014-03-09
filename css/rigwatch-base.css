@@ -599,6 +599,7 @@ a.navbar-brand img {
 .navbar-collapse {
   max-height: 100%;
   box-shadow: inset 0px 0px 20px #111;
+  background: linear-gradient(#484E55, #3A3F44 60%, #313539);
 }
 
 .nav-pills > li {

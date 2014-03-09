@@ -230,6 +230,26 @@ function prettifyInputs() {
         color: 'blue'
      });
   });
+} 
+
+ 
+// Toggle Mobile Navbar
+function toggleMobileNavbar() {
+  $('.navbar-collapse').collapse('toggle');
+}
+
+// Hide Mobile Header
+function hideMobileHeader() {
+  $('.navbar').css({
+    maxHeight : "0px",
+    minHeight: "0px"
+    }
+  );
+  $('.container.sub-nav').css({
+    paddingTop : "65px"
+    }
+  );
+  $('.navbar-header').hide();  
 }
 
 
