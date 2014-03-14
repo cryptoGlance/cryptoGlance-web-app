@@ -54,7 +54,7 @@ $(document).ready(function() {
    
    $('.anchor-offset').click(function() {
       var target = $(this).attr('href');
-      $('body').scrollTo(target, 1000, { margin: true, offset: -60, easing:'easeOutBack'});
+      $('body').scrollTo(target, 1000, { margin: true, offset: -80, easing:'easeOutBack'});
       navMain.collapse('slideUp');
       // TODO: Set the active/last-clicked nav-pill to toggle '.active'
       

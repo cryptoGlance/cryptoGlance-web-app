@@ -4,17 +4,23 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-      <meta name="description" content="RigWatch is an open-source, self-hosted PHP webapp that can be used to monitor and control your mining rigs and pools, complete with a responsive UI.">
-      <meta name="author" content="RigWatch">
+      <meta name="description" content="cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot.">
+      <meta name="author" content="cryptoGlance">
+      <meta property="og:title" content="cryptoGlance" />
+      <meta property="og:site_name" content="cryptoGlance" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="http://cryptoglance.info" />
+      <meta property="og:image" content="http://cryptoglance.info/images/cryptoglance-icon.png" />
+      <meta property="og:description" content="cryptoGlance is an companion tool which gives you a glance at all of your crypto-currency components in one spot." />
       <link rel="shortcut icon" href="favicon.png">
       <link rel="icon" type="image/png" href="favicon.png">      
-      <title>RigWatch :: Multi-Rig Monitor</title>
+      <title>cryptoGlance :: Crypto-Currency Companion</title>
       <!-- Bootstrap core CSS -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
       <link href="css/whhg.css" rel="stylesheet">
-      <!-- Custom RigWatch styles -->
-      <link href="css/rigwatch-base.css" rel="stylesheet">
+      <!-- Custom cryptoGlance styles -->
+      <link href="css/cryptoglance-base.css" rel="stylesheet">
       
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
@@ -33,14 +39,14 @@
                   <span class="sr-only">Toggle navigation</span>
                   <i class="icon icon-dropmenu"></i>
                   </button>
-                  <a class="navbar-brand anchor-offset" href="#top"><img src="images/rigwatch-logo-landscape-shadow.png" alt="RigWatch" /></a>
+                  <a class="navbar-brand anchor-offset" href="#top"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
                </div>
                <div class="navbar-collapse collapse">
                   <ul class="nav nav-pills navbar-nav">
                      <li class="active"><a href="#top" class="anchor-offset"><i class="icon icon-speed"></i> Dashboard<span id="dashboard-tag">monitoring console</span><span id="dash-add-panel" class="grad-green" data-toggle="modal" data-target="#editPool" data-backdrop="static">+ add new panel</span></a></li>
                      <li><a href="#panel-features" class="anchor-offset"><i class="icon icon-managedhosting"></i> Features<span>you'll love (we hope)</span></a></li>
-                     <!-- <li><a href="#panel-source" class="anchor-offset"><i class="icon icon-code"></i> Source<span>available on Github!</span></a></li> -->
-                     <li><a href="#panel-chat" class="anchor-offset"><i class="icon icon-chat"></i> Chat<span>Support + Dev Ideas</span></a></li>
+                     <!-- <li><a href="#panel-source" class="anchor-offset"><i class="icon icon-code"></i> Source<span>available on Github!</span></a></li>
+                     <li><a href="#panel-chat" class="anchor-offset"><i class="icon icon-chat"></i> Chat<span>Support + Dev Ideas</span></a></li> -->
                      <li><a href="#panel-social" class="anchor-offset"><i class="icon icon-groups-friends"></i> Social<span>spread the word</span></a></li>
                      <li><a href="#panel-donations" class="anchor-offset"><i class="icon icon-bitcoin"></i> Donations<span>are greatly appreciated!</span></a></li>
                   </ul>
@@ -49,12 +55,12 @@
             </div>
          </div>
          <div id="top" class="jumbotron">
-            <img src="images/rigwatch-devices.png" />
+            <img src="images/cryptoglance-devices.png" />
             <h1>Real-time updates in one spot, for all of your mining rigs <i class="icon icon-pixelpickaxe"></i></h1>
-            <p class="jumbo-desc">RigWatch is an open-source, self-hosted PHP webapp that can be used to monitor and control your mining rigs and pools, complete with a responsive UI.</p>
+            <p class="jumbo-desc">cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot.</p>
             <p class="jumbo-cta">
                <a class="btn btn-warning btn-lg" href="#" role="button"><i class="icon icon-download-alt"></i> Coming Soon<span>we're almost ready!</span></a>
-               <!-- <a class="btn btn-warning btn-lg" href="https://github.com/scar45/rigWatch/archive/master.zip" role="button"><i class="icon icon-download-alt"></i> Download Now &raquo;<span>latest master branch from Github</span></a> -->
+               <!-- <a class="btn btn-warning btn-lg" href="https://github.com/cryptoglance/cryptoglance/archive/master.zip" role="button"><i class="icon icon-download-alt"></i> Download Now &raquo;<span>latest version from Github</span></a> -->
                <a class="btn btn-default btn-lg" href="#installation" role="button"><i class="icon icon-install"></i> Installation Guide<span><!-- for multiple web servers -->also coming soon...</span></a>
                <br>
             </p>
@@ -88,7 +94,7 @@
                </div>
                <div class="stat-pair">
                   <div class="stat-label">
-                     We're in the early, yet release-worthy stages of RigWatch development, so you can be sure that new features will be added as time goes on.
+                     We're in the early, yet release-worthy stages of cryptoGlance development, so you can be sure that new features will be added as time goes on.
                   </div>
                </div>
             </div>
@@ -102,16 +108,16 @@
                <br>
                <div class="stat-pair stat-pair-devs">
                   <div class="stat-label">
-                     Don't hesitate to fork RigWatch and submit pull requests!
+                     Don't hesitate to fork cryptoGlance and submit pull requests!
                   </div>
                </div>
                <br>
-               <a id="btn-sauce" href="https://github.com/scar45/rigwatch" rel="external"><button type="button" class="btn btn-lg btn-default"><i class="icon icon-github"></i> &nbsp;Grab the sauce on Github</button></a>
+               <a id="btn-sauce" href="https://github.com/scar45/cryptoglance" rel="external"><button type="button" class="btn btn-lg btn-default"><i class="icon icon-github"></i> &nbsp;Grab the sauce on Github</button></a>
             </div>
          </div> -->
          <div id="panel-social" class="panel panel-primary">
             <div class="panel-lighter">
-               <h1>find RigWatch elsewhere</h1>
+               <h1>find cryptoGlance elsewhere</h1>
             </div>         
             <div class="panel-body social-icons">
                <div class="stat-pair stat-pair-devs">
@@ -128,12 +134,12 @@
                      </div>
                   </div>
                   <div class="social-box">
-                     <a class="social-icon" href="http://reddit.com/r/rigwatch" rel="external"><img src="images/icon-reddit.png" />(sub)Reddit</a>
-                     <a class="social-count" href="http://reddit.com/r/rigwatch" rel="external"><button type="button" class="btn btn-xs btn-warning"><i class="icon icon-reddit"></i> Subscribe</button></a>
+                     <a class="social-icon" href="http://reddit.com/r/cryptoglance" rel="external"><img src="images/icon-reddit.png" />(sub)Reddit</a>
+                     <a class="social-count" href="http://reddit.com/r/cryptoglance" rel="external"><button type="button" class="btn btn-xs btn-warning"><i class="icon icon-reddit"></i> Subscribe</button></a>
                   </div>
                   <div class="social-box">
-                     <a class="social-icon" href="http://twitter.com/rigwatch" rel="external"><img src="images/icon-twitter.png" />Twitter</a>
-                     <a class="twitter-follow-button social-count" href="https://twitter.com/rigwatch" data-show-count="true" data-show-screen-name="false" data-width="80px" data-lang="en">Follow @rigwatch</a>
+                     <a class="social-icon" href="http://twitter.com/cryptoglance" rel="external"><img src="images/icon-twitter.png" />Twitter</a>
+                     <a class="twitter-follow-button social-count" href="https://twitter.com/cryptoglance" data-show-count="true" data-show-screen-name="false" data-width="85px" data-lang="en">Follow @cryptoglance</a>
                   </div>
                </div>
             </div>
@@ -149,39 +155,46 @@
                   </div>
                </div>
                <div class="container social-icons">
-                  <a class="social-icon" href="http://webchat.freenode.net?channels=%23RigWatch&uio=OT10cnVlJjExPTIwNQa5" rel="external"><h3>Enter IRC Chatroom</h3><img src="images/icon-chat.png" /></a>
-                  <p>...or, connect to <span class="orange">Freenode</span> and join <span class="orange">#RigWatch</span> with your favourite mobile IRC client.</p>
-                  <iframe src="http://webchat.freenode.net?channels=%23RigWatch&uio=OT10cnVlJjExPTIwNQa5"></iframe>
+                  <a class="social-icon" href="http://webchat.freenode.net?channels=%23cryptoGlance&uio=OT10cnVlJjExPTIwNQa5" rel="external"><h3>Enter IRC Chatroom</h3><img src="images/icon-chat.png" /></a>
+                  <p>...or, connect to <span class="orange">Freenode</span> and join <span class="orange">#cryptoGlance</span> with your favourite mobile IRC client.</p>
+                  <iframe src="http://webchat.freenode.net?channels=%23cryptoGlance&uio=OT10cnVlJjExPTIwNQa5"></iframe>
                </div>
             </div>
          </div>
          <div id="panel-donations" class="panel panel-primary panel-in-footer">
-            <div class="panel-lighter">
-               <h1>&lt;3 to all donators</h1>
-            </div>         
             <div class="panel-body">
                <div class="stat-pair stat-pair-devs">
-                  <div class="stat-value">
-                     Made with <i class="icon icon-pixelheart"></i> by:
-                  </div>
-                  <div class="stat-label">
-                     <a href="#" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/75ef5c7e71725a216433547ad93fbc0c?d=https%3A%2F%2Fidenticons.github.com%2Fc78bf60d254e1947a636d8152e588691.png"><br>scar45</a> / <a href="#" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/12885e27b0f7be03e5d398d0f4ad3b5c?d=https%3A%2F%2Fidenticons.github.com%2F97711c22cd4fe16127b6c1bf98c926a3.png"><br>Stoyvo</a> / <a href="#" rel="external"><img class="avatar" src="https://2.gravatar.com/avatar/76517ae0a2c5ded3f7365d13b849eaab?d=https%3A%2F%2Fidenticons.github.com%2Fc858c1bf532f19e2f976c6233a3be279.png"><br>DChaykas</a>
-                  </div>
                   <div class="stat-value">
                      Donations make us feel like champs <i class="icon icon-medal"></i>
                   </div>
                   <div class="stat-label stat-label-donate">
+<<<<<<< HEAD
                      <a href="images/LUQ4GyjjDtopdGj3h8CvDEP4QCLd3FEhDT.png" rel="external"><img src="images/icon-litecoin.png" alt="Litecoin" /></a> LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M
                      <br>
                      <a href="images/1HBY1cskYysa2in8zNVfLgPLpEYAoTsGyS.png" rel="external"><img src="images/icon-bitcoin.png" alt="Bitcoin" /></a> 12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE
+=======
+                    <div class="donate-address">
+                        <a href="images/qr-donate-btc.png" rel="external" title="Donate some Bitcoin (BTC)"><img src="images/icon-bitcoin.png" alt="Bitcoin"></a> 12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE
+                    </div>
+                    <div class="donate-address">
+                        <a href="images/qr-donate-ltc.png" rel="external" title="Donate some Litecoin (LTC)"><img src="images/icon-litecoin.png" alt="Litecoin"></a> LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M
+                    </div>
+                    <div class="donate-address">
+                        <a href="images/qr-donate-vtc.png" rel="external" title="Donate some Vertcoin (VTC)"><img src="images/icon-vertcoin.png" alt="Vertcoin"></a> Vp9izfX1kM3BqGADtvan1Et5nBiU1s32Zp
+                    </div>
+                    <div class="donate-address">
+                        <a href="images/qr-donate-doge.png" rel="external" title="Donate some Dogecoin (DOGE)"><img src="images/icon-dogecoin.png" alt="Dogecoin"></a> D8bcNHYbkBDqwkvZKKpfu8oAyzqezJ5RvW
+                    </div>
+>>>>>>> Converted branding to cryptoGlance
                   </div>
                   <div class="stat-value">
                      Long live crypto-currency!
                   </div>
                </div>
-               <h3>Licensed under GPLv2</h3>
-               <!-- <a href="https://github.com/scar45/rigWatch/tree/gh-pages" rel="external"><button type="button" class="btn btn-lg btn-default"><i class="icon icon-github"></i>&nbsp; this site's source on Github</button></a> -->
+               <div class="clearfix"></div>
                <br>
+               <a href="https://github.com/cryptoglance/cryptoglance/tree/gh-pages" rel="external"><button type="button" class="btn btn-lg btn-default"><i class="icon icon-github"></i>&nbsp; this site's source on Github</button></a>
+               <h3>Licensed under GPLv2</h3>
             </div>
          </div>
       </div>      
@@ -190,7 +203,7 @@
       <script src="js/jquery.easing.1.3.js"></script>
       <script src="js/jquery.scrollTo.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
-      <script src="js/rigwatch-ui.js"></script>
+      <script src="js/cryptoglance-ui.js"></script>
       
       <!-- G+ button -->
       <script type="text/javascript">

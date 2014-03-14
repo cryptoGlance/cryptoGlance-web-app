@@ -1,6 +1,6 @@
 
-/* Custom RigWatch styles
-	by George Merlocco (george@merloc.co) // https://github.com/scar45/
+/* Custom cryptoglance styles
+	by scar45 // https://github.com/cryptoglance/
 */
 
 html {
@@ -8,7 +8,7 @@ html {
 }
 
 body {
-   background: url(../images/rigwatch-watermark.png) no-repeat bottom left fixed transparent;
+   background: url(../images/cryptoglance-watermark.png) no-repeat bottom left fixed transparent;
    background-size: contain;
    font-family: robotolight, sans-serif;
    padding-top: 52px;
@@ -161,7 +161,6 @@ a.navbar-brand img {
 }
 
 .nav-pills li a:hover, .nav-pills li a:active, .nav-pills li a:hover * {
-    border-width: 0 1px 1px;
     color: #fff;
 }
 
@@ -456,7 +455,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-body .stat-pair .stat-label {
-    background: url(../images/inflicted.png) repeat #424750;
+    background: url(../images/black-denim.png) repeat #111;
     font-family: robotocondensed;
     font-size: 20px;
     text-transform: lowercase;
@@ -469,7 +468,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-body .stat-pair .stat-value {
-    background: url(../images/black-denim.png) repeat #111;
+    background: url(../images/inflicted.png) repeat #424750;
     font-size: 22px;
     padding: 0;
     border-bottom: 1px solid #555;
@@ -489,6 +488,20 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     float: left;
 }
 
+.panel-in-footer .panel-body .stat-pair, .donate-address {
+  padding: 2px 0;
+  margin: 6px 0 0;
+}
+
+.donate-address {
+  border-bottom: 1px solid #444;
+  text-align:left;
+}
+
+.panel-in-footer .panel-body .stat-pair-qr .stat-label .donate-address:last-child {
+  border-bottom: 0;
+}
+
 .panel-in-footer .panel-body .stat-pair-devs a {
     display: inline-block;
     margin: 0 10px;
@@ -496,9 +509,8 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-in-footer .panel-body .stat-pair-devs a img {
-    height: 64px;
-    width: 64px;
-    margin-bottom: 3px;
+    height: 24px;
+    width: 24px;
 }
 
 .panel-body .stat-pair .stat-value i {
@@ -691,7 +703,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     }
 
     a.navbar-brand img {
-       height: 48px;
+       height: 87px;
     }
 
     .navbar-nav {
@@ -830,7 +842,11 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     .panel-body .stat-pair .stat-label {
         padding: 9px 15px 11px;
     }
-
+    
+    .panel-body .stat-pair .stat-label-donate {
+        padding: 1px 15px 11px;
+    }
+    
     .panel-body .stat-pair .stat-value {
         font-size: 30px;
     }
@@ -899,8 +915,23 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
         margin: 0 auto;
     }
 
+    .navbar {
+        min-height: 80px;
+    }
+    
+    .navbar-nav {
+        margin: 11px 0px 5px 20px;
+    }
+    
+    .nav-pills li a {
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        border-width: 1px;
+        margin: 0 6px;
+    }
+    
     a.navbar-brand img {
-       height: 83px;
+       height: 104px;
     }
 
     .jumbotron .jumbo-cta, .jumbotron .jumbo-desc {
