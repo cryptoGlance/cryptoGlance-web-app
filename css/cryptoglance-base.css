@@ -167,6 +167,10 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   outline: none;
 }
 
+.btn-default {
+  color: #ddd;
+}
+
 .panel-footer h3.helpful-tip {
   font-style: italic;
   color: #bbb;
@@ -512,7 +516,7 @@ select.form-control {
   text-align: center;
   text-shadow: 0 1px 0 #000;
   font-family: robotolight;
-  font-size: 22px;
+  font-size: 16px;
   margin: 5px 0;
 }
 
@@ -528,7 +532,6 @@ select.form-control {
 
 .login-container .panel-footer span {
   font-family: robotoblack;
-  font-size: 17px;
 }
 
 #panel-login #login-failure {
@@ -584,9 +587,10 @@ a.navbar-brand {
 }
 
 a.navbar-brand img {
-  height: 58px;
+  height: 54px;
   width: auto;
   position: absolute;
+  z-index: 10000;
 }
 
 .navbar-nav {
@@ -760,6 +764,7 @@ a#dash-add-panel {
 
 #total-hashrate {
   height: 100%;
+  text-align: center;
   font-size: 31px;
   font-family: bebas;
   padding: 12px 20px 10px;
@@ -781,7 +786,7 @@ a#dash-add-panel {
 .container h1 {
   padding: 0px 0px 0px 60px;
   text-align: left;
-  font-size: 36px;
+  font-size: 32px;
   letter-spacing: 1px;
   line-height: 25px;
   text-shadow: 2px 2px 0px rgb(0, 0, 0);
@@ -906,7 +911,7 @@ a#dash-add-panel {
 
 .panel-title i, .panel-title img {
   position: absolute;
-  font-size: 40px;
+  font-size: 32px;
   left: 0;
   top: -43px;
   color: #33b5e5;
@@ -1206,11 +1211,22 @@ a#dash-add-panel {
 }
 
 .panel-in-footer {
-  margin-bottom: 15px;
+  margin-bottom: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
   border: 10px solid #33b5e5;
   border-width: 0 0 10px;
+}
+
+.social-box {
+  text-align: center;
+  padding: 6px 0;
+}
+
+.social-icon img {
+  width: 47px;
+  height: auto;
+  margin: 0 4px;
 }
 
 .panel-in-footer h1 {
@@ -1222,6 +1238,10 @@ a#dash-add-panel {
   font-size: 27px;
 }
 
+.panel-in-footer .btn {
+  margin: 5px 0;
+}
+
 .panel-in-footer .panel-body .stat-pair {
   overflow: auto;
 }
@@ -1231,13 +1251,14 @@ a#dash-add-panel {
 }
 
 .panel-in-footer .panel-body .stat-pair, .donate-address {
-  padding: 2px 0;
-  margin: 6px 0 0;
+  margin: 5px 0 0;
 }
 
 .donate-address {
+  padding: 2px 0;
   border-bottom: 1px solid #444;
   text-align:left;
+  font-size: 12px;
 }
 
 .panel-in-footer .panel-body .stat-pair-qr .stat-label .donate-address:last-child {
@@ -1453,16 +1474,28 @@ a#dash-add-panel {
 }
 
 /* X-Small devices (small tablets, 680px and up) */
-@media (min-width: 680px) {
+@media (min-width: 480px) {
 
   .panel-footer h3 {
     margin: 8px 0 0;
+  }
+  
+  a.navbar-brand img {
+    height: 68px;
+  }
+
+  .donate-address {
+    font-size: 15px;
   }
 
 }  
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+
+  .login-container .panel-footer p {
+    font-size: 22px;
+  }
 
   .modal-dialog {
     margin: 40px auto;
@@ -1512,7 +1545,7 @@ a#dash-add-panel {
   }
   
   a.navbar-brand img {
-    height: 56px;
+    height: 59px;
   }
 
   .navbar .container {
@@ -1681,6 +1714,7 @@ a#dash-add-panel {
 
   .panel-in-footer {
     margin-bottom: 0px;
+    text-align: center;
   }
 
   .panel-in-footer h1 {
@@ -1725,10 +1759,6 @@ a#dash-add-panel {
     font-size: 30px;
   }
   
-  .panel-in-footer .panel-body .stat-pair {
-    min-height: 213px;
-  }
-
   .panel-in-footer .panel-body .stat-pair-qr .stat-label {
     height: auto;
     min-height: 147px;
@@ -1755,6 +1785,10 @@ a#dash-add-panel {
     display: table-cell;
   }
   
+  .donate-address {
+    font-size: 20px;
+  }
+
   .panel-overview .panel-footer .pull-left {
     display: none;
   }

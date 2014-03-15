@@ -7,7 +7,7 @@
     
     <link rel="shortcut icon" href="favicon.png">
     
-    <title>RigWatch - Login</title>
+    <title>cryptoGlance - Login</title>
     
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -15,8 +15,8 @@
     <link href="css/whhg.css" rel="stylesheet">
     <!-- jQuery PrettyCheckable by arthurgouveia (http://arthurgouveia.com/prettyCheckable/) styles -->
     <link href="css/prettyCheckable.css" rel="stylesheet">
-    <!-- Custom RigWatch styles -->
-    <link href="css/rigwatch-base.css" rel="stylesheet">
+    <!-- Custom cryptoGlance styles -->
+    <link href="css/cryptoglance-base.css" rel="stylesheet">
       
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

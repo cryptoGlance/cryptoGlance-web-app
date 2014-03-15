@@ -6,7 +6,7 @@
          
       <div id="settings-wrap" class="container sub-nav full-content">
         <div id="readme" class="panel panel-default no-icon">
-          <h1>RigWatch Settings</h1>
+          <h1>cryptoGlance Settings</h1>
           <div class="panel-heading">
               <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> General</h2>
           </div>
@@ -90,7 +90,7 @@
                   <label for="inputYourEmail" class="col-sm-4 control-label">E-mail Address:</label>
                   <div class="col-sm-6">
                     <input type="email" class="form-control" id="inputYourEmail" placeholder="your e-mail address">
-                    <span class="help-block"><i class="icon icon-info-sign"></i> Comma-separated list of e-mail addresses above where RigWatch will send alerts.</span>
+                    <span class="help-block"><i class="icon icon-info-sign"></i> Comma-separated list of e-mail addresses above where cryptoGlance will send alerts.</span>
                   </div>
                 </div>
               </fieldset>
@@ -99,7 +99,7 @@
                 <div class="form-group">
                   <label for="inputSendingAddress" class="col-sm-4 control-label">From Address:</label>
                   <div class="col-sm-6">
-                    <input type="email" class="form-control" id="inputSendingAddress" placeholder="rigwatch-alerts@my.domain">
+                    <input type="email" class="form-control" id="inputSendingAddress" placeholder="alerts@my.domain">
                     <span class="help-block"><i class="icon icon-info-sign"></i> Notifications will be sent FROM this address (can be anything most times).</span>
                   </div>
                 </div>
@@ -155,7 +155,7 @@
               <fieldset>
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-6">
-                    <span class="help-block"><i class="icon icon-info-sign"></i> RigWatch cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.</span>
+                    <span class="help-block"><i class="icon icon-info-sign"></i> cryptoGlance cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.</span>
                   </div>
                   <label class="col-sm-2 control-label"><button type="submit" class="btn btn-lg btn-success"><i class="icon icon-programclose"></i> Clear Cookies</button></label>
                 </div>

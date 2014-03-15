@@ -26,7 +26,7 @@
                <span class="sr-only">Toggle navigation</span>
                <i class="icon icon-dropmenu"></i>
                </button>
-               <a class="navbar-brand" href="index.php"><img src="images/rigwatch-logo-landscape-shadow.png" alt="RigWatch" /></a>
+               <a class="navbar-brand" href="index.php"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav">
@@ -41,7 +41,7 @@
                            <span class="width-reading">90%</span> <!-- width-reading -->
                            <div id="slider"></div> <!-- the Slider -->
                         </li>
-                        <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> RigWatch Settings</a></li>
+                        <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
                         <div class="divider"></div> <!-- the Slider -->
                         <?php require_once("includes/menu-active_panels.php"); ?>
                      </ul>
@@ -50,12 +50,12 @@
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-question-sign mobile-icon"></i> Help <b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-header">Learn more</li>
-                        <li><a href="help.php"><i class="icon icon-question-sign"></i> Help using RigWatch</a></li>
-                        <li><a href="https://github.com/scar45/rigwatch" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
+                        <li><a href="help.php"><i class="icon icon-question-sign"></i> Help using cryptoGlance</a></li>
+                        <li><a href="https://github.com/scar45/cryptoglance" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">RigWatch Discussion</li>
+                        <li class="dropdown-header">cryptoGlance Discussion</li>
                         <li><a href="help.php" rel="external"><i class="icon icon-postalt"></i> Bitcointalk.org Forum Thread</a></li>
-                        <li><a href="http://reddit.com/r/rigwatch" rel="external"><i class="icon icon-reddit"></i> /r/RigWatch Subreddit</a></li>
+                        <li><a href="http://reddit.com/r/cryptoglance" rel="external"><i class="icon icon-reddit"></i> /r/cryptoGlance Subreddit</a></li>
                      </ul>
                   </li>
                   <li id="nav-login-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>
@@ -63,7 +63,7 @@
                </ul>
             </div>
             <div id="alert-update" class="top-alert">
-               <span><b>Update available!</b> You are running <b class="current"></b>, but the latest release is <b class="latest"></b>.</span> <a href="https://github.com/scar45/rigWatch/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a class="alert-dismiss" href="#"><i class="icon icon-buttonx"></i></a>
+               <span><b>Update available!</b> You are running <b class="current"></b>, but the latest release is <b class="latest"></b>.</span> <a href="https://github.com/scar45/cryptoglance/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a class="alert-dismiss" href="#"><i class="icon icon-buttonx"></i></a>
             </div>
             <!--/.nav-collapse -->
          </div>
