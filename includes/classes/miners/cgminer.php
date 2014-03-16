@@ -32,7 +32,7 @@ class Class_Miners_Cgminer {
         } else {
             fwrite($socket, $cmd);
             while (!feof($socket)) {
-                $response .= fgets($socket, 1024);
+                $response .= fgets($socket);
             }
             fclose($socket);
         }
@@ -54,8 +54,8 @@ class Class_Miners_Cgminer {
             'id' => $devData['GPU'],
             'enabled' => $devData['Enabled'],
             'health' => $devData['Status'],
-            'hashrate_avg' => $devData['MHS av'],
-            'hashrate_5s' => $devData['MHS 5s'],
+            'hashrate_avg' => round($devData['MHS av'], 4),
+            'hashrate_5s' => round($devData['MHS 5s'], 4),
             'intensity' => $devData['Intensity'],
             'temperature' => $devData['Temperature'],
             'fan_speed' => $devData['Fan Speed'] . ' RPM',
@@ -106,8 +106,8 @@ class Class_Miners_Cgminer {
         $data = array(
             'type' => 'cgminer',
             'uptime' => $upTime,
-            'hashrate_avg' => $summaryData['MHS av'],
-            'hashrate_5s' => $summaryData['MHS 5s'],
+            'hashrate_avg' => round($summaryData['MHS av'], 4),
+            'hashrate_5s' => round($summaryData['MHS 5s'], 4),
             'blocks_found' => $summaryData['Found Blocks'],
             'accepted' => $summaryData['Accepted'],
             'rejected' => $summaryData['Rejected'],

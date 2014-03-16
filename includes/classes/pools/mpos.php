@@ -13,6 +13,7 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
     protected $_actions = array(
         'public',
         'getpoolstatus',
+        'getblockstats',
         'getuserbalance',
         'getuserstatus',
     );
@@ -39,6 +40,8 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
                 
                 if ($action == 'getpoolstatus') {
                     $poolData[$action] = $poolData[$action]['getpoolstatus']['data'];
+                } else if ($action == 'getblockstats') {
+                    $poolData[$action] = $poolData[$action]['getblockstats']['data'];
                 } else if ($action == 'getuserbalance') {
                     $poolData[$action] = $poolData[$action]['getuserbalance']['data'];
                 } else if ($action == 'getuserstatus') {
@@ -83,8 +86,8 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
             $data['%_of_expected'] = round(($poolData['public']['shares_this_round'] / $poolData['getpoolstatus']['estshares']) * 100, 2) . '%';
             $data['current_block'] = $poolData['getpoolstatus']['currentnetworkblock'];
             $data['last_block'] = $poolData['getpoolstatus']['lastblock'];
-            $data['blocks_pool_found'] = 'TODO';
-            $data['next_(est.)_difficulty'] = $poolData['getpoolstatus']['nextnetworkblock'];
+            $data['blocks_pool_found'] = $poolData['getblockstats']['TotalValid'];
+//            $data['next_(est.)_difficulty'] = $poolData['getblockstats']['getpoolstatus']['nextnetworkblock'];
             $data['url'] = $this->_apiURL;
             $data['username'] = $poolData['getuserstatus']['username'];
             

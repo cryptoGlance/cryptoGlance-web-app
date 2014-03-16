@@ -1,12 +1,12 @@
 <?php
 require_once('classes/filehandler.php');
-class RigWatch {
+class CryptoGlance {
 
     private $_configTypes = array(
         'currency',
         'miners',
         'pools',
-        'rigwatch',
+        'cryptoglance',
         'wallets',
     );
     

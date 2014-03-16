@@ -11,6 +11,18 @@ if (!empty($_SESSION['login_string'])) {
     $loginObj = new Login();
     if ($loginObj->login(trim($_POST['username']), trim($_POST['password'])) !== FALSE) {
         $_SESSION['login_string'] = hash('sha512', $_POST['password'] . $_SERVER['HTTP_USER_AGENT']);
+        
+        // Forces use of cookies
+        if (ini_set('session.use_only_cookies', 1) === FALSE) {
+            die('Error: We require that sessions only use cookies. Consult your PHP config to resolve this issue.');
+        }
+        
+        // Gets cookies params
+        $cookieParams = session_get_cookie_params();
+        session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], false, true);
+        
+        session_regenerate_id(); // This hangs sometimes and we dont know why...
+        
         header('Location: index.php');
         exit();
     } else {
@@ -74,6 +86,6 @@ include("includes/login-header.php");
       <script src="js/jquery.cookie.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/prettyCheckable.min.js"></script>
-      <script src="js/rigwatch-ui.js"></script>
+      <script src="js/cryptoglance-ui.js"></script>
    </body>
 </html>

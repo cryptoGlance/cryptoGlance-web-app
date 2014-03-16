@@ -362,7 +362,7 @@ $(document).ready(function() {
   // Dismiss Update Alert
   $('.alert-dismiss', '#alert-update').click(function(e) {
     e.preventDefault();
-    $.cookie('rigwatch_version', true, { expires: 3, path: '/' });
+    $.cookie('cryptoglance_version', true, { expires: 3, path: '/' });
     $('#alert-update').slideUp('fast');
   });
   

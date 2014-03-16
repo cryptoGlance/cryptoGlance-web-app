@@ -1,4 +1,4 @@
-var ajaxCall;
+var ajaxCall = ['all', 'rig', 'pool', 'wallet'];
 
 ajaxUpdateCall('all');
 
@@ -18,11 +18,11 @@ function ajaxUpdateCall(action, actionAttr) {
         queryUrl = action + '&attr=' + actionAttr;
     }
     
-    if (typeof ajaxCall == 'object') {
-        ajaxCall.abort();
+    if (typeof ajaxCall[action] == 'object') {
+        ajaxCall[action].abort();
     }
     
-    ajaxCall = $.ajax({
+    ajaxCall[action] = $.ajax({
         type: 'post',
         url: 'ajax.php?type=update&action=' + queryUrl,
         dataType: 'json'
@@ -43,12 +43,12 @@ function ajaxUpdateCall(action, actionAttr) {
 // TODO: Bug - when the Tools --> Active Panel link is clicked, it animates down, but then 'locks' the user there when they try to scroll
 // possibly caused by where this function is (just below) and the fact that is also exists in 'rigwatch-ui.js'
 
-$('.anchor-offset').click(function() {
-    var target = $(this).attr('href');
-    $('body').scrollTo(target, 750, { margin: true, offset: -120 });
-});
-
-$('.anchor').click(function() {
-    var target = $(this).attr('href');
-    $('body').scrollTo(target, 750, { margin: true });
-});
+//$('.anchor-offset').click(function() {
+//    var target = $(this).attr('href');
+//    $('body').scrollTo(target, 750, { margin: true, offset: -120 });
+//});
+//
+//$('.anchor').click(function() {
+//    var target = $(this).attr('href');
+//    $('body').scrollTo(target, 750, { margin: true });
+//});

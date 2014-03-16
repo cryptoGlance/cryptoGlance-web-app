@@ -224,7 +224,7 @@ function updateRigs (data) {
             } else if (devHeatWarning <= dev.temperature) {
                 status = 'orange';
                 icon = 'fire';
-                if (rigIcon != 'danger' && rigIcon != 'warning-sign') {
+                if (rigIcon != 'danger' && rigIcon != 'warning-sign' && rigIcon != 'hot') {
                     rigStatus = 'orange';
                     rigIcon = 'fire';
                 }

@@ -18,8 +18,8 @@ include("includes/header.php");
    <div id="dashboard-wrap" class="container sub-nav">
    
     <?php
-    require_once('includes/rigwatch.php');
-    $rigWatch = new RigWatch();
+    require_once('includes/cryptoglance.php');
+    $rigWatch = new CryptoGlance();
     
     // Overview
     if (count($rigWatch->getMiners()) > 0) {
