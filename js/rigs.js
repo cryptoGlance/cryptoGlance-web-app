@@ -59,7 +59,7 @@ $('.btn-manage-rig').click(function() {
 $('.btn-switchpool', '#manageRig').click(function() {
     var minerId = $('#manageRig').attr('data-attr');
     var switchPoolModal = $('#switchPool .checkbox');
-    $(switchPoolModal).html('');
+    $(switchPoolModal).html('<img src="images/ajax-loader.gif" alt="Loading..." class="ajax-loader" />');
     $.ajax({
         type: 'post',
         url: 'ajax.php?type=miners&action=get-pools&miner=' + minerId,
@@ -77,6 +77,8 @@ $('.btn-switchpool', '#manageRig').click(function() {
                     $('input:radio[id=rig'+ minerId +'-pool'+ k.id +']', switchPoolModal).prop('checked', true);
                 }
             });
+            
+            $(switchPoolModal).find('.ajax-loader').remove();
             
         }
     });

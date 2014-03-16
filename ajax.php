@@ -1,7 +1,8 @@
 <?php
 require_once('includes/inc.php');
 
-if (empty($_SESSION['login_string'])) {
+if (!$_SESSION['login_string']) {
+    http_response_code(401); // 401 = Unauthorized
     exit();
 }
 

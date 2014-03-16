@@ -396,6 +396,11 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   display: none;
 }
 
+.modal-body .checkbox .ajax-loader {
+    display: block;
+    margin: 0 auto;
+}
+
 .modal-body .checkbox label {
   display: block;
 }

@@ -1,4 +1,15 @@
-<?php require_once("includes/header.php"); ?>
+<?php
+include('includes/inc.php');
+
+if (!$_SESSION['login_string']) {
+    header('Location: login.php');
+    exit();
+}
+
+$jsArray = array('settings');
+
+require_once("includes/header.php");
+?>
        
 <!-- ### Below is the Settings page which contains common/site-wide preferences
       
@@ -157,7 +168,7 @@
                   <div class="col-sm-offset-2 col-sm-6">
                     <span class="help-block"><i class="icon icon-info-sign"></i> cryptoGlance cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.</span>
                   </div>
-                  <label class="col-sm-2 control-label"><button type="submit" class="btn btn-lg btn-success"><i class="icon icon-programclose"></i> Clear Cookies</button></label>
+                  <label class="col-sm-2 control-label"><button name="clearCookies" class="btn btn-lg btn-success"><i class="icon icon-programclose"></i> Clear Cookies</button></label>
                 </div>
               </fieldset>
             </form>

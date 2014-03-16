@@ -21,7 +21,11 @@ $html = Markdown::defaultTransform($text);
 
 ?>
 
-<?php require_once("includes/header.php"); ?>
+<?php
+$jsArray = array();
+
+require_once("includes/header.php");
+?>
        
 <!-- ### Below is the Settings page which contains common/site-wide preferences
       

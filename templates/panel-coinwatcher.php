@@ -166,7 +166,6 @@
             <div class="stat-label">
                Source:
                <select class="form-control">
-                  <option value="mtgox">Mt.Gox</option>
                   <option value="vircurex">Vircurex</option>
                   <option value="btce" selected>BTC-E</option>
                </select>

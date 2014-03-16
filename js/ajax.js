@@ -25,7 +25,12 @@ function ajaxUpdateCall(action, actionAttr) {
     ajaxCall[action] = $.ajax({
         type: 'post',
         url: 'ajax.php?type=update&action=' + queryUrl,
-        dataType: 'json'
+        dataType: 'json',
+        statusCode: {
+            401: function() {
+                window.location.assign('login.php');
+            }
+        }
     }).done(function(data) {
         if (typeof data.rigs != 'undefined') {
             updateRigs(data.rigs);
