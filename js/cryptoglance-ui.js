@@ -85,6 +85,23 @@ function restoreDashboard() {
 //    }
 // }
 
+// Smooth scroll to active rig from the Overview panel
+// TODO: Bug - when the Tools --> Active Panel link is clicked, it animates down, but then 'locks' the user there when they try to scroll
+// possibly caused by where this function is (just below) and the fact that is also exists in 'rigwatch-ui.js'
+
+$(function() {
+    $('#overview').on('click', '.anchor-offset', function(e) {
+        e.preventDefault();
+        var target = $(this).attr('href');
+        $('body').scrollTo(target, 750, { margin: true, offset: -120 });
+    });
+    
+//    $('.anchor').click(function() {
+//        var target = $(this).attr('href');
+//        $('body').scrollTo(target, 750, { margin: true });
+//    });
+});
+
 function callAlert() {
     $(function(){
 
