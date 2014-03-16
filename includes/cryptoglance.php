@@ -29,6 +29,37 @@ class CryptoGlance {
     public function getWallets() {
         return $this->_configs['wallets'];
     }
+    
+    public function getSettings() {
+        return $this->_configs['cryptoglance'];
+    }
+    
+    public function saveSettings($data) {
+        $fh = $fileHandler = new Class_FileHandler('configs/cryptoglance.json');
+        $settings = json_decode($fh->read(), true);
+        
+        if ($data['general']) {
+            $settings['general'] = array(
+                'temps' => array(
+                    'warning' => $data['general']['tempWarning'],
+                    'danger' => $data['general']['tempDanger'],
+                ),
+                'updateTimes' => array(
+                    'rig' => $data['general']['rigUpdateTime']*1000,
+                    'pool' => $data['general']['poolUpdateTime']*1000,
+                    'wallet' => $data['general']['walletUpdateTime']*1000,
+                )
+            );
+        }
+        
+        if ($data['email']) {
+        
+        }
+        
+        $this->_configs['cryptoglance'] = $settings;
+        
+        $fh->write(json_encode($settings));
+    }
 
 }
 ?>

@@ -6,7 +6,6 @@
 <script type="text/javascript" src="js/messenger.min.js"></script>
 <script type="text/javascript" src="js/messenger-theme-flat.js"></script>
 <script type="text/javascript" src="js/prettyCheckable.min.js"></script>
-<script type="text/javascript" src="js/ajax.js"></script> 
 <script type="text/javascript" src="js/cryptoglance-ui.js"></script>
 <script type="text/javascript" src="js/version.js"></script> 
 <?php

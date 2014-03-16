@@ -28,13 +28,34 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    
+    <?php
+    if (isset($cryptoGlance)) {
+        $settings = $cryptoGlance->getSettings();
+        
+    } else {
+        $settings = array(
+            'general' => array(
+                'temps' => array(
+                   'warning' => 75,            
+                   'danger' => 85,            
+                ),
+                'updateTimes' => array(
+                    'rig' => 2,
+                    'pool' => 120,
+                    'wallet' => 600,
+                ),
+            )
+        );
+    }
+    ?>
     <script type="text/javascript">
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
-        var devHeatWarning = 80;
-        var devHeatDanger = 85;
+        var devHeatWarning = <?php echo $settings['general']['temps']['warning'] ?>;
+        var devHeatDanger = <?php echo $settings['general']['temps']['danger'] ?>;
         var devHWWarning = 5;
-        var rigUpdateTime = 2500;
-        var poolUpdateTime = 7200;
-        var walletUpdateTime = 18000;
+        var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig']*1000 ?>;
+        var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool']*1000 ?>;
+        var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet']*1000 ?>;
     </script>     
 </head>

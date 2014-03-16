@@ -6,7 +6,11 @@ if (!$_SESSION['login_string']) {
     exit();
 }
 
+require_once('includes/cryptoglance.php');
+$cryptoGlance = new CryptoGlance();
+
 $jsArray = array(
+    'ajax',
     'rigs',
     'pools',
     'wallets',
@@ -18,15 +22,13 @@ include("includes/header.php");
    <div id="dashboard-wrap" class="container sub-nav">
    
     <?php
-    require_once('includes/cryptoglance.php');
-    $rigWatch = new CryptoGlance();
     
     // Overview
-    if (count($rigWatch->getMiners()) > 0) {
+    if (count($cryptoGlance->getMiners()) > 0) {
         include("templates/panel-overview.php");
     
         // Miners
-        foreach ($rigWatch->getMiners() as $minerId => $miner) {
+        foreach ($cryptoGlance->getMiners() as $minerId => $miner) {
             $minerId++; // Doing this because minerID 0 means all devices in ajax calls
             include("templates/panel-rig.php");
         }
@@ -37,7 +39,7 @@ include("includes/header.php");
     ?>
 
       <?php
-      foreach ($rigWatch->getPools() as $poolId => $pool) {
+      foreach ($cryptoGlance->getPools() as $poolId => $pool) {
         $poolId++;
         include("templates/panel-pool.php");
       }
@@ -50,7 +52,7 @@ include("includes/header.php");
       <?php //require_once("templates/panel-coinwatcher.php"); ?>
 
       <?php
-      if (count($rigWatch->getWallets()) > 0) {
+      if (count($cryptoGlance->getWallets()) > 0) {
         include("templates/panel-wallet.php");
       }
       ?>

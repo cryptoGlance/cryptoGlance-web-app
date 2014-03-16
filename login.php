@@ -43,7 +43,7 @@ include("includes/login-header.php");
                   <?php
                   }
                   ?>
-                  <form action="" method="POST" class="form-horizontal" role="form">
+                  <form method="POST" class="form-horizontal" role="form">
                     <div class="form-group">
                       <label for="username" class="col-sm-offset-1 col-sm-3 control-label"><i class="icon icon-user"></i></label>
                       <div class="col-sm-4">
