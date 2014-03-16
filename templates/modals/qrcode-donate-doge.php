@@ -7,8 +7,8 @@
             <h2><i class="icon icon-value-coins"></i> Donate Dogecoin</h2>
          </div>
          <div class="modal-body">
-            <img src="images/qr-donate-doge.png" alt="Dogecoin QRCode (Rigwatch Donations)" />
-            <p>The RigWatch team greatly appreciates any amount of Dogecoin that you are able to donate. It really helps us to continue development!</p>
+            <img src="images/qr-donate-doge.png" alt="Dogecoin QRCode (CryptoGlance Donations)" />
+            <p>The CryptoGlance team greatly appreciates any amount of Dogecoin that you are able to donate. It really helps us to continue development!</p>
             <h3>Our Dogecoin Address</h3>
             <p class="modal-donate-address">D8bcNHYbkBDqwkvZKKpfu8oAyzqezJ5RvW</p>
          </div>

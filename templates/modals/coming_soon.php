@@ -7,7 +7,7 @@
             <h2><i class="icon icon-defragment"></i> Coming Soon!</h2>
          </div>
          <div class="modal-body">
-            <b>This feature/function is currently in development.</b><br>Please check for updates to RigWatch, otherwise it will be included once it's ready.
+            <b>This feature/function is currently in development.</b><br>Please check for updates to CryptoGlance, otherwise it will be included once it's ready.
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-time"></i> OK, I'll be patient.</button>
