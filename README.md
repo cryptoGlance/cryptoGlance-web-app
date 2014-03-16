@@ -1,6 +1,6 @@
 <br>
 
-_[Skip to FAQ](#faq)_ &bull; <a href="http://rigwat.ch" rel="external">http://rigwat.ch</a>
+_[Skip to FAQ](#faq)_ &bull; <a href="http://cryptoglance.info/" rel="external">http://cryptoglance.info/</a>
 
 ----
 
