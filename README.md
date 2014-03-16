@@ -4,7 +4,7 @@ _[Skip to FAQ](#faq)_ &bull; <a href="http://rigwat.ch" rel="external">http://ri
 
 ----
 
-## What is RigWatch?
+## What is CryptoGlance?
 
 Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other APIs, all in one responsive UI. Protected with a login, but also offers a read-only/public view (if desired).
 
@@ -37,7 +37,7 @@ Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other API
 
 #### Step-by-step Instructions:
 
-**Advanced Users:** Simply setup a new PHP instance and point it to the root folder of the RigWatch source/download. Ensure that the **php_sockets** extension is enabled, and you should be good to go.
+**Advanced Users:** Simply setup a new PHP instance and point it to the root folder of the CryptoGlance source/download. Ensure that the **php_sockets** extension is enabled, and you should be good to go.
 
 **Beginner Users:**
 
@@ -62,21 +62,21 @@ You'll want to ensure you're running cgminer with API-Access enabled, here's an 
 
 FAQ:
 --
-**Q. I am (understandably) careful with my crypto-currency. Can I trust RigWatch?**
+**Q. I am (understandably) careful with my crypto-currency. Can I trust CryptoGlance?**
 
-A. Most definitely! The code is completely open source, and you run RigWatch on your own web server. No private keys are requested, nor passwords stored, with exception to API keys, but they are excluded from source.
+A. Most definitely! The code is completely open source, and you run CryptoGlance on your own web server. No private keys are requested, nor passwords stored, with exception to API keys, but they are excluded from source.
 
 ---
 
-**Q. How do I backup my RigWatch settings?**
+**Q. How do I backup my CryptoGlance settings?**
 
 A. Just look for the /user_data folder, and copy that somewhere safe.
 
 ---
 
-**Q. I cannot get RigWatch to run. What can I check?**
+**Q. I cannot get CryptoGlance to run. What can I check?**
 
-A. Getting RigWatch setup requires a tiny bit of knowledge relating to web servers that host PHP sites. Most often you can search for any specific errors you see, or try the following:
+A. Getting CryptoGlance setup requires a tiny bit of knowledge relating to web servers that host PHP sites. Most often you can search for any specific errors you see, or try the following:
 
 - Ensure that the **php_sockets** extension is loaded via **php.ini**
 - Configure any firewalls/anti-virus to allow for your web server traffic (usually port 80)
@@ -85,7 +85,7 @@ A. Getting RigWatch setup requires a tiny bit of knowledge relating to web serve
 
 ---
 
-**Q. The RigWatch site loads, but no data or stats are displayed. Why?**
+**Q. The CryptoGlance site loads, but no data or stats are displayed. Why?**
 
 A. Your mining utility (cgminer / bfgminer / cudaminer / etc.) requires that API access is allowed. Please see the installation section above for the proper settings to use in your .conf or .bat files.
 
@@ -93,7 +93,7 @@ A. Your mining utility (cgminer / bfgminer / cudaminer / etc.) requires that API
 
 **Q. Why is my wallet balance 0?**
 
-A. Double-check that you've entered information accurately. Note that RigWatch will never ask for private keys or any other sensitive information.
+A. Double-check that you've entered information accurately. Note that CryptoGlance will never ask for private keys or any other sensitive information.
 
 ## We owe thanks to the following projects:
 
@@ -106,7 +106,7 @@ Hope you enjoy what we're trying to do here, and thanks to all of the other simi
 
 ## Our Donation Addresses:
 
-We've put a lot of our time and effort into RigWatch, and it hasn't been easy. We also wanted to make this tool free to everyone, however donations keep our fire lit, and more features/improvements coming out. If you like what we've built, or at least appreciate our efforts, please send a donation to any of the following addresses:
+We've put a lot of our time and effort into CryptoGlance, and it hasn't been easy. We also wanted to make this tool free to everyone, however donations keep our fire lit, and more features/improvements coming out. If you like what we've built, or at least appreciate our efforts, please send a donation to any of the following addresses:
 
 **Bitcoin** == 12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE
 
