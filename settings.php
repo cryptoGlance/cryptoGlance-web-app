@@ -47,7 +47,6 @@ if (isset($_POST['general'])) {
 
 $settings = $cryptoGlance->getSettings();
 
-
 $jsArray = array('settings');
 
 require_once("includes/header.php");
@@ -89,15 +88,15 @@ require_once("includes/header.php");
                   <label class="col-sm-5 control-label">Rigs:</label>
                   <div class="col-sm-3 refresh-interval">
                     <select class="form-control" name="rigUpdateTime">
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 2) ? 'selected="selected"' : '' ?> value="2">2 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 3) ? 'selected="selected"' : '' ?> value="3">3 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 5) ? 'selected="selected"' : '' ?> value="5">5 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 10) ? 'selected="selected"' : '' ?> value="10">10 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 30) ? 'selected="selected"' : '' ?> value="30">30 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 60) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 120) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 300) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 600) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 2000) ? 'selected="selected"' : '' ?> value="2">2 seconds</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 3000) ? 'selected="selected"' : '' ?> value="3">3 seconds</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 5000) ? 'selected="selected"' : '' ?> value="5">5 seconds</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 10000) ? 'selected="selected"' : '' ?> value="10">10 seconds</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 30000) ? 'selected="selected"' : '' ?> value="30">30 seconds</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 60000) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
                     </select>
                   </div>
                 </div>
@@ -105,9 +104,9 @@ require_once("includes/header.php");
                   <label class="col-sm-5 control-label">Pools:</label>
                   <div class="col-sm-3 refresh-interval">
                     <select class="form-control" name="poolUpdateTime">
-                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 120) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 300) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 600) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
                     </select>
                   </div>
                 </div>
@@ -115,11 +114,11 @@ require_once("includes/header.php");
                   <label class="col-sm-5 control-label">Wallets:</label>
                   <div class="col-sm-3 refresh-interval">
                     <select class="form-control" name="walletUpdateTime">
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 600) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 1800) ? 'selected="selected"' : '' ?> value="1800">30 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 2700) ? 'selected="selected"' : '' ?> value="2700">45 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 3600) ? 'selected="selected"' : '' ?> value="3600">1 hour</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 7200) ? 'selected="selected"' : '' ?> value="7200">2 hours</option>
+                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 1800000) ? 'selected="selected"' : '' ?> value="1800">30 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 2700000) ? 'selected="selected"' : '' ?> value="2700">45 minutes</option>
+                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 3600000) ? 'selected="selected"' : '' ?> value="3600">1 hour</option>
+                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 7200000) ? 'selected="selected"' : '' ?> value="7200">2 hours</option>
                     </select>
                   </div>
                 </div>
