@@ -305,6 +305,6 @@ function updateRigs (data) {
     } else {
         overallHashrateMetric = 'MH/s';
     }
-    $('#total-hashrate').html(overallHashrate.toFixed(2) + ' <small>'+ overallHashrateMetric +'</small>');
+    $('.total-hashrate').html(overallHashrate.toFixed(2) + ' <small>'+ overallHashrateMetric +'</small>');
     
 }

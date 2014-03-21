@@ -30,7 +30,10 @@
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav">
-                  <li><a id="total-hashrate">0 <small>MH/s</small></a></li>
+                  
+                  <!-- TODO: ONLY show the total-hashrate + side-width-slider when on index.php / Dashboard -->
+                  
+                  <li><a class="total-hashrate">0 <small>MH/s</small></a></li>
                   <li class="active topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a></li>
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsthree-gears mobile-icon"></i> Tools <b class="caret"></b></a>
