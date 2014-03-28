@@ -1,6 +1,6 @@
 // Update call by seconds
 setInterval(function() {
-    rigUpdateCall('rig');
+    ajaxUpdateCall('rig');
 }, rigUpdateTime);
 
 // Update by Long Poll method... Bad idea. Those who like to explore can experiment with this. ONLY USE THIS ON YOUR RIGS!
@@ -17,29 +17,6 @@ setInterval(function() {
 //        timeout: rigUpdateTime
 //    });
 //})();
-
-// Update json data
-function rigUpdateCall(action, actionAttr) {
-    var queryUrl = action;
-    if (typeof actionAttr != 'undefined') {
-        queryUrl = action + '&attr=' + actionAttr;
-    }
-    
-    if (typeof ajaxCall == 'object') {
-        ajaxCall.abort();
-    }
-    
-    ajaxCall = $.ajax({
-        type: 'post',
-        url: 'ajax.php?type=update&action=' + queryUrl,
-        dataType: 'json'
-    }).done(function(data) {
-        if (typeof data.rigs != 'undefined') {
-            updateRigs(data.rigs);
-        }
-    });
-}
-
 
 // Manage Rig
 $('.btn-manage-rig').click(function() {
