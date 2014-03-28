@@ -1,6 +1,6 @@
 // Update call by seconds
 setInterval(function() {
-    ajaxUpdateCall('rig');
+    rigUpdateCall('rig');
 }, rigUpdateTime);
 
 // Update by Long Poll method... Bad idea. Those who like to explore can experiment with this. ONLY USE THIS ON YOUR RIGS!
@@ -29,21 +29,15 @@ function rigUpdateCall(action, actionAttr) {
         ajaxCall.abort();
     }
     
-//    ajaxCall = $.ajax({
-//        type: 'post',
-//        url: 'ajax.php?type=update&action=' + queryUrl,
-//        dataType: 'json'
-//    }).done(function(data) {
-//        if (typeof data.rigs != 'undefined') {
-//            updateRigs(data.rigs);
-//        }
-//        if (typeof data.pools != 'undefined') {
-//            updatePools(data.pools);
-//        }
-//        if (typeof data.wallets != 'undefined') {
-//            updateWallets(data.wallets);
-//        }
-//    });
+    ajaxCall = $.ajax({
+        type: 'post',
+        url: 'ajax.php?type=update&action=' + queryUrl,
+        dataType: 'json'
+    }).done(function(data) {
+        if (typeof data.rigs != 'undefined') {
+            updateRigs(data.rigs);
+        }
+    });
 }
 
 
@@ -156,6 +150,7 @@ function updateRigs(data) {
         $(rigNavElm).append('<li><a class="blue" href="#rig-'+ rigId +'-summary" data-toggle="tab">Summary <i class="icon icon-dotlist"></i></a></li>');
         var summaryContentTab = $(rigTabContentElm).find('#rig-' + rigId + '-summary').find('.panel-body-summary');
         $(summaryContentTab).find('div').remove();
+        $(summaryContentTab).find('img').remove();
         var totalShares = rig.summary.accepted + rig.summary.rejected + rig.summary.stale;
         if (rig.summary.hashrate_5s == 0) {
             rig.summary.hashrate_5s = rig.summary.hashrate_avg;
@@ -315,6 +310,7 @@ function updateRigs(data) {
             rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
         }
         $(overviewTable).append('<tr><td><i class="icon icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' '+ rigStatus +'">'+ $('h1', rigElm).html() +'</a></td><td>'+ rig.summary.hashrate_5s +'</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
+        $(summaryContentTabTable).show();
     });
     
     // Total amount of hash power

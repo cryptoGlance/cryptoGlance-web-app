@@ -10,8 +10,8 @@
       <h2 class="panel-title"><i class="icon icon-walletalt"></i> Balances</h2>
    </div>
    <div class="panel-body panel-body-addresses"></div>
-   <div class="panel-footer text-right">
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#manageWallets"><i class="icon icon-walletalt"></i> Add a Wallet</button>
-      <button type="button" class="btn btn-default btn-updater" data-type="wallet" data-attr="false"><i class="icon icon-refresh"></i> Update Now</button>
-   </div>
+<!--   <div class="panel-footer text-right" style="display: none;">-->
+<!--      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#manageWallets"><i class="icon icon-walletalt"></i> Add a Wallet</button>-->
+<!--      <button type="button" class="btn btn-default btn-updater" data-type="wallet" data-attr="false"><i class="icon icon-refresh"></i> Update Now</button>-->
+<!--   </div>-->
 </div>

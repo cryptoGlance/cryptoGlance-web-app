@@ -10,6 +10,8 @@
             <a class="new-panel-btn btn-switchpool" data-toggle="modal" data-target="#switchPool" data-backdrop="static" data-dismiss="modal"><i class="icon icon-refreshalt"></i>Switch Pool</a>
 <!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal"><i class="icon icon-eye-view"></i>View All Stats</a>-->
 <!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal"><i class="icon icon-edit"></i>Edit Details</a>-->
+<!--            <a class="new-panel-btn btn-pause" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-pause"></i>Pause Mining</a>-->
+<!--            <a class="new-panel-btn btn-play" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-play"></i>Continue Mining</a>-->
             <a class="new-panel-btn btn-restart" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-restart"></i>Restart Miner</a>
 <!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal"><i class="icon icon-selectionremove"></i>Remove Rig</a>-->
          </div>

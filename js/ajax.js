@@ -41,7 +41,7 @@ function ajaxUpdateCall(action, actionAttr) {
         if (typeof data.wallets != 'undefined') {
             updateWallets(data.wallets);
         }
-        initMasonry();
+//        initMasonry();
     });
 }
 

@@ -6,8 +6,8 @@
       <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
       <h2 class="panel-title"><i class="icon icon-communitysmall"></i> Pool Stats</h2>
    </div>
-   <div class="panel-body panel-body-stats"></div>
-   <div class="panel-footer text-right">
+   <div class="panel-body panel-body-stats"><img src="images/ajax-loader.gif" alt="loading" /></div>
+   <div class="panel-footer text-right" style="display: none;">
 <!--      <button type="button" class="btn btn-default btn-updater"><i class="icon icon-refresh"></i> Update Now</button>-->
 <!--      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPool" data-backdrop="static"><i class="icon icon-edit"></i> Edit Pool</button>-->
    </div>

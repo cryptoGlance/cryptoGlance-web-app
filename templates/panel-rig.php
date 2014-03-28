@@ -14,10 +14,8 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" id="rig-<?php echo $minerId?>-summary">
                 <div class="panel-body panel-body-stats">
-                    <div class="panel-body-summary">
-                    
-                    </div>
-                    <div class="table-summary table-responsive">
+                    <div class="panel-body-summary"><img src="images/ajax-loader.gif" alt="loading" /></div>
+                    <div class="table-summary table-responsive" style="display: none;">
                         <table class="table table-hover table-striped">
                             <thead></thead>
                             <tbody></tbody>
@@ -27,7 +25,7 @@
             </div>
         </div>
         
-        <div class="panel-footer">
+        <div class="panel-footer" style="display: none;">
             <div class="text-right">
                 <button type="button" class="btn btn-default btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-server"></i> Manage Rig</button>
     <!--            <button type="button" class="btn btn-default btn-updater" data-type="rig" data-attr="<?php echo $minerId?>"><i class="icon icon-refresh"></i> Update Now</button>-->
