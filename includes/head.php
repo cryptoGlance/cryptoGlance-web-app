@@ -54,8 +54,8 @@
         var devHeatWarning = <?php echo $settings['general']['temps']['warning'] ?>;
         var devHeatDanger = <?php echo $settings['general']['temps']['danger'] ?>;
         var devHWWarning = 5;
-        var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig']*1000 ?>;
-        var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool']*1000 ?>;
-        var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet']*1000 ?>;
+        var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig'] ?>;
+        var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool'] ?>;
+        var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet'] ?>;
     </script>     
 </head>

@@ -9,9 +9,6 @@
       </div>
       <div class="modal-body">
          <div class="new-panel-choices">
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addOverview" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-eye-view"></i>Overview
-            </a>
             <a class="new-panel-btn" data-toggle="modal" data-target="#addRig" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-server"></i>Rig
             </a>

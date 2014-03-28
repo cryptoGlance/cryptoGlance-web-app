@@ -11,6 +11,7 @@ class Class_Miners_Cgminer {
 
     // data
     protected $_summary;
+    protected $_type;
     protected $_devs = array();
     protected $_pools = array();
 
@@ -40,22 +41,16 @@ class Class_Miners_Cgminer {
         return str_replace("\0", '', $response); // It took 4+ hours to find this solution... JSON response has ASCII BOM at the begining. 
     }
     
-    private function getDevData($devId) {
-        if (is_null($devId)) {
-            return null;
-        }
-        
-        $devId = intval($devId); // simple sanitizing
+    private function getDataGPU($devId) {
         $devData = $this->_devs[$devId];
         
         $data = array();
-
         $data = array(
             'id' => $devData['GPU'],
             'enabled' => $devData['Enabled'],
             'health' => $devData['Status'],
-            'hashrate_avg' => round($devData['MHS av'], 4),
-            'hashrate_5s' => round($devData['MHS 5s'], 4),
+            'hashrate_avg' => round($devData['MHS av'], 3),
+            'hashrate_5s' => round($devData['MHS 5s'], 3),
             'intensity' => $devData['Intensity'],
             'temperature' => $devData['Temperature'],
             'fan_speed' => $devData['Fan Speed'] . ' RPM',
@@ -64,6 +59,26 @@ class Class_Miners_Cgminer {
             'memory_clock' => $devData['Memory Clock'],
             'gpu_voltage' => $devData['GPU Voltage']  . 'V',
             'powertune' => $devData['Powertune']  . '%',
+            'accepted' => $devData['Accepted'],
+            'rejected' => $devData['Rejected'],
+            'hw_errors' => $devData['Hardware Errors'],
+            'utility' => $devData['Utility'] . '/m',
+        );
+    
+        return $data;
+    }
+    
+    private function getDataASC($devId) {
+        $devData = $this->_devs[$devId];
+        
+        $data = array();
+        $data = array(
+            'id' => $devId,
+            'type' => 'ASC',
+            'enabled' => $devData['Enabled'],
+            'health' => $devData['Status'],
+            'hashrate_avg' => $devData['MHS av'],
+            'hashrate_5s' => $devData['MHS 5s'],
             'accepted' => $devData['Accepted'],
             'rejected' => $devData['Rejected'],
             'hw_errors' => $devData['Hardware Errors'],
@@ -104,10 +119,9 @@ class Class_Miners_Cgminer {
         }
         
         $data = array(
-            'type' => 'cgminer',
             'uptime' => $upTime,
-            'hashrate_avg' => round($summaryData['MHS av'], 4),
-            'hashrate_5s' => round($summaryData['MHS 5s'], 4),
+            'hashrate_avg' => round($summaryData['MHS av'], 3),
+            'hashrate_5s' => round($summaryData['MHS 5s'], 3),
             'blocks_found' => $summaryData['Found Blocks'],
             'accepted' => $summaryData['Accepted'],
             'rejected' => $summaryData['Rejected'],
@@ -123,14 +137,18 @@ class Class_Miners_Cgminer {
     private function getAllData() {
         $data = array();
         
-        // Get GPU Summary
+        // Get Device Summary
         $data['summary'] = $this->getSummaryData();
         
         // Get All Device data
-        foreach ($this->_devs as $dev) {
-            $data['devs'][] = $this->getDevData($dev['GPU']);
+        foreach ($this->_devs as $devKey => $dev) {
+            if (isset($this->_devs[$devKey]['GPU'])) {
+                $data['devs']['GPU'][] = $this->getDataGPU($devKey);
+            } elseif (isset($this->_devs[$devKey]['ASC']) || isset($this->_devs[$devKey]['PGA'])) {
+                $data['devs']['ASC'][] = $this->getDataASC($devKey);
+            }
         }
-        
+
         return $data;
     }
     
@@ -160,7 +178,7 @@ class Class_Miners_Cgminer {
         }
         
         return null;
-    }    
+    }
     public function switchPool($poolId) {
         return $this->getData('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }

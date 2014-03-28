@@ -25,7 +25,7 @@ class Class_Update {
         echo json_encode($data);
     }
     
-    public function pool() {
+    public function pool() { // needs cache override like wallets
         $data['pools'] = $this->getPools();
         
         echo json_encode($data);
@@ -40,6 +40,24 @@ class Class_Update {
         $data['wallets'] = $this->getWallets($cached);
         
         echo json_encode($data);
+    }
+    
+    public function addConfig() {
+        if (isset($_POST['type'])) {
+            $action = 'add' . ucwords(strtolower($_POST['type']));
+            require_once(dirname(__FILE__).'/../cryptoglance.php');
+            $cryptoglance = new CryptoGlance();
+            $cryptoglance->$action();
+        }
+    }
+    
+    public function removeConfig() {
+        if (isset($_POST['type'])) {
+            $action = 'remove' . ucwords(strtolower($_POST['type']));
+            require_once(dirname(__FILE__).'/../cryptoglance.php');
+            $cryptoglance = new CryptoGlance();
+            $cryptoglance->$action();
+        }
     }
 
     // Private

@@ -37,8 +37,9 @@
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
-           <button type="button" class="btn btn-lg btn-success" id="btnAddPool"><i class="icon icon-save-floppy"></i> Save</button>
+           <button type="button" class="btn btn-lg btn-success submitAddConfig" id="btnAddPool"><i class="icon icon-save-floppy"></i> Save</button>
          </div>
+         <input type="hidden" name="type" value="pool" />
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -33,7 +33,6 @@ include("includes/header.php");
             include("templates/panel-rig.php");
         }
         include("templates/modals/switch-pool.php");
-        include("templates/modals/add_rig.php");
     }
    
     ?>
@@ -55,6 +54,13 @@ include("includes/header.php");
       if (count($cryptoGlance->getWallets()) > 0) {
         include("templates/panel-wallet.php");
       }
+      
+      if (count($cryptoGlance->getMiners()) > 0 || count($cryptoGlance->getPools()) > 0) {
+        include("templates/modals/delete_prompt.php");
+      }
+      
+        include("templates/modals/add_rig.php");
+        include("templates/modals/add_pool.php");
       ?>
       
    </div>

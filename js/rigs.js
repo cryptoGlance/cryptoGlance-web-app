@@ -29,21 +29,21 @@ function rigUpdateCall(action, actionAttr) {
         ajaxCall.abort();
     }
     
-    ajaxCall = $.ajax({
-        type: 'post',
-        url: 'ajax.php?type=update&action=' + queryUrl,
-        dataType: 'json'
-    }).done(function(data) {
-        if (typeof data.rigs != 'undefined') {
-            updateRigs(data.rigs);
-        }
-        if (typeof data.pools != 'undefined') {
-            updatePools(data.pools);
-        }
-        if (typeof data.wallets != 'undefined') {
-            updateWallets(data.wallets);
-        }
-    });
+//    ajaxCall = $.ajax({
+//        type: 'post',
+//        url: 'ajax.php?type=update&action=' + queryUrl,
+//        dataType: 'json'
+//    }).done(function(data) {
+//        if (typeof data.rigs != 'undefined') {
+//            updateRigs(data.rigs);
+//        }
+//        if (typeof data.pools != 'undefined') {
+//            updatePools(data.pools);
+//        }
+//        if (typeof data.wallets != 'undefined') {
+//            updateWallets(data.wallets);
+//        }
+//    });
 }
 
 
@@ -91,9 +91,9 @@ $('#switchPool .btn-success').click(function() {
             type: 'post',
             url: 'ajax.php?type=miners&action=switch-pool&miner=' + minerId + '&pool=' + (parseInt(selectedPoolId)+1),
             dataType: 'json'
+        }).done(function(data) {
+            ajaxUpdateCall('all');
         });
-        
-        ajaxUpdateCall('all');
     }
 });
 
@@ -107,9 +107,8 @@ $('.btn-restart', '#manageRig').click(function() {
     });
 });
 
-function updateRigs (data) {
+function updateRigs(data) {
     var overallHashrate = 0;
-    
     var overview = $('#overview');
     var overviewTable = $(overview).find('.panel-body-overview div table tbody');
     $(overviewTable).find('tr').remove();
@@ -123,21 +122,29 @@ function updateRigs (data) {
         var devWarning = false;
         var devDanger = false;
 
+        $(rigElm).removeClass('panel-warning');
+        $(rigElm).removeClass('panel-danger');
+
         if (rig == null || typeof rig.summary == 'undefined' || typeof rig.devs == 'undefined') {
             $(rigElm).find('.toggle-panel-body').hide();
             $(rigNavElm).hide();
             $(rigTabContentElm).hide();
             $(rigElm).find('.panel-footer').hide();
-            if ($(rigTitle).html().indexOf(' - OFFLINE') == -1) {
-                $(rigTitle).append(' - OFFLINE');
-            }
+            $(overviewTable).append('<tr><td><i class="icon icon-ban-circle grey"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' grey">'+ $('h1', rigElm).html().replace(' - OFFLINE', '') +'</a></td><td>--</td><td>--</td><td>--</td></tr>');
+//            if ($(rigTitle).html().indexOf(' - OFFLINE') == -1) {
+//                $(rigTitle).append(' - OFFLINE');
+//            }
+            $(rigElm).removeClass('panel-warning');
+            $(rigElm).removeClass('panel-danger');
+            $(rigElm).addClass('panel-offline');
             return true;
         } else {
             $(rigElm).find('.toggle-panel-body').show();
             $(rigNavElm).show();
             $(rigTabContentElm).show();
             $(rigElm).find('.panel-footer').show();
-            $(rigTitle).html($(rigTitle).html().replace(' - OFFLINE', ''));
+//            $(rigTitle).html($(rigTitle).html().replace(' - OFFLINE', ''));
+            $(rigElm).removeClass('panel-offline');
         }
     
         // Clear nav items
@@ -150,6 +157,9 @@ function updateRigs (data) {
         var summaryContentTab = $(rigTabContentElm).find('#rig-' + rigId + '-summary').find('.panel-body-summary');
         $(summaryContentTab).find('div').remove();
         var totalShares = rig.summary.accepted + rig.summary.rejected + rig.summary.stale;
+        if (rig.summary.hashrate_5s == 0) {
+            rig.summary.hashrate_5s = rig.summary.hashrate_avg;
+        }
         $.each(rig.summary, function (k,v) {
             var sharePercent = 0;
             if (k == 'accepted' || k == 'rejected' || k == 'stale') {
@@ -168,9 +178,9 @@ function updateRigs (data) {
                 }
                 
                 if (v < 1) {
-                    v = (v*1000) + ' KH/S';
+                    v = (v*1024) + ' KH/S';
                 } else if(v > 1024) {
-                    v = (v/1000) + ' GH/S';
+                    v = (v/1024) + ' GH/S';
                 } else {
                     v = parseFloat(v).toFixed(2) + ' MH/S';
                 }
@@ -178,15 +188,16 @@ function updateRigs (data) {
             
             $(summaryContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div><div class="progress progress-striped"><div class="progress-bar progress-bar-'+progressStyle+'" style="width: '+sharePercent+'%"></div></div></div>');
         });
+        
         var summaryContentTabTable = $(rigTabContentElm).find('#rig-' + rigId + '-summary').find('.table-summary');
         var summaryContentTabTableHead = $(rigTabContentElm).find('thead');
         var summaryContentTabTableBody = $(rigTabContentElm).find('tbody');
         $(summaryContentTabTableHead).find('tr').remove();
         $(summaryContentTabTableBody).find('tr').remove();
         var removeTable = false;
-        if (rig.summary.type == 'cgminer') {
+        if (typeof rig.devs.GPU != 'undefined' && rig.devs.GPU.length > 0) {
             $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Temperature</th><th>Fan Speed</th><th>Fan %</th><th>Hashrate (5s)</th><th>Utility</th></tr>');
-        } else if (rig.summary.type == 'dualminer') {
+        } else if (typeof rig.devs.ASC != 'undefined' && rig.devs.ASC.length > 0) {
             $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Hashrate 5s</th><th>Accepted</th><th>Rejected</th><th>Utility</th><th>HW Errors</th></tr>');
         } else {
             removeTable = true;
@@ -195,90 +206,101 @@ function updateRigs (data) {
         
         var rigStatus = 'green';
         var rigIcon = 'check';
+        var rigPanel = '';
         
         // Update Devices
-        $.each(rig.devs, function (devIndex, dev) {
-            // Status colours
-            var status = dev.health;
-            var icon = '';
-            if (dev.enabled == 'N') {
-                status = 'grey';
-                icon = 'ban-circle';
-            } else if (status == 'Dead' || dev.hw_errors > 10) {
-                status = 'red';
-                icon = 'danger';
-                rigStatus = 'red';
-                rigIcon = 'danger';
-            } else if (status == 'Sick' || (dev.hw_errors > 0 && dev.hw_errors <= devHWWarning)) {
-                status = 'orange';
-                icon = 'warning-sign';
-                if (rigIcon != 'danger') {
-                    rigStatus = 'orange';
-                    rigIcon = 'warning-sign';
-                }
-            } else if (devHeatDanger <= dev.temperature) {
-                status = 'red';
-                icon = 'hot';
-                if (rigIcon != 'danger' && rigIcon != 'warning-sign') {
+        $.each(rig.devs, function (devType, devTypes) {
+            $.each(devTypes, function (devIndex, dev) {
+                // Status colours
+                var status = dev.health;
+                var icon = '';
+                if (dev.enabled == 'N') {
+                    status = 'grey';
+                    icon = 'ban-circle';
+                    rigPanel = 'offline';
+                } else if (status == 'Dead' || dev.hw_errors > 10) {
+                    status = 'red';
+                    icon = 'danger';
                     rigStatus = 'red';
-                    rigIcon = 'hot';
-                }
-            } else if (devHeatWarning <= dev.temperature) {
-                status = 'orange';
-                icon = 'fire';
-                if (rigIcon != 'danger' && rigIcon != 'warning-sign' && rigIcon != 'hot') {
-                    rigStatus = 'orange';
-                    rigIcon = 'fire';
-                }
-            } else {
-                status = 'green';
-                icon = 'cpu-processor';
-            }
-            
-            // add dev to Nav
-            $(rigNavElm).append('<li><a class="rig-'+ rigId +'-dev-'+ devIndex +' '+ status +'" href="#rig-'+ rigId +'-dev-'+ devIndex +'" data-toggle="tab">dev'+ devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
-            $(rigTabContentElm).find('#rig-'+ rigId +'-dev-'+ devIndex).remove();
-            $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig-'+ rigId +'-dev-'+ devIndex +'"><div class="panel-body panel-body-stats"></div></div>');
-            
-            // Updating DEV Content Tab
-            var devContentTab = $(rigTabContentElm).find('#rig-' + rigId + '-dev-' + dev.id).find('.panel-body-stats');
-            $(devContentTab).find('div').remove();
-            $.each(dev, function(k, v) {
-                if (k != 'id' && k != 'enabled') {
-                    if (k == 'temperature') {
-                        v = v + '&deg;C';
-                    } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
-                        if (v < 1) {
-                            v = (v*1000) + ' KH/S';
-                        } else if (v > 1024) {
-                            v = (v/1000) + ' GH/S';
-                        } else {
-                            v = v + ' MH/S';
-                        }
+                    rigIcon = 'danger';
+                    rigPanel = 'danger';
+                } else if (status == 'Sick' || (dev.hw_errors > 0 && dev.hw_errors <= devHWWarning)) {
+                    status = 'orange';
+                    icon = 'warning-sign';
+                    if (rigIcon != 'danger') {
+                        rigStatus = 'orange';
+                        rigIcon = 'warning-sign';
+                        rigPanel = 'warning';
                     }
-                    
-                    $(devContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
+                } else if (devHeatDanger <= dev.temperature) {
+                    status = 'red';
+                    icon = 'hot';
+                    if (rigIcon != 'danger' && rigIcon != 'warning-sign') {
+                        rigStatus = 'red';
+                        rigIcon = 'hot';
+                        rigPanel = 'danger';
+                    }
+                } else if (devHeatWarning <= dev.temperature) {
+                    status = 'orange';
+                    icon = 'fire';
+                    if (rigIcon != 'danger' && rigIcon != 'warning-sign' && rigIcon != 'hot') {
+                        rigStatus = 'orange';
+                        rigIcon = 'fire';
+                        rigPanel = 'warning';
+                    }
+                } else {
+                    status = 'green';
+                    icon = 'cpu-processor';
                 }
-            });
-            
-            // Update Summary Page of DEVs
-            if (!removeTable) {
-            
-            if (dev.hashrate_5s < 1) {
-                dev.hashrate_5s = (dev.hashrate_5s*1000) + ' KH/S';
-            } else if (dev.hashrate_5s > 1024) {
-                dev.hashrate_5s = parseFloat(dev.hashrate_5s/1000).toFixed(2) + ' GH/S';
-            } else {
-                dev.hashrate_5s += ' MH/S';
-            }
-            
-                if (rig.summary.type == 'cgminer') {
-                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
-                } else if(rig.summary.type == 'dualminer') {
-                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
+                
+                if (rigPanel != '') {
+                    $(rigElm).addClass('panel-' + rigPanel);
                 }
-            }
+                
+                // add dev to Nav
+                $(rigNavElm).append('<li><a class="rig-'+ rigId +'-'+ devType +'-'+ devIndex +' '+ status +'" href="#rig-'+ rigId +'-'+ devType +'-'+ devIndex +'" data-toggle="tab">'+ devType +' '+ devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
+                $(rigTabContentElm).find('#rig-'+ rigId +'-'+ devType +'-'+ devIndex).remove();
+                $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig-'+ rigId +'-'+ devType +'-'+ devIndex +'"><div class="panel-body panel-body-stats"></div></div>');
+                
+                // Updating DEV Content Tab
+                var devContentTab = $(rigTabContentElm).find('#rig-' + rigId + '-'+ devType +'-' + dev.id).find('.panel-body-stats');
+                $(devContentTab).find('div').remove();
+                $.each(dev, function(k, v) {
+                    if (k != 'id' && k != 'enabled') {
+                        if (k == 'temperature') {
+                            v = v + '&deg;C';
+                        } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
+                            if (v < 1) {
+                                v = (v*1024) + ' KH/S';
+                            } else if (v > 1024) {
+                                v = (v/1024) + ' GH/S';
+                            } else {
+                                v = v + ' MH/S';
+                            }
+                        }
+                        
+                        $(devContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
+                    }
+                });
+                
+                // Update Summary Page of DEVs
+                if (!removeTable) {
+                    if (dev.hashrate_5s < 1) {
+                        dev.hashrate_5s = (dev.hashrate_5s*1024) + ' KH/S';
+                    } else if (dev.hashrate_5s > 1024) {
+                        dev.hashrate_5s = parseFloat(dev.hashrate_5s/1024).toFixed(2) + ' GH/S';
+                    } else {
+                        dev.hashrate_5s += ' MH/S';
+                    }
+                
+                    if (devType == 'GPU') {
+                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
+                    } else if(devType == 'ASC') {
+                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
+                    }
+                }
             
+            });        
         });
         
         $(rigNavElm).find('li:eq('+ selectedNav +')').addClass('active');
@@ -286,9 +308,9 @@ function updateRigs (data) {
                         
         // Update Overview Panel
         if (rig.summary.hashrate_5s < 1) {
-            rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1000) + ' KH/S';
+            rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1024) + ' KH/S';
         } else if (rig.summary.hashrate_5s > 1024) {
-            rig.summary.hashrate_5s = (rig.summary.hashrate_5s / 1000) + ' GH/S';
+            rig.summary.hashrate_5s = (rig.summary.hashrate_5s / 1024) + ' GH/S';
         } else {
             rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
         }
@@ -297,14 +319,13 @@ function updateRigs (data) {
     
     // Total amount of hash power
     if (overallHashrate < 1) {
-        overallHashrate *= 1000;
+        overallHashrate *= 1024;
         overallHashrateMetric = 'KH/S';
     } else if (overallHashrate > 1024) {
-        overallHashrate /= 1000;
+        overallHashrate /= 1024;
         overallHashrateMetric = 'GH/s';
     } else {
         overallHashrateMetric = 'MH/s';
     }
     $('.total-hashrate').html(overallHashrate.toFixed(2) + ' <small>'+ overallHashrateMetric +'</small>');
-    
 }

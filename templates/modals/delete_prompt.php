@@ -7,12 +7,15 @@
             <h2><i class="icon icon-question-sign"></i> Are you sure?</h2>
          </div>
          <div class="modal-body">
-            <big>This will remove %RIGNAME% // %POOLNAME% from your dashboard if you continue.<br><br>Note that this does not delete the panel data, so you can always add it again if you wish.</big>
+<!--            <big>This will remove %RIGNAME% // %POOLNAME% from your dashboard if you continue.<br><br>Note that this does not delete the panel data, so you can always add it again if you wish.</big>-->
+            <big>This will remove the %PANNELNAME% configuration!</big>
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal"><i class="icon icon-circledelete"></i> Yes, good riddance!</button>
+           <button type="button" class="btn btn-lg btn-warning submitRemoveConfig" data-dismiss="modal"><i class="icon icon-circledelete"></i> Yes, good riddance!</button>
            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> No, keep it!</button>
          </div>
+         <input type="hidden" name="type" />
+         <input type="hidden" name="id" />
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

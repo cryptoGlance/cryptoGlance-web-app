@@ -26,7 +26,7 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
     }
 
     public function update($cached = true) {
-        if ($cached == false || $this->_fileHandler->lastTimeModified() >= 300) { // updates every 5 minutes
+        if ($cached == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
             $poolData = array();
             foreach ($this->_actions as $action) {
                 $curl = curl_init($this->_apiURL  . '/index.php?page=api&id='. $this->_userId .'&api_key='. $this->_apiKey . '&action=' . $action);
@@ -50,8 +50,8 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
             }
             
             // Math Stuffs
-            $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
-            $units2 = array('KB', 'MB', 'GB', 'TB'); 
+            $units = array('H', 'KH', 'MH', 'GH', 'TH'); 
+            $units2 = array('KH', 'MH', 'GH', 'TH'); 
             
             // Data Order
             $data['type'] = 'mpos';
