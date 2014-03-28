@@ -1,5 +1,11 @@
 /* Custom WebCanada prototype framework styles
 	by George Merlocco (george@merloc.co) // https://github.com/scar45/
+
+    TODO:
+      - Decrease font-size within .panel
+      - Remove gradient from non-rig panels and color code wallets (green), pools (blue) as solid
+      - Show "Active Panels"
+  
 */
 
 html {
@@ -288,9 +294,9 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 }
 
 .form-horizontal .form-group.temp-thresholds input {
-  width: 100px;
-  height: 60px;
-  font-size: 3em;
+  width: 81px;
+  height: 55px;
+  font-size: 2.2em;
   margin-right: 5px;
   text-align: center;
   letter-spacing: -3px;
@@ -783,7 +789,7 @@ a#dash-add-panel {
   text-shadow: 0px 1px 0 #050;
 }
 
-.site-width-slider {
+.site-width-slider, .site-layout, .site-layout-btns {
   display: none;
 }
 
@@ -848,6 +854,19 @@ a#dash-add-panel {
   background: rgba(255,255,255,0.2);
 }
 
+.panel-primary > .panel-heading {
+  background: #047195;
+  background: -moz-linear-gradient(left, #047195 0%, #33b5e5 49%, #faec03 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#047195), color-stop(49%,#33b5e5), color-stop(100%,#faec03));
+  background: -webkit-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
+  background: -o-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
+  background: -ms-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
+  background: linear-gradient(to right, #047195 0%,#33b5e5 49%,#faec03 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#faec03',GradientType=1 );
+  padding: 5px 4px 4px 15px;
+  cursor: move;
+}
+
 .panel-warning {
   border-color: #6e6e6e #F89406 #F89406 #33b5e5;
 }
@@ -878,6 +897,25 @@ a#dash-add-panel {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#ED3838',GradientType=1 );
 }  
 
+.panel-offline {
+  border-color: #444;
+}
+
+.panel-offline h1, .panel-offline h2 i {
+  color: #888;
+}
+
+.panel-offline > .panel-heading {
+  background: #444;
+  background: -moz-linear-gradient(left, #444 0%, #656565 49%, #888 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#444), color-stop(49%,#656565), color-stop(100%,#888));
+  background: -webkit-linear-gradient(left, #444 0%,#656565 49%,#888 100%);
+  background: -o-linear-gradient(left, #444 0%,#656565 49%,#888 100%);
+  background: -ms-linear-gradient(left, #444 0%,#656565 49%,#888 100%);
+  background: linear-gradient(to right, #444 0%,#656565 49%,#888 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444', endColorstr='#888',GradientType=1 );
+}  
+
 .panel h1 {
   position: absolute;
   top: -48px;
@@ -886,19 +924,6 @@ a#dash-add-panel {
 .panel-nobg {
   background: none;
   border: none;
-}
-
-.panel-primary > .panel-heading {
-  background: #047195;
-  background: -moz-linear-gradient(left, #047195 0%, #33b5e5 49%, #faec03 100%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#047195), color-stop(49%,#33b5e5), color-stop(100%,#faec03));
-  background: -webkit-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
-  background: -o-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
-  background: -ms-linear-gradient(left, #047195 0%,#33b5e5 49%,#faec03 100%);
-  background: linear-gradient(to right, #047195 0%,#33b5e5 49%,#faec03 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#faec03',GradientType=1 );
-  padding: 5px 4px 4px 15px;
-  cursor: move;
 }
 
 .login-container > .panel-primary > .panel-heading {
@@ -1388,6 +1413,7 @@ a#dash-add-panel {
 .panel-body .table tr td {
   font-weight: bold;
   padding: 3px 10px;
+  vertical-align: middle;
 }
 
 /*.panel-body .table tr td:nth-child(3), .panel-body .table tr th:nth-child(3), .panel-body .table tr td:nth-child(6), .panel-body .table tr th:nth-child(6) {*/
@@ -1851,6 +1877,10 @@ a#dash-add-panel {
     width: 100%;
   }
   
+  #slider {
+    width: 150px;
+  }
+  
   .site-width-slider a, .site-width-slider a:hover {
     -webkit-transition: none !important;
     -moz-transition: none !important;
@@ -1863,8 +1893,52 @@ a#dash-add-panel {
     float: right;
     font-weight: bold;
     color: #33b5e5;
-    margin: -5px 8px 0 0;
+    margin: -5px 20px 0 0;
     font-size: 17px;
+  }
+
+}
+
+
+/* Super-wide devices (1680px and up) */
+@media (min-width: 1680px) {
+
+  .site-layout, .site-layout-btns {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .site-layout {
+    float: left;
+    overflow: auto;
+  }
+  
+  .navbar-nav li.open .dropdown-menu .btn-group button {
+    padding: 1px 20px 3px;
+  }
+  
+  .navbar-nav li.open .dropdown-menu .btn-group button i {
+    color: #ccc;
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .navbar-nav li.open .dropdown-menu .btn-group button.active-layout {
+    background: #51575E;
+    outline: none;
+  }
+  
+  .navbar-nav li.open .dropdown-menu .btn-group button.active-layout i {
+    color: #fff;
+  }
+
+  .panel-masonry {
+    width: 30.5%;
+    margin: 0 1% 90px;
+  }
+  
+  .panel-in-footer {
+    width: 100%;
   }
 
 }

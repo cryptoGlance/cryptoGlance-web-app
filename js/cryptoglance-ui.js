@@ -133,6 +133,39 @@ function callAlert() {
     });
 }
 
+// Setup Masonry Layout
+
+function initMasonry() {
+  $('.panel:not(.panel-in-footer, .panel-no-grid)').addClass('panel-masonry');
+  $('#dashboard-wrap').masonry({
+    itemSelector: '.panel',
+    columnWidth: '.panel-masonry'
+  });
+  $.cookie("use_masonry_layout", "yes");
+}
+
+function destroyMasonry() {
+  $('#dashboard-wrap').masonry('destroy');
+  $('.panel:not(.panel-in-footer, .panel-no-grid)').removeClass('panel-masonry');
+  $.removeCookie("use_masonry_layout");
+}
+
+function restoreSiteLayout() {
+  var siteLayout = $.cookie('use_masonry_layout');
+  var viewportWidth  = $(window).width();
+    
+  if (siteLayout == null) {
+    $('#layout-grid').removeClass('active-layout');
+    $('#layout-list').addClass('active-layout');
+  } 
+  else if (viewportWidth >= 1680 && siteLayout == 'yes')
+  {
+    initMasonry();
+    $('#layout-list').removeClass('active-layout');
+    $('#layout-grid').addClass('active-layout');
+  }  
+}
+
 // Modify Panel width
 //
 
@@ -177,6 +210,9 @@ $(function() {
 
     stop: function(event,ui) {
       // tooltip.fadeOut('fast');
+      
+      // TODO: only run this if the 'masonryOn' cookie is set to true/1
+      initMasonry();
     },
   });
 
@@ -277,7 +313,10 @@ function scrollTo(id){
 
 $(window).resize(function() {
   mobileWidthFixer();
-  
+});
+
+$(window).ready(function() {
+  restoreSiteLayout();  
 });
   
 // Execute when the DOM is ready
@@ -288,10 +327,23 @@ $(document).ready(function() {
   prettifyInputs();
   
   restoreDashboard();
-  // restoreWalletOrder();
-  
   restorePanelWidth();
 
+  $('#layout-grid').click(function() {
+    initMasonry();
+    $('#layout-list').removeClass('active-layout');
+    $(this).addClass('active-layout');
+    return false;
+  });
+  
+  $('#layout-list').click(function() {
+    destroyMasonry();
+    $('#layout-grid').removeClass('active-layout');
+    $(this).addClass('active-layout');
+    restorePanelWidth();
+    return false;
+  });
+  
   $('#collapse-all-panels').click(function(event) {
     event.preventDefault();
     collapseAllPanels();

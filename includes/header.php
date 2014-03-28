@@ -40,9 +40,15 @@
                      <ul class="dropdown-menu">
                         <li class="dropdown-header site-width-slider">Panel Width</li>
                         <li class="site-width-slider">
-                           <span class="tooltip"></span> <!-- Tooltip -->
                            <span class="width-reading">90%</span> <!-- width-reading -->
                            <div id="slider"></div> <!-- the Slider -->
+                        </li>
+                        <li class="dropdown-header site-layout">Site Layout</li>
+                        <li class="site-layout-btns">
+                          <div class="btn-group">
+                            <button type="button" id="layout-list" class="btn btn-primary"><i class="icon icon-menu"></i></button>
+                            <button type="button" id="layout-grid" class="btn btn-primary"><i class="icon icon-th"></i></button>
+                          </div>
                         </li>
                         <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
                         <div class="divider"></div> <!-- the Slider -->

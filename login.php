@@ -27,7 +27,7 @@ include("includes/login-header.php");
          
       <div id="dashboard-wrap" class="container sub-nav login-container">
       
-         <div id="overview" class="panel panel-primary panel-overview">
+         <div id="overview" class="panel panel-primary panel-no-grid panel-overview">
             <h1>Login</h1>
             <div class="panel-heading">
                <h2 class="panel-title"><small><i class="icon icon-enteralt"></i></small></h2>

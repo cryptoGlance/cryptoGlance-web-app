@@ -57,7 +57,7 @@ require_once("includes/header.php");
 -->
          
       <div id="settings-wrap" class="container sub-nav full-content">
-        <div id="readme" class="panel panel-default no-icon">
+        <div id="readme" class="panel panel-default panel-no-grid no-icon">
           <h1>cryptoGlance Settings</h1>
           <div class="panel-heading">
               <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> General</h2>

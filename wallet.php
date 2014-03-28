@@ -10,7 +10,7 @@ require_once("includes/header.php");
          
       <div id="wallet-wrap" class="container sub-nav">
 
-        <div id="wallet-details" class="panel panel-primary panel-overview">
+        <div id="wallet-details" class="panel panel-primary panel-no-grid panel-overview">
            <h1>Wallet</h1>
            <div class="panel-heading">
               <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
@@ -75,7 +75,7 @@ require_once("includes/header.php");
            </div>
         </div>
         
-        <div id="readme" class="panel panel-default">
+        <div id="readme" class="panel panel-default panel-no-grid">
           <h1>Wallet Details</h1>
           <div class="panel-heading">
               <h2 class="panel-title"><i class="icon icon-walletalt"></i></h2>
