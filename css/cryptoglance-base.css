@@ -520,9 +520,10 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
 }
 
 .total-wallet-balance span {
-  font-size: 40px;
+  font-size: 32px;
   letter-spacing: -1px;
   display: block;
+  text-shadow: -2px 2px 0 #222;
 }
 
 .total-wallet-balance img {
@@ -946,7 +947,7 @@ a#dash-add-panel {
 }  
 
 .panel-wallet h1, .panel-wallet h2 i {
-  color: #8F8;
+  color: #41B441;
 }
 
 .panel-warning {
@@ -1060,7 +1061,6 @@ a#dash-add-panel {
   margin: 0;
   padding: 0;
   clear: both;
-  background: #3E444C;
 }
 
 .panel-rig ul li {
@@ -1075,9 +1075,9 @@ a#dash-add-panel {
   font-weight: bold;
   font-size: 15px;
   color: #bbb;
-  -webkit-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0;
-  margin: 0 1px;
+  -webkit-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  margin: 0 3px;
   padding: 0 15px;
 }
 
@@ -1188,7 +1188,7 @@ a#dash-add-panel {
   text-align: left;
 }
 
-.panel-body-stats {
+.panel-rig .panel-content {
   background: #F89406;
   background: -moz-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(245, 255, 0, 0.39) 100%);
   background: -webkit-gradient(linear, left, right, color-stop(0%,rgba(51, 181, 229, 0.2)), (100%,rgba(245, 255, 0, 0.39)));
@@ -1198,7 +1198,7 @@ a#dash-add-panel {
   background: linear-gradient(to right, rgba(51, 181, 229, 0.2) 0%, rgba(245, 255, 0, 0.39) 100%);
 }
 
-.panel-warning .panel-body-stats {
+.panel-warning .panel-content {
   background: #F89406;
   background: -moz-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(248, 148, 6, 0.39) 100%);
   background: -webkit-gradient(linear, left, right, color-stop(0%,rgba(51, 181, 229, 0.2)), (100%,rgba(248, 148, 6, 0.39)));
@@ -1208,7 +1208,7 @@ a#dash-add-panel {
   background: linear-gradient(to right, rgba(51, 181, 229, 0.2) 0%, rgba(248, 148, 6, 0.39) 100%);
 }
 
-.panel-danger .panel-body-stats {
+.panel-danger .panel-content {
   background: #ED3838;
   background: -moz-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(237, 56, 56, 0.39) 100%);
   background: -webkit-gradient(linear, left, right, color-stop(0%,rgba(51, 181, 229, 0.2)), (100%,rgba(237, 56, 56, 0.39)));
@@ -1508,6 +1508,7 @@ a#dash-add-panel {
 
 .panel-body .table tr th, .panel-body .table tr td {
   font-size: 16px;
+  text-shadow: -1px 1px 0 #222;
 }
 
 .panel-body .table tr th {
@@ -1697,7 +1698,7 @@ a#dash-add-panel {
   }
   
   .navbar {
-    min-height: 45px;
+    min-height: inherit;
   }
   
   .navbar-collapse {
@@ -1965,6 +1966,9 @@ a#dash-add-panel {
     padding: 3px 15px;
   }
 
+  .total-wallet-balance span {
+    font-size: 40px;
+  }
   .donate-address {
     font-size: 20px;
   }

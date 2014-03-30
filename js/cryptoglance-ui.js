@@ -195,8 +195,9 @@ $(function() {
     },
 
     stop: function(event,ui) {
-      var siteLayout = $.cookie('use_masonry_layout');
-      if (siteLayout == 'yes') {
+      var viewportWidth  = $(window).width(),
+        siteLayout = $.cookie('use_masonry_layout');
+      if (siteLayout == 'yes' && viewpoerWidth > 1200) {
         initMasonry();
       }  
     },
@@ -276,7 +277,7 @@ function prettifyInputs() {
 // Toggle Mobile Navbar
 //
 function toggleMobileNavbar() {
-  $('.navbar-collapse').collapse('toggle');
+  $('.navbar').collapse('toggle');
 }
 
 // Show Mobile Hashrate
@@ -288,17 +289,12 @@ function toggleMobileHashrate() {
 // App-specific fixes needed after page loads
 //
 function fixApp() {
-  $('.navbar').css({
-    maxHeight : "0px",
-    minHeight: "0px"
-    }
-  );
   $('.container.sub-nav').css({
     paddingTop : "65px"
     }
   );
-  $('.navbar-header').hide();  
   $('#mobile-hashrate').css('top','0px');
+  $('.navbar').collapse('hide');
 }
 
 
@@ -325,8 +321,7 @@ $(function() {
 //
 
 $(window).resize(function() {
-  mobileWidthFixer();
-  
+  mobileWidthFixer();  
 });
 
 $(window).ready(function() {

@@ -13,7 +13,7 @@ require_once("includes/header.php");
         <div id="wallet-details" class="panel panel-primary panel-no-grid panel-wallet">
            <h1>Wallet</h1>
            <div class="panel-heading">
-              <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
+              <button type="button" class="panel-header-button btn-updater" data-type="all"><i class="icon icon-refresh"></i> Update</button>
               <h2 class="panel-title">{{WALLET_NAME}}</h2>
            </div>
            <div class="panel-body">
@@ -65,14 +65,6 @@ require_once("includes/header.php");
                 </form>
               </div>
            </div><!-- / .panel-body -->
-           <div class="panel-footer">
-              <div class="pull-left">
-                 <h3 class="helpful-tip"><i class="icon icon-info-sign"></i> table scrolls horizontally</h3>
-              </div>
-              <div class="pull-right">
-                 <button type="button" class="btn btn-default btn-updater" data-type="all"><i class="icon icon-refresh"></i> Update Now</button>
-              </div>
-           </div>
         </div>
         
         <div id="readme" class="panel panel-default panel-no-grid">
