@@ -253,9 +253,10 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 
 .panel-heading .panel-header-button {
   position: relative;
-  top: -1px;
-  z-index: 1000;
+  margin-top: -6px;
+  z-index: 990;
   float: right;
+  height: 30px;
 }
 
 .panel-heading .panel-header-button:hover {
@@ -524,6 +525,12 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
   display: block;
 }
 
+.total-wallet-balance img {
+  max-height: 48px;
+  width: auto;
+  margin-top: -10px;
+}
+
 #inputMailPort {
   width: 80px;
 }
@@ -541,6 +548,11 @@ select.form-control {
 .modal-footer {
   margin-top: 0;
   padding: 6px 10px 10px;
+}
+
+.container {
+  padding-right: 3px;
+  padding-left: 3px;
 }
 
 .login-container .panel-footer p {
@@ -641,6 +653,10 @@ a.navbar-brand img {
   float: none;
 }
 
+.navbar > .nav-pills > li:first-child {
+  display: none;
+}
+
 .nav-pills > li > a {
   font-size: 23px;
   font-family: robotolight;
@@ -651,12 +667,6 @@ a.navbar-brand img {
   text-align: left;
   background: rgba(0,0,0,0.3);
 }
-
-/*
-.nav-pills li #slider a {
-  background: none;
-}
-*/
 
 .nav-pills li a:hover, .nav-pills li a:active, .nav-pills li a:hover * {
   border-width: 0 1px 1px;
@@ -809,15 +819,33 @@ a#dash-add-panel {
 .navbar-default .navbar-nav > li > a.total-hashrate * {
   color: #8f8;
 }
+  
+#mobile-hashrate {
+  position: fixed;
+  top: 53px;
+  right: 0;
+  background: url('../images/inflicted.png') repeat scroll 0% 0% #111;
+  border-radius: 0 0 0 5px;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #047195;
+  border-width: 0 0 1px 1px;
+}
+
+#mobile-hashrate .total-hashrate {
+  margin-right: 0px;
+  padding: 6px 16px 4px;
+  background: none;
+}
 
 .container.sub-nav {
-  padding-top: 140px;
+  padding-top: 110px;
 }
 
 .container h1 {
-  padding: 0px 0px 0px 60px;
+  padding: 0px 0px 0px 50px;
   text-align: left;
-  font-size: 32px;
+  font-size: 28px;
   letter-spacing: 1px;
   line-height: 25px;
   text-shadow: 2px 2px 0px rgb(0, 0, 0);
@@ -842,13 +870,12 @@ a#dash-add-panel {
   margin: 0 0 100px;
   background: rgba(120,255,120,0.3);
   height: 145px;
-  width: 100%;
 
 }
 
 .panel {
   position: relative;
-  margin-bottom: 70px;
+  margin-bottom: 55px;
   border: 1px solid;
   border-color: #33b5e5 #FAEC03 #C2DD43 #33b5e5;
   background: rgba(255,255,255,0.2);
@@ -864,7 +891,62 @@ a#dash-add-panel {
   background: linear-gradient(to right, #047195 0%,#33b5e5 49%,#faec03 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#faec03',GradientType=1 );
   padding: 5px 4px 4px 15px;
+  /*
   cursor: move;
+  */
+}
+
+.panel-pool {
+  border-color: #6e6e6e #09c #09c #33b5e5;
+}
+
+.panel-pool > .panel-heading {
+  background: #047195;
+  background: -moz-linear-gradient(left, #047195 0%, #33b5e5 49%, #047195 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#047195), color-stop(49%,#33b5e5), color-stop(100%,#047195));
+  background: -webkit-linear-gradient(left, #047195 0%,#33b5e5 49%,#047195 100%);
+  background: -o-linear-gradient(left, #047195 0%,#33b5e5 49%,#047195 100%);
+  background: -ms-linear-gradient(left, #047195 0%,#33b5e5 49%,#047195 100%);
+  background: linear-gradient(to right, #047195 0%,#33b5e5 49%,#047195 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#047195', endColorstr='#33b5e5',GradientType=1 );
+}  
+
+.panel-overview {
+  border-color: #6e6e6e #33b5e5 #047195 #949494;
+}
+
+.panel-overview > .panel-heading {
+  background: #949494;
+  background: -moz-linear-gradient(left, #949494 0%, #96BAC7 49%, #33b5e5 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#949494), color-stop(49%,#96BAC7), color-stop(100%,#33b5e5));
+  background: -webkit-linear-gradient(left, #949494 0%,#96BAC7 49%,#33b5e5 100%);
+  background: -o-linear-gradient(left, #949494 0%,#96BAC7 49%,#33b5e5 100%);
+  background: -ms-linear-gradient(left, #949494 0%,#96BAC7 49%,#33b5e5 100%);
+  background: linear-gradient(to right, #949494 0%,#96BAC7 49%,#33b5e5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#949494', endColorstr='#33b5e5',GradientType=1 );
+}  
+
+.panel-overview h1, .panel-overview h2 i {
+  color: #ccc;
+}
+
+.panel-wallet {
+  border-color: #6e6e6e #38DF38 #287528 #287528;
+}
+
+.panel-wallet > .panel-heading {
+  background: #23DD23;
+  background: -moz-linear-gradient(left, #287528 0%, #23DD23 49%, #38DF38 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#287528), color-stop(49%,#23DD23), color-stop(100%,#38DF38));
+  background: -webkit-linear-gradient(left, #287528 0%,#23DD23 49%,#38DF38 100%);
+  background: -o-linear-gradient(left, #287528 0%,#23DD23 49%,#38DF38 100%);
+  background: -ms-linear-gradient(left, #287528 0%,#23DD23 49%,#38DF38 100%);
+  background: linear-gradient(to right, #287528 0%,#23DD23 49%,#38DF38 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#287528', endColorstr='#38DF38',GradientType=1 );
+}  
+
+.panel-wallet h1, .panel-wallet h2 i {
+  color: #8F8;
 }
 
 .panel-warning {
@@ -918,7 +1000,7 @@ a#dash-add-panel {
 
 .panel h1 {
   position: absolute;
-  top: -48px;
+  top: -45px;
 }
 
 .panel-nobg {
@@ -952,7 +1034,7 @@ a#dash-add-panel {
 
 .panel-title {
   position: relative;
-  font-size: 26px;
+  font-size: 20px;
   text-shadow: 0px 2px 0 #000;
   letter-spacing: 1px;
   padding-left: 0px;
@@ -962,7 +1044,7 @@ a#dash-add-panel {
 .panel-title i, .panel-title img {
   position: absolute;
   font-size: 32px;
-  left: 0;
+  left: -7px;
   top: -43px;
   color: #33b5e5;
   text-shadow: 1px 1px 0 #222;
@@ -977,6 +1059,7 @@ a#dash-add-panel {
 .panel-rig ul {
   margin: 0;
   padding: 0;
+  clear: both;
   background: #3E444C;
 }
 
@@ -990,12 +1073,12 @@ a#dash-add-panel {
 .panel-rig ul li a {
   font-family: roboto;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 15px;
   color: #bbb;
   -webkit-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0;
   margin: 0 1px;
-  padding: 3px 15px;
+  padding: 0 15px;
 }
 
 
@@ -1088,16 +1171,17 @@ a#dash-add-panel {
   padding: 5px;
   overflow: auto;
   text-align: center;
+  clear: both;
 }
 
 .full-content .panel-body {
   font-size: 18px;
   text-align: left;
-  padding: 0 20px;
+  padding: 0;
 }
 
 .panel-pool .panel-body {
-  background: #072935;
+  background: rgba(7, 41, 53, 0.6);
 }
 
 .panel-body-feed {
@@ -1105,23 +1189,43 @@ a#dash-add-panel {
 }
 
 .panel-body-stats {
-  background: #047195;
-  background: -moz-linear-gradient(top, #191B1D 0%, #090909 100%);
-  background: -webkit-gradient(linear, top, bottom, color-stop(0%,#191B1D), (100%,#090909));
-  background: -webkit-linear-gradient(top, #191B1D 0%,#090909 100%);
-  background: -o-linear-gradient(top, #191B1D 0%,#090909 100%);
-  background: -ms-linear-gradient(top, #191B1D 0%,#090909 100%);
-  background: linear-gradient(to bottom, #191B1D 0%,#090909 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191B1D', endColorstr='#090909',GradientType=0 );
+  background: #F89406;
+  background: -moz-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(245, 255, 0, 0.39) 100%);
+  background: -webkit-gradient(linear, left, right, color-stop(0%,rgba(51, 181, 229, 0.2)), (100%,rgba(245, 255, 0, 0.39)));
+  background: -webkit-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(245, 255, 0, 0.39) 100%);
+  background: -o-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(245, 255, 0, 0.39) 100%);
+  background: -ms-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(245, 255, 0, 0.39) 100%);
+  background: linear-gradient(to right, rgba(51, 181, 229, 0.2) 0%, rgba(245, 255, 0, 0.39) 100%);
+}
+
+.panel-warning .panel-body-stats {
+  background: #F89406;
+  background: -moz-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(248, 148, 6, 0.39) 100%);
+  background: -webkit-gradient(linear, left, right, color-stop(0%,rgba(51, 181, 229, 0.2)), (100%,rgba(248, 148, 6, 0.39)));
+  background: -webkit-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(248, 148, 6, 0.39) 100%);
+  background: -o-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(248, 148, 6, 0.39) 100%);
+  background: -ms-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(248, 148, 6, 0.39) 100%);
+  background: linear-gradient(to right, rgba(51, 181, 229, 0.2) 0%, rgba(248, 148, 6, 0.39) 100%);
+}
+
+.panel-danger .panel-body-stats {
+  background: #ED3838;
+  background: -moz-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(237, 56, 56, 0.39) 100%);
+  background: -webkit-gradient(linear, left, right, color-stop(0%,rgba(51, 181, 229, 0.2)), (100%,rgba(237, 56, 56, 0.39)));
+  background: -webkit-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(237, 56, 56, 0.39) 100%);
+  background: -o-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(237, 56, 56, 0.39) 100%);
+  background: -ms-linear-gradient(left, rgba(51, 181, 229, 0.2) 0%, rgba(237, 56, 56, 0.39) 100%);
+  background: linear-gradient(to right, rgba(51, 181, 229, 0.2) 0%, rgba(237, 56, 56, 0.39) 100%);
 }
 
 .panel-body .stat-pair, .panel-body .stat-pair-dropzone {
-  border: 1px solid #33b5e5;
-  border-color: #33b5e5 #07a #069 #33b5e5;
-  border-radius: 4px;
+  border: 1px solid #777;
+  border-color: #888 #a0a0a0 #a0a0a0 #999;
+  border-radius: 5px;
   display: inline-block;
   text-align: center;
-  margin: 0 0 2px;
+  margin: 0px 0px -6px -1px;
+  overflow: hidden;
 }
 
 .panel-body .stat-pair-dropzone {
@@ -1155,7 +1259,7 @@ a#dash-add-panel {
   border-radius: 4px 4px 0 0;
   display: block;
   padding: 5px 15px 0;
-  font-size: 14px;
+  font-size: 13px;
   font-family: bebas, robotocondensed, sans-serif;
   text-shadow: 0 1px 0 #000;
 }
@@ -1174,9 +1278,9 @@ a#dash-add-panel {
 
 .panel-body .stat-pair .stat-value {
   background: url(../images/inflicted.png) repeat #111;
-  font-size: 22px;
+  font-size: 20px;
   border-radius: 0;
-  padding: 2px 10px 0;
+  padding: 0 10px;
 }
 
 .panel-body .stat-pair.feed-item {
@@ -1386,15 +1490,20 @@ a#dash-add-panel {
   font-size: 18px;
 }
 
-.panel-body .table-responsive, .panel-body .table {
+.panel-body .table {
   margin: 0;
   font-family: roboto, sans-serif;
   text-shadow: 1px 1px 0 #555;
-  border: 1px solid #535353 !important;
+  border: 1px solid #696969 !important;
+}
+
+.table-responsive {
+  margin-bottom: 0;
+  overflow-x: auto;
 }
 
 .panel-body .table-summary {
-  margin: 0;
+  margin: 5px 0 0;
 }
 
 .panel-body .table tr th, .panel-body .table tr td {
@@ -1414,6 +1523,10 @@ a#dash-add-panel {
   font-weight: bold;
   padding: 3px 10px;
   vertical-align: middle;
+}
+
+.table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
+    font-size: 13px;
 }
 
 /*.panel-body .table tr td:nth-child(3), .panel-body .table tr th:nth-child(3), .panel-body .table tr td:nth-child(6), .panel-body .table tr th:nth-child(6) {*/
@@ -1613,9 +1726,13 @@ a#dash-add-panel {
     line-height: 32px;
     padding-right: 10px;
   }
-
+  
   .total-hashrate {
     margin-right: 8px;
+  }
+  
+  #mobile-hashrate {
+    top: 44px;
   }
   
   .nav-pills > li {
@@ -1742,11 +1859,15 @@ a#dash-add-panel {
   }
 
   .container h1 {
-    font-size: 40px;
-    top: -38px;
+    font-size: 30px;
+    top: -33px;
     letter-spacing: 1px;
     line-height: 1px;
-    padding-left: 65px;
+    padding-left: 50px;
+  }
+  
+  .container #wallet-details h1 {
+    padding-left: 10px;
   }
   
   .no-icon h1 {
@@ -1759,7 +1880,7 @@ a#dash-add-panel {
   }
 
   .panel {
-    margin-bottom: 90px;
+    margin-bottom: 70px;
   }
   
 
@@ -1777,15 +1898,15 @@ a#dash-add-panel {
   }
 
   .panel-title i {
-    font-size: 35px;
+    font-size: 32px;
   }
 
   .panel-body .stat-pair .stat-label, .panel-body .stat-pair .stat-value {
-    font-size: 20px;
+    font-size: 17px;
   }
   
   .panel-body .stat-pair .stat-label {
-    padding: 2px 15px 4px;
+    padding: 1px 15px 0;
   }
 
   .panel-wallet .panel-body .stat-pair .stat-label {
@@ -1807,7 +1928,8 @@ a#dash-add-panel {
   }
 
   .panel-body .stat-pair .stat-value {
-    font-size: 30px;
+    font-size: 26px;
+    line-height: 35px;
   }
   
   .panel-in-footer .panel-body .stat-pair-qr .stat-label {
@@ -1827,15 +1949,22 @@ a#dash-add-panel {
   .panel-body .stat-pair .stat-value i {
     font-size: 24px;
   }
-
-  .panel-body .table tr th, .panel-body .table tr td {
-    font-size: 19px;
-  }
   
   .panel-body .table tr td:nth-child(3), .panel-body .table tr th:nth-child(3), .panel-body .table tr td:nth-child(6), .panel-body .table tr th:nth-child(6) {
     display: table-cell;
   }
   
+  
+  .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
+      font-size: 16px;
+  }
+
+  
+  .panel-rig ul li a {
+    font-size: 17px;
+    padding: 3px 15px;
+  }
+
   .donate-address {
     font-size: 20px;
   }
@@ -1855,7 +1984,20 @@ a#dash-add-panel {
   .login-container {
     width: 75% !important;
   }
-   
+
+  .navbar > .nav-pills > li:first-child {
+    display: inline-block;
+  }
+    
+  #mobile-hashrate {
+    display: none;
+  }
+    
+  .panel-title {
+    position: relative;
+    font-size: 23px;
+  }
+
   .panel-in-footer .panel-body .stat-pair-qr .stat-value img {
     height: 48px;
     width: 48px;
@@ -1871,7 +2013,7 @@ a#dash-add-panel {
     width: 90%;
     margin: 0 auto;
   }
-    
+
   .site-width-slider {
     display: inline-block;
     width: 100%;
@@ -1900,12 +2042,12 @@ a#dash-add-panel {
 }
 
 
-/* Super-wide devices (1680px and up) */
-@media (min-width: 1680px) {
+/* Super-wide devices (1600px and up) */
+@media (min-width: 1600px) {
 
   .site-layout, .site-layout-btns {
     display: block;
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
   
   .site-layout {
@@ -1934,7 +2076,20 @@ a#dash-add-panel {
 
   .panel-masonry {
     width: 30.5%;
-    margin: 0 1% 90px;
+    margin: 0 1% 70px;
+  }
+  
+  .panel-masonry .panel-body .table tr th, .panel-masonry .panel-body .table tr td {
+    font-size: 14px;
+  }  
+  
+  .panel-masonry .panel-body .stat-pair .stat-value {
+    font-size: 24px;
+    line-height: 32px;
+  }  
+  
+  .panel-masonry .panel-body .stat-pair .stat-label {
+    font-size: 15px;
   }
   
   .panel-in-footer {

@@ -38,17 +38,17 @@
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsthree-gears mobile-icon"></i> Tools <b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                        <li class="dropdown-header site-width-slider">Panel Width</li>
-                        <li class="site-width-slider">
-                           <span class="width-reading">90%</span> <!-- width-reading -->
-                           <div id="slider"></div> <!-- the Slider -->
-                        </li>
                         <li class="dropdown-header site-layout">Site Layout</li>
                         <li class="site-layout-btns">
                           <div class="btn-group">
                             <button type="button" id="layout-list" class="btn btn-primary"><i class="icon icon-menu"></i></button>
                             <button type="button" id="layout-grid" class="btn btn-primary"><i class="icon icon-th"></i></button>
                           </div>
+                        </li>
+                        <li class="dropdown-header site-width-slider">Panel Width</li>
+                        <li class="site-width-slider">
+                           <span class="width-reading">90%</span> <!-- width-reading -->
+                           <div id="slider"></div> <!-- the Slider -->
                         </li>
                         <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
                         <div class="divider"></div> <!-- the Slider -->
@@ -77,3 +77,5 @@
             <!--/.nav-collapse -->
          </div>
       </div>
+      
+      <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>

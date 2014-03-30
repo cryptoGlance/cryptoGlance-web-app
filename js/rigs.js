@@ -277,6 +277,13 @@ function updateRigs(data) {
         
         $(rigNavElm).find('li:eq('+ selectedNav +')').addClass('active');
         $(rigTabContentElm).find('.tab-pane:eq('+ selectedNav +')').addClass('active');
+                
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+          var siteLayout = $.cookie('use_masonry_layout');
+          if (siteLayout == 'yes') {
+            initMasonry();
+          }  
+        })
                         
         // Update Overview Panel
         if (rig.summary.hashrate_5s < 1) {

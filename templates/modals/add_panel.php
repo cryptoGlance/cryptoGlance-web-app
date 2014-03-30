@@ -15,8 +15,8 @@
             <a class="new-panel-btn" data-toggle="modal" data-target="#addPool" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-communitysmall"></i>Pool
             </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addAddress" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-walletalt"></i>Address
+            <a class="new-panel-btn" data-toggle="modal" data-target="#addWallet" data-backdrop="static" data-dismiss="modal">
+               <i class="icon icon-walletalt"></i>Wallet
             </a>
 <!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">-->
 <!--               <i class="icon icon-barchartalt"></i>Graph-->

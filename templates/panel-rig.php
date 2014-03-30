@@ -3,9 +3,12 @@
     
     <div class="panel-heading">
         <button type="button" class="panel-header-button btn-delete" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-        <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
-        <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
-        <h2 class="panel-title"><i class="icon icon-server"></i> Mining Rig Stats</h2>
+        <button type="button" class="panel-header-button btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-managedhosting"></i> Manage</button>
+        <!-- <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
+        <button type="button" class="sort-down panel-header-button toggle-panel-body"><i class="icon icon-chevron-down"></i></button> 
+        <button type="button" class="sort-up panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>
+        <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>  --> 
+        <h2 class="panel-title"><i class="icon icon-pixelpickaxe"></i> Rig Stats</h2>
     </div>
     
     <div class="panel-content">
@@ -24,14 +27,15 @@
                 </div><!-- / .panel-body -->
             </div>
         </div>
-        
-        <div class="panel-footer" style="display: none;">
+    <!--        
+        <div class="panel-footer">
             <div class="text-right">
-                <button type="button" class="btn btn-default btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-server"></i> Manage Rig</button>
-    <!--            <button type="button" class="btn btn-default btn-updater" data-type="rig" data-attr="<?php echo $minerId?>"><i class="icon icon-refresh"></i> Update Now</button>-->
-                <!-- <button type="button" class="btn btn-default"><i class="icon icon-statistics"></i> View All Stats</button> -->
+                
+            <button type="button" class="btn btn-default btn-updater" data-type="rig" data-attr="<?php echo $minerId?>"><i class="icon icon-refresh"></i> Update Now</button>
+            <button type="button" class="btn btn-default"><i class="icon icon-statistics"></i> View All Stats</button>
             </div>
         </div>
+    -->
     </div>
     
 </div>

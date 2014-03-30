@@ -10,15 +10,15 @@ require_once("includes/header.php");
          
       <div id="wallet-wrap" class="container sub-nav">
 
-        <div id="wallet-details" class="panel panel-primary panel-no-grid panel-overview">
+        <div id="wallet-details" class="panel panel-primary panel-no-grid panel-wallet">
            <h1>Wallet</h1>
            <div class="panel-heading">
               <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
-              <h2 class="panel-title"><img src="images/icon-bitcoin.png" /> {{WALLET_NAME}}</h2>
+              <h2 class="panel-title">{{WALLET_NAME}}</h2>
            </div>
            <div class="panel-body">
               <div class="total-wallet-balance">
-                <span class="green">3.48970242 BTC</span>
+                <span class="green">3.48970242 <img src="images/icon-bitcoin.png" /> BTC</span>
               </div>
               <div class="table-responsive">
                 <form role="form">

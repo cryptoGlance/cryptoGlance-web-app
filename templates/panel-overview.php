@@ -2,9 +2,10 @@
 <div id="overview" class="panel panel-primary panel-overview">
    <h1>Overview</h1>
    <div class="panel-heading">
-      <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-      <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
-      <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button> 
+      <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
+      <button type="button" class="panel-header-button btn-updater" data-type="all"><i class="icon icon-refresh"></i> Update</button>
+      <!-- <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
+      <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>  -->
       <h2 class="panel-title"><i class="icon icon-eye-view"></i> Current Rigs</h2>
    </div>
    <div class="panel-body panel-body-overview">
@@ -25,12 +26,4 @@
         </table>
       </div>
    </div><!-- / .panel-body -->
-   <div class="panel-footer">
-      <div class="pull-left">
-         <h3 class="helpful-tip"><i class="icon icon-info-sign"></i> table scrolls horizontally</h3>
-      </div>
-      <div class="pull-right">
-         <button type="button" class="btn btn-default btn-updater" data-type="all"><i class="icon icon-refresh"></i> Update Now</button>
-      </div>
-   </div>
 </div>

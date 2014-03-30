@@ -19,35 +19,36 @@ function externalLinks() {
 // Dashboard Panel Sorting and Repositioning
 //
 
-$(function() {
-  $( "#dashboard-wrap:not(.login-container)" ).sortable({
-    placeholder: "dashboard-dropzone",
-    opacity: 0.75,
-    scrollSpeed: 50,
-    handle: '.panel-heading',
-    forcePlaceholderSize: true,
-    scroll: true,
-    scrollSensitivity: 100,
-    update: function(event, ui) {
-      var cooked = [];
-      $("#dashboard-wrap:not(.login-container)").each(function(index, domEle){ cooked[index]=  $(domEle).sortable('toArray');});
-      $.cookie('cookie_dashboard_layout', 'x'+cooked.join('|'), { expires: 31, path: '/'});
-    }
-  });
-});
-
-
-function restoreDashboard() {
-  var cookie = $.cookie('cookie_dashboard_layout');
-  if (!cookie) return;
-  var SavedID = cookie.split('|');
-  for ( var u=0, ul=SavedID.length; u < ul; u++ ){ SavedID[u] = SavedID[u].split(',');}
-  for (var Scolumn=0, n = SavedID.length; Scolumn < n; Scolumn++) {
-    for (var Sitem=0, m = SavedID[Scolumn].length; Sitem < m; Sitem++) {
-      $("#dashboard-wrap:not(.login-container)").eq(Scolumn).append($("#dashboard-wrap:not(.login-container)").children("#" + SavedID[Scolumn][Sitem]));
-    }
-  }
-}
+// $(function() {
+//   $( "#dashboard-wrap:not(.login-container)" ).sortable({
+//     placeholder: "panel",
+//     opacity: 0.75,
+//     scrollSpeed: 50,
+//     handle: '.panel-heading',
+//     containment: '#dashboard-wrap',    
+//     forcePlaceholderSize: false,
+//     scroll: true,
+//     scrollSensitivity: 100,
+//     update: function(event, ui) {
+//       var cooked = [];
+//       $("#dashboard-wrap:not(.login-container)").each(function(index, domEle){ cooked[index]=  $(domEle).sortable('toArray');});
+//       $.cookie('cookie_dashboard_layout', 'x'+cooked.join('|'), { expires: 365, path: '/'});
+//     }
+//   }).disableSelection();
+// });
+// 
+// 
+// function restoreDashboard() {
+//   var cookie = $.cookie('cookie_dashboard_layout');
+//   if (!cookie) return;
+//   var SavedID = cookie.split('|');
+//   for ( var u=0, ul=SavedID.length; u < ul; u++ ){ SavedID[u] = SavedID[u].split(',');}
+//   for (var Scolumn=0, n = SavedID.length; Scolumn < n; Scolumn++) {
+//     for (var Sitem=0, m = SavedID[Scolumn].length; Sitem < m; Sitem++) {
+//       $("#dashboard-wrap:not(.login-container)").eq(Scolumn).append($("#dashboard-wrap:not(.login-container)").children("#" + SavedID[Scolumn][Sitem]));
+//     }
+//   }
+// }
 
 // Wallet/Address stat-pair Sorting and Repositioning
 //
@@ -85,17 +86,6 @@ function restoreDashboard() {
 //    }
 // }
 
-// Smooth scroll to active rig from the Overview panel
-// TODO: Bug - when the Tools --> Active Panel link is clicked, it animates down, but then 'locks' the user there when they try to scroll
-// possibly caused by where this function is (just below) and the fact that is also exists in 'rigwatch-ui.js'
-
-$(function() {
-    $('#overview').on('click', '.anchor-offset', function(e) {
-        e.preventDefault();
-        var target = $(this).attr('href');
-        $('body').scrollTo(target, 750, { margin: true, offset: -120 });
-    });
-});
 
 function callAlert() {
     $(function(){
@@ -136,18 +126,22 @@ function callAlert() {
 
 // Setup Masonry Layout
 function initMasonry() {
+  $('#dashboard-wrap, .full-content').css('width','100%');
   $('.panel:not(.panel-in-footer, .panel-no-grid)').addClass('panel-masonry');
   $('#dashboard-wrap').masonry({
     itemSelector: '.panel',
-    columnWidth: '.panel-masonry'
+    columnWidth: 1
   });
   $.cookie("use_masonry_layout", "yes");
+  $(".site-width-slider").fadeOut();
 }
 
 function destroyMasonry() {
   $('#dashboard-wrap').masonry('destroy');
   $('.panel:not(.panel-in-footer, .panel-no-grid)').removeClass('panel-masonry');
   $.removeCookie("use_masonry_layout");
+  restorePanelWidth();
+  $(".site-width-slider").fadeIn();
 }
 
 function restoreSiteLayout() {
@@ -172,22 +166,16 @@ function restoreSiteLayout() {
 $(function() {
 
   //Store frequently elements in variables
-  var slider  = $('#slider'),
-    tooltip = $('.tooltip');
-    
-  //Hide the Tooltip at first
-  tooltip.hide();
-
+  var slider  = $('#slider');
+  
   //Call the Slider
   slider.slider({
-    //Config
     range: "min",
-    min: 49,
-    max:96,
+    min: 59,
+    max:100,
     value: 90,
 
     start: function(event,ui) {
-      // tooltip.fadeIn('fast');
     },
 
     //Slider Event
@@ -197,40 +185,43 @@ $(function() {
         actualWidth = $('.width-reading'),
         container = $('#dashboard-wrap, .full-content'),
         viewportWidth  = $(window).width();
-     
-     // tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly
 
-     if(viewportWidth > 1200) {
+     if (viewportWidth > 1200) {
         container.css('width', value + '%');
         actualWidth.html(value + '%');
         $.cookie("cookie_panel_width", value);
      }
-     
+          
     },
 
     stop: function(event,ui) {
-      // tooltip.fadeOut('fast');
-      
-      // TODO: only run this if the 'masonryOn' cookie is set to true/1
-      initMasonry();
+      var siteLayout = $.cookie('use_masonry_layout');
+      if (siteLayout == 'yes') {
+        initMasonry();
+      }  
     },
   });
 
 });
 
 function restorePanelWidth() {
-  var panelWidth = $.cookie('cookie_panel_width');
+  var panelWidth = $.cookie('cookie_panel_width'),
+    siteLayout = $.cookie('use_masonry_layout');
+
   if (!panelWidth) return;
-     $('#dashboard-wrap, .full-content').css('width', panelWidth + '%');
-     $('.width-reading').html(panelWidth + '%');
-     $('.width-reading').html(panelWidth + '%');
-     $('#slider').slider("value", panelWidth);
-  // Set slider point !!!!!!!!!
+  
+  if (siteLayout != "yes") {
+    $('#dashboard-wrap, .full-content').css('width', panelWidth + '%');
+    $('.width-reading').html(panelWidth + '%');
+    $('.width-reading').html(panelWidth + '%');
+    $('#slider').slider("value", panelWidth);
+  };
 }
 
 function mobileWidthFixer() {
   var viewportWidth  = $(window).width(),
-    container = $('#dashboard-wrap, .full-content');
+    container = $('#dashboard-wrap, .full-content'),
+    siteLayout = $.cookie('use_masonry_layout'),
     currentWidth = $('#slider').slider("option", "value");
     
   if(viewportWidth < 770) {
@@ -238,7 +229,9 @@ function mobileWidthFixer() {
   } else if (viewportWidth < 1200) {
     container.css('width', '90%');
   } else {
-    container.css('width', currentWidth + '%');
+    if(siteLayout != "yes"){
+      container.css('width', currentWidth + '%');
+    }
   }
   
 }
@@ -253,7 +246,7 @@ function collapseAllPanels() {
     return false;
 }
   
-  
+
 // Close navbar after click on mobile
 //
 
@@ -281,12 +274,20 @@ function prettifyInputs() {
 
  
 // Toggle Mobile Navbar
+//
 function toggleMobileNavbar() {
   $('.navbar-collapse').collapse('toggle');
 }
 
-// Hide Mobile Header
-function hideMobileHeader() {
+// Show Mobile Hashrate
+//
+function toggleMobileHashrate() {
+  $('#mobile-hashrate').slideToggle('slow');
+}
+
+// App-specific fixes needed after page loads
+//
+function fixApp() {
   $('.navbar').css({
     maxHeight : "0px",
     minHeight: "0px"
@@ -297,6 +298,7 @@ function hideMobileHeader() {
     }
   );
   $('.navbar-header').hide();  
+  $('#mobile-hashrate').css('top','0px');
 }
 
 
@@ -306,6 +308,17 @@ function hideMobileHeader() {
 function scrollTo(id){
   $('html,body').animate({scrollTop: $(id).offset().top},'slow');
 };
+
+
+// Smooth scroll to active rig from the Overview panel
+
+$(function() {
+    $('#overview').on('click', '.anchor-offset', function(e) {
+        e.preventDefault();
+        var target = $(this).attr('href');
+        $('body').scrollTo(target, 750, { margin: true, offset: -120 });
+    });
+});
     
   
 // Only change custom width (via slider) for viewports over 1200px
@@ -327,7 +340,7 @@ $(document).ready(function() {
   externalLinks();
   prettifyInputs();
   
-  restoreDashboard();
+  //restoreDashboard();
   restorePanelWidth();
   
   $('#layout-grid').click(function() {
@@ -344,7 +357,7 @@ $(document).ready(function() {
     restorePanelWidth();
     return false;
   });
-
+  
   $('#collapse-all-panels').click(function(event) {
     event.preventDefault();
     collapseAllPanels();
@@ -382,7 +395,7 @@ $(document).ready(function() {
      disabled: true
     });
     setTimeout(function() { 
-     $currentButton.html("<i class='icon icon-refresh'></i> Update Now");
+     $currentButton.html("<i class='icon icon-refresh'></i> Update");
      $currentButton.prop({
         disabled: false
      });
