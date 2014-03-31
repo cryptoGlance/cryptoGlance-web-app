@@ -13,7 +13,6 @@
     
     <div class="panel-content">
         <ul class="nav nav-pills"></ul>
-        
         <div class="tab-content">
             <div class="tab-pane fade in active" id="rig-<?php echo $minerId?>-summary">
                 <div class="panel-body panel-body-stats">

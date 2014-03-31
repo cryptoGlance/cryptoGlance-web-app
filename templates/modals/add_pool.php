@@ -16,22 +16,43 @@
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <strong>Success!</strong> You've saved this pool.
             </div>         
-           <div class="form-group">
+           <div class="form-group all">
              <label for="inputPoolLabel" class="col-sm-3 control-label">Label</label>
-             <div class="col-sm-9">
-               <input type="text" class="form-control" id="inputPoolLabel">
+             <div class="col-sm-7">
+               <input type="text" class="form-control" id="inputPoolLabel" name="label">
              </div>
            </div>
-           <div class="form-group">
-             <label for="inputPoolIP" class="col-sm-3 control-label">Pool URL</label>
-             <div class="col-sm-9">
-               <input type="text" class="form-control" id="inputPoolIP">
+          <div class="form-group all">
+            <label for="selectPoolType" class="col-sm-3 control-label">Type</label>
+            <div class="col-sm-4">
+              <select class="form-control" id="selectPoolType" name="poolType">
+                 <option value="mpos">MPOS</option>
+                 <option value="wafflepool">WafflePool</option>
+              </select>
+            </div>
+          </div>
+           <div class="form-group mpos">
+             <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
+             <div class="col-sm-7">
+               <input type="text" class="form-control" id="inputPoolURL" name="url">
              </div>
            </div>
-           <div class="form-group">
-             <label for="inputPoolPort" class="col-sm-3 control-label">API Key</label>
-             <div class="col-sm-9">
-               <input type="text" class="form-control" id="inputPoolPort" maxLength="5">
+           <div class="form-group mpos">
+             <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
+             <div class="col-sm-7">
+               <input type="text" class="form-control" id="inputPoolAPI" name="api">
+             </div>
+           </div>
+           <div class="form-group mpos">
+             <label for="inputPoolUserId" class="col-sm-3 control-label">User ID</label>
+             <div class="col-sm-3">
+               <input type="text" class="form-control" id="inputPoolUserId" name="userid">
+             </div>
+           </div>
+           <div class="form-group wafflepool" style="display: none;">
+             <label for="inputAddress" class="col-sm-3 control-label">BTC Address</label>
+             <div class="col-sm-7">
+               <input type="text" class="form-control" id="inputAddress" name="address">
              </div>
            </div>
          </div>

@@ -10,7 +10,7 @@
       <div class="modal-body">
          <div class="new-panel-choices">
             <a class="new-panel-btn" data-toggle="modal" data-target="#addRig" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-server"></i>Rig
+               <i class="icon icon-pixelpickaxe"></i>Rig
             </a>
             <a class="new-panel-btn" data-toggle="modal" data-target="#addPool" data-backdrop="static" data-dismiss="modal">
                <i class="icon icon-communitysmall"></i>Pool

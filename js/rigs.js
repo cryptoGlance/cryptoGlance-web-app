@@ -266,9 +266,9 @@ function updateRigs(data) {
                     }
                 
                     if (devType == 'GPU') {
-                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
+                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType + dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
                     } else if(devType == 'ASC') {
-                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">dev'+dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
+                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType +dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
                     }
                 }
             
@@ -277,14 +277,14 @@ function updateRigs(data) {
         
         $(rigNavElm).find('li:eq('+ selectedNav +')').addClass('active');
         $(rigTabContentElm).find('.tab-pane:eq('+ selectedNav +')').addClass('active');
-                
+        
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-          var siteLayout = $.cookie('use_masonry_layout');
-          if (siteLayout == 'yes') {
-            initMasonry();
-          }  
-        })
-                        
+            var siteLayout = $.cookie('use_masonry_layout');
+            if (siteLayout == 'yes') {
+                initMasonry();
+            }  
+        });
+        
         // Update Overview Panel
         if (rig.summary.hashrate_5s < 1) {
             rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1024) + ' KH/S';

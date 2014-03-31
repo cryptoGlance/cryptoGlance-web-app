@@ -27,7 +27,7 @@ class Class_Pools {
     }
 
     private function addPool($pool) {
-        if (empty($pool['type']) || empty($pool['apiurl']) || empty($pool['apikey']) || empty($pool['userid'])) {
+        if (empty($pool['type'])) {
             return false;
         }
 

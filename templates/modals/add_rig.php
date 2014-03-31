@@ -13,8 +13,8 @@
                  <strong>Success!</strong> You've saved this mining rig.
                </div>         
               <div class="form-group">
-                <label for="inputRigLabel" class="col-sm-5 control-label">Label</label>
-                <div class="col-sm-5">
+                <label for="inputRigLabel" class="col-sm-3 control-label">Label</label>
+                <div class="col-sm-7">
                   <input type="text" class="form-control" id="inputRigLabel" name="label">
                 </div>
               </div>
@@ -27,13 +27,13 @@
 <!--                </div>-->
 <!--              </div>-->
               <div class="form-group">
-                <label for="inputRigIP" class="col-sm-5 control-label">IP Address</label>
-                <div class="col-sm-5">
+                <label for="inputRigIP" class="col-sm-3 control-label">IP Address</label>
+                <div class="col-sm-7">
                   <input type="text" class="form-control" id="inputRigIP" name="ip_address">
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputRigPort" class="col-sm-5 control-label">API Port</label>
+                <label for="inputRigPort" class="col-sm-3 control-label">API Port</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="port">
                 </div>

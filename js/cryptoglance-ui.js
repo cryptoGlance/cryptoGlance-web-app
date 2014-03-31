@@ -449,5 +449,20 @@ $(document).ready(function() {
         $('input[name="type"]', this).val($(this).attr('data-type'));
         $('input[name="id"]', this).val($(this).attr('data-id'));
     });
+    
+        
+    // Pool modal
+    $('#selectPoolType').change(function() {
+        var type = $(this).val();
+        if (type == 'mpos') {
+            $('#addPool').find('.form-group').hide();
+            $('#addPool').find('.mpos').show();
+            $('#addPool').find('.all').show();
+        } else if (type == 'wafflepool') {
+            $('#addPool').find('.form-group').hide();
+            $('#addPool').find('.wafflepool').show();
+            $('#addPool').find('.all').show();            
+        }
+    });
   
 });

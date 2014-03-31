@@ -123,9 +123,12 @@ class Class_Miners_Cgminer {
             'hashrate_avg' => round($summaryData['MHS av'], 3),
             'hashrate_5s' => round($summaryData['MHS 5s'], 3),
             'blocks_found' => $summaryData['Found Blocks'],
-            'accepted' => $summaryData['Accepted'],
-            'rejected' => $summaryData['Rejected'],
-            'stale' => $summaryData['Stale'],
+//            'accepted' => $summaryData['Accepted'],
+            'accepted' => $summaryData['Difficulty Accepted'],
+//            'rejected' => $summaryData['Rejected'],
+            'rejected' => $summaryData['Difficulty Rejected'],
+//            'stale' => $summaryData['Stale'],
+            'stale' => $summaryData['Difficulty Stale'],
             'hw_errors' => $summaryData['Hardware Errors'],
             'utility' => $summaryData['Utility'] . '/m',
             'active_mining_pool' => $activePool['url'],
@@ -192,7 +195,7 @@ class Class_Miners_Cgminer {
         if ($this->onlineCheck() != null) {
             $summary = json_decode($this->getData('{"command":"summary"}'), true);
             $this->_summary = $summary['SUMMARY'];
-        
+
             $dev = json_decode($this->getData('{"command":"devs"}'), true);
             $this->_devs = $dev['DEVS'];
         

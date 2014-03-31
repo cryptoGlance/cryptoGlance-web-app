@@ -67,6 +67,7 @@ class CryptoGlance {
         $rigId = $rigId-1;
         
         unset($this->_config['miners'][$rigId]);
+        $this->_config['miners'] = array_values($this->_config['miners']);
         $fh = $fileHandler = new Class_FileHandler('configs/miners.json');
         $fh->write(json_encode($this->_config['miners']));
         http_response_code(202); // accepted
@@ -82,24 +83,30 @@ class CryptoGlance {
     // NOT DONE
         $label = $_POST['label'];
         $type = $_POST['poolType'];
-        $ipAddress = $_POST['ip_address'];
-        $port = intval($_POST['port']);
+        $url = rtrim($_POST['url'], '/');
+        $address = $_POST['address'];
+        $api = $_POST['api'];
+        $userid = $_POST['userid'];
         
-        if (empty($type) || empty($ipAddress) || empty($port)) {
+        $pool = array();
+        if ($type == 'mpos' && !(empty($url) || empty($api) || empty($userid))) {
+            $pool = array(
+                'type' => 'mpos',
+                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
+                'apiurl' => $url,
+                'apikey' => $api,
+                'userid' => $userid,
+            );
+        } else if ($type == 'wafflepool' && !empty($address)) {
+            $pool = array(
+                'type' => 'wafflepool',
+                'name' => ($label ? $label : 'WafflePool'),
+                'address' => $address,
+            );
+        } else {
             http_response_code(406); // not accepted
             return null;
         }
-        
-        foreach ($this->_config['pools'] as $rig) {
-            if ($ipAddress == $rig['host'] && $port == $rig['port']) {
-                http_response_code(409); // conflict
-                return null;
-            }
-        }
-        
-        $pool = array(
-        
-        );
         
         $this->_config['pools'][] = $pool;
         $fh = $fileHandler = new Class_FileHandler('configs/pools.json');
@@ -116,6 +123,7 @@ class CryptoGlance {
         $poolId = $poolId-1;
         
         unset($this->_config['pools'][$poolId]);
+        $this->_config['pools'] = array_values($this->_config['pools']);
         $fh = $fileHandler = new Class_FileHandler('configs/pools.json');
         $fh->write(json_encode($this->_config['pools']));
         http_response_code(202); // accepted
