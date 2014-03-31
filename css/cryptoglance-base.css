@@ -932,6 +932,10 @@ a#dash-add-panel {
   color: #ccc;
 }
 
+.panel-pool h1, .panel-pool h2 i {
+  color: #9DE5FF;
+}
+
 .panel-wallet {
   border-color: #6e6e6e #38DF38 #287528 #287528;
 }
@@ -1761,6 +1765,10 @@ a#dash-add-panel {
     border-width: 0 1px 1px;
     text-align: left;
     box-shadow: inset 0 -3px 10px rgba(0,0,0,0.4)
+  }
+  
+  .nav-pills .dropdown-menu li a {
+    box-shadow: none;
   }
 
   .nav-pills>li+li {
