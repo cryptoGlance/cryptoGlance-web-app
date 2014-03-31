@@ -1,6 +1,7 @@
 // UI JavaScript for RigWatch
 // 	by George Merlocco (george@merloc.co) // https://github.com/scar45/
 
+// ***** NOTE ***** JS optimization/clean-up is needed, don't laugh!
 
 // Javascript Open in New Window (validation workaround)
 //
@@ -277,7 +278,13 @@ function prettifyInputs() {
 // Toggle Mobile Navbar
 //
 function toggleMobileNavbar() {
-  $('.navbar').collapse('toggle');
+  var viewportWidth  = $(window).width();
+
+  if(viewportWidth < 768) {
+    $('.navbar-collapse').collapse('toggle');
+  } else {
+    $('.navbar').collapse('toggle');
+  }
 }
 
 // Show Mobile Hashrate
@@ -294,7 +301,20 @@ function fixApp() {
     }
   );
   $('#mobile-hashrate').css('top','0px');
-  $('.navbar').collapse('hide');
+
+  var viewportWidth  = $(window).width();
+
+  if(viewportWidth < 768) {
+    $('.navbar-collapse').slideUp();
+    $('.navbar, .navbar-header').css({
+      'min-height':'0px',
+      'height':'0px'
+    });
+    $('.navbar-header').css('overflow','hidden');
+    $('a.navbar-brand img').hide();
+  } else {
+    $('.navbar').collapse('hide');
+  }
 }
 
 
