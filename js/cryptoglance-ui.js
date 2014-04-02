@@ -198,7 +198,7 @@ $(function() {
     stop: function(event,ui) {
       var viewportWidth  = $(window).width(),
         siteLayout = $.cookie('use_masonry_layout');
-      if (siteLayout == 'yes' && viewpoerWidth > 1200) {
+      if (siteLayout == 'yes' && viewportWidth > 1200) {
         initMasonry();
       }  
     },
