@@ -6,6 +6,13 @@ if (!$_SESSION['login_string']) {
     exit();
 }
 
+global $CACHED;
+if (isset($_GET['cached']) && $_GET['cached'] == 0) {
+    $CACHED = false;
+} else {
+    $CACHED = true;
+}
+
 $type = ucwords(strtolower($_GET['type']));
 
 $action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($_GET['action'])));

@@ -63,7 +63,7 @@ $('#switchPool .btn-success').click(function() {
             url: 'ajax.php?type=miners&action=switch-pool&miner=' + minerId + '&pool=' + (parseInt(selectedPoolId)+1),
             dataType: 'json'
         }).done(function(data) {
-            ajaxUpdateCall('all');
+            ajaxUpdateCall('rig');
         });
     }
 });
@@ -230,7 +230,7 @@ function updateRigs(data) {
                 }
                 
                 // add dev to Nav
-                $(rigNavElm).append('<li><a class="rig-'+ rigId +'-'+ devType +'-'+ devIndex +' '+ status +'" href="#rig-'+ rigId +'-'+ devType +'-'+ devIndex +'" data-toggle="tab">'+ devType +' '+ devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
+                $(rigNavElm).append('<li><a class="rig-'+ rigId +'-'+ devType +'-'+ devIndex +' '+ status +'" href="#rig-'+ rigId +'-'+ devType +'-'+ devIndex +'" data-toggle="tab">'+ devType + devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
                 $(rigTabContentElm).find('#rig-'+ rigId +'-'+ devType +'-'+ devIndex).remove();
                 $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig-'+ rigId +'-'+ devType +'-'+ devIndex +'"><div class="panel-body panel-body-stats"></div></div>');
                 

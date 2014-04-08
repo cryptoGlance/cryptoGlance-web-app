@@ -27,8 +27,8 @@ class Class_Miners_Cgminer {
     private function getData($cmd) {
         $response = '';
         $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, 1);
-        
-        if (!$socket) {
+                
+        if (!$socket || $errno != 0) {
             return null;
         } else {
             fwrite($socket, $cmd);

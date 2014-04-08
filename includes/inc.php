@@ -10,19 +10,14 @@ if (ini_set('session.use_only_cookies', 1) === FALSE) {
 }
 // Gets cookies params
 $cookieParams = session_get_cookie_params();
-session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], false, true);
+//session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], false, true);
 session_start();
 
 require_once('config.php');
 
 define('DATA_PATH', getcwd() . '/' . DATA_FOLDER . '/');
 
-//
-//// DEV ONLY:
-define('CURRENT_VERSION', 'v0.1-alpha');
-//// END DEV ONLY
-//
 
-// PRODUCTION:
-//define('CURRENT_VERSION', 'v0.0.');
+//// Current Build:
+define('CURRENT_VERSION', 'v0.1-alpha');
 ?>

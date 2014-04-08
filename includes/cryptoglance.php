@@ -3,10 +3,9 @@ require_once('classes/filehandler.php');
 class CryptoGlance {
 
     private $_configTypes = array(
-        'currency',
+        'cryptoglance',
         'miners',
         'pools',
-        'cryptoglance',
         'wallets',
     );
     
@@ -80,7 +79,6 @@ class CryptoGlance {
         return $this->_config['pools'];
     }
     public function addPool() {
-    // NOT DONE
         $label = $_POST['label'];
         $type = $_POST['poolType'];
         $url = rtrim($_POST['url'], '/');

@@ -1,6 +1,9 @@
 var ajaxCall = ['all', 'rig', 'pool', 'wallet'];
 
-ajaxUpdateCall('all');
+//ajaxUpdateCall('all');
+ajaxUpdateCall('rig');
+ajaxUpdateCall('pool');
+ajaxUpdateCall('wallet');
 
 // BTN Updates
 $('.btn-updater').click(function() {

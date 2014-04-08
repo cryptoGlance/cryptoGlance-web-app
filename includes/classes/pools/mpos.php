@@ -25,8 +25,8 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
         $this->_fileHandler = new Class_FileHandler('pools/mpos/'. $params['apikey'] .'.json');
     }
 
-    public function update($cached = true) {
-        if ($cached == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
+    public function update() {
+        if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
             $poolData = array();
             foreach ($this->_actions as $action) {
                 $curl = curl_init($this->_apiURL  . '/index.php?page=api&id='. $this->_userId .'&api_key='. $this->_apiKey . '&action=' . $action);

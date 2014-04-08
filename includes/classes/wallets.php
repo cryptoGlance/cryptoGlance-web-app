@@ -49,31 +49,24 @@ class Class_Wallets {
             'addresses' => $addessData,
         );
     }
-
-    public function getAddresses() {
-        $walletId = intval($_GET['wallet']);
-        if ($walletId == 0) {
-            return null;
-        }
-        
-        $walletAddressesData = array();
-        foreach($this->_wallets[$walletId-1]['addresses'] as $address) {
-            $walletAddressesData[] = $address->getAddress();
-        }
-        
-        echo json_encode($walletAddressesData);
-    }
     
-    public function update($cached = false) {
-        $data = array();
+    public function update($walletId = null) {
+        $data = $wallets = array();
+        $wallets = $this->_wallets;
         
-        foreach ($this->_wallets as $key => $wallet) {
+        if (!empty($walletId) && $walletId != 0) {
+            $walletId -= 1;
+            $wallets = array($this->_wallets[$walletId]);
+        }
+        
+        foreach ($wallets as $key => $wallet) {
             $walletAddressData = array();
             $totalBalance = 0;
             
             // Wallet actually contains a bunch of addresses and associated data
             foreach ($wallet['addresses'] as $address) {
-                $addressData = $address->update($cached);
+                $addressData = $address->update();
+                $walletAddressData[$addressData['address']] = $addressData['balance'];
                 $totalBalance += $addressData['balance'];
             }
             
@@ -82,7 +75,8 @@ class Class_Wallets {
                 'currency_code' => $this->_currencies[$wallet['currency']],
                 'label' => $wallet['label'],
                 'balance' => $totalBalance,
-                'total_addresses' => count($wallet['addresses']),
+                'total_addresses' => count($wallet['addresses']), // needed?
+                'addresses' => $walletAddressData,
             );
             
         }

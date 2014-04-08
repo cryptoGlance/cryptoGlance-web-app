@@ -51,11 +51,11 @@
     ?>
     <script type="text/javascript">
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
-        var devHeatWarning = <?php echo $settings['general']['temps']['warning'] ?>;
-        var devHeatDanger = <?php echo $settings['general']['temps']['danger'] ?>;
+        var devHeatWarning = <?php echo (!empty($settings['general']['temps']['warning']) ? $settings['general']['temps']['warning'] : 75) ?>;
+        var devHeatDanger = <?php echo (!empty($settings['general']['temps']['danger']) ? $settings['general']['temps']['danger'] : 85) ?>;
         var devHWWarning = 5;
-        var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig'] ?>;
-        var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool'] ?>;
-        var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet'] ?>;
+        var rigUpdateTime = <?php echo (!empty($settings['general']['updateTimes']['rig']) ? $settings['general']['updateTimes']['rig'] : 3000) ?>;
+        var poolUpdateTime = <?php echo (!empty($settings['general']['updateTimes']['pool']) ? $settings['general']['updateTimes']['pool'] : 120000) ?>;
+        var walletUpdateTime = <?php echo (!empty($settings['general']['updateTimes']['wallet']) ? $settings['general']['updateTimes']['wallet'] : 600000) ?>;
     </script>     
 </head>

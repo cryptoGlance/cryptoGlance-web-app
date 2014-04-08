@@ -37,14 +37,15 @@ class Class_Pools {
     }
     
     public function update($poolId = null) {
+        $data = array();
         if (!empty($poolId) && $poolId != 0) {
             $poolId -= 1; // Arrays start at 0... 1 less than the ID on frontend
             if (!empty($this->_pools[$poolId])) {
-                $data[] = $this->_pools[$poolId]->update(false);
+                $data[] = $this->_pools[$poolId]->update();
             }
         } else {        
             foreach ($this->_pools as $pool) {
-                $data[] = $pool->update(true);
+                $data[] = $pool->update();
             }
         }
         

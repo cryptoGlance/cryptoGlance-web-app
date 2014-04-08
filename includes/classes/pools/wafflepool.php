@@ -14,8 +14,8 @@ class Class_Pools_Wafflepool extends Class_Pools_Abstract {
         $this->_fileHandler = new Class_FileHandler('pools/wafflepool/'. $params['address'] .'.json');
     }
 
-    public function update($cached = true) {
-        if ($cached == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
+    public function update() {
+        if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
             $curl = curl_init($this->_apiURL  . '/tmp_api?address='. $this->_btcaddess); // temporaary since 
             curl_setopt($curl, CURLOPT_FAILONERROR, true);
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);

@@ -15,8 +15,8 @@ class Class_Wallets_Abstract {
         $this->_address = $address;
     }
     
-    public function getAddress() {
-        return json_decode($this->_fileHandler->read(), true);
-    }
+//    public function getAddressData() {
+//        return json_decode($this->_fileHandler->read(), true);
+//    }
 }
 ?>

@@ -25,19 +25,24 @@ class Class_Update {
         echo json_encode($data);
     }
     
-    public function pool() { // needs cache override like wallets
-        $data['pools'] = $this->getPools();
+    public function pool() {
+        $id = null;
+        if (isset($_GET['attr'])) {
+            $id = intval($_GET['attr']);
+        }
+    
+        $data['pools'] = $this->getPools($id);
         
         echo json_encode($data);
     }
     
     public function wallet() {
-        $cached = null;
+        $id = null;
         if (isset($_GET['attr'])) {
-            $cached = ($_GET['attr'] == 'false') ? false : true;
+            $id = intval($_GET['attr']);
         }
         
-        $data['wallets'] = $this->getWallets($cached);
+        $data['wallets'] = $this->getWallets($id);
         
         echo json_encode($data);
     }
@@ -75,9 +80,9 @@ class Class_Update {
         return $data;
     }
     
-    private function getWallets($cached = true) {
+    private function getWallets($walletId = null) {
         $wallets = new Class_Wallets();
-        $data = $wallets->update($cached);
+        $data = $wallets->update($walletId);
         
         return $data;
     }
