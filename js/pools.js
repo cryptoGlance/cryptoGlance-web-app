@@ -27,7 +27,7 @@ function updatePools (data) {
                 v = '<a href="'+ pool.url +'/index.php?page=statistics&action=round&height='+v+'" target="_blank">'+v+'</a>';
             }
             
-            $(poolContentElm).append('<div class="stat-pair pool-conf-payout" id="pool-'+poolId+'-pool-conf-payout"><div class="stat-value"><span class="'+pairClass+'">'+v+'</span></div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
+            $(poolContentElm).append('<div class="stat-pair"><div class="stat-value"><span class="'+pairClass+'">'+v+'</span></div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
         });
     });
 }
