@@ -108,7 +108,7 @@ if ($walletId != 0) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-5">
+                        <div class="col-sm-offset-4 col-sm-4">
                             <button type="button" class="btn btn-lg btn-success" id="btnSaveWallets"><i class="icon icon-save-floppy"></i> Save Wallet</button>
                             <?php if ($walletId != 0) { ?>
                             <button type="button" class="btn btn-lg btn-danger" id="btnDeleteWallet"><i class="icon icon-circledelete"></i> Remove Wallet</button>
