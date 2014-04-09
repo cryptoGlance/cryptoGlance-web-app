@@ -152,9 +152,9 @@ function updateRigs(data) {
                 }
                 
                 if (v < 1) {
-                    v = (v*1024) + ' KH/S';
-                } else if(v > 1024) {
-                    v = (v/1024) + ' GH/S';
+                    v = (v*1000) + ' KH/S';
+                } else if(v > 1000) {
+                    v = (v/1000) + ' GH/S';
                 } else {
                     v = parseFloat(v).toFixed(2) + ' MH/S';
                 }
@@ -245,9 +245,9 @@ function updateRigs(data) {
                             v = v + '&deg;C';
                         } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
                             if (v < 1) {
-                                v = (v*1024) + ' KH/S';
-                            } else if (v > 1024) {
-                                v = (v/1024) + ' GH/S';
+                                v = (v*1000) + ' KH/S';
+                            } else if (v > 1000) {
+                                v = (v/1000) + ' GH/S';
                             } else {
                                 v = v + ' MH/S';
                             }
@@ -260,9 +260,9 @@ function updateRigs(data) {
                 // Update Summary Page of DEVs
                 if (!removeTable) {
                     if (dev.hashrate_5s < 1) {
-                        dev.hashrate_5s = (dev.hashrate_5s*1024) + ' KH/S';
-                    } else if (dev.hashrate_5s > 1024) {
-                        dev.hashrate_5s = parseFloat(dev.hashrate_5s/1024).toFixed(2) + ' GH/S';
+                        dev.hashrate_5s = (dev.hashrate_5s*1000) + ' KH/S';
+                    } else if (dev.hashrate_5s > 1000) {
+                        dev.hashrate_5s = parseFloat(dev.hashrate_5s/1000).toFixed(2) + ' GH/S';
                     } else {
                         dev.hashrate_5s += ' MH/S';
                     }
@@ -289,9 +289,9 @@ function updateRigs(data) {
         
         // Update Overview Panel
         if (rig.summary.hashrate_5s < 1) {
-            rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1024) + ' KH/S';
-        } else if (rig.summary.hashrate_5s > 1024) {
-            rig.summary.hashrate_5s = (rig.summary.hashrate_5s / 1024) + ' GH/S';
+            rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1000) + ' KH/S';
+        } else if (rig.summary.hashrate_5s > 1000) {
+            rig.summary.hashrate_5s = (rig.summary.hashrate_5s / 1000) + ' GH/S';
         } else {
             rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
         }
@@ -301,10 +301,10 @@ function updateRigs(data) {
     
     // Total amount of hash power
     if (overallHashrate < 1) {
-        overallHashrate *= 1024;
+        overallHashrate *= 1000;
         overallHashrateMetric = 'KH/S';
-    } else if (overallHashrate > 1024) {
-        overallHashrate /= 1024;
+    } else if (overallHashrate > 1000) {
+        overallHashrate /= 1000;
         overallHashrateMetric = 'GH/s';
     } else {
         overallHashrateMetric = 'MH/s';
