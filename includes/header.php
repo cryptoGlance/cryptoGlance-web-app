@@ -59,8 +59,8 @@
                            <div id="slider"></div> <!-- the Slider -->
                         </li>
                         <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
-                        <div class="divider"></div> <!-- the Slider -->
-                        <?php require_once("includes/menu-active_panels.php"); ?>
+                        <!-- <div class="divider"></div> -->
+                        <?php //require_once("includes/menu-active_panels.php"); ?>
                      </ul>
                   </li>
                   <li class="dropdown topnav">
