@@ -33,8 +33,16 @@
                   
                   <!-- TODO: ONLY show the total-hashrate + side-width-slider when on index.php / Dashboard -->
                   
+                  <?php
+                  $currentPage = preg_replace('/\.php$/', '', basename($_SERVER['PHP_SELF']));
+                  if ($currentPage == 'index') {
+                  ?>
                   <li><a class="total-hashrate">0 <small>MH/s</small></a></li>
-                  <li class="active topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a></li>
+                  <?php
+                  } ?>
+                  <li class="active topnav topnav-icon"><a id="dash-link" href="index.php" <?php echo ($currentPage != 'index') ? 'style="margin-right: 5px; -webkit-border-radius: 0 0 9px 9px; border-radius: 0 0 9px 9px;"' : '' ?>><i class="icon icon-speed"></i> Dashboard</a>
+                    <?php if ($currentPage == 'index') { ?><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a><?php } ?>
+                  </li>
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsthree-gears mobile-icon"></i> Tools <b class="caret"></b></a>
                      <ul class="dropdown-menu">
