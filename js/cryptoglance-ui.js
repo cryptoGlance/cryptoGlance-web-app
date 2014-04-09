@@ -484,5 +484,80 @@ $(document).ready(function() {
             $('#addPool').find('.all').show();            
         }
     });
+    
+    // Wallet Page \\
+    // Edit Action
+    $('#wallet-details').on('click', '.editAddress', function(e) {
+        e.preventDefault();
+        // row Parent
+        var addrRow = $(this).parents('tr');
+        $(addrRow).addClass('wallet-inline-edit');
+        
+        // Get Label and value
+        var addrLabelTd = $('[data-name="label"]', addrRow);
+        var addrLabelVal = $(addrLabelTd).html();
+        
+        // Create input field, populate, and style
+        var addrLabelInput = document.createElement("input");
+        $(addrLabelInput).val(addrLabelVal);
+        $(addrLabelInput).addClass('form-control');
+        $(addrLabelInput).attr('name', 'label');
+        $(addrLabelTd).html(addrLabelInput);
+
+        // get Last column (action buttons)
+        var actionTd = $('td:last', addrRow);
+        $(actionTd).html('<a href="#saveAddress" class="saveAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a>');
+    });
+    // Remove Action
+    $('#wallet-details').on('click', '.removeAddress', function(e) {
+        e.preventDefault();
+        
+        // Wallet Id
+        var walletId = $('#wallet-details').attr('data-walletId');
+        
+        // row Parent
+        var addrRow = $(this).parents('tr');
+        var addrKey = $(addrRow).attr('data-key');
+        
+        // on done:
+        $.ajax({
+            type: 'post',
+            url: 'ajax.php?type=update&action=remove-config',
+            data: { type: 'address', walletId: walletId, addrId: addrKey },
+            statusCode: {
+                202: function() {
+                    location.reload(true);
+                }
+            }
+        });
+    });
+    // Add Action
+    $('#wallet-details').on('click', '.saveAddress', function(e) {
+        e.preventDefault();
+        
+        // Wallet Id
+        var walletId = $('#wallet-details').attr('data-walletId');
+        
+        // row Parent
+        var addrRow = $(this).parents('tr');
+        var addrKey = $(addrRow).attr('data-key');
+        var addrLabel = $('[name="label"]', addrRow).val();
+        var addrAddress = $('[name="address"]', addrRow).val();
+        
+        // on done:
+        $.ajax({
+            type: 'post',
+            url: 'ajax.php?type=update&action=add-config',
+            data: { type: 'address', walletId: walletId, addrId: addrKey, label: addrLabel, address: addrAddress },
+            statusCode: {
+                202: function() {
+                    location.reload(true);
+                },
+                406: function() {
+                    alert('a field is missing a required value (label/address)');
+                }
+            }
+        });
+    });
   
 });

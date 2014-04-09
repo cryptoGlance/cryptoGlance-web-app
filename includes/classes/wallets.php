@@ -28,6 +28,11 @@ class Class_Wallets {
             }
         }
     }
+    
+    public function getCurrencies() {
+        // Making room for possible addition of data here.s
+        return $this->_currencies;
+    }
 
     private function addWallet($currency, $label, $addresses) {
         if (empty($currency) || empty($addresses)) {

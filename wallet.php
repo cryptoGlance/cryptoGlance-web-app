@@ -29,7 +29,7 @@ if ($walletId != 0) {
 <!-- ### Below is the Wallet page which contains wallet balances for children addresses, and allows for adding new addresses, and editing/deleting the entire wallet-->
     <div id="wallet-wrap" class="container sub-nav">
         <?php if ($walletId != 0) { ?>
-        <div id="wallet-details" class="panel panel-primary panel-no-grid panel-wallet">
+        <div id="wallet-details" class="panel panel-primary panel-no-grid panel-wallet" data-walletId="<?php echo $walletId ?>">
             <h1>Wallet</h1>
             <div class="panel-heading">
                 <button type="button" class="panel-header-button btn-updater" data-type="all"><i class="icon icon-refresh"></i> Update</button>
@@ -51,23 +51,19 @@ if ($walletId != 0) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                foreach($wallet['addresses'] as $address) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $address['label']?></td>
-                                    <td><?php echo $address['address']?></td>
+                                <?php foreach($wallet['addresses'] as $addressKey => $address) { ?>
+                                <tr data-key="<?php echo ($addressKey+1); ?>">
+                                    <td data-name="label"><?php echo $address['label']?></td>
+                                    <td data-name="address"><?php echo $address['address']?></td>
                                     <td><?php echo $wallet['data']['addresses'][$address['address']] ?> <?php echo $wallet['data']['currency_code'] ?></td>
-                                    <td><a href="#editAddress"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removeAddress"><span class="red"><i class="icon icon-remove"></i></span></a></td>
+                                    <td><a href="#editAddress" class="editAddress"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removeAddress" class="removeAddress"><span class="red"><i class="icon icon-remove"></i></span></a></td>
                                 </tr>
-                                <?php
-                                }
-                                ?>
+                                <?php } ?>
                                 <tr class="wallet-inline-edit">
-                                    <td><input type="text" class="form-control"></td>
-                                    <td><input type="text" class="form-control"></td>
+                                    <td><input type="text" name="label" class="form-control"></td>
+                                    <td><input type="text" name="address" class="form-control"></td>
                                     <td><em>new address</em></td>
-                                    <td><a href="#saveAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a></td>
+                                    <td><a href="#saveAddress" class="saveAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -96,21 +92,20 @@ if ($walletId != 0) {
                     <strong>Failed!</strong> Could not save the wallet info for some reason.
                 </div>  
                 <?php } ?>
-                <form class="form-horizontal" role="form">       
+                <form class="form-horizontal" role="form"> 
                     <div class="form-group">
                         <label for="inputWalletName" class="control-label col-sm-4">Wallet Name:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="inputWalletName">
+                            <input type="text" class="form-control" id="inputWalletName" name="label">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputWalletCurrency" class="control-label col-sm-4">Currency:</label>
                         <div class="col-sm-5">
-                            <select class="form-control">
-                                <option>Bitcoin (BTC)</option>
-                                <option>Litecoin (LTC)</option>
-                                <option>Dogecoin (DOGE)</option>
-                                <option>VertCoin (VTC)</option>
+                            <select class="form-control" name="currency">
+                                <?php foreach ($cryptoGlance->getCurrencies() as $currency => $code) { ?>
+                                <option value="<?php echo $code ?>"><?php echo $currency ?> (<?php echo $code ?>)</option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>

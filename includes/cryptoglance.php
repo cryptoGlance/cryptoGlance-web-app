@@ -59,11 +59,11 @@ class CryptoGlance {
     public function removeRig(){
         $rigId = intval($_POST['id']);
         
-        if (empty($rigId) || $rigId == 0) {
+        if ($rigId == 0 || empty($this->_config['miners'][$rigId-1])) {
             http_response_code(406); // not accepted
             return null;
         }
-        $rigId = $rigId-1;
+        $rigId -= 1;
         
         unset($this->_config['miners'][$rigId]);
         $this->_config['miners'] = array_values($this->_config['miners']);
@@ -114,11 +114,11 @@ class CryptoGlance {
     public function removePool(){
         $poolId = intval($_POST['id']);
         
-        if (empty($poolId) || $poolId == 0) {
+        if ($poolId == 0 || empty($this->_config['pools'][$poolId-1])) {
             http_response_code(406); // not accepted
             return null;
         }
-        $poolId = $poolId-1;
+        $poolId -= 1;
         
         unset($this->_config['pools'][$poolId]);
         $this->_config['pools'] = array_values($this->_config['pools']);
@@ -131,8 +131,74 @@ class CryptoGlance {
     //////////////
     // Wallets //
     /////////////
+    public function getCurrencies() {
+        $wallet = new Class_Wallets();
+        return $wallet->getCurrencies();
+    }
     public function getWallets() {
         return $this->_config['wallets'];
+    }
+    public function addWallet() {
+//        $label = $_POST['label'];
+//        $type = $_POST['currency'];
+    }
+    public function removeWallet() {
+    
+    }
+    public function addAddress() {
+        $walletId = intval($_POST['walletId']);
+        $addrId = intval($_POST['addrId']); // if addrID exist, edit address, not make new one
+        $newLabel = $_POST['label'];
+        $newAddress = $_POST['address'];
+        
+        if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1])) {
+            http_response_code(406); // not accepted
+            return null;
+        }
+        $walletId -= 1;
+        
+        if ($addrId != 0) {
+            // editing existing address
+            $addrId -= 1;
+            if (empty($this->_config['wallets'][$walletId]['addresses'][$addrId]) || empty($newLabel)) {
+                http_response_code(406); // not accepted
+                return null;
+            }
+            
+            $this->_config['wallets'][$walletId]['addresses'][$addrId]['label'] = $newLabel;
+        }  else {
+            // adding new address
+            if (empty($newLabel) || empty($newAddress)) {
+                http_response_code(406); // not accepted
+                return null;
+            }
+            
+            $this->_config['wallets'][$walletId]['addresses'][] = array(
+                'label' => $newLabel,
+                'address' => $newAddress,
+            );            
+        }
+
+        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh->write(json_encode($this->_config['wallets']));
+        http_response_code(202); // accepted
+    }
+    public function removeAddress() {
+        $walletId = intval($_POST['walletId']);
+        $addrId = intval($_POST['addrId']);
+        
+        if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1]) || $addrId == 0 || empty($this->_config['wallets'][$walletId-1]['addresses'][$addrId-1])) {
+            http_response_code(406); // not accepted
+            return null;
+        }
+        $walletId -= 1;
+        $addrId -= 1;
+        
+        unset($this->_config['wallets'][$walletId]['addresses'][$addrId]);
+        $this->_config['wallets'][$walletId]['addresses'] = array_values($this->_config['wallets'][$walletId]['addresses']);
+        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh->write(json_encode($this->_config['wallets']));
+        http_response_code(202); // accepted
     }
     
     
