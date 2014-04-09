@@ -139,11 +139,48 @@ class CryptoGlance {
         return $this->_config['wallets'];
     }
     public function addWallet() {
-//        $label = $_POST['label'];
-//        $type = $_POST['currency'];
+        $walletId = intval($_POST['walletId']);
+        $label = $_POST['label'];
+        $currency = $_POST['currency'];
+        
+        if ($walletId != 0) {
+            $walletId -= 1;
+            if (empty($label)) {
+                http_response_code(406); // not accepted
+                return null;
+            }
+            $this->_config['wallets'][$walletId]['label'] = $label;
+        } else {
+            if (empty($label) || empty($currency)) { // new wallets need label and option from currency dropdown
+                http_response_code(406); // not accepted
+                return null;
+            }
+            $this->_config['wallets'][] = array(
+                'currency' => $currency,
+                'label' => $label,
+                'addresses' => array()
+            );        
+        }
+        
+        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh->write(json_encode($this->_config['wallets']));
+        http_response_code(202); // accepted
+        echo count($this->_config['wallets']);
     }
     public function removeWallet() {
-    
+        $walletId = intval($_POST['walletId']);
+        
+        if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1])) {
+            http_response_code(406); // not accepted
+            return null;
+        }
+        $walletId -= 1;
+        
+        unset($this->_config['wallets'][$walletId]);
+        $this->_config['wallets'] = array_values($this->_config['wallets']);
+        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh->write(json_encode($this->_config['wallets']));
+        http_response_code(202); // accepted
     }
     public function addAddress() {
         $walletId = intval($_POST['walletId']);

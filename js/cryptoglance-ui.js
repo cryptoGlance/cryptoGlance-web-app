@@ -486,7 +486,7 @@ $(document).ready(function() {
     });
     
     // Wallet Page \\
-    // Edit Action
+    // Edit Address Action
     $('#wallet-details').on('click', '.editAddress', function(e) {
         e.preventDefault();
         // row Parent
@@ -508,7 +508,7 @@ $(document).ready(function() {
         var actionTd = $('td:last', addrRow);
         $(actionTd).html('<a href="#saveAddress" class="saveAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a>');
     });
-    // Remove Action
+    // Remove Address Action
     $('#wallet-details').on('click', '.removeAddress', function(e) {
         e.preventDefault();
         
@@ -531,7 +531,7 @@ $(document).ready(function() {
             }
         });
     });
-    // Add Action
+    // Add Address Action
     $('#wallet-details').on('click', '.saveAddress', function(e) {
         e.preventDefault();
         
@@ -559,5 +559,51 @@ $(document).ready(function() {
             }
         });
     });
-  
+    // Save Wallet
+    var btnSaveWallets = false;
+    $('#btnSaveWallets').click(function(e) {
+        e.preventDefault();
+        if (!btnSaveWallets) {
+        btnSaveWallets = true;
+            $.ajax({
+                type: 'post',
+                url: 'ajax.php?type=update&action=add-config',
+                data: $('form', '#walletDetails').serialize()
+            }).done(function(data, statusText, xhr){
+                var status = xhr.status;
+                if (status == 202) {
+                    var walletId = data;
+                    window.location.href = 'wallet.php?id=' + walletId;
+                    $('#alert-saved-wallet').fadeIn('fast');
+                    $('#alert-save-fail-wallet').fadeOut('fast');
+                } else if (status == 406) {
+                    $('#alert-save-fail-wallet').fadeIn('fast');
+                    $('#alert-saved-wallet').fadeOut('fast');
+                    btnSaveWallets = false;
+                }
+            });
+        }
+    });
+    // Remove Wallet
+    var btnDeleteWallet = false;
+    $('#btnDeleteWallet').click(function(e) {
+        e.preventDefault();
+        if (!btnDeleteWallet) {
+            btnDeleteWallet = true;
+            $.ajax({
+                type: 'post',
+                url: 'ajax.php?type=update&action=remove-config',
+                data: $('form', '#walletDetails').serialize()
+            }).done(function(data, statusText, xhr){
+                var status = xhr.status;
+                if (status == 202) {
+                    window.location.href = 'index.php';
+                } else if (status == 406) {
+                    $('#alert-save-fail-wallet').fadeIn('fast');
+                    btnDeleteWallet = false;
+                }
+            });
+        }
+    });
+      
 });

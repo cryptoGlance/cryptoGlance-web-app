@@ -12,9 +12,6 @@
       <?php require_once("templates/modals/qrcode-donate-vtc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-doge.php"); ?>
       <?php require_once("templates/modals/manage_rig.php"); ?>
-      <?php require_once("templates/modals/manage_wallet.php"); ?>
-      <?php require_once("templates/modals/prompt_remove_wallet.php"); ?>
-      <?php require_once("templates/modals/edit_wallet.php"); ?>
       <!-- -->
       
       <div class="page-container">

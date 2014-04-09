@@ -8,8 +8,6 @@ if (!$_SESSION['login_string']) {
 
 $jsArray = array();
 require_once("includes/header.php");
-$error = null;
-
 require_once('includes/autoloader.inc.php');
 require_once('includes/cryptoglance.php');
 $cryptoGlance = new CryptoGlance();
@@ -73,46 +71,48 @@ if ($walletId != 0) {
         </div>
         <?php } ?>
         
-        <div id="readme" class="panel panel-default panel-no-grid">
+        <div id="walletDetails" class="panel panel-default panel-no-grid">
             <h1>Wallet Details</h1>
             <div class="panel-heading">
-            <h2 class="panel-title"><i class="icon icon-walletalt"></i></h2>
+                <h2 class="panel-title"><i class="icon icon-walletalt"></i></h2>
             </div>
             <div class="panel-body">
             
             <!-- Bootstrap Alert docs here: http://getbootstrap.com/components/#alerts -->
             
-                <div id="alert-saved-wallet" class="alert alert-success alert-dismissable">
+                <div id="alert-saved-wallet" class="alert alert-success alert-dismissable" style="display: none;">
                     <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <strong>Success!</strong> You've updated your wallet.
                 </div>
-                <?php if (!is_null($error)) { ?>
-                <div id="alert-save-fail-wallet" class="alert alert-danger alert-dismissable">
+                <div id="alert-save-fail-wallet" class="alert alert-danger alert-dismissable" style="display: none;">
                     <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <strong>Failed!</strong> Could not save the wallet info for some reason.
                 </div>  
-                <?php } ?>
-                <form class="form-horizontal" role="form"> 
+                <form class="form-horizontal" role="form">
+                    <input type="hidden" name="type" value="wallet" />
+                    <input type="hidden" name="walletId" value="<?php echo $walletId ?>" />
                     <div class="form-group">
                         <label for="inputWalletName" class="control-label col-sm-4">Wallet Name:</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="inputWalletName" name="label">
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="inputWalletName" name="label" value="<?php echo $wallet['label'] ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputWalletCurrency" class="control-label col-sm-4">Currency:</label>
-                        <div class="col-sm-5">
-                            <select class="form-control" name="currency">
+                        <div class="col-sm-2">
+                            <select class="form-control" name="currency" <?php echo ($walletId != 0 ? 'disabled' : '') ?>>
                                 <?php foreach ($cryptoGlance->getCurrencies() as $currency => $code) { ?>
-                                <option value="<?php echo $code ?>"><?php echo $currency ?> (<?php echo $code ?>)</option>
+                                <option value="<?php echo $currency ?>" <?php echo ($wallet['currency'] == $currency ? 'selected' : '') ?>><?php echo ucwords($currency) ?> (<?php echo $code ?>)</option>
                                 <?php } ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-5">
+                        <div class="col-sm-offset-3 col-sm-5">
                             <button type="button" class="btn btn-lg btn-success" id="btnSaveWallets"><i class="icon icon-save-floppy"></i> Save Wallet</button>
+                            <?php if ($walletId != 0) { ?>
                             <button type="button" class="btn btn-lg btn-danger" id="btnDeleteWallet"><i class="icon icon-circledelete"></i> Remove Wallet</button>
+                            <?php } ?>
                         </div>
                     </div>
                 </form>
