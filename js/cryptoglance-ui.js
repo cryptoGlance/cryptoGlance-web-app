@@ -432,14 +432,17 @@ $(document).ready(function() {
 
   $('#btnSaveHost').click(function() {
     $("#alert-saved-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+    prettifyInputs();
   });  
 
   $('#btnAddHost').click(function() {
     $("#alert-added-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+    prettifyInputs();
   }); 
   
   $('#btnSaveWallets').click(function() {
     $("#alert-saved-wallet").fadeIn('slow').delay( 4000 ).fadeOut(3000);
+    prettifyInputs();
   });  
 
 //  $('#btnSavePool').click(function() {
@@ -462,12 +465,14 @@ $(document).ready(function() {
     $('.btn-delete').click(function() {
         $('#deletePrompt').attr('data-type', $(this).parentsUntil('.panel').parent().attr('data-type'));
         $('#deletePrompt').attr('data-id', $(this).parentsUntil('.panel').parent().attr('data-id'));
+        prettifyInputs();
     });
   
     $('#deletePrompt').on('shown.bs.modal', function () {
         $('.modal-body', this).html($('.modal-body', this).html().replace(/%PANNELNAME%/g, 'pannelname'));
         $('input[name="type"]', this).val($(this).attr('data-type'));
         $('input[name="id"]', this).val($(this).attr('data-id'));
+        prettifyInputs();
     });
     
         
@@ -483,6 +488,7 @@ $(document).ready(function() {
             $('#addPool').find('.wafflepool').show();
             $('#addPool').find('.all').show();            
         }
+        prettifyInputs();
     });
     
     // Wallet Page \\

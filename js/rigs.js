@@ -24,6 +24,7 @@ $('.btn-manage-rig').click(function() {
     var manageRig = $('#manageRig');
     $(manageRig).attr('data-attr', minerId);
     $('.rig-name', manageRig).html($('.panel-title .value', '#rig-'+minerId).text());
+    prettifyInputs();
 });
 
 // Switch Pools
@@ -49,8 +50,9 @@ $('.btn-switchpool', '#manageRig').click(function() {
                 }
             });
             
-            $(switchPoolModal).find('.ajax-loader').remove();
+            prettifyInputs();
             
+            $(switchPoolModal).find('.ajax-loader').remove();
         }
     });
 });
