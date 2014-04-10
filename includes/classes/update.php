@@ -14,35 +14,19 @@ class Class_Update {
     }
     
     public function rig() {
-        // Handling the notice PHP spits out.
-        $id = null;
-        if (isset($_GET['attr'])) {
-            $id = intval($_GET['attr']);
-        }
-        
-        $data['rigs'] = $this->getRigs($id);
+        $data['rigs'] = $this->getRigs(intval($_GET['attr']));
         
         echo json_encode($data);
     }
     
     public function pool() {
-        $id = null;
-        if (isset($_GET['attr'])) {
-            $id = intval($_GET['attr']);
-        }
-    
-        $data['pools'] = $this->getPools($id);
+        $data['pools'] = $this->getPools(intval($_GET['attr']));
         
         echo json_encode($data);
     }
     
     public function wallet() {
-        $id = null;
-        if (isset($_GET['attr'])) {
-            $id = intval($_GET['attr']);
-        }
-        
-        $data['wallets'] = $this->getWallets($id);
+        $data['wallets'] = $this->getWallets(intval($_GET['attr']));
         
         echo json_encode($data);
     }
@@ -74,7 +58,7 @@ class Class_Update {
     }
 
     private function getRigs($rigId = null) {
-        $rigs = new Class_Miners(); // Rigs have Miners
+        $rigs = new Class_Miners(); // Miners actually means Rigs
         $data = $rigs->update($rigId);
 
         return $data;

@@ -1,17 +1,24 @@
-var ajaxCall = ['all', 'rig', 'pool', 'wallet'];
+var ajaxCall = [];
 
-//ajaxUpdateCall('all');
-ajaxUpdateCall('rig');
-ajaxUpdateCall('pool');
-ajaxUpdateCall('wallet');
+$(document).ready(function() {
+    // All Rigs
+    // this is what we want updated the quickest
+    $('.panel[data-type="rig"]').each(function() {
+        var rigId = $(this).attr('data-id');
+        ajaxUpdateCall('rig', rigId);
+        setInterval(function() {
+            ajaxUpdateCall('rig', rigId);
+        }, rigUpdateTime);
+    });
+
+    ajaxUpdateCall('pool'); // all pools at once
+    ajaxUpdateCall('wallet'); // all wallets at once
+});
 
 // BTN Updates
 $('.btn-updater').click(function() {
-    if ($(this).attr('data-type') == 'all') {
-        ajaxUpdateCall('all');
-    } else {
-        ajaxUpdateCall($(this).attr('data-type'), $(this).attr('data-attr'));
-    }
+    console.log('all update called');
+    ajaxUpdateCall($(this).attr('data-type'), $(this).attr('data-attr'));
 });
 
 // Update json data
@@ -19,13 +26,15 @@ function ajaxUpdateCall(action, actionAttr) {
     var queryUrl = action;
     if (typeof actionAttr != 'undefined') {
         queryUrl = action + '&attr=' + actionAttr;
+    } else {
+        actionAttr = '';
     }
     
-    if (typeof ajaxCall[action] == 'object') {
-        ajaxCall[action].abort();
+    if (typeof ajaxCall[action+actionAttr] == 'object') {
+        ajaxCall[action+actionAttr].abort();
     }
     
-    ajaxCall[action] = $.ajax({
+    ajaxCall[action+actionAttr] = $.ajax({
         type: 'post',
         url: 'ajax.php?type=update&action=' + queryUrl,
         dataType: 'json',
@@ -44,7 +53,6 @@ function ajaxUpdateCall(action, actionAttr) {
         if (typeof data.wallets != 'undefined') {
             updateWallets(data.wallets);
         }
-//        initMasonry();
     });
 }
 

@@ -1,7 +1,7 @@
 // Update call by seconds
-setInterval(function() {
-    ajaxUpdateCall('rig');
-}, rigUpdateTime);
+//setInterval(function() {
+//    ajaxUpdateCall('rig');
+//}, rigUpdateTime);
 
 // Update by Long Poll method... Bad idea. Those who like to explore can experiment with this. ONLY USE THIS ON YOUR RIGS!
 //(function rigUpdateCall(){
@@ -17,6 +17,8 @@ setInterval(function() {
 //        timeout: rigUpdateTime
 //    });
 //})();
+
+var hashrateCollection = [];
 
 // Manage Rig
 $('.btn-manage-rig').click(function() {
@@ -84,16 +86,16 @@ function updateRigs(data) {
     var overallHashrate = 0;
     var overview = $('#overview');
     var overviewTable = $(overview).find('.panel-body-overview div table tbody');
-    $(overviewTable).find('tr').remove();
 
     $.each(data, function( rigIndex, rig ) {
-        var rigId = (rigIndex+1);
+        var rigId = (parseInt(rigIndex)+1);
         var rigElm = $('#rig-'+rigId);
         var rigNavElm = $(rigElm).find('.nav');
         var rigTabContentElm = $(rigElm).find('.tab-content');
         var rigTitle = $('h1', rigElm);
         var devWarning = false;
-        var devDanger = false;
+        var devDanger = false; 
+        var rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable);
 
         $(rigElm).removeClass('panel-warning');
         $(rigElm).removeClass('panel-danger');
@@ -103,7 +105,11 @@ function updateRigs(data) {
             $(rigNavElm).hide();
             $(rigTabContentElm).hide();
             $(rigElm).find('.panel-footer').hide();
-            $(overviewTable).append('<tr><td><i class="icon icon-ban-circle grey"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' grey">'+ $('h1', rigElm).html().replace(' - OFFLINE', '') +'</a></td><td>--</td><td>--</td><td>--</td></tr>');
+            if (rigOverviewRow.length == 0) {
+                $(overviewTable).append('<tr data-rig="'+ rigId +'"></tr>');
+                rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable)
+            }
+            $(rigOverviewRow).html('<td><i class="icon icon-ban-circle grey"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' grey">'+ $('h1', rigElm).html().replace(' - OFFLINE', '') +'</a></td><td>--</td><td>--</td><td>--</td>');
 //            if ($(rigTitle).html().indexOf(' - OFFLINE') == -1) {
 //                $(rigTitle).append(' - OFFLINE');
 //            }
@@ -148,7 +154,7 @@ function updateRigs(data) {
                 progressStyle = 'danger';
             } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
                 if (k == 'hashrate_5s') {
-                    overallHashrate += v;
+                    hashrateCollection[rigId] = v;
                 }
                 
                 if (v < 1) {
@@ -295,11 +301,22 @@ function updateRigs(data) {
         } else {
             rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
         }
-        $(overviewTable).append('<tr><td><i class="icon icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' '+ rigStatus +'">'+ $('h1', rigElm).html() +'</a></td><td>'+ rig.summary.hashrate_5s +'</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td></tr>');
+        
+        // update overview
+        if (rigOverviewRow.length == 0) {
+            $(overviewTable).append('<tr data-rig="'+ rigId +'"></tr>');
+            rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable)
+        }
+        $(rigOverviewRow).html('<td><i class="icon icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' '+ rigStatus +'">'+ $('h1', rigElm).html() +'</a></td><td>'+ rig.summary.hashrate_5s +'</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td>');
+        
         $(summaryContentTabTable).show();
     });
     
     // Total amount of hash power
+    overallHashrate = 0;
+    for (key in hashrateCollection) {
+        overallHashrate += parseFloat(hashrateCollection[key]);
+    }    
     if (overallHashrate < 1) {
         overallHashrate *= 1000;
         overallHashrateMetric = 'KH/S';

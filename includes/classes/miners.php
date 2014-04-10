@@ -72,14 +72,14 @@ class Class_Miners {
     // Automatic Update function
     public function update($minerId = null) {
         $data = array();
-        if (!empty($minerId) && $minerId != 0) {
+        if (!is_null($minerId) && $minerId != 0) {
             $minerId -= 1; // Arrays start at 0... 1 less than the ID on frontend
             if (!empty($this->_miners[$minerId])) {
-                $data[] = $this->_miners[$minerId]->update();
+                $data[$minerId] = $this->_miners[$minerId]->update();
             }
         } else {
-            foreach ($this->_miners as $miner) {
-                $data[] = $miner->update();
+            foreach ($this->_miners as $minerId => $miner) {
+                $data[$minerId] = $miner->update();
             }
         }
         
