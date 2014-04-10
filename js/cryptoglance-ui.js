@@ -332,7 +332,7 @@ $(function() {
     $('#overview').on('click', '.anchor-offset', function(e) {
         e.preventDefault();
         var target = $(this).attr('href');
-        $('body').scrollTo(target, 750, { margin: true, offset: -120 });
+        $('body').scrollTo(target, 750, { margin: true, offset: -100 });
     });
 });
     
