@@ -184,37 +184,46 @@ class CryptoGlance {
     }
     public function addAddress() {
         $walletId = intval($_POST['walletId']);
-        $addrId = intval($_POST['addrId']); // if addrID exist, edit address, not make new one
         $newLabel = $_POST['label'];
         $newAddress = $_POST['address'];
         
-        if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1])) {
+        if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1]) || empty($newLabel) || empty($newAddress)) {
             http_response_code(406); // not accepted
             return null;
         }
+        
         $walletId -= 1;
         
-        if ($addrId != 0) {
-            // editing existing address
-            $addrId -= 1;
-            if (empty($this->_config['wallets'][$walletId]['addresses'][$addrId]) || empty($newLabel)) {
-                http_response_code(406); // not accepted
+        foreach ($this->_config['wallets'][$walletId]['addresses'] as $address) {
+            if ($newAddress == $address['address']) {
+                http_response_code(409); // not accepted
                 return null;
             }
-            
-            $this->_config['wallets'][$walletId]['addresses'][$addrId]['label'] = $newLabel;
-        }  else {
-            // adding new address
-            if (empty($newLabel) || empty($newAddress)) {
-                http_response_code(406); // not accepted
-                return null;
-            }
-            
-            $this->_config['wallets'][$walletId]['addresses'][] = array(
-                'label' => $newLabel,
-                'address' => $newAddress,
-            );            
         }
+        
+        $this->_config['wallets'][$walletId]['addresses'][] = array(
+            'label' => $newLabel,
+            'address' => $newAddress,
+        );            
+
+        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh->write(json_encode($this->_config['wallets']));
+        http_response_code(202); // accepted
+    }
+    public function editAddress() {
+        $walletId = intval($_POST['walletId']);
+        $addrId = intval($_POST['addrId']);
+        $newLabel = $_POST['label'];
+        
+        if ($walletId == 0 || $addrId == 0 || empty($this->_config['wallets'][$walletId-1]['addresses'][$addrId-1]) || empty($newLabel)) {
+            http_response_code(406); // not accepted
+            return null;
+        }
+
+        $walletId -= 1;
+        $addrId -= 1;
+        
+        $this->_config['wallets'][$walletId]['addresses'][$addrId]['label'] = $newLabel;
 
         $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));

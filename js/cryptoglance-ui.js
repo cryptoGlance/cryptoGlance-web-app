@@ -493,7 +493,7 @@ $(document).ready(function() {
     
     // Wallet Page \\
     // Edit Address Action
-    $('#wallet-details').on('click', '.editAddress', function(e) {
+    $('#walletAddresses').on('click', '.editAddress', function(e) {
         e.preventDefault();
         // row Parent
         var addrRow = $(this).parents('tr');
@@ -512,14 +512,54 @@ $(document).ready(function() {
 
         // get Last column (action buttons)
         var actionTd = $('td:last', addrRow);
-        $(actionTd).html('<a href="#saveAddress" class="saveAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a>');
+        $(actionTd).html('<a href="#saveAddress" class="saveEditAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a>');
     });
-    // Remove Address Action
-    $('#wallet-details').on('click', '.removeAddress', function(e) {
+    // Save Edit Address Action
+    $('#walletAddresses').on('click', '.saveEditAddress', function(e) {
         e.preventDefault();
         
         // Wallet Id
-        var walletId = $('#wallet-details').attr('data-walletId');
+        var walletId = $('#walletAddresses').attr('data-walletId');
+        
+        // row Parent
+        var addrRow = $(this).parents('tr');
+        var addrKey = $(addrRow).attr('data-key');
+        var addrLabelInput = $('[name="label"]', addrRow);
+        
+        // on done:
+        $.ajax({
+            type: 'post',
+            url: 'ajax.php?type=update&action=edit-config',
+            data: { type: 'address', walletId: walletId, addrId: addrKey, label: $(addrLabelInput).val() },
+            statusCode: {
+                202: function() {
+                    var addrLabelTd = $('[data-name="label"]', addrRow);
+                    $(addrLabelTd).html($(addrLabelInput).val());
+                    $(addrLabelInput).remove();
+                    
+                    $('#alert-save-fail-address').fadeOut();
+                    $('#alert-saved-address').fadeIn();
+                    
+                    // get Last column (action buttons)
+                    var actionTd = $('td:last', addrRow);
+                    $(actionTd).html('<a href="#editAddress" class="editAddress"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removeAddress" class="removeAddress"><span class="red"><i class="icon icon-remove"></i></span></a>');
+                },
+                406: function() {
+                    $(addrLabelInput).removeClass('red');
+                    $(addrLabelInput).addClass('red');
+                    $('.errormsg', '#alert-save-fail-address').html('You need to provide a label for this address.');
+                    $('#alert-saved-address').fadeOut();
+                    $('#alert-save-fail-address').fadeIn();
+                }
+            }
+        });
+    });
+    // Remove Address Action
+    $('#walletAddresses').on('click', '.removeAddress', function(e) {
+        e.preventDefault();
+        
+        // Wallet Id
+        var walletId = $('#walletAddresses').attr('data-walletId');
         
         // row Parent
         var addrRow = $(this).parents('tr');
@@ -538,29 +578,41 @@ $(document).ready(function() {
         });
     });
     // Add Address Action
-    $('#wallet-details').on('click', '.saveAddress', function(e) {
+    $('#walletAddresses').on('click', '.saveNewAddress', function(e) {
         e.preventDefault();
         
         // Wallet Id
-        var walletId = $('#wallet-details').attr('data-walletId');
+        var walletId = $('#walletAddresses').attr('data-walletId');
         
         // row Parent
         var addrRow = $(this).parents('tr');
         var addrKey = $(addrRow).attr('data-key');
-        var addrLabel = $('[name="label"]', addrRow).val();
-        var addrAddress = $('[name="address"]', addrRow).val();
+        var addrLabel = $('[name="label"]', addrRow);
+        var addrAddress = $('[name="address"]', addrRow);
         
         // on done:
         $.ajax({
             type: 'post',
             url: 'ajax.php?type=update&action=add-config',
-            data: { type: 'address', walletId: walletId, addrId: addrKey, label: addrLabel, address: addrAddress },
+            data: { type: 'address', walletId: walletId, addrId: addrKey, label: $(addrLabel).val(), address: $(addrAddress).val() },
             statusCode: {
                 202: function() {
                     location.reload(true);
                 },
                 406: function() {
-                    alert('a field is missing a required value (label/address)');
+                    $(addrLabel).removeClass('red');
+                    $(addrAddress).removeClass('red');
+                    $(addrLabel).addClass('red');
+                    $(addrAddress).addClass('red');
+                    $('.errormsg', '#alert-save-fail-address').html('You need to provide a label and address.');
+                    $('#alert-save-fail-address').fadeIn();
+                },
+                409: function() {
+                    $(addrLabel).removeClass('red');
+                    $(addrAddress).removeClass('red');
+                    $(addrAddress).addClass('red');
+                    $('.errormsg', '#alert-save-fail-address').html('This address already exists in the wallet.');
+                    $('#alert-save-fail-address').fadeIn();
                 }
             }
         });
@@ -570,21 +622,31 @@ $(document).ready(function() {
     $('#btnSaveWallets').click(function(e) {
         e.preventDefault();
         if (!btnSaveWallets) {
-        btnSaveWallets = true;
+            btnSaveWallets = true;
+            console.log('before');
             $.ajax({
                 type: 'post',
                 url: 'ajax.php?type=update&action=add-config',
                 data: $('form', '#walletDetails').serialize()
-            }).done(function(data, statusText, xhr){
+            }).done(function(data, statusText, xhr) {
                 var status = xhr.status;
+                console.log('DONE!');
+                console.log(status);
                 if (status == 202) {
-                    var walletId = data;
-                    window.location.href = 'wallet.php?id=' + walletId;
-                    $('#alert-saved-wallet').fadeIn('fast');
-                    $('#alert-save-fail-wallet').fadeOut('fast');
-                } else if (status == 406) {
-                    $('#alert-save-fail-wallet').fadeIn('fast');
-                    $('#alert-saved-wallet').fadeOut('fast');
+                    if ($('[name="walletId"]', '#walletDetails').val() == 0) {
+                        var walletId = data;
+                        window.location.href = 'wallet.php?id=' + walletId;
+                    }
+                    $('.panel-title', '#walletAddresses').html($('[name="label"]', '#walletDetails').val());
+                    $('#alert-saved-wallet').fadeIn();
+                    $('#alert-save-fail-wallet').fadeOut();
+                    btnSaveWallets = false;
+                }
+            }).fail(function(data, statusText, xhr) {
+                var status = data.status;
+                if (status == 406) {
+                    $('#alert-saved-wallet').fadeOut();
+                    $('#alert-save-fail-wallet').fadeIn();
                     btnSaveWallets = false;
                 }
             });
@@ -605,7 +667,7 @@ $(document).ready(function() {
                 if (status == 202) {
                     window.location.href = 'index.php';
                 } else if (status == 406) {
-                    $('#alert-save-fail-wallet').fadeIn('fast');
+                    $('#alert-save-fail-wallet').fadeIn();
                     btnDeleteWallet = false;
                 }
             });

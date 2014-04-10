@@ -27,13 +27,21 @@ if ($walletId != 0) {
 <!-- ### Below is the Wallet page which contains wallet balances for children addresses, and allows for adding new addresses, and editing/deleting the entire wallet-->
     <div id="wallet-wrap" class="container sub-nav">
         <?php if ($walletId != 0) { ?>
-        <div id="wallet-details" class="panel panel-primary panel-no-grid panel-wallet" data-walletId="<?php echo $walletId ?>">
+        <div id="walletAddresses" class="panel panel-primary panel-no-grid panel-wallet" data-walletId="<?php echo $walletId ?>">
             <h1>Wallet</h1>
             <div class="panel-heading">
-                <button type="button" class="panel-header-button btn-updater" data-type="all"><i class="icon icon-refresh"></i> Update</button>
+                <button type="button" class="panel-header-button btn-updater" onClick="location.reload(true);"><i class="icon icon-refresh"></i> Update</button>
                 <h2 class="panel-title"><?php echo $wallet['label'] ?></h2>
             </div>
             <div class="panel-body">
+                <div id="alert-saved-address" class="alert alert-success alert-dismissable" style="display: none;">
+                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Success!</strong> You've updated your addresses.
+                </div>
+                <div id="alert-save-fail-address" class="alert alert-danger alert-dismissable" style="display: none;">
+                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Failed!</strong> <span class="errormsg"></span>
+                </div> 
                 <div class="total-wallet-balance">
                 <span class="green"><?php echo $wallet['data']['balance'] ?> <img src="images/icon-<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></span>
                 </div>
@@ -61,7 +69,7 @@ if ($walletId != 0) {
                                     <td><input type="text" name="label" class="form-control"></td>
                                     <td><input type="text" name="address" class="form-control"></td>
                                     <td><em>new address</em></td>
-                                    <td><a href="#saveAddress" class="saveAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a></td>
+                                    <td><a href="#saveAddress" class="saveNewAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -86,7 +94,7 @@ if ($walletId != 0) {
                 </div>
                 <div id="alert-save-fail-wallet" class="alert alert-danger alert-dismissable" style="display: none;">
                     <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Failed!</strong> Could not save the wallet info for some reason.
+                    <strong>Failed!</strong> Wallet needs a name.
                 </div>  
                 <form class="form-horizontal" role="form">
                     <input type="hidden" name="type" value="wallet" />

@@ -35,7 +35,7 @@ class Class_Wallets {
     }
 
     private function addWallet($currency, $label, $addresses) {
-        if (empty($currency) || empty($addresses)) {
+        if (empty($currency)) {
             return false;
         }
         
@@ -83,7 +83,6 @@ class Class_Wallets {
                 'total_addresses' => count($wallet['addresses']), // needed?
                 'addresses' => $walletAddressData,
             );
-            
         }
         
         return $data;

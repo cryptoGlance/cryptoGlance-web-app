@@ -40,6 +40,15 @@ class Class_Update {
         }
     }
     
+    public function editConfig() {
+        if (isset($_POST['type'])) {
+            $action = 'edit' . ucwords(strtolower($_POST['type']));
+            require_once(dirname(__FILE__).'/../cryptoglance.php');
+            $cryptoglance = new CryptoGlance();
+            $cryptoglance->$action();
+        }
+    }
+    
     public function removeConfig() {
         if (isset($_POST['type'])) {
             $action = 'remove' . ucwords(strtolower($_POST['type']));
