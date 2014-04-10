@@ -9,15 +9,9 @@
       </div>
       <div class="modal-body">
          <div class="new-panel-choices">
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addRig" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-pixelpickaxe"></i>Rig
-            </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addPool" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-communitysmall"></i>Pool
-            </a>
-            <a class="new-panel-btn" data-toggle="modal" data-target="#addWallet" data-backdrop="static" data-dismiss="modal">
-               <i class="icon icon-walletalt"></i>Wallet
-            </a>
+            <a class="new-panel-btn" data-toggle="modal" data-target="#addRig" data-backdrop="static" data-dismiss="modal"><i class="icon icon-pixelpickaxe"></i>Rig</a>
+            <a class="new-panel-btn" data-toggle="modal" data-target="#addPool" data-backdrop="static" data-dismiss="modal"><i class="icon icon-communitysmall"></i>Pool</a>
+            <a href="wallet.php" class="new-panel-btn"><i class="icon icon-walletalt"></i>Wallet</a>
 <!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal">-->
 <!--               <i class="icon icon-barchartalt"></i>Graph-->
 <!--            </a>-->
