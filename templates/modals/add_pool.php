@@ -19,7 +19,7 @@
            <div class="form-group all">
              <label for="inputPoolLabel" class="col-sm-3 control-label">Label</label>
              <div class="col-sm-7">
-               <input type="text" class="form-control" id="inputPoolLabel" name="label">
+               <input type="text" class="form-control" id="inputPoolLabel" name="label" placeholder="Name of this pool">
              </div>
            </div>
           <div class="form-group all">
@@ -34,7 +34,7 @@
            <div class="form-group mpos">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
-               <input type="text" class="form-control" id="inputPoolURL" name="url">
+               <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http:// or https://">
              </div>
            </div>
            <div class="form-group mpos">

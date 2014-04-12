@@ -752,6 +752,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   padding: 5px 10px 0;
 }
 
+.navbar-default .navbar-toggle {
+    border: none;
+}
+
 .navbar-toggle:active, .navbar-toggle:focus {
   color: #ddd;
 }
@@ -817,6 +821,10 @@ a#dash-add-panel {
   background: rgba(51,181,225,0.1);
   text-shadow: 2px 2px 0 #000;
   color: #8f8;
+}
+
+.navbar-default .navbar-nav > li > a.total-hashrate {
+  display: none;
 }
 
 .navbar-default .navbar-nav > li > a.total-hashrate * {
@@ -2014,6 +2022,10 @@ a#dash-add-panel {
   }
 
   .navbar > .nav-pills > li:first-child {
+    display: inline-block;
+  }
+
+  .navbar-default .navbar-nav > li > a.total-hashrate {
     display: inline-block;
   }
     

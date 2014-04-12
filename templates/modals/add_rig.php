@@ -15,7 +15,7 @@
               <div class="form-group">
                 <label for="inputRigLabel" class="col-sm-3 control-label">Label</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" id="inputRigLabel" name="label">
+                  <input type="text" class="form-control" id="inputRigLabel" name="label" placeholder="Name of this rig">
                 </div>
               </div>
 <!--              <div class="form-group">-->
@@ -35,7 +35,7 @@
               <div class="form-group">
                 <label for="inputRigPort" class="col-sm-3 control-label">API Port</label>
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="port">
+                  <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="port" placeholder="4028">
                 </div>
               </div>
 <!--              <div class="form-group">-->
