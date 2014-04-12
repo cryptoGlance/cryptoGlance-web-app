@@ -327,4 +327,5 @@ function updateRigs(data) {
         overallHashrateMetric = 'MH/s';
     }
     $('.total-hashrate').html(overallHashrate.toFixed(2) + ' <small>'+ overallHashrateMetric +'</small>');
+    document.title = overallHashrate.toFixed(2) + ' ' + overallHashrateMetric + ' | ' + documentTitle
 }

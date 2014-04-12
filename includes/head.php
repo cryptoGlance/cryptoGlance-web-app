@@ -34,7 +34,6 @@
     <?php
     if (isset($cryptoGlance)) {
         $settings = $cryptoGlance->getSettings();
-        
     } else {
         $settings = array(
             'general' => array(
@@ -53,6 +52,7 @@
     ?>
 
     <script type="text/javascript">
+        var documentTitle = document.title;
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
         var devHeatWarning = <?php echo (!empty($settings['general']['temps']['warning']) ? $settings['general']['temps']['warning'] : 75) ?>;
         var devHeatDanger = <?php echo (!empty($settings['general']['temps']['danger']) ? $settings['general']['temps']['danger'] : 85) ?>;
