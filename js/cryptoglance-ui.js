@@ -72,7 +72,7 @@ $(document).ready(function() {
    $('.feature').find('span').hide();
 
    $('.feature').hover(function() {
-      $(this).find('span').slideToggle();
+      $(this).find('span').finish().slideToggle();
    })
    
     

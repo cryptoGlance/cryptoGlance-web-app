@@ -30,6 +30,16 @@
    </head>
    <body>
       <a href="https://plus.google.com/110896112995796953409" rel="publisher"></a>
+      <div class="modal fade" id="youTubeClip" tabindex="-1" role="dialog" aria-labelledby="youTubeClipLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-body">
+              <iframe width="560" height="315" src="//www.youtube.com/embed/5BBI8icIFuI" frameborder="0" allowfullscreen></iframe>
+              <a href="https://www.youtube.com/embed/5BBI8icIFuI" rel="external"><i class="icon icon-youtube"></i>Watch on YouTube</span>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
       <div class="page-container">
          <!-- Fixed navbar -->
          <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -45,8 +55,8 @@
                   <ul class="nav nav-pills navbar-nav">
                      <li class="active"><a href="#top" class="anchor-offset"><i class="icon icon-speed"></i> Dashboard<span id="dashboard-tag">monitoring console</span><span id="dash-add-panel" class="grad-green" data-toggle="modal" data-target="#editPool" data-backdrop="static">+ add new panel</span></a></li>
                      <li><a href="#panel-features" class="anchor-offset"><i class="icon icon-managedhosting"></i> Features<span>you'll love (we hope)</span></a></li>
-                     <!-- <li><a href="#panel-source" class="anchor-offset"><i class="icon icon-code"></i> Source<span>available on Github!</span></a></li>
-                     <li><a href="#panel-chat" class="anchor-offset"><i class="icon icon-chat"></i> Chat<span>Support + Dev Ideas</span></a></li> -->
+                     <li><a href="#jumbo-cta" class="anchor-offset"><i class="icon icon-download-alt"></i> Download <span>standalone or source</span></a></li>
+                     <!-- <li><a href="#panel-chat" class="anchor-offset"><i class="icon icon-chat"></i> Chat<span>Support + Dev Ideas</span></a></li> -->
                      <li><a href="#panel-social" class="anchor-offset"><i class="icon icon-groups-friends"></i> Social<span>spread the word</span></a></li>
                      <li><a href="#panel-donations" class="anchor-offset"><i class="icon icon-bitcoin"></i> Donations<span>are greatly appreciated!</span></a></li>
                   </ul>
@@ -56,15 +66,15 @@
          </div>
          <div id="top" class="jumbotron">
             <img src="images/cryptoglance-devices.png" />
-            <h1>Real-time updates in one spot, for all of your mining rigs <i class="icon icon-pixelpickaxe"></i></h1>
+            <h1>Real-time updates in one spot, for all of your crypto components <i class="icon icon-pixelpickaxe"></i></h1>
             <p class="jumbo-desc">cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot.</p>
-            <p class="jumbo-cta">
-               <a class="btn btn-warning btn-lg" href="#" role="button"><i class="icon icon-download-alt"></i> Coming Soon<span>we're almost ready!</span></a>
-               <!-- <a class="btn btn-warning btn-lg" href="https://github.com/cryptoglance/cryptoglance-app/archive/master.zip" role="button"><i class="icon icon-download-alt"></i> Download Now &raquo;<span>latest version from Github</span></a> -->
-               <a class="btn btn-default btn-lg" href="#installation" role="button"><i class="icon icon-install"></i> Installation Guide<span><!-- for multiple web servers -->also coming soon...</span></a>
+            <p class="jumbo-copy jumbo-cta" id="jumbo-cta">
+               <a class="btn btn-success btn-lg" rel="external"  href="https://sourceforge.net/projects/cryptoglance/files/latest/download?source=files" role="button"><i class="icon icon-windowseight"></i> Download for Windows<span>standalone server, ready-to-run</span></a>
+               <a class="btn btn-warning btn-lg" rel="external" href="https://github.com/cryptoGlance/cryptoGlance-web-app"" rel="external" role="button"><i class="icon icon-github"></i> Source Code at Github<span>run on your own web server</span></a>
+               <a class="btn btn-default btn-lg" href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external" role="button"><i class="icon icon-play"></i> Get the Android App<span>at the Google Play store</span></a>
+               <a class="btn btn-danger btn-lg" href="https://www.youtube.com/embed/5BBI8icIFuI?autoplay=1" rel="external" role="button"><i class="icon icon-youtube"></i> Video Tour / Setup Guide<span>check cryptoGlance in action</span></a>
                <br>
             </p>
-            <p class="jumbo-copy container">Installation is easy. If you've ever setup websites on a server, you'll be up and running in a few minutes. On the other hand, if you don't have that experience under your belt, don't fret. A simple-to-follow installation guide is just above, <em>how convenient!</em></p>
          </div>
          <div id="panel-features" class="panel panel-primary">
             <div class="panel-lighter">
@@ -97,6 +107,24 @@
                      We're in the early, yet release-worthy stages of cryptoGlance development, so you can be sure that new features will be added as time goes on.
                   </div>
                </div>
+               <h2>Complete Feature List</h2>
+               <ul>
+                  <li>Standalone version with installer (for Windows), or run the source code within your own (PHP) web server environment</li>
+                  <li>Obtains valid data directly from cgminer/sgminer</li>
+                  <li>Monitors detailed statistics, and manages core functions of multiple rigs/ASICs</li>
+                  <li>Switch pools and restart miners remotely</li>
+                  <li>Actively track pool stats and crypto address balances</li>
+                  <li>Responsive, mobile-friendly interface</li>
+                  <li>Realtime information display (no refresh needed)</li>
+                  <li>Secure login system</li>
+                  <li>Configurable warning and danger status with visual cues</li>
+                  <li>Create 'wallets' that are collections of your selected coin addresses, and display the balance</li>
+                  <li>Void of malware or donation mining (does <strong>NOT</strong> require your private keys at all)</li>
+                  <li>Companion <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android app</a> which easily allows you to quickly access your cryptoGlance instance while on the go</li>
+                  <li><strong>MUCH MORE is planned!</strong> <a href="#panel-social" class="anchor-offset">Follow us</a> to find out when new features are released!</li>
+                  <li><a href="#panel-donations" class="anchor-offset">Please support future development by donating</a></li>
+                  <li><a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/master/README.md" rel="external"><em>Read the full README</em></a></li>
+                </ul>
             </div>
          </div>
          <!-- <div id="panel-source" class="panel panel-primary">
