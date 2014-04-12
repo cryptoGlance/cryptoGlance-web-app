@@ -65,17 +65,6 @@ require_once("includes/header.php");
               <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> General</h2>
           </div>
           <div class="panel-body">
-            <?php if ($generalSaveResult) { ?>
-            <div id="alert-saved-address" class="alert alert-success alert-dismissable">
-                <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Success!</strong> You've updated your settings.
-            </div>
-            <?php } elseif (!$generalSaveResult && !is_null($generalSaveResult)) { ?>
-            <div id="alert-save-fail-address" class="alert alert-danger alert-dismissable">
-                <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Failed!</strong> Please make sure <em>/<?php echo DATA_FOLDER; ?>/configs/</em> is writable.
-            </div>
-            <?php } ?>
             <form class="form-horizontal" role="form" method="POST">
               <fieldset>
                 <h3>Temperature Thresholds:</h3>                
@@ -135,6 +124,17 @@ require_once("includes/header.php");
                     </select>
                   </div>
                 </div>
+                <?php if ($generalSaveResult) { ?>
+                <div id="alert-saved-address" class="alert alert-success alert-dismissable">
+                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Success!</strong> You've updated your settings.
+                </div>
+                <?php } elseif (!$generalSaveResult && !is_null($generalSaveResult)) { ?>
+                <div id="alert-save-fail-address" class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Failed!</strong> Please make sure <em>/<?php echo DATA_FOLDER; ?>/configs/</em> is writable.
+                </div>
+                <?php } ?>
                 <div class="form-group">
                   <div class="col-sm-offset-5 col-sm-2">
                     <button type="submit" name="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>
@@ -152,7 +152,7 @@ require_once("includes/header.php");
               <fieldset>
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-6">
-                    <span class="help-block"><i class="icon icon-info-sign"></i> cryptoGlance cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.</span>
+                    <span class="help-block"><i class="icon icon-info-sign"></i> cryptoGlance cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.<br><b>* YOU WILL BE LOGGED OUT AFTER CLEARING COOKIES!</b></span>
                   </div>
                   <label class="col-sm-2 control-label"><button name="clearCookies" class="btn btn-lg btn-success"><i class="icon icon-programclose"></i> Clear Cookies</button></label>
                 </div>
