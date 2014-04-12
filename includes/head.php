@@ -1,3 +1,4 @@
+<?php $currentPage = preg_replace('/\.php$/', '', basename($_SERVER['PHP_SELF'])); ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,7 +7,8 @@
     <meta name="author" content="">
     
     <link rel="shortcut icon" href="favicon.png">
-    
+                      
+    <!-- TODO: ONLY show the total-hashrate in <title> when on index.php / Dashboard -->
     <title>cryptoGlance - Dashboard</title>
     
     <!-- Bootstrap core CSS -->
@@ -49,6 +51,7 @@
         );
     }
     ?>
+
     <script type="text/javascript">
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
         var devHeatWarning = <?php echo (!empty($settings['general']['temps']['warning']) ? $settings['general']['temps']['warning'] : 75) ?>;

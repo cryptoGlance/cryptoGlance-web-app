@@ -1,6 +1,7 @@
 <div id="wallet" class="panel panel-primary panel-wallet">
    <h1>Wallet</h1>
    <div class="panel-heading">
+      <a href="wallet.php" title="Add a new collection of addresses to this panel"><button type="button" class="panel-header-button btn-manage-rig"><i class="icon icon-googleplusold"></i> Add Wallet</button></a>
       <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true" style="display: none;"><i class="icon icon-circledelete"></i></button>
       <!-- <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
       <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>  -->

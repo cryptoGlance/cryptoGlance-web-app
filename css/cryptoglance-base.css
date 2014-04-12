@@ -1725,6 +1725,7 @@ a#dash-add-panel {
 
   .navbar-nav {
     width: auto;
+    min-height: 44px;
     float: right;
     margin: -1px 0px 0px 20px;
   }
@@ -1788,7 +1789,12 @@ a#dash-add-panel {
     padding: 4px 13px 5px;
   }
   
-  .navbar .nav-pills > li:nth-child(3) > a {
+  .navbar .nav-pills:not(.no-dash) > li:nth-child(3) > a {
+    -webkit-border-radius: 0 0 0 9px;
+    border-radius: 0 0 0 9px;
+  }
+  
+  .navbar .no-dash > li:nth-child(2) > a {
     -webkit-border-radius: 0 0 0 9px;
     border-radius: 0 0 0 9px;
   }
@@ -1802,6 +1808,12 @@ a#dash-add-panel {
     margin-right: 45px;
     -webkit-border-radius: 0 0 0 9px;
     border-radius: 0 0 0 9px;
+  }
+  
+  .no-dash li a#dash-link {
+    margin-right: 10px;
+    -webkit-border-radius: 0 0 9px 9px;
+    border-radius: 0 0 9px 9px;
   }
 
   .nav-pills li a#dash-add-panel {

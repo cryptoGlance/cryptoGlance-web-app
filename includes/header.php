@@ -26,18 +26,13 @@
                <a class="navbar-brand" href="index.php"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
             </div>
             <div class="navbar-collapse collapse">
-               <ul class="nav nav-pills navbar-nav">
-                  
-                  <!-- TODO: ONLY show the total-hashrate + side-width-slider when on index.php / Dashboard -->
-                  
-                  <?php
-                  $currentPage = preg_replace('/\.php$/', '', basename($_SERVER['PHP_SELF']));
-                  if ($currentPage == 'index') {
-                  ?>
+               <ul class="nav nav-pills navbar-nav
+                <?php echo ($currentPage != 'index') ? 'no-dash' : '' ?>
+               ">
+                  <?php if ($currentPage == 'index') { ?>  
                   <li><a class="total-hashrate">0 <small>MH/s</small></a></li>
-                  <?php
-                  } ?>
-                  <li class="active topnav topnav-icon"><a id="dash-link" href="index.php" <?php echo ($currentPage != 'index') ? 'style="margin-right: 5px; -webkit-border-radius: 0 0 9px 9px; border-radius: 0 0 9px 9px;"' : '' ?>><i class="icon icon-speed"></i> Dashboard</a>
+                  <?php } ?>
+                  <li class="active topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a>
                     <?php if ($currentPage == 'index') { ?><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a><?php } ?>
                   </li>
                   <li class="dropdown">
