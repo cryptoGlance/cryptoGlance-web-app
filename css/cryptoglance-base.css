@@ -422,6 +422,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 
 .modal-body .checkbox label span {
   position: relative;
+  top: -8px;
   font-size: 23px;
   margin-left: 15px;
 }
@@ -1537,11 +1538,11 @@ a#dash-add-panel {
 
 /*.panel-body .table tr td:nth-child(3), .panel-body .table tr th:nth-child(3), .panel-body .table tr td:nth-child(6), .panel-body .table tr th:nth-child(6) {*/
 /*  display: none;*/
-/*}*/
+/*}
 .panel-body .table tr td:nth-child(6), .panel-body .table tr th:nth-child(6), .panel-body .table tr td:nth-child(7), .panel-body .table tr th:nth-child(7) {
   display: none;
 }
-
+*/
 .panel-footer {
    overflow: auto;
    padding: 6px 6px 6px 10px;

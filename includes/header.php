@@ -78,4 +78,6 @@
          </div>
       </div>
       
-      <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>
+      <?php if ($currentPage == 'index') { ?>
+        <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>
+      <?php } ?>
