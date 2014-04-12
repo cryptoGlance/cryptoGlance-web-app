@@ -34,6 +34,9 @@ if ($walletId != 0) {
                 <h2 class="panel-title"><?php echo $wallet['label'] ?></h2>
             </div>
             <div class="panel-body">
+                <div class="total-wallet-balance">
+                <span class="green"><?php echo $wallet['data']['balance'] ?> <img src="images/icon-<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></span>
+                </div>
                 <div id="alert-saved-address" class="alert alert-success alert-dismissable" style="display: none;">
                     <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <strong>Success!</strong> You've updated your addresses.
@@ -42,9 +45,6 @@ if ($walletId != 0) {
                     <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <strong>Failed!</strong> <span class="errormsg"></span>
                 </div> 
-                <div class="total-wallet-balance">
-                <span class="green"><?php echo $wallet['data']['balance'] ?> <img src="images/icon-<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></span>
-                </div>
                 <div class="table-responsive">
                     <form role="form">
                         <table class="table table-hover table-striped table-wallet">

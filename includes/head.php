@@ -9,7 +9,12 @@
     <link rel="shortcut icon" href="favicon.png">
                       
     <!-- TODO: ONLY show the total-hashrate in <title> when on index.php / Dashboard -->
-    <title>cryptoGlance - Dashboard</title>
+    <title>
+    <?php echo ($currentPage == 'index') ? 'Dashboard' : '' ?>
+    <?php echo ($currentPage == 'settings') ? 'Settings' : '' ?>
+    <?php echo ($currentPage == 'help') ? 'README.md' : '' ?>
+    <?php echo ($currentPage == 'wallet') ? 'Wallet Details' : '' ?>
+    :: cryptoGlance</title>
     
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
