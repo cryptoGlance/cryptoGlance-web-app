@@ -9,6 +9,8 @@ if (!$_SESSION['login_string']) {
 require_once('includes/cryptoglance.php');
 $cryptoGlance = new CryptoGlance();
 $errors = array();
+$generalSaveResult = null;
+$emailSaveResult = null;
 
 if (isset($_POST['general'])) {
     $data = array();
@@ -36,13 +38,13 @@ if (isset($_POST['general'])) {
         $errors['walletUpdateTime'] = true;
     }
     
-    $cryptoGlance->saveSettings(array('general' => $data));
+    $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
 } else if (isset($_POST['email'])) {
     $data = array();
     
     // do stuff
 
-    $cryptoGlance->saveSettings(array('email' => $data));
+    $emailSaveResult = $cryptoGlance->saveSettings(array('email' => $data));
 }
 
 $settings = $cryptoGlance->getSettings();
@@ -63,6 +65,17 @@ require_once("includes/header.php");
               <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> General</h2>
           </div>
           <div class="panel-body">
+            <?php if ($generalSaveResult) { ?>
+            <div id="alert-saved-address" class="alert alert-success alert-dismissable">
+                <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Success!</strong> You've updated your settings.
+            </div>
+            <?php } elseif (!$generalSaveResult && !is_null($generalSaveResult)) { ?>
+            <div id="alert-save-fail-address" class="alert alert-danger alert-dismissable">
+                <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Failed!</strong> Please make sure <em>/<?php echo DATA_FOLDER; ?>/configs/</em> is writable.
+            </div>
+            <?php } ?>
             <form class="form-horizontal" role="form" method="POST">
               <fieldset>
                 <h3>Temperature Thresholds:</h3>                

@@ -46,5 +46,12 @@ class Class_FileHandler {
         
         return $timeDiff;
     }
+    
+    /*
+     * Check if the file is writable or not.
+     */
+    public function isWritable() {
+        return is_writable($this->_fullFilePath);
+    }
 
 }
