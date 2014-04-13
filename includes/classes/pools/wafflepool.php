@@ -17,13 +17,18 @@ class Class_Pools_Wafflepool extends Class_Pools_Abstract {
     public function update() {
         if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
             $curl = curl_init($this->_apiURL  . '/tmp_api?address='. $this->_btcaddess); // temporaary since 
+            
             curl_setopt($curl, CURLOPT_FAILONERROR, true);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; RigWatch ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
+            curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
+            
             $poolData = json_decode(curl_exec($curl), true);
+            curl_close($curl);
             
             // Math Stuffs
             $units = array('H', 'KH', 'MH', 'GH', 'TH');

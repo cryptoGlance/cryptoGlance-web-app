@@ -30,13 +30,19 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
             $poolData = array();
             foreach ($this->_actions as $action) {
                 $curl = curl_init($this->_apiURL  . '/index.php?page=api&id='. $this->_userId .'&api_key='. $this->_apiKey . '&action=' . $action);
+                
                 curl_setopt($curl, CURLOPT_FAILONERROR, true);
-                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
+                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; RigWatch ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
+                
+                $poolData[$action] = array();
                 $poolData[$action] = json_decode(curl_exec($curl), true);
+                curl_close($curl);
                 
                 if ($action == 'getpoolstatus') {
                     $poolData[$action] = $poolData[$action]['getpoolstatus']['data'];
