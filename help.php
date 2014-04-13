@@ -34,7 +34,7 @@ require_once("includes/header.php");
          
       <div id="help-wrap" class="container sub-nav full-content">
         <div class="markdown-body">
-           <div id="readme" class="panel panel-default">
+           <div id="readme" class="panel panel-default panel-no-grid">
              <h1>cryptoGlance Help</h1>
              <div class="panel-heading">
                  <h2 class="panel-title"><i class="icon icon-document"></i> README.md</h2>

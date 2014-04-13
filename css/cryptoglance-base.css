@@ -82,6 +82,10 @@ hr {
   border-style: solid none solid;
 }
 
+pre {
+  display: inline-block;
+}
+
 a, a:visited, a:hover, a i, a:hover i {
   -webkit-transition: color 300ms ease-in-out !important;
   -moz-transition: color 300ms ease-in-out !important;
@@ -1191,7 +1195,11 @@ a#dash-add-panel {
 .full-content .panel-body {
   font-size: 18px;
   text-align: left;
-  padding: 0;
+  padding: 0 10px;
+}
+
+.full-content .panel-no-grid {
+  margin: 0 0 50px;
 }
 
 .panel-pool .panel-body {
@@ -1918,6 +1926,13 @@ a#dash-add-panel {
     margin-bottom: 70px;
   }
   
+  .full-content .panel-body {
+    padding: 0 20px;
+  }
+
+  .full-content .panel-no-grid {
+    margin: 0 20px 70px;
+  }
 
   .panel-in-footer {
     margin-bottom: 0px;
@@ -2072,7 +2087,12 @@ a#dash-add-panel {
     -o-transition: none !important;
     transition: none !important;
   }
-  
+
+  .full-content .panel-no-grid {
+    margin: 0 auto;
+    width: 60%;
+  }
+
   .width-reading {
     float: right;
     font-weight: bold;
