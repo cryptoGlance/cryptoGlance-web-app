@@ -95,12 +95,12 @@ a, a:visited, a:hover, a i, a:hover i {
 }
 
 a, a:visited {
-  color: #33b5e5;
+  color: #FBEE03;
   text-decoration: none !important;
 }
 
 a:hover {
-  color: #FBEE03;
+  color: #33b5e5;
 }
 
 a:active {
@@ -1077,6 +1077,11 @@ a#dash-add-panel {
   width: 40px;
   height: 40px;
   top: -47px;
+}
+
+.panel-body img {
+  max-width: 100%;
+  height: auto;
 }
 
 .panel-rig ul {

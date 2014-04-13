@@ -1,11 +1,13 @@
 <br>
-_[Skip to FAQ](#faq)_ &bull; <a href="http://cryptoglance.info/" rel="external">http://cryptoglance.info</a>
+_[Skip to FAQs](#faq)_ &bull; <a href="http://cryptoglance.info/" rel="external">http://cryptoglance.info</a>
 
 ----
 
-### What is CryptoGlance?
+<img src="images/cryptoGlance-thread-header.png" alt="cryptoGlance" />
 
-Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other APIs, all in one responsive UI. Protected with a login, but also offers a read-only/public view (if desired).
+### What is cryptoGlance?
+
+cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot. Designed for large and small screens, you can easily monitor and control many aspects of your crypto/mining devices. There's also an <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android companion app</a> which connects to your cryptoGlance installation remotely.
 
 ### Features:
 
@@ -27,10 +29,19 @@ Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other API
 
 ### Requirements:
 
+- cgminer / bfgminer / cudaminer / sgminer properly configured with API access allowed
+
+*Windows Version:* 
+
+- Windows XP or newer
+
+*Running from source:* 
+
 - PHP v5.2+
-- Apache or IIS
-- cgminer / bfgminer / cudaminer / sgminer with API access allowed
-- MPOS Mining Pool account with your API key (for certain pool stats -- ask your pool operatir)
+- Apache / IIS / mongoose, or whichever web server you prefer
+- php_sockets extension enabled in PHP
+
+--- 
 
 ### Installation:
 
@@ -42,22 +53,35 @@ Self-hosted, PHP-based frontend interface for cgminer, MPOS pools, and other API
 
 2. Read the information that appears in the installer carefully.
 
-3. Choose your installation directory. **NOTE** - if you wish to install within **C:\Program Files (x86)\**, you will need to run cryptoGlance as an Administrator, since this is required for applications to write within Program Files. cryptoGlance creates a /user_data/ directory with your settings, and also writes new files here. This is why the default installation directory is *C:\cryptoGlance*.
+3. Choose your installation directory. **NOTE** - if you wish to install within <b>C:\Program Files (x86)\</b>, you will need to run cryptoGlance as an Administrator, since this is required for applications to write within that system directory. cryptoGlance creates a /user_data/ directory with your settings, and also writes new files here. This is why the default installation directory is *C:\cryptoGlance*.
 
-4. You'll want to ensure you're running your mining application with API-Access enabled, here's an example excerpt from the .conf:
+4. **OPTIONAL** - If you wish to access cryptoGlance from other devices, you'll need to edit the **{{install_dir}}/settings.json** file. Change line 30 to use your 192.168.x.x address, similar to:
 
 <br>
 
-    ...
-    "api-allow" : "127.0.0.1,192.168.1/24",
-    "api-listen" : true,
-    "api-mcast-port" : "4028",
-    "api-port" : "4028",
-    ...
-
-<a name="faq"></a>
+    "listen_on": ["192.168.1.20", 4041],
 
 ...and you should be good to go. 
+
+---
+
+### Upgrading:
+
+Upgrading is easy. 
+
+*Windows Version:* 
+
+- First off, it never hurts to make a backup copy of your entire cryptoGlance folder. Files that should be kept safe are:
+ - **/user_data** folder
+ - **{{ install-dir }}\settings.json** (optional modification for accessing cryptoGlance externally on other devices)
+- Simply <a href="https://sourceforge.net/projects/cryptoglance/files/latest/download" rel="external">download the latest version</a>, and install the program to the same directory. Your **/user_data** folder will not be overwritten
+- If you've made an edit  need to re-edit the **{{ install-dir }}/settings.json** file.
+
+*Running from source:* 
+
+- Either run a **git pull** if you've cloned the repo, or simply overwrite all files from the latest zip download on Github.
+
+<a name="faq"></a>
 
 ---
 
@@ -71,35 +95,35 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 
 ---
 
-**Q. I am (understandably) careful with my crypto-currency. Can I trust CryptoGlance?**
+**Q. I am (understandably) careful with my crypto-currency. Can I trust cryptoGlance?**
 
-**A.** Most definitely! The code is completely open source, and you run CryptoGlance on your own web server (even the Windows version). There's no calls to home, or anything of the sort. No private keys are requested, passwords (stored as salted hashes) and API keys are within a protected **/user_data** directory, excluded from source.
+**A.** Most definitely! The code is completely open source, and you run cryptoGlance on your own web server (even the Windows version). There's no calls to home, or anything of the sort. No private keys are requested, passwords (stored as salted hashes) and API keys are within a protected **/user_data** directory, excluded from source.
 
 ---
 
-**Q. How do I backup my CryptoGlance settings?**
+**Q. How do I backup my cryptoGlance settings?**
 
 **A.** Just look for the **/user_data** folder in the following locations, and copy it somewhere safe:
 
 *Windows Version:* 
 
-- **{{ cG Install Dir }}\application\user_data**
+- **{{ install-dir }}\application\user_data**
 
 *Running from source:* 
 
-- **{{ project root }}/user_data**
+- **{{ project-root }}/user_data**
 
 ---
 
-**Q. I cannot get CryptoGlance to run. What can I check?**
+**Q. I cannot get cryptoGlance to run. What can I check?**
 
-**A.** The Windows version should work quite well out of the box, but getting CryptoGlance setup under your own web server requires a bit of knowledge. Most often times, you can search for any specific errors you see, or try the following:
+**A.** The Windows version should work quite well out of the box, but getting cryptoGlance setup under your own web server requires a bit of knowledge. Most often times, you can search for any specific errors you see, or try the following:
 
 *Windows Version:*
 
 - Configure any firewalls/anti-virus to allow cryptoGlance.exe traffic through
 - Note the default port for the Windows app is **4041**. If you are configuring cryptoGlance to be externally accessible, you'll need to forward port **4041** to the IP of the Windows box running it, or change the port via the app's config file here:
- - **{{ cG Install Dir }}\settings.json**
+ - **{{ install-dir }}\settings.json**
  - Simply open it in a text editor, and search for **"listen_on": ["127.0.0.1", 4041]**
 - Investigate the **{{ cG Install Dir }}\debug.log** file for traces of errors
 
@@ -111,9 +135,16 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 
 ---
 
-**Q. The CryptoGlance site loads, but after adding a rig, no data or stats are displayed. Why?**
+**Q. The cryptoGlance site loads, but after adding a rig, no data or stats are displayed. Why?**
 
-**A.** Your mining utility (cgminer / bfgminer / cudaminer / etc.) requires that API access is allowed. Please see the installation section above for the proper settings to use in your .conf or .bat files.
+**A.** Your mining utility (cgminer / bfgminer / cudaminer / etc.) requires that API access is allowed. Here's an example excerpt from the .conf:
+
+    ...
+    "api-allow" : "127.0.0.1,192.168.1/24",
+    "api-listen" : true,
+    "api-mcast-port" : "4028",
+    "api-port" : "4028",
+    ...
 
 ---
 
@@ -127,7 +158,7 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 
 **Q. Why is my wallet balance 0?**
 
-**A.** Double-check that you've entered your address information accurately. Note that CryptoGlance will never ask for private keys or any other sensitive information.
+**A.** Double-check that you've entered your address information accurately. Note that cryptoGlance will never ask for private keys or any other sensitive information.
 
 ---
 
@@ -152,19 +183,19 @@ Hope you enjoy what we're trying to do here, and thanks to all of the other simi
 
 ### Our Donation Addresses:
 
-We've put a lot of our time and effort into CryptoGlance, and it hasn't been easy. We also wanted to make this tool free to everyone, however donations keep our fire lit, and more features/improvements coming out. If you like what we've built, or at least appreciate our efforts, please send code, or a donation to any of the following addresses:
+We've put a lot of our time and effort into cryptoGlance, and it hasn't been easy. We also wanted to make this tool free to everyone, however donations keep our fire lit, and more features/improvements coming out. If you like what we've built, or at least appreciate our efforts, please send code, or a donation to any of the following addresses:
 
 **Bitcoin**<br>
-12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE
+<small>12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE</small>
 
 **Litecoin**<br>
-LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M
+<small>LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M</small>
 
 **Vertcoin**<br>
-Vp9izfX1kM3BqGADtvan1Et5nBiU1s32Zp
+<small>Vp9izfX1kM3BqGADtvan1Et5nBiU1s32Zp</small>
 
 **Dogecoin**<br>
-D8bcNHYbkBDqwkvZKKpfu8oAyzqezJ5RvW 
+<small>D8bcNHYbkBDqwkvZKKpfu8oAyzqezJ5RvW</small>
 
 ---
 
