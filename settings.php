@@ -49,6 +49,13 @@ if (isset($_POST['general'])) {
 
 $settings = $cryptoGlance->getSettings();
 
+if (empty($settings['general']['temps']['warning'])) {
+    $settings['general']['temps']['warning'] = 75;
+}
+if (empty($settings['general']['temps']['danger'])) {
+    $settings['general']['temps']['danger'] = 85;
+}
+
 $jsArray = array('settings');
 
 require_once("includes/header.php");
@@ -70,12 +77,12 @@ require_once("includes/header.php");
                 <h3>Temperature Thresholds:</h3>                
                 <div class="form-group temp-thresholds">
                   <div class="temp-set-warning orange">
-                    <input type="text" class="form-control" id="inputTempWarning" name="tempWarning" value="<?php echo $settings['general']['temps']['warning'] ?>" placeholder="75" maxlength="3">
+                    <input type="text" class="form-control" id="inputTempWarning" name="tempWarning" value="<?php echo $settings['general']['temps']['warning'] ?>" placeholder="<?php echo $settings['general']['temps']['warning'] ?>" maxlength="3">
                     <span>&deg;C</span>
                     <label for="inputTempWarning" class="control-label">Warning</label>
                   </div>
                   <div class="temp-set-danger red">
-                    <input type="text" class="form-control" id="inputTempDanger" name="tempDanger" value="<?php echo $settings['general']['temps']['danger'] ?>" placeholder="85" maxlength="3">
+                    <input type="text" class="form-control" id="inputTempDanger" name="tempDanger" value="<?php echo $settings['general']['temps']['danger'] ?>" placeholder="<?php echo $settings['general']['temps']['danger'] ?>" maxlength="3">
                     <span>&deg;C</span>
                     <label for="inputTempDanger" class="control-label">Danger</label>
                   </div>
