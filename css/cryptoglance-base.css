@@ -1383,7 +1383,9 @@ a#dash-add-panel {
   -webkit-border-radius: 0;
   border-radius: 0;
   border: 10px solid #33b5e5;
-  border-width: 0 0 10px;
+  border-width: 1px 0 10px;
+  border-color: #656565 #444 #33b5e5 #444;
+  box-shadow: 0px 0px 200px rgba(51, 181, 229, 0.3);
 }
 
 .social-box {

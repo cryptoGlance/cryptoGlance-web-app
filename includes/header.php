@@ -59,12 +59,12 @@
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-question-sign mobile-icon"></i> Help <b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-header">Learn more</li>
-                        <li><a href="help.php"><i class="icon icon-question-sign"></i> Help using cryptoGlance</a></li>
-                        <li><a href="https://github.com/scar45/cryptoglance" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
+                        <li><a href="help.php"><i class="icon icon-preview"></i> View the README</a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">cryptoGlance Discussion</li>
-                        <li><a href="help.php" rel="external"><i class="icon icon-postalt"></i> Bitcointalk.org Forum Thread</a></li>
-                        <li><a href="http://reddit.com/r/cryptoglance" rel="external"><i class="icon icon-reddit"></i> /r/cryptoGlance Subreddit</a></li>
+                        <li class="dropdown-header">Official Links</li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external"><i class="icon icon-playstore"></i> Android Companion App</a></li>
+                        <li><a href="https://github.com/scar45/cryptoglance" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
+                        <li><a href="https://cryptoglance.info" rel="external"><i class="icon icon-glasses"></i> cryptoGlance Homepage</a></li>
                      </ul>
                   </li>
                   <li id="nav-login-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>
