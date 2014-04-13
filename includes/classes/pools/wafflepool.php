@@ -40,7 +40,7 @@ class Class_Pools_Wafflepool extends Class_Pools_Abstract {
 //            $data['pool_name'] = $poolData['public']['pool_name'];
             $data['sent'] = $poolData['balances']['sent'];
             $data['balance'] = $poolData['balances']['confirmed'];
-            $data['unconfirmed_balance'] = $poolData['balances']['unconverted'];
+            $data['unconfirmed_balance'] = number_format($poolData['balances']['unconverted'], 8);
             
             $pow = min(floor(($poolData['hash_rate'] ? log($poolData['hash_rate']) : 0) / log(1024)), count($units) - 1);
             $poolData['hash_rate'] /= pow(1024, $pow);
