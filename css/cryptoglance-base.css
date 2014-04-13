@@ -562,6 +562,10 @@ select.form-control {
   padding-left: 3px;
 }
 
+.page-login a.navbar-brand img {
+  right: 0;
+}
+
 .login-container .panel-footer p {
   text-align: center;
   text-shadow: 0 1px 0 #000;
