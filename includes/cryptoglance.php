@@ -278,9 +278,9 @@ class CryptoGlance {
         }
         
         $this->_config['cryptoglance'] = $settings;
+        $fh->write(json_encode($settings));
         
         if ($fh->isWritable()) {
-            $fh->write(json_encode($settings));
             return true;
         } else {
             return false;
