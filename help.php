@@ -1,4 +1,5 @@
 <?php
+include('includes/inc.php');
 
 # This file passes the content of the Readme.md file in the same directory
 # through the Markdown filter. You can adapt this sample code in any way
