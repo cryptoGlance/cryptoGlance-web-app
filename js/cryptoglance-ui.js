@@ -463,13 +463,15 @@ $(document).ready(function() {
   
     // Delete
     $('.btn-delete').click(function() {
-        $('#deletePrompt').attr('data-type', $(this).parentsUntil('.panel').parent().attr('data-type'));
-        $('#deletePrompt').attr('data-id', $(this).parentsUntil('.panel').parent().attr('data-id'));
+        var panelType = $(this).parentsUntil('.panel').parent().attr('data-type');
+        var panelId = $(this).parentsUntil('.panel').parent().attr('data-id');
+        $('#deletePrompt').attr('data-type', panelType);
+        $('#deletePrompt').attr('data-id', panelId);
+        $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
         prettifyInputs();
     });
   
     $('#deletePrompt').on('shown.bs.modal', function () {
-        $('.modal-body', this).html($('.modal-body', this).html().replace(/%PANNELNAME%/g, 'pannelname'));
         $('input[name="type"]', this).val($(this).attr('data-type'));
         $('input[name="id"]', this).val($(this).attr('data-id'));
         prettifyInputs();

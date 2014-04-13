@@ -8,7 +8,7 @@
          </div>
          <div class="modal-body">
 <!--            <big>This will remove %RIGNAME% // %POOLNAME% from your dashboard if you continue.<br><br>Note that this does not delete the panel data, so you can always add it again if you wish.</big>-->
-            <big>This will remove the %PANNELNAME% configuration!</big>
+            <big>This will remove the <span class="panelName"></span> configuration!</big>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-warning submitRemoveConfig" data-dismiss="modal"><i class="icon icon-circledelete"></i> Yes, good riddance!</button>
