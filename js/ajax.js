@@ -55,10 +55,9 @@ function ajaxUpdateCall(action, actionAttr) {
             updateWallets(data.wallets);
         }
         
-        if (typeof $.cookie('use_masonry_layout') != 'undefined' && $.cookie('use_masonry_layout') == 'yes' && $(window).width() > 1600 && Math.floor((new Date() - lastMasonryUpdate[action+actionAttr])/1000) > 5) {
-            initMasonry();
-            lastMasonryUpdate[action+actionAttr] = new Date();
-        } else if (typeof lastMasonryUpdate[action+actionAttr] == 'undefined') {
+        if (typeof $.cookie('use_masonry_layout') != 'undefined' && $.cookie('use_masonry_layout') == 'yes' && $(window).width() > 1600
+            && (typeof lastMasonryUpdate[action+actionAttr] == 'undefined' || Math.floor((new Date() - lastMasonryUpdate[action+actionAttr])/1000) > 5)
+        ) {
             initMasonry();
             lastMasonryUpdate[action+actionAttr] = new Date();
         }
