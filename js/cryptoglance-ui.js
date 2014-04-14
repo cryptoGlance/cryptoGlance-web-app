@@ -148,13 +148,15 @@ function destroyMasonry() {
 function restoreSiteLayout() {
   var siteLayout = $.cookie('use_masonry_layout');
   var viewportWidth  = $(window).width();
+  
+  console.log(siteLayout);
+  console.log(viewportWidth);
     
   if (siteLayout == null) {
     $('#layout-grid').removeClass('active-layout');
     $('#layout-list').addClass('active-layout');
   } 
-  else if (viewportWidth >= 1680 && siteLayout == 'yes')
-  {
+  else if (viewportWidth >= 1600 && siteLayout == 'yes') {
     initMasonry();
     $('#layout-list').removeClass('active-layout');
     $('#layout-grid').addClass('active-layout');
@@ -354,6 +356,7 @@ $(document).ready(function() {
 
   externalLinks();
   prettifyInputs();
+  restoreSiteLayout();
   
   //restoreDashboard();
   restorePanelWidth();

@@ -1,4 +1,5 @@
 var ajaxCall = [];
+var lastMasonryUpdate = new Date();
 
 $(document).ready(function() {
     // All Rigs
@@ -53,6 +54,15 @@ function ajaxUpdateCall(action, actionAttr) {
         if (typeof data.wallets != 'undefined') {
             updateWallets(data.wallets);
         }
+        
+        if (typeof $.cookie('use_masonry_layout') != 'undefined' && $.cookie('use_masonry_layout') == 'yes' && $(window).width() > 1600 && Math.floor((new Date() - lastMasonryUpdate[action+actionAttr])/1000) > 5) {
+            initMasonry();
+            lastMasonryUpdate[action+actionAttr] = new Date();
+        } else if (typeof lastMasonryUpdate[action+actionAttr] == 'undefined') {
+            initMasonry();
+            lastMasonryUpdate[action+actionAttr] = new Date();
+        }
+        
     });
 }
 
