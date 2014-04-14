@@ -67,7 +67,7 @@ include("includes/login-header.php");
             <div class="panel-footer">
                <p><b>Forgot your password?</b> Well then, you'll need to delete the file <em>/<?php echo DATA_FOLDER; ?>/configs/account.json</em>, then log in with a fresh account immediately.</p>
                <hr>
-               <p><span>Still having trouble? Touch base with us on &nbsp;<a href="https://plus.google.com/u/0/b/110896112995796953409/communities/111042089628113521779" rel="external"><i class="icon icon-googleplus"></i></a> <a href="http://reddit.com/r/rigwatch" rel="external"><i class="icon icon-reddit"></i></a> <a href="http://twitter.com/rigwatch" rel="external"><i class="icon icon-twitter"></i></a> or <a href="http://webchat.freenode.net/?channels=%23RigWatch&uio=OT10cnVlJjExPTIwNQa5" rel="external">join our IRC chat</a>.</span></p>
+               <p><span>Still having trouble? Touch base with us on &nbsp;<a href="https://plus.google.com/u/0/b/110896112995796953409/communities/111042089628113521779" rel="external"><i class="icon icon-googleplus"></i></a> <a href="http://reddit.com/r/cryptoglance" rel="external"><i class="icon icon-reddit"></i></a> <a href="http://twitter.com/cryptoglance" rel="external"><i class="icon icon-twitter"></i></a> or <a href="http://webchat.freenode.net/?channels=%23cryptoGlance&uio=OT10cnVlJjExPTIwNQa5" rel="external">join our IRC chat</a>.</span></p>
             </div>
          </div>
       </div>

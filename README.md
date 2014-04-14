@@ -49,7 +49,7 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
 
 ### Installation:
 
-**Advanced Users:** Simply setup a new PHP instance and point it to the root folder of the cryptoGlance source/download. Ensure that the **php_sockets** extension is enabled in **php.ini**, and you should be good to go.
+**Advanced Users:** Simply setup a new PHP instance and point it to the root folder of the cryptoGlance source/download. Ensure that the **php_sockets** extension is enabled in **php.ini**, grant write access to the **/user_data** folder, and you should be good to go.
 
 **Windows App Users:**
 
