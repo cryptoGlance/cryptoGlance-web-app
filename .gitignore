@@ -1,0 +1,11 @@
+user_data/configs/
+user_data/currencies/
+user_data/dev/
+user_data/pools/
+user_data/wallets/
+pure-assets/
+vectorstock/
+.idea/
+web.config
+*.bak
+Thumbs.db
