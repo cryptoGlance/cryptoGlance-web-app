@@ -11,21 +11,25 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
 
 ### Features:
 
-- Add multiple rigs which display data from cgminer
-- Add multiple pools to watch that support MPOS frontends (ask your pool op if you're unsure, or look in their site's footer)
-- Mobile optimized design
-- Customizable via:
- - Add/Remove/Edit Panels and move them around
- - Collapse or Expand panels
- - Drag n' drop certain stat-pairs to the position you prefer
- - These preferences are saved to a local browser cookie (for now)
-- Monitor RSS feeds and Subreddits
-- Create exchange/conversion rate pairs that display fresh data
-- Add your addresses to keep on top of their current balance (determined from the public blockchain)
+<ul>
+  <li>Standalone version with installer (for Windows), or run the source code within your own (PHP) web server environment</li>
+  <li>Obtains valid data directly from cgminer/sgminer</li>
+  <li>Monitors detailed statistics, and manages core functions of multiple rigs/ASICs</li>
+  <li>Switch pools and restart miners remotely</li>
+  <li>Actively track pool stats and crypto address balances (MPOS and selective pools supported)</li>
+  <li>Responsive, mobile-friendly interface</li>
+  <li>Realtime information display (no refresh needed)</li>
+  <li>Secure login system</li>
+  <li>Configurable warning and danger status with visual cues</li>
+  <li>Create 'wallets' that are collections of your selected coin addresses, and display the balance</li>
+  <li>Void of malware or donation mining (does <strong>NOT</strong> require your private keys at all)</li>
+  <li>Companion <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android app</a> which easily allows you to quickly access your cryptoGlance instance while on the go</li>
+  <li><strong>MUCH MORE is planned!</strong> Follow our social accounts, or drop by our IRC channel to find out when new features are released!</li>
+</ul>
 
 ### Video Demo:
 
-<a href="http://www.youtube.com/watch?v=5BBI8icIFuI" rel="external"><img src="images/cryptoGlance-video-intro-landscape.png" alt="cryptoGlance Video Thumb" /></a>
+<a href="http://www.youtube.com/watch?v=MZF1ZasbT58" rel="external"><img src="images/cryptoGlance-video-intro-landscape.png" alt="cryptoGlance Video Thumb" /></a>
 
 ### Requirements:
 
@@ -153,6 +157,12 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 **A.** Some functions require **API write access** in order to issue commands to the miner. An example of these would be *Switch Pools*, and other such commands that don't simply read data. In order to fix this, open your miner .conf file (or modify your .bat), and ensure that you have a "**W:**" notation before each IP that you wish to grant write access to:
 
     "api-allow" : "W:127.0.0.1,W:192.168.1/24",
+
+---
+
+**Q. After adding a pool panel, I see a lot of NULL values. What's up?**
+
+**A.** This is most often caused by entering any one of the pool inputs incorrectly. Try removing the panel, and adding it again with accurate information.
 
 ---
 

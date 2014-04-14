@@ -2098,7 +2098,7 @@ a#dash-add-panel {
   }
 
   .full-content .panel-no-grid {
-    margin: 0 auto;
+    margin: 0 auto 70px;
     width: 60%;
   }
 
