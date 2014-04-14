@@ -143,7 +143,7 @@ require_once("includes/header.php");
                 </div>
                 <?php } ?>
                 <div class="form-group">
-                  <div class="col-sm-offset-5 col-sm-2">
+                  <div class="col-sm-offset-4 col-sm-2">
                     <button type="submit" name="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>
                   </div>
                 </div>
