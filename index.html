@@ -30,16 +30,6 @@
    </head>
    <body>
       <a href="https://plus.google.com/110896112995796953409" rel="publisher"></a>
-      <div class="modal fade" id="youTubeClip" tabindex="-1" role="dialog" aria-labelledby="youTubeClipLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-body">
-              <iframe width="560" height="315" src="//www.youtube.com/embed/5BBI8icIFuI" frameborder="0" allowfullscreen></iframe>
-              <a href="https://www.youtube.com/embed/5BBI8icIFuI" rel="external"><i class="icon icon-youtube"></i>Watch on YouTube</span>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
       <div class="page-container">
          <!-- Fixed navbar -->
          <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -67,12 +57,12 @@
          <div id="top" class="jumbotron">
             <img src="images/cryptoglance-devices.png" />
             <h1>Real-time updates in one spot, for all of your crypto components <i class="icon icon-pixelpickaxe"></i></h1>
-            <p class="jumbo-desc">cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot.</p>
+            <p class="jumbo-desc">cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot. Designed for large and small screens, you can easily monitor and control many aspects of your crypto/mining devices. There's also an <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android companion app</a> which connects to your cryptoGlance installation remotely.</p>
             <p class="jumbo-copy jumbo-cta" id="jumbo-cta">
                <a class="btn btn-success btn-lg" rel="external"  href="https://sourceforge.net/projects/cryptoglance/files/latest/download?source=files" role="button"><i class="icon icon-windowseight"></i> Download for Windows<span>standalone server, ready-to-run</span></a>
                <a class="btn btn-warning btn-lg" rel="external" href="https://github.com/cryptoGlance/cryptoGlance-web-app"" rel="external" role="button"><i class="icon icon-github"></i> Source Code at Github<span>run on your own web server</span></a>
                <a class="btn btn-default btn-lg" href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external" role="button"><i class="icon icon-play"></i> Get the Android App<span>at the Google Play store</span></a>
-               <a class="btn btn-danger btn-lg" href="https://www.youtube.com/embed/5BBI8icIFuI?autoplay=1" rel="external" role="button"><i class="icon icon-youtube"></i> Video Tour / Setup Guide<span>check cryptoGlance in action</span></a>
+               <a class="btn btn-danger btn-lg" href="https://www.youtube.com/watch?v=MZF1ZasbT58" rel="external" role="button"><i class="icon icon-youtube"></i> Video Tour / Setup Guide<span>check cryptoGlance in action</span></a>
                <br>
             </p>
          </div>
@@ -113,7 +103,7 @@
                   <li>Obtains valid data directly from cgminer/sgminer</li>
                   <li>Monitors detailed statistics, and manages core functions of multiple rigs/ASICs</li>
                   <li>Switch pools and restart miners remotely</li>
-                  <li>Actively track pool stats and crypto address balances</li>
+                  <li>Actively track pool stats and crypto address balances (MPOS and selective pools supported)</li>
                   <li>Responsive, mobile-friendly interface</li>
                   <li>Realtime information display (no refresh needed)</li>
                   <li>Secure login system</li>
@@ -139,8 +129,10 @@
                      Inspect ALL of the code, no malware or shady stuff here!
                   </div>
                </div>
+               <!--
                <br>
                <a id="btn-sauce" href="https://github.com/cryptoglance/cryptoGlance-web-app" rel="external"><button type="button" class="btn btn-lg btn-default"><i class="icon icon-github"></i> &nbsp;Grab the sauce on Github<span>fork it &amp; submit pull requests</span></button></a>
+               -->
             </div>
          </div>
          <div id="panel-social" class="panel panel-primary">
@@ -148,12 +140,6 @@
                <h1>find cryptoGlance elsewhere</h1>
             </div>         
             <div class="panel-body social-icons">
-               <div class="stat-pair stat-pair-devs">
-                  <div class="stat-label">
-                     follow the project, get in touch, and/or help spread the word!
-                  </div>
-
-               </div>
                <div class="container">
                   <div class="social-box">
                      <a class="social-icon" href="https://plus.google.com/u/0/b/110896112995796953409/communities/111042089628113521779" rel="external"><img src="images/icon-google-plus.png" />Google+</a>
@@ -170,6 +156,11 @@
                      <a class="twitter-follow-button social-count" href="https://twitter.com/cryptoglance" data-show-count="true" data-show-screen-name="false" data-width="85px" data-lang="en">Follow @cryptoglance</a>
                   </div>
                </div>
+               <div class="stat-pair stat-pair-devs">
+                  <div class="stat-label">
+                     follow the project, get in touch, and/or help spread the word!
+                  </div>
+               </div>
             </div>
          </div>
          <div id="panel-chat" class="panel panel-primary">
@@ -177,15 +168,15 @@
                <h1>Chat (support + dev ideas)</h1>
             </div>         
             <div class="panel-body">
-               <div class="stat-pair stat-pair-devs">
-                  <div class="stat-label">
-                     Please be respectful and patient when waiting for answers&hellip;Thanks!
-                  </div>
-               </div>
                <div class="container social-icons">
                   <a class="social-icon" href="http://webchat.freenode.net?channels=%23cryptoGlance&uio=OT10cnVlJjExPTIwNQa5" rel="external"><h3>Enter IRC Chatroom</h3><img src="images/icon-chat.png" /></a>
                   <p>...or, connect to <span class="orange">Freenode</span> and join <span class="orange">#cryptoGlance</span> with your favourite mobile IRC client.</p>
                   <iframe src="http://webchat.freenode.net?channels=%23cryptoGlance&uio=OT10cnVlJjExPTIwNQa5"></iframe>
+               </div>
+               <div class="stat-pair stat-pair-devs">
+                  <div class="stat-label">
+                     Please be respectful and patient when waiting for answers&hellip;Thanks!
+                  </div>
                </div>
             </div>
          </div>
