@@ -148,9 +148,6 @@ function destroyMasonry() {
 function restoreSiteLayout() {
   var siteLayout = $.cookie('use_masonry_layout');
   var viewportWidth  = $(window).width();
-  
-  console.log(siteLayout);
-  console.log(viewportWidth);
     
   if (siteLayout == null) {
     $('#layout-grid').removeClass('active-layout');
