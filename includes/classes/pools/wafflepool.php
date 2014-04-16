@@ -3,7 +3,7 @@
 /*
  * @author Stoyvo
  */
-class Class_Pools_Wafflepool extends Class_Pools_Abstract {
+class Pools_Wafflepool extends Pools_Abstract {
 
     // Pool Information
     protected $_btcaddess;
@@ -11,7 +11,7 @@ class Class_Pools_Wafflepool extends Class_Pools_Abstract {
     public function __construct($params) {
         parent::__construct(array('apiurl' => 'http://wafflepool.com'));
         $this->_btcaddess = $params['address'];
-        $this->_fileHandler = new Class_FileHandler('pools/wafflepool/'. $params['address'] .'.json');
+        $this->_fileHandler = new FileHandler('pools/wafflepool/'. $params['address'] .'.json');
     }
 
     public function update() {

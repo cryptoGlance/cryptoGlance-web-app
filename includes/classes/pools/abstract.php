@@ -3,7 +3,7 @@
 /*
  * @author Stoyvo
  */
-class Class_Pools_Abstract {
+class Pools_Abstract {
     
     protected $_apiURL;
     protected $_fileHandler;

@@ -11,12 +11,12 @@
  * @author Timothy.Stoyanovski
  */
 
-class Class_Miners {
+class Miners {
 
     protected $_miners = array();
 
     public function __construct() {
-        $fh = new Class_FileHandler('configs/miners.json');
+        $fh = new FileHandler('configs/miners.json');
         $miners = json_decode($fh->read(), true);
 
         if (!empty($miners)) {
@@ -32,7 +32,7 @@ class Class_Miners {
             return false;
         }
 
-        $class = 'Class_Miners_' . ucwords(strtolower($type));
+        $class = 'Miners_' . ucwords(strtolower($type));
         $obj = new $class($host, $port);
         $this->_miners[] = $obj;
     }

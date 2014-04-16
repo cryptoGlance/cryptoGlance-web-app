@@ -3,7 +3,7 @@
 /*
  * @author Stoyvo
  */
-class Class_Pools_Mpos extends Class_Pools_Abstract {
+class Pools_Mpos extends Pools_Abstract {
 
     // Pool Information
     protected $_apiKey;
@@ -22,7 +22,7 @@ class Class_Pools_Mpos extends Class_Pools_Abstract {
         parent::__construct($params);
         $this->_apiKey = $params['apikey'];
         $this->_userId = $params['userid'];
-        $this->_fileHandler = new Class_FileHandler('pools/mpos/'. $params['apikey'] .'.json');
+        $this->_fileHandler = new FileHandler('pools/mpos/'. $params['apikey'] .'.json');
     }
 
     public function update() {

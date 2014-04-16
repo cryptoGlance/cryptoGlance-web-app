@@ -7,7 +7,7 @@ class Login {
     protected $_fh = null;
     
     public function __construct() {
-        $this->_fh = new Class_FileHandler('configs/account.json');
+        $this->_fh = new FileHandler('configs/account.json');
     }
     
     public function login($username, $password) {

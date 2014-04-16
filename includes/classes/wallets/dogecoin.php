@@ -3,12 +3,12 @@
 /*
  * @author Stoyvo
  */
-class Class_Wallets_Dogecoin extends Class_Wallets_Abstract {
+class Wallets_Dogecoin extends Wallets_Abstract {
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);
         $this->_apiURL = 'http://dogechain.info/chain/Dogecoin/q/addressbalance/' . $address;
-        $this->_fileHandler = new Class_FileHandler('wallets/dogecoin/' . $this->_address . '.json');
+        $this->_fileHandler = new FileHandler('wallets/dogecoin/' . $this->_address . '.json');
     }
     
     public function update() {

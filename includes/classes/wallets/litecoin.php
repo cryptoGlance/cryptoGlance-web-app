@@ -3,12 +3,12 @@
 /*
  * @author Stoyvo
  */
-class Class_Wallets_Litecoin extends Class_Wallets_Abstract {
+class Wallets_Litecoin extends Wallets_Abstract {
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);
         $this->_apiURL = 'http://ltc.blockr.io/api/v1/address/balance/' . $address;
-        $this->_fileHandler = new Class_FileHandler('wallets/litecoin/' . $this->_address . '.json');
+        $this->_fileHandler = new FileHandler('wallets/litecoin/' . $this->_address . '.json');
     }
     
     public function update() {

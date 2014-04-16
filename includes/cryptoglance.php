@@ -13,7 +13,7 @@ class CryptoGlance {
 
     public function __construct() {
         foreach ($this->_configTypes as $configType) {
-            $fh = $fileHandler = new Class_FileHandler('configs/' . $configType . '.json');
+            $fh = $fileHandler = new FileHandler('configs/' . $configType . '.json');
             $this->_config[$configType] = json_decode($fh->read(), true);
         }
     }
@@ -52,7 +52,7 @@ class CryptoGlance {
         );
         
         $this->_config['miners'][] = $rig;
-        $fh = $fileHandler = new Class_FileHandler('configs/miners.json');
+        $fh = $fileHandler = new FileHandler('configs/miners.json');
         $fh->write(json_encode($this->_config['miners']));
         http_response_code(202); // accepted
     }
@@ -67,7 +67,7 @@ class CryptoGlance {
         
         unset($this->_config['miners'][$rigId]);
         $this->_config['miners'] = array_values($this->_config['miners']);
-        $fh = $fileHandler = new Class_FileHandler('configs/miners.json');
+        $fh = $fileHandler = new FileHandler('configs/miners.json');
         $fh->write(json_encode($this->_config['miners']));
         http_response_code(202); // accepted
     }
@@ -107,7 +107,7 @@ class CryptoGlance {
         }
         
         $this->_config['pools'][] = $pool;
-        $fh = $fileHandler = new Class_FileHandler('configs/pools.json');
+        $fh = $fileHandler = new FileHandler('configs/pools.json');
         $fh->write(json_encode($this->_config['pools']));
         http_response_code(202); // accepted
     }
@@ -122,7 +122,7 @@ class CryptoGlance {
         
         unset($this->_config['pools'][$poolId]);
         $this->_config['pools'] = array_values($this->_config['pools']);
-        $fh = $fileHandler = new Class_FileHandler('configs/pools.json');
+        $fh = $fileHandler = new FileHandler('configs/pools.json');
         $fh->write(json_encode($this->_config['pools']));
         http_response_code(202); // accepted
     }
@@ -132,7 +132,7 @@ class CryptoGlance {
     // Wallets //
     /////////////
     public function getCurrencies() {
-        $wallet = new Class_Wallets();
+        $wallet = new Wallets();
         return $wallet->getCurrencies();
     }
     public function getWallets() {
@@ -162,7 +162,7 @@ class CryptoGlance {
             );        
         }
         
-        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
         http_response_code(202); // accepted
         echo count($this->_config['wallets']);
@@ -178,7 +178,7 @@ class CryptoGlance {
         
         unset($this->_config['wallets'][$walletId]);
         $this->_config['wallets'] = array_values($this->_config['wallets']);
-        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
         http_response_code(202); // accepted
     }
@@ -206,7 +206,7 @@ class CryptoGlance {
             'address' => $newAddress,
         );            
 
-        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
         http_response_code(202); // accepted
     }
@@ -225,7 +225,7 @@ class CryptoGlance {
         
         $this->_config['wallets'][$walletId]['addresses'][$addrId]['label'] = $newLabel;
 
-        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
         http_response_code(202); // accepted
     }
@@ -242,7 +242,7 @@ class CryptoGlance {
         
         unset($this->_config['wallets'][$walletId]['addresses'][$addrId]);
         $this->_config['wallets'][$walletId]['addresses'] = array_values($this->_config['wallets'][$walletId]['addresses']);
-        $fh = $fileHandler = new Class_FileHandler('configs/wallets.json');
+        $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
         http_response_code(202); // accepted
     }
@@ -256,7 +256,7 @@ class CryptoGlance {
     }
     
     public function saveSettings($data) {
-        $fh = $fileHandler = new Class_FileHandler('configs/cryptoglance.json');
+        $fh = $fileHandler = new FileHandler('configs/cryptoglance.json');
         $settings = json_decode($fh->read(), true);
         
         if ($data['general']) {

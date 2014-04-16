@@ -3,13 +3,13 @@
 /*
  * @author Stoyvo
  */
-class Class_Wallets_Bitcoin extends Class_Wallets_Abstract {
+class Wallets_Bitcoin extends Wallets_Abstract {
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);
 //        $this->_apiURL = 'http://blockchain.info/address/' . $address . '?format=json&limit=0';
         $this->_apiURL = 'http://blockr.io/api/v1/address/balance/' . $address;
-        $this->_fileHandler = new Class_FileHandler('wallets/bitcoin/' . $this->_address . '.json');
+        $this->_fileHandler = new FileHandler('wallets/bitcoin/' . $this->_address . '.json');
     }
     
     public function update() {

@@ -5,7 +5,7 @@
  *
  * @author Stoyvo
  */
-class Class_FileHandler {
+class FileHandler {
 
     protected $_fullFilePath;
 

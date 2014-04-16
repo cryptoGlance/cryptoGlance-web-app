@@ -3,7 +3,7 @@
 /*
  * @author Stoyvo
  */
-class Class_Wallets_Abstract {
+class Wallets_Abstract {
     
     protected $_apiURL;
     protected $_label;

@@ -17,7 +17,7 @@ if ($walletId != 0) {
     $wallet = $wallets[$walletId-1];
     
     if (!empty($wallet)) {
-        $walletObj = new Class_Wallets();
+        $walletObj = new Wallets();
         $walletData = $walletObj->update($walletId);
         $wallet['data'] = $walletData[0];
     }

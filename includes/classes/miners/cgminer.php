@@ -3,7 +3,7 @@
 /*
  * @author Stoyvo
  */
-class Class_Miners_Cgminer {
+class Miners_Cgminer {
 
     // socket things
     protected $_host;

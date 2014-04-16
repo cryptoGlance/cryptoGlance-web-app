@@ -2,7 +2,7 @@
 /*
  * @author Stoyvo
  */
-class Class_Update {
+class Update {
 
     public function all() {
         $data = array();
@@ -60,21 +60,21 @@ class Class_Update {
 
     // Private
     private function getPools($poolId = null) {
-        $pools = new Class_Pools();
+        $pools = new Pools();
         $data = $pools->update($poolId);
         
         return $data;
     }
 
     private function getRigs($rigId = null) {
-        $rigs = new Class_Miners(); // Miners actually means Rigs
+        $rigs = new Miners(); // Miners actually means Rigs
         $data = $rigs->update($rigId);
 
         return $data;
     }
     
     private function getWallets($walletId = null) {
-        $wallets = new Class_Wallets();
+        $wallets = new Wallets();
         $data = $wallets->update($walletId);
         
         return $data;
