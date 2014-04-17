@@ -107,7 +107,7 @@ if ($walletId != 0) {
                     </div>
                     <div class="form-group">
                         <label for="inputWalletCurrency" class="control-label col-sm-4">Currency:</label>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <select class="form-control" name="currency" <?php echo ($walletId != 0 ? 'disabled' : '') ?>>
                                 <?php foreach ($cryptoGlance->getCurrencies() as $currency => $code) { ?>
                                 <option value="<?php echo $currency ?>" <?php echo ($wallet['currency'] == $currency ? 'selected' : '') ?>><?php echo ucwords($currency) ?> (<?php echo $code ?>)</option>
