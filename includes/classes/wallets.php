@@ -13,6 +13,7 @@ class Wallets {
     protected $_wallets = array();
     protected $_currencies = array(
         'bitcoin' => 'BTC',
+        'continuum' => 'CTM',
         'litecoin' => 'LTC',
         'dogecoin' => 'DOGE',
         'vertcoin' => 'VTC',
