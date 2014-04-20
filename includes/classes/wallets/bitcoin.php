@@ -1,5 +1,5 @@
 <?php
-
+require_once('abstract.php');
 /*
  * @author Stoyvo
  */

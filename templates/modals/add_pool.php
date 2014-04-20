@@ -26,24 +26,26 @@
             <label for="selectPoolType" class="col-sm-3 control-label">Type</label>
             <div class="col-sm-4">
               <select class="form-control" id="selectPoolType" name="poolType">
+                 <option disabled selected>Select A Pool</option>
+                 <option value="btcguild">BTC Guild</option>
                  <option value="mpos">MPOS</option>
                  <option value="wafflepool">WafflePool</option>
               </select>
             </div>
           </div>
-           <div class="form-group mpos">
+           <div class="form-group mpos" style="display: none;">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
-               <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http:// or https://">
+               <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://vertsquad.com/">
              </div>
            </div>
-           <div class="form-group mpos">
+           <div class="form-group mpos btcguild" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">
              </div>
            </div>
-           <div class="form-group mpos">
+           <div class="form-group mpos" style="display: none;">
              <label for="inputPoolUserId" class="col-sm-3 control-label">User ID</label>
              <div class="col-sm-3">
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">

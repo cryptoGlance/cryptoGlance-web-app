@@ -87,17 +87,23 @@ class CryptoGlance {
         $userid = $_POST['userid'];
         
         $pool = array();
-        if ($type == 'mpos' && !(empty($url) || empty($api) || empty($userid))) {
+         if ($type == 'btcguild' && !empty($api)) {
             $pool = array(
-                'type' => 'mpos',
+                'type' => $type,
+                'name' => ($label ? $label : 'BTC Guild'),
+                'apikey' => $api,
+            );
+        } else if ($type == 'mpos' && !(empty($url) || empty($api) || empty($userid))) {
+            $pool = array(
+                'type' => $type,
                 'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
-                'apiurl' => $url,
+                'apiurl' => rtrim($url, '/'),
                 'apikey' => $api,
                 'userid' => $userid,
             );
         } else if ($type == 'wafflepool' && !empty($address)) {
             $pool = array(
-                'type' => 'wafflepool',
+                'type' => $type,
                 'name' => ($label ? $label : 'WafflePool'),
                 'address' => $address,
             );

@@ -1,7 +1,7 @@
 <?php
  // New Autoloader
 function cgLoader($className) {
-    $className = 'classes/' . $className;
+    $className = 'classes/' . strtolower($className);
 //    if (defined('CRYPTOGLANCE_PATH')) { $classesPath = CRYPTOGLANCE_PATH; }
     $className = ltrim($className, '\\');
     $fileName  = '';

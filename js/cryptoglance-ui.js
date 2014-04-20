@@ -457,7 +457,7 @@ $(document).ready(function() {
   // Dismiss Update Alert
   $('.alert-dismiss', '#alert-update').click(function(e) {
     e.preventDefault();
-    $.cookie('cryptoglance_version', true, { expires: 3 });
+    $.cookie('cryptoglance_version', true, { expires: 1 });
     $('#alert-update').slideUp('fast');
   });
   
@@ -481,15 +481,9 @@ $(document).ready(function() {
     // Pool modal
     $('#selectPoolType').change(function() {
         var type = $(this).val();
-        if (type == 'mpos') {
-            $('#addPool').find('.form-group').hide();
-            $('#addPool').find('.mpos').show();
-            $('#addPool').find('.all').show();
-        } else if (type == 'wafflepool') {
-            $('#addPool').find('.form-group').hide();
-            $('#addPool').find('.wafflepool').show();
-            $('#addPool').find('.all').show();            
-        }
+        $('#addPool').find('.form-group').hide();
+        $('#addPool').find('.' + type).show();
+        $('#addPool').find('.all').show();
         prettifyInputs();
     });
     
