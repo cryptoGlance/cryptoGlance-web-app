@@ -63,7 +63,7 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Official Links</li>
                         <li><a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external"><i class="icon icon-playstore"></i> Android Companion App</a></li>
-                        <li><a href="https://github.com/scar45/cryptoglance" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
+                        <li><a href="https://github.com/cryptoGlance/cryptoGlance-web-app" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
                         <li><a href="https://cryptoglance.info" rel="external"><i class="icon icon-glasses"></i> cryptoGlance Homepage</a></li>
                      </ul>
                   </li>
@@ -72,7 +72,7 @@
                </ul>
             </div>
             <div id="alert-update" class="top-alert">
-               <span><b>Update available!</b> You are running <b class="current"></b>, but the latest release is <b class="latest"></b>.</span> <a href="https://github.com/scar45/cryptoglance/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a class="alert-dismiss" href="#"><i class="icon icon-buttonx"></i></a>
+               <span><b>Update available!</b> You are running <b class="current"></b>, but the latest release is <b class="latest"></b>.</span> <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a class="alert-dismiss" href="#"><i class="icon icon-buttonx"></i></a>
             </div>
             <!--/.nav-collapse -->
          </div>
