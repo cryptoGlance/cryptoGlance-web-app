@@ -131,6 +131,7 @@ class Miners_Cgminer {
             'stale' => $summaryData['Difficulty Stale'],
             'hw_errors' => $summaryData['Hardware Errors'],
             'utility' => $summaryData['Utility'] . '/m',
+//            'utility' => $summaryData['Work Utility'] . '/m',
             'active_mining_pool' => $activePool['url'],
         );
         

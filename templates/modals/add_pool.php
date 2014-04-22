@@ -29,17 +29,18 @@
                  <option disabled selected>Select A Pool</option>
                  <option value="btcguild">BTC Guild</option>
                  <option value="mpos">MPOS</option>
+                 <option value="simplecoin">SimpleCoin</option>
                  <option value="wafflepool">WafflePool</option>
               </select>
             </div>
           </div>
-           <div class="form-group mpos" style="display: none;">
+           <div class="form-group mpos simplecoin" style="display: none;">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://vertsquad.com/">
              </div>
            </div>
-           <div class="form-group mpos btcguild" style="display: none;">
+           <div class="form-group mpos btcguild simplecoin" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">

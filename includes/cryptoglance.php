@@ -93,13 +93,20 @@ class CryptoGlance {
                 'name' => ($label ? $label : 'BTC Guild'),
                 'apikey' => $api,
             );
-        } else if ($type == 'mpos' && !(empty($url) || empty($api) || empty($userid))) {
+        } else if ($type == 'mpos' && !empty($url) && !empty($api) && !empty($userid)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
                 'apiurl' => rtrim($url, '/'),
                 'apikey' => $api,
                 'userid' => $userid,
+            );
+        } else if ($type == 'simplecoin' && !empty($api) && !empty($url)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
+                'apiurl' => rtrim($url, '/'),
+                'apikey' => $api,
             );
         } else if ($type == 'wafflepool' && !empty($address)) {
             $pool = array(
