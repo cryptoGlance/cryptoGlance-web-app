@@ -61,7 +61,11 @@ class Pools_Simplecoin extends Pools_Abstract {
                     $data['active_worker(s)']++;
                 }
             }
-            $data['efficiency'] /= $data['active_worker(s)'];
+            if ($data['active_worker(s)'] > 0) {
+                $data['efficiency'] /= $data['active_worker(s)'];
+            } else {
+                $data['efficiency'] = 0;
+            }
             
             $this->_fileHandler->write(json_encode($data));
             return $data;
