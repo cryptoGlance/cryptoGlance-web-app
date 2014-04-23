@@ -43,6 +43,7 @@ class Pools_Simplecoin extends Pools_Abstract {
             
             $data['balance'] = (!empty($poolData['balance']) ? $poolData['balance']/100000000 : 0);
             $data['unconfirmed_balance'] = (!empty($poolData['unconfirmed_balance']) ? $poolData['unconfirmed_balance']/100000000 : 0);
+            $data['estimated_round_payout'] = (!empty($poolData['est_round_payout']) ? $poolData['est_round_payout']/100000000 : 0);
 
             $data['user_hashrate'] = $poolData['last_10_hashrate'];
             $pow = min(floor(($poolData['last_10_hashrate'] ? log($poolData['last_10_hashrate']) : 0) / log(1024)), count($units2) - 1);
