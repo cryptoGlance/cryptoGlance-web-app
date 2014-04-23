@@ -116,6 +116,7 @@ function updateRigs(data) {
             $(rigElm).removeClass('panel-warning');
             $(rigElm).removeClass('panel-danger');
             $(rigElm).addClass('panel-offline');
+            $('.btn-manage-rig', rigElm).hide();
             return true;
         } else {
             $(rigElm).find('.toggle-panel-body').show();
@@ -124,6 +125,7 @@ function updateRigs(data) {
             $(rigElm).find('.panel-footer').show();
 //            $(rigTitle).html($(rigTitle).html().replace(' - OFFLINE', ''));
             $(rigElm).removeClass('panel-offline');
+            $('.btn-manage-rig', rigElm).show();
         }
     
         // Clear nav items

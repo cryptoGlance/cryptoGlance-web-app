@@ -3,7 +3,7 @@
     
     <div class="panel-heading">
         <button type="button" class="panel-header-button btn-delete" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button> 
-        <button type="button" class="panel-header-button btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-managedhosting"></i> Manage</button>
+        <button type="button" class="panel-header-button btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>" style="display: none;"><i class="icon icon-managedhosting"></i> Manage</button>
         <!-- <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
         <button type="button" class="sort-down panel-header-button toggle-panel-body"><i class="icon icon-chevron-down"></i></button> 
         <button type="button" class="sort-up panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>
