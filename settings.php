@@ -75,23 +75,31 @@ require_once("includes/header.php");
             <form class="form-horizontal" role="form" method="POST">
               <fieldset>
                 <h3>Temperature Thresholds:</h3>                
-                <div class="form-group temp-thresholds">
-                  <div class="temp-set-warning orange">
+                <div class="form-group setting-thresholds setting-temperature">
+                  <div class="setting-warning orange">
                     <input type="text" class="form-control" id="inputTempWarning" name="tempWarning" value="<?php echo $settings['general']['temps']['warning'] ?>" placeholder="<?php echo $settings['general']['temps']['warning'] ?>" maxlength="3">
                     <span>&deg;C</span>
                     <label for="inputTempWarning" class="control-label">Warning</label>
                   </div>
-                  <div class="temp-set-danger red">
+                  <div class="setting-danger red">
                     <input type="text" class="form-control" id="inputTempDanger" name="tempDanger" value="<?php echo $settings['general']['temps']['danger'] ?>" placeholder="<?php echo $settings['general']['temps']['danger'] ?>" maxlength="3">
                     <span>&deg;C</span>
                     <label for="inputTempDanger" class="control-label">Danger</label>
                   </div>
                 </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-4 col-sm-4">
-                    <span class="help-block"><i class="icon icon-info-sign"></i> Set the points where <span class="orange">warning</span> and <span class="red">danger</span> labels will appear (<span class="red">danger</span> must be greater than <span class="orange">warning</span>).</span>
+                <span class="help-block"><i class="icon icon-info-sign"></i> Set the points where <span class="orange">warning</span> and <span class="red">danger</span> labels will appear (<span class="red">danger</span> must be greater than <span class="orange">warning</span>).</span>
+                <h3>HW Error Thresholds:</h3>               
+                <div class="form-group setting-thresholds setting-hwerror">
+                  <div class="setting-warning orange">
+                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwerrWarning" value="<?php echo $settings['general']['hwerrs']['warning'] ?>" placeholder="<?php echo $settings['general']['hwerrs']['warning'] ?>" maxlength="2">
+                    <label for="inputHWErrWarning" class="control-label">Warning</label>
+                  </div>
+                  <div class="setting-danger red">
+                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwerrDanger" value="<?php echo $settings['general']['hwerrs']['danger'] ?>" placeholder="<?php echo $settings['general']['hwerrs']['danger'] ?>" maxlength="2">
+                    <label for="inputHWErrDanger" class="control-label">Danger</label>
                   </div>
                 </div>
+                <span class="help-block"><i class="icon icon-info-sign"></i> Set the count of hardware errors that will trigger each status.</span>
                 <h3>Stat Refresh Intervals:</h3>                
                 <div class="form-group">
                   <label class="col-sm-5 control-label">Rigs:</label>
@@ -134,6 +142,39 @@ require_once("includes/header.php");
                     </select>
                   </div>
                 </div>
+                <h3>App Updates:</h3>                
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="check-app-updates">
+                      Enable cryptoGlance Updates
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group app-update-types">
+                  <span class="help-block"><i class="icon icon-info-sign"></i> Choose which type of updates you would like to be notified for:</span>
+                  <div class="col-sm-4">
+                    <label>
+                      <input type="radio" name="app-update-type">
+                      Release
+                    </label>
+                    <span class="help-block">Stable builds suitable for every-day use</span>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>
+                      <input type="radio" name="app-update-type" />
+                      Beta
+                    </label>
+                    <span class="help-block">New features and bug fixes, but not fully tested</span>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>
+                      <input type="radio" name="app-update-type">
+                      Nightly
+                    </label>
+                    <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
+                  </div>
+                </div>
                 <?php if ($generalSaveResult) { ?>
                 <div id="alert-saved-address" class="alert alert-success alert-dismissable">
                     <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -146,7 +187,9 @@ require_once("includes/header.php");
                 </div>
                 <?php } ?>
                 <div class="form-group">
-                  <div class="col-sm-offset-4 col-sm-2">
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
                     <button type="submit" name="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>
                   </div>
                 </div>
@@ -161,10 +204,9 @@ require_once("includes/header.php");
             <form class="form-horizontal" role="form">
               <fieldset>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-6">
-                    <span class="help-block"><i class="icon icon-info-sign"></i> cryptoGlance cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.<br><b>* YOU WILL BE LOGGED OUT AFTER CLEARING COOKIES!</b></span>
-                  </div>
-                  <label class="col-sm-2 control-label"><button name="clearCookies" class="btn btn-lg btn-success"><i class="icon icon-programclose"></i> Clear Cookies</button></label>
+                  <div class="col-sm-12">
+                    <span class="help-block"><i class="icon icon-info-sign"></i> cryptoGlance cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.<br><br><b>* YOU WILL BE LOGGED OUT AFTER CLEARING COOKIES!</b></span>
+                    <button name="clearCookies" class="btn btn-lg btn-danger"><i class="icon icon-programclose"></i> Clear Cookies</button>
                 </div>
               </fieldset>
             </form>

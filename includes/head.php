@@ -26,8 +26,8 @@
     <link href="css/slider.css" rel="stylesheet">
     <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
     <link href="css/whhg.css" rel="stylesheet">
-    <!-- jQuery PrettyCheckable by arthurgouveia (http://arthurgouveia.com/prettyCheckable/) styles -->
-    <link href="css/prettyCheckable.css" rel="stylesheet">
+    <!-- extend Bootstrap styles -->
+    <link href="css/bootstrap-switch.min.css" rel="stylesheet">
     <!-- Custom cryptoGlance styles -->
     <link href="css/cryptoglance-base.css" rel="stylesheet">
       

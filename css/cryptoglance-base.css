@@ -74,7 +74,16 @@ h1, h2, h3, h4, h5, h6 {
 #settings-wrap h3 {
   text-align: center;
   font-size: 1.6em;
-  margin-bottom: 20px;
+  margin: 30px 0 20px;
+  padding-top: 20px;
+  border-top: 1px solid #888;
+  box-shadow: 0px -20px 20px -10px rgba(0,0,0, 0.4);
+}
+
+#settings-wrap h3:first-child {
+  margin-top: 0;
+  border-top: 0;
+  box-shadow: none;
 }
 
 hr {
@@ -107,8 +116,32 @@ a:active {
   color: #0d0;
 }
 
-table a, table a:visited {
-  border-bottom: 1px dotted #fff;
+.bootstrap-switch {
+  border-color: #777;
+  min-width: 50px;
+  margin: -3px 5px 0 0;
+}
+
+.modal-body .bootstrap-switch {
+  margin: -3px 15px 0 0;
+}
+
+.bootstrap-switch .bootstrap-switch-label {
+  background: #3E444C;
+}
+
+.bootstrap-switch .bootstrap-switch-handle-on, .bootstrap-switch .bootstrap-switch-handle-off, .bootstrap-switch .bootstrap-switch-label {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.bootstrap-switch i {
+  font-size: 10px;
+}
+
+label, .radio label, .checkbox label {
+  font-weight: bold;
+  font-family: roboto, sans-serif;
 }
 
 table a:hover {
@@ -279,26 +312,27 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 
 .form-horizontal .form-group {
   margin: 15px 0;
+  text-align: center;
 }
 
-.form-horizontal .form-group.temp-thresholds {
+.form-horizontal .form-group.setting-thresholds {
   width: 320px;
   margin: 0 auto 20px;
+  text-align: center;
 }
 
-.form-horizontal .form-group.temp-thresholds div {
-  width: 150px;
+.form-horizontal .form-group.setting-thresholds div {
+  width: 130px;
+  margin: 0 10px;
+  display: inline-block;
 }
 
-.form-horizontal .form-group.temp-thresholds div.temp-set-warning {
-  float: left;
+.form-horizontal .form-group.setting-thresholds.setting-hwerror div {
+  width: 84px;
+  display: inline-block;
 }
 
-.form-horizontal .form-group.temp-thresholds div.temp-set-danger {
-  float: right;
-}
-
-.form-horizontal .form-group.temp-thresholds input {
+.form-horizontal .form-group.setting-thresholds input {
   width: 81px;
   height: 55px;
   font-size: 2.2em;
@@ -309,21 +343,20 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   line-height: 1.05em;
 }
 
-.form-horizontal .form-group.temp-thresholds div.temp-set-warning input {
+.form-horizontal .form-group.setting-thresholds div.setting-warning input {
   border: 2px solid #F89406;
 }
 
-.form-horizontal .form-group.temp-thresholds div.temp-set-danger input {
+.form-horizontal .form-group.setting-thresholds div.setting-danger input {
   border: 2px solid #ED3838;
 }
 
-.form-horizontal .form-group.temp-thresholds span {
+.form-horizontal .form-group.setting-thresholds span {
   font-size: 1.8em;
 }
 
-.form-horizontal .form-group.temp-thresholds label {
-  clear: both;
-  padding-left: 10px;
+.form-horizontal .form-group.setting-thresholds label {
+  float: left;
 }
 
 .help-block {
@@ -334,6 +367,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   font-size: 0.8em;
   text-shadow: -1px 1px 1px #111;
   line-height: 1.2em;
+  text-align: center;
 }
 
 .label {
@@ -422,17 +456,8 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 
 .modal-body .checkbox label {
   display: block;
-}
-
-.modal-body .checkbox label span {
-  position: relative;
-  top: -8px;
-  font-size: 23px;
-  margin-left: 15px;
-}
-
-.checkbox.has-pretty-child {
-  padding: 6px 0 0;
+  font-weight: normal;
+  font-family: robotolight, sans-serif;
 }
 
 .new-panel-choices {
@@ -1033,6 +1058,10 @@ a#dash-add-panel {
 
 .login-container > .panel-primary > .panel-heading {
   cursor: auto;
+}
+
+#settings-wrap .app-update-types {
+  display: none;
 }
 
 .no-icon h1 {

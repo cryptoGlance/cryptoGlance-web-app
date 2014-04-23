@@ -267,9 +267,12 @@ $(function(){
 // Pretty checkable styling
 function prettifyInputs() {
   var inputs = $('input[type=radio], input[type=checkbox]').each(function() {
-     $(this).prettyCheckable({
-        color: 'blue'
-     });
+    $(this).bootstrapSwitch({
+      'offText':'<i class="icon icon-remove"></i>',
+      'onText':'<i class="icon icon-ok"></i>',
+      'onColor':'success',
+      'offColor':'danger'
+    });
   });
 } 
 
@@ -358,6 +361,12 @@ $(document).ready(function() {
   //restoreDashboard();
   restorePanelWidth();
   
+  // Toggle App Update Types
+  //
+  $('input[name="check-app-updates"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('.app-update-types').fadeToggle();
+  });
+  
   $('#layout-grid').click(function() {
     initMasonry();
     $('#layout-list').removeClass('active-layout');
@@ -445,6 +454,7 @@ $(document).ready(function() {
     prettifyInputs();
   });  
 
+  
 //  $('#btnSavePool').click(function() {
 //    $("#alert-saved-pool").fadeIn('slow').delay( 4000 ).fadeOut(3000);
 //  })  
