@@ -198,13 +198,13 @@ function updateRigs(data) {
                     status = 'grey';
                     icon = 'ban-circle';
                     rigPanel = 'offline';
-                } else if (status == 'Dead' || dev.hw_errors > 10) {
+                } else if (status == 'Dead' || dev.hw_errors >= devHWDanger) {
                     status = 'red';
                     icon = 'danger';
                     rigStatus = 'red';
                     rigIcon = 'danger';
                     rigPanel = 'danger';
-                } else if (status == 'Sick' || (dev.hw_errors > 0 && dev.hw_errors <= devHWWarning)) {
+                } else if (status == 'Sick' || (dev.hw_errors >= devHWWarning)) {
                     status = 'orange';
                     icon = 'warning-sign';
                     if (rigIcon != 'danger') {

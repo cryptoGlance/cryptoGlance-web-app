@@ -17,6 +17,8 @@ if (isset($_POST['general'])) {
     $data = array(
         'tempWarning' => intval($_POST['tempWarning']),
         'tempDanger' => intval($_POST['tempDanger']),
+        'hwWarning' => intval($_POST['hwWarning']),
+        'hwDanger' => intval($_POST['hwDanger']),
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
@@ -27,6 +29,12 @@ if (isset($_POST['general'])) {
     }
     if ($data['tempDanger'] <= 0 && $data['tempDanger'] <= $data['tempWarning']) {
         $errors['tempDanger'] = true;
+    }
+    if ($data['hwWarning'] <= 0) {
+        $errors['hwWarning'] = true;
+    }
+    if ($data['hwDanger'] <= 0 && $data['hwDanger'] <= $data['hwWarning']) {
+        $errors['hwDanger'] = true;
     }
     if ($data['rigUpdateTime'] < 2) {
         $errors['rigUpdateTime'] = true;
@@ -54,6 +62,12 @@ if (empty($settings['general']['temps']['warning'])) {
 }
 if (empty($settings['general']['temps']['danger'])) {
     $settings['general']['temps']['danger'] = 85;
+}
+if (empty($settings['general']['hardwareErrors']['warning'])) {
+    $settings['general']['hardwareErrors']['warning'] = 3;
+}
+if (empty($settings['general']['hardwareErrors']['danger'])) {
+    $settings['general']['hardwareErrors']['danger'] = 10;
 }
 
 $jsArray = array('settings');
@@ -91,11 +105,11 @@ require_once("includes/header.php");
                 <h3>HW Error Thresholds:</h3>               
                 <div class="form-group setting-thresholds setting-hwerror">
                   <div class="setting-warning orange">
-                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwerrWarning" value="<?php echo $settings['general']['hwerrs']['warning'] ?>" placeholder="<?php echo $settings['general']['hwerrs']['warning'] ?>" maxlength="2">
+                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" maxlength="2">
                     <label for="inputHWErrWarning" class="control-label">Warning</label>
                   </div>
                   <div class="setting-danger red">
-                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwerrDanger" value="<?php echo $settings['general']['hwerrs']['danger'] ?>" placeholder="<?php echo $settings['general']['hwerrs']['danger'] ?>" maxlength="2">
+                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" maxlength="2">
                     <label for="inputHWErrDanger" class="control-label">Danger</label>
                   </div>
                 </div>

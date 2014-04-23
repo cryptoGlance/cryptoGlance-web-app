@@ -278,6 +278,10 @@ class CryptoGlance {
                     'warning' => $data['general']['tempWarning'],
                     'danger' => $data['general']['tempDanger'],
                 ),
+                'hardwareErrors' => array(
+                    'warning' => $data['general']['hwWarning'],
+                    'danger' => $data['general']['hwDanger'],
+                ),
                 'updateTimes' => array(
                     'rig' => $data['general']['rigUpdateTime']*1000,
                     'pool' => $data['general']['poolUpdateTime']*1000,
