@@ -71,9 +71,6 @@
                   <!-- <li id="nav-logout-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li> -->
                </ul>
             </div>
-            <div id="alert-update" class="top-alert">
-               <span><b>Update available!</b> You are running <b class="current"></b>, but the latest release is <b class="latest"></b>.</span> <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a> <a class="alert-dismiss" href="#"><i class="icon icon-buttonx"></i></a>
-            </div>
             <!--/.nav-collapse -->
          </div>
       </div>

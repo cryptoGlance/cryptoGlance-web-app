@@ -189,17 +189,6 @@ require_once("includes/header.php");
                     <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
                   </div>
                 </div>
-                <?php if ($generalSaveResult) { ?>
-                <div id="alert-saved-address" class="alert alert-success alert-dismissable">
-                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Success!</strong> You've updated your settings.
-                </div>
-                <?php } elseif (!$generalSaveResult && !is_null($generalSaveResult)) { ?>
-                <div id="alert-save-fail-address" class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Failed!</strong> Please make sure <em>/<?php echo DATA_FOLDER; ?>/configs/</em> is writable.
-                </div>
-                <?php } ?>
                 <div class="form-group">
                 </div>
                 <div class="form-group">

@@ -34,15 +34,6 @@ include("includes/login-header.php");
             </div>
             <div class="panel-body panel-body-overview">
                <div id="panel-login">
-                  <?php
-                  if ($error) {
-                  ?>
-                  <div id="login-failure">
-                     <p><i class="icon icon-fbdislike"></i> <big>You shall <b>NOT</b> pass!</big> You've entered incorrect credentials. (If you're having trouble, read the notes below the login button.)</p>
-                  </div>
-                  <?php
-                  }
-                  ?>
                   <form method="POST" class="form-horizontal" role="form">
                     <div class="form-group">
                       <label for="username" class="col-sm-offset-1 col-sm-3 control-label"><i class="icon icon-user"></i></label>
@@ -72,11 +63,53 @@ include("includes/login-header.php");
          </div>
       </div>
       <!-- /container -->
-      <script src="js/jquery-1.10.2.min.js"></script>
-      <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-      <script src="js/jquery.cookie.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/prettyCheckable.min.js"></script>
-      <script src="js/cryptoglance-ui.js"></script>
+      <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+      <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery.toastmessage.js"></script>
+      <script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
+      
+      <!-- TODO: Put another PHP if statement which checks if it's the user's first time here (no account.json) 
+
+          // (Toast) First login (no account.json)
+          function showToastFirstLogin() {
+            var toastMsgFirstLogin = '<b>Read Carefully!</b> This is your first time logging into cryptoGlance. Please set a new username + password that will serve as your credentials.';
+            $().toastmessage('showToast', {
+              sticky  : true,
+              text    : toastMsgFirstLogin,
+              type    : 'warning',
+              position: 'top-center'
+            });
+          }
+
+          $(document).ready(function() {
+            showToastFirstLogin();
+          });
+      
+      -->
+      
+      
+      <?php
+      if ($error) {
+      ?>
+      <script type="text/javascript">
+          // (Toast) Login error
+          function showToastLoginError() {
+            var toastMsgLoginError = '<b>You shall NOT pass!</b> You\'ve entered incorrect credentials. (If you\'re having trouble, read the notes below the login button.)';
+            $().toastmessage('showToast', {
+              sticky  : true,
+              text    : toastMsgLoginError,
+              type    : 'error',
+              position: 'top-center'
+            });
+          }
+
+          $(document).ready(function() {
+            showToastLoginError();
+          });      
+      </script>
+      <?php
+      }
+      ?>
    </body>
 </html>

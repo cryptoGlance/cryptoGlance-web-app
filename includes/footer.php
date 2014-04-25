@@ -31,7 +31,7 @@
                 <a href="https://github.com/cryptoglance" rel="external"><button type="button" class="btn btn-default">Source on Github</button></a>
               </div>
               <div class="stat-value">
-                Licensed under GPLv2
+                <?php echo CURRENT_VERSION?>
               </div>
             </div>         
          </div><!-- / .panel-body -->

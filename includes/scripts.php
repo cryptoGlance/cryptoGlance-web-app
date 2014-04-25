@@ -4,8 +4,7 @@
 <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
 <script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/messenger.min.js"></script>
-<script type="text/javascript" src="js/messenger-theme-flat.js"></script>
+<script type="text/javascript" src="js/jquery.toastmessage.js"></script>
 <script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
 <script type="text/javascript" src="js/cryptoglance-ui.js"></script>
 <script type="text/javascript" src="js/version.js"></script> 
@@ -14,3 +13,13 @@
         echo '<script type="text/javascript" src="js/'.$js.'.js"></script>';
     }
 ?>
+
+<?php if ($generalSaveResult) { ?>
+  <script type="text/javascript">$(document).ready(function() {
+      showToastSettingsSaved();
+    });</script>
+<?php } elseif (!$generalSaveResult && !is_null($generalSaveResult)) { ?>
+  <script type="text/javascript">$(document).ready(function() {
+      showToastWriteError();
+    });</script>
+<?php } ?>

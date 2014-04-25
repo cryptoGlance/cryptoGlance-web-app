@@ -18,10 +18,8 @@
     
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- HubSpot / messenger (https://github.com/HubSpot/messenger) styles -->
-    <link href="css/messenger.css" rel="stylesheet">
-    <link href="css/messenger-spinner.css" rel="stylesheet">
-    <link href="css/messenger-theme-flat.css" rel="stylesheet">
+    <!-- jQuery Toast Message Plugin (https://github.com/akquinet/jquery-toastmessage-plugin) styles -->
+    <link href="css/jquery.toastmessage.css" rel="stylesheet">
     <!-- jQuery Slider styles -->
     <link href="css/slider.css" rel="stylesheet">
     <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->

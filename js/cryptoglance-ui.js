@@ -338,7 +338,51 @@ $(function() {
     });
 });
     
+    
+// Setup Toast Messages
+//
+function setToasts() {
+  // setting toast defaults
+  $().toastmessage({
+      position : 'top-center',
+      stayTime : 5000,
+      sticky   : true,
+      close    : function () {console.log("toast is closed ...");}
+  });
+}
+
+// (Toast) New cG Update available
+function showToastUpdate() {
+  var toastMsgUpdate = '<b>Update available!</b> You are running <b class="current">v1.1.0-beta</b>, but the latest release is <b class="latest">v1.0.1</b>.<span><a href="https://github.com/cryptoGlance/cryptoGlance-web-app/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a></span>'; 
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : toastMsgUpdate,
+    type    : 'notice'
+  });
+}
+
+// (Toast) Saved settings
+function showToastSettingsSaved() {
+  var toastMsgSettingsSaved = '<b>Success!</b> You\'ve updated your settings.';
+  $().toastmessage('showToast', {
+    sticky  : false,
+    text    : toastMsgSettingsSaved,
+    type    : 'success'
+  });
   
+}
+
+// (Toast) Unable to write to dir
+function showToastWriteError() {
+  var toastMsgWriteError = '<b>Failed!</b> Please make sure <em>/<?php echo DATA_FOLDER; ?>/configs/</em> is writable.';
+  $().toastmessage('showToast', {
+    sticky  : false,
+    text    : toastMsgWriteError,
+    type    : 'error'
+  });
+}
+
+
 // Only change custom width (via slider) for viewports over 1200px
 //
 
@@ -353,7 +397,7 @@ $(window).ready(function() {
 // Execute when the DOM is ready
 //
 $(document).ready(function() {
-
+setToasts();
   externalLinks();
   prettifyInputs();
   restoreSiteLayout();
