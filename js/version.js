@@ -10,9 +10,7 @@ setTimeout(function() {
             crossDomain: 'true'
         }).done(function(data) {
             if (data[0].tag_name != CURRENT_VERSION) {
-                $('.current', '#alert-update').html(CURRENT_VERSION);
-                $('.latest', '#alert-update').html(data[0].tag_name);
-                $('#alert-update').slideDown('fast');
+                showToastUpdate(CURRENT_VERSION, data[0].tag_name);
             } else {
                 $.removeCookie('cryptoglance_version', { path: '/' });
             }

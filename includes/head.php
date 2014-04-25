@@ -61,6 +61,7 @@
     <script type="text/javascript">
         var documentTitle = document.title;
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
+        var DATA_FOLDER = '<?php echo DATA_FOLDER; ?>';
         var devHeatWarning = <?php echo (!empty($settings['general']['temps']['warning']) ? $settings['general']['temps']['warning'] : 75) ?>;
         var devHeatDanger = <?php echo (!empty($settings['general']['temps']['danger']) ? $settings['general']['temps']['danger'] : 85) ?>;
         var devHWWarning = <?php echo (!empty($settings['general']['hardwareErrors']['warning']) ? $settings['general']['hardwareErrors']['warning'] : 3) ?>;

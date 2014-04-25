@@ -18,7 +18,6 @@ $(document).ready(function() {
 
 // BTN Updates
 $('.btn-updater').click(function() {
-    console.log('all update called');
     ajaxUpdateCall($(this).attr('data-type'), $(this).attr('data-attr'));
 });
 

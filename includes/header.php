@@ -26,16 +26,14 @@
                <a class="navbar-brand" href="index.php"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
             </div>
             <div class="navbar-collapse collapse">
-               <ul class="nav nav-pills navbar-nav
-                <?php echo ($currentPage != 'index') ? 'no-dash' : '' ?>
-               ">
+               <ul class="nav nav-pills navbar-nav<?php echo ($currentPage != 'index') ? ' no-dash' : '' ?>">
                   <?php if ($currentPage == 'index') { ?>  
                   <li><a class="total-hashrate">0 <small>MH/s</small></a></li>
                   <?php } ?>
-                  <li class="<?php if ($currentPage == 'index') { ?>active <?php } ?>topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a>
+                  <li class="<?php echo ($currentPage == 'index') ? 'active ' : '' ?>topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a>
                     <?php if ($currentPage == 'index') { ?><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a><?php } ?>
                   </li>
-                  <li class="<?php if ($currentPage == 'settings') { ?>active <?php } ?>dropdown">
+                  <li class="<?php echo ($currentPage == 'settings') ? 'active ' : '' ?>dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-settingsthree-gears mobile-icon"></i> Tools <b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-header site-layout">Site Layout</li>
@@ -55,7 +53,7 @@
                         <?php //require_once("includes/menu-active_panels.php"); ?>
                      </ul>
                   </li>
-                  <li class="<?php if ($currentPage == 'help') { ?>active <?php } ?>dropdown topnav">
+                  <li class="<?php echo ($currentPage == 'help') ? 'active ' : '' ?>dropdown topnav">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-question-sign mobile-icon"></i> Help <b class="caret"></b></a>
                      <ul class="dropdown-menu">
                         <li class="dropdown-header">Learn more</li>

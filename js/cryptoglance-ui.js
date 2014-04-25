@@ -346,18 +346,20 @@ function setToasts() {
   $().toastmessage({
       position : 'top-center',
       stayTime : 5000,
-      sticky   : true,
-      close    : function () {console.log("toast is closed ...");}
+      sticky   : true
   });
 }
 
 // (Toast) New cG Update available
-function showToastUpdate() {
-  var toastMsgUpdate = '<b>Update available!</b> You are running <b class="current">v1.1.0-beta</b>, but the latest release is <b class="latest">v1.0.1</b>.<span><a href="https://github.com/cryptoGlance/cryptoGlance-web-app/archive/master.zip" rel="external"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Download Now</button></a></span>'; 
+function showToastUpdate(currentVersion, newestVersion) {
+  var toastMsgUpdate = '<b>Update available!</b> You are running <b class="current">'+currentVersion+'</b>, but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Update Now</button></a></span>'; 
   $().toastmessage('showToast', {
     sticky  : true,
     text    : toastMsgUpdate,
-    type    : 'notice'
+    type    : 'notice',
+    close    : function () {
+        $.cookie('cryptoglance_version', currentVersion, { expires: 1 });
+    }
   });
 }
 
@@ -374,7 +376,7 @@ function showToastSettingsSaved() {
 
 // (Toast) Unable to write to dir
 function showToastWriteError() {
-  var toastMsgWriteError = '<b>Failed!</b> Please make sure <em>/<?php echo DATA_FOLDER; ?>/configs/</em> is writable.';
+  var toastMsgWriteError = '<b>Failed!</b> Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.';
   $().toastmessage('showToast', {
     sticky  : false,
     text    : toastMsgWriteError,
@@ -506,14 +508,6 @@ setToasts();
 //  $('#btnAddPool').click(function() {
 //    $("#alert-added-pool").fadeIn('slow').delay( 4000 ).fadeOut(3000);
 //  })
-
-  
-  // Dismiss Update Alert
-  $('.alert-dismiss', '#alert-update').click(function(e) {
-    e.preventDefault();
-    $.cookie('cryptoglance_version', true, { expires: 1 });
-    $('#alert-update').slideUp('fast');
-  });
   
     // Delete
     $('.btn-delete').click(function() {
@@ -680,15 +674,12 @@ setToasts();
         e.preventDefault();
         if (!btnSaveWallets) {
             btnSaveWallets = true;
-            console.log('before');
             $.ajax({
                 type: 'post',
                 url: 'ajax.php?type=update&action=add-config',
                 data: $('form', '#walletDetails').serialize()
             }).done(function(data, statusText, xhr) {
                 var status = xhr.status;
-                console.log('DONE!');
-                console.log(status);
                 if (status == 202) {
                     if ($('[name="walletId"]', '#walletDetails').val() == 0) {
                         var walletId = data;
