@@ -8,14 +8,6 @@
            <h2 class="modal-title" id="addPoolLabel"><i class="icon icon-circleadd"></i> Add a Mining Pool</h2>
          </div>
          <div class="modal-body">
-            <div id="alert-added-pool" class="alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <strong>Success!</strong> You've saved this pool.
-            </div>         
-            <div id="alert-saved-pool" class="alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <strong>Success!</strong> You've saved this pool.
-            </div>         
            <div class="form-group all">
              <label for="inputPoolLabel" class="col-sm-3 control-label">Label</label>
              <div class="col-sm-7">

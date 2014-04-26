@@ -356,6 +356,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 
 .modal {
   outline: 0;
+  z-index: 10000;
 }
 
 .modal-dialog {
@@ -392,28 +393,47 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 }
 
 .modal-header i {
-  margin: -2px 3px 0px 5px;
-  float: right;
+  display: none;
+  margin: -2px 10px 0px 5px;
+  float: left;
   text-shadow: -1px 1px 0 #777;
   font-size: 28px;
   color: #29313A;
 }
-
+/*
 .modal-header .close {
-  display: none;
-  
-  position: absolute;
-  top: -7px;
-  right: 0px;
+  position: relative;
+  float: right;
+  top: -14px;
+  right: -9px;
   color: #29313A;
   text-shadow: -1px 1px 0 #777;
-  font-size: 29px;
+  font-size: 52px;
   opacity: 0.7;
 }
 
 .modal-header .close:hover {
   opacity: 1;
+  color: #900;
 }
+*/
+
+.modal-header .close {
+    background:url(../images/toast-close.png);
+    width:22px;
+    height:22px;
+    position: absolute;
+    top:-6px;
+    right:-6px;
+    text-indent: -10000px;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.modal-header .close:hover {
+    background:url(../images/toast-close-hover.png);
+}
+
 
 .modal-body {
   border-top: 1px solid #777;
@@ -445,7 +465,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   background: #414C57;
   border-radius: 4px;
   box-shadow: -1px 1px 0px #000;
-  padding: 2px 9px;
+  padding: 0 9px 10px;
   margin: 0px 4px 11px;
   min-width: 78px;
   font-size: 1.4em;
@@ -635,6 +655,7 @@ select.form-control {
 .navbar {
   box-shadow: 0 5px 10px rgba(0,0,0,0.8);
   border-bottom: 1px solid #555;
+  z-index: 9990;
 }
 
 a.navbar-brand {
@@ -1679,6 +1700,9 @@ a#dash-add-panel {
 /* X-Small devices (small tablets, 680px and up) */
 @media (min-width: 480px) {
 
+  .navbar {
+    z-index: 9000;
+  }
   .panel-footer h3 {
     margin: 8px 0 0;
   }
@@ -1700,6 +1724,10 @@ a#dash-add-panel {
     font-size: 22px;
   }
 
+  .modal {
+    top: 20px;
+  }
+  
   .modal-dialog {
     margin: 40px auto;
     width: 720px;
@@ -1718,8 +1746,9 @@ a#dash-add-panel {
   }
   
   .modal-header i {
-    margin: -6px 5px 0px 5px;
-    font-size: 36px;
+    display: inline;
+    margin: -6px 10px 0px -13px;
+    font-size: 30px;
   }
   
   .modal-body {

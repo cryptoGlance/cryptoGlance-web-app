@@ -88,43 +88,6 @@ function externalLinks() {
 // }
 
 
-function callAlert() {
-    $(function(){
-
-     Messenger.options = {
-      extraClasses: "messenger-fixed messenger-on-bottom",
-      theme: "flat"
-     };
-
-     var steps = [
-      function() {
-        var msg = Messenger().post({
-         message: 'Refreshing Content...',
-         type: 'info',
-         actions: false
-        });
-        setTimeout(function(){
-         msg.update({
-          message: 'Update Complete!',
-          type: 'success',
-          actions: false
-         });
-        }, 4000);
-        setTimeout(function(){ msg.hide(); }, 8000);
-      }
-     ];
-
-     var i = 1;
-
-     steps[0]();
-     setInterval(function(){
-      steps[i]();
-      i = (i + 1) % steps.length;
-     }, 6000);
-
-    });
-}
-
 // Setup Masonry Layout
 function initMasonry() {
   $('#dashboard-wrap, .full-content').css('width','100%');
@@ -352,10 +315,9 @@ function setToasts() {
 
 // (Toast) New cG Update available
 function showToastUpdate(currentVersion, newestVersion) {
-  var toastMsgUpdate = '<b>Update available!</b> You are running <b class="current">'+currentVersion+'</b>, but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-download-alt"></i> Update Now</button></a></span>'; 
   $().toastmessage('showToast', {
     sticky  : true,
-    text    : toastMsgUpdate,
+    text    : '<b>Update available!</b> You are running <b class="current">'+currentVersion+'</b>, but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-refresh"></i> Update Now</button></a></span>',
     type    : 'notice',
     close    : function () {
         $.cookie('cryptoglance_version', currentVersion, { expires: 1 });
@@ -365,22 +327,40 @@ function showToastUpdate(currentVersion, newestVersion) {
 
 // (Toast) Saved settings
 function showToastSettingsSaved() {
-  var toastMsgSettingsSaved = '<b>Success!</b> You\'ve updated your settings.';
   $().toastmessage('showToast', {
     sticky  : false,
-    text    : toastMsgSettingsSaved,
+    text    : '<b>Success!</b> Your configuration was saved.',
     type    : 'success'
+  });
+  
+}
+
+// (Toast) Unable to save settings
+function showToastSettingsNOTSaved() {
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : '<b>Failure!</b> Your configuration was <b>not</b> updated. Check your user data or refer to the <a href="help.php#faq">FAQ in the README</a>.',
+    type    : 'error'
   });
   
 }
 
 // (Toast) Unable to write to dir
 function showToastWriteError() {
-  var toastMsgWriteError = '<b>Failed!</b> Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.';
   $().toastmessage('showToast', {
     sticky  : false,
-    text    : toastMsgWriteError,
+    text    : '<b>Failed!</b> Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.',
     type    : 'error'
+  });
+}
+
+
+// (Toast) No .htaccess in user_data
+function showToastNoHTACCESS() {
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : '<b>No .htaccess in /'+DATA_FOLDER+'!</b> Using this file to block access to your user data directory is a good idea. It\'s included in the source, but for some reason it does not exist in your installation. Ensure it contains the <a href="https://raw.githubusercontent.com/cryptoGlance/cryptoGlance-web-app/master/user_data/.htaccess" rel="external">contents of the source file</a>.',
+    type    : 'warning'
   });
 }
 
