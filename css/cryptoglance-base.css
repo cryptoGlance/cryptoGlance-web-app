@@ -71,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: -1px 2px 0px rgba(0, 0, 0, 0.6);
 }
 
-#settings-wrap h3 {
+#settings-wrap h3, #rigPoolDetails h3 {
   text-align: center;
   font-size: 1.6em;
   margin: 30px 0 20px;
@@ -93,6 +93,16 @@ hr {
 
 pre {
   display: inline-block;
+  background: #030;
+  color: #090;
+  text-shadow: 0px 0px 1px rgba(0, 255, 0, 0.3);
+  text-align: left;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 26px;
+  border-color: #080;
+  margin: 10px 0;
+  text-transform: none;
 }
 
 a, a:visited, a:hover, a i, a:hover i {
@@ -166,6 +176,14 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   text-align: right;
 }
 
+.dark-overlay {
+  display: none;
+  position: fixed;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 9900;
+}
 
 .grey {
   color: #9c9c9c !important;
@@ -291,24 +309,24 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   text-align: center;
 }
 
-.form-horizontal .form-group.setting-thresholds {
+.form-horizontal .setting-thresholds {
   width: 320px;
   margin: 0 auto 20px;
   text-align: center;
 }
 
-.form-horizontal .form-group.setting-thresholds div {
+.form-horizontal .setting-thresholds div {
   width: 130px;
   margin: 0 10px;
   display: inline-block;
 }
 
-.form-horizontal .form-group.setting-thresholds.setting-hwerror div {
+.form-horizontal .setting-thresholds.setting-hwerror div {
   width: 84px;
   display: inline-block;
 }
 
-.form-horizontal .form-group.setting-thresholds input {
+.form-horizontal .setting-thresholds input {
   width: 81px;
   height: 55px;
   font-size: 2.2em;
@@ -319,19 +337,19 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   line-height: 1.05em;
 }
 
-.form-horizontal .form-group.setting-thresholds div.setting-warning input {
+.form-horizontal .setting-thresholds div.setting-warning input {
   border: 2px solid #F89406;
 }
 
-.form-horizontal .form-group.setting-thresholds div.setting-danger input {
+.form-horizontal .setting-thresholds div.setting-danger input {
   border: 2px solid #ED3838;
 }
 
-.form-horizontal .form-group.setting-thresholds span {
+.form-horizontal .setting-thresholds span {
   font-size: 1.8em;
 }
 
-.form-horizontal .form-group.setting-thresholds label {
+.form-horizontal .setting-thresholds label {
   float: left;
 }
 
@@ -537,6 +555,20 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
   font-size: 23px;
   padding: 0 8px;
   font-family: robotolight;
+}
+
+.table-devices input.form-control {
+  font-size: 17px;
+  padding: 0 5px;
+  font-family: roboto;
+  font-weight: bold;
+  height: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-space {
+  margin: 13px 0px 10px;
 }
 
 .wallet-inline-edit input.form-control {
@@ -1105,6 +1137,30 @@ a#dash-add-panel {
   top: -47px;
 }
 
+#first-run-notice {
+  width: 90%;
+  background: rgba(0,200,0,0.2);
+  border: 4px dotted #070;
+  color: #0c0;
+  margin: 0 auto 64px;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#first-run-notice span {
+  display: block;
+  margin-top: 20px;
+}
+
+#first-run-notice b {
+  color: #cfc;
+  font-size: 24px;
+  line-height: 25px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
 .panel-body img {
   max-width: 100%;
   height: auto;
@@ -1329,6 +1385,17 @@ a#dash-add-panel {
   padding: 0 15px 1px;
 }
 
+.panel-body .stat-pair .stat-label p {
+  margin: 10px;
+  text-transform: none;
+  font-weight: bold;
+  font-family: roboto, sans-serif;
+}
+
+.panel-body .stat-pair .stat-label button#btn-update-process {
+  margin: 10px 0;
+}
+
 .panel-body .stat-pair .stat-label-donate {
   text-transform: none;
 }
@@ -1419,6 +1486,10 @@ a#dash-add-panel {
 
 #inputNewAddress {
   margin-top: 5px;
+}
+
+.add-new-wrapper {
+  display: none;
 }
 
 .panel-in-footer {
@@ -1576,6 +1647,7 @@ a#dash-add-panel {
   text-transform: lowercase;
   background: url(../images/darkdenim3.png) repeat #424750;
   text-align: center;
+  vertical-align: middle;
   padding: 0 10px;
 }
 
@@ -1661,6 +1733,45 @@ a#dash-add-panel {
     /* Standard */
     transform: rotate(360deg);
   }
+}
+
+.icon-update-available {
+  display: none;
+  margin: 0 7px;
+
+  -moz-animation: flash 1500ms ease-in-out;
+  -moz-animation-iteration-count: infinite;
+
+  -webkit-animation: flash 1500ms ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+
+  -ms-animation: flash 1500ms ease-in-out;
+  -ms-animation-iteration-count: infinite;
+}
+
+.panel-body .stat-pair .stat-value .icon-update-available i {
+  font-size: 19px;
+}
+
+@-webkit-keyframes flash {
+    0% {opacity:0;}
+    25% {opacity:1;}
+    75% {opacity:1;}
+    100% {opacity:0;}
+}
+
+@-moz-keyframes flash {
+    0% {opacity:0;}
+    25% {opacity:1;}
+    75% {opacity:1;}
+    100% {opacity:0;}
+}
+
+@-ms-keyframes flash {
+    0% {opacity:0;}
+    25% {opacity:1;}
+    75% {opacity:1;}
+    100% {opacity:0;}
 }
 
 .panel-footer i.icon-spin {
@@ -1964,6 +2075,10 @@ a#dash-add-panel {
     font-size: 22px;
     letter-spacing: 2px;
   }
+  
+  #first-run-notice {
+    width: 40%;
+  }
 
   .panel {
     margin-bottom: 70px;
@@ -2042,7 +2157,11 @@ a#dash-add-panel {
   .panel-body .stat-pair .stat-value i {
     font-size: 24px;
   }
-  
+
+  .panel-body .stat-pair .stat-value button i {
+    font-size: 15px;
+  }
+
   .panel-body .table tr td:nth-child(3), .panel-body .table tr th:nth-child(3), .panel-body .table tr td:nth-child(6), .panel-body .table tr th:nth-child(6) {
     display: table-cell;
   }

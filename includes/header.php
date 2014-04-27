@@ -15,6 +15,7 @@
       <!-- -->
       
       <div class="page-container">
+      <div class="dark-overlay"></div>
       <!-- Fixed navbar -->
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
          <div class="container">

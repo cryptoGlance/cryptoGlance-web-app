@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
          <div class="new-panel-choices">
-            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal"><i class="icon icon-detailsalt"></i>Details</a>
+            <a class="new-panel-btn" href="rig.php"><i class="icon icon-detailsalt"></i>Details</a>
             <a class="new-panel-btn btn-switchpool" data-toggle="modal" data-target="#switchPool" data-backdrop="static" data-dismiss="modal"><i class="icon icon-refreshalt"></i>Switch Pool</a>
 <!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal"><i class="icon icon-eye-view"></i>View All Stats</a>-->
 <!--            <a class="new-panel-btn btn-pause" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-pause"></i>Pause Mining</a>-->

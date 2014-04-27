@@ -103,17 +103,25 @@ require_once("includes/header.php");
                 </div>
                 <span class="help-block"><i class="icon icon-info-sign"></i> Set the points where <span class="orange">warning</span> and <span class="red">danger</span> labels will appear (<span class="red">danger</span> must be greater than <span class="orange">warning</span>).</span>
                 <h3>HW Error Thresholds:</h3>               
-                <div class="form-group setting-thresholds setting-hwerror">
-                  <div class="setting-warning orange">
-                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" maxlength="2">
-                    <label for="inputHWErrWarning" class="control-label">Warning</label>
-                  </div>
-                  <div class="setting-danger red">
-                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" maxlength="2">
-                    <label for="inputHWErrDanger" class="control-label">Danger</label>
-                  </div>
+                <div class="form-group checkbox">
+                  <label>
+                    <input type="checkbox" name="check-hw-errors">
+                    Enable Hardware Error Reporting
+                  </label>
                 </div>
-                <span class="help-block"><i class="icon icon-info-sign"></i> Set the count of hardware errors that will trigger each status.</span>
+                <div class="form-group setting-hwerror">
+                  <div class="setting-hw-errors setting-thresholds">
+                    <div class="setting-warning orange">
+                      <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" maxlength="2">
+                      <label for="inputHWErrWarning" class="control-label">Warning</label>
+                    </div>
+                    <div class="setting-danger red">
+                      <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" maxlength="2">
+                      <label for="inputHWErrDanger" class="control-label">Danger</label>
+                    </div>
+                  </div>
+                  <span class="help-block"><i class="icon icon-info-sign"></i> Set the count of hardware errors that will trigger each status.</span>
+                </div>
                 <h3>Stat Refresh Intervals:</h3>                
                 <div class="form-group">
                   <label class="col-sm-5 control-label">Rigs:</label>

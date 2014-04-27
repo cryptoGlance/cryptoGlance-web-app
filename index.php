@@ -21,6 +21,10 @@ include("includes/header.php");
          
    <div id="dashboard-wrap" class="container sub-nav">
    
+    <!-- TODO: If there are NO panels yet, then show this div // CSS is around line 1140 (set 'display: none' pls!) -->
+    
+    <div id="first-run-notice"><b>Start by adding a panel.</b><br>The Dashboard is comprised of a variety of panels, each showing a certain type of info.<span><a href="#add-panel" data-toggle="modal" data-target="#addPanel"><button type="button" class="btn btn-lg btn-warning" data-type="all"><i class="icon icon-newtab"></i> Add Panel</button></a></span></div>
+   
     <?php
     
     // Overview

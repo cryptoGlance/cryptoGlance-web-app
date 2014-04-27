@@ -387,6 +387,23 @@ setToasts();
   //restoreDashboard();
   restorePanelWidth();
   
+  // Reveal hidden settings
+  //
+  $('#btnAddPool').click( function() {
+    $(this).fadeOut('fast', function() {
+      $(this).next('.add-new-wrapper').fadeIn('slow');
+    });
+  });
+  
+  // Start Update Process
+  //
+  // TODO: Fix my derpy code below to work nice (show disabled, loader gif button duing process, then back to a green 'update complete' after, which logs the user out)
+  //
+  $('#btn-update-process').click( function() {
+    $(this).html('<img src="images/ajax-loader.gif" alt="loading" />').prop('disabled', true).delay(5000).prop('disabled', false).html('Update Complete!').addClass('btn-success');
+    $('pre').fadeIn('slow');
+  });
+  
   // Toggle App Update Types
   //
   $('input[name="check-app-updates"]').on('switchChange.bootstrapSwitch', function(event, state) {
