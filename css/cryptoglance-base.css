@@ -92,7 +92,7 @@ hr {
 }
 
 pre {
-  display: inline-block;
+  display: block;
   background: #030;
   color: #090;
   text-shadow: 0px 0px 1px rgba(0, 255, 0, 0.3);
