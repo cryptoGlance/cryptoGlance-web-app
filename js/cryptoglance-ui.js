@@ -395,6 +395,14 @@ setToasts();
     });
   });
   
+  // Pulsate "Add Panel" button
+  //
+  $('#flash-add-panel').click( function() {
+    $('#dash-add-panel').removeClass('flash', function() {
+    $('#dash-add-panel').addClass('flash');
+    });
+  });
+  
   // Start Update Process
   //
   // TODO: Fix my derpy code below to work nice (show disabled, loader gif button duing process, then back to a green 'update complete' after, which logs the user out)

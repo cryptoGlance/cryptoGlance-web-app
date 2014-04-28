@@ -858,6 +858,17 @@ a#dash-add-panel {
   padding: 7px 2px 7px 6px;
 }
 
+a#dash-add-panel.flash {
+  -moz-animation: flash 500ms ease-in-out;
+  -moz-animation-iteration-count: 5;
+
+  -webkit-animation: flash 500ms ease-in-out;
+  -webkit-animation-iteration-count: 5;
+
+  -ms-animation: flash 500ms ease-in-out;
+  -ms-animation-iteration-count: 5;
+}
+
 .nav-pills li a#dash-add-panel i {
   color: #050;
   text-shadow: 0px -1px 0 #bdb;
@@ -1978,7 +1989,7 @@ a#dash-add-panel {
   }
   
   .nav-pills li a#dash-link {
-    margin-right: 45px;
+    margin-right: 48px;
     -webkit-border-radius: 0 0 0 9px;
     border-radius: 0 0 0 9px;
   }
