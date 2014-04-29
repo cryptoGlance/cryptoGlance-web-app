@@ -19,4 +19,4 @@ define('DATA_PATH', getcwd() . '/' . DATA_FOLDER . '/');
 
 
 //// Current Build:
-define('CURRENT_VERSION', 'v1.0.1.23');
+define('CURRENT_VERSION', 'v1.0.1.27');
