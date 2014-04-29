@@ -13,8 +13,11 @@ $generalSaveResult = null;
 $emailSaveResult = null;
 
 if (isset($_POST['general'])) {
+    $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
     $data = array();
     $data = array(
+        'update' => intval($updatesEnabled),
+        'updateType' => $_POST['updateType'],
         'tempWarning' => intval($_POST['tempWarning']),
         'tempDanger' => intval($_POST['tempDanger']),
         'hwWarning' => intval($_POST['hwWarning']),
@@ -54,21 +57,7 @@ if (isset($_POST['general'])) {
 
     $emailSaveResult = $cryptoGlance->saveSettings(array('email' => $data));
 }
-
 $settings = $cryptoGlance->getSettings();
-
-if (empty($settings['general']['temps']['warning'])) {
-    $settings['general']['temps']['warning'] = 75;
-}
-if (empty($settings['general']['temps']['danger'])) {
-    $settings['general']['temps']['danger'] = 85;
-}
-if (empty($settings['general']['hardwareErrors']['warning'])) {
-    $settings['general']['hardwareErrors']['warning'] = 3;
-}
-if (empty($settings['general']['hardwareErrors']['danger'])) {
-    $settings['general']['hardwareErrors']['danger'] = 10;
-}
 
 $jsArray = array('settings');
 
@@ -105,7 +94,7 @@ require_once("includes/header.php");
                 <h3>HW Error Thresholds:</h3>               
                 <div class="form-group checkbox">
                   <label>
-                    <input type="checkbox" name="check-hw-errors">
+                    <input type="checkbox" name="hwErrorsEnabled" <?php echo ($settings['general']['hardwareErrors']['enabled']) ? 'checked' : '' ?>>
                     Enable Hardware Error Reporting
                   </label>
                 </div>
@@ -168,30 +157,30 @@ require_once("includes/header.php");
                 <div class="form-group">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="check-app-updates">
+                      <input type="checkbox" name="update" <?php echo ($settings['general']['updates']['enabled']) ? 'checked' : '' ?>>
                       Enable cryptoGlance Updates
                     </label>
                   </div>
                 </div>
-                <div class="form-group app-update-types">
+                <div class="form-group app-update-types" style="display: <?php echo ($settings['general']['updates']['enabled']) ? 'block' : 'none' ?>;">
                   <span class="help-block"><i class="icon icon-info-sign"></i> Choose which type of updates you would like to be notified for:</span>
                   <div class="col-sm-4">
                     <label>
-                      <input type="radio" name="app-update-type">
+                      <input type="radio" name="updateType" value="release" <?php echo ($settings['general']['updates']['type'] == 'release') ? 'checked' : '' ?>>
                       Release
                     </label>
                     <span class="help-block">Stable builds suitable for every-day use</span>
                   </div>
                   <div class="col-sm-4">
                     <label>
-                      <input type="radio" name="app-update-type" />
+                      <input type="radio" name="updateType" value="beta" <?php echo ($settings['general']['updates']['type'] == 'beta') ? 'checked' : '' ?>/>
                       Beta
                     </label>
                     <span class="help-block">New features and bug fixes, but not fully tested</span>
                   </div>
                   <div class="col-sm-4">
                     <label>
-                      <input type="radio" name="app-update-type">
+                      <input type="radio" name="updateType" value="nightly" <?php echo ($settings['general']['updates']['type'] == 'nightly') ? 'checked' : '' ?>>
                       Nightly
                     </label>
                     <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
@@ -201,7 +190,7 @@ require_once("includes/header.php");
                 </div>
                 <div class="form-group">
                   <div class="col-sm-12">
-                    <button type="submit" name="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>
+                    <button type="submit" name="general" value="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>
                   </div>
                 </div>
               </fieldset>
@@ -218,6 +207,7 @@ require_once("includes/header.php");
                   <div class="col-sm-12">
                     <span class="help-block"><i class="icon icon-info-sign"></i> cryptoGlance cookies save preferences like panel width/positioning, and are safe to clear. Your important settings are always within the /user_data folder.<br><br><b>* YOU WILL BE LOGGED OUT AFTER CLEARING COOKIES!</b></span>
                     <button name="clearCookies" class="btn btn-lg btn-danger"><i class="icon icon-programclose"></i> Clear Cookies</button>
+                  </div>
                 </div>
               </fieldset>
             </form>
@@ -228,7 +218,6 @@ require_once("includes/header.php");
       <!-- /container -->
 
       <?php require_once("includes/footer.php"); ?>
-      </div>
       <!-- /page-container -->
       
       <?php require_once("includes/scripts.php"); ?>

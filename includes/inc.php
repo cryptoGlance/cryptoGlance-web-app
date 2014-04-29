@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ERROR);
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 
 $session_name = 'cryptoGlance'; // feel free to rename this!
 session_name($session_name);
@@ -17,6 +17,8 @@ require_once('config.php');
 
 define('DATA_PATH', getcwd() . '/' . DATA_FOLDER . '/');
 
+require_once('cryptoglance.php');
+$cryptoGlance = new CryptoGlance();
 
 //// Current Build:
 define('CURRENT_VERSION', 'v1.0.1.23');

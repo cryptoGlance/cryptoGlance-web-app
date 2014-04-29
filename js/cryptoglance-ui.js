@@ -414,7 +414,7 @@ setToasts();
   
   // Toggle App Update Types
   //
-  $('input[name="check-app-updates"]').on('switchChange.bootstrapSwitch', function(event, state) {
+  $('input[name="update"]', '#settings-wrap').on('switchChange.bootstrapSwitch', function(event, state) {
     $('.app-update-types').fadeToggle();
   });
   
