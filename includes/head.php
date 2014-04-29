@@ -37,33 +37,14 @@
     <![endif]-->
     
     <?php
-    if (isset($cryptoGlance)) {
-        $settings = $cryptoGlance->getSettings();
-    } else {
-        $settings = array(
-            'general' => array(
-                'temps' => array(
-                   'warning' => 75,            
-                   'danger' => 85,            
-                ),
-                'hardwareErrors' => array(
-                   'warning' => 3,            
-                   'danger' => 10,            
-                ),
-                'updateTimes' => array(
-                    'rig' => 2,
-                    'pool' => 120,
-                    'wallet' => 600,
-                ),
-            )
-        );
-    }
+    $settings = $cryptoGlance->getSettings();
     ?>
 
     <script type="text/javascript">
         var documentTitle = document.title;
-        var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
         var DATA_FOLDER = '<?php echo DATA_FOLDER; ?>';
+        var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
+        <?php echo ($settings['general']['updates']['enabled'] == '1') ? 'var updateType = "' . $updateFeed[$settings['general']['updates']['type']]['feed'] . '";' : '' ?>
         var devHeatWarning = <?php echo (!empty($settings['general']['temps']['warning']) ? $settings['general']['temps']['warning'] : 75) ?>;
         var devHeatDanger = <?php echo (!empty($settings['general']['temps']['danger']) ? $settings['general']['temps']['danger'] : 85) ?>;
         var devHWWarning = <?php echo (!empty($settings['general']['hardwareErrors']['warning']) ? $settings['general']['hardwareErrors']['warning'] : 3) ?>;

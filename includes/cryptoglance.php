@@ -265,7 +265,34 @@ class CryptoGlance {
     // Settings //
     //////////////
     public function getSettings() {
-        return $this->_config['cryptoglance'];
+        $settings = $this->_config['cryptoglance'];
+        
+        if (empty($settings['general']['temps']['warning'])) {
+            $settings['general']['temps']['warning'] = 75;
+        }
+        if (empty($settings['general']['temps']['danger'])) {
+            $settings['general']['temps']['danger'] = 85;
+        }
+        if (empty($settings['general']['hardwareErrors']['enabled'])) {
+            $settings['general']['hardwareErrors']['enabled'] = 1;
+        }
+        if (empty($settings['general']['hardwareErrors']['warning'])) {
+            $settings['general']['hardwareErrors']['warning'] = 3;
+        }
+        if (empty($settings['general']['hardwareErrors']['danger'])) {
+            $settings['general']['hardwareErrors']['danger'] = 10;
+        }
+        if (empty($settings['general']['updateTimes']['rig'])) {
+            $settings['general']['updateTimes']['rig'] = 2;
+        }
+        if (empty($settings['general']['updateTimes']['pool'])) {
+            $settings['general']['updateTimes']['pool'] = 120;
+        }
+        if (empty($settings['general']['updateTimes']['wallet'])) {
+            $settings['general']['updateTimes']['wallet'] = 600;
+        }
+        
+        return $settings;
     }
     
     public function saveSettings($data) {
@@ -274,6 +301,10 @@ class CryptoGlance {
         
         if ($data['general']) {
             $settings['general'] = array(
+                'updates' => array(
+                    'enabled' => $data['general']['update'],
+                    'type' => $data['general']['updateType'],
+                ),
                 'temps' => array(
                     'warning' => $data['general']['tempWarning'],
                     'danger' => $data['general']['tempDanger'],
