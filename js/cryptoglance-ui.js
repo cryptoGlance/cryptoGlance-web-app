@@ -318,11 +318,9 @@ function showToastUpdate(currentVersion, newestVersion) {
   $().toastmessage('showToast', {
     sticky  : true,
     text    : '<b>Update available!</b> You are running <b class="current">'+currentVersion+'</b>, but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-refresh"></i> Update Now</button></a></span>',
-    type    : 'notice',
-    close    : function () {
-        $.cookie('cryptoglance_version', currentVersion, { expires: 1 });
-    }
+    type    : 'notice'
   });
+  $.cookie('cryptoglance_version', newestVersion, { expires: 1 });
 }
 
 // (Toast) Saved settings
@@ -379,7 +377,7 @@ $(window).ready(function() {
 // Execute when the DOM is ready
 //
 $(document).ready(function() {
-setToasts();
+  setToasts();
   externalLinks();
   prettifyInputs();
   restoreSiteLayout();
@@ -404,12 +402,9 @@ setToasts();
   });
   
   // Start Update Process
-  //
-  // TODO: Fix my derpy code below to work nice (show disabled, loader gif button duing process, then back to a green 'update complete' after, which logs the user out)
-  //
   $('#btn-update-process').click( function() {
-    $(this).html('<img src="images/ajax-loader.gif" alt="loading" />').prop('disabled', true).delay(5000).prop('disabled', false).html('Update Complete!').addClass('btn-success');
-    $('pre').fadeIn('slow');
+    $(this).attr('disabled', true);
+    $('iframe').slideDown();
   });
   
   // Toggle App Update Types
@@ -726,5 +721,5 @@ setToasts();
             });
         }
     });
-      
+
 });

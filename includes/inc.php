@@ -19,6 +19,7 @@ define('DATA_PATH', getcwd() . '/' . DATA_FOLDER . '/');
 
 require_once('cryptoglance.php');
 $cryptoGlance = new CryptoGlance();
+$settings = $cryptoGlance->getSettings();
 
 //// Current Build:
 define('CURRENT_VERSION', 'v1.0.1.23');
