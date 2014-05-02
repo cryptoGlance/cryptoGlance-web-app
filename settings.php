@@ -6,8 +6,6 @@ if (!$_SESSION['login_string']) {
     exit();
 }
 
-require_once('includes/cryptoglance.php');
-$cryptoGlance = new CryptoGlance();
 $errors = array();
 $generalSaveResult = null;
 $emailSaveResult = null;
@@ -50,6 +48,8 @@ if (isset($_POST['general'])) {
     }
     
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
+    $cryptoGlance = new CryptoGlance();
+    $settings = $cryptoGlance->getSettings();
 } else if (isset($_POST['email'])) {
     $data = array();
     
@@ -57,7 +57,6 @@ if (isset($_POST['general'])) {
 
     $emailSaveResult = $cryptoGlance->saveSettings(array('email' => $data));
 }
-$settings = $cryptoGlance->getSettings();
 
 $jsArray = array('settings');
 
@@ -69,7 +68,7 @@ require_once("includes/header.php");
 -->
          
       <div id="settings-wrap" class="container sub-nav full-content">
-        <div id="readme" class="panel panel-default panel-no-grid no-icon">
+        <div id="settings" class="panel panel-default panel-no-grid no-icon">
           <h1>Settings</h1>
           <div class="panel-heading">
               <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> General</h2>
@@ -186,8 +185,7 @@ require_once("includes/header.php");
                     <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
                   </div>
                 </div>
-                <div class="form-group">
-                </div>
+                <div class="form-group"></div>
                 <div class="form-group">
                   <div class="col-sm-12">
                     <button type="submit" name="general" value="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>

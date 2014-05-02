@@ -1403,6 +1403,14 @@ a#dash-add-panel.flash {
   font-family: roboto, sans-serif;
 }
 
+#AutoUpdate .panel-body .stat-pair .stat-label form iframe {
+    border: 1px solid;
+    border-color: #080;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 230px;
+    width: 100%;
+}
 .panel-body .stat-pair .stat-label button#btn-update-process {
   margin: 10px 0;
 }
