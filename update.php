@@ -214,6 +214,58 @@ if (isset($_POST['cryptoglance_version']) &&
         }
         echo '==> Done copying new files...<br />'; ob_flush(); flush(); sleep(1);
         
+        // START Cleanup -----------------------
+        
+        echo '----------<br />';
+        echo '==> Cleaning up... <br />'; ob_flush(); flush(); sleep(1);
+        echo '==> Deleting update files:<br />'; ob_flush(); flush(); sleep(1);
+        $it = new RecursiveDirectoryIterator('./update', RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+        // first delete files
+        foreach($files as $file) {
+            if ($file->getFilename() === '.' || $file->getFilename() === '..') {
+                continue;
+            }
+            $realFilePath = $file->getRealPath();
+            if (!$file->isDir()) {
+                if (unlink($realFilePath)) {
+                    echo '==> Deleted File: ' . $realFilePath . '<br />'; ob_flush(); flush();
+                } else {
+                    echo '==> Cannot Delete File: ' . $realFilePath . '<br />'; ob_flush(); flush();
+                }
+            }
+        }
+        // now delete folders
+        $failedFolders = array();
+        foreach($files as $file) {
+            if ($file->getFilename() === '.' || $file->getFilename() === '..') {
+                continue;
+            }
+            $realFilePath = $file->getRealPath();
+            if ($file->isDir()){
+                if (rmdir($realFilePath)) {
+                    echo '==> Deleted Folder: ' . $realFilePath . '<br />'; ob_flush(); flush();
+                } else {
+                    $failedFolders[] = $realFilePath;
+                    echo '==> Cannot Delete Folder: ' . $realFilePath . '<br />'; ob_flush(); flush();
+                }
+            }
+        }
+        // sort all failedFolders and do this process again
+        usort($failedFolders,'lensort');
+        foreach($failedFolders as $folderPath) {
+            if (rmdir($folderPath)) {
+                echo '==> Deleted Folder: ' . $folderPath . '<br />'; ob_flush(); flush();
+            } else {
+                echo '==> Cannot Delete Folder: ' . $folderPath . '<br />'; ob_flush(); flush();
+            }
+        }
+        if (rmdir(getcwd().'/update')) {
+            echo '==> Deleted Folder: ' . getcwd().'/update' . '<br />'; ob_flush(); flush();
+        } else {
+            echo '==> Cannot Delete Folder: ' . getcwd().'/update' . '<br />'; ob_flush(); flush();
+        }
+        echo '==> Done cleaning up...<br />'; ob_flush(); flush(); sleep(1);
         
         // FINISHED -----------------------
                     
