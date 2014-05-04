@@ -33,7 +33,7 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
 
 ### Requirements:
 
-- cgminer / bfgminer / cudaminer / sgminer properly configured with API access allowed
+- cgminer / sgminer properly configured with API access allowed
 
 *Windows Version:* 
 
@@ -141,7 +141,7 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 
 **Q. The cryptoGlance site loads, but after adding a rig, no data or stats are displayed. Why?**
 
-**A.** Your mining utility (cgminer / bfgminer / cudaminer / etc.) requires that API access is allowed. Here's an example excerpt from the .conf:
+**A.** Your mining utility (cgminer) requires that API access is allowed. Here's an example excerpt from the .conf:
 
     ...
     "api-allow" : "127.0.0.1,192.168.1/24",

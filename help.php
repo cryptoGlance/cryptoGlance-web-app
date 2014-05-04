@@ -17,12 +17,9 @@ spl_autoload_register(function($class){
 use \Michelf\Markdown;
 
 # Read file and pass content through the Markdown parser
-$text = file_get_contents('Readme.md');
+$text = file_get_contents('README.md');
 $html = Markdown::defaultTransform($text);
 
-?>
-
-<?php
 $jsArray = array();
 
 require_once("includes/header.php");
