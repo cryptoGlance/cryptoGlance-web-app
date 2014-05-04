@@ -616,7 +616,8 @@ select.form-control {
 }
 
 .page-login a.navbar-brand img {
-  right: 0;
+  left: 50%;
+  margin-left: -139px;
 }
 
 .login-container .panel-footer p {
