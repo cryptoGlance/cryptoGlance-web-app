@@ -63,7 +63,7 @@
                         <li class="dropdown-header">Official Links</li>
                         <li><a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external"><i class="icon icon-playstore"></i> Android Companion App</a></li>
                         <li><a href="https://github.com/cryptoGlance/cryptoGlance-web-app" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
-                        <li><a href="https://cryptoglance.info" rel="external"><i class="icon icon-glasses"></i> cryptoGlance Homepage</a></li>
+                        <li><a href="http://cryptoglance.info" rel="external"><i class="icon icon-glasses"></i> cryptoGlance Homepage</a></li>
                      </ul>
                   </li>
                   <li id="nav-login-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>

@@ -1,6 +1,7 @@
 <?php
+ini_set("display_errors", 0);
 error_reporting(E_ERROR);
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
 $session_name = 'cryptoGlance'; // feel free to rename this!
 session_name($session_name);
@@ -22,4 +23,4 @@ $cryptoGlance = new CryptoGlance();
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
-define('CURRENT_VERSION', 'v1.0.1.30');
+define('CURRENT_VERSION', 'v1.0.1.32');
