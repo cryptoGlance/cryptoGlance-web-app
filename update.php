@@ -1,10 +1,11 @@
 <?php
 include('includes/inc.php');
 
-if (!$_SESSION['login_string']) {
-    header('Location: login.php');
-    exit();
-} else if (!$_COOKIE['cryptoglance_version']) {
+//if (!$_SESSION['login_string']) {
+//    header('Location: login.php');
+//    exit();
+//} else
+if (!$_COOKIE['cryptoglance_version']) {
     header('Location: index.php');
     exit();
 }
