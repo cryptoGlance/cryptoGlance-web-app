@@ -45,7 +45,7 @@ class Pools_Simplecoin extends Pools_Abstract {
             $units2 = array('MH', 'GH', 'TH'); 
             
             // Data Order
-            $data['type'] = 'simplevert';
+            $data['type'] = 'simplecoin';
             
             $data['total_paid'] = (!empty($poolData[$this->_apiKey]['total_paid']) ? $poolData[$this->_apiKey]['total_paid']/100000000 : 0);
             

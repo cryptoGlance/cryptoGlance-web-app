@@ -93,6 +93,12 @@ class CryptoGlance {
                 'name' => ($label ? $label : 'BTC Guild'),
                 'apikey' => $api,
             );
+        } else if ($type == 'eclipse' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'Eclipse'),
+                'apikey' => $api,
+            );
         } else if ($type == 'mpos' && !empty($url) && !empty($api) && !empty($userid)) {
             $pool = array(
                 'type' => $type,

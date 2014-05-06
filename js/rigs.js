@@ -162,7 +162,7 @@ function updateRigs(data) {
                 if (v < 1) {
                     v = (v*1000) + ' KH/S';
                 } else if(v > 1000) {
-                    v = (v/1000) + ' GH/S';
+                    v = parseFloat(v/1000).toFixed(2) + ' GH/S';
                 } else {
                     v = parseFloat(v).toFixed(2) + ' MH/S';
                 }
@@ -253,9 +253,9 @@ function updateRigs(data) {
                             v = v + '&deg;C';
                         } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
                             if (v < 1) {
-                                v = (v*1000) + ' KH/S';
+                                v = (v/1000) + ' KH/S';
                             } else if (v > 1000) {
-                                v = (v/1000) + ' GH/S';
+                                v = parseFloat(v/1000).toFixed(2) + ' GH/S';
                             } else {
                                 v = v + ' MH/S';
                             }
@@ -299,7 +299,7 @@ function updateRigs(data) {
         if (rig.summary.hashrate_5s < 1) {
             rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1000) + ' KH/S';
         } else if (rig.summary.hashrate_5s > 1000) {
-            rig.summary.hashrate_5s = (rig.summary.hashrate_5s / 1000) + ' GH/S';
+            rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s / 1000).toFixed(2) + ' GH/S';
         } else {
             rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
         }
