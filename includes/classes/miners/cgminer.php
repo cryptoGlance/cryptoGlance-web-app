@@ -124,8 +124,8 @@ class Miners_Cgminer {
         
         $data = array(
             'uptime' => $upTime,
-            'hashrate_avg' => round($summaryData['MHS av'], 3),
-            'hashrate_5s' => round($summaryData['MHS 5s'], 3),
+            'hashrate_avg' => (!empty($summaryData['GHS av'])) ? round($summaryData['GHS av']*1000, 3) : round($summaryData['MHS av'], 3),
+            'hashrate_5s' => (!empty($summaryData['GHS 5s'])) ? round($summaryData['GHS 5s']*1000, 3) : round($summaryData['MHS 5s'], 3),
             'blocks_found' => $summaryData['Found Blocks'],
 //            'accepted' => $summaryData['Accepted'],
             'accepted' => round($summaryData['Difficulty Accepted']),
