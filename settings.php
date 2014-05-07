@@ -14,12 +14,14 @@ $emailSaveResult = null;
 
 if (isset($_POST['general'])) {
     $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
+    $hwErrorsEnabled = ($_POST['hwErrorsEnabled'] == 'on') ? 1 : 0;
     $data = array();
     $data = array(
         'update' => intval($updatesEnabled),
         'updateType' => $_POST['updateType'],
         'tempWarning' => intval($_POST['tempWarning']),
         'tempDanger' => intval($_POST['tempDanger']),
+        'hwErrorsEnabled' => intval($hwErrorsEnabled),
         'hwWarning' => intval($_POST['hwWarning']),
         'hwDanger' => intval($_POST['hwDanger']),
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
@@ -27,27 +29,29 @@ if (isset($_POST['general'])) {
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
     );
     
-    if ($data['tempWarning'] <= 0) {
-        $errors['tempWarning'] = true;
-    }
-    if ($data['tempDanger'] <= 0 && $data['tempDanger'] <= $data['tempWarning']) {
-        $errors['tempDanger'] = true;
-    }
-    if ($data['hwWarning'] <= 0) {
-        $errors['hwWarning'] = true;
-    }
-    if ($data['hwDanger'] <= 0 && $data['hwDanger'] <= $data['hwWarning']) {
-        $errors['hwDanger'] = true;
-    }
-    if ($data['rigUpdateTime'] < 2) {
-        $errors['rigUpdateTime'] = true;
-    }
-    if ($data['poolUpdateTime'] < 120) {
-        $errors['poolUpdateTime'] = true;
-    }
-    if ($data['walletUpdateTime'] < 600) {
-        $errors['walletUpdateTime'] = true;
-    }
+// not ready
+//    if ($data['tempWarning'] <= 0) {
+//        $errors['tempWarning'] = true;
+//    }
+//    if ($data['tempDanger'] <= 0 && $data['tempDanger'] <= $data['tempWarning']) {
+//        $errors['tempDanger'] = true;
+//    }
+//    if ($data['hwWarning'] <= 0) {
+//        $errors['hwWarning'] = true;
+//    }
+//    if ($data['hwDanger'] <= 0 && $data['hwDanger'] <= $data['hwWarning']) {
+//        $errors['hwDanger'] = true;
+//    }
+//    if ($data['rigUpdateTime'] < 2) {
+//        $errors['rigUpdateTime'] = true;
+//    }
+//    if ($data['poolUpdateTime'] < 120) {
+//        $errors['poolUpdateTime'] = true;
+//    }
+//    if ($data['walletUpdateTime'] < 600) {
+//        $errors['walletUpdateTime'] = true;
+//    }
+// end not ready
     
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
     $cryptoGlance = new CryptoGlance();
