@@ -21,11 +21,11 @@ error_reporting(E_ERROR);
 
 require_once('config.php');
 
-define('DATA_PATH', getcwd() . '/' . DATA_FOLDER . '/');
+define('DATA_PATH', realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR . DATA_FOLDER . DIRECTORY_SEPARATOR);
 
 require_once('cryptoglance.php');
 $cryptoGlance = new CryptoGlance();
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
-define('CURRENT_VERSION', 'v1.0.1.35');
+define('CURRENT_VERSION', 'v1.0.1.33');

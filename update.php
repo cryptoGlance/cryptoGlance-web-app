@@ -17,7 +17,7 @@ if (isset($_POST['cryptoglance_version']) &&
     error_reporting(-1); ini_set('display_errors', 1);
     $currentDir = realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
     $newVersion = strip_tags($_POST['cryptoglance_version']);
-    $updateDir = 'update' . DIRECTORY_SEPARATOR .$newVersion;
+    $updateDir = 'update' . DIRECTORY_SEPARATOR . $newVersion;
     $extractedFolder = '';
     // get settings for update type to get
     $settings = $cryptoGlance->getSettings();
