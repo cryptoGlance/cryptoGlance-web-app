@@ -7,9 +7,6 @@ if (!$_SESSION['login_string']) {
 }
 session_write_close();
 
-require_once('includes/cryptoglance.php');
-$cryptoGlance = new CryptoGlance();
-
 $jsArray = array(
     'ajax',
     'rigs',
@@ -20,17 +17,12 @@ $jsArray = array(
 include("includes/header.php");
 ?>
 
-  <div id="first-run-notice"><b>Start by adding a panel.</b><br>The Dashboard is comprised of a variety of panels, each showing a certain type of info.<span><a href="#add-panel" id="flash-add-panel"><button type="button" class="btn btn-lg btn-warning" data-type="all"><i class="icon icon-newtab"></i> Add Panel</button></a></span></div>
-         
+   
+    <?php if (count($cryptoGlance->getMiners()) == 0 && count($cryptoGlance->getPools()) == 0 && count($cryptoGlance->getWallets()) == 0) { ?>
+    <div id="first-run-notice"><b>Start by adding a panel.</b><br>The Dashboard is comprised of a variety of panels, each showing a certain type of info.<span><a href="#add-panel" id="flash-add-panel"><button type="button" class="btn btn-lg btn-warning" data-type="all"><i class="icon icon-newtab"></i> Add Panel</button></a></span></div>
+    <?php } ?>
    <div id="dashboard-wrap" class="container sub-nav">
-   
-   <?php 
-   if (count($cryptoGlance->getMiners()) == 0 && count($cryptoGlance->getPools()) == 0 && count($cryptoGlance->getWallets()) == 0) {
-   ?>
-   
     <?php
-    }
-    
     // Overview
     if (count($cryptoGlance->getMiners()) > 0) {
         include("templates/panel-overview.php");
