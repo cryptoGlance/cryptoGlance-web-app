@@ -43,6 +43,7 @@
         <?php echo ($settings['general']['updates']['enabled'] == '1') ? 'var updateType = "' . $updateFeed[$settings['general']['updates']['type']]['feed'] . '";' : '' ?>
         var devHeatWarning = <?php echo (!empty($settings['general']['temps']['warning']) ? $settings['general']['temps']['warning'] : 75) ?>;
         var devHeatDanger = <?php echo (!empty($settings['general']['temps']['danger']) ? $settings['general']['temps']['danger'] : 85) ?>;
+        var devHWEnabled = <?php echo ($settings['general']['hardwareErrors']['enabled'] == '1') ? '1' : '0' ?>;
         var devHWWarning = <?php echo (!empty($settings['general']['hardwareErrors']['warning']) ? $settings['general']['hardwareErrors']['warning'] : 5) ?>;
         var devHWDanger = <?php echo (!empty($settings['general']['hardwareErrors']['danger']) ? $settings['general']['hardwareErrors']['danger'] : 15) ?>;
         var rigUpdateTime = <?php echo (!empty($settings['general']['updateTimes']['rig']) ? $settings['general']['updateTimes']['rig'] : 3000) ?>;

@@ -60,7 +60,7 @@ class Pools_Eclipse extends Pools_Abstract {
             
             // how to get active user workers and total hashrate?
             
-            $data['time_since_last_block'] = gmdate('H\H i\M s\S', strtotime($poolData['poolstats']['round_duration'])); // how to format? 00:52:44
+            $data['time_since_last_block'] = gmdate('H\H i\M s\S', strtotime('t'.$poolData['poolstats']['round_duration'])); // how to format? 00:52:44
             
             $data['url'] = $this->_apiURL;
             

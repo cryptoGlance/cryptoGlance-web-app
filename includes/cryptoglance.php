@@ -272,14 +272,20 @@ class CryptoGlance {
     //////////////
     public function getSettings() {
         $settings = $this->_config['cryptoglance'];
-        
+
+        if (empty($settings['general']['updates']['enabled']) && $settings['general']['updates']['enabled'] != 0) {
+            $settings['general']['updates']['enabled'] = 1;
+        }
+        if (empty($settings['general']['updates']['type'])) {
+            $settings['general']['updates']['type'] = 'release';
+        }
         if (empty($settings['general']['temps']['warning'])) {
             $settings['general']['temps']['warning'] = 75;
         }
         if (empty($settings['general']['temps']['danger'])) {
             $settings['general']['temps']['danger'] = 85;
         }
-        if (empty($settings['general']['hardwareErrors']['enabled'])) {
+        if (empty($settings['general']['hardwareErrors']['enabled']) && $settings['general']['hardwareErrors']['enabled'] != 0) {
             $settings['general']['hardwareErrors']['enabled'] = 1;
         }
         if (empty($settings['general']['hardwareErrors']['warning'])) {
@@ -297,7 +303,7 @@ class CryptoGlance {
         if (empty($settings['general']['updateTimes']['wallet'])) {
             $settings['general']['updateTimes']['wallet'] = 600;
         }
-        
+
         return $settings;
     }
     
@@ -316,6 +322,7 @@ class CryptoGlance {
                     'danger' => $data['general']['tempDanger'],
                 ),
                 'hardwareErrors' => array(
+                    'enabled' => $data['general']['hwErrorsEnabled'],
                     'warning' => $data['general']['hwWarning'],
                     'danger' => $data['general']['hwDanger'],
                 ),
