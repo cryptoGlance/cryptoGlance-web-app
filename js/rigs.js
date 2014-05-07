@@ -253,7 +253,7 @@ function updateRigs(data) {
                             v = v + '&deg;C';
                         } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
                             if (v < 1) {
-                                v = (v/1000) + ' KH/S';
+                                v = (v*1000) + ' KH/S';
                             } else if (v > 1000) {
                                 v = parseFloat(v/1000).toFixed(2) + ' GH/S';
                             } else {
