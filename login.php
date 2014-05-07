@@ -13,7 +13,7 @@ if (!empty($_SESSION['login_string'])) {
         $_SESSION['login_string'] = hash('sha512', $_POST['password'] . $_SERVER['HTTP_USER_AGENT']);
         
         session_regenerate_id(); // This hangs sometimes and we dont know why...
-        
+        session_write_close();
         header('Location: index.php');
         exit();
     } else {
@@ -21,6 +21,8 @@ if (!empty($_SESSION['login_string'])) {
         $error = true;
     }
 }
+
+session_write_close();
 
 include("includes/login-header.php");
 ?>

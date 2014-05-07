@@ -1,10 +1,12 @@
 <?php
 require_once('includes/inc.php');
 
-//if (!$_SESSION['login_string']) {
-//    http_response_code(401); // 401 = Unauthorized
-//    exit();
-//}
+if (!$_SESSION['login_string']) {
+    http_response_code(401); // 401 = Unauthorized
+    exit();
+}
+
+session_write_close();
 
 global $CACHED;
 if (isset($_GET['cached']) && $_GET['cached'] == 0) {
