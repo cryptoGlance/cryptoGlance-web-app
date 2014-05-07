@@ -1154,7 +1154,7 @@ a#dash-add-panel.flash {
   background: rgba(0,200,0,0.2);
   border: 4px dotted #070;
   color: #0c0;
-  margin: 0 auto 64px;
+  margin: 100px auto 0;
   padding: 30px;
   border-radius: 10px;
   text-align: center;
