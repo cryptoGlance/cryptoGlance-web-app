@@ -1,10 +1,12 @@
 <?php
 include('includes/inc.php');
 
-//if (!$_SESSION['login_string']) {
-//    header('Location: login.php');
-//    exit();
-//}
+if (!$_SESSION['login_string']) {
+    header('Location: login.php');
+    exit();
+}
+
+session_write_close();
 
 $jsArray = array();
 require_once("includes/header.php");

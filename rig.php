@@ -6,6 +6,8 @@ if (!$_SESSION['login_string']) {
     exit();
 }
 
+session_write_close();
+
 $jsArray = array();
 require_once("includes/header.php");
 require_once('includes/autoloader.inc.php');
