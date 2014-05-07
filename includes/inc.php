@@ -25,4 +25,4 @@ $cryptoGlance = new CryptoGlance();
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
-define('CURRENT_VERSION', 'v1.0.1.40');
+define('CURRENT_VERSION', 'v1.0.1.40'); 
