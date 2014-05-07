@@ -15,8 +15,9 @@ if (isset($_POST['cryptoglance_version']) &&
 ) {
     set_time_limit(0); // Downloading or unzipping might exceed this time limit
     error_reporting(-1); ini_set('display_errors', 1);
+    $currentDir = realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
     $newVersion = strip_tags($_POST['cryptoglance_version']);
-    $updateDir = 'update/'.$newVersion;
+    $updateDir = 'update' . DIRECTORY_SEPARATOR .$newVersion;
     $extractedFolder = '';
     // get settings for update type to get
     $settings = $cryptoGlance->getSettings();
@@ -64,9 +65,9 @@ if (isset($_POST['cryptoglance_version']) &&
 
         // MAKE FOLDERS -----------------------
         
-        echo '==> Creating temporary directory to download update and unzip: '.$updateDir.'/<br />'; ob_flush(); flush();
+        echo '==> Creating temporary directory to download update and unzip: '.$updateDir.'<br />'; ob_flush(); flush();
         
-        if (!mkdir($updateDir, 0777, true)) {
+        if (!mkdir($currentDir . $updateDir, 0777, true)) {
             echo '==> ERROR: Failed to create the directory: ' . $updateDir . '<br />';  ob_flush(); flush(); sleep(1);
             exit;
         } else {
@@ -78,7 +79,7 @@ if (isset($_POST['cryptoglance_version']) &&
         echo '==> Downloading: ' . $updateFeed[$updateType]['zip'] . '<br />'; ob_flush(); flush();
                 
         $curl = curl_init();
-        $fp = fopen($updateDir.'.zip', 'w');
+        $fp = fopen($currentDir . $updateDir .'.zip', 'w');
         curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
         curl_setopt($curl, CURLOPT_URL, $updateFeed[$updateType]['zip']);
         curl_setopt($curl, CURLOPT_FAILONERROR, true);
@@ -108,27 +109,27 @@ if (isset($_POST['cryptoglance_version']) &&
         if (!$zip) {
             echo '==> ERROR: Could not create ZipArchive object...<br />'; ob_flush(); flush(); sleep(1);
             exit;
-        } else if($zip->open(getcwd(). '/' . $updateDir.'.zip') != "true") {  
+        } else if($zip->open($currentDir . $updateDir.'.zip') != "true") { 
             echo '==> ERROR: Could not open ' . $file_zip . '<br />'; ob_flush(); flush(); sleep(1);
             exit;
         }
         
-        echo '==> Unzipping archive to: '.$updateDir.'/<br />'; ob_flush(); flush(); sleep(1);
+        echo '==> Unzipping archive to: '.$updateDir.'<br />'; ob_flush(); flush(); sleep(1);
         
-        $zip->extractTo(getcwd(). '/' . $updateDir);
+        $zip->extractTo($currentDir . $updateDir);
         $zip->close();
         
         echo '==> Update Unzipped!<br />'; ob_flush(); flush(); sleep(1);
         
         echo '==> Deleting update archive file!<br />'; ob_flush(); flush();
         
-        unlink($updateDir.'.zip');
+        unlink($currentDir . $updateDir.'.zip');
         
         echo '==> Update archive file deleted!<br />'; ob_flush(); flush(); sleep(1);
         
-        foreach (new DirectoryIterator(getcwd(). '/' . $updateDir) as $file) {
+        foreach (new DirectoryIterator($currentDir . $updateDir) as $file) {
             if($file->isDot() || !$file->isDir()) continue;
-            if($file->isDir()) $extractedFolder = $updateDir.'/'.$file->getFilename();
+            if($file->isDir()) $extractedFolder = $updateDir.DIRECTORY_SEPARATOR.$file->getFilename();
         }
         if (empty($extractedFolder)) {
             die('==> ERROR: Something bad happened. Extracted Folder is empty!');
@@ -144,11 +145,11 @@ if (isset($_POST['cryptoglance_version']) &&
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         // first delete files
         foreach($files as $file) {
-            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), '/' . DATA_FOLDER) !== false) {
+            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), DIRECTORY_SEPARATOR . DATA_FOLDER) !== false) {
                 continue;
             }
             $realFilePath = $file->getRealPath();
-            if (!$file->isDir() && strpos($file->getRealPath(), '/update/') === false && strpos($file->getRealPath(), '/.update/') === false) {
+            if (!$file->isDir() && strpos($file->getRealPath(), DIRECTORY_SEPARATOR . 'update' . DIRECTORY_SEPARATOR) === false && strpos($file->getRealPath(), DIRECTORY_SEPARATOR . '.update') === false) {
                 if (unlink($realFilePath)) {
                     echo '==> Deleted File: ' . $realFilePath . '<br />'; ob_flush(); flush();
                 } else {
@@ -159,7 +160,7 @@ if (isset($_POST['cryptoglance_version']) &&
         // now delete folders
         $failedFolders = array();
         foreach($files as $file) {
-            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), '/update') !== false || strpos($file->getRealPath(), '/.update') !== false || strpos($file->getRealPath(), '/' . DATA_FOLDER) !== false) {
+            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), DIRECTORY_SEPARATOR.'update') !== false || strpos($file->getRealPath(), DIRECTORY_SEPARATOR.'.update') !== false || strpos($file->getRealPath(), DIRECTORY_SEPARATOR . DATA_FOLDER) !== false) {
                 continue;
             }
             $realFilePath = $file->getRealPath();
@@ -184,14 +185,14 @@ if (isset($_POST['cryptoglance_version']) &&
         echo '==> Done deleting old files...<br />'; ob_flush(); flush(); sleep(1);
         
         echo '<br />==> Copying new files: ' . $extractedFolder . '<br />'; ob_flush(); flush();
-        $it = new RecursiveDirectoryIterator(getcwd(). '/' . $extractedFolder, RecursiveDirectoryIterator::SKIP_DOTS);
+        $it = new RecursiveDirectoryIterator($currentDir . $extractedFolder, RecursiveDirectoryIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         // first make folders
         foreach($files as $file) {
-            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), '/' . DATA_FOLDER) !== false) {
+            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), DIRECTORY_SEPARATOR . DATA_FOLDER) !== false) {
                 continue;
             }
-            $realPath = str_replace('/'.$extractedFolder, '', $file->getRealPath());
+            $realPath = str_replace(DIRECTORY_SEPARATOR.$extractedFolder, '', $file->getRealPath());
             if ($file->isDir() && !file_exists($realPath)){
                 if (mkdir($realPath, 755, true)) {
                     echo '==> Created Directory: ' . $realPath . '<br />'; ob_flush(); flush();
@@ -202,14 +203,14 @@ if (isset($_POST['cryptoglance_version']) &&
         }
         // now copy files
         foreach($files as $file) {
-            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), '/' . DATA_FOLDER) !== false) {
+            if ($file->getFilename() === '.' || $file->getFilename() === '..' || strpos($file->getRealPath(), DIRECTORY_SEPARATOR . DATA_FOLDER) !== false) {
                 continue;
             }
             if (!$file->isDir()){
-                if (copy($file->getRealPath(), str_replace('/'.$extractedFolder, '', $file->getRealPath()))) {
-                    echo '==> Copied File: ' . str_replace('/'.$extractedFolder, '', $file->getRealPath()) . '<br />'; ob_flush(); flush();
+                if (copy($file->getRealPath(), str_replace(DIRECTORY_SEPARATOR.$extractedFolder, '', $file->getRealPath()))) {
+                    echo '==> Copied File: ' . str_replace(DIRECTORY_SEPARATOR.$extractedFolder, '', $file->getRealPath()) . '<br />'; ob_flush(); flush();
                 } else {
-                    echo '==> Cannot Copy File: ' . str_replace('/'.$extractedFolder, '', $file->getRealPath()) . '<br />'; ob_flush(); flush();
+                    echo '==> Cannot Copy File: ' . str_replace(DIRECTORY_SEPARATOR.$extractedFolder, '', $file->getRealPath()) . '<br />'; ob_flush(); flush();
                 }
             }
         }
@@ -220,7 +221,7 @@ if (isset($_POST['cryptoglance_version']) &&
         echo '----------<br />';
         echo '==> Cleaning up... <br />'; ob_flush(); flush(); sleep(1);
         echo '==> Deleting update files:<br />'; ob_flush(); flush(); sleep(1);
-        $it = new RecursiveDirectoryIterator('./update', RecursiveDirectoryIterator::SKIP_DOTS);
+        $it = new RecursiveDirectoryIterator($currentDir . 'update', RecursiveDirectoryIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         // first delete files
         foreach($files as $file) {
@@ -243,7 +244,7 @@ if (isset($_POST['cryptoglance_version']) &&
                 continue;
             }
             $realFilePath = $file->getRealPath();
-            if ($file->isDir()){
+            if ($file->isDir()) {
                 if (rmdir($realFilePath)) {
                     echo '==> Deleted Folder: ' . $realFilePath . '<br />'; ob_flush(); flush();
                 } else {
@@ -262,9 +263,9 @@ if (isset($_POST['cryptoglance_version']) &&
             }
         }
         if (rmdir(getcwd().'/update')) {
-            echo '==> Deleted Folder: ' . getcwd().'/update' . '<br />'; ob_flush(); flush();
+            echo '==> Deleted Folder: ' . $currentDir.'update' . '<br />'; ob_flush(); flush();
         } else {
-            echo '==> Cannot Delete Folder: ' . getcwd().'/update' . '<br />'; ob_flush(); flush();
+            echo '==> Cannot Delete Folder: ' . $currentDir.'update' . '<br />'; ob_flush(); flush();
         }
         echo '==> Done cleaning up...<br />'; ob_flush(); flush(); sleep(1);
         

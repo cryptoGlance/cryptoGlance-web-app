@@ -1,10 +1,10 @@
 <?php
 include('includes/inc.php');
 
-//if (!$_SESSION['login_string']) {
-//    header('Location: login.php');
-//    exit();
-//}
+if (!$_SESSION['login_string']) {
+    header('Location: login.php');
+    exit();
+}
 
 $errors = array();
 $generalSaveResult = null;
