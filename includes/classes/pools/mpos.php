@@ -65,16 +65,16 @@ class Pools_Mpos extends Pools_Abstract {
             $data['balance'] = $poolData['getuserbalance']['confirmed'];
             $data['unconfirmed_balance'] = $poolData['getuserbalance']['unconfirmed'];
             
-            $pow = min(floor(($poolData['getpoolstatus']['nethashrate'] ? log($poolData['getpoolstatus']['nethashrate']) : 0) / log(1024)), count($units) - 1);
-            $poolData['getpoolstatus']['nethashrate'] /= pow(1024, $pow);
+            $pow = min(floor(($poolData['getpoolstatus']['nethashrate'] ? log($poolData['getpoolstatus']['nethashrate']) : 0) / log(1000)), count($units) - 1);
+            $poolData['getpoolstatus']['nethashrate'] /= pow(1000, $pow);
             $data['network_hashrate'] = round($poolData['getpoolstatus']['nethashrate'], 2) . ' ' . $units[$pow] . '/s';
             
-            $pow = min(floor(($poolData['getpoolstatus']['hashrate'] ? log($poolData['getpoolstatus']['hashrate']) : 0) / log(1024)), count($units2) - 1);
-            $poolData['getpoolstatus']['hashrate'] /= pow(1024, $pow);
+            $pow = min(floor(($poolData['getpoolstatus']['hashrate'] ? log($poolData['getpoolstatus']['hashrate']) : 0) / log(1000)), count($units2) - 1);
+            $poolData['getpoolstatus']['hashrate'] /= pow(1000, $pow);
             $data['pool_hashrate'] = round($poolData['getpoolstatus']['hashrate'], 2) . ' ' . $units2[$pow] . '/s';
             
-            $pow = min(floor(($poolData['getuserstatus']['hashrate'] ? log($poolData['getuserstatus']['hashrate']) : 0) / log(1024)), count($units2) - 1);
-            $poolData['getuserstatus']['hashrate'] /= pow(1024, $pow);
+            $pow = min(floor(($poolData['getuserstatus']['hashrate'] ? log($poolData['getuserstatus']['hashrate']) : 0) / log(1000)), count($units2) - 1);
+            $poolData['getuserstatus']['hashrate'] /= pow(1000, $pow);
             $data['user_hashrate'] = round($poolData['getuserstatus']['hashrate'], 2) . ' ' . $units2[$pow] . '/s';
             
             $data['pool_workers'] = $poolData['getpoolstatus']['workers'];

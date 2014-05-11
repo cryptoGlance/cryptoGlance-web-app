@@ -38,8 +38,8 @@ class Pools_Btcguild extends Pools_Abstract {
             $data['type'] = 'btcguild';
 
             // Pool Speed
-            $pow = min(floor(($poolData['pool']['pool_speed'] ? log($poolData['pool']['pool_speed']) : 0) / log(1024)), count($units) - 1);
-            $poolData['pool']['pool_speed'] /= pow(1024, $pow);
+            $pow = min(floor(($poolData['pool']['pool_speed'] ? log($poolData['pool']['pool_speed']) : 0) / log(1000)), count($units) - 1);
+            $poolData['pool']['pool_speed'] /= pow(1000, $pow);
             $data['pool_hashrate'] = round($poolData['pool']['pool_speed'], 2) . ' ' . $units[$pow] . '/s';
             $data['user_hashrate'] = 0;
             

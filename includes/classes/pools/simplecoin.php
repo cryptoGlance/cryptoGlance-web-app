@@ -53,12 +53,12 @@ class Pools_Simplecoin extends Pools_Abstract {
             $data['unconfirmed_balance'] = (!empty($poolData[$this->_apiKey]['unconfirmed_balance']) ? $poolData[$this->_apiKey]['unconfirmed_balance']/100000000 : 0);
             $data['estimated_round_payout'] = (!empty($poolData[$this->_apiKey]['est_round_payout']) ? number_format($poolData[$this->_apiKey]['est_round_payout'], 8) : 0);
             
-            $pow = min(floor(($poolData['pool_stats']['hashrate'] ? log($poolData['pool_stats']['hashrate']) : 0) / log(1024)), count($units) - 1);
-            $poolData['pool_stats']['hashrate'] /= pow(1024, $pow);
+            $pow = min(floor(($poolData['pool_stats']['hashrate'] ? log($poolData['pool_stats']['hashrate']) : 0) / log(1000)), count($units) - 1);
+            $poolData['pool_stats']['hashrate'] /= pow(1000, $pow);
             $data['pool_hashrate'] = round($poolData['pool_stats']['hashrate'], 2) . ' ' . $units[$pow] . '/s';
 
-            $pow = min(floor(($poolData[$this->_apiKey]['last_10_hashrate'] ? log($poolData[$this->_apiKey]['last_10_hashrate']) : 0) / log(1024)), count($units2) - 1);
-            $poolData[$this->_apiKey]['last_10_hashrate'] /= pow(1024, $pow);
+            $pow = min(floor(($poolData[$this->_apiKey]['last_10_hashrate'] ? log($poolData[$this->_apiKey]['last_10_hashrate']) : 0) / log(1000)), count($units2) - 1);
+            $poolData[$this->_apiKey]['last_10_hashrate'] /= pow(1000, $pow);
             $data['user_hashrate'] = round($poolData[$this->_apiKey]['last_10_hashrate'], 2) . ' ' . $units2[$pow] . '/s';
             
             $data['pool_workers'] = $poolData['pool_stats']['workers'];

@@ -32,13 +32,13 @@ class CryptoGlance {
         
 //        if (empty($type) || empty($ipAddress) || empty($port)) {
         if (empty($ipAddress) || empty($port)) {
-            http_response_code(406); // not accepted
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         
         foreach ($this->_config['miners'] as $rig) {
             if ($ipAddress == $rig['host'] && $port == $rig['port']) {
-                http_response_code(409); // conflict
+                header("HTTP/1.0 409 Conflict"); // conflict
                 return null;
             }
         }
@@ -54,13 +54,13 @@ class CryptoGlance {
         $this->_config['miners'][] = $rig;
         $fh = $fileHandler = new FileHandler('configs/miners.json');
         $fh->write(json_encode($this->_config['miners']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     public function removeRig(){
         $rigId = intval($_POST['id']);
         
         if ($rigId == 0 || empty($this->_config['miners'][$rigId-1])) {
-            http_response_code(406); // not accepted
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         $rigId -= 1;
@@ -69,7 +69,7 @@ class CryptoGlance {
         $this->_config['miners'] = array_values($this->_config['miners']);
         $fh = $fileHandler = new FileHandler('configs/miners.json');
         $fh->write(json_encode($this->_config['miners']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     
     ///////////
@@ -121,20 +121,20 @@ class CryptoGlance {
                 'address' => $address,
             );
         } else {
-            http_response_code(406); // not accepted
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         
         $this->_config['pools'][] = $pool;
         $fh = $fileHandler = new FileHandler('configs/pools.json');
         $fh->write(json_encode($this->_config['pools']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     public function removePool(){
         $poolId = intval($_POST['id']);
         
         if ($poolId == 0 || empty($this->_config['pools'][$poolId-1])) {
-            http_response_code(406); // not accepted
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         $poolId -= 1;
@@ -143,7 +143,7 @@ class CryptoGlance {
         $this->_config['pools'] = array_values($this->_config['pools']);
         $fh = $fileHandler = new FileHandler('configs/pools.json');
         $fh->write(json_encode($this->_config['pools']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     
     
@@ -165,13 +165,13 @@ class CryptoGlance {
         if ($walletId != 0) {
             $walletId -= 1;
             if (empty($label)) {
-                http_response_code(406); // not accepted
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
                 return null;
             }
             $this->_config['wallets'][$walletId]['label'] = $label;
         } else {
             if (empty($label) || empty($currency)) { // new wallets need label and option from currency dropdown
-                http_response_code(406); // not accepted
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
                 return null;
             }
             $this->_config['wallets'][] = array(
@@ -183,14 +183,14 @@ class CryptoGlance {
         
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
         echo count($this->_config['wallets']);
     }
     public function removeWallet() {
         $walletId = intval($_POST['walletId']);
         
         if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1])) {
-            http_response_code(406); // not accepted
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         $walletId -= 1;
@@ -199,7 +199,7 @@ class CryptoGlance {
         $this->_config['wallets'] = array_values($this->_config['wallets']);
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     public function addAddress() {
         $walletId = intval($_POST['walletId']);
@@ -207,7 +207,7 @@ class CryptoGlance {
         $newAddress = $_POST['address'];
         
         if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1]) || empty($newLabel) || empty($newAddress)) {
-            http_response_code(406); // not accepted
+            hheader("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         
@@ -215,7 +215,7 @@ class CryptoGlance {
         
         foreach ($this->_config['wallets'][$walletId]['addresses'] as $address) {
             if ($newAddress == $address['address']) {
-                http_response_code(409); // not accepted
+                header("HTTP/1.0 409 Conflict"); // not accepted
                 return null;
             }
         }
@@ -227,7 +227,7 @@ class CryptoGlance {
 
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     public function editAddress() {
         $walletId = intval($_POST['walletId']);
@@ -235,7 +235,7 @@ class CryptoGlance {
         $newLabel = $_POST['label'];
         
         if ($walletId == 0 || $addrId == 0 || empty($this->_config['wallets'][$walletId-1]['addresses'][$addrId-1]) || empty($newLabel)) {
-            http_response_code(406); // not accepted
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
 
@@ -246,14 +246,14 @@ class CryptoGlance {
 
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     public function removeAddress() {
         $walletId = intval($_POST['walletId']);
         $addrId = intval($_POST['addrId']);
         
         if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1]) || $addrId == 0 || empty($this->_config['wallets'][$walletId-1]['addresses'][$addrId-1])) {
-            http_response_code(406); // not accepted
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         $walletId -= 1;
@@ -263,7 +263,7 @@ class CryptoGlance {
         $this->_config['wallets'][$walletId]['addresses'] = array_values($this->_config['wallets'][$walletId]['addresses']);
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
-        http_response_code(202); // accepted
+        header("HTTP/1.0 202 Accepted"); // accepted
     }
     
     
@@ -285,23 +285,23 @@ class CryptoGlance {
         if (empty($settings['general']['temps']['danger'])) {
             $settings['general']['temps']['danger'] = 85;
         }
-        if (empty($settings['general']['hardwareErrors']['enabled']) && $settings['general']['hardwareErrors']['enabled'] != 0) {
+        if (empty($settings['general']['hardwareErrors']['enabled'])) {
             $settings['general']['hardwareErrors']['enabled'] = 1;
         }
         if (empty($settings['general']['hardwareErrors']['warning'])) {
-            $settings['general']['hardwareErrors']['warning'] = 3;
+            $settings['general']['hardwareErrors']['warning'] = 5;
         }
         if (empty($settings['general']['hardwareErrors']['danger'])) {
-            $settings['general']['hardwareErrors']['danger'] = 10;
+            $settings['general']['hardwareErrors']['danger'] = 15;
         }
         if (empty($settings['general']['updateTimes']['rig'])) {
-            $settings['general']['updateTimes']['rig'] = 2;
+            $settings['general']['updateTimes']['rig'] = 3000;
         }
         if (empty($settings['general']['updateTimes']['pool'])) {
-            $settings['general']['updateTimes']['pool'] = 120;
+            $settings['general']['updateTimes']['pool'] = 120000;
         }
         if (empty($settings['general']['updateTimes']['wallet'])) {
-            $settings['general']['updateTimes']['wallet'] = 600;
+            $settings['general']['updateTimes']['wallet'] = 600000;
         }
 
         return $settings;

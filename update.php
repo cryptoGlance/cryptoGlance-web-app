@@ -63,7 +63,7 @@ if (isset($_POST['cryptoglance_version']) &&
     if ($settings['general']['updates']['enabled'] == 1) {
         $updateType = $settings['general']['updates']['type'];
         
-        echo '==> Starting Update...<br />'; ob_flush(); flush(); sleep(1);
+        echo '==> Starting Update...Please be patient<br />==> Downloading update zip...<br />'; ob_flush(); flush(); sleep(1);
 
         // MAKE FOLDERS -----------------------
         
@@ -140,7 +140,7 @@ if (isset($_POST['cryptoglance_version']) &&
         // START UPDATE -----------------------
         
         echo '----------<br />';
-        echo '==> Updating cryptoGlance... <br />'; ob_flush(); flush(); sleep(1);
+        echo '==> Updating cryptoGlance...<br />'; ob_flush(); flush(); sleep(1);
         
         echo '==> Deleting old files:<br />'; ob_flush(); flush(); sleep(1);
         $it = new RecursiveDirectoryIterator('.', RecursiveDirectoryIterator::SKIP_DOTS);
@@ -274,7 +274,7 @@ if (isset($_POST['cryptoglance_version']) &&
         // FINISHED -----------------------
                     
         echo '----------<br />';
-        echo 'Update Done!';
+        echo '** cryptoGlance was updated successfully! **<br />You can navigate back to the Dashboard now.';
         echo '<div id="done"></div>'; // this is purely for JS to stop scrolling down
         ob_flush();
         flush();
