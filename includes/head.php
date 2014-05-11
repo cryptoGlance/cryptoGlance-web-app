@@ -14,20 +14,20 @@
     <?php echo ($currentPage == 'settings') ? 'Settings' : '' ?>
     <?php echo ($currentPage == 'help') ? 'README.md' : '' ?>
     <?php echo ($currentPage == 'wallet') ? 'Wallet Details' : '' ?>
+    <?php echo ($currentPage == 'rig') ? 'Rig Details' : '' ?>
+    <?php echo ($currentPage == 'update') ? 'Updating cryptoGlance...' : '' ?>
     :: cryptoGlance</title>
     
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- HubSpot / messenger (https://github.com/HubSpot/messenger) styles -->
-    <link href="css/messenger.css" rel="stylesheet">
-    <link href="css/messenger-spinner.css" rel="stylesheet">
-    <link href="css/messenger-theme-flat.css" rel="stylesheet">
+    <!-- jQuery Toast Message Plugin (https://github.com/akquinet/jquery-toastmessage-plugin) styles -->
+    <link href="css/jquery.toastmessage.css" rel="stylesheet">
     <!-- jQuery Slider styles -->
     <link href="css/slider.css" rel="stylesheet">
     <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
     <link href="css/whhg.css" rel="stylesheet">
-    <!-- jQuery PrettyCheckable by arthurgouveia (http://arthurgouveia.com/prettyCheckable/) styles -->
-    <link href="css/prettyCheckable.css" rel="stylesheet">
+    <!-- extend Bootstrap styles -->
+    <link href="css/bootstrap-switch.min.css" rel="stylesheet">
     <!-- Custom cryptoGlance styles -->
     <link href="css/cryptoglance-base.css" rel="stylesheet">
       
@@ -35,35 +35,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    
-    <?php
-    if (isset($cryptoGlance)) {
-        $settings = $cryptoGlance->getSettings();
-    } else {
-        $settings = array(
-            'general' => array(
-                'temps' => array(
-                   'warning' => 75,            
-                   'danger' => 85,            
-                ),
-                'updateTimes' => array(
-                    'rig' => 2,
-                    'pool' => 120,
-                    'wallet' => 600,
-                ),
-            )
-        );
-    }
-    ?>
 
     <script type="text/javascript">
         var documentTitle = document.title;
+        var DATA_FOLDER = '<?php echo DATA_FOLDER; ?>';
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
-        var devHeatWarning = <?php echo (!empty($settings['general']['temps']['warning']) ? $settings['general']['temps']['warning'] : 75) ?>;
-        var devHeatDanger = <?php echo (!empty($settings['general']['temps']['danger']) ? $settings['general']['temps']['danger'] : 85) ?>;
-        var devHWWarning = 5;
-        var rigUpdateTime = <?php echo (!empty($settings['general']['updateTimes']['rig']) ? $settings['general']['updateTimes']['rig'] : 3000) ?>;
-        var poolUpdateTime = <?php echo (!empty($settings['general']['updateTimes']['pool']) ? $settings['general']['updateTimes']['pool'] : 120000) ?>;
-        var walletUpdateTime = <?php echo (!empty($settings['general']['updateTimes']['wallet']) ? $settings['general']['updateTimes']['wallet'] : 600000) ?>;
+        <?php echo ($settings['general']['updates']['enabled'] == '1') ? 'var updateType = "' . $updateFeed[$settings['general']['updates']['type']]['feed'] . '";' : '' ?>
+        var devHeatWarning = <?php echo $settings['general']['temps']['warning'] ?>;
+        var devHeatDanger = <?php echo $settings['general']['temps']['danger'] ?>;
+        var devHWEnabled = <?php echo $settings['general']['hardwareErrors']['enabled'] ?>;
+        var devHWWarning = <?php echo $settings['general']['hardwareErrors']['warning'] ?>;
+        var devHWDanger = <?php echo $settings['general']['hardwareErrors']['danger'] ?>;
+        var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig'] ?>;
+        var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool'] ?>;
+        var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet'] ?>;
     </script>     
 </head>

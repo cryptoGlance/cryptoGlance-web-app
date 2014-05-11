@@ -8,14 +8,6 @@
            <h2 class="modal-title" id="addPoolLabel"><i class="icon icon-circleadd"></i> Add a Mining Pool</h2>
          </div>
          <div class="modal-body">
-            <div id="alert-added-pool" class="alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <strong>Success!</strong> You've saved this pool.
-            </div>         
-            <div id="alert-saved-pool" class="alert alert-success alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <strong>Success!</strong> You've saved this pool.
-            </div>         
            <div class="form-group all">
              <label for="inputPoolLabel" class="col-sm-3 control-label">Label</label>
              <div class="col-sm-7">
@@ -26,24 +18,28 @@
             <label for="selectPoolType" class="col-sm-3 control-label">Type</label>
             <div class="col-sm-4">
               <select class="form-control" id="selectPoolType" name="poolType">
+                 <option disabled selected>Select A Pool</option>
+                 <option value="btcguild">BTC Guild</option>
+                 <option value="eclipse">Eclipse</option>
                  <option value="mpos">MPOS</option>
+                 <option value="simplecoin">SimpleCoin</option>
                  <option value="wafflepool">WafflePool</option>
               </select>
             </div>
           </div>
-           <div class="form-group mpos">
+           <div class="form-group mpos simplecoin" style="display: none;">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
-               <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http:// or https://">
+               <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://vertsquad.com/">
              </div>
            </div>
-           <div class="form-group mpos">
+           <div class="form-group mpos btcguild simplecoin eclipse" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">
              </div>
            </div>
-           <div class="form-group mpos">
+           <div class="form-group mpos" style="display: none;">
              <label for="inputPoolUserId" class="col-sm-3 control-label">User ID</label>
              <div class="col-sm-3">
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">

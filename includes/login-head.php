@@ -11,10 +11,10 @@
     
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery Toast Message Plugin (https://github.com/akquinet/jquery-toastmessage-plugin) styles -->
+    <link href="css/jquery.toastmessage.css" rel="stylesheet">
     <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
     <link href="css/whhg.css" rel="stylesheet">
-    <!-- jQuery PrettyCheckable by arthurgouveia (http://arthurgouveia.com/prettyCheckable/) styles -->
-    <link href="css/prettyCheckable.css" rel="stylesheet">
     <!-- Custom cryptoGlance styles -->
     <link href="css/cryptoglance-base.css" rel="stylesheet">
       

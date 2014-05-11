@@ -6,6 +6,8 @@ if (!$_SESSION['login_string']) {
     exit();
 }
 
+session_write_close();
+
 $jsArray = array();
 require_once("includes/header.php");
 require_once('includes/autoloader.inc.php');
@@ -17,7 +19,7 @@ if ($walletId != 0) {
     $wallet = $wallets[$walletId-1];
     
     if (!empty($wallet)) {
-        $walletObj = new Class_Wallets();
+        $walletObj = new Wallets();
         $walletData = $walletObj->update($walletId);
         $wallet['data'] = $walletData[0];
     }
@@ -37,14 +39,6 @@ if ($walletId != 0) {
                 <div class="total-wallet-balance">
                 <span class="green"><?php echo $wallet['data']['balance'] ?> <img src="images/icon-<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></span>
                 </div>
-                <div id="alert-saved-address" class="alert alert-success alert-dismissable" style="display: none;">
-                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Success!</strong> You've updated your addresses.
-                </div>
-                <div id="alert-save-fail-address" class="alert alert-danger alert-dismissable" style="display: none;">
-                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Failed!</strong> <span class="errormsg"></span>
-                </div> 
                 <div class="table-responsive">
                     <form role="form">
                         <table class="table table-hover table-striped table-wallet">
@@ -85,18 +79,7 @@ if ($walletId != 0) {
                 <h2 class="panel-title"><i class="icon icon-walletalt"></i></h2>
             </div>
             <div class="panel-body">
-            
-            <!-- Bootstrap Alert docs here: http://getbootstrap.com/components/#alerts -->
-            
-                <div id="alert-saved-wallet" class="alert alert-success alert-dismissable" style="display: none;">
-                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Success!</strong> You've updated your wallet.
-                </div>
-                <div id="alert-save-fail-wallet" class="alert alert-danger alert-dismissable" style="display: none;">
-                    <button type="button" class="close fade in" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Failed!</strong> Wallet needs a name.
-                </div>  
-                <form class="form-horizontal" role="form">
+              <form class="form-horizontal" role="form">
                     <input type="hidden" name="type" value="wallet" />
                     <input type="hidden" name="walletId" value="<?php echo $walletId ?>" />
                     <div class="form-group">
@@ -107,7 +90,7 @@ if ($walletId != 0) {
                     </div>
                     <div class="form-group">
                         <label for="inputWalletCurrency" class="control-label col-sm-4">Currency:</label>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <select class="form-control" name="currency" <?php echo ($walletId != 0 ? 'disabled' : '') ?>>
                                 <?php foreach ($cryptoGlance->getCurrencies() as $currency => $code) { ?>
                                 <option value="<?php echo $currency ?>" <?php echo ($wallet['currency'] == $currency ? 'selected' : '') ?>><?php echo ucwords($currency) ?> (<?php echo $code ?>)</option>

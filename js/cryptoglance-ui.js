@@ -88,43 +88,6 @@ function externalLinks() {
 // }
 
 
-function callAlert() {
-    $(function(){
-
-     Messenger.options = {
-      extraClasses: "messenger-fixed messenger-on-bottom",
-      theme: "flat"
-     };
-
-     var steps = [
-      function() {
-        var msg = Messenger().post({
-         message: 'Refreshing Content...',
-         type: 'info',
-         actions: false
-        });
-        setTimeout(function(){
-         msg.update({
-          message: 'Update Complete!',
-          type: 'success',
-          actions: false
-         });
-        }, 4000);
-        setTimeout(function(){ msg.hide(); }, 8000);
-      }
-     ];
-
-     var i = 1;
-
-     steps[0]();
-     setInterval(function(){
-      steps[i]();
-      i = (i + 1) % steps.length;
-     }, 6000);
-
-    });
-}
-
 // Setup Masonry Layout
 function initMasonry() {
   $('#dashboard-wrap, .full-content').css('width','100%');
@@ -148,9 +111,6 @@ function destroyMasonry() {
 function restoreSiteLayout() {
   var siteLayout = $.cookie('use_masonry_layout');
   var viewportWidth  = $(window).width();
-  
-  console.log(siteLayout);
-  console.log(viewportWidth);
     
   if (siteLayout == null) {
     $('#layout-grid').removeClass('active-layout');
@@ -270,9 +230,12 @@ $(function(){
 // Pretty checkable styling
 function prettifyInputs() {
   var inputs = $('input[type=radio], input[type=checkbox]').each(function() {
-     $(this).prettyCheckable({
-        color: 'blue'
-     });
+    $(this).bootstrapSwitch({
+      'offText':'<i class="icon icon-remove"></i>',
+      'onText':'<i class="icon icon-ok"></i>',
+      'onColor':'success',
+      'offColor':'danger'
+    });
   });
 } 
 
@@ -338,7 +301,68 @@ $(function() {
     });
 });
     
+    
+// Setup Toast Messages
+//
+function setToasts() {
+  // setting toast defaults
+  $().toastmessage({
+      position : 'top-center',
+      stayTime : 5000,
+      sticky   : true
+  });
+}
+
+// (Toast) New cG Update available
+function showToastUpdate(currentVersion, newestVersion) {
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : '<b>Update available!</b> You are running <b class="current">'+currentVersion+'</b>, but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-refresh"></i> Update Now</button></a></span>',
+    type    : 'notice'
+  });
+  $.cookie('cryptoglance_version', newestVersion, { expires: 1 });
+}
+
+// (Toast) Saved settings
+function showToastSettingsSaved() {
+  $().toastmessage('showToast', {
+    sticky  : false,
+    text    : '<b>Success!</b> Your configuration was saved.',
+    type    : 'success'
+  });
   
+}
+
+// (Toast) Unable to save settings
+function showToastSettingsNOTSaved() {
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : '<b>Failure!</b> Your configuration was <b>not</b> updated. Check your user data or refer to the <a href="help.php#faq">FAQ in the README</a>.',
+    type    : 'error'
+  });
+  
+}
+
+// (Toast) Unable to write to dir
+function showToastWriteError() {
+  $().toastmessage('showToast', {
+    sticky  : false,
+    text    : '<b>Failed!</b> Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.',
+    type    : 'error'
+  });
+}
+
+
+// (Toast) No .htaccess in user_data
+function showToastNoHTACCESS() {
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : '<b>No .htaccess in /'+DATA_FOLDER+'!</b> Using this file to block access to your user data directory is a good idea. It\'s included in the source, but for some reason it does not exist in your installation. Ensure it contains the <a href="https://raw.githubusercontent.com/cryptoGlance/cryptoGlance-web-app/master/user_data/.htaccess" rel="external">contents of the source file</a>.',
+    type    : 'warning'
+  });
+}
+
+
 // Only change custom width (via slider) for viewports over 1200px
 //
 
@@ -353,13 +377,41 @@ $(window).ready(function() {
 // Execute when the DOM is ready
 //
 $(document).ready(function() {
-
+  setToasts();
   externalLinks();
   prettifyInputs();
   restoreSiteLayout();
   
   //restoreDashboard();
   restorePanelWidth();
+  
+  // Reveal hidden settings
+  //
+  $('#btnAddPool').click( function() {
+    $(this).fadeOut('fast', function() {
+      $(this).next('.add-new-wrapper').fadeIn('slow');
+    });
+  });
+  
+  // Pulsate "Add Panel" button
+  //
+  $('#flash-add-panel').click( function() {
+    $('#dash-add-panel').removeClass('flash', function() {
+    $('#dash-add-panel').addClass('flash');
+    });
+  });
+  
+  // Start Update Process
+  $('#btn-update-process').click( function() {
+    $(this).attr('disabled', true);
+    $('iframe').slideDown();
+  });
+  
+  // Toggle App Update Types
+  //
+  $('input[name="update"]', '#settings-wrap').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('.app-update-types').fadeToggle();
+  });
   
   $('#layout-grid').click(function() {
     initMasonry();
@@ -448,6 +500,7 @@ $(document).ready(function() {
     prettifyInputs();
   });  
 
+  
 //  $('#btnSavePool').click(function() {
 //    $("#alert-saved-pool").fadeIn('slow').delay( 4000 ).fadeOut(3000);
 //  })  
@@ -455,14 +508,6 @@ $(document).ready(function() {
 //  $('#btnAddPool').click(function() {
 //    $("#alert-added-pool").fadeIn('slow').delay( 4000 ).fadeOut(3000);
 //  })
-
-  
-  // Dismiss Update Alert
-  $('.alert-dismiss', '#alert-update').click(function(e) {
-    e.preventDefault();
-    $.cookie('cryptoglance_version', true, { expires: 3 });
-    $('#alert-update').slideUp('fast');
-  });
   
     // Delete
     $('.btn-delete').click(function() {
@@ -484,15 +529,16 @@ $(document).ready(function() {
     // Pool modal
     $('#selectPoolType').change(function() {
         var type = $(this).val();
-        if (type == 'mpos') {
-            $('#addPool').find('.form-group').hide();
-            $('#addPool').find('.mpos').show();
-            $('#addPool').find('.all').show();
-        } else if (type == 'wafflepool') {
-            $('#addPool').find('.form-group').hide();
-            $('#addPool').find('.wafflepool').show();
-            $('#addPool').find('.all').show();            
+        $('#addPool').find('.form-group').hide();
+        $('#addPool').find('.' + type).show();
+        $('#addPool').find('.all').show();
+        
+        if (type == 'simplecoin') {
+            $('#inputPoolURL').attr('placeholder', 'http://simpledoge.com');
+        } else if (type == 'mpos') {
+            $('#inputPoolURL').attr('placeholder', 'http://vertsquad.com');
         }
+        
         prettifyInputs();
     });
     
@@ -628,15 +674,12 @@ $(document).ready(function() {
         e.preventDefault();
         if (!btnSaveWallets) {
             btnSaveWallets = true;
-            console.log('before');
             $.ajax({
                 type: 'post',
                 url: 'ajax.php?type=update&action=add-config',
                 data: $('form', '#walletDetails').serialize()
             }).done(function(data, statusText, xhr) {
                 var status = xhr.status;
-                console.log('DONE!');
-                console.log(status);
                 if (status == 202) {
                     if ($('[name="walletId"]', '#walletDetails').val() == 0) {
                         var walletId = data;
@@ -678,5 +721,5 @@ $(document).ready(function() {
             });
         }
     });
-      
+
 });

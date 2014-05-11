@@ -31,7 +31,9 @@
                 <a href="https://github.com/cryptoglance" rel="external"><button type="button" class="btn btn-default">Source on Github</button></a>
               </div>
               <div class="stat-value">
-                Licensed under GPLv2
+                <span class="icon-update-available"><a title="New version of cryptoGlance is available!" href="update.php"><i class="icon icon-circle-arrow-up green"></i></a></span>
+                <?php echo CURRENT_VERSION ?>
+                <span class="icon-update-available"><a title="New version of cryptoGlance is available!" href="update.php"><i class="icon icon-circle-arrow-up green"></i></a></span>
               </div>
             </div>         
          </div><!-- / .panel-body -->

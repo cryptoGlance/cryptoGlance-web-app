@@ -1,22 +1,23 @@
 $( window ).ready(function() {
-setTimeout(function() {
-    var cookie = $.cookie('cryptoglance_version');
-    
-    if (typeof cookie == 'undefined') {    
-        $.ajax({
-            type: 'get',
-            url: 'https://api.github.com/repos/cryptoGlance/cryptoGlance-web-app/releases',
-            dataType: 'json',
-            crossDomain: 'true'
-        }).done(function(data) {
-            if (data[0].tag_name != CURRENT_VERSION) {
-                $('.current', '#alert-update').html(CURRENT_VERSION);
-                $('.latest', '#alert-update').html(data[0].tag_name);
-                $('#alert-update').slideDown('fast');
+if (typeof updateType != 'undefined') {
+  setTimeout(function() {
+      var cookie = $.cookie('cryptoglance_version');
+      if (typeof cookie == 'undefined') {    
+          $.ajax({
+              type: 'get',
+              url: updateType,
+              dataType: 'json',
+              crossDomain: 'true'
+          }).done(function(data) {
+            if (data.commit.commit.message != CURRENT_VERSION) {
+                showToastUpdate(CURRENT_VERSION, data.commit.commit.message);
+                $('.icon-update-available').show();
             } else {
                 $.removeCookie('cryptoglance_version', { path: '/' });
+                $('.icon-update-available').hide();
             }
-        });
-    }
-}, 2500);
+          });
+      }; 
+  }, 2500);
+}
 });

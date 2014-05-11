@@ -8,10 +8,6 @@
            <h2 class="modal-title" id="editRigLabel"><i class="icon icon-edit"></i> Edit This Rig</h2>
          </div>
          <div class="modal-body">
-               <div id="alert-saved-host" class="alert alert-success alert-dismissable">
-                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                 <strong>Success!</strong> You've saved this mining rig.
-               </div>         
               <div class="form-group">
                 <label for="inputRigLabel" class="col-sm-3 control-label">Label</label>
                 <div class="col-sm-9">

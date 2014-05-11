@@ -5,15 +5,17 @@ $error = false;
 if (!empty($_SESSION['login_string'])) {
     header('Location: index.php');
     exit();
-} else if (!empty($_POST['username']) && !empty($_POST['password'])) {
-    require_once('includes/classes/login.php');
+}
+
+require_once('includes/classes/login.php');
+$loginObj = new Login();
+if (!empty($_POST['username']) && !empty($_POST['password'])) {
     
-    $loginObj = new Login();
     if ($loginObj->login(trim($_POST['username']), trim($_POST['password'])) !== FALSE) {
         $_SESSION['login_string'] = hash('sha512', $_POST['password'] . $_SERVER['HTTP_USER_AGENT']);
         
         session_regenerate_id(); // This hangs sometimes and we dont know why...
-        
+        session_write_close();
         header('Location: index.php');
         exit();
     } else {
@@ -21,6 +23,8 @@ if (!empty($_SESSION['login_string'])) {
         $error = true;
     }
 }
+
+session_write_close();
 
 include("includes/login-header.php");
 ?>
@@ -34,15 +38,6 @@ include("includes/login-header.php");
             </div>
             <div class="panel-body panel-body-overview">
                <div id="panel-login">
-                  <?php
-                  if ($error) {
-                  ?>
-                  <div id="login-failure">
-                     <p><i class="icon icon-fbdislike"></i> <big>You shall <b>NOT</b> pass!</big> You've entered incorrect credentials. (If you're having trouble, read the notes below the login button.)</p>
-                  </div>
-                  <?php
-                  }
-                  ?>
                   <form method="POST" class="form-horizontal" role="form">
                     <div class="form-group">
                       <label for="username" class="col-sm-offset-1 col-sm-3 control-label"><i class="icon icon-user"></i></label>
@@ -72,11 +67,53 @@ include("includes/login-header.php");
          </div>
       </div>
       <!-- /container -->
-      <script src="js/jquery-1.10.2.min.js"></script>
-      <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-      <script src="js/jquery.cookie.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/prettyCheckable.min.js"></script>
-      <script src="js/cryptoglance-ui.js"></script>
+      <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+      <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery.toastmessage.js"></script>
+      <script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
+      
+      <?php if (!$loginObj->firstLogin()) { ?>
+      <script type="text/javascript">
+          // (Toast) First login (no account.json)
+          function showToastFirstLogin() {
+            var toastMsgFirstLogin = '<b>Read Carefully!</b> This is your first time logging into cryptoGlance. Please set a new username + password that will serve as your credentials.';
+            $().toastmessage('showToast', {
+              sticky  : true,
+              text    : toastMsgFirstLogin,
+              type    : 'warning',
+              position: 'top-center'
+            });
+          }
+
+          $(document).ready(function() {
+            showToastFirstLogin();
+          });
+    </script>
+    <?php } ?>
+      
+      
+      <?php
+      if ($error) {
+      ?>
+      <script type="text/javascript">
+          // (Toast) Login error
+          function showToastLoginError() {
+            var toastMsgLoginError = '<b>You shall NOT pass!</b> You\'ve entered incorrect credentials. (If you\'re having trouble, read the notes below the login button.)';
+            $().toastmessage('showToast', {
+              sticky  : true,
+              text    : toastMsgLoginError,
+              type    : 'error',
+              position: 'top-center'
+            });
+          }
+
+          $(document).ready(function() {
+            showToastLoginError();
+          });      
+      </script>
+      <?php
+      }
+      ?>
    </body>
 </html>

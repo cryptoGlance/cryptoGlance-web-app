@@ -1,15 +1,15 @@
 <?php
-
+require_once('abstract.php');
 /*
  * @author Stoyvo
  */
-class Class_Wallets_Bitcoin extends Class_Wallets_Abstract {
+class Wallets_Bitcoin extends Wallets_Abstract {
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);
 //        $this->_apiURL = 'http://blockchain.info/address/' . $address . '?format=json&limit=0';
         $this->_apiURL = 'http://blockr.io/api/v1/address/balance/' . $address;
-        $this->_fileHandler = new Class_FileHandler('wallets/bitcoin/' . $this->_address . '.json');
+        $this->_fileHandler = new FileHandler('wallets/bitcoin/' . $this->_address . '.json');
     }
     
     public function update() {
@@ -20,7 +20,7 @@ class Class_Wallets_Bitcoin extends Class_Wallets_Abstract {
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; RigWatch ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
+            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
             $walletData = json_decode(curl_exec($curl), true);
             
             $data = array (

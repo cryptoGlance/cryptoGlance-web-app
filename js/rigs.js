@@ -116,6 +116,7 @@ function updateRigs(data) {
             $(rigElm).removeClass('panel-warning');
             $(rigElm).removeClass('panel-danger');
             $(rigElm).addClass('panel-offline');
+            $('.btn-manage-rig', rigElm).hide();
             return true;
         } else {
             $(rigElm).find('.toggle-panel-body').show();
@@ -124,6 +125,7 @@ function updateRigs(data) {
             $(rigElm).find('.panel-footer').show();
 //            $(rigTitle).html($(rigTitle).html().replace(' - OFFLINE', ''));
             $(rigElm).removeClass('panel-offline');
+            $('.btn-manage-rig', rigElm).show();
         }
     
         // Clear nav items
@@ -160,7 +162,7 @@ function updateRigs(data) {
                 if (v < 1) {
                     v = (v*1000) + ' KH/S';
                 } else if(v > 1000) {
-                    v = (v/1000) + ' GH/S';
+                    v = parseFloat(v/1000).toFixed(2) + ' GH/S';
                 } else {
                     v = parseFloat(v).toFixed(2) + ' MH/S';
                 }
@@ -198,13 +200,13 @@ function updateRigs(data) {
                     status = 'grey';
                     icon = 'ban-circle';
                     rigPanel = 'offline';
-                } else if (status == 'Dead' || dev.hw_errors > 10) {
+                } else if (status == 'Dead' || (devHWEnabled && dev.hw_errors >= devHWDanger)) {
                     status = 'red';
                     icon = 'danger';
                     rigStatus = 'red';
                     rigIcon = 'danger';
                     rigPanel = 'danger';
-                } else if (status == 'Sick' || (dev.hw_errors > 0 && dev.hw_errors <= devHWWarning)) {
+                } else if (status == 'Sick' || (devHWEnabled && dev.hw_errors >= devHWWarning)) {
                     status = 'orange';
                     icon = 'warning-sign';
                     if (rigIcon != 'danger') {
@@ -253,7 +255,7 @@ function updateRigs(data) {
                             if (v < 1) {
                                 v = (v*1000) + ' KH/S';
                             } else if (v > 1000) {
-                                v = (v/1000) + ' GH/S';
+                                v = parseFloat(v/1000).toFixed(2) + ' GH/S';
                             } else {
                                 v = v + ' MH/S';
                             }
@@ -297,7 +299,7 @@ function updateRigs(data) {
         if (rig.summary.hashrate_5s < 1) {
             rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1000) + ' KH/S';
         } else if (rig.summary.hashrate_5s > 1000) {
-            rig.summary.hashrate_5s = (rig.summary.hashrate_5s / 1000) + ' GH/S';
+            rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s / 1000).toFixed(2) + ' GH/S';
         } else {
             rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
         }

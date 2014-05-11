@@ -8,18 +8,19 @@
  * @author Timothy.Stoyanovski
  */
 
-class Class_Wallets {
+class Wallets {
 
     protected $_wallets = array();
     protected $_currencies = array(
         'bitcoin' => 'BTC',
+        'continuum' => 'CTM',
         'litecoin' => 'LTC',
         'dogecoin' => 'DOGE',
         'vertcoin' => 'VTC',
     );
 
     public function __construct() {
-        $fh = new Class_FileHandler('configs/wallets.json');
+        $fh = new FileHandler('configs/wallets.json');
         $wallets = json_decode($fh->read(), true);
 
         if (!empty($wallets)) {
@@ -39,7 +40,7 @@ class Class_Wallets {
             return false;
         }
         
-        $class = 'Class_Wallets_' . ucwords(strtolower($currency));
+        $class = 'Wallets_' . ucwords(strtolower($currency));
         
         $walletData = array();
         $addessData = array();

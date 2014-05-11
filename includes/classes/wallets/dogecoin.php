@@ -1,14 +1,14 @@
 <?php
-
+require_once('abstract.php');
 /*
  * @author Stoyvo
  */
-class Class_Wallets_Dogecoin extends Class_Wallets_Abstract {
+class Wallets_Dogecoin extends Wallets_Abstract {
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);
         $this->_apiURL = 'http://dogechain.info/chain/Dogecoin/q/addressbalance/' . $address;
-        $this->_fileHandler = new Class_FileHandler('wallets/dogecoin/' . $this->_address . '.json');
+        $this->_fileHandler = new FileHandler('wallets/dogecoin/' . $this->_address . '.json');
     }
     
     public function update() {
@@ -19,7 +19,7 @@ class Class_Wallets_Dogecoin extends Class_Wallets_Abstract {
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; RigWatch ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
+            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
             $walletBalance = curl_exec($curl); // this comes back as a single value (total doge in the wallet)
             
             $data = array (

@@ -5,7 +5,7 @@
  *
  * @author Stoyvo
  */
-class Class_FileHandler {
+class FileHandler {
 
     protected $_fullFilePath;
 
@@ -52,6 +52,13 @@ class Class_FileHandler {
      */
     public function isWritable() {
         return is_writable($this->_fullFilePath);
+    }
+    
+    /*
+     * Check if the file exists or not.
+     */
+    public function fileExists() {
+        return file_exists($this->_fullFilePath);
     }
 
 }

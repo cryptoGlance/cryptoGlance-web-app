@@ -3,12 +3,12 @@ require_once('abstract.php');
 /*
  * @author Stoyvo
  */
-class Wallets_Litecoin extends Wallets_Abstract {
+class Wallets_Continuum extends Wallets_Abstract {
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);
-        $this->_apiURL = 'http://ltc.blockr.io/api/v1/address/balance/' . $address;
-        $this->_fileHandler = new FileHandler('wallets/litecoin/' . $this->_address . '.json');
+        $this->_apiURL = 'http://www.ctmchain.com/chain/Continuumcoin/q/addressbalance/' . $address;
+        $this->_fileHandler = new FileHandler('wallets/continuum/' . $this->_address . '.json');
     }
     
     public function update() {
@@ -20,12 +20,12 @@ class Wallets_Litecoin extends Wallets_Abstract {
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
-            $walletData = json_decode(curl_exec($curl), true);
+            $addressBalance = curl_exec($curl);
             
             $data = array (
                 'label' => $this->_label,
                 'address' => $this->_address,
-                'balance' => (float) $walletData['data']['balance']
+                'balance' => (float) $addressBalance
             );
             
             $this->_fileHandler->write(json_encode($data));

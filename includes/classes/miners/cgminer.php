@@ -3,7 +3,7 @@
 /*
  * @author Stoyvo
  */
-class Class_Miners_Cgminer {
+class Miners_Cgminer {
 
     // socket things
     protected $_host;
@@ -59,8 +59,10 @@ class Class_Miners_Cgminer {
             'memory_clock' => $devData['Memory Clock'],
             'gpu_voltage' => $devData['GPU Voltage']  . 'V',
             'powertune' => $devData['Powertune']  . '%',
-            'accepted' => $devData['Accepted'],
-            'rejected' => $devData['Rejected'],
+//            'accepted' => $devData['Accepted'],
+            'accepted' => round($devData['Difficulty Accepted']),
+//            'rejected' => $devData['Rejected'],
+            'rejected' => round($devData['Difficulty Rejected']),
             'hw_errors' => $devData['Hardware Errors'],
             'utility' => $devData['Utility'] . '/m',
         );
@@ -79,8 +81,10 @@ class Class_Miners_Cgminer {
             'health' => $devData['Status'],
             'hashrate_avg' => $devData['MHS av'],
             'hashrate_5s' => $devData['MHS 5s'],
-            'accepted' => $devData['Accepted'],
-            'rejected' => $devData['Rejected'],
+//            'accepted' => $devData['Accepted'],
+            'accepted' => round($devData['Difficulty Accepted']),
+//            'rejected' => $devData['Rejected'],
+            'rejected' => round($devData['Difficulty Rejected']),
             'hw_errors' => $devData['Hardware Errors'],
             'utility' => $devData['Utility'] . '/m',
         );
@@ -120,17 +124,18 @@ class Class_Miners_Cgminer {
         
         $data = array(
             'uptime' => $upTime,
-            'hashrate_avg' => round($summaryData['MHS av'], 3),
-            'hashrate_5s' => round($summaryData['MHS 5s'], 3),
+            'hashrate_avg' => (!empty($summaryData['GHS av'])) ? round($summaryData['GHS av']*1000, 3) : round($summaryData['MHS av'], 3),
+            'hashrate_5s' => (!empty($summaryData['GHS 5s'])) ? round($summaryData['GHS 5s']*1000, 3) : round($summaryData['MHS 5s'], 3),
             'blocks_found' => $summaryData['Found Blocks'],
 //            'accepted' => $summaryData['Accepted'],
-            'accepted' => $summaryData['Difficulty Accepted'],
+            'accepted' => round($summaryData['Difficulty Accepted']),
 //            'rejected' => $summaryData['Rejected'],
-            'rejected' => $summaryData['Difficulty Rejected'],
+            'rejected' => round($summaryData['Difficulty Rejected']),
 //            'stale' => $summaryData['Stale'],
-            'stale' => $summaryData['Difficulty Stale'],
+            'stale' => round($summaryData['Difficulty Stale']),
             'hw_errors' => $summaryData['Hardware Errors'],
             'utility' => $summaryData['Utility'] . '/m',
+//            'utility' => $summaryData['Work Utility'] . '/m',
             'active_mining_pool' => $activePool['url'],
         );
         

@@ -2,9 +2,11 @@
 require_once('includes/inc.php');
 
 if (!$_SESSION['login_string']) {
-    http_response_code(401); // 401 = Unauthorized
+    header("HTTP/1.0 401 Unauthorized");
     exit();
 }
+
+session_write_close();
 
 global $CACHED;
 if (isset($_GET['cached']) && $_GET['cached'] == 0) {
@@ -24,7 +26,8 @@ if (empty($type) || empty($action)) {
 
 require_once('includes/autoloader.inc.php');
 
-$className = 'Class_' . $type;
-$obj = new $className();
+//$className = 'Class_' . $type;
+//$obj = new $className();
+$obj = new $type();
 $obj->$action();
 ?>

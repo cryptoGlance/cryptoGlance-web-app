@@ -11,12 +11,12 @@
  * @author Timothy.Stoyanovski
  */
 
-class Class_Pools {
+class Pools {
 
     protected $_pools = array();
 
     public function __construct() {
-        $fh = new Class_FileHandler('configs/pools.json');
+        $fh = new FileHandler('configs/pools.json');
         $pools = json_decode($fh->read(), true);
         
         if (!empty($pools)) {
@@ -31,7 +31,7 @@ class Class_Pools {
             return false;
         }
 
-        $class = 'Class_Pools_' . ucwords(strtolower($pool['type']));
+        $class = 'Pools_' . ucwords(strtolower($pool['type']));
         $obj = new $class($pool);
         $this->_pools[] = $obj;
     }
