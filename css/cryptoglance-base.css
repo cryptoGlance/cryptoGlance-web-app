@@ -1105,7 +1105,9 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   }
   
   .panel-body ul li ul {
-    width: 90%;
+    width: auto;
+    margin: 8px 20px;
+    line-height: 18px;
   }
   
 }
