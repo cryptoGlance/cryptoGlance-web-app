@@ -54,13 +54,30 @@ class Pools_Eclipse extends Pools_Abstract {
             $data['estimated_rewards'] = $poolData['userstats']['data']['user']['estimated_rewards'];
             
             $data['pool_hashrate'] = $poolData['poolstats']['hashrate'];
-            $data['user_hashrate'] = '---';
+            
+            
+            $data['user_hashrate'] = 0;
+            $speedMultiplier = array(
+                'GH/s' => 1000,
+                'TH/s' => 1000000,
+            );
+            foreach ($poolData['userstats']['workers'] as $worker) {
+                if (!empty($worker['hash_rate'])) {
+                    $hashrate = strtok($worker['hash_rate'], ' ');
+                    $hashspeed = substr(strrchr($worker['hash_rate'], ' '), 1);
+                    $data['user_hashrate'] += $hashrate * $speedMultiplier[$hashspeed];
+                }
+            }
+            
+            $pow = min(floor(($data['user_hashrate'] ? log($data['user_hashrate']) : 0) / log(1000)), count($units2) - 1);
+            $data['user_hashrate'] /= pow(1000, $pow);
+            $data['user_hashrate'] = round($data['user_hashrate'], 2) . ' ' . $units2[$pow] . '/s';
             
             $data['pool_workers'] = $poolData['poolstats']['active_workers'];
             
             // how to get active user workers and total hashrate?
             
-            $data['time_since_last_block'] = gmdate('H\H i\M s\S', strtotime('t'.$poolData['poolstats']['round_duration'])); // how to format? 00:52:44
+            $data['time_since_last_block'] = date('H\H i\M s\S', strtotime('t'.$poolData['poolstats']['round_duration'])); // how to format? 00:52:44
             
             $data['url'] = $this->_apiURL;
             

@@ -16,7 +16,7 @@ if (isset($_POST['cryptoglance_version']) &&
     ($_SERVER['PHP_SELF'] == $_SERVER['REQUEST_URI'])
 ) {
     set_time_limit(0); // Downloading or unzipping might exceed this time limit
-    error_reporting(-1); ini_set('display_errors', 1);
+    error_reporting(-1); ini_set('display_errors', 0);
     $currentDir = realpath(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
     $newVersion = strip_tags($_POST['cryptoglance_version']);
     $updateDir = 'update' . DIRECTORY_SEPARATOR . $newVersion;
