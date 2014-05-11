@@ -1,5 +1,5 @@
 <?php
-set_time_limit(10);
+set_time_limit(15);
 ini_set("display_errors", 0);
 error_reporting(E_ERROR);
 //error_reporting(E_ALL);
@@ -25,4 +25,4 @@ $cryptoGlance = new CryptoGlance();
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
-define('CURRENT_VERSION', 'v1.0.1.41');
+define('CURRENT_VERSION', 'v1.0.1.42');

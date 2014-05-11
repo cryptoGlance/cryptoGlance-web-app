@@ -5,10 +5,12 @@ $error = false;
 if (!empty($_SESSION['login_string'])) {
     header('Location: index.php');
     exit();
-} else if (!empty($_POST['username']) && !empty($_POST['password'])) {
-    require_once('includes/classes/login.php');
+}
+
+require_once('includes/classes/login.php');
+$loginObj = new Login();
+if (!empty($_POST['username']) && !empty($_POST['password'])) {
     
-    $loginObj = new Login();
     if ($loginObj->login(trim($_POST['username']), trim($_POST['password'])) !== FALSE) {
         $_SESSION['login_string'] = hash('sha512', $_POST['password'] . $_SERVER['HTTP_USER_AGENT']);
         
@@ -71,8 +73,8 @@ include("includes/login-header.php");
       <script type="text/javascript" src="js/jquery.toastmessage.js"></script>
       <script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
       
-      <!-- TODO: Put another PHP if statement which checks if it's the user's first time here (no account.json) 
-
+      <?php if (!$loginObj->firstLogin()) { ?>
+      <script type="text/javascript">
           // (Toast) First login (no account.json)
           function showToastFirstLogin() {
             var toastMsgFirstLogin = '<b>Read Carefully!</b> This is your first time logging into cryptoGlance. Please set a new username + password that will serve as your credentials.';
@@ -87,8 +89,8 @@ include("includes/login-header.php");
           $(document).ready(function() {
             showToastFirstLogin();
           });
-      
-      -->
+    </script>
+    <?php } ?>
       
       
       <?php
