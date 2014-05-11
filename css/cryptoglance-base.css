@@ -551,7 +551,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   font-family: roboto;
 }
 
-.panel-body ul li a, .panel-body ul li a:visited {
+.panel-body ul li a, .panel-body ul li a:visited, .panel-body .stat-label a {
   color: #FEEF00;
 }
 
@@ -1103,7 +1103,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   .panel-body ul {
     width: 60%;
   }
-
+  
+  .panel-body ul li ul {
+    width: 90%;
+  }
   
 }
 
@@ -1127,7 +1130,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
     width: 70%;
   }
   
-  .panel-body ul {
+  .panel-body ul:not(.panel-body ul li ul) {
     width: 40%;
   }
   
