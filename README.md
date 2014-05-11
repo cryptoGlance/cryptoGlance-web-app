@@ -1,5 +1,5 @@
 <br>
-_[Skip to FAQs](#faq)_ &bull; <a href="http://cryptoglance.info/" rel="external">http://cryptoglance.info</a>
+_[Skip to **FAQs**](#faq)_ &bull; _[Skip to **Changelog**](#changelog)_ &bull; <a href="http://cryptoglance.info/" rel="external">http://cryptoglance.info</a>
 
 ----
 
@@ -7,22 +7,43 @@ _[Skip to FAQs](#faq)_ &bull; <a href="http://cryptoglance.info/" rel="external"
 
 ### What is cryptoGlance?
 
-cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot. Designed for large and small screens, you can easily monitor and control many aspects of your crypto/mining devices. There's also an <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android companion app</a> which connects to your cryptoGlance installation remotely.
+cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot. Designed for large and small screens, you can easily monitor and control many aspects of your crypto/mining devices. There's also an <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android companion app</a> which connects to your cryptoGlance installation remotely (it's much the same as using your mobile browser, but acts as a form of donation).
 
 ### Features:
 
 <ul>
   <li>Standalone version with installer (for Windows), or run the source code within your own (PHP) web server environment</li>
-  <li>Obtains valid data directly from cgminer/sgminer</li>
-  <li>Monitors detailed statistics, and manages core functions of multiple rigs/ASICs</li>
-  <li>Switch pools and restart miners remotely</li>
-  <li>Actively track pool stats and crypto address balances (MPOS and selective pools supported)</li>
   <li>Responsive, mobile-friendly interface</li>
-  <li>Realtime information display (no refresh needed)</li>
+  <li>Real-time information display (no refresh needed)</li>
   <li>Secure login system</li>
+  <li>Obtains valid data directly from cgminer/sgminer</li>
+  <li>Rigs/ASICs
+    <ul>
+      <li>Monitors detailed statistics, and manages core functions of multiple rigs/ASICs</li>
+      <li>Switch pools and restart miners remotely</li>
+    </ul>
+  </li>
+  <li>Pools
+    <ul>
+      <li>Actively track pool stats (MPOS and selective pools supported)</li>
+    </ul>
+  </li>
+  <li>Wallets/Balances
+    <ul>
+      <li>"Wallets" in cryptoGlance are basically collections of public addresses that you wish to check the balance of</li>
+      <li>You can create multiple wallets which will sum up the total balances of all addresses belonging</li>
+      <li>Multiple coin types are supported, with more being added regularly</li>
+    </ul>
+  </li>
+  <li>Updates:
+    <ul>
+      <li>Notification alerts</li>
+      <li>Automatic updating from within cryptoGlance</li>
+      <li>Select your release type preference</li>
+    </ul>
+  </li>
   <li>Configurable warning and danger status with visual cues</li>
-  <li>Create 'wallets' that are collections of your selected coin addresses, and display the balance</li>
-  <li>Void of malware or donation mining (does <strong>NOT</strong> require your private keys at all)</li>
+  <li>Void of malware or donation mining (does <strong>NOT</strong> require your private keys at all -- code is open source!)</li>
   <li>Companion <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android app</a> which easily allows you to quickly access your cryptoGlance instance while on the go</li>
   <li><strong>MUCH MORE is planned!</strong> Follow our social accounts, or drop by our IRC channel to find out when new features are released!</li>
 </ul>
@@ -45,13 +66,25 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
 - Apache / IIS / mongoose, or whichever web server you prefer
 - php_sockets extension enabled in PHP
 
+<br>
+
 --- 
 
 ### Installation:
 
-**Advanced Users:** Simply setup a new PHP instance and point it to the root folder of the cryptoGlance source/download. Ensure that the **php_sockets** extension is enabled in **php.ini**, grant write access to the **/user_data** folder, and you should be good to go.
+_**Advanced Users:**_
 
-**Windows App Users:**
+Simply setup a new PHP instance and point it to the root folder of the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app" rel="external">cryptoGlance source/download</a>. Ensure that the **php_sockets** extension is enabled in **php.ini**, grant write access to the **/user_data** folder, and you should be good to go.
+
+<br>
+
+_**Linux Users:**_
+
+1. Note that a few php/supporting packages must be installed prior to using cryptoGlance. We've created a simple script that will install them for you, or feel free to run the steps yourself by examining the **install-linux-dependencies.sh** file.
+
+<br>
+
+_**Windows App Users:**_
 
 1. <a href="https://sourceforge.net/projects/cryptoglance/files/latest/download" rel="external">Download the latest version of cryptoGlance</a> and run the setup executable to begin installation.
 
@@ -67,27 +100,49 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
 
 ...and you should be good to go. 
 
+<br>
+
 ---
 
 ### Upgrading:
 
-Upgrading is easy. 
+Upgrading cryptoGlance is easy.  First off, it never hurts to make a backup copy of your entire cryptoGlance folder. Files that should be kept particularly safe are:
 
-*Windows Version:* 
+- **/user_data** folder 
 
-- First off, it never hurts to make a backup copy of your entire cryptoGlance folder. Files that should be kept safe are:
- - **/user_data** folder
- - **{{ install-dir }}\settings.json** (optional modification for accessing cryptoGlance externally on other devices)
-- Simply <a href="https://sourceforge.net/projects/cryptoglance/files/latest/download" rel="external">download the latest version</a>, and install the program to the same directory. Your **/user_data** folder will not be overwritten
-- If you've made an edit  need to re-edit the **{{ install-dir }}/settings.json** file.
+Next, you'll need to **Enable cryptoGlance Updates** on the Settings page. Then, choose your release type:
 
-*Running from source:* 
+- **Release:** Stable code, should have very few bugs/issues (if any).
+- **Beta:** Slightly experimental for testing new features and bug-fixes.
+- **Nightly:** Bleeding-edge code commits, will most likely have bugs, but they shouldn't be very serious.
 
-- Either run a **git pull** if you've cloned the repo, or simply overwrite all files from the latest zip download on Github.
+<br>
+
+_**Windows App:**_
+
+Since the Windows App works a bit differently, in the sense that it has its own webserver with PHP installed and configured, updates aren't usually frequent, and separate from the main release version numbers. However, if you do use the Windows App, it may be a good idea to <a href="https://sourceforge.net/projects/cryptoglance/files/latest/download" rel="external">check for the latest version on SourceForge</a> from time to time. Simply install the program to the same directory. Your /user_data folder will not be overwritten.
+
+If you've made edits to {{ install-dir }}\settings.json (optional modification for accessing cryptoGlance externally on other devices), then you'll need to re-apply them after the installation finishes.
+
+<a name="changelog"></a>
+
+<br>
+
+---
+
+### Changelog:
+
+- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/master" rel="external">Live **Release** changelog</a>
+- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/beta" rel="external">Live **Beta** changelog</a>
+- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/nightly" rel="external">Live **Nightly** changelog</a>
 
 <a name="faq"></a>
 
----
+_* Remember, you can choose if you'd like to be alerted to cryptoGlance updates by checking the Settings page, and selecting **Enable cryptoGlance Updates**. After that, choose the version type you'd like, hit **Save** and you're good to go._
+
+<br>
+
+--- 
 
 ### FAQ:
 
@@ -109,13 +164,8 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 
 **A.** Just look for the **/user_data** folder in the following locations, and copy it somewhere safe:
 
-*Windows Version:* 
-
-- **{{ install-dir }}\application\user_data**
-
-*Running from source:* 
-
 - **{{ project-root }}/user_data**
+- _**Windows App** users need to backup **{{ install-dir }}\application\user_data** and **{{ install-dir }}\settings.json** (optional modification for accessing cryptoGlance externally on other devices)_
 
 ---
 
@@ -135,6 +185,12 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 
 - Confirm that PHP is installed and working properly
 - Ensure that the **php_sockets** extension is loaded via **php.ini**
+- (Linux) Ensure that you have the following packages installed:
+ - apache2
+ - php5
+ - libapache2-mod-php5
+ - php5-json
+ - php5-curl
 - Adjust permissions to allow for write access on the **/user_data** folder  
 
 ---
@@ -176,6 +232,8 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 
 **A.** Yes, you may include it **only in non-commercial distributions**. If you wish to include it along with software or hardware that you sell, please get in touch with a channel operator in **#cryptoGlance on Freenode IRC** (use the chat widget on <a href="http://cryptoglance.info/" rel="external">http://cryptoglance.info</a>) to discuss.
 
+<br>
+
 ---
 
 ### We owe thanks to the following projects:
@@ -188,6 +246,8 @@ The **Run from Source** version is for users who know how to setup a (simple) PH
 - [Bootstrap CSS Framework](http://getbootstrap.com)
 
 Hope you enjoy what we're trying to do here, and thanks to all of the other similar OSS projects like this for help and inspiration (we give extra special thanks to **Anubis** for that!).
+
+<br>
 
 ---
 
