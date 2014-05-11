@@ -285,7 +285,7 @@ class CryptoGlance {
         if (empty($settings['general']['temps']['danger'])) {
             $settings['general']['temps']['danger'] = 85;
         }
-        if (empty($settings['general']['hardwareErrors']['enabled']) && $settings['general']['hardwareErrors']['enabled'] != 0) {
+        if (empty($settings['general']['hardwareErrors']['enabled'])) {
             $settings['general']['hardwareErrors']['enabled'] = 1;
         }
         if (empty($settings['general']['hardwareErrors']['warning'])) {
