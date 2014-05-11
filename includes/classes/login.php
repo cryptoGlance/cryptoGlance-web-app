@@ -27,7 +27,6 @@ class Login {
     }
     
     private function register($username, $password) {
-        
         if (!empty($username) && !empty($password)) {
             $data = array(
                 'username' => $username,
@@ -39,7 +38,10 @@ class Login {
         }
         
         return false;
-        
     }
+    
+    public function firstLogin() {
+        return $this->_fh->fileExists();
+    } 
 
 }
