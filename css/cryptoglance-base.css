@@ -1409,7 +1409,7 @@ a#dash-add-panel.flash {
     border-color: #080;
     border-radius: 4px;
     box-sizing: border-box;
-    height: 230px;
+    height: 360px;
     width: 100%;
 }
 .panel-body .stat-pair .stat-label button#btn-update-process {
