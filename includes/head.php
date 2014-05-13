@@ -13,6 +13,7 @@
     <?php echo ($currentPage == 'index') ? 'Dashboard' : '' ?>
     <?php echo ($currentPage == 'settings') ? 'Settings' : '' ?>
     <?php echo ($currentPage == 'help') ? 'README.md' : '' ?>
+    <?php echo ($currentPage == 'changelog') ? 'CHANGELOG.md' : '' ?>
     <?php echo ($currentPage == 'wallet') ? 'Wallet Details' : '' ?>
     <?php echo ($currentPage == 'rig') ? 'Rig Details' : '' ?>
     <?php echo ($currentPage == 'update') ? 'Updating cryptoGlance...' : '' ?>
