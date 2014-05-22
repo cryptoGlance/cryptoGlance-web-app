@@ -1,4 +1,7 @@
 <?php
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
+
 include('includes/inc.php');
 
 if (!$_SESSION['login_string']) {
@@ -6,21 +9,42 @@ if (!$_SESSION['login_string']) {
     exit();
 }
 
+$rigId = intval($_GET['id']);
+if ($rigId == 0) {
+    header('Location: index.php');
+    exit();
+}
+
 session_write_close();
 
-$jsArray = array();
-require_once("includes/header.php");
+$jsArray = array(
+    'rig/script',
+);
+
 require_once('includes/autoloader.inc.php');
-require_once('includes/cryptoglance.php');
+require_once("includes/header.php");
+
 $cryptoGlance = new CryptoGlance();
+
+$rigsObj = new Miners();
+$rigObj = $rigsObj->getMiner($rigId);
+$rigData = $rigObj->getSettings();
+
+$rigData['config'] = $cryptoGlance->getMiners($rigId);
+if (is_null($rigData)) {
+    die('Rig is offline'); // this needs to be prettier.
+}
 
 ?>
        
-    <div id="rig-wrap" class="container sub-nav">
-        <div id="rigDetails" class="panel panel-primary panel-no-grid panel-rig">
-            <h1>{{ RIG_NAME }}</h1>
+    <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $rigId;?>">
+    <?php
+        foreach($rigData['devs'] as $devType => $devs) {
+    ?>
+        <div id="rigDeviceDetails" class="panel panel-primary panel-no-grid panel-rig">
+            <h1><?php echo (!empty($rigData['config']['name']) ? $rigData['config']['name'] : $rigData['config']['host'] . ':' . $rigData['config']['port']); ?></h1>
             <div class="panel-heading">
-                <h2 class="panel-title">Device Settings<i class="icon icon-pixelpickaxe"></i></h2>
+                <h2 class="panel-title"><?php echo $devType; ?> Settings<i class="icon icon-pixelpickaxe"></i></h2>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -32,6 +56,7 @@ $cryptoGlance = new CryptoGlance();
                                     <th>Device</th>
                                     <th>Enabled</th>
                                     <th>Hashrate (5s)</th>
+                                <?php if ($devType == 'GPU') { ?>
                                     <th>Temperature</th>
                                     <th>Intensity</th>
                                     <th>Fan Percent</th>
@@ -39,21 +64,63 @@ $cryptoGlance = new CryptoGlance();
                                     <th>Memory Clock</th>
                                     <th>Voltage</th>
                                     <th>Powertune</th>
+                                <?php } else if ($devType == 'ASC') { ?>
+                                    <th>Frequency</th>
+                                <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                  <td><i class="icon icon-cpu-processor green"></i></td>
-                                  <td>gpu1</td>
-                                  <td><input type="checkbox" /></td>
-                                  <td>420 kh/s</td>
-                                  <td>69&deg;C</td>
-                                  <td><input type="text" class="form-control" value="17" /></td>
-                                  <td><input type="text" class="form-control" value="70" /></td>
-                                  <td><input type="text" class="form-control" value="1080" /></td>
-                                  <td><input type="text" class="form-control" value="1350" /></td>
-                                  <td><input type="text" class="form-control" value="1.175" /></td>
-                                  <td><input type="text" class="form-control" value="+20" /></td>
+                            <?php
+                            foreach ($devs as $dev) {
+                                $status = 'green'; // alive
+                                $icon = 'cpu-processor';
+                                if ($dev['enabled'] == 'N') {
+                                    $status = 'grey';
+                                    $icon = 'ban-circle';
+                                } else if ($dev['health'] == 'Dead') {
+                                    $status = 'red';
+                                    $icon = 'danger';
+                                } else if ($dev['health'] == 'Sick') {
+                                    $status = 'orange';
+                                    $icon = 'warning-sign';
+                                } else if ($dev['health'] == 'Hot') {
+                                    $status = 'red';
+                                    $icon = 'hot';
+                                } else if ($dev['health'] == 'Warm') {
+                                    $status = 'orange';
+                                    $icon = 'fire';
+                                }
+                            ?>
+                                <tr data-devType="<?php echo $devType; ?>" data-devId="<?php echo $dev['id']; ?>" data-icon="<?php echo $icon; ?>" data-status="<?php echo $status; ?>">
+                                  <td><i class="icon icon-<?php echo $icon; ?> <?php echo $status; ?>"></i></td>
+                                  <td class="<?php echo $status; ?>"><?php echo $devType . $dev['id']; ?></td>
+                                  <td><input type="checkbox" class="enableDev" name="enabledDev<?php echo $dev['id']; ?>" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
+                                  <td><?php
+                                    if ($dev['hashrate_5s'] < 1) {
+                                        $dev['hashrate_5s'] = ($dev['hashrate_5s']*1000) . ' KH/S';
+                                    } else if (v > 1000) {
+                                        $dev['hashrate_5s'] = floatval($dev['hashrate_5s']/1000).round(2) . ' GH/S';
+                                    } else {
+                                        $dev['hashrate_5s'] = $dev['hashrate_5s'] . ' MH/S';
+                                    }
+                                    
+                                    echo $dev['hashrate_5s'];
+                                  ?></td>
+                                  <?php if ($devType == 'GPU') { ?>
+                                  <td><?php echo (!empty($dev['temperature']) ? $dev['temperature'] . '&deg;C' : '--'); ?></td>
+                                  <td><input type="text" class="form-control" value="<?php echo $dev['intensity']; ?>" /></td>
+                                  <td><input type="text" class="form-control" value="<?php echo $dev['fan_percent']; ?>" /></td>
+                                  <td><input type="text" class="form-control" value="<?php echo $dev['engine_clock']; ?>" /></td>
+                                  <td><input type="text" class="form-control" value="<?php echo $dev['memory_clock']; ?>" /></td>
+                                  <td><input type="text" class="form-control" value="<?php echo $dev['gpu_voltage']; ?>" /></td>
+                                  <td><input type="text" class="form-control" value="<?php echo $dev['powertune']; ?>" /></td>
+                                  <?php } else if ($devType == 'ASC') { ?>
+                                  <td><input type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" /></td>
+                                  <?php } ?>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                             </tbody>
                         </table>
                         
@@ -66,6 +133,9 @@ $cryptoGlance = new CryptoGlance();
                 </div>
             </div><!-- / .panel-body -->
         </div>
+        <?php
+        }
+        ?>
         
         <div id="rigPoolDetails" class="panel panel-default panel-no-grid">
             <h1>Available Pools</h1>
@@ -89,61 +159,37 @@ $cryptoGlance = new CryptoGlance();
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                              <td><input type="radio" name="gpu-enabled" class="form-control" /></td>
-                              <td>Example Pool Label</td>
-                              <td>scrypt.pool.url:3333</td>
-                              <td>scar45.worker</td>
-                              <td>password</td>
-                              <td>3</td>
+                        <?php
+                        foreach ($rigData['pools'] as $pool) {
+                            if ($rigData['active_pool']['id'] == $pool['POOL']) {
+                                $active = true;
+                            } else {
+                                $active = false;
+                            }
+                        ?>
+                            <tr data-poolId="<?php echo $pool['POOL']; ?>">
+                              <td><input type="radio" name="enabledPool" class="form-control"  <?php echo ($active) ? 'checked' : ''; ?> /></td>
+                              <td>---</td>
+                              <td><?php echo $pool['URL']; ?></td>
+                              <td><?php echo $pool['User']; ?></td>
+                              <td></td>
+                              <td class="priority"><?php echo $pool['Priority']; ?></td>
                               <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
                               <br>
                               </td>
                             </tr>
-                            <tr>
-                              <td><input type="radio" name="gpu-enabled" class="form-control" /></td>
-                              <td>Example Pool Label</td>
-                              <td>scrypt.pool.url:3333</td>
-                              <td>scar45.worker</td>
-                              <td>password</td>
-                              <td>3</td>
-                              <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
-                              <br>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><input type="radio" name="gpu-enabled" class="form-control" /></td>
-                              <td>Example Pool Label</td>
-                              <td>scrypt.pool.url:3333</td>
-                              <td>scar45.worker</td>
-                              <td>password</td>
-                              <td>3</td>
-                              <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
-                              <br>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><input type="radio" name="gpu-enabled" class="form-control" /></td>
-                              <td><input type="text" class="form-control" value="EDITING EXAMPLE" /></td>
-                              <td><input type="text" class="form-control" value="scrypt.pool.url:3333" /></td>
-                              <td><input type="text" class="form-control" value="scar45.worker" /></td>
-                              <td><input type="text" class="form-control" value="password" /></td>
-                              <td><input type="text" class="form-control" maxlength="3" value="3" style="width: 50px;" /></td>
-                              <td><a href="#editPoolConfig" class="editPoolConfig"><span title="Save this pool" class="blue"><i class="icon icon-save-floppy"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span title="Cancel changes" class="orange"><i class="icon icon-undo"></i></span></a>
-                              <br>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><input type="radio" name="gpu-enabled" class="form-control" /></td>
-                              <td>Example Pool Label</td>
-                              <td>scrypt.pool.url:3333</td>
-                              <td>scar45.worker</td>
-                              <td>password</td>
-                              <td>3</td>
-                              <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
-                              <br>
-                              </td>
-                            </tr>
+                        <?php } ?>
+<!--                            <tr>-->
+<!--                              <td><input type="radio" name="gpu-enabled" class="form-control" /></td>-->
+<!--                              <td><input type="text" class="form-control" value="EDITING EXAMPLE" /></td>-->
+<!--                              <td><input type="text" class="form-control" value="scrypt.pool.url:3333" /></td>-->
+<!--                              <td><input type="text" class="form-control" value="scar45.worker" /></td>-->
+<!--                              <td><input type="text" class="form-control" value="password" /></td>-->
+<!--                              <td><input type="text" class="form-control" maxlength="3" value="3" style="width: 50px;" /></td>-->
+<!--                              <td><a href="#editPoolConfig" class="editPoolConfig"><span title="Save this pool" class="blue"><i class="icon icon-save-floppy"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span title="Cancel changes" class="orange"><i class="icon icon-undo"></i></span></a>-->
+<!--                              <br>-->
+<!--                              </td>-->
+<!--                            </tr>-->
                         </tbody>
                     </table>
                     <button type="button" class="btn btn-primary btn-space" id="btnAddPool"><i class="icon icon-plus-sign"></i> Add New Pool</button>

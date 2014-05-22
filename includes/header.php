@@ -2,16 +2,13 @@
 <html lang="en">
 <?php require_once("includes/head.php"); ?>
    <body>
-      <?php require_once("templates/modals/coming_soon.php"); ?>
       <?php require_once("templates/modals/add_panel.php"); ?>
       
-      <!-- TODO: Move these require_once modals to a better spot, only when a rig is actually added -->
-      <?php require_once("templates/modals/manage_rig.php"); ?>
+      <!-- -->
       <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-ltc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-vtc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-doge.php"); ?>
-      <?php require_once("templates/modals/manage_rig.php"); ?>
       <!-- -->
       
       <div class="page-container">
@@ -67,7 +64,6 @@
                      </ul>
                   </li>
                   <li id="nav-login-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>
-                  <!-- <li id="nav-logout-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li> -->
                </ul>
             </div>
             <!--/.nav-collapse -->

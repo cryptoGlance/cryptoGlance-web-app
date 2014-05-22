@@ -26,6 +26,7 @@ $('.btn-manage-rig').click(function() {
     var manageRig = $('#manageRig');
     $(manageRig).attr('data-attr', minerId);
     $('.rig-name', manageRig).html($('.panel-title .value', '#rig-'+minerId).text());
+    $('.btn-details', manageRig).attr('href', 'rig.php?id=' + minerId);
     prettifyInputs();
 });
 

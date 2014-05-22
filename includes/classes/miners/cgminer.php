@@ -179,8 +179,12 @@ class Miners_Cgminer {
                     'active' => ($pool['POOL'] == $activePool['id']) ? 1 : 0,
                     'url' => $pool['URL'],
                     'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
+                    'Priority' => $pool['Priority'],
                 );
             }
+            
+            // sort array based on priority
+            usort($poolData, array('Miners_Cgminer','poolPrioritySort'));
             
             return $poolData;
         }
@@ -190,10 +194,81 @@ class Miners_Cgminer {
     public function switchPool($poolId) {
         return $this->getData('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
+    public function prioritizePools($poolId, $newPriority) {
+        $pools = $this->getPools();
+        $poolCount = count($pools);
+        
+        foreach ($pools as $pKey => $pool) {
+            if ($pool['id'] == $poolId) {
+                unset($pools[$pKey]);
+            }
+        }
+        
+        $pools = array_values($pools);
+        
+        $orderedPoolIds = null;
+        for ($i = 0; $i < $poolCount; $i++) {
+            if ($i == $newPriority) {
+                $orderedPoolIds .= $poolId;
+            } else if ($i > $newPriority) {
+                $orderedPoolIds .= $pools[$i-1]['id'];
+            } else {
+                $orderedPoolIds .= $pools[$i]['id'];
+            }
+            
+            if (($poolCount-$i) > 1) {
+                $orderedPoolIds .= ',';
+            }
+        }
+        
+        return $this->getData('{"command":"poolpriority","parameter":"'. $orderedPoolIds .'"}');
+    }
+    
+    // Dev State
+    public function setDevState($devType, $devId, $state) { // 1 = on, 0 = off;        
+        $devType = strtolower($devType);
+        if ($state == 0) {
+            if ($devType == 'gpu') {
+                $command = 'gpudisable';
+            } else if ($devType == 'asc') {
+                $command = 'ascdisable';
+            }
+            return $this->getData('{"command":"'.$command.'","parameter":"'. $devId .'"}');
+        } else if ($state == 1) {
+            if ($devType == 'gpu') {
+                $command = 'gpuenable';
+            } else if ($devType == 'asc') {
+                $command = 'ascenable';
+            }
+            return $this->getData('{"command":"'.$command.'","parameter":"'. $devId .'"}');
+        }
+        
+        return null;        
+    }
     
     // Restart
     public function restart() {
             return $this->getData('{"command":"restart"}');
+    }
+    
+    public function getSettings() {
+        if ($this->onlineCheck() != null) {
+            //$config = $this->getData('{"command":"config"}');
+            
+            $data = $this->update();
+            
+            $rigData['devs'] = $data['devs'];
+            $rigData['pools'] = $this->_pools;
+            
+            // sort array based on priority
+            usort($rigData['pools'], array('Miners_Cgminer','poolPrioritySort'));
+            
+            $rigData['active_pool'] = $this->getActivePool();
+        
+            return $rigData;
+        }
+        
+        return null;
     }
 
     public function update() {
@@ -206,11 +281,17 @@ class Miners_Cgminer {
         
             $pools = json_decode($this->getData('{"command":"pools"}'), true);
             $this->_pools = $pools['POOLS'];
+            
     
             return $this->getAllData();
         }
         
         return null;
+    }
+    
+    // misc
+    private static function poolPrioritySort($a,$b) {
+        return ($a['Priority'] < $b['Priority']) ? -1 : 1;
     }
 
 }

@@ -21,7 +21,14 @@ class CryptoGlance {
     //////////
     // Rigs //
     //////////
-    public function getMiners() {
+    public function getMiners($minerId = null) {
+        if (!is_null($minerId) && $minerId != 0) {
+            $minerId -= 1; // Arrays start at 0... 1 less than the ID on frontend
+            if (!empty($this->_config['miners'][$minerId])) {
+                return $this->_config['miners'][$minerId];
+            }
+        }
+        
         return $this->_config['miners'];
     }
     public function addRig() {

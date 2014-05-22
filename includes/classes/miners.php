@@ -49,6 +49,39 @@ class Miners {
     }
     
     // Setters
+    // Enable/Disable Dev
+    public function devState() {
+        $minerId = intval($_GET['miner']);
+        $devType = strval($_GET['devType']);
+        $devId = intval($_GET['dev']);
+        
+        if ($_GET['state'] === 'true') {
+            $state = 1;
+        } else if ($_GET['state'] === 'false') {
+            $state = 0;
+        } else {
+            return null;
+        }
+        
+        if ($minerId == 0 || $devId == 0 || empty($devType)) {
+            return null;
+        }
+    
+        $this->_miners[$minerId-1]->setDevState($devType, $devId-1, $state); 
+    }
+    
+    public function prioritizePools() {
+        $minerId = intval($_GET['miner']);
+        $poolId = intval($_GET['pool']);
+        $priority = intval($_GET['priority']);
+        
+        if ($minerId == 0 || $poolId == 0) {
+            return null;
+        }
+        
+        $this->_miners[$minerId-1]->prioritizePools($poolId-1, $priority); 
+    }
+    
     public function switchPool() {
         $minerId = intval($_GET['miner']);
         $poolId = intval($_GET['pool']);
@@ -67,6 +100,15 @@ class Miners {
         }
     
         $this->_miners[$minerId-1]->restart();
+    }
+    
+    public function getMiner($minerId = null) {
+        if (!is_null($minerId) && $minerId != 0) {
+            $minerId -= 1; // Arrays start at 0... 1 less than the ID on frontend
+            if (!empty($this->_miners[$minerId])) {
+                return $this->_miners[$minerId];
+            }
+        }
     }
 
     // Automatic Update function

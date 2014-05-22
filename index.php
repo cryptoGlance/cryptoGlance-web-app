@@ -9,9 +9,10 @@ session_write_close();
 
 $jsArray = array(
     'ajax',
-    'rigs',
-    'pools',
-    'wallets',
+    'dashboard/script',
+    'dashboard/rigs',
+    'dashboard/pools',
+    'dashboard/wallets',
 );
 
 include("includes/header.php");
@@ -25,6 +26,8 @@ include("includes/header.php");
     <?php
     // Overview
     if (count($cryptoGlance->getMiners()) > 0) {
+        include("templates/modals/manage_rig.php");
+        
         include("templates/panel-overview.php");
     
         // Miners
