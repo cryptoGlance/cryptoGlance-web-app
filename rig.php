@@ -42,7 +42,7 @@ if (is_null($rigData)) {
         foreach($rigData['devs'] as $devType => $devs) {
     ?>
         <div id="rigDeviceDetails" class="panel panel-primary panel-no-grid panel-rig">
-            <h1><?php echo (!empty($rigData['config']['name']) ? $rigData['config']['name'] : $rigData['config']['host'] . ':' . $rigData['config']['port']); ?></h1>
+            <h1><?php echo (!empty($rigData['config']['name']) ? $rigData['config']['name'] : $rigData['config']['host']); ?></h1>
             <div class="panel-heading">
                 <h2 class="panel-title"><?php echo $devType; ?> Settings<i class="icon icon-pixelpickaxe"></i></h2>
             </div>
@@ -172,7 +172,7 @@ if (is_null($rigData)) {
                               <td>---</td>
                               <td><?php echo $pool['URL']; ?></td>
                               <td><?php echo $pool['User']; ?></td>
-                              <td></td>
+                              <td>********</td>
                               <td class="priority"><?php echo $pool['Priority']; ?></td>
                               <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
                               <br>
@@ -193,42 +193,43 @@ if (is_null($rigData)) {
                         </tbody>
                     </table>
                     <button type="button" class="btn btn-primary btn-space" id="btnAddPool"><i class="icon icon-plus-sign"></i> Add New Pool</button>
-                    <div class="add-new-wrapper">
+                    <div id="addNewPool" class="add-new-wrapper">
                       <h3>Add a new pool:</h3>                
                       <div class="form-group">
                         <label for="inputPoolLabel" class="col-sm-5 control-label">Pool Label</label>
                         <div class="col-sm-5">
-                          <input type="text" class="form-control" id="inputPoolLabel" name="label" placeholder="Name of this pool">
+                          <input type="text" class="form-control poolLabel" name="poolLabel" placeholder="Name of this pool">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputPoolURL" class="col-sm-5 control-label">URL</label>
                         <div class="col-sm-5">
-                          <input type="text" class="form-control" id="inputPoolURL" name="label" placeholder="Pool URL (including port #)">
+                          <input type="text" class="form-control poolUrl" name="poolUrl" placeholder="Pool URL (including port #)">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="inputPoolWorker" class="col-sm-5 control-label">Worker</label>
+                        <label for="inputPoolWorker" class="col-sm-5 control-label">Username/Worker</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="inputPoolWorker" name="label">
+                          <input type="text" class="form-control poolUser" name="poolUser">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputPoolPassword" class="col-sm-5 control-label">Password</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="inputPoolPassword" name="label">
+                          <input type="password" class="form-control poolPassword" name="poolPassword" placeholder="password">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputPoolPriority" class="col-sm-5 control-label">Priority</label>
                         <div class="col-sm-2">
-                          <input type="text" class="form-control" maxlength="3" id="inputPoolPriority" name="label">
+                          <input type="text" class="form-control poolPriority" maxlength="3" name="poolPriority">
                         </div>
                       </div>
-                      <button type="button" class="btn btn-lg btn-success" id="btnAddPool"><i class="icon icon-save-floppy"></i> Save New Pool</button>
+                      <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>
+                      <button type="button" class="btn btn-lg btn-success" id="btnSavePool"><i class="icon icon-save-floppy"></i> Save New Pool</button>
                       <br>
                       <br>
-                  </div><!-- end add-new-pool-wrapper -->
+                    </div><!-- end add-new-pool-wrapper -->
                 </form>
             </div>
         </div>
@@ -264,7 +265,7 @@ if (is_null($rigData)) {
                       <input type="text" class="form-control" id="inputRigHashrate" maxLength="5">
                     </div>
                   </div>
-                   <button type="button" class="btn btn-lg btn-success" id="btnAddPool"><i class="icon icon-save-floppy"></i> Save Rig Details</button>
+                   <button type="button" class="btn btn-lg btn-success" id="btnSaveRig"><i class="icon icon-save-floppy"></i> Save Rig Details</button>
                     <br>
                     <br>
                 </form>

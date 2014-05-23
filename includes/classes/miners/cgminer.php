@@ -169,7 +169,6 @@ class Miners_Cgminer {
         if ($this->onlineCheck() != null) {
             $pools = json_decode($this->getData('{"command":"pools"}'), true);
             $this->_pools = $pools['POOLS'];
-            
             $activePool = $this->getActivePool();
             
             $poolData = array();
@@ -178,6 +177,7 @@ class Miners_Cgminer {
                     'id' => $pool['POOL'],
                     'active' => ($pool['POOL'] == $activePool['id']) ? 1 : 0,
                     'url' => $pool['URL'],
+                    'user' => $pool['User'],
                     'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
                     'Priority' => $pool['Priority'],
                 );
@@ -190,6 +190,27 @@ class Miners_Cgminer {
         }
         
         return null;
+    }
+    public function addPool($data) {
+        $this->getData('{"command":"addpool","parameter":"'. $data['url'] .','. $data['username'] .','. $data['password'] .'"}');
+        
+        $pools = $this->getPools();
+        $newPoolId = null;
+        foreach ($pools as $pool) {
+            if ($pool['url'] == $data['url'] && $pool['user'] == $data['username']) {
+                $newPoolId = $pool['id'];
+            }
+        }
+        
+        if (is_null($newPoolId)) {
+            return false;
+        }
+        
+        if (!empty($data['priority'])) {
+            $this->prioritizePools($newPoolId, $data['priority']);
+        }
+        
+        return true;
     }
     public function switchPool($poolId) {
         return $this->getData('{"command":"switchpool","parameter":"'. $poolId .'"}');
@@ -231,7 +252,9 @@ class Miners_Cgminer {
             if ($devType == 'gpu') {
                 $command = 'gpudisable';
             } else if ($devType == 'asc') {
-                $command = 'ascdisable';
+                $command = 'ascenable';
+            } else if ($devType == 'pga') { // who uses pga anymore?
+                $command = 'pgaenable';
             }
             return $this->getData('{"command":"'.$command.'","parameter":"'. $devId .'"}');
         } else if ($state == 1) {
@@ -239,6 +262,8 @@ class Miners_Cgminer {
                 $command = 'gpuenable';
             } else if ($devType == 'asc') {
                 $command = 'ascenable';
+            } else if ($devType == 'pga') { // who uses pga anymore?
+                $command = 'pgaenable';
             }
             return $this->getData('{"command":"'.$command.'","parameter":"'. $devId .'"}');
         }

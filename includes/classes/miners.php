@@ -70,6 +70,32 @@ class Miners {
         $this->_miners[$minerId-1]->setDevState($devType, $devId-1, $state); 
     }
     
+    public function addPool() {
+        $minerId = intval($_GET['miner']);
+        $data = array(
+            'label' => $_POST['label'],
+            'url' => $_POST['url'],
+            'username' => $_POST['user'],
+            'password' => $_POST['password'],
+            'priority' => $_POST['priority'],
+        );
+        
+        if ($minerId == 0 || empty($data['url']) || empty($data['username'])) {
+            header("HTTP/1.0 409 Conflict"); // conflict
+            return null;
+        }
+        
+        $result = $this->_miners[$minerId-1]->addPool($data);
+        
+        if (!$result) {
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
+        } else {
+            header("HTTP/1.0 202 Accepted"); // accepted
+        }
+        
+        return null;
+    }
+    
     public function prioritizePools() {
         $minerId = intval($_GET['miner']);
         $poolId = intval($_GET['pool']);

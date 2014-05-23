@@ -32,7 +32,7 @@ $(document).ready(function() {
         }
     });
     
-    // change pool
+    // activate pool
     $('input[name="enabledPool"]:radio', '#rigPoolDetails').on('switchChange.bootstrapSwitch', function (event, state) {
         var minerId =  $('#rig-wrap').attr('data-rigId');
         var poolId = $(this).parentsUntil('tr').parent().attr('data-poolId');
@@ -48,7 +48,7 @@ $(document).ready(function() {
         }
     });
     
-    // Sortable
+    // Sortable Pools
     $('tbody', '#rigPoolDetails').sortable({
         placeholder: "ui-state-highlight",
         stop: function(event, ui) {
@@ -71,5 +71,38 @@ $(document).ready(function() {
                 });
             }
         }
+    });
+    
+    // Add Pool
+    $('#btnSavePool').click(function() {
+        var minerId =  $('#rig-wrap').attr('data-rigId');
+        var addPool = $('#addNewPool');
+        var poolLabel = $('input.poolLabel', addPool).val();
+        var poolUrl = $('input.poolUrl', addPool).val();
+        var poolUser = $('input.poolUser', addPool).val();
+        var poolPassword = $('input.poolPassword', addPool).val();
+        var poolPriority = $('input.poolPriority', addPool).val();
+        
+        if (poolUrl != '' && poolUser != '') {
+            $.ajax({
+                type: 'post',
+                url: 'ajax.php?type=miners&action=add-pool&miner=' + minerId,
+                data: { label: poolLabel, url: poolUrl, user: poolUser, password: poolPassword, priority: poolPriority },
+                dataType: 'json',
+                statusCode: {
+                    202: function() {
+                        location.reload(true);
+                    },
+                    406: function() {
+                        // not accepted - cgminer did not add pool correctly
+                    },
+                    409: function() {
+                        // conflict - missing required params
+                    }
+                }
+            });
+        }
+        
+        
     });
 });
