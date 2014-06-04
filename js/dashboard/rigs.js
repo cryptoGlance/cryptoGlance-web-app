@@ -111,9 +111,6 @@ function updateRigs(data) {
                 rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable)
             }
             $(rigOverviewRow).html('<td><i class="icon icon-ban-circle grey"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' grey">'+ $('h1', rigElm).html().replace(' - OFFLINE', '') +'</a></td><td>--</td><td>--</td><td>--</td>');
-//            if ($(rigTitle).html().indexOf(' - OFFLINE') == -1) {
-//                $(rigTitle).append(' - OFFLINE');
-//            }
             $(rigElm).removeClass('panel-warning');
             $(rigElm).removeClass('panel-danger');
             $(rigElm).addClass('panel-offline');
@@ -124,7 +121,6 @@ function updateRigs(data) {
             $(rigNavElm).show();
             $(rigTabContentElm).show();
             $(rigElm).find('.panel-footer').show();
-//            $(rigTitle).html($(rigTitle).html().replace(' - OFFLINE', ''));
             $(rigElm).removeClass('panel-offline');
             $('.btn-manage-rig', rigElm).show();
         }
@@ -178,10 +174,8 @@ function updateRigs(data) {
         $(summaryContentTabTableHead).find('tr').remove();
         $(summaryContentTabTableBody).find('tr').remove();
         var removeTable = false;
-        if (typeof rig.devs.GPU != 'undefined' && rig.devs.GPU.length > 0) {
-            $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Temperature</th><th>Fan Speed</th><th>Fan %</th><th>Hashrate (5s)</th><th>Utility</th></tr>');
-        } else if (typeof rig.devs.ASC != 'undefined' && rig.devs.ASC.length > 0) {
-            $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Hashrate 5s</th><th>Accepted</th><th>Rejected</th><th>Utility</th><th>HW Errors</th></tr>');
+        if ((typeof rig.devs.GPU != 'undefined' && rig.devs.GPU.length > 0) || typeof rig.devs.ASC != 'undefined' && rig.devs.ASC.length > 0) {
+            $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Temperature</th><th>Hashrate 5s</th><th>Accepted</th><th>Rejected</th><th>Utility</th><th>HW Errors</th></tr>');
         } else {
             removeTable = true;
             $(summaryContentTabTable).remove();
@@ -276,11 +270,7 @@ function updateRigs(data) {
                         dev.hashrate_5s += ' MH/S';
                     }
                 
-                    if (devType == 'GPU') {
-                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType + dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
-                    } else if(devType == 'ASC') {
-                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType +dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
-                    }
+                    $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType + dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
                 }
             
             });        

@@ -1,30 +1,60 @@
 <?php
-
+require_once('abstract.php');
 /*
  * @author Stoyvo
  */
-class Miners_Cgminer {
+class Miners_Cgminer extends Miners_Abstract {
 
-    // socket things
+    // Miner Memebers
     protected $_host;
     protected $_port;
 
-    // data
-    protected $_summary;
-    protected $_type;
+    // Data
+    protected $_summary = array();
     protected $_devs = array();
+    protected $_devStatus = array();
     protected $_pools = array();
 
-    public function __construct($host, $port) {
+
+    // PUBLIC
+    public function __construct($host, $port, $name, $settings) {
+        parent::__construct($name, $settings);
         $this->_host = $host;
         $this->_port = $port;
-
-        if (!extension_loaded('sockets')) {
-            die('The sockets extension is not loaded.');
+        
+        if (is_null($this->fetchData())) {
+            return null;
         }
     }
-
-    private function getData($cmd) {
+    
+    public function overview() {
+        $data = array();
+        $totalHashrate = 0;
+        
+        foreach ($this->_devs as $devKey => $dev) {
+            $totalHashrate += $dev['MHS 5s'];
+        }
+        
+        $rigStatus = $this->getRigStatus();
+        
+        $hashrate5s = $this->getFormattedHashrate($totalHashrate);
+        $activePool = $this->getActivePool();
+        $uptime = $this->getUptime();
+        
+        return array('overview' => array(
+                'name' => $this->_name,
+                'status_colour' => $rigStatus['colour'],
+                'status_icon' => $rigStatus['icon'],
+                'hashrate_5s' => $hashrate5s,
+                'active_pool' => $activePool,
+                'uptime' => $uptime,
+            )
+        );
+    }
+    
+    
+    // PRIVATE
+    private function cmd($cmd) {
         $response = '';
         $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, 1);
                 
@@ -38,58 +68,7 @@ class Miners_Cgminer {
             fclose($socket);
         }
         
-        return str_replace("\0", '', $response); // It took 4+ hours to find this solution... JSON response has ASCII BOM at the begining. 
-    }
-    
-    private function getDataGPU($devId) {
-        $devData = $this->_devs[$devId];
-        
-        $data = array();
-        $data = array(
-            'id' => $devData['GPU'],
-            'enabled' => $devData['Enabled'],
-            'health' => $devData['Status'],
-            'hashrate_avg' => round($devData['MHS av'], 3),
-            'hashrate_5s' => round($devData['MHS 5s'], 3),
-            'intensity' => $devData['Intensity'],
-            'temperature' => $devData['Temperature'],
-            'fan_speed' => $devData['Fan Speed'] . ' RPM',
-            'fan_percent' => $devData['Fan Percent'] . '%',
-            'engine_clock' => $devData['GPU Clock'],
-            'memory_clock' => $devData['Memory Clock'],
-            'gpu_voltage' => $devData['GPU Voltage']  . 'V',
-            'powertune' => $devData['Powertune']  . '%',
-//            'accepted' => $devData['Accepted'],
-            'accepted' => round($devData['Difficulty Accepted']),
-//            'rejected' => $devData['Rejected'],
-            'rejected' => round($devData['Difficulty Rejected']),
-            'hw_errors' => $devData['Hardware Errors'],
-            'utility' => $devData['Utility'] . '/m',
-        );
-    
-        return $data;
-    }
-    
-    private function getDataASC($devId) {
-        $devData = $this->_devs[$devId];
-        
-        $data = array();
-        $data = array(
-            'id' => $devId,
-            'type' => 'ASC',
-            'enabled' => $devData['Enabled'],
-            'health' => $devData['Status'],
-            'hashrate_avg' => $devData['MHS av'],
-            'hashrate_5s' => $devData['MHS 5s'],
-//            'accepted' => $devData['Accepted'],
-            'accepted' => round($devData['Difficulty Accepted']),
-//            'rejected' => $devData['Rejected'],
-            'rejected' => round($devData['Difficulty Rejected']),
-            'hw_errors' => $devData['Hardware Errors'],
-            'utility' => $devData['Utility'] . '/m',
-        );
-    
-        return $data;
+        return str_replace("\0", '', $response); // JSON response has ASCII BOM at the begining. 
     }
     
     private function getActivePool() {
@@ -108,215 +87,169 @@ class Miners_Cgminer {
         );
     }
     
-    private function getSummaryData() {
-        $summaryData = $this->_summary[0];
-        $data = array();
-        
-        $activePool = $this->getActivePool();
-        
-        if ($summaryData['Elapsed'] <= 86400) { // Less than a day
-            $upTime = gmdate('H\H i\M s\S', $summaryData['Elapsed']);
-        } else if ($summaryData['Elapsed'] <= 604800) { // Less than a week
-            $upTime = gmdate('d\D H\H i\M', $summaryData['Elapsed']);
-        } else {  // A Month!?
-            $upTime = gmdate('W\W d\D H\H', $summaryData['Elapsed']);
-        }
-        
-        $data = array(
-            'uptime' => $upTime,
-            'hashrate_avg' => (!empty($summaryData['GHS av'])) ? round($summaryData['GHS av']*1000, 3) : round($summaryData['MHS av'], 3),
-            'hashrate_5s' => (!empty($summaryData['GHS 5s'])) ? round($summaryData['GHS 5s']*1000, 3) : round($summaryData['MHS 5s'], 3),
-            'blocks_found' => $summaryData['Found Blocks'],
-//            'accepted' => $summaryData['Accepted'],
-            'accepted' => round($summaryData['Difficulty Accepted']),
-//            'rejected' => $summaryData['Rejected'],
-            'rejected' => round($summaryData['Difficulty Rejected']),
-//            'stale' => $summaryData['Stale'],
-            'stale' => round($summaryData['Difficulty Stale']),
-            'hw_errors' => $summaryData['Hardware Errors'],
-            'utility' => $summaryData['Utility'] . '/m',
-//            'utility' => $summaryData['Work Utility'] . '/m',
-            'active_mining_pool' => $activePool['url'],
-        );
-        
-        return $data;
-    }
-    
-    private function getAllData() {
-        $data = array();
-        
-        // Get Device Summary
-        $data['summary'] = $this->getSummaryData();
-        
-        // Get All Device data
+    private function getDevStatus() {
         foreach ($this->_devs as $devKey => $dev) {
-            if (isset($this->_devs[$devKey]['GPU'])) {
-                $data['devs']['GPU'][] = $this->getDataGPU($devKey);
-            } elseif (isset($this->_devs[$devKey]['ASC']) || isset($this->_devs[$devKey]['PGA'])) {
-                $data['devs']['ASC'][] = $this->getDataASC($devKey);
-            }
-        }
-
-        return $data;
-    }
-    
-    private function onlineCheck() {
-        return $this->getData('{"command":"version"}');
-    }
-    
-    // Pools
-    public function getPools() {
-        if ($this->onlineCheck() != null) {
-            $pools = json_decode($this->getData('{"command":"pools"}'), true);
-            $this->_pools = $pools['POOLS'];
-            $activePool = $this->getActivePool();
+            $status = array();
             
-            $poolData = array();
-            foreach ($this->_pools as $pool) {
-                $poolData[] = array(
-                    'id' => $pool['POOL'],
-                    'active' => ($pool['POOL'] == $activePool['id']) ? 1 : 0,
-                    'url' => $pool['URL'],
-                    'user' => $pool['User'],
-                    'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
-                    'Priority' => $pool['Priority'],
+            // Start with hardware errors
+            if ($this->_settings['hwErrors']['enabled']) {
+                if (
+                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] >= $dev['Hardware Errors']) || 
+                    (
+                        $this->_settings['hwErrors']['type'] == 'percent' &&
+                        $this->_settings['hwErrors']['danger']['percent'] >= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
+                    )
+                ) {
+                    $status = array (
+                        'colour' => 'red',
+                        'icon' => 'danger'
+                    );
+                } else if (
+                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] >= $dev['Hardware Errors']) || 
+                    (
+                        $this->_settings['hwErrors']['type'] == 'percent' &&
+                        $this->_settings['hwErrors']['warning']['percent'] >= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
+                    )
+                ) {
+                    $status = array (
+                        'colour' => 'orange',
+                        'icon' => 'warning-sign'
+                    );
+                }
+            }
+            
+            // If no hardware errors, check the health
+            if (empty($status)) {
+                if ($dev['Status'] == 'Dead') {
+                    $status = array(
+                        'colour' => 'red',
+                        'icon' => 'danger'
+                    );
+                } else if ($dev['Status'] == 'Sick') {
+                    $status = array(
+                        'colour' => 'orange',
+                        'icon' => 'warning-sign'
+                    );
+                }
+            }
+            
+            // If no hardware errors and health is okay, do temperatures
+            if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
+                if ($this->_settings['temps']['danger'] >= $dev['Temperature']) {
+                    $status = array (
+                        'colour' => 'red',
+                        'icon' => 'hot'
+                    );
+                } else if ($this->_settings['temps']['warning'] >= $dev['Temperature']) {
+                    $status = array (
+                        'colour' => 'orange',
+                        'icon' => 'fire'
+                    );
+                }
+            }
+            
+            // If all pass somehow... Mark it good to go!
+            if (empty($status) && $dev['Enabled'] == 'Y') {
+                $status = array(
+                    'colour' => 'green',
+                    'icon' => 'cpu-processor'
                 );
             }
             
-            // sort array based on priority
-            usort($poolData, array('Miners_Cgminer','poolPrioritySort'));
+            // If still empty, we must be offline
+            if (empty($status)) {
+                $status = array(
+                    'colour' => 'grey',
+                    'icon' => 'ban-circle',
+                );
+            }
             
-            return $poolData;
+            $this->_devStatus[$devKey] = $status;
         }
-        
-        return null;
     }
-    public function addPool($data) {
-        $this->getData('{"command":"addpool","parameter":"'. $data['url'] .','. $data['username'] .','. $data['password'] .'"}');
+    private function getRigStatus() {
+        $rigStatus = array(
+            'colour' => 'grey',
+            'icon' => 'ban-circle',
+        );
         
-        $pools = $this->getPools();
-        $newPoolId = null;
-        foreach ($pools as $pool) {
-            if ($pool['url'] == $data['url'] && $pool['user'] == $data['username']) {
-                $newPoolId = $pool['id'];
+        foreach ($this->_devStatus as $status) {
+            if ($status['colour'] == 'red') {
+                $rigStatus = array(
+                    'colour' => 'red',
+                    'icon' => $status['icon'],
+                );
+            } else if ($status['colour'] == 'orange' && $rigStatus['colour'] != 'red') {
+                $rigStatus = array(
+                    'colour' => 'orange',
+                    'icon' => $status['icon'],
+                );
+            } else if ($status['colour'] == 'green' && $rigStatus['colour'] != 'red' && $rigStatus['colour'] != 'orange') {
+                $rigStatus = array(
+                    'colour' => 'green',
+                    'icon' => $status['icon'],
+                );
             }
         }
         
-        if (is_null($newPoolId)) {
-            return false;
-        }
-        
-        if (!empty($data['priority'])) {
-            $this->prioritizePools($newPoolId, $data['priority']);
-        }
-        
-        return true;
+        return $rigStatus;
     }
-    public function switchPool($poolId) {
-        return $this->getData('{"command":"switchpool","parameter":"'. $poolId .'"}');
+    
+    private function getFormattedHashrate($hashrate) {
+        $hashrate *= 1000;
+        
+        // Math Stuffs
+        $units = array('KH', 'MH', 'GH', 'TH', 'PH');
+        
+        $pow = min(floor(($hashrate ? log($hashrate) : 0) / log(1000)), count($units) - 1);
+        $hashrate /= pow(1000, $pow);
+        $hashrate = round($hashrate, 2) . ' ' . $units[$pow] . '/s';
+        
+        return $hashrate;
     }
-    public function prioritizePools($poolId, $newPriority) {
-        $pools = $this->getPools();
-        $poolCount = count($pools);
-        
-        foreach ($pools as $pKey => $pool) {
-            if ($pool['id'] == $poolId) {
-                unset($pools[$pKey]);
-            }
-        }
-        
-        $pools = array_values($pools);
-        
-        $orderedPoolIds = null;
-        for ($i = 0; $i < $poolCount; $i++) {
-            if ($i == $newPriority) {
-                $orderedPoolIds .= $poolId;
-            } else if ($i > $newPriority) {
-                $orderedPoolIds .= $pools[$i-1]['id'];
+    
+    private function getUptime() {
+        if (isset($this->_summary[0]['Elapsed'])) {
+            $seconds = $this->_summary[0]['Elapsed'];
+            
+            $from = new DateTime("@0");
+            $to = new DateTime("@$seconds");
+            
+            if ($seconds < 86400) {
+                $format = '%hH %iM %sS';
+            } else if ($seconds <= 604800) {
+                $format = '%aD %hH %iM';
             } else {
-                $orderedPoolIds .= $pools[$i]['id'];
+                $format = '%wW %aD %hH';
             }
             
-            if (($poolCount-$i) > 1) {
-                $orderedPoolIds .= ',';
-            }
-        }
-        
-        return $this->getData('{"command":"poolpriority","parameter":"'. $orderedPoolIds .'"}');
-    }
-    
-    // Dev State
-    public function setDevState($devType, $devId, $state) { // 1 = on, 0 = off;        
-        $devType = strtolower($devType);
-        if ($state == 0) {
-            if ($devType == 'gpu') {
-                $command = 'gpudisable';
-            } else if ($devType == 'asc') {
-                $command = 'ascenable';
-            } else if ($devType == 'pga') { // who uses pga anymore?
-                $command = 'pgaenable';
-            }
-            return $this->getData('{"command":"'.$command.'","parameter":"'. $devId .'"}');
-        } else if ($state == 1) {
-            if ($devType == 'gpu') {
-                $command = 'gpuenable';
-            } else if ($devType == 'asc') {
-                $command = 'ascenable';
-            } else if ($devType == 'pga') { // who uses pga anymore?
-                $command = 'pgaenable';
-            }
-            return $this->getData('{"command":"'.$command.'","parameter":"'. $devId .'"}');
-        }
-        
-        return null;        
-    }
-    
-    // Restart
-    public function restart() {
-            return $this->getData('{"command":"restart"}');
-    }
-    
-    public function getSettings() {
-        if ($this->onlineCheck() != null) {
-            //$config = $this->getData('{"command":"config"}');
+            $uptime = $from->diff($to)->format($format);
             
-            $data = $this->update();
-            
-            $rigData['devs'] = $data['devs'];
-            $rigData['pools'] = $this->_pools;
-            
-            // sort array based on priority
-            usort($rigData['pools'], array('Miners_Cgminer','poolPrioritySort'));
-            
-            $rigData['active_pool'] = $this->getActivePool();
-        
-            return $rigData;
+            return $uptime;
         }
         
         return null;
     }
-
-    public function update() {
+    
+    private function onlineCheck() {
+        return $this->cmd('{"command":"version"}');
+    }
+    
+    private function fetchData() {
         if ($this->onlineCheck() != null) {
-            $summary = json_decode($this->getData('{"command":"summary"}'), true);
+            $summary = json_decode($this->cmd('{"command":"summary"}'), true);
             $this->_summary = $summary['SUMMARY'];
 
-            $dev = json_decode($this->getData('{"command":"devs"}'), true);
+            $dev = json_decode($this->cmd('{"command":"devs"}'), true);
             $this->_devs = $dev['DEVS'];
+            $this->getDevStatus(); // gets status of each device
         
-            $pools = json_decode($this->getData('{"command":"pools"}'), true);
+            $pools = json_decode($this->cmd('{"command":"pools"}'), true);
             $this->_pools = $pools['POOLS'];
-            
     
-            return $this->getAllData();
+            return true;
         }
         
         return null;
     }
-    
-    // misc
-    private static function poolPrioritySort($a,$b) {
-        return ($a['Priority'] < $b['Priority']) ? -1 : 1;
-    }
-
 }

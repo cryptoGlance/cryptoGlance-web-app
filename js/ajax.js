@@ -11,7 +11,7 @@ $(document).ready(function() {
             ajaxUpdateCall('rig', rigId);
         }, rigUpdateTime);
     });
-
+    
     ajaxUpdateCall('pool'); // all pools at once
     ajaxUpdateCall('wallet'); // all wallets at once
 });

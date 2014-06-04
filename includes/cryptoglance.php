@@ -286,21 +286,6 @@ class CryptoGlance {
         if (empty($settings['general']['updates']['type'])) {
             $settings['general']['updates']['type'] = 'release';
         }
-        if (empty($settings['general']['temps']['warning'])) {
-            $settings['general']['temps']['warning'] = 75;
-        }
-        if (empty($settings['general']['temps']['danger'])) {
-            $settings['general']['temps']['danger'] = 85;
-        }
-        if (empty($settings['general']['hardwareErrors']['enabled'])) {
-            $settings['general']['hardwareErrors']['enabled'] = 1;
-        }
-        if (empty($settings['general']['hardwareErrors']['warning'])) {
-            $settings['general']['hardwareErrors']['warning'] = 5;
-        }
-        if (empty($settings['general']['hardwareErrors']['danger'])) {
-            $settings['general']['hardwareErrors']['danger'] = 15;
-        }
         if (empty($settings['general']['updateTimes']['rig'])) {
             $settings['general']['updateTimes']['rig'] = 3000;
         }

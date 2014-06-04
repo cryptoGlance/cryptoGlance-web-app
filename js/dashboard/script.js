@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    // dashboard specific script
+    // dashboard specific
 });

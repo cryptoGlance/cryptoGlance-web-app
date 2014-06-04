@@ -19,6 +19,10 @@ $type = ucwords(strtolower($_GET['type']));
 
 $action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($_GET['action'])));
 
+// If we're not posting, it's a get function
+if (empty($_POST)) {
+    $action = 'get' . $action;
+}
 
 if (empty($type) || empty($action)) {
     exit();
