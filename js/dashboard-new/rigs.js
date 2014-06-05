@@ -1,27 +1,33 @@
-var Rigs = function() {
-  this._rigs = [];
-}
+!function (export, $) {
 
-Rigs.prototype.add = function (rigId) {
-  this._rigs[rigId] = [];
-}
-
-Rigs.prototype.generateOverview = function() {
-  $.ajax({
-      type: 'post',
-      data : {
-          type: 'miners',
-          action: 'overview'
-      }
-      url: 'ajax.php',
-      dataType: 'json'
-  });
-
-  var overview = $('#overview');
-  var overviewTableData = '';
-  for (index = 0; index < a.length; ++index) {
-
+  var Rigs = function() {
+    this._rigs = [];
   }
 
-  $('#overview .panel-body-overview div table tbody').append();
-}
+  Rigs.prototype.add = function (rigId) {
+    this._rigs[rigId] = [];
+  }
+
+  Rigs.prototype.generateOverview = function() {
+    $.ajax({
+        type: 'post',
+        data : {
+            type: 'miners',
+            action: 'overview'
+        }
+        url: 'ajax.php',
+        dataType: 'json'
+    });
+
+    var overview = $('#overview');
+    var overviewTableData = '';
+    for (index = 0; index < a.length; ++index) {
+
+    }
+
+    $('#overview .panel-body-overview div table tbody').append();
+  }
+
+  export.Rigs = Rigs
+
+}(window, window.jQuery)
