@@ -1,4 +1,4 @@
-!function (export, $) {
+!function (root, $) {
 
   var Rigs = function() {
     this._rigs = [];
@@ -28,6 +28,6 @@
     $('#overview .panel-body-overview div table tbody').append();
   }
 
-  export.Rigs = Rigs
+  root.Rigs = Rigs
 
 }(window, window.jQuery)
