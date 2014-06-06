@@ -4,13 +4,13 @@
     this.collection = []
   }
 
-  RigCollection.prototype.add = function(rig) {
+  RigCollection.prototype.add = function (rig) {
     this.collection.push(rig)
   }
 
-  Rig.prototype.update = function () {}
+  RigCollection.prototype.update = function () {}
 
-  RigCollection.prototype.generateOverview = function() {
+  RigCollection.prototype.generateOverview = function () {
 
     var overview = $('#overview')
     var overviewTableData = ''
@@ -27,8 +27,6 @@
 
     $('#overview .panel-body-overview div table tbody').append()
   }
-
-  // $(document).on('update.rigs', update)
 
   root.RigCollection = RigCollection
 
