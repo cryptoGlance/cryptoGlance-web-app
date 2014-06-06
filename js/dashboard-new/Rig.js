@@ -1,7 +1,7 @@
 /**
 
   TODO:
-  - continue breaking apart old rigs.js
+  - continue breaking apart old rigs.js (stopped at line 172)
   - finish creating rest of public methods
   - finish creating rest of private methods
 
