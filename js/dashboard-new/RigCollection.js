@@ -1,8 +1,20 @@
+/**
+
+  TODO:
+  - continue breaking apart old rigs.js
+  - setup data synchronization of RigCollection overview
+
+**/
+
 !function (root, $) {
+
+  /*==========  RigCollection object/class/constructor  ==========*/
 
   var RigCollection = function () {
     this.collection = []
   }
+
+  /*==========  Public methods  ==========*/
 
   RigCollection.prototype.add = function (rig) {
     this.collection.push(rig)
@@ -27,6 +39,11 @@
 
     $('#overview .panel-body-overview div table tbody').append()
   }
+
+  /*==========  Private methods  ==========*/
+
+
+  /*==========  Export RigCollection  ==========*/
 
   root.RigCollection = RigCollection
 
