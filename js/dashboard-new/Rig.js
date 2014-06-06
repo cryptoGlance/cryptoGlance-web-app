@@ -90,19 +90,14 @@
           stats += this._buildStat(key, summary[key], 'danger', ((summary[key]/totalShares) * 100).toFixed(0))
           break
         case 'hashrate_5s':
+          hashrateCollection[this.rigId] = summary[key]
         case 'hashrate_avg':
           stats += this._buildStat(key, this._getSpeed(summary[key]), null, null)
           break
         default:
           stats += this._buildStat(key, summary[key], null, null)
       }
-
     }
-    // if (k == 'hashrate_5s' || k == 'hashrate_avg') {
-    //     if (k == 'hashrate_5s') {
-    //         hashrateCollection[rigId] = v;
-    //     }
-    // }
 
     $summaryContentTab.append(stats)
   }
