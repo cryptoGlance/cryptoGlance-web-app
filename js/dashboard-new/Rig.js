@@ -13,27 +13,6 @@
     this.$rigEl.removeClass('panel-warning panel-danger')
   }
 
-  Rig.prototype.update = function () {}
-
-  Rig.prototype.generateOverview = function() {
-    $.ajax({
-        type: 'post',
-        data : {
-          type: 'miners',
-          action: 'overview'
-        },
-        url: 'ajax.php',
-        dataType: 'json'
-    });
-
-    var overview = $('#overview')
-    var overviewTableData = ''
-
-    $('#overview .panel-body-overview div table tbody').append()
-  }
-
-  $(document).on('update.rigs', update)
-
   root.Rig = Rig
 
 }(window, window.jQuery)
