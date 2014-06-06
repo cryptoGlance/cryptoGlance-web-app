@@ -1,7 +1,7 @@
 /**
 
   TODO:
-  - continue breaking apart old rigs.js (stopped at line 172)
+  - continue breaking apart old rigs.js (stopped at line 190)
   - setup data synchronization of RigCollection overview
 
 **/
