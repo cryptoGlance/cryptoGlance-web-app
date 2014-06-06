@@ -94,7 +94,7 @@
           stats += this._buildStat(key, this._getSpeed(summary[key]), null, null)
           break
         default:
-
+          stats += this._buildStat(key, summary[key], null, null)
       }
 
     }
