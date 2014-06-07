@@ -10,6 +10,7 @@
   /*=====================================================
   =            Util Class/Object/Constructor            =
   =====================================================*/
+
   var Util = function () {
     throws 'Error:: Util is an abstract class, and should not be instantiated!'
   }
@@ -20,6 +21,7 @@
   /*===========================================
   =            Util Public Methods            =
   ===========================================*/
+
   Util.getSpeed = function (value) {
     if (value < 1) {
       return(value * 1000) + ' KH/S';
