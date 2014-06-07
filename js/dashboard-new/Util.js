@@ -12,7 +12,7 @@
   =====================================================*/
 
   var Util = function () {
-    throws 'Error:: Util is an abstract class, and should not be instantiated!'
+    throw 'Error:: Util is an abstract class, and should not be instantiated!'
   }
 
   /*-----  End of Util Class/Object/Constructor  ------*/
