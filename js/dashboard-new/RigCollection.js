@@ -69,30 +69,52 @@
 
 }(window, window.jQuery)
 
-$(rigNavElm).find('li:eq('+ selectedNav +')').addClass('active');
-        $(rigTabContentElm).find('.tab-pane:eq('+ selectedNav +')').addClass('active');
+$rigNavEl.find('li:eq('+ selectedNav +')').addClass('active');
+$rigTabContentEl.find('.tab-pane:eq('+ selectedNav +')').addClass('active');
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            var siteLayout = $.cookie('use_masonry_layout');
-            if (siteLayout == 'yes') {
-                initMasonry();
-            }
-        });
+$(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (evt) {
+    var siteLayout = $.cookie('use_masonry_layout');
+    if (siteLayout == 'yes') {
+        initMasonry();
+    }
+});
 
-        // Update Overview Panel
-        if (rig.summary.hashrate_5s < 1) {
-            rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1000) + ' KH/S';
-        } else if (rig.summary.hashrate_5s > 1000) {
-            rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s / 1000).toFixed(2) + ' GH/S';
-        } else {
-            rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
-        }
+// Update Overview Panel
+if (rig.summary.hashrate_5s < 1) {
+    rig.summary.hashrate_5s = (rig.summary.hashrate_5s * 1000) + ' KH/S';
+} else if (rig.summary.hashrate_5s > 1000) {
+    rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s / 1000).toFixed(2) + ' GH/S';
+} else {
+    rig.summary.hashrate_5s = parseFloat(rig.summary.hashrate_5s).toFixed(2) + ' MH/S';
+}
 
-        // update overview
-        if (rigOverviewRow.length == 0) {
-            $(overviewTable).append('<tr data-rig="'+ rigId +'"></tr>');
-            rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable)
-        }
-        $(rigOverviewRow).html('<td><i class="icon icon-'+ rigIcon +' '+ rigStatus +'"></i></td><td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' '+ rigStatus +'">'+ $('h1', rigElm).html() +'</a></td><td>'+ rig.summary.hashrate_5s +'</td><td>'+ rig.summary.active_mining_pool +'</td><td>'+ rig.summary.uptime +'</td>');
+// update overview
+if ($rigOverviewRow.length == 0) {
+    $overviewTable.append('<tr data-rig="'+ rigId +'"></tr>');
+    rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable)
+}
+rigOverviewRow = '<td><i class="icon icon-'+ rigIcon +' '+ rigStatus +'"></i></td>' +
+                 '<td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' '+ rigStatus +'">'+ $('h1', rigElm).html() +'</a></td>' +
+                 '<td>'+ rig.summary.hashrate_5s +'</td>' +
+                 '<td>'+ rig.summary.active_mining_pool +'</td>' +
+                 '<td>'+ rig.summary.uptime +'</td>'
+$rigOverviewRow.html(rigOverviewRow)
 
-        $(summaryContentTabTable).show();
+$summaryContentTabTable.show();
+
+ // Total amount of hash power
+    overallHashrate = 0;
+    for (key in hashrateCollection) {
+        overallHashrate += parseFloat(hashrateCollection[key]);
+    }
+    if (overallHashrate < 1) {
+        overallHashrate *= 1000;
+        overallHashrateMetric = 'KH/S';
+    } else if (overallHashrate > 1000) {
+        overallHashrate /= 1000;
+        overallHashrateMetric = 'GH/s';
+    } else {
+        overallHashrateMetric = 'MH/s';
+    }
+    $('.total-hashrate').html(overallHashrate.toFixed(2) + ' <small>'+ overallHashrateMetric +'</small>');
+    document.title = overallHashrate.toFixed(2) + ' ' + overallHashrateMetric + ' | ' + documentTitle
