@@ -4,40 +4,40 @@
 !function (root, $) {
 
   /*==========================================================
-  =            RigDevice Class/Object/Constructor            =
+  =            Device Class/Object/Constructor            =
   ==========================================================*/
 
-  var RigDevice = function () {
+  var Device = function () {
 
   }
 
-  /*-----  End of RigDevice Class/Object/Constructor  ------*/
+  /*-----  End of Device Class/Object/Constructor  ------*/
 
 
   /*================================================
-  =            RigDevice Public Methods            =
+  =            Device Public Methods            =
   ================================================*/
 
 
 
-  /*-----  End of RigDevice Public Methods  ------*/
+  /*-----  End of Device Public Methods  ------*/
 
 
   /*=================================================
-  =            RigDevice Private Methods            =
+  =            Device Private Methods            =
   =================================================*/
 
 
 
-  /*-----  End of RigDevice Private Methods  ------*/
+  /*-----  End of Device Private Methods  ------*/
 
 
   /*========================================
-  =            RigDevice export            =
+  =            Device export            =
   ========================================*/
 
-  root.RigDevice = RigDevice
+  root.Device = Device
 
-  /*-----  End of RigDevice export  ------*/
+  /*-----  End of Device export  ------*/
 
 } (window, window.jQuery)
