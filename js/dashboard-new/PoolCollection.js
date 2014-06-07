@@ -11,7 +11,9 @@
   =            PoolCollection Class/Object/Constructor            =
   ===============================================================*/
 
-  var PoolCollection = function () {}
+  var PoolCollection = function () {
+    this.collection = []
+  }
 
   /*-----  End of PoolCollection Class/Object/Constructor  ------*/
 
@@ -20,7 +22,13 @@
   =            PoolCollection Public Methods            =
   =====================================================*/
 
+  PoolCollection.prototype.add = function(poolId) {
+    this.collection.push(new Pool(poolId))
+  }
 
+  PoolCollection.prototype.update = function() {
+
+  }
 
   /*-----  End of PoolCollection Public Methods  ------*/
 
