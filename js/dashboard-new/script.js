@@ -1,18 +1,27 @@
 !function ($){
 
-  /*==========  Rig collection init  ==========*/
+  /*=========================================
+  =            Start the Rigs...            =
+  =========================================*/
+
   var rigs = new RigCollection()
 
   $('.panel-rig').each(function(index) {
     var rigId = this.getAttribute('data-id')
-    var rig = new Rig(rigId)
-    rigs.add(rig)
+    rigs.add(rigId)
   })
 
-  rigs.generateOverview()
+  rigs.start()
+
+  // long polling (yuck!)
+  setInterval(rigs.update, 5000)
+
+  /*-----  End of Start the Rigs...  ------*/
 
 
-  /*==========  Button event handlers  ==========*/
+  /*=============================================
+  =            Global Event Handling            =
+  =============================================*/
 
   $(document)
   // Manage Rig
@@ -96,4 +105,14 @@
       dataType: 'json'
     })
   })
+
+  .on('shown.bs.tab', 'a[data-toggle="tab"]', function (evt) {
+    var siteLayout = $.cookie('use_masonry_layout');
+    if (siteLayout == 'yes') {
+        initMasonry();
+    }
+  })
+
+  /*-----  End of Global Event Handling  ------*/
+
 }(window.jQuery)
