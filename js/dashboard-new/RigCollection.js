@@ -8,13 +8,20 @@
 
 !function (root, $) {
 
-  /*==========  RigCollection object/class/constructor  ==========*/
+  /*==============================================================
+  =            RigCollection Class/Object/Constructor            =
+  ==============================================================*/
 
   var RigCollection = function () {
     this.collection = []
   }
 
-  /*==========  Public methods  ==========*/
+  /*-----  End of RigCollection Class/Object/Constructor  ------*/
+
+
+  /*====================================================
+  =            RigCollection Public Methods            =
+  ====================================================*/
 
   RigCollection.prototype.add = function (rig) {
     this.collection.push(rig)
@@ -40,11 +47,24 @@
     $('#overview .panel-body-overview div table tbody').append()
   }
 
-  /*==========  Private methods  ==========*/
+  /*-----  End of RigCollection Public Methods  ------*/
 
 
-  /*==========  Export RigCollection  ==========*/
+  /*=====================================================
+  =            RigCollection Private Methods            =
+  =====================================================*/
+
+
+
+  /*-----  End of RigCollection Private Methods  ------*/
+
+
+  /*============================================
+  =            RigCollection Export            =
+  ============================================*/
 
   root.RigCollection = RigCollection
+
+  /*-----  End of RigCollection Export  ------*/
 
 }(window, window.jQuery)
