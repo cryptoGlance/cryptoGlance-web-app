@@ -90,19 +90,19 @@
     for (var key in summary) {
       switch (key) {
         case 'accepted':
-          stats += this._buildStat(key, summary[key], 'success', ((summary[key]/totalShares) * 100).toFixed(0))
+          stats += Util.buildStat(key, summary[key], 'success', ((summary[key]/totalShares) * 100).toFixed(0))
           break
         case 'rejected':
         case 'stale':
-          stats += this._buildStat(key, summary[key], 'danger', ((summary[key]/totalShares) * 100).toFixed(0))
+          stats += Util.buildStat(key, summary[key], 'danger', ((summary[key]/totalShares) * 100).toFixed(0))
           break
         case 'hashrate_5s':
           hashrateCollection[this.rigId] = summary[key]
         case 'hashrate_avg':
-          stats += this._buildStat(key, this._getSpeed(summary[key]), null, null)
+          stats += Util.buildStat(key, Util.getSpeed(summary[key]), null, null)
           break
         default:
-          stats += this._buildStat(key, summary[key], null, null)
+          stats += Util.buildStat(key, summary[key], null, null)
       }
     }
 
@@ -117,27 +117,7 @@
   =            Rig Private Methods            =
   ===========================================*/
 
-  Rig.prototype._getSpeed = function (value) {
-    if (value < 1) {
-      return(value * 1000) + ' KH/S';
-    }
-    else if (value > 1000) {
-      return parseFloat(value/1000).toFixed(2) + ' GH/S';
-    } else {
-      return parseFloat(value).toFixed(2) + ' MH/S';
-    }
-  }
 
-  Rig.prototype._buildStat = function (name, value, progress, share) {
-    return '<div class="stat-pair">' +
-            '<div class="stat-value">' + value + '</div>' +
-            '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
-            '<div class="progress progress-striped">' +
-            '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share +'%">' +
-            '</div>' +
-            '</div>' +
-            '</div>'
-  }
 
   /*-----  End of Rig Private Methods  ------*/
 
