@@ -126,14 +126,14 @@
     for (var key in devices) {
       switch (key) {
         case 'temperature':
-          deviceTabs += this._buildStat(devices[key] + '&deg;C', key, null, null)
+          deviceTabs += Util.buildStat(devices[key] + '&deg;C', key, null, null)
           break
         case 'hashrate_5s':
         case 'hashrate_avg':
-          deviceTabs += this._buildStat(key, this._getSpeed(devices[key]), null, null)
+          deviceTabs += Util.buildStat(key, Util.getSpeed(devices[key]), null, null)
           break
         default:
-          deviceTabs += this._buildStat(key, devices[key], null, null)
+          deviceTabs += Util.buildStat(key, devices[key], null, null)
       }
     }
 
@@ -141,7 +141,7 @@
 
     // Update Summary Page of DEVs
     if (!removeTable) {
-      dev.hashrate_5s = this._getSpeed(dev.hashrate_5s)
+      dev.hashrate_5s = Util.getSpeed(dev.hashrate_5s)
 
     $summaryContentTabTableBody.append('<tr>' +
                                          '<td><i class="icon icon-'+ icon +' '+status+'"></i></td>' +
