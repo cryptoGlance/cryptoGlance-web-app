@@ -10,21 +10,39 @@
 
 !function (root, $) {
 
-  /*==========  Rig object/class/constructor  ==========*/
+  /*===================================================
+  =            Rig Class/Object/Constructor            =
+  ===================================================*/
 
   var Rig = function (rigId) {
+
+    /* Rig properties */
     this.rigId            = rigId
     this.$rigEl           = $('#rig-' + rigId)
     this.$rigNavEl        = this.$rigEl.find('.nav')
     this.$rigTabContentEl = this.$rigEl.find('.tab-content')
     this.$rigTitle        = this.$rigEl.find('h1')
     this.$rigOverviewRow  = $('tr[data-rig="'+ rigId +'"]', overviewTable)
+    this.health           = 'Happy'
     this.status           = 'green'
     this.icon             = 'check'
     this.panel            = ''
+
+    /* Rig constants */
+    this.HEAT_WARNING     = root.devHeatWarning;
+    this.HEAT_DANGER      = root.devHeatDanger;
+    this.HW_ENABLED       = root.devHWEnabled;
+    this.HW_WARNING       = root.devHWWarning;
+    this.HW_DANGER        = root.devHWDanger;
+    this.UPDATE_INTERVAL  = root.rigUpdateTime;
   }
 
-  /*==========  Public methods  ==========*/
+  /*-----  End of Rig Class/Object/Constructor  ------*/
+
+
+  /*==========================================
+  =            Rig Public Methods            =
+  ==========================================*/
 
   Rig.prototype.start = function () {
 
@@ -107,8 +125,12 @@
     this._updateDevices(devices)
   }
 
+  /*-----  End of Rig Public Methods  ------*/
 
-  /*==========  Private methods  ==========*/
+
+  /*===========================================
+  =            Rig Private Methods            =
+  ===========================================*/
 
   Rig.prototype._getSpeed = function (value) {
     if (value < 1) {
@@ -157,101 +179,140 @@
     }
 
     // Update Devices
-    $.each(rig.devs, function (devType, devTypes) {
-        $.each(devTypes, function (devIndex, dev) {
-            // Status colours
-            var status = dev.health;
-            var icon = '';
-            if (dev.enabled == 'N') {
-                status = 'grey';
-                icon = 'ban-circle';
-                rigPanel = 'offline';
-            } else if (status == 'Dead' || (devHWEnabled && dev.hw_errors >= devHWDanger)) {
-                status = 'red';
-                icon = 'danger';
-                rigStatus = 'red';
-                rigIcon = 'danger';
-                rigPanel = 'danger';
-            } else if (status == 'Sick' || (devHWEnabled && dev.hw_errors >= devHWWarning)) {
-                status = 'orange';
-                icon = 'warning-sign';
-                if (rigIcon != 'danger') {
-                    rigStatus = 'orange';
-                    rigIcon = 'warning-sign';
-                    rigPanel = 'warning';
-                }
-            } else if (devHeatDanger <= dev.temperature) {
-                status = 'red';
-                icon = 'hot';
-                if (rigIcon != 'danger' && rigIcon != 'warning-sign') {
-                    rigStatus = 'red';
-                    rigIcon = 'hot';
-                    rigPanel = 'danger';
-                }
-            } else if (devHeatWarning <= dev.temperature) {
-                status = 'orange';
-                icon = 'fire';
-                if (rigIcon != 'danger' && rigIcon != 'warning-sign' && rigIcon != 'hot') {
-                    rigStatus = 'orange';
-                    rigIcon = 'fire';
-                    rigPanel = 'warning';
-                }
-            } else {
-                status = 'green';
-                icon = 'cpu-processor';
-            }
-
-            if (rigPanel != '') {
-                $(rigElm).addClass('panel-' + rigPanel);
-            }
-
-            // add dev to Nav
-            $(rigNavElm).append('<li><a class="rig-'+ rigId +'-'+ devType +'-'+ devIndex +' '+ status +'" href="#rig-'+ rigId +'-'+ devType +'-'+ devIndex +'" data-toggle="tab">'+ devType + devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
-            $(rigTabContentElm).find('#rig-'+ rigId +'-'+ devType +'-'+ devIndex).remove();
-            $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig-'+ rigId +'-'+ devType +'-'+ devIndex +'"><div class="panel-body panel-body-stats"></div></div>');
-
-            // Updating DEV Content Tab
-            var devContentTab = $(rigTabContentElm).find('#rig-' + rigId + '-'+ devType +'-' + dev.id).find('.panel-body-stats');
-            $(devContentTab).find('div').remove();
-            $.each(dev, function(k, v) {
-                if (k != 'id' && k != 'enabled') {
-                    if (k == 'temperature') {
-                        v = v + '&deg;C';
-                    } else if (k == 'hashrate_5s' || k == 'hashrate_avg') {
-                        if (v < 1) {
-                            v = (v*1000) + ' KH/S';
-                        } else if (v > 1000) {
-                            v = parseFloat(v/1000).toFixed(2) + ' GH/S';
-                        } else {
-                            v = v + ' MH/S';
-                        }
-                    }
-
-                    $(devContentTab).append('<div class="stat-pair"><div class="stat-value">'+v+'</div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
-                }
-            });
-
-            // Update Summary Page of DEVs
-            if (!removeTable) {
-                if (dev.hashrate_5s < 1) {
-                    dev.hashrate_5s = (dev.hashrate_5s*1000) + ' KH/S';
-                } else if (dev.hashrate_5s > 1000) {
-                    dev.hashrate_5s = parseFloat(dev.hashrate_5s/1000).toFixed(2) + ' GH/S';
-                } else {
-                    dev.hashrate_5s += ' MH/S';
-                }
-
-                $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType + dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
-            }
-
-        });
-    });
-
+    this._checkDeviceStatus(devices)
   }
 
+  Rig.prototype._registerDevice = function(device) {
+    // body...
+  };
 
-  /*==========  Export Rig constructor  ==========*/
+  Rig.prototype._setDeviceStatus = function(status) {
+    switch (status) {
+      case 'disabled':
+        this.status = 'grey'
+        this.icon = 'ban-circle'
+        this.panel = 'offline'
+        break
+      case 'dead':
+        this.status = 'red'
+        this.icon = 'danger'
+        this.panel = 'danger'
+        break
+      case 'sick':
+        this.status = 'orange';
+        this.icon = 'warning-sign';
+        this.panel = 'warning';
+        break
+      case 'hot':
+        this.status = 'red';
+        this.icon = 'hot';
+        this.panel = 'danger';
+        break
+      case 'warm':
+        this.status = 'orange';
+        this.icon = 'fire';
+        this.panel = 'warning';
+        break
+      default:
+        this.status = 'green'
+        this.icon = 'cpu-processor'
+        this.panel = ''
+    }
+  }
+
+  Rig.prototype._checkDeviceStatus = function(devices) {
+    var deviceList = ''
+    var deviceTabToRemove = []
+    var deviceTabs = ''
+    var deviceTabsContent = ''
+    this.icon = 'cpu-processor'
+    this.panel = ''
+    for (var deviceType in devices) {
+      for (var deviceIndex in devices[deviceType]) {
+        // Status colours
+        this.health = deviceIndex.health
+        if (deviceIndex.enabled === 'N') {
+          this._setDeviceStatus('disabled')
+        }
+        else if (this.health === 'Dead' || (this.HW_ENABLED && dev.hw_errors >= this.HW_DANGER)) {
+          this._setDeviceStatus('dead')
+        }
+        else if (this.health === 'Sick' || (this.HW_ENABLED && dev.hw_errors >= this.HW_WARNING)) {
+          this._setDeviceStatus('sick')
+        }
+        else if (this.HEAT_DANGER <= deviceIndex.temperature) {
+          this._setDeviceStatus('hot')
+        }
+        else if (this.HEAT_WARNING <= deviceIndex.temperature) {
+          this._setDeviceStatus('warm')
+        }
+
+        deviceList += '<li>' +
+                      '<a class="rig-' + this.rigId + '-' + deviceType + '-' + deviceIndex + ' ' + this.status + '" href="#rig-' + this.rigId  + '-' + deviceType + '-' + deviceIndex + '" data-toggle="tab">' + deviceType + deviceIndex + ' ' +
+                      '<i class="icon icon-'+ this.icon +'"></i>' +
+                      '</a>' +
+                      '</li>'
+        deviceTabToRemove.push('#rig-'+ this.rigId +'-'+ deviceType +'-'+ deviceIndex)
+        deviceTabsContent += '<div class="tab-pane fade in" id="rig-'+ this.rigId +'-'+ deviceType +'-'+ deviceIndex +'">' +
+                      '<div class="panel-body panel-body-stats"></div>' +
+                      '</div>'
+      }
+    }
+
+    if (this.panel !== '') {
+      this.$rigEl.addClass('panel-' + this.panel);
+    }
+
+    // add dev to Nav
+    this.$rigNavEl.append(deviceList)
+    this.$rigTabContentEl.find(deviceTabToRemove).remove()
+    this.$rigTabContentEl.append(deviceTabsContent)
+
+    // Updating DEV Content Tab
+    var $devContentTab = this.$rigTabContentEl.find('#rig-' + this.rigId + '-'+ deviceType +'-' + device.id).find('.panel-body-stats')
+    $devContentTab.find('div').remove()
+    for (var key in devices) {
+      switch (key) {
+        case 'temperature':
+          deviceTabs += this._buildStat(devices[key] + '&deg;C', key, null, null)
+          break
+        case 'hashrate_5s':
+        case 'hashrate_avg':
+          deviceTabs += this._buildStat(key, this._getSpeed(devices[key]), null, null)
+          break
+        default:
+          deviceTabs += this._buildStat(key, devices[key], null, null)
+      }
+    }
+
+    $devContentTab.append(deviceTabs)
+
+    // Update Summary Page of DEVs
+    if (!removeTable) {
+      dev.hashrate_5s = this._getSpeed(dev.hashrate_5s)
+
+    $summaryContentTabTableBody.append('<tr>' +
+                                         '<td><i class="icon icon-'+ icon +' '+status+'"></i></td>' +
+                                         '<td class="'+status+'">'+ devType + dev.id+'</td>' +
+                                         '<td>'+dev.temperature+'&deg;C</td>' +
+                                         '<td>'+dev.hashrate_5s+'</td>' +
+                                         '<td>'+dev.accepted+'</td>' +
+                                         '<td>'+dev.rejected+'</td>' +
+                                         '<td>'+dev.utility+'</td>' +
+                                         '<td>'+dev.hw_errors+'</td>' +
+                                         '</tr>')
+    }
+  }
+
+  /*-----  End of Rig Private Methods  ------*/
+
+
+  /*==================================
+  =            Rig Export            =
+  ==================================*/
 
   root.Rig = Rig
+
+  /*-----  End of Rig Export  ------*/
 
 }(window, window.jQuery)
