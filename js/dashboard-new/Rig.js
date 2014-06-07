@@ -18,7 +18,9 @@
     this.$rigNavEl        = this.$rigEl.find('.nav')
     this.$rigTabContentEl = this.$rigEl.find('.tab-content')
     this.$rigTitle        = this.$rigEl.find('h1')
-    this.$rigOverviewRow  = $('tr[data-rig="'+ rigId +'"]', overviewTable)
+    this.$overview        = $('#overview')
+    this.$overviewTable   = this.$overview.find('.panel-body-overview div table tbody');
+    this.$rigOverviewRow  = this.$overviewTable.find('tr[data-rig="'+ rigId +'"]')
     this.deviceCollection = []
   }
 
@@ -36,19 +38,17 @@
       this.$rigNavEl.hide()
       this.$rigTabContentEl.hide()
 
-      // if (this.$rigOverviewRow.length == 0) {
-      //   $(overviewTable).append('<tr data-rig="'+ rigId +'"></tr>');
-      //   rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable)
-      // }
-      // $(rigOverviewRow).html('<td><i class="icon icon-ban-circle grey"></i></td>' +
-      //                        '<td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' grey">'+ $('h1', rigElm).html().replace(' - OFFLINE', '') +'</a></td>' +
-      //                        '<td>--</td>' +
-      //                        '<td>--</td>' +
-      //                        '<td>--</td>')
+      if (this.$rigOverviewRow.length == 0) {
+        $this.overviewTable.append('<tr data-rig="'+ this.rigId +'"></tr>')
+      }
+      this.$rigOverviewRow.html('<td><i class="icon icon-ban-circle grey"></i></td>' +
+                                '<td><a href="#rig-'+ this.rigId +'" class="anchor-offset rig-'+ this.rigId +' grey">'+ this.$rigTitle.html().replace(' - OFFLINE', '') +'</a></td>' +
+                                '<td>--</td>' +
+                                '<td>--</td>' +
+                                '<td>--</td>')
 
       this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
       this.$rigEl.find('.btn-manage-rig').hide()
-      return true
     }
     else {
       this.$rigEl.find('.toggle-panel-body, .panel-footer').show();
@@ -106,8 +106,12 @@
       }
     }
 
+    this.clearNav()
     $summaryContentTab.append(stats)
     this._updateDevices(devices)
+
+    this.$rigNavEl.find('li:eq('+ selectedNav +')').addClass('active');
+    this.$rigTabContentEl.find('.tab-pane:eq('+ selectedNav +')').addClass('active');
   }
 
   /*-----  End of Rig Public Methods  ------*/
