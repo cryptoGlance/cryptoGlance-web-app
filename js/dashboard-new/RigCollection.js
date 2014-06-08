@@ -17,7 +17,8 @@
     this.overallHashrate = 0
 
     this.$overview = $('#overview')
-    var overviewTableData = ''
+    this.$overviewTable = $('#overview-table')
+    this.overviewTableData = ''
   }
 
   /*-----  End of RigCollection Class/Object/Constructor  ------*/
@@ -38,6 +39,7 @@
   }
 
   RigCollection.prototype.update = function () {
+    var _self = this
     $.ajax({
       type: 'post',
       data : {
@@ -48,36 +50,23 @@
       dataType: 'json'
     })
     .done(function (data) {
+      data.forEach(function (overview, index) {
+      _self.overviewTableData += '<tr data-rig="'+ index +'">' +
+                                 '<td><i class="icon icon-'+ overview.status_icon +' '+ overview.status_colour +'"></i></td>' +
+                                 '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ overview.status_colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
+                                 '<td>'+ overview.hashrate_5s +'</td>' +
+                                 '<td>'+ overview.active_pool.url +'</td>' +
+                                 '<td>'+ overview.uptime +'</td>' +
+                                 '</tr>'
+      _self.overallHashrate += Util.extractHashRate(overview.hashrate_5s)
+      })
 
-      $('#overview .panel-body-overview div table tbody').append()
+      _self.$overviewTable.find('tbody').html(rigOverviewRow)
 
-      // Update Overview Panel
-      rig.summary.hashrate_5s = Util.getSpeed(rig.summary.hashrate_5s =)
+      $summaryContentTabTable.show()
 
-
-      // update overview
-      if ($rigOverviewRow.length == 0) {
-          $overviewTable.append('<tr data-rig="'+ rigId +'"></tr>');
-          rigOverviewRow = $('tr[data-rig="'+ rigId +'"]', overviewTable)
-      }
-      rigOverviewRow = '<td><i class="icon icon-'+ rigIcon +' '+ rigStatus +'"></i></td>' +
-                       '<td><a href="#rig-'+ rigId +'" class="anchor-offset rig-'+ rigId +' '+ rigStatus +'">'+ $('h1', rigElm).html() +'</a></td>' +
-                       '<td>'+ rig.summary.hashrate_5s +'</td>' +
-                       '<td>'+ rig.summary.active_mining_pool +'</td>' +
-                       '<td>'+ rig.summary.uptime +'</td>'
-      $rigOverviewRow.html(rigOverviewRow)
-
-      $summaryContentTabTable.show();
-
-       // Total amount of hash power
-      for (key in hashrateCollection) {
-          overallHashrate += parseFloat(hashrateCollection[key]);
-      }
-
-      overallHashrate = Util.getSpeed(overallHashrate)
-
-      $('.total-hashrate').html(overallHashrate);
-      document.title = overallHashrate + ' | Dashboard :: cryptoGlance'
+      $('.total-hashrate').html(Util.getSpeed(this.overallHashrate))
+      this._updateDocumentTitle(Util.getSpeed(this.overallHashrate))
 
     })
   }
@@ -89,7 +78,9 @@
   =            RigCollection Private Methods            =
   =====================================================*/
 
-
+  RigCollection.prototype._updateDocumentTitle = function (str) {
+    document.title = str + ' | Dashboard :: cryptoGlance'
+  }
 
   /*-----  End of RigCollection Private Methods  ------*/
 
