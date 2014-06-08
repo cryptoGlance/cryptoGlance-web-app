@@ -9,3 +9,4 @@ vectorstock/
 web.config
 *.bak
 Thumbs.db
+example-*.*
