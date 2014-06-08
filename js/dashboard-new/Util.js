@@ -7,15 +7,15 @@
 
 !function (root, $) {
 
-  /*=====================================================
-  =            Util Class/Object/Constructor            =
-  =====================================================*/
+  /*===============================================
+  =            Util Abstract Singleton            =
+  ===============================================*/
 
   var Util = function () {
     throw 'Error:: Util is an abstract class, and should not be instantiated!'
   }
 
-  /*-----  End of Util Class/Object/Constructor  ------*/
+ /*-----  End of Util Abstract Singleton  ------*/
 
 
   /*===========================================
@@ -43,7 +43,40 @@
             '</div>' +
             '</div>'
   }
+  Util.extractHashrate = function (hashrate) {
+    if ('number' === typeof hashrate) {
+      return hashrate
+    }
 
+    var regex = /^(\d{1,})\s?(KH\/s|MH\/s|GH\/s)$/gi
+    var value
+    var unit
+
+    if (regex.test(hashrate)) {
+      var matches = hashrate.replace(regex, function (arr, v, u) {
+          value = parseFloat(v)
+          unit = u.toLowerCase()
+          return arr
+      })
+
+      switch (unit) {
+        case 'gh/s':
+          value = value * 1e6
+          break
+        case 'mh/s':
+          value = value * 1e3
+          break
+        case 'kh/s':
+        default:
+          value = value
+      }
+
+      return value
+    }
+    else {
+      throw 'Error:: invalid value for parameter {hashrate}'
+    }
+  }
 
   /*-----  End of Util Public Methods  ------*/
 
