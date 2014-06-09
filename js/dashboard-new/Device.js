@@ -7,11 +7,13 @@
 
 !function (root, $) {
 
+  'use strict';
+
   /*==========================================================
   =            Device Class/Object/Constructor            =
   ==========================================================*/
 
-  var Device = function () {
+  var Device = function (deviceID) {
     /* Device constants */
     this.HEAT_WARNING     = root.devHeatWarning;
     this.HEAT_DANGER      = root.devHeatDanger;
@@ -19,9 +21,20 @@
     this.HW_WARNING       = root.devHWWarning;
     this.HW_DANGER        = root.devHWDanger;
     this.UPDATE_INTERVAL  = root.rigUpdateTime;
+    this.TAB_HEADER       = '<tr>' +
+                            '<th></th>' +
+                            '<th>DEV #</th>' +
+                            '<th>Temperature</th>' +
+                            '<th>Hashrate 5s</th>' +
+                            '<th>Accepted</th>' +
+                            '<th>Rejected</th>' +
+                            '<th>Utility</th>' +
+                            '<th>HW Errors</th>' +
+                            '</tr>'
 
     /* Device properties*/
-    this.health = 'Happy'
+    this.id     = deviceID
+    this.health = 'Alive'
     this.status = 'green'
     this.icon   = 'check'
     this.panel  = ''
@@ -45,24 +58,15 @@
 
 
   Device.prototype._updateDevices = function (devices) {
-    var $summaryContentTabTable = this.$rigTabContentEl.find('#rig-' + rigId + '-summary').find('.table-summary')
-    var $summaryContentTabTableHead = this.$rigTabContentEl.find('thead')
-    var $summaryContentTabTableBody = this.$rigTabContentEl.find('tbody')
-    var removeTable = false
-    $summaryContentTabTable.find('tr').remove()
+    // var $summaryContentTabTable = this.$rigTabContentEl.find('#rig-' + rigId + '-summary').find('.table-summary')
+    // var $summaryContentTabTableHead = this.$rigTabContentEl.find('thead')
+    // var $summaryContentTabTableBody = this.$rigTabContentEl.find('tbody')
+    // var removeTable = false
+    // $summaryContentTabTable.find('tr').remove()
 
     if ((typeof devices.GPU != 'undefined' && devices.GPU.length > 0) ||
          typeof devices.ASC != 'undefined' && devices.ASC.length > 0) {
-        $summaryContentTabTableHead.append('<tr>' +
-                                           '<th></th>' +
-                                           '<th>DEV #</th>' +
-                                           '<th>Temperature</th>' +
-                                           '<th>Hashrate 5s</th>' +
-                                           '<th>Accepted</th>' +
-                                           '<th>Rejected</th>' +
-                                           '<th>Utility</th>' +
-                                           '<th>HW Errors</th>' +
-                                           '</tr>');
+        $summaryContentTabTableHead.append(this.TAB_HEADER);
     } else {
       removeTable = true
       $summaryContentTabTable.remove()
@@ -112,7 +116,7 @@
     }
 
     if (this.panel !== '') {
-      this.$rigEl.addClass('panel-' + this.panel);
+      this.$rigEl.addClass('panel-' + this.panel)
     }
 
     // add dev to Nav
@@ -126,14 +130,14 @@
     for (var key in devices) {
       switch (key) {
         case 'temperature':
-          deviceTabs += Util.buildStat(devices[key] + '&deg;C', key, null, null)
+          deviceTabs += this._buildStat(devices[key] + '&deg;C', key, null, null)
           break
         case 'hashrate_5s':
         case 'hashrate_avg':
-          deviceTabs += Util.buildStat(key, Util.getSpeed(devices[key]), null, null)
+          deviceTabs += this._buildStat(key, Util.getSpeed(devices[key]), null, null)
           break
         default:
-          deviceTabs += Util.buildStat(key, devices[key], null, null)
+          deviceTabs += this._buildStat(key, devices[key], null, null)
       }
     }
 
@@ -143,17 +147,24 @@
     if (!removeTable) {
       dev.hashrate_5s = Util.getSpeed(dev.hashrate_5s)
 
-    $summaryContentTabTableBody.append('<tr>' +
-                                         '<td><i class="icon icon-'+ icon +' '+status+'"></i></td>' +
-                                         '<td class="'+status+'">'+ devType + dev.id+'</td>' +
-                                         '<td>'+dev.temperature+'&deg;C</td>' +
-                                         '<td>'+dev.hashrate_5s+'</td>' +
-                                         '<td>'+dev.accepted+'</td>' +
-                                         '<td>'+dev.rejected+'</td>' +
-                                         '<td>'+dev.utility+'</td>' +
-                                         '<td>'+dev.hw_errors+'</td>' +
+      $summaryContentTabTableBody.append('<tr>' +
+                                         '<td><i class="icon icon-'+ this.icon +' ' + thisstatus + '"></i></td>' +
+                                         '<td class="' + this.status + '">' + devType + dev.id + '</td>' +
+                                         '<td>' + dev.temperature + '&deg;C</td>' +
+                                         '<td>' + dev.hashrate_5s + '</td>' +
+                                         '<td>' + dev.accepted + '</td>' +
+                                         '<td>' + dev.rejected + '</td>' +
+                                         '<td>' + dev.utility + '</td>' +
+                                         '<td>' + dev.hw_errors + '</td>' +
                                          '</tr>')
     }
+  }
+
+  Device.prototype._buildStat = function (name, value, progress, share) {
+    return '<div class="stat-pair">' +
+           '<div class="stat-value">' + value + '</div>' +
+           '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
+           '</div>'
   }
 
   Device.prototype._registerDevice = function (device) {
