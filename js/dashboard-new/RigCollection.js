@@ -8,6 +8,8 @@
 
 !function (root, $) {
 
+  'use strict';
+
   /*==============================================================
   =            RigCollection Class/Object/Constructor            =
   ==============================================================*/
@@ -19,6 +21,7 @@
     this.$overview = $('#overview')
     this.$overviewTable = $('#overview-table')
     this.overviewTableData = ''
+    // $summaryContentTabTable.show()
   }
 
   /*-----  End of RigCollection Class/Object/Constructor  ------*/
@@ -51,22 +54,17 @@
     })
     .done(function (data) {
       data.forEach(function (overview, index) {
-      _self.overviewTableData += '<tr data-rig="'+ index +'">' +
-                                 '<td><i class="icon icon-'+ overview.status_icon +' '+ overview.status_colour +'"></i></td>' +
-                                 '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ overview.status_colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
-                                 '<td>'+ overview.hashrate_5s +'</td>' +
-                                 '<td>'+ overview.active_pool.url +'</td>' +
-                                 '<td>'+ overview.uptime +'</td>' +
-                                 '</tr>'
-      _self.overallHashrate += Util.extractHashRate(overview.hashrate_5s)
+      _self.overviewTableData += _self._buildOverviewRow(overview, index)
+      _self.overallHashrate = Util.extractHashRate(overview.hashrate_5s)
       })
 
-      _self.$overviewTable.find('tbody').html(rigOverviewRow)
+      _self.overallHashrate = Util.getSpeed(_self.overallHashrate)
 
-      $summaryContentTabTable.show()
+      _self.$overviewTable.find('tbody').html(_self.overviewTableData)
 
-      $('.total-hashrate').html(Util.getSpeed(this.overallHashrate))
-      this._updateDocumentTitle(Util.getSpeed(this.overallHashrate))
+      $('.total-hashrate').html(_self.overallHashrate)
+
+      _self._updateDocumentTitle(_self.overallHashrate)
 
     })
   }
@@ -80,6 +78,16 @@
 
   RigCollection.prototype._updateDocumentTitle = function (str) {
     document.title = str + ' | Dashboard :: cryptoGlance'
+  }
+
+  RigCollection.prototype._buildOverviewRow = function (overview, index) {
+    return '<tr data-rig="'+ index +'">' +
+           '<td><i class="icon icon-'+ overview.status_icon +' '+ overview.status_colour +'"></i></td>' +
+           '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ overview.status_colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
+           '<td>'+ overview.hashrate_5s +'</td>' +
+           '<td>'+ overview.active_pool.url +'</td>' +
+           '<td>'+ overview.uptime +'</td>' +
+           '</tr>'
   }
 
   /*-----  End of RigCollection Private Methods  ------*/
