@@ -66,7 +66,7 @@
       return value
     }
     else {
-      throw 'Error:: invalid value for parameter {hashrate}'
+      throw 'Error:: invalid value of  { ' + hashrate + ' } for parameter hashrate'
     }
   }
 

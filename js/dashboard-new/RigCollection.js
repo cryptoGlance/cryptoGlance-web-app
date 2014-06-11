@@ -19,7 +19,7 @@
     this.overallHashrate = 0
 
     this.$overview = $('#overview')
-    this.$overviewTable = $('#overview-table')
+    this.$overviewTable = $('#overview table')
     this.overviewTableData = ''
     // $summaryContentTabTable.show()
   }
@@ -37,25 +37,36 @@
 
   RigCollection.prototype.start = function() {
     this.collection.forEach(function (rig) {
-      rig.start()
+      $.ajax({
+       url: 'ajax.php',
+        data : {
+          type: 'rigs',
+          action: 'update'
+        },
+       success: rig.update,
+       dataType: 'json'
+       // complete: rig.update,
+       // timeout: rigUpdateTime
+      })
     })
   }
 
   RigCollection.prototype.update = function () {
     var _self = this
     $.ajax({
-      type: 'post',
+      // type: 'post',
       data : {
-        type: 'miners',
-        action: 'overview'
+        type: 'rigs',
+        action: 'update'
       },
       url: 'ajax.php',
       dataType: 'json'
     })
     .done(function (data) {
       data.forEach(function (overview, index) {
-      _self.overviewTableData += _self._buildOverviewRow(overview, index)
-      _self.overallHashrate = Util.extractHashRate(overview.hashrate_5s)
+      overview = overview.overview.overview // TEMP
+      _self.overviewTableData += _self._buildOverviewRow(overview, index+1)
+      _self.overallHashrate += Util.extractHashrate(overview.hashrate_5s)
       })
 
       _self.overallHashrate = Util.getSpeed(_self.overallHashrate)
