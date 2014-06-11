@@ -65,10 +65,11 @@
     })
     .done(function (data) {
       _self.overviewTableData = ''
+      _self.overallHashrate = 0
 
       data.forEach(function (overview, index) {
       overview = overview.overview.overview // TEMP
-      _self.overviewTableData += _self._buildOverviewRow(overview, index+1)
+      _self.overviewTableData += _self._buildOverviewRow(overview, index + 1)
       _self.overallHashrate += Util.extractHashrate(overview.hashrate_5s)
       })
 
