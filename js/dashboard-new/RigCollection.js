@@ -20,6 +20,7 @@
 
     this.$overview = $('#overview')
     this.$overviewTable = $('#overview table')
+    this.$overviewTableBody = $('#overview tbody')
     this.overviewTableData = ''
     // $summaryContentTabTable.show()
   }
@@ -71,7 +72,8 @@
 
       _self.overallHashrate = Util.getSpeed(_self.overallHashrate)
 
-      _self.$overviewTable.find('tbody').html(_self.overviewTableData)
+      _self.$overviewTableBody.html('')
+      _self.$overviewTableBody.html(_self.overviewTableData)
 
       $('.total-hashrate').html(_self.overallHashrate)
 
