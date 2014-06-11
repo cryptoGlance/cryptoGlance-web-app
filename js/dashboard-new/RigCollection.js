@@ -64,6 +64,8 @@
       dataType: 'json'
     })
     .done(function (data) {
+      _self.overviewTableData = ''
+
       data.forEach(function (overview, index) {
       overview = overview.overview.overview // TEMP
       _self.overviewTableData += _self._buildOverviewRow(overview, index+1)
@@ -72,7 +74,6 @@
 
       _self.overallHashrate = Util.getSpeed(_self.overallHashrate)
 
-      _self.$overviewTableBody.html('')
       _self.$overviewTableBody.html(_self.overviewTableData)
 
       $('.total-hashrate').html(_self.overallHashrate)
