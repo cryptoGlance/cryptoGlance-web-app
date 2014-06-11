@@ -149,12 +149,12 @@ class Miners_Cgminer extends Miners_Abstract {
             
             // If no hardware errors and health is okay, do temperatures
             if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
-                if ($this->_settings['temps']['danger'] >= $dev['Temperature']) {
+                if ($dev['Temperature'] >= $this->_settings['temps']['danger']) {
                     $status = array (
                         'colour' => 'red',
                         'icon' => 'hot'
                     );
-                } else if ($this->_settings['temps']['warning'] >= $dev['Temperature']) {
+                } else if ($dev['Temperature'] >= $this->_settings['temps']['warning']) {
                     $status = array (
                         'colour' => 'orange',
                         'icon' => 'fire'
