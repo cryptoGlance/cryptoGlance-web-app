@@ -15,7 +15,9 @@
   // rigs.update()
 
   // long polling (yuck!)
-  setInterval(rigs.update, 5000)
+  setInterval(function () {
+    rigs.update()
+  }, 5000)
   // setInterval(function() {
   //   ajaxUpdateCall('pool')
   // }, poolUpdateTime);
