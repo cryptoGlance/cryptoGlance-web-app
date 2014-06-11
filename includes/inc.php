@@ -2,7 +2,7 @@
 set_time_limit(15);
 ini_set("display_errors", 1);
 error_reporting(E_ERROR);
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
 session_name('cryptoGlance'); // feel free to rename this!
 

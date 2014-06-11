@@ -18,8 +18,11 @@ class Rigs {
             $rigId = intval($_GET['id']);
             $this->addRig($rigs[$rigId]['type'], $rigs[$rigId]['host'], $rigs[$rigId]['port']);
         } else if (!empty($rigs)) {
-            foreach ($rigs as $rigType => $rig) {
+            foreach ($rigs as $rigId => $rig) {
                 $name = (!empty($rig['name']) ? $rig['name'] : $rig['host']);
+                if (empty($rig['settings'])) {
+                    $rig['settings'] = array();
+                }
                 $this->addRig($rig['type'], $rig['host'], $rig['port'], $name, $rig['settings']);
             }
         }
@@ -35,14 +38,23 @@ class Rigs {
         $this->_rigs[] = $obj;
     }
     
-    // Get Overview of all Rigs
+    // Get Overview of Rigs
     public function getOverview() {
         $data = array();
         foreach ($this->_rigs as $rig) {
             $data[] = $rig->overview();
         }
         
-        return json_encode($data);
+        echo json_encode($data);
+    }
+    
+    public function getUpdate() {
+        $data = array();
+        foreach ($this->_rigs as $rig) {
+            $data[] = $rig->update();
+        }
+        
+        echo json_encode($data);
     }
     
 }
