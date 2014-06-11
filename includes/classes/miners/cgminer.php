@@ -52,6 +52,16 @@ class Miners_Cgminer extends Miners_Abstract {
         );
     }
     
+    public function update() {
+        $data = array(
+            'overview' => $this->overview(),
+            'summary' => array(),
+            'devs' => array(),
+        );
+        
+        return $data;
+    }
+    
     
     // PRIVATE
     private function cmd($cmd) {
@@ -81,10 +91,14 @@ class Miners_Cgminer extends Miners_Abstract {
             }
         }
         
-        return array(
-            'id' => $this->_pools[0]['POOL'],
-            'url' => $this->_pools[0]['Stratum URL'],
-        );
+        if (!empty($this->_pools)) {        
+            return array(
+                'id' => $this->_pools[0]['POOL'],
+                'url' => $this->_pools[0]['Stratum URL'],
+            );
+        }
+        
+        return array();
     }
     
     private function getDevStatus() {
@@ -97,7 +111,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] >= $dev['Hardware Errors']) || 
                     (
                         $this->_settings['hwErrors']['type'] == 'percent' &&
-                        $this->_settings['hwErrors']['danger']['percent'] >= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
+                        $this->_settings['hwErrors']['danger']['percent'] <= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
                     )
                 ) {
                     $status = array (
@@ -108,7 +122,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] >= $dev['Hardware Errors']) || 
                     (
                         $this->_settings['hwErrors']['type'] == 'percent' &&
-                        $this->_settings['hwErrors']['warning']['percent'] >= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
+                        $this->_settings['hwErrors']['warning']['percent'] <= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
                     )
                 ) {
                     $status = array (

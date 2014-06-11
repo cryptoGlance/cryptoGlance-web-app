@@ -17,7 +17,7 @@ class Miners_Abstract {
             $this->_settings = array(
                 'hwErrors' => array(
                     'enabled' => 1,
-                    'type' => 'number',
+                    'type' => 'percent',
                     'danger' => array(
                         'percent' => '10',
                         'number' => '10',
