@@ -40,7 +40,7 @@
       return hashrate
     }
 
-    var regex = /^(\d{1,})\s?(KH\/s|MH\/s|GH\/s)$/gi
+    var regex = /^(\d{1,}|\d{1,}\.\d{1,})?\s?(KH\/s|MH\/s|GH\/s)$/gi
     var value
     var unit
 
