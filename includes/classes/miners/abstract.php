@@ -30,7 +30,7 @@ class Miners_Abstract {
                 'temps' => array(
                     'enabled' => 1,
                     'danger' => '80',
-                    'warning' => '70',
+                    'warning' => '75',
                 ),
             );
         }

@@ -36,9 +36,9 @@ class Miners_Cgminer extends Miners_Abstract {
     public function overview() {
         return array(
             'name' => $this->_name,
-            'status_colour' => $this->_rigStatus['colour'],
-            'status_icon' => $this->_rigStatus['icon'],
+            'status' => $this->_rigStatus,
             'hashrate_5s' => $this->getFormattedHashrate($this->_rigHashrate),
+            'raw_hashrate' => $this->_rigHashrate,
             'active_pool' => $this->_activePool,
             'uptime' => $this->_upTime,
         );
@@ -49,24 +49,69 @@ class Miners_Cgminer extends Miners_Abstract {
         $hePercent = round(($this->_summary['Hardware Errors'] / ($this->_summary['Difficulty Accepted'] + $this->_summary['Difficulty Rejected'] + $this->_summary['Hardware Errors'])) * 100, 3);
         
         return array(
-            'uptime' => $this->_upTime,
             'hashrate_avg' => $this->getFormattedHashrate($this->_summary['MHS av']),
-            'hashrate_5s' => $this->getFormattedHashrate($this->_rigHashrate),
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => $this->_summary['Difficulty Accepted'] . ' ('. round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
             'rejected' => $this->_summary['Difficulty Rejected'] . ' ('. round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
             'stale' => $this->_summary['Difficulty Stale'] . ' ('. round(($this->_summary['Difficulty Stale']/$totalShares)*100, 3) .'%)',
             'hw_errors' => $this->_summary['Hardware Errors'] . ' ('.$hePercent.'%)',
             'work_utility' => $this->_summary['Work Utility'] . '/m',
-            'active_mining_pool' => $this->_activePool,
         );
+    }
+    
+    public function devices() {
+        $devices = array();
+
+        foreach ($this->_devs as $devKey => $dev) {
+            $totalShares = $dev['Difficulty Accepted'] + $dev['Difficulty Rejected'];
+            $hePercent = round(($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100, 3);
+            
+            if (isset($dev['GPU'])) {
+                $devices[] = array(
+                    'id' => $dev['GPU'],
+                    'status' => $this->_devStatus[$devKey],
+                    'enabled' => $dev['Enabled'],
+                    'health' => $dev['Status'],
+                    'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
+                    'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
+                    'intensity' => $dev['Intensity'],
+                    'temperature' => $dev['Temperature'],
+                    'fan_speed' => $dev['Fan Speed'] . ' RPM ('.$dev['Fan Percent'] . '%'.')',
+                    'engine_clock' => $dev['GPU Clock'],
+                    'memory_clock' => $dev['Memory Clock'],
+                    'gpu_voltage' => $dev['GPU Voltage']  . 'V',
+                    'powertune' => $dev['Powertune']  . '%',
+                    'accepted' => $dev['Difficulty Accepted'] . ' ('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
+                    'rejected' => $dev['Difficulty Rejected'] . ' ('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
+                    'hw_errors' => $dev['Hardware Errors'] . ' ('.$hePercent.'%)',
+                    'utility' => $dev['Utility'] . '/m',
+                );
+            } else if (isset($dev['ASC']) || isset($dev['PGA'])) {
+                $devices[] = array(
+                    'id' => (isset($dev['ASC']) ? $dev['ASC'] : $dev['PGA']),
+                    'status' => $this->_devStatus[$devKey],
+                    'enabled' => $dev['Enabled'],
+                    'health' => $dev['Status'],
+                    'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
+                    'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
+                    'temperature' => $dev['Temperature'],
+                    'accepted' => $dev['Difficulty Accepted'] . ' ('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
+                    'rejected' => $dev['Difficulty Rejected'] . ' ('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
+                    'hw_errors' => $dev['Hardware Errors'] . ' ('.$hePercent.'%)',
+                    'utility' => $dev['Utility'] . '/m',
+                    'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
+                );
+            }
+        }
+        
+        return $devices;
     }
     
     public function update() {
         $data = array(
             'overview' => $this->overview(),
             'summary' => $this->summary(),
-            'devs' => array(),
+            'devs' => $this->devices(),
         );
         
         return $data;
@@ -201,6 +246,7 @@ class Miners_Cgminer extends Miners_Abstract {
         $rigStatus = array(
             'colour' => 'grey',
             'icon' => 'ban-circle',
+            'panel' => 'offline',
         );
         
         foreach ($this->_devStatus as $status) {
@@ -208,16 +254,19 @@ class Miners_Cgminer extends Miners_Abstract {
                 $rigStatus = array(
                     'colour' => 'red',
                     'icon' => $status['icon'],
+                    'panel' => 'danger',
                 );
             } else if ($status['colour'] == 'orange' && $rigStatus['colour'] != 'red') {
                 $rigStatus = array(
                     'colour' => 'orange',
                     'icon' => $status['icon'],
+                    'panel' => 'warning',
                 );
             } else if ($status['colour'] == 'green' && $rigStatus['colour'] != 'red' && $rigStatus['colour'] != 'orange') {
                 $rigStatus = array(
                     'colour' => 'green',
                     'icon' => $status['icon'],
+                    'panel' => '',
                 );
             }
         }
