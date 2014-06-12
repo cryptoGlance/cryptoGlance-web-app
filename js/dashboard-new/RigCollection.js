@@ -42,12 +42,17 @@
        url: 'ajax.php',
         data : {
           type: 'rigs',
-          action: 'update'
+          action: 'update',
+          id: rig.rigId
         },
-       success: rig.update,
        dataType: 'json'
-       // complete: rig.update,
-       // timeout: rigUpdateTime
+      })
+      .fail(function () {
+        console.error('Call to Rig ' + rig.rigId + ' failed!')
+      })
+      .done(function (data) {
+        data = data[0]
+        rig.update(data)
       })
     })
   }
@@ -64,6 +69,7 @@
       dataType: 'json'
     })
     .done(function (data) {
+      console.log(data)
       _self.overviewTableData = ''
       _self.overallHashrate = 0
 
