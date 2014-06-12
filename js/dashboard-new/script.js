@@ -11,13 +11,13 @@
     rigs.add(rigId)
   })
 
-  // rigs.start()
-  // rigs.update()
+  rigs.start()
+  rigs.update()
 
   // long polling (yuck!)
-  setInterval(function () {
-    rigs.update()
-  }, 5000)
+  // setInterval(function () {
+  //   rigs.update()
+  // }, 5000)
   // setInterval(function() {
   //   ajaxUpdateCall('pool')
   // }, poolUpdateTime);
