@@ -44,7 +44,7 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
-    if (!data || this.enabled && ('undefined' === typeof data.summary)){// || 'undefined' === typeof data.devices)) {
+    if (!this.enabled || ('undefined' === typeof data.summary || 'undefined' === typeof data.devices)) {
       this._off()
       return
     }
@@ -132,7 +132,7 @@
 
   Rig.prototype._off = function () {
     this.enabled = false
-    this.$rigEl.find('.toggle-panel-body, .panel-footer').hide()
+    // this.$rigEl.find('.toggle-panel-body, .panel-footer').hide()
     this.$rigNavEl.hide()
     this.$rigTabContentEl.hide()
 
