@@ -15,6 +15,7 @@
     this.rigID = rigID
     this.$summaryTableBody = $('#rig-' + rigID + '-summary table tbody')
     this.collection = []
+    this.count = 0
   }
 
   /*-----  End of DeviceCollection Class/Object/Constructor  ------*/
@@ -25,6 +26,7 @@
   =======================================================*/
 
   DeviceCollection.prototype.add = function(deviceObj) {
+    this.count++
     this.collection.push(new Device(deviceObj.id, rigId))
   }
 

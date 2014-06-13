@@ -64,8 +64,8 @@
     summary.hashrate_5s = summary.hashrate_5s !== 0 ? summary.hashrate_5s : summary.hashrate_avg
 
     // ensure newly added devices are accounted for
-    if (this.deviceCollection.length < devices.length) {
-      for (var i = 0; i < (devices.length - this.deviceCollection.length); i++) {
+    if (this.deviceCollection.count < devices.length) {
+      for (var i = 0; i < (devices.length - this.deviceCollection.count); i++) {
         this.deviceCollection.add(devices[i])
       }
     }
