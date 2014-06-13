@@ -105,7 +105,7 @@
         case 'hashrate_5s':
           // hashrateCollection[this.rigId] = statusObj[key]
         case 'hashrate_avg':
-          statusHtml += this._buildStatHtml(key, Util.getSpeed(statusObj[key]), null, null)
+          statusHtml += this._buildStatHtml(key, Util.getSpeed(Util.extractHashrate(statusObj[key])), null, null)
           break
         default:
           statusHtml += this._buildStatHtml(key, statusObj[key], null, null)
@@ -114,6 +114,7 @@
     return statusHtml
   }
   Rig.prototype._buildStatHtml = function (name, value, progress, share) {
+    console.log(value)
     return '<div class="stat-pair">' +
             '<div class="stat-value">' + value + '</div>' +
             '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
@@ -126,7 +127,7 @@
 
   Rig.prototype.add = function(deviceObj) {
     this.deviceCollection.push(new Device(deviceObj))
-  };
+  }
 
   Rig.prototype._off = function () {
     this.enabled = false
