@@ -33,7 +33,8 @@
   DeviceCollection.prototype.update = function (deviceList) {
     var deviceSummary = ''
     this.collection.forEach(function (device, index) {
-      deviceSummary += device.update(deviceList[index])
+      console.log(deviceList)
+      deviceSummary += device.update(deviceList[index] || {})
     })
     // console.log(deviceList, deviceSummary)
     this.$summaryTableBody.html(deviceSummary)
