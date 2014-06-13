@@ -61,7 +61,6 @@
     var summary = data.summary || {}
     var devices = data.devices || []
     var sharePercent = 0
-    var totalShares = summary.accepted + summary.rejected + summary.stale
     summary.hashrate_5s = summary.hashrate_5s !== 0 ? summary.hashrate_5s : summary.hashrate_avg
 
     if (this.deviceCollection.length < devices.length) {
@@ -93,6 +92,7 @@
 
   Rig.prototype._buildStat = function (statusObj) {
     var statusHtml = ''
+    var totalShares = statusObj.accepted + statusObj.rejected + statusObj.stale
     for (var key in statusObj) {
       switch (key) {
         case 'accepted':
