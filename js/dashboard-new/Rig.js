@@ -44,7 +44,6 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
-    console.log(data)
     if (!data || this.enabled && ('undefined' === typeof data.summary)){// || 'undefined' === typeof data.devices)) {
       this._off()
       return
@@ -60,14 +59,13 @@
 
     var stats = ''
     var summary = data.summary || {}
-    var devices = data.devices || []
+    var devices = data.devs || []
     var sharePercent = 0
     summary.hashrate_5s = summary.hashrate_5s !== 0 ? summary.hashrate_5s : summary.hashrate_avg
 
     // ensure newly added devices are accounted for
     if (this.deviceCollection.count < devices.length) {
       for (var i = 0; i < (devices.length - this.deviceCollection.count); i++) {
-        console.log(devices[i])
         this.deviceCollection.add(devices[i].id)
       }
     }
