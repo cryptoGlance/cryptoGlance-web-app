@@ -11,6 +11,7 @@ $jsArray = array(
     'dashboard-new/Util',
     'dashboard-new/RigCollection',
     'dashboard-new/Rig',
+    'dashboard-new/DeviceCollection',
     'dashboard-new/Device',
     'dashboard-new/script'
     // 'ajax',
