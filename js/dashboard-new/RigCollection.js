@@ -17,6 +17,9 @@
   var RigCollection = function () {
     this.collection = []
     this.overallHashrate = 0
+    this._ready = true
+    this._rigCount = 0
+    this._rigsResponded = 0
 
     this.$overview = $('#overview')
     this.$overviewTable = $('#overview table')
@@ -36,7 +39,40 @@
     this.collection.push(new Rig(rigId))
   }
 
-  RigCollection.prototype.start = function() {
+  RigCollection.prototype.start = function (data) {
+    var _self = this
+    $.ajax({
+      // type: 'post',
+      data : {
+        type: 'rigs',
+        action: 'update'
+      },
+      url: 'ajax.php',
+      dataType: 'json'
+    })
+    .done(function (data) {
+      _self._rigCount = data.length
+      _self._buildOverview(data)
+      setInterval(function () {
+        if (_self._ready) {
+          _self._rigsResponded = 0
+          _self._ready = false
+          _self._update()
+        }
+      }, 5000)
+    })
+  }
+
+  /*-----  End of RigCollection Public Methods  ------*/
+
+
+  /*=====================================================
+  =            RigCollection Private Methods            =
+  =====================================================*/
+
+  RigCollection.prototype._update = function () {
+    var _self = this
+    var overviewData = []
     this.collection.forEach(function (rig) {
       $.ajax({
        url: 'ajax.php',
@@ -51,50 +87,38 @@
         console.error('Call to Rig ' + rig.rigId + ' failed!')
       })
       .done(function (data) {
+        _self._rigsResponded++
         data = data[0]
         rig.update(data)
+        overviewData.push(data)
+        if (_self._rigsResponded === _self._rigCount) {
+          _self._ready = true
+          _self._buildOverview(overviewData)
+        }
       })
     })
   }
 
-  RigCollection.prototype.update = function () {
+  RigCollection.prototype._buildOverview = function (data) {
     var _self = this
-    $.ajax({
-      // type: 'post',
-      data : {
-        type: 'rigs',
-        action: 'update'
-      },
-      url: 'ajax.php',
-      dataType: 'json'
+    _self.overviewTableData = ''
+    _self.overallHashrate = 0
+
+    data.forEach(function (res, index) {
+    res = res.overview // TEMP
+    _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
+    _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
     })
-    .done(function (data) {
-      _self.overviewTableData = ''
-      _self.overallHashrate = 0
 
-      data.forEach(function (res, index) {
-      res = res.overview // TEMP
-      _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
-      _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
-      })
+    _self.overallHashrate = Util.getSpeed(_self.overallHashrate)
 
-      _self.overallHashrate = Util.getSpeed(_self.overallHashrate)
+    _self.$overviewTableBody.html(_self.overviewTableData)
 
-      _self.$overviewTableBody.html(_self.overviewTableData)
+    $('.total-hashrate').html(_self.overallHashrate)
 
-      $('.total-hashrate').html(_self.overallHashrate)
+    _self._updateDocumentTitle(_self.overallHashrate)
 
-      _self._updateDocumentTitle(_self.overallHashrate)
-
-    })
   }
-
-  /*-----  End of RigCollection Public Methods  ------*/
-
-
-  /*=====================================================
-  =            RigCollection Private Methods            =
-  =====================================================*/
 
   RigCollection.prototype._updateDocumentTitle = function (str) {
     document.title = str + ' | Dashboard :: cryptoGlance'
