@@ -13,26 +13,26 @@
   =            Rig Class/Object/Constructor            =
   ===================================================*/
 
-  var Rig = function (rigId) {
+  var Rig = function (rigID) {
     /* Rig properties */
-    this.rigId            = rigId
-    this.$rigEl           = $('#rig-' + rigId)
+    this.rigID            = rigID
+    this.$rigEl           = $('#rig-' + rigID)
     this.$rigNavEl        = this.$rigEl.find('.nav')
     this.$rigTabContentEl = this.$rigEl.find('.tab-content')
     this.$rigTitle        = this.$rigEl.find('h1')
-    this.$rigSummary      = $('#rig-' + this.rigId + '-summary')
+    this.$rigSummary      = $('#rig-' + this.rigID + '-summary')
     this.$loader          = this.$rigSummary.find('img[alt="loading"]')
     this.manageBtn        = '<li>' +
-                            '<a class="blue" href="#rig-'+ rigId +'-summary" data-toggle="tab">' +
+                            '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                             'Summary ' +
                             '<i class="icon icon-dotlist"></i>' +
                             '</a>' +
                             '</li>'
     // this.$overview        = $('#overview')
     // this.$overviewTable   = this.$overview.find('.panel-body-overview div table tbody');
-    // this.$rigOverviewRow  = this.$overviewTable.find('tr[data-rig="'+ rigId +'"]')
-    this.$rigSummary      = $('#rig-' + rigId + '-summary').find('.panel-body-summary')
-    this.deviceCollection = []
+    // this.$rigOverviewRow  = this.$overviewTable.find('tr[data-rig="'+ rigID +'"]')
+    this.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
+    this.deviceCollection = new DeviceCollection(rigID)
     this.enabled          = false
   }
 
@@ -65,13 +65,13 @@
 
     if (this.deviceCollection.length < devices.length) {
       for (var i = 0; i < (devices.length - this.deviceCollection.length); i++) {
-        this.add(devices[i])
+        this.deviceCollection.add(devices[i])
       }
     }
 
     this._clearNav()
     this.$rigSummary.html(this._buildStat(summary))
-    // this._updateDevices(devices)
+    this.deviceCollection.update(devices)
 
     this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
     this.$rigTabContentEl.find('.tab-pane:eq('+ this.selectedNav +')').addClass('active')
@@ -103,7 +103,7 @@
           statusHtml += this._buildStatHtml(key, statusObj[key], 'danger', ((statusObj[key]/totalShares) * 100).toFixed(0))
           break
         case 'hashrate_5s':
-          // hashrateCollection[this.rigId] = statusObj[key]
+          // hashrateCollection[this.rigID] = statusObj[key]
         case 'hashrate_avg':
           statusHtml += this._buildStatHtml(key, Util.getSpeed(Util.extractHashrate(statusObj[key])), null, null)
           break
@@ -135,11 +135,11 @@
     this.$rigTabContentEl.hide()
 
     // if (this.$rigOverviewRow.length == 0) {
-    //   $this.overviewTable.append('<tr data-rig="'+ this.rigId +'"></tr>')
+    //   $this.overviewTable.append('<tr data-rig="'+ this.rigID +'"></tr>')
     // }
-    // this.$rigOverviewRow.html('<tr data-rig="'+ this.rigId +'">' +
+    // this.$rigOverviewRow.html('<tr data-rig="'+ this.rigID +'">' +
     //                           '<td><i class="icon icon-ban-circle grey"></i></td>' +
-    //                           '<td><a href="#rig-'+ this.rigId +'" class="anchor-offset rig-'+ this.rigId +' grey">'+ this.$rigTitle.html().replace(' - OFFLINE', '') +'</a></td>' +
+    //                           '<td><a href="#rig-'+ this.rigID +'" class="anchor-offset rig-'+ this.rigID +' grey">'+ this.$rigTitle.html().replace(' - OFFLINE', '') +'</a></td>' +
     //                           '<td>--</td>' +
     //                           '<td>--</td>' +
     //                           '<td>--</td>' +
