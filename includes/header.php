@@ -26,7 +26,10 @@
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav<?php echo ($currentPage != 'index') ? ' no-dash' : '' ?>">
                   <?php if ($currentPage == 'index') { ?>  
-                  <li><a class="total-hashrate">0 <small>MH/s</small></a></li>
+                  <li><a id="hashrate_sha256" class="total-hashrate">0 <small>MH/s</small></a></li>
+                  <li><a id="hashrate_scrypt" class="total-hashrate">0 <small>MH/s</small></a></li>
+                  <li><a id="hashrate_scrypt-n" class="total-hashrate">0 <small>MH/s</small></a></li>
+                  <li><a id="hashrate_x11" class="total-hashrate">0 <small>MH/s</small></a></li>
                   <?php } ?>
                   <li class="<?php echo ($currentPage == 'index') ? 'active ' : '' ?>topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a>
                     <?php if ($currentPage == 'index') { ?><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a><?php } ?>

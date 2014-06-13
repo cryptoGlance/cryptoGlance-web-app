@@ -37,6 +37,7 @@ class Miners_Cgminer extends Miners_Abstract {
         return array(
             'name' => $this->_name,
             'status' => $this->_rigStatus,
+            'algorithm' => $this->_settings['algorithm'],
             'hashrate_5s' => $this->getFormattedHashrate($this->_rigHashrate),
             'raw_hashrate' => $this->_rigHashrate,
             'active_pool' => $this->_activePool,
@@ -335,6 +336,7 @@ class Miners_Cgminer extends Miners_Abstract {
     
             //Misc data
             $this->getUptime();
+
             return true;
         }
         
