@@ -79,7 +79,7 @@
         data : {
           type: 'rigs',
           action: 'update',
-          id: rig.rigId
+          id: rig.rigID
         },
        dataType: 'json'
       })
