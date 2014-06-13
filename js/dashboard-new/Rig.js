@@ -45,7 +45,6 @@
 
   Rig.prototype.update = function (data) {
     if (!data || this.enabled && ('undefined' === typeof data.summary)){// || 'undefined' === typeof data.devices)) {
-      // console.log('asdf')
       this._off()
       return
     }
