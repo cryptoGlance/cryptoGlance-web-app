@@ -25,9 +25,9 @@
   =            DeviceCollection Public Methods            =
   =======================================================*/
 
-  DeviceCollection.prototype.add = function(deviceObj) {
+  DeviceCollection.prototype.add = function(deviceID) {
     this.count++
-    this.collection.push(new Device(deviceObj.id, rigId))
+    this.collection.push(new Device(deviceID))
   }
 
   DeviceCollection.prototype.update = function (deviceList) {
@@ -35,7 +35,7 @@
     this.collection.forEach(function (device, index) {
       deviceSummary += device.update(deviceList[index])
     })
-    console.log(deviceSummary)
+    console.log(deviceList, deviceSummary)
     this.$summaryTableBody.html(deviceSummary)
   }
 

@@ -66,7 +66,8 @@
     // ensure newly added devices are accounted for
     if (this.deviceCollection.count < devices.length) {
       for (var i = 0; i < (devices.length - this.deviceCollection.count); i++) {
-        this.deviceCollection.add(devices[i])
+        console.log(devices[i])
+        this.deviceCollection.add(devices[i].id)
       }
     }
 

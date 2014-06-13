@@ -13,7 +13,7 @@
   =            Device Class/Object/Constructor            =
   ==========================================================*/
 
-  var Device = function (deviceID, rigID) {
+  var Device = function (deviceID) {
     /* Device constants */
     this.HEAT_WARNING     = root.devHeatWarning;
     this.HEAT_DANGER      = root.devHeatDanger;
@@ -47,9 +47,6 @@
     this.utility = '0m'
     this.frequency = 0
     this.panel  = ''
-    this.rigId = rigID
-    this.$rigTableHead = $('#rig-' + rigID +'-summary table thead')
-    this.$rigTableBody = $('#rig-' + rigID +'-summary table tbody')
   }
 
   /*-----  End of Device Class/Object/Constructor  ------*/
@@ -59,7 +56,7 @@
   =            Device Public Methods            =
   ================================================*/
 
-  Device.prototype.update = function (deviceProp) {
+  Device.prototype.update = function (deviceObj) {
     this.status = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
     this.health = deviceObj.health || 'Alive'
     this.icon   = deviceObj.status.icon || 'check'
