@@ -4,19 +4,20 @@
   =            Start the Rigs...            =
   =========================================*/
 
-  var rigs = new RigCollection()
+  var rigCollection = new RigCollection()
 
   $('.panel-rig').each(function(index) {
     var rigId = this.getAttribute('data-id')
-    rigs.add(rigId)
+    rigCollection.add(rigId)
   })
 
-  rigs.start()
-  // rigs.update()
+  // rigCollection.start()
+  // rigCollection.update()
 
   // long polling (yuck!)
   setInterval(function () {
-    rigs.update()
+    rigCollection.start()
+    rigCollection.update()
   }, 5000)
   // setInterval(function() {
   //   ajaxUpdateCall('pool')
