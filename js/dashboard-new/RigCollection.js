@@ -125,12 +125,17 @@
   }
 
   RigCollection.prototype._buildOverviewRow = function (overview, index) {
+    var icon = overview.status.icon || 'ban-circle'
+    var colour = overview.status.colour || 'grey'
+    var hashrate_5s = colour !== 'grey' ? overview.hashrate_5s : '--'
+    var active_pool_url = overview.active_pool.url || '--'
+    var uptime = overview.uptime || '--'
     return '<tr data-rig="'+ index +'">' +
-           '<td><i class="icon icon-'+ overview.status.icon +' '+ overview.status.colour +'"></i></td>' +
-           '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ overview.status.colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
-           '<td>'+ overview.hashrate_5s +'</td>' +
-           '<td>'+ overview.active_pool.url +'</td>' +
-           '<td>'+ overview.uptime +'</td>' +
+           '<td><i class="icon icon-'+ icon +' '+ colour +'"></i></td>' +
+           '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
+           '<td>'+ hashrate_5s +'</td>' +
+           '<td>'+ active_pool_url +'</td>' +
+           '<td>'+ uptime +'</td>' +
            '</tr>'
   }
 
