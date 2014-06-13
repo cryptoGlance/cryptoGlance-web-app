@@ -33,7 +33,7 @@
     // this.$rigOverviewRow  = this.$overviewTable.find('tr[data-rig="'+ rigID +'"]')
     this.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
     this.deviceCollection = new DeviceCollection(rigID)
-    this.enabled          = false
+    this.init          = true
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/
@@ -44,12 +44,12 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
-    if (!this.enabled || ('undefined' === typeof data.summary || 'undefined' === typeof data.devices)) {
+    if ('undefined' === typeof data.summary || !data.devs.length) {
       this._off()
       return
     }
 
-    if (!this.enabled) {
+    if (this.init) {
       this._on()
 
       this.$loader.remove()
@@ -131,7 +131,6 @@
   }
 
   Rig.prototype._off = function () {
-    this.enabled = false
     // this.$rigEl.find('.toggle-panel-body, .panel-footer').hide()
     this.$rigNavEl.hide()
     this.$rigTabContentEl.hide()
@@ -152,7 +151,7 @@
   }
 
   Rig.prototype._on = function() {
-    this.enabled = true
+    this.init = false
     this.$rigEl.find('.toggle-panel-body, .panel-footer').show()
     this.$rigNavEl.show()
     this.$rigTabContentEl.show()
