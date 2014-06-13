@@ -15,7 +15,7 @@ class Rigs {
         $rigs = json_decode($fh->read(), true);
         
         if (isset($_GET['id'])) {
-            $rigId = intval($_GET['id']);
+            $rigId = intval($_GET['id'])-1;
             $this->addRig($rigs[$rigId]['type'], $rigs[$rigId]['host'], $rigs[$rigId]['port']);
         } else if (!empty($rigs)) {
             foreach ($rigs as $rigId => $rig) {
