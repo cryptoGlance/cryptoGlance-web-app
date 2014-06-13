@@ -153,7 +153,7 @@
 
     return '<tr>' +
            '<td><i class="icon icon-'+ this.status.icon +' ' + this.status.colour + '"></i></td>' +
-           '<td class="' + this.status.colour + '">Device ' + this.id + '</td>' +
+           '<td class="' + this.status.colour + '">' + this.id + '</td>' +
            '<td>' + this.temperature + '</td>' +
            '<td>' + this.hashrate_5s + '</td>' +
            '<td>' + this.accepted + '</td>' +
