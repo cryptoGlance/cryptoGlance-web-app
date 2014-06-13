@@ -28,7 +28,7 @@ class Miners_Cgminer extends Miners_Abstract {
         $this->_host = $host;
         $this->_port = $port;
         
-        if (is_null($this->fetchData())) {
+        if ($this->fetchData() == null) {
             return null;
         }
     }
@@ -51,9 +51,9 @@ class Miners_Cgminer extends Miners_Abstract {
         return array(
             'hashrate_avg' => $this->getFormattedHashrate($this->_summary['MHS av']),
             'blocks_found' => $this->_summary['Found Blocks'],
-            'accepted' => $this->_summary['Difficulty Accepted'] . ' ('. round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
-            'rejected' => $this->_summary['Difficulty Rejected'] . ' ('. round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
-            'stale' => $this->_summary['Difficulty Stale'] . ' ('. round(($this->_summary['Difficulty Stale']/$totalShares)*100, 3) .'%)',
+            'accepted' => round($this->_summary['Difficulty Accepted']) . ' ('. round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
+            'rejected' => round($this->_summary['Difficulty Rejected']) . ' ('. round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
+            'stale' => round($this->_summary['Difficulty Stale']) . ' ('. round(($this->_summary['Difficulty Stale']/$totalShares)*100, 3) .'%)',
             'hw_errors' => $this->_summary['Hardware Errors'] . ' ('.$hePercent.'%)',
             'work_utility' => $this->_summary['Work Utility'] . '/m',
         );
@@ -81,8 +81,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'memory_clock' => $dev['Memory Clock'],
                     'gpu_voltage' => $dev['GPU Voltage']  . 'V',
                     'powertune' => $dev['Powertune']  . '%',
-                    'accepted' => $dev['Difficulty Accepted'] . ' ('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
-                    'rejected' => $dev['Difficulty Rejected'] . ' ('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
+                    'accepted' => round($dev['Difficulty Accepted']) . ' ('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
+                    'rejected' => round($dev['Difficulty Rejected']) . ' ('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
                     'hw_errors' => $dev['Hardware Errors'] . ' ('.$hePercent.'%)',
                     'utility' => $dev['Utility'] . '/m',
                 );
@@ -95,8 +95,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
                     'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
                     'temperature' => ($dev['Temperature'] > 0) ? $dev['Temperature'] . '&deg;C / ' . ((($dev['Temperature']*9)/5)+32) : '0&deg;C/0&deg;F',
-                    'accepted' => $dev['Difficulty Accepted'] . ' ('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
-                    'rejected' => $dev['Difficulty Rejected'] . ' ('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
+                    'accepted' => round($dev['Difficulty Accepted']) . ' ('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
+                    'rejected' => round($dev['Difficulty Rejected']) . ' ('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
                     'hw_errors' => $dev['Hardware Errors'] . ' ('.$hePercent.'%)',
                     'utility' => $dev['Utility'] . '/m',
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
