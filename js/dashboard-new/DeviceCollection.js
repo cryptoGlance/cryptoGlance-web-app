@@ -35,7 +35,7 @@
     this.collection.forEach(function (device, index) {
       deviceSummary += device.update(deviceList[index])
     })
-    console.log(deviceList, deviceSummary)
+    // console.log(deviceList, deviceSummary)
     this.$summaryTableBody.html(deviceSummary)
   }
 

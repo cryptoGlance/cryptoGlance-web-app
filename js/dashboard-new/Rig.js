@@ -44,6 +44,7 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
+    console.log(data)
     if (!data || this.enabled && ('undefined' === typeof data.summary)){// || 'undefined' === typeof data.devices)) {
       this._off()
       return
