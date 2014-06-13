@@ -102,8 +102,8 @@
 
   RigCollection.prototype._buildOverviewRow = function (overview, index) {
     return '<tr data-rig="'+ index +'">' +
-           '<td><i class="icon icon-'+ overview.status_icon +' '+ overview.status_colour +'"></i></td>' +
-           '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ overview.status_colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
+           '<td><i class="icon icon-'+ overview.status.icon +' '+ overview.status.colour +'"></i></td>' +
+           '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ overview.status.colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
            '<td>'+ overview.hashrate_5s +'</td>' +
            '<td>'+ overview.active_pool.url +'</td>' +
            '<td>'+ overview.uptime +'</td>' +
