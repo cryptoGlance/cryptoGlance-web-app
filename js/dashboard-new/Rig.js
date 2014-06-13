@@ -64,6 +64,7 @@
     summary.hashrate_5s = summary.hashrate_5s !== 0 ? summary.hashrate_5s : summary.hashrate_avg
 
     // ensure newly added devices are accounted for
+    console.log(this.deviceCollection.count)
     if (this.deviceCollection.count < devices.length + 1) {
       for (var i = 0; i < (devices.length - this.deviceCollection.count); i++) {
         this.deviceCollection.add(devices[i].id)
@@ -72,7 +73,6 @@
 
     this._clearNav()
     this.$rigSummary.html(this._buildStat(summary))
-    console.log(devices)
     this.deviceCollection.update(devices)
 
     // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
