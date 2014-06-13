@@ -64,8 +64,8 @@
     this.hashrate_avg = deviceObj.hashrate_avg || '0 KH/s'
     this.hashrate_5s = deviceObj.hashrate_5s || '0 KH/s'
     this.temperature = deviceObj.temperature || 'n/a'
-    this.accepted = deviceObject.accepted || '0 (0%)'
-    this.rejected = deviceObject.rejected || '0 (0%)'
+    this.accepted = deviceObj.accepted || '0 (0%)'
+    this.rejected = deviceObj.rejected || '0 (0%)'
     this.hw_errors = deviceObj.hw_errors || '0 (0%)'
     this.utility = deviceObj.utility || '0m'
     this.frequency = deviceObj.frequency || 0
