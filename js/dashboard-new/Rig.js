@@ -63,6 +63,7 @@
     var sharePercent = 0
     summary.hashrate_5s = summary.hashrate_5s !== 0 ? summary.hashrate_5s : summary.hashrate_avg
 
+    // ensure newly added devices are accounted for
     if (this.deviceCollection.length < devices.length) {
       for (var i = 0; i < (devices.length - this.deviceCollection.length); i++) {
         this.deviceCollection.add(devices[i])
@@ -73,8 +74,8 @@
     this.$rigSummary.html(this._buildStat(summary))
     this.deviceCollection.update(devices)
 
-    this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
-    this.$rigTabContentEl.find('.tab-pane:eq('+ this.selectedNav +')').addClass('active')
+    // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
+    // this.$rigTabContentEl.find('.tab-pane:eq('+ this.selectedNav +')').addClass('active')
   }
 
   /*-----  End of Rig Public Methods  ------*/
