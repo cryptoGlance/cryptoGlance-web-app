@@ -49,13 +49,13 @@
       return
     }
 
-    if (!this.enabled){
-    this._on()
+    if (!this.enabled) {
+      this._on()
 
-    this.$loader.remove()
+      this.$loader.remove()
 
-    this.$rigNavEl.append(this.manageBtn)
-  }
+      this.$rigNavEl.append(this.manageBtn)
+    }
 
     var stats = ''
     var summary = data.summary || {}
