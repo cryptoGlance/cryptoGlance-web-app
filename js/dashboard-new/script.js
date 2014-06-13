@@ -11,14 +11,14 @@
     rigCollection.add(rigId)
   })
 
-  // rigCollection.start()
+  rigCollection.start()
   // rigCollection.update()
 
   // long polling (yuck!)
-  setInterval(function () {
-    rigCollection.start()
-    rigCollection.update()
-  }, 5000)
+  // setInterval(function () {
+  //   rigCollection.start()
+  //   rigCollection.update()
+  // }, 5000)
   // setInterval(function() {
   //   ajaxUpdateCall('pool')
   // }, poolUpdateTime);
