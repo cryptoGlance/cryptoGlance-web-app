@@ -5,9 +5,8 @@
  * This was refactored to add another level of management... I hope it still makes sense...
  * This class holds wallets, wallets have addresses within them.
  *
- * @author Timothy.Stoyanovski
+ * @author Stoyvo
  */
-
 class Wallets {
 
     protected $_wallets = array();
@@ -23,7 +22,10 @@ class Wallets {
         $fh = new FileHandler('configs/wallets.json');
         $wallets = json_decode($fh->read(), true);
 
-        if (!empty($wallets)) {
+        if (isset($_GET['id'])) {
+            $walletId = intval($_GET['id'])-1;
+            $this->addWallet($wallets[$walletId]['currency'], $wallets[$walletId]['label'], $wallets[$walletId]['addresses']);
+        } else if (!empty($wallets)) {
             foreach ($wallets as $key => $wallet) {
                 $this->addWallet($wallet['currency'], $wallet['label'], $wallet['addresses']);
             }
@@ -31,7 +33,7 @@ class Wallets {
     }
     
     public function getCurrencies() {
-        // Making room for possible addition of data here.s
+        // Making room for possible addition of data here.
         return $this->_currencies;
     }
 
@@ -56,16 +58,10 @@ class Wallets {
         );
     }
     
-    public function update($walletId = null) {
-        $data = $wallets = array();
-        $wallets = $this->_wallets;
+    public function getUpdate() {
+        $data = array();
         
-        if (!empty($walletId) && $walletId != 0) {
-            $walletId -= 1;
-            $wallets = array($this->_wallets[$walletId]);
-        }
-        
-        foreach ($wallets as $key => $wallet) {
+        foreach ($this->_wallets as $wallet) {
             $walletAddressData = array();
             $totalBalance = 0;
             
@@ -76,7 +72,7 @@ class Wallets {
                 $totalBalance += $addressData['balance'];
             }
             
-            $data[$key] = array (
+            $data[] = array (
                 'currency' => $wallet['currency'],
                 'currency_code' => $this->_currencies[$wallet['currency']],
                 'label' => $wallet['label'],
@@ -86,7 +82,7 @@ class Wallets {
             );
         }
         
-        return $data;
+        echo json_encode($data);
     }
 
 }

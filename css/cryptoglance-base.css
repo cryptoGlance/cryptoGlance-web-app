@@ -1982,7 +1982,7 @@ a#dash-add-panel.flash {
     padding: 4px 13px 5px;
   }
   
-  .navbar .nav-pills:not(.no-dash) > li:nth-child(3) > a {
+  .navbar .nav-pills:not(.no-dash) > li:nth-child(6) > a {
     -webkit-border-radius: 0 0 0 9px;
     border-radius: 0 0 0 9px;
   }
