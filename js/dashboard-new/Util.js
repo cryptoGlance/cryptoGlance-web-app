@@ -36,6 +36,9 @@
   }
 
   Util.extractHashrate = function (hashrate) {
+    if (!hashrate) {
+      return 0
+    }
     if ('number' === typeof hashrate) {
       return hashrate
     }
