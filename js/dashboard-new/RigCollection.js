@@ -73,7 +73,7 @@
   RigCollection.prototype._update = function () {
     var _self = this
     var overviewData = []
-    this.collection.forEach(function (rig) {
+    this.collection.forEach(function (rig, index) {
       $.ajax({
        url: 'ajax.php',
         data : {
@@ -90,7 +90,7 @@
         _self._rigsResponded++
         data = data[0]
         rig.update(data)
-        overviewData.push(data)
+        overviewData[index] = data
         if (_self._rigsResponded === _self._rigCount) {
           _self._ready = true
           _self._buildOverview(overviewData)
