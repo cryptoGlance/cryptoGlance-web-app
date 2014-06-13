@@ -114,7 +114,6 @@
     return statusHtml
   }
   Rig.prototype._buildStatHtml = function (name, value, progress, share) {
-    console.log(value)
     return '<div class="stat-pair">' +
             '<div class="stat-value">' + value + '</div>' +
             '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
