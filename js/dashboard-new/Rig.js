@@ -44,7 +44,8 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
-    if (!data || this.enabled && ('undefined' === typeof data.summary || 'undefined' === typeof data.devices)) {
+    if (!data || this.enabled && ('undefined' === typeof data.summary)){// || 'undefined' === typeof data.devices)) {
+      // console.log('asdf')
       this._off()
       return
     }
@@ -70,7 +71,7 @@
     }
 
     this._clearNav()
-    this.$rigSummary.append(this._buildStat(summary))
+    this.$rigSummary.html(this._buildStat(summary))
     // this._updateDevices(devices)
 
     this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
