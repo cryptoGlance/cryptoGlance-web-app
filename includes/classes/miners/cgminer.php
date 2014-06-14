@@ -95,7 +95,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     'health' => $dev['Status'],
                     'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
                     'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
-                    'temperature' => ($dev['Temperature'] > 0) ? $dev['Temperature'] . '&deg;C / ' . ((($dev['Temperature']*9)/5)+32) : '0&deg;C/0&deg;F',
+                    'temperature' => ($dev['Temperature'] > 0) ? $dev['Temperature'] . '&deg;C / ' . ((($dev['Temperature']*9)/5)+32) .'&deg;F' : '0&deg;C/0&deg;F',
                     'accepted' => round($dev['Difficulty Accepted']) . ' ('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)',
                     'rejected' => round($dev['Difficulty Rejected']) . ' ('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)',
                     'hw_errors' => $dev['Hardware Errors'] . ' ('.$hePercent.'%)',
