@@ -119,14 +119,14 @@
 
     _self.$overviewTableBody.html(_self.overviewTableData)
 
-    $('.total-hashrate').html(_self.overallHashrate)
+    $('.total-hashrate').html('<span class="hashrate-algo">scrypt</span>' + _self.overallHashrate)
 
     _self._updateDocumentTitle(_self.overallHashrate)
 
   }
 
   RigCollection.prototype._updateDocumentTitle = function (str) {
-    document.title = str + ' | Dashboard :: cryptoGlance'
+    document.title = str + ' :: Dashboard (cryptoGlance)'
   }
 
   RigCollection.prototype._buildOverviewRow = function (overview, index) {

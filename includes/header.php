@@ -25,12 +25,6 @@
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav<?php echo ($currentPage != 'index') ? ' no-dash' : '' ?>">
-                  <?php if ($currentPage == 'index') { ?>  
-                  <li><a id="hashrate_sha256" class="total-hashrate">0 <small>MH/s</small></a></li>
-                  <li><a id="hashrate_scrypt" class="total-hashrate">0 <small>MH/s</small></a></li>
-                  <li><a id="hashrate_scrypt-n" class="total-hashrate">0 <small>MH/s</small></a></li>
-                  <li><a id="hashrate_x11" class="total-hashrate">0 <small>MH/s</small></a></li>
-                  <?php } ?>
                   <li class="<?php echo ($currentPage == 'index') ? 'active ' : '' ?>topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a>
                     <?php if ($currentPage == 'index') { ?><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a><?php } ?>
                   </li>
@@ -49,6 +43,7 @@
                            <span class="width-reading">90%</span> <!-- width-reading -->
                            <div id="slider"></div> <!-- the Slider -->
                         </li>
+                        <?php if ($currentPage == 'index') { ?><li class="dropdown-header chk-hashrate"><label>Show Total Hashrate(s)<input type="checkbox" for="lbl-total-hashrate"></label></li><?php } ?>
                         <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
                         <!-- <div class="divider"></div> -->
                         <?php //require_once("includes/menu-active_panels.php"); ?>
@@ -74,5 +69,12 @@
       </div>
       
       <?php if ($currentPage == 'index') { ?>
-        <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>
+      <ul id="total-hashrates">
+        <li><a id="hashrate_sha256" class="total-hashrate">0 <small>MH/s</small></a>
+        <a id="hashrate_scrypt" class="total-hashrate">0 <small>MH/s</small></a>
+        <a id="hashrate_scrypt-n" class="total-hashrate">0 <small>MH/s</small></a>
+        <a id="hashrate_x11" class="total-hashrate">0 <small>MH/s</small></a></li>
+      </ul>
+      
+      <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>
       <?php } ?>

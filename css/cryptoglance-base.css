@@ -838,6 +838,34 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   padding: 3px 20px 3px 13px;
 }
 
+.navbar-nav li.open .dropdown-menu .chk-hashrate {
+  width: 100%;
+  position: relative;
+}
+
+.navbar-nav li.open .dropdown-menu .chk-hashrate label {
+  font-family: robotolight, sans-serif;
+  font-weight: normal;
+}
+
+.navbar-nav li.open .dropdown-menu .chk-hashrate .bootstrap-switch {
+  right: 10px;
+  top: 7px;
+  position: absolute;
+}
+
+.navbar-nav li.open .dropdown-menu .chk-hashrate .bootstrap-switch-label {
+  background: #222;
+}
+
+.navbar-nav li.open .dropdown-menu .chk-hashrate i {
+  font-size: 12px;
+  margin: 0;
+  color: #eee;
+  position: relative;
+  top: 1px;
+}
+
 .dropdown-menu {
   right: 0;
   left: inherit;
@@ -884,17 +912,37 @@ a#dash-add-panel.flash {
   display: none;
 }
 
-.total-hashrate, .navbar-default .navbar-nav > li > a.total-hashrate {
+#total-hashrates {
+  margin: 45px 0 1px;
+  text-align: center;
+  position: fixed;
+  right: 5px;
+  z-index: 8800;
+  padding: 0 0 0 10px;
+}
+
+#total-hashrates > li {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 2px 7px;
+  border: 1px solid #047195;
+  border-width: 0 1px 1px;
+  border-radius: 0 0 8px 8px;
+  box-shadow: inset 0 0 45px rgba(51,181,225,0.5);
+  background: rgba(0,0,0,0.75);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.total-hashrate, #total-hashrates > li > a.total-hashrate {
   height: 100%;
   text-align: center;
   font-size: 31px;
   font-family: bebas;
-  padding: 12px 20px 10px;
-  border-width: 0 1px;
-  box-shadow: inset 0 0 20px rgba(51,181,225,0.3);
-  background: rgba(51,181,225,0.1);
-  text-shadow: 2px 2px 0 #000;
+  padding: 0 7px 3px;
   color: #8f8;
+  display: inline-block;
+  line-height: 1em;
 }
 
 .navbar-default .navbar-nav > li > a.total-hashrate {
@@ -903,6 +951,14 @@ a#dash-add-panel.flash {
 
 .navbar-default .navbar-nav > li > a.total-hashrate * {
   color: #8f8;
+}
+
+#total-hashrates > li > a > span.hashrate-algo {
+  display: block;
+  font-size: 0.45em;
+  color: #bbb;
+  margin: -4px 0;
+  font-family: robotolight;
 }
   
 #mobile-hashrate {
@@ -1391,6 +1447,7 @@ a#dash-add-panel.flash {
 
 .panel-body .stat-pair .stat-label {
   background: url(../images/darkdenim3.png) repeat #424750;
+  border-radius: 0;
   font-family: robotocondensed;
   text-transform: lowercase;
   color: #aaa;
@@ -1679,6 +1736,21 @@ a#dash-add-panel.flash {
 
 .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
     font-size: 13px;
+}
+
+.stat-pair span, .panel-rig table tr td span {
+  font-size: 0.75em;
+  color: #aaa;
+}
+
+.stat-pair span {
+  display: inline-block;
+  line-height: normal;
+  margin-left: 3px;
+}
+
+.stat-pair span.superscript {
+  vertical-align: top;
 }
 
 /*.panel-body .table tr td:nth-child(3), .panel-body .table tr th:nth-child(3), .panel-body .table tr td:nth-child(6), .panel-body .table tr th:nth-child(6) {*/
