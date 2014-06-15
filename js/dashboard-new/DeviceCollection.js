@@ -12,10 +12,10 @@
   =================================================================*/
 
   var DeviceCollection = function (rigID) {
+    this.collection        = []
     this.rigID             = rigID
     this.$summaryTable     = $('#rig-' + rigID + '-summary table')
     this.$summaryTableBody = $('#rig-' + rigID + '-summary table tbody')
-    this.collection        = []
     this.count             = 0
   }
 
@@ -28,7 +28,7 @@
 
   DeviceCollection.prototype.add = function(deviceID) {
     this.count++
-    this.collection.push(new Device(deviceID))
+    this.collection.push(new this.SubClass(deviceID))
   }
 
   DeviceCollection.prototype.update = function (deviceList) {
