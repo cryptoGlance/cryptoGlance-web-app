@@ -39,9 +39,12 @@
     this.collection.push(new Pool(poolId))
   }
 
-  PoolCollection.prototype._update = function (poolList) {
-    this.collection.forEach(function (pool, index) {
-      pool.update(poolList[index])
+  PoolCollection.prototype._update = function () {
+    var _self = this
+    _self._getData(function (pools) {
+      _self.collection.forEach(function (pool, index) {
+        pool.update(pools[index])
+      })
     })
   }
 
