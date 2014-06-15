@@ -63,7 +63,7 @@
     var _self = this
     $.ajax({
       url: 'ajax.php',
-      data: _self.apiData
+      data: _self.apiData,
       dataType: 'json',
       statusCode: {
         401: function() {
