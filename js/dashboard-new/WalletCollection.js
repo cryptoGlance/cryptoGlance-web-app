@@ -29,7 +29,9 @@
         _self._add(index)
       })
 
-      _self._update()
+      setInterval(function () {
+        _self._update()
+      }, window.interval)
     })
   }
 

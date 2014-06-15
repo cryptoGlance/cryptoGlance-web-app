@@ -23,8 +23,11 @@
   =====================================================*/
 
   PoolCollection.prototype.start = function () {
-    this._getData(function (pools) {
-      console.log(pools)
+    var _self = this
+    _self._getData(function (pools) {
+      setInterval(function () {
+        _self._update()
+      }, window.interval)
     })
   }
 
