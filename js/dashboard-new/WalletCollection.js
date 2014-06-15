@@ -22,17 +22,14 @@
   =======================================================*/
 
   WalletCollection.prototype.start = function () {
-    $.ajax({
-      url: 'ajax.php?type=wallets&action=update',
-      dataType: 'json',
-      statusCode: {
-        401: function() {
-          window.location.assign('login.php');
-        }
-      }
-    })
-    .done(function (data) {
-      console.log(data)
+    var _self = this
+
+    _self._getData(function (wallets) {
+      wallets.forEach(function (wallet, index) {
+        _self.add(index)
+      })
+
+      _self.update()
     })
   }
 
@@ -47,8 +44,25 @@
     this.collection.push(new Wallet(walletId))
   }
 
-  WalletCollection.prototype._update = function() {
-    // body...
+  WalletCollection.prototype._update = function () {
+    this._getData(function (wallets) {
+      this.collection.forEach(function (wallet, index) {
+        wallet.update(wallets[index])
+      })
+    })
+  }
+
+  WalletCollection.prototype._getData = function (callback) {
+    $.ajax({
+      url: 'ajax.php?type=wallets&action=update',
+      dataType: 'json',
+      statusCode: {
+        401: function() {
+          window.location.assign('login.php');
+        }
+      }
+    })
+    .done(callback)
   }
 
   /*-----  End of WalletCollection Private Methods  ------*/
