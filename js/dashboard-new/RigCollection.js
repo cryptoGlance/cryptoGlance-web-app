@@ -79,7 +79,7 @@
     var _self = this
     var overviewData = []
     _self.collection.forEach(function (rig, index) {
-      this.apiData.id = rig.rigID
+      _self.apiData.id = rig.rigID
       _self._getData(function (data) {
         _self._rigsResponded++
         data = data[0]
