@@ -20,7 +20,7 @@
     }
     this.walletOverviewHtml = ''
 
-    this.$wallet = $('#wallet')
+    this.$walletOverviewBody = $('#wallet .panel-body')
   }
 
   /*-----  End of WalletCollection Class/Object/Constructor  ------*/
@@ -59,10 +59,10 @@
     _self.walletOverviewHtml = ''
     _self._getData(function (wallets) {
       _self.collection.forEach(function (wallet, index) {
-        this.walletOverviewHtml += wallet.update(wallets[index])
+        _self.walletOverviewHtml += wallet.update(wallets[index])
       })
     })
-    _self.$wallet.html(_self.walletOverviewHtml)
+    _self.$walletOverviewBody.html(_self.walletOverviewHtml)
   }
 
   WalletCollection.prototype._getData = function (callback) {
