@@ -72,7 +72,7 @@
     }
 
     this._clearNav()
-    this.$rigSummary.html(this._buildStat(summary))
+    this.$rigSummary.html(this._buildStatus(summary))
     this.deviceCollection.update(devices)
 
     // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
@@ -92,30 +92,30 @@
     this.$rigNavEl.find('li').remove()
   }
 
-  Rig.prototype._buildStat = function (statusObj) {
+  Rig.prototype._buildStatus = function (statusObj) {
     var statusHtml = ''
     var totalShares = statusObj.accepted + statusObj.rejected + statusObj.stale
     for (var key in statusObj) {
       switch (key) {
         case 'accepted':
-          statusHtml += this._buildStatusHtml(key, statusObj[key], 'success', ((statusObj[key]/totalShares) * 100).toFixed(0))
+          statusHtml += this._getStatusHtml(key, statusObj[key], 'success', ((statusObj[key]/totalShares) * 100).toFixed(0))
           break
         case 'rejected':
         case 'stale':
-          statusHtml += this._buildStatusHtml(key, statusObj[key], 'danger', ((statusObj[key]/totalShares) * 100).toFixed(0))
+          statusHtml += this._getStatusHtml(key, statusObj[key], 'danger', ((statusObj[key]/totalShares) * 100).toFixed(0))
           break
         case 'hashrate_5s':
           // hashrateCollection[this.rigID] = statusObj[key]
         case 'hashrate_avg':
-          statusHtml += this._buildStatusHtml(key, Util.getSpeed(Util.extractHashrate(statusObj[key])), null, null)
+          statusHtml += this._getStatusHtml(key, Util.getSpeed(Util.extractHashrate(statusObj[key])), null, null)
           break
         default:
-          statusHtml += this._buildStatusHtml(key, statusObj[key], null, null)
+          statusHtml += this._getStatusHtml(key, statusObj[key], null, null)
       }
     }
     return statusHtml
   }
-  Rig.prototype._buildStatusHtml = function (name, value, progress, share) {
+  Rig.prototype._getSatusHtml = function (name, value, progress, share) {
     return '<div class="stat-pair">' +
             '<div class="stat-value">' + value + '</div>' +
             '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
