@@ -61,7 +61,7 @@
   ======================================================*/
 
   PoolCollection.prototype._add = function (poolId) {
-    this.collection.push(new Pool(poolId))
+    this.collection.push(new this.SubClass(poolId))
   }
 
   PoolCollection.prototype._update = function (pools) {

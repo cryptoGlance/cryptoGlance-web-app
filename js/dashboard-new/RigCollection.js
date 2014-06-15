@@ -72,7 +72,7 @@
   =====================================================*/
 
   RigCollection.prototype._add = function (rigId) {
-    this.collection.push(new Rig(rigId))
+    this.collection.push(new this.SubClass(rigId))
   }
 
   RigCollection.prototype._update = function () {

@@ -64,7 +64,7 @@
   ========================================================*/
 
   WalletCollection.prototype._add = function (walletId) {
-    this.collection.push(new Wallet(walletId))
+    this.collection.push(new this.SubClass(walletId))
   }
 
   WalletCollection.prototype._update = function (wallets) {
