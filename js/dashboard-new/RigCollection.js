@@ -49,7 +49,7 @@
     })
 
     /*==========  Initial data call  ==========*/
-    _self.getData(function (data) {
+    _self._getData(function (data) {
       _self._rigCount = data.length
       _self._buildOverview(data)
 
