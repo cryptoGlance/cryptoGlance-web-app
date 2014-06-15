@@ -32,13 +32,18 @@
   WalletCollection.prototype.start = function () {
     var _self = this
 
+    /*==========  Initial data call  ==========*/
     _self._getData(function (wallets) {
+
+      /*==========  Generate collection  ==========*/
       wallets.forEach(function (wallet, index) {
         _self._add(index)
       })
 
+      /*==========  Initial wallet update in DOM  ==========*/
       _self._update(wallets)
 
+      /*==========  Setup polling  ==========*/
       setInterval(function () {
         _self._getData(function (wallets) {
           _self._update(wallets)

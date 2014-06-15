@@ -28,13 +28,23 @@
 
   PoolCollection.prototype.start = function () {
     var _self = this
+
+    /*==========  Initial data call  ==========*/
     _self._getData(function (pools) {
+
+      /*==========  Generate collection  ==========*/
       pools.forEach(function (pool, index) {
         _self._add(index)
       })
 
+      /*==========  Initial wallet update in DOM  ==========*/
+      _self._update(pools)
+
+      /*==========  Setup polling  ==========*/
       setInterval(function () {
-        _self._update()
+        _self._getData(function (pools) {
+          _self._update(pools)
+        })
       }, window.interval)
     })
   }
@@ -50,12 +60,10 @@
     this.collection.push(new Pool(poolId))
   }
 
-  PoolCollection.prototype._update = function () {
+  PoolCollection.prototype._update = function (pools) {
     var _self = this
-    _self._getData(function (pools) {
-      _self.collection.forEach(function (pool, index) {
-        pool.update(pools[index])
-      })
+    _self.collection.forEach(function (pool, index) {
+      pool.update(pools[index])
     })
   }
 

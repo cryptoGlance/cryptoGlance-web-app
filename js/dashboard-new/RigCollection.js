@@ -42,14 +42,18 @@
   RigCollection.prototype.start = function (data) {
     var _self = this
 
+    /*==========  Generate collection  ==========*/
     $('.panel-rig').each(function(index) {
       var rigId = this.getAttribute('data-id')
       _self._add(rigId)
     })
 
+    /*==========  Initial data call  ==========*/
     _self.getData(function (data) {
       _self._rigCount = data.length
       _self._buildOverview(data)
+
+      /*==========  Setup polling  ==========*/
       setInterval(function () {
         if (_self._ready) {
           _self._rigsResponded = 0
