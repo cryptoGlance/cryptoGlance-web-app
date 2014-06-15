@@ -42,7 +42,7 @@
           break
         case 'last_block':
           if (poolObj.type == 'mpos' &&  'undefined' !== typeof poolObj.url) {
-            summary += '<a href="' + poolObj.url + '/index.php?page=statistics&action=round&height=' + poolObj[key] + '" target="_blank" rel="external">' + poolObj[key] + '</a>'
+            summary += this._buildStatusHtml('green', key, '<a href="' + poolObj.url + '/index.php?page=statistics&action=round&height=' + poolObj[key] + '" target="_blank" rel="external">' + poolObj[key] + '</a>')
           }
           break
         default:
