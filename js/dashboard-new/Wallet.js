@@ -64,7 +64,8 @@
   =            Export Wallet            =
   =====================================*/
 
-  root.Wallet = Wallet
+  // root.Wallet = Wallet
+  root.WalletCollection.prototype.SubClass = Wallet
 
   /*-----  End of Export Wallet  ------*/
 

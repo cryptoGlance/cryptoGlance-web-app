@@ -126,10 +126,6 @@
             '</div>'
   }
 
-  Rig.prototype.add = function(deviceObj) {
-    this.deviceCollection.push(new Device(deviceObj))
-  }
-
   Rig.prototype._off = function () {
     // this.$rigEl.find('.toggle-panel-body, .panel-footer').hide()
     this.$rigNavEl.hide()
@@ -146,7 +142,7 @@
     //                           '<td>--</td>' +
     //                           '</tr>')
 
-    this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
+    this.$rigEl.removeClass('panel-warning panel-danger')._addClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').hide()
   }
 
@@ -166,7 +162,7 @@
   =            Rig Export            =
   ==================================*/
 
-  root.Rig = Rig
+  root.RigCollection.prototype.SubClass = Rig
 
   /*-----  End of Rig Export  ------*/
 

@@ -76,7 +76,8 @@
   =            Export Pool            =
   ===================================*/
 
-  root.Pool = Pool
+  // root.Pool = Pool
+  root.PoolCollection.prototype.SubClass = Pool
 
   /*-----  End of Export Pool  ------*/
 

@@ -226,7 +226,8 @@
   =            Device export               =
   ========================================*/
 
-  root.Device = Device
+  // root.Device = Device
+  root.DeviceCollection.prototype.SubClass = Device
 
   /*-----  End of Device export  ------*/
 
