@@ -5,6 +5,8 @@
   =========================================*/
 
   var rigCollection = new RigCollection()
+  var poolCollection = new PoolCollection()
+  var walletCollection = new WalletCollection()
 
   $('.panel-rig').each(function(index) {
     var rigId = this.getAttribute('data-id')
@@ -12,16 +14,19 @@
   })
 
   rigCollection.start()
-  // rigCollection.update()
 
   // long polling (yuck!)
-  // setInterval(function () {
-  //   rigCollection.start()
-  //   rigCollection.update()
-  // }, 5000)
-  // setInterval(function() {
-  //   ajaxUpdateCall('pool')
-  // }, poolUpdateTime);
+  setInterval(function() {
+    $.ajax({
+        url: 'ajax.php?type=pools&action=' + queryUrl,
+        dataType: 'json',
+        statusCode: {
+            401: function() {
+                window.location.assign('login.php');
+            }
+        }
+    })
+  }, 5000)
   // setInterval(function() {
   //   ajaxUpdateCall('wallet');
   // }, walletUpdateTime);
