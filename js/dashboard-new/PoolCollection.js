@@ -71,10 +71,10 @@
         }
       }
     })
-    .done(callback)
     .fail(function (xhr, status, message) {
       console.error(message)
     })
+    .done(callback)
   }
 
   /*-----  End of PoolCollection Private Methods  ------*/
