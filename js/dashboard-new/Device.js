@@ -154,8 +154,8 @@
     //   dev.hashrate_5s = Util.getSpeed(dev.hashrate_5s)
 
     return '<tr>' +
-           '<td><i class="icon icon-'+ this.status.icon +' ' + this.status.colour + '"></i></td>' +
-           '<td class="' + this.status.colour + '">' this.name+ ' ' + this.id + '</td>' +
+           '<td><i class="icon icon-'+ this.status.icon + ' ' + this.status.colour + '"></i></td>' +
+           '<td class="' + this.status.colour + '">' + this.name + ' ' + this.id + '</td>' +
            '<td>' + this.temperature + '</td>' +
            '<td>' + this.hashrate_5s + '</td>' +
            '<td>' + this.accepted + '</td>' +
