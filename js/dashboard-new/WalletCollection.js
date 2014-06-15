@@ -29,7 +29,7 @@
         _self._add(index)
       })
 
-      _self.update()
+      _self._update()
     })
   }
 
