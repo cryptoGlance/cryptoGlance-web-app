@@ -16,17 +16,17 @@
   rigCollection.start()
 
   // long polling (yuck!)
-  setInterval(function() {
-    $.ajax({
-        url: 'ajax.php?type=pools&action=' + queryUrl,
-        dataType: 'json',
-        statusCode: {
-            401: function() {
-                window.location.assign('login.php');
-            }
-        }
-    })
-  }, 5000)
+  // setInterval(function() {
+  //   $.ajax({
+  //       url: 'ajax.php?type=pools&action=' + queryUrl,
+  //       dataType: 'json',
+  //       statusCode: {
+  //           401: function() {
+  //               window.location.assign('login.php');
+  //           }
+  //       }
+  //   })
+  // }, 5000)
   // setInterval(function() {
   //   ajaxUpdateCall('wallet');
   // }, walletUpdateTime);
