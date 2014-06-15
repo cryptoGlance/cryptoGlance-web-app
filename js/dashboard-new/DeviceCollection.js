@@ -12,11 +12,11 @@
   =================================================================*/
 
   var DeviceCollection = function (rigID) {
-    this.rigID = rigID
-    this.$summaryTable = $('#rig-' + rigID + '-summary table')
+    this.rigID             = rigID
+    this.$summaryTable     = $('#rig-' + rigID + '-summary table')
     this.$summaryTableBody = $('#rig-' + rigID + '-summary table tbody')
-    this.collection = []
-    this.count = 0
+    this.collection        = []
+    this.count             = 0
   }
 
   /*-----  End of DeviceCollection Class/Object/Constructor  ------*/
