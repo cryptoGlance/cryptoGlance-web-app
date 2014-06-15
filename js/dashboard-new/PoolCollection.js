@@ -25,6 +25,10 @@
   PoolCollection.prototype.start = function () {
     var _self = this
     _self._getData(function (pools) {
+      pools.forEach(function (pool, index) {
+        _self._add(index)
+      })
+
       setInterval(function () {
         _self._update()
       }, window.interval)
