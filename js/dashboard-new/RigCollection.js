@@ -35,14 +35,15 @@
   =            RigCollection Public Methods            =
   ====================================================*/
 
-  RigCollection.prototype.add = function (rigId) {
-    this.collection.push(new Rig(rigId))
-  }
-
   RigCollection.prototype.start = function (data) {
     var _self = this
+
+    $('.panel-rig').each(function(index) {
+      var rigId = this.getAttribute('data-id')
+      _self._add(rigId)
+    })
+
     $.ajax({
-      // type: 'post',
       data : {
         type: 'rigs',
         action: 'update'
@@ -69,6 +70,10 @@
   /*=====================================================
   =            RigCollection Private Methods            =
   =====================================================*/
+
+  RigCollection.prototype._add = function (rigId) {
+    this.collection.push(new Rig(rigId))
+  }
 
   RigCollection.prototype._update = function () {
     var _self = this

@@ -22,11 +22,18 @@
   =======================================================*/
 
   WalletCollection.prototype.start = function () {
-    // body...
-  }
-
-  WalletCollection.prototype.add = function (walletId) {
-    this.collection.push(new Wallet(walletId))
+    $.ajax({
+      url: 'ajax.php?type=wallets&action=update',
+      dataType: 'json',
+      statusCode: {
+        401: function() {
+          window.location.assign('login.php');
+        }
+      }
+    })
+    .done(function (data) {
+      console.log(data)
+    })
   }
 
   /*-----  End of WalletCollection Public Methods  ------*/
@@ -36,7 +43,13 @@
   =            WalletCollection Private Methods            =
   ========================================================*/
 
+  WalletCollection.prototype._add = function (walletId) {
+    this.collection.push(new Wallet(walletId))
+  }
 
+  WalletCollection.prototype._update = function() {
+    // body...
+  }
 
   /*-----  End of WalletCollection Private Methods  ------*/
 

@@ -22,13 +22,18 @@
   =            PoolCollection Public Methods            =
   =====================================================*/
 
-  PoolCollection.prototype.add = function(poolId) {
-    this.collection.push(new Pool(poolId))
-  }
-
-  PoolCollection.prototype.update = function (poolList) {
-    this.collection.forEach(function (pool, index) {
-      pool.update(poolList[index])
+  PoolCollection.prototype.start = function () {
+    $.ajax({
+      url: 'ajax.php?type=pools&action=update',
+      dataType: 'json',
+      statusCode: {
+        401: function() {
+          window.location.assign('login.php');
+        }
+      }
+    })
+    .done(function (data) {
+      console.log(data)
     })
   }
 
@@ -39,7 +44,15 @@
   =            PoolCollection Private Methods            =
   ======================================================*/
 
+  PoolCollection.prototype._add = function(poolId) {
+    this.collection.push(new Pool(poolId))
+  }
 
+  PoolCollection.prototype._update = function (poolList) {
+    this.collection.forEach(function (pool, index) {
+      pool.update(poolList[index])
+    })
+  }
 
   /*-----  End of PoolCollection Private Methods  ------*/
 
