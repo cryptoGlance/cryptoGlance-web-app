@@ -36,9 +36,13 @@
       wallets.forEach(function (wallet, index) {
         _self._add(index)
       })
-      console.log(_self.collection)
+
+      _self._update(wallets)
+
       setInterval(function () {
-        _self._update()
+        _self._getData(function (wallets) {
+          _self._update(wallets)
+        })
       }, window.interval)
     })
   }
@@ -54,13 +58,11 @@
     this.collection.push(new Wallet(walletId))
   }
 
-  WalletCollection.prototype._update = function () {
+  WalletCollection.prototype._update = function (wallets) {
     var _self = this
     _self.walletOverviewHtml = ''
-    _self._getData(function (wallets) {
-      _self.collection.forEach(function (wallet, index) {
-        _self.walletOverviewHtml += wallet.update(wallets[index])
-      })
+    _self.collection.forEach(function (wallet, index) {
+      _self.walletOverviewHtml += wallet.update(wallets[index])
     })
     _self.$walletOverviewBody.html(_self.walletOverviewHtml)
   }
