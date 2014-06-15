@@ -29,19 +29,15 @@
   PoolCollection.prototype.start = function () {
     var _self = this
 
+    /*==========  Generate collection  ==========*/
+    $('[data-type="pool"]').each(function (pool) {
+      _self._add(this.getAttribute('data-id'))
+    })
+
     /*==========  Initial data call  ==========*/
     _self._getData(function (pools) {
 
-      console.log(pools.length)
-
-      /*==========  Generate collection  ==========*/
-      pools.forEach(function (pool, index) {
-        _self._add(index)
-      })
-
-      console.log(_self.collection.length)
-
-      /*==========  Initial wallet update in DOM  ==========*/
+      /*==========  Initial pools update in DOM  ==========*/
       _self._update(pools)
 
       /*==========  Setup polling  ==========*/
