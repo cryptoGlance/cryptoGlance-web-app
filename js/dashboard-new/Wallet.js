@@ -12,9 +12,12 @@
   =======================================================*/
 
   var Wallet = function (walletId) {
-    this.walletId = walletId
-    this.$walletPanel = $('#wallet')
-    this.$addressesPanel = this.$walletPanel.find('.panel-body-addresses')
+    this.id              = walletId
+    this.currency        = 'CDN'
+    this.balance         = 0
+    this.currency_code   = 0
+    this.total_addresses = 0
+    this.label           = 'money'
   }
 
   /*-----  End of Wallet Class/Object/Constructor  ------*/
@@ -24,21 +27,14 @@
   =            Wallet Public Methods            =
   =============================================*/
 
-  Wallet.prototype.start = function() {
-    this.$addressesPanel.html('')
+  Wallet.prototype.update = function (walletObj) {
+    this.currency        = walletObj.currency
+    this.balance         = walletObj.balance
+    this.currency_code   = walletObj.currency_code
+    this.total_addresses = walletObj.total_addresses
+    this.label           = walletObj.label
 
-     $.each(data, function( walletIndex, wallet) {
-        this.$addressesPanel.append('<div class="stat-pair" id="wallet-address-'+ walletId +'">' +
-                                 '<div class="stat-value">' +
-                                 '<img src="images/icon-'+ wallet.currency +'.png" alt="'+ wallet.currency +'" />' +
-                                 '<span class="green">'+ wallet.balance +' '+ wallet.currency_code +'</span>' +
-                                 '<span class="address-label">in '+'<b>'+ wallet.total_addresses +'</b> address(es)</span>' +
-                                 '</div>' +
-                                 '<div class="stat-label">' +
-                                 '<a href="wallet.php?id='+walletId+'" class="stat-pair-icon">'+ wallet.label +' <i class="icon icon-walletalt"></i></a>' +
-                                 '</div>' +
-                                 '</div>')
-    });
+    return this._buildStatusHtml()
   }
 
   /*-----  End of Wallet Public Methods  ------*/
@@ -48,7 +44,18 @@
   =            Wallet Private Methods            =
   ==============================================*/
 
-
+  Wallet.prototype._buildStatusHtml = function () {
+    return '<div class="stat-pair" id="wallet-address-' + this.id + '">' +
+           '<div class="stat-value">' +
+           '<img src="images/icon-' + this.currency + '.png" alt="' + this.currency + '" />' +
+           '<span class="green">' + this.balance + ' ' + this.currency_code + '</span>' +
+           '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +
+           '</div>' +
+           '<div class="stat-label">' +
+           '<a href="wallet.php?id=' + this.id + '" class="stat-pair-icon">' + this.label + ' <i class="icon icon-walletalt"></i></a>' +
+           '</div>' +
+           '</div>'
+  }
 
   /*-----  End of Wallet Private Methods  ------*/
 
