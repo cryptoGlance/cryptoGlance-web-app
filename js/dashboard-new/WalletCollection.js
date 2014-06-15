@@ -15,8 +15,8 @@
     this.collection = []
 
     this.apiData = {
-      type = 'wallets',
-      action = 'update'
+      type: 'wallets',
+      action: 'update'
     }
   }
 

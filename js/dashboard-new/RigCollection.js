@@ -18,8 +18,8 @@
     this.collection = []
 
     this.apiData = {
-      type = 'rigs',
-      action = 'update'
+      type: 'rigs',
+      action: 'update'
     }
     this.overallHashrate = 0
     this._ready = true

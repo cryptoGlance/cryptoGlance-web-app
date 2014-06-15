@@ -14,8 +14,8 @@
   var PoolCollection = function () {
     this.collection = []
     this.apiData = {
-      type = 'pools',
-      action = 'update'
+      type: 'pools',
+      action: 'update'
     }
   }
 
