@@ -33,6 +33,7 @@
     var _self = this
 
     _self._getData(function (wallets) {
+      console.log(wallets)
       wallets.forEach(function (wallet, index) {
         _self._add(index)
       })
