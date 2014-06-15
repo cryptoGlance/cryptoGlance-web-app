@@ -49,7 +49,8 @@ class Pools {
             }
         }
 
-        return $data;
+        // return $data;
+        echo json_encode($data);
     }
 
 }
