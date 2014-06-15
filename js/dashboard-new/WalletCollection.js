@@ -13,6 +13,11 @@
 
   var WalletCollection = function () {
     this.collection = []
+
+    this.apiData = {
+      type = 'wallets',
+      action = 'update'
+    }
   }
 
   /*-----  End of WalletCollection Class/Object/Constructor  ------*/
@@ -56,8 +61,10 @@
   }
 
   WalletCollection.prototype._getData = function (callback) {
+    var _self = this
     $.ajax({
-      url: 'ajax.php?type=wallets&action=update',
+      url: 'ajax.php',
+      data = _self.apiData
       dataType: 'json',
       statusCode: {
         401: function() {
@@ -66,6 +73,9 @@
       }
     })
     .done(callback)
+    .fail(function (xhr, status, message) {
+      console.error(message)
+    })
   }
 
   /*-----  End of WalletCollection Private Methods  ------*/
