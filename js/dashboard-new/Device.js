@@ -23,7 +23,7 @@
     this.UPDATE_INTERVAL  = root.rigUpdateTime;
     this.TAB_HEADER       = '<tr>' +
                             '<th></th>' +
-                            '<th>DEV #</th>' +
+                            '<th>Device name</th>' +
                             '<th>Temperature</th>' +
                             '<th>Hashrate 5s</th>' +
                             '<th>Accepted</th>' +
@@ -34,6 +34,7 @@
 
     /* Device properties*/
     this.id     = deviceID
+    this.name     = 'Device'
     this.status = { icon: 'cpu-processor', colour: 'green' }
     this.health = 'Alive'
     this.icon   = 'check'
@@ -57,6 +58,7 @@
   ================================================*/
 
   Device.prototype.update = function (deviceObj) {
+    this.name = deviceObj.name || 'Device'
     this.status = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
     this.health = deviceObj.health || 'Alive'
     this.icon   = deviceObj.status.icon || 'check'
@@ -153,7 +155,7 @@
 
     return '<tr>' +
            '<td><i class="icon icon-'+ this.status.icon +' ' + this.status.colour + '"></i></td>' +
-           '<td class="' + this.status.colour + '">' + this.id + '</td>' +
+           '<td class="' + this.status.colour + '">' this.name+ ' ' + this.id + '</td>' +
            '<td>' + this.temperature + '</td>' +
            '<td>' + this.hashrate_5s + '</td>' +
            '<td>' + this.accepted + '</td>' +
