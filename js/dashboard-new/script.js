@@ -1,6 +1,6 @@
 !function ($){
 
-  window.interval = 3e4
+  window.interval = 5e3
 
   /*================================
   =            The Rigs            =
