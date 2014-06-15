@@ -7,7 +7,7 @@
   =================================*/
 
   var rigCollection = new RigCollection()
-  // rigCollection.start()
+  rigCollection.start()
 
   /*-----  End of The Rigs  ------*/
 
@@ -17,7 +17,7 @@
   =================================*/
 
   var poolCollection = new PoolCollection()
-  // poolCollection.start()
+  poolCollection.start()
 
   /*-----  End of The Pools  ------*/
 
