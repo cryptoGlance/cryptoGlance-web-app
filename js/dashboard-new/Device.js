@@ -173,7 +173,7 @@
   =            Device Private Methods            =
   =================================================*/
 
-  Device.prototype._buildStat = function (name, value, progress, share) {
+  Device.prototype._buildStatusHtml = function (name, value, progress, share) {
     return '<div class="stat-pair">' +
            '<div class="stat-value">' + value + '</div>' +
            '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
