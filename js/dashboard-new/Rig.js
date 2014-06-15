@@ -142,7 +142,7 @@
     //                           '<td>--</td>' +
     //                           '</tr>')
 
-    this.$rigEl.removeClass('panel-warning panel-danger')._addClass('panel-offline')
+    this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').hide()
   }
 
