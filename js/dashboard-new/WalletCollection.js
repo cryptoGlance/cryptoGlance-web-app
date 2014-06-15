@@ -33,11 +33,10 @@
     var _self = this
 
     _self._getData(function (wallets) {
-      console.log(wallets)
       wallets.forEach(function (wallet, index) {
         _self._add(index)
       })
-
+      console.log(_self.collection)
       setInterval(function () {
         _self._update()
       }, window.interval)
@@ -79,7 +78,7 @@
       }
     })
     .fail(function (xhr, status, message) {
-      console.error(message)
+      console.error(xhr, status, message)
     })
     .done(callback)
   }
