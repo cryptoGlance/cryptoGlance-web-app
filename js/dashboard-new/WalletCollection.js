@@ -26,7 +26,7 @@
 
     _self._getData(function (wallets) {
       wallets.forEach(function (wallet, index) {
-        _self.add(index)
+        _self._add(index)
       })
 
       _self.update()
