@@ -28,8 +28,8 @@
                             '<th>Hashrate 5s</th>' +
                             '<th>Accepted</th>' +
                             '<th>Rejected</th>' +
-                            '<th>Utility</th>' +
                             '<th>HW Errors</th>' +
+                            '<th>WTFUtility</th>' +
                             '</tr>'
 
     /* Device properties*/
@@ -158,8 +158,8 @@
            '<td>' + this.hashrate_5s + '</td>' +
            '<td>' + this.accepted + '</td>' +
            '<td>' + this.rejected + '</td>' +
-           '<td>' + this.utility + '</td>' +
            '<td>' + this.hw_errors + '</td>' +
+           '<td>' + this.utility + '</td>' +
            '</tr>'
     // }
   }
