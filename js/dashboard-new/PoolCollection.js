@@ -23,17 +23,8 @@
   =====================================================*/
 
   PoolCollection.prototype.start = function () {
-    $.ajax({
-      url: 'ajax.php?type=pools&action=update',
-      dataType: 'json',
-      statusCode: {
-        401: function() {
-          window.location.assign('login.php');
-        }
-      }
-    })
-    .done(function (data) {
-      console.log(data)
+    this._getData(function (pools) {
+      console.log(pools)
     })
   }
 
@@ -52,6 +43,19 @@
     this.collection.forEach(function (pool, index) {
       pool.update(poolList[index])
     })
+  }
+
+  PoolCollection.prototype._getData = function (callback) {
+    $.ajax({
+      url: 'ajax.php?type=pools&action=update',
+      dataType: 'json',
+      statusCode: {
+        401: function() {
+          window.location.assign('login.php');
+        }
+      }
+    })
+    .done(callback)
   }
 
   /*-----  End of PoolCollection Private Methods  ------*/
