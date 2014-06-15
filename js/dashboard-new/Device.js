@@ -33,21 +33,21 @@
                             '</tr>'
 
     /* Device properties*/
-    this.id     = deviceID
-    this.name     = 'Device'
-    this.status = { icon: 'cpu-processor', colour: 'green' }
-    this.health = 'Alive'
-    this.icon   = 'check'
-    this.enabled = 'N'
+    this.id           = deviceID
+    this.name         = 'Device'
+    this.status       = { icon: 'cpu-processor', colour: 'green' }
+    this.health       = 'Alive'
+    this.icon         = 'check'
+    this.enabled      = 'N'
     this.hashrate_avg = '0 KH/s'
-    this.hashrate_5s = '0 KH/s'
-    this.temperature = 'n/a'
-    this.accepted = '0 (0%)'
-    this.rejected = '0 (0%)'
-    this.hw_errors = '0 (0%)'
-    this.utility = '0m'
-    this.frequency = 0
-    this.panel  = ''
+    this.hashrate_5s  = '0 KH/s'
+    this.temperature  = 'n/a'
+    this.accepted     = '0 (0%)'
+    this.rejected     = '0 (0%)'
+    this.hw_errors    = '0 (0%)'
+    this.utility      = '0m'
+    this.frequency    = 0
+    this.panel        = ''
   }
 
   /*-----  End of Device Class/Object/Constructor  ------*/
@@ -58,19 +58,19 @@
   ================================================*/
 
   Device.prototype.update = function (deviceObj) {
-    this.name = deviceObj.name || 'Device'
-    this.status = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
-    this.health = deviceObj.health || 'Alive'
-    this.icon   = deviceObj.status.icon || 'check'
-    this.enabled = deviceObj.enabled || 'N'
+    this.name         = deviceObj.name || 'Device'
+    this.status       = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
+    this.health       = deviceObj.health || 'Alive'
+    this.icon         = deviceObj.status.icon || 'check'
+    this.enabled      = deviceObj.enabled || 'N'
     this.hashrate_avg = deviceObj.hashrate_avg || '0 KH/s'
-    this.hashrate_5s = deviceObj.hashrate_5s || '0 KH/s'
-    this.temperature = deviceObj.temperature || 'n/a'
-    this.accepted = deviceObj.accepted || '0 (0%)'
-    this.rejected = deviceObj.rejected || '0 (0%)'
-    this.hw_errors = deviceObj.hw_errors || '0 (0%)'
-    this.utility = deviceObj.utility || '0m'
-    this.frequency = deviceObj.frequency || 0
+    this.hashrate_5s  = deviceObj.hashrate_5s || '0 KH/s'
+    this.temperature  = deviceObj.temperature || 'n/a'
+    this.accepted     = deviceObj.accepted || '0 (0%)'
+    this.rejected     = deviceObj.rejected || '0 (0%)'
+    this.hw_errors    = deviceObj.hw_errors || '0 (0%)'
+    this.utility      = deviceObj.utility || '0m'
+    this.frequency    = deviceObj.frequency || 0
     // var $summaryContentTabTable = this.$rigTabContentEl.find('#rig-' + rigId + '-summary').find('.table-summary')
     // var $summaryContentTabTableHead = this.$rigTabContentEl.find('thead')
     // var $summaryContentTabTableBody = this.$rigTabContentEl.find('tbody')
@@ -188,33 +188,33 @@
     switch (status) {
       case 'disabled':
         this.status.colour = 'grey'
-        this.status.icon = 'ban-circle'
-        this.panel = 'offline'
+        this.status.icon   = 'ban-circle'
+        this.panel         = 'offline'
         break
       case 'dead':
         this.status.colour = 'red'
-        this.status.icon = 'danger'
-        this.panel = 'danger'
+        this.status.icon   = 'danger'
+        this.panel         = 'danger'
         break
       case 'sick':
-        this.status.colour = 'orange';
-        this.status.icon = 'warning-sign';
-        this.panel = 'warning';
+        this.status.colour = 'orange'
+        this.status.icon   = 'warning-sign'
+        this.panel         = 'warning'
         break
       case 'hot':
-        this.status.colour = 'red';
-        this.status.icon = 'hot';
-        this.panel = 'danger';
+        this.status.colour = 'red'
+        this.status.icon   = 'hot'
+        this.panel         = 'danger'
         break
       case 'warm':
-        this.status.colour = 'orange';
-        this.status.icon = 'fire';
-        this.panel = 'warning';
+        this.status.colour = 'orange'
+        this.status.icon   = 'fire'
+        this.panel         = 'warning'
         break
       default:
         this.status.colour = 'green'
-        this.status.icon = 'cpu-processor'
-        this.panel = ''
+        this.status.icon   = 'cpu-processor'
+        this.panel         = ''
     }
   }
 
