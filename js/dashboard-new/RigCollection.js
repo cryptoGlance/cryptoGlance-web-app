@@ -43,7 +43,7 @@
     var _self = this
 
     /*==========  Generate collection  ==========*/
-    $('.panel-rig').each(function(index) {
+    $('.panel-rig').each(function() {
       var rigId = this.getAttribute('data-id')
       _self._add(rigId)
     })
