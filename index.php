@@ -13,6 +13,10 @@ $jsArray = array(
     'dashboard-new/Rig',
     'dashboard-new/DeviceCollection',
     'dashboard-new/Device',
+    'dashboard-new/PoolCollection',
+    'dashboard-new/Pool',
+    'dashboard-new/WalletCollection',
+    'dashboard-new/Wallet',
     'dashboard-new/script'
     // 'ajax',
     // 'dashboard/script',
