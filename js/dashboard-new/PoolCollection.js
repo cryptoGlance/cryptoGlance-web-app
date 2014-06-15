@@ -13,6 +13,10 @@
 
   var PoolCollection = function () {
     this.collection = []
+    this.apiData = {
+      type = 'pools',
+      action = 'update'
+    }
   }
 
   /*-----  End of PoolCollection Class/Object/Constructor  ------*/
@@ -56,8 +60,10 @@
   }
 
   PoolCollection.prototype._getData = function (callback) {
+    var _self = this
     $.ajax({
-      url: 'ajax.php?type=pools&action=update',
+      url: 'ajax.php',
+      data = _self.apiData
       dataType: 'json',
       statusCode: {
         401: function() {
@@ -66,6 +72,9 @@
       }
     })
     .done(callback)
+    .fail(function (xhr, status, message) {
+      console.error(message)
+    })
   }
 
   /*-----  End of PoolCollection Private Methods  ------*/
