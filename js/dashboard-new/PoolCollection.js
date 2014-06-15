@@ -17,6 +17,7 @@
       type: 'pools',
       action: 'update'
     }
+    this.ready = true
   }
 
   /*-----  End of PoolCollection Class/Object/Constructor  ------*/
@@ -42,9 +43,12 @@
 
       /*==========  Setup polling  ==========*/
       setInterval(function () {
-        _self._getData(function (pools) {
-          _self._update(pools)
-        })
+        if (_self.ready) {
+          _self.ready = false
+          _self._getData(function (pools) {
+            _self._update(pools)
+          })
+        }
       }, window.interval)
     })
   }
@@ -65,6 +69,7 @@
     _self.collection.forEach(function (pool, index) {
       pool.update(pools[index])
     })
+    _self.ready = true
   }
 
   PoolCollection.prototype._getData = function (callback) {

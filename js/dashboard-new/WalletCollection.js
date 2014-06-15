@@ -19,6 +19,7 @@
       action: 'update'
     }
     this.walletOverviewHtml = ''
+    this.ready = true
 
     this.$walletOverviewBody = $('#wallet .panel-body')
   }
@@ -45,9 +46,12 @@
 
       /*==========  Setup polling  ==========*/
       setInterval(function () {
-        _self._getData(function (wallets) {
-          _self._update(wallets)
-        })
+        if (_self.ready) {
+          _self.ready = false
+          _self._getData(function (wallets) {
+            _self._update(wallets)
+          })
+        }
       }, window.interval)
     })
   }
@@ -70,6 +74,7 @@
       _self.walletOverviewHtml += wallet.update(wallets[index])
     })
     _self.$walletOverviewBody.html(_self.walletOverviewHtml)
+    _self.ready = true
   }
 
   WalletCollection.prototype._getData = function (callback) {
