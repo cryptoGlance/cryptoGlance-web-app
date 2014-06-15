@@ -14,7 +14,7 @@
   var Pool = function (poolId) {
     this.poolId = poolId
     this.$poolEl = $('#pool-' + poolId)
-    this.$poolContentElm = this.$poolEl.find('.panel-body-stats')
+    this.$poolContentEl = $('#pool-' + poolId +' .panel-body-stats')
   }
 
   /*-----  End of Pool Class/Object/Constructor  ------*/
@@ -24,23 +24,33 @@
   =            Pool Public Methods            =
   ===========================================*/
 
-  Pool.prototype.start = function() {
-    this.$poolContentEl.html('')
-
-    $.each(pool, function (k,v) {
-      var pairClass = '';
-      if (k == 'type') {
-          return true;
-      } else if (k == 'balance' || k == 'paid_BTC' || k == 'paid_NMC') {
-          pairClass = 'green';
-      } else if (k == 'unconfirmed_balance' || k == 'unpaid_BTC' || k == 'unpaid_NMC') {
-          pairClass = 'red';
-      } else if (k == 'last_block' && pool.type == 'mpos' && typeof pool.url != 'undefined') {
-          v = '<a href="' + pool.url + '/index.php?page=statistics&action=round&height=' + v + '" target="_blank" rel="external">' + v + '</a>';
+  Pool.prototype.update = function (poolObj) {
+    var summary = ''
+    for (var key in poolObj) {
+      switch (key) {
+        case 'type':
+          break
+        case 'balance':
+        case 'paid_BTC':
+        case 'paid_NMC':
+          summary += this._buildStat('green', key, poolObj[key])
+          break
+        case 'unconfirmed_balance':
+        case 'unpaid_BTC':
+        case 'unpaid_NMC':
+          summary += this._buildStat('red', key, poolObj[key])
+          break
+        case 'last_block':
+          if (poolObj.type == 'mpos' &&  'undefined' !== typeof poolObj.url) {
+            summary += '<a href="' + pool.url + '/index.php?page=statistics&action=round&height=' + poolObj[key] + '" target="_blank" rel="external">' + v + '</a>'
+          }
+          break
+        default:
+          summary += this._buildStat('green', key, poolObj[key])
       }
+    }
 
-      $(poolContentElm).append('<div class="stat-pair"><div class="stat-value"><span class="'+pairClass+'">'+v+'</span></div><div class="stat-label">'+k.replace(/_|-|\./g, ' ')+'</div></div>');
-    })
+    this.$poolContentEl.html(summary)
   }
 
   /*-----  End of Pool Public Methods  ------*/
@@ -50,7 +60,14 @@
   =            Pool Private Methods            =
   ============================================*/
 
-
+  Pool.prototype._buildStat = function (_class, name, value) {
+    return '<div class="stat-pair">' +
+           '<div class="stat-value">' +
+           '<span class="' + _class + '">' + value + '</span>' +
+           '</div>' +
+           '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
+           '</div>'
+  }
 
   /*-----  End of Pool Private Methods  ------*/
 
