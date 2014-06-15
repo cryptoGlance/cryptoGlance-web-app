@@ -18,6 +18,9 @@
       type: 'wallets',
       action: 'update'
     }
+    this.walletOverviewHtml = ''
+
+    this.$wallet = $('#wallet')
   }
 
   /*-----  End of WalletCollection Class/Object/Constructor  ------*/
@@ -53,11 +56,13 @@
 
   WalletCollection.prototype._update = function () {
     var _self = this
+    _self.walletOverviewHtml = ''
     _self._getData(function (wallets) {
       _self.collection.forEach(function (wallet, index) {
-        wallet.update(wallets[index])
+        this.walletOverviewHtml += wallet.update(wallets[index])
       })
     })
+    _self.$wallet.html(_self.walletOverviewHtml)
   }
 
   WalletCollection.prototype._getData = function (callback) {
