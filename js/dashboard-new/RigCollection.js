@@ -16,6 +16,11 @@
 
   var RigCollection = function () {
     this.collection = []
+
+    this.apiData = {
+      type = 'rigs',
+      action = 'update'
+    }
     this.overallHashrate = 0
     this._ready = true
     this._rigCount = 0
@@ -25,7 +30,6 @@
     this.$overviewTable = $('#overview table')
     this.$overviewTableBody = $('#overview tbody')
     this.overviewTableData = ''
-    // $summaryContentTabTable.show()
   }
 
   /*-----  End of RigCollection Class/Object/Constructor  ------*/
@@ -43,15 +47,7 @@
       _self._add(rigId)
     })
 
-    $.ajax({
-      data : {
-        type: 'rigs',
-        action: 'update'
-      },
-      url: 'ajax.php',
-      dataType: 'json'
-    })
-    .done(function (data) {
+    _self.getData(function (data) {
       _self._rigCount = data.length
       _self._buildOverview(data)
       setInterval(function () {
@@ -78,20 +74,9 @@
   RigCollection.prototype._update = function () {
     var _self = this
     var overviewData = []
-    this.collection.forEach(function (rig, index) {
-      $.ajax({
-       url: 'ajax.php',
-        data : {
-          type: 'rigs',
-          action: 'update',
-          id: rig.rigID
-        },
-       dataType: 'json'
-      })
-      .fail(function () {
-        console.error('Call to Rig ' + rig.rigId + ' failed!')
-      })
-      .done(function (data) {
+    _self.collection.forEach(function (rig, index) {
+      this.apiData.id = rig.rigID
+      _self._getData(function (data) {
         _self._rigsResponded++
         data = data[0]
         rig.update(data)
@@ -101,6 +86,19 @@
           _self._buildOverview(overviewData)
         }
       })
+    })
+  }
+
+  RigCollection.prototype._getData = function (callback) {
+    var _self = this
+    $.ajax({
+      url: 'ajax.php',
+      data : _self.apiData,
+      dataType: 'json'
+    })
+    .done(callback)
+    .fail(function (xhr, status, message) {
+      console.error(message)
     })
   }
 
