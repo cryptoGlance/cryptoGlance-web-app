@@ -41,7 +41,7 @@
           summary += this._buildStatusHtml('red', key, poolObj[key])
           break
         case 'last_block':
-          if (poolObj.type == 'mpos' &&  'undefined' !== typeof poolObj.url) {
+          if (poolObj.type === 'mpos' &&  'undefined' !== typeof poolObj.url) {
             summary += this._buildStatusHtml('green', key, '<a href="' + poolObj.url + '/index.php?page=statistics&action=round&height=' + poolObj[key] + '" target="_blank" rel="external">' + poolObj[key] + '</a>')
           }
           break

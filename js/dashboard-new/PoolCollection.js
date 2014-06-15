@@ -32,10 +32,14 @@
     /*==========  Initial data call  ==========*/
     _self._getData(function (pools) {
 
+      console.log(pools.length)
+
       /*==========  Generate collection  ==========*/
       pools.forEach(function (pool, index) {
         _self._add(index)
       })
+
+      console.log(_self.collection.length)
 
       /*==========  Initial wallet update in DOM  ==========*/
       _self._update(pools)
@@ -56,7 +60,7 @@
   =            PoolCollection Private Methods            =
   ======================================================*/
 
-  PoolCollection.prototype._add = function(poolId) {
+  PoolCollection.prototype._add = function (poolId) {
     this.collection.push(new Pool(poolId))
   }
 
