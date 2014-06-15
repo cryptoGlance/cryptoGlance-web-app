@@ -7,7 +7,7 @@
   =================================*/
 
   var rigCollection = new RigCollection()
-  rigCollection.start()
+  // rigCollection.start()
 
   /*-----  End of The Rigs  ------*/
 
@@ -27,7 +27,7 @@
   ===================================*/
 
   var walletCollection = new WalletCollection()
-  walletCollection.start()
+  // walletCollection.start()
 
   /*-----  End of The Wallets  ------*/
 
