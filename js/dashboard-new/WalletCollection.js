@@ -45,8 +45,9 @@
   }
 
   WalletCollection.prototype._update = function () {
-    this._getData(function (wallets) {
-      this.collection.forEach(function (wallet, index) {
+    var _self = this
+    _self._getData(function (wallets) {
+      _self.collection.forEach(function (wallet, index) {
         wallet.update(wallets[index])
       })
     })
