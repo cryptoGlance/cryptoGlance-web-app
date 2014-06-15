@@ -17,7 +17,7 @@
   =================================*/
 
   var poolCollection = new PoolCollection()
-  poolCollection.start()
+  // poolCollection.start()
 
   /*-----  End of The Pools  ------*/
 
@@ -27,7 +27,7 @@
   ===================================*/
 
   var walletCollection = new WalletCollection()
-  // walletCollection.start()
+  walletCollection.start()
 
   /*-----  End of The Wallets  ------*/
 
