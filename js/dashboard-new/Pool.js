@@ -12,8 +12,8 @@
   =====================================================*/
 
   var Pool = function (poolId) {
-    this.poolId = poolId
-    this.$poolEl = $('#pool-' + poolId)
+    this.poolId         = poolId
+    this.$poolEl        = $('#pool-' + poolId)
     this.$poolContentEl = $('#pool-' + poolId +' .panel-body-stats')
   }
 
@@ -33,12 +33,12 @@
         case 'balance':
         case 'paid_BTC':
         case 'paid_NMC':
-          summary += this._buildStat('green', key, poolObj[key])
+          summary += this._buildStatusHtml('green', key, poolObj[key])
           break
         case 'unconfirmed_balance':
         case 'unpaid_BTC':
         case 'unpaid_NMC':
-          summary += this._buildStat('red', key, poolObj[key])
+          summary += this._buildStatusHtml('red', key, poolObj[key])
           break
         case 'last_block':
           if (poolObj.type == 'mpos' &&  'undefined' !== typeof poolObj.url) {
@@ -46,7 +46,7 @@
           }
           break
         default:
-          summary += this._buildStat('green', key, poolObj[key])
+          summary += this._buildStatusHtml('green', key, poolObj[key])
       }
     }
 
@@ -60,7 +60,7 @@
   =            Pool Private Methods            =
   ============================================*/
 
-  Pool.prototype._buildStat = function (_class, name, value) {
+  Pool.prototype._buildStatusHtml = function (_class, name, value) {
     return '<div class="stat-pair">' +
            '<div class="stat-value">' +
            '<span class="' + _class + '">' + value + '</span>' +
