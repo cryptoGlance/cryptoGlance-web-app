@@ -1,37 +1,33 @@
 !function ($){
 
-  /*=========================================
-  =            Start the Rigs...            =
-  =========================================*/
+  /*================================
+  =            The Rigs            =
+  =================================*/
 
   var rigCollection = new RigCollection()
-  var poolCollection = new PoolCollection()
-  var walletCollection = new WalletCollection()
-
-  $('.panel-rig').each(function(index) {
-    var rigId = this.getAttribute('data-id')
-    rigCollection.add(rigId)
-  })
-
   rigCollection.start()
 
-  // long polling (yuck!)
-  // setInterval(function() {
-  //   $.ajax({
-  //       url: 'ajax.php?type=pools&action=' + queryUrl,
-  //       dataType: 'json',
-  //       statusCode: {
-  //           401: function() {
-  //               window.location.assign('login.php');
-  //           }
-  //       }
-  //   })
-  // }, 5000)
-  // setInterval(function() {
-  //   ajaxUpdateCall('wallet');
-  // }, walletUpdateTime);
+  /*-----  End of The Rigs  ------*/
 
-  /*-----  End of Start the Rigs...  ------*/
+
+  /*=================================
+  =            The Pools            =
+  =================================*/
+
+  var poolCollection = new PoolCollection()
+  poolCollection.start()
+
+  /*-----  End of The Pools  ------*/
+
+
+  /*===================================
+  =            The Wallets            =
+  ===================================*/
+
+  var walletCollection = new WalletCollection()
+  walletCollection.start()
+
+  /*-----  End of The Wallets  ------*/
 
 
   /*=============================================
@@ -120,7 +116,6 @@
       dataType: 'json'
     })
   })
-
   .on('shown.bs.tab', 'a[data-toggle="tab"]', function (evt) {
     var siteLayout = $.cookie('use_masonry_layout');
     if (siteLayout == 'yes') {
