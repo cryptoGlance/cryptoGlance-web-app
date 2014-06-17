@@ -13,11 +13,11 @@
 
   var DeviceCollection = function (rigID) {
     this.collection        = []
-    this.rigID             = rigID
-    this.$summaryTable     = $('#rig-' + rigID + '-summary table')
-    this.$summaryTableBody = $('#rig-' + rigID + '-summary table tbody')
-    this.$deviceNav        = $('#rig-' + rigID + '-summary .nav')
-    this.$deviceStatus     = $('#rig-' + rigID + '-summary .tab-content')
+    // this.rigID             = rigID
+    // this.$summaryTable     = $('#rig-' + rigID + '-summary table')
+    // this.$summaryTableBody = $('#rig-' + rigID + '-summary table tbody')
+    // this.$deviceNav        = $('#rig-' + rigID + ' .nav')
+    // this.$deviceStatus     = $('#rig-' + rigID + ' .tab-content')
     this.count             = 0
   }
 
@@ -45,9 +45,15 @@
       deviceStatus.push(deviceUpdate.status)
     })
     this.$summaryTable.show()
-    this.$deviceNav.html(deviceNav.join(''))
-    this.$summaryTableBody.html(deviceSummary.join(''))
-    this.$deviceStatus.html(deviceStatus.join(''))
+
+    return {
+      nav: deviceNav.join(''),
+      summary: deviceSummary.join(''),
+      status: deviceStatus.join('')
+    }
+    // this.$deviceNav.html(this.navSummaryTab + deviceNav.join(''))
+    // this.$summaryTableBody.html(deviceSummary.join(''))
+    // this.$deviceStatus.html(deviceStatus.join(''))
   }
 
   /*-----  End of DeviceCollection Public Methods  ------*/
