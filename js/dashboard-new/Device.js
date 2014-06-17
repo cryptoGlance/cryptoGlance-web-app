@@ -102,7 +102,7 @@
               '</div>' +
               '</div>',
       nav: '<li>' +
-           '<a class="rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id + ' ' + _self.status.colour + '" href="#rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id +'" data-toggle="tab">' + _self.name + _self.id + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
+           '<a class="rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id + ' ' + _self.status.colour + '" href="#rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id +'" data-toggle="tab">' + _self.name + ' ' + _self.id + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
            '</li>'
     }
   }
