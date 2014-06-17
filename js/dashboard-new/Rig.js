@@ -79,6 +79,7 @@
     }
 
     var deviceHtml = _self.deviceCollection.update(devices)
+    console.log(deviceHtml)
     _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
     _self.$rigSummary.html(_self._buildStatus(summary))
     _self.$rigTabContentEl.html(_self.$rigSummary.html() + deviceHtml.summary)
