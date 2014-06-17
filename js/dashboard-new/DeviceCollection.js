@@ -46,9 +46,6 @@
       summary: deviceSummary.join(''),
       status: deviceStatus.join('')
     }
-    // this.$deviceNav.html(this.navSummaryTab + deviceNav.join(''))
-    // this.$summaryTableBody.html(deviceSummary.join(''))
-    // this.$deviceStatus.html(deviceStatus.join(''))
   }
 
   /*-----  End of DeviceCollection Public Methods  ------*/
