@@ -17,7 +17,7 @@
     this.$summaryTable     = $('#rig-' + rigID + '-summary table')
     this.$summaryTableBody = $('#rig-' + rigID + '-summary table tbody')
     this.$deviceNav        = $('#rig-' + rigID + '-summary .nav')
-    this.$deviceStatus     = $('#rig-' + rigID + '-summary .nav')
+    this.$deviceStatus     = $('#rig-' + rigID + '-summary .tab-content')
     this.count             = 0
   }
 
@@ -44,12 +44,10 @@
       deviceNav.push(deviceUpdate.nav)
       deviceStatus.push(deviceUpdate.status)
     })
-    deviceNav.unshift('<li>' +
-                      '<a class="blue" href="#rig-3-summary" data-toggle="tab">Summary <i class="icon icon-dotlist"></i></a>' +
-                      '</li>')
-    this.$deviceNav.html(deviceNav.join(''))
     this.$summaryTable.show()
+    this.$deviceNav.html(deviceNav.join(''))
     this.$summaryTableBody.html(deviceSummary.join(''))
+    this.$deviceStatus.html(this.deviceStatus.join(''))
   }
 
   /*-----  End of DeviceCollection Public Methods  ------*/

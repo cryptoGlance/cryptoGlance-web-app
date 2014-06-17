@@ -24,22 +24,15 @@
     _self.$rigTitle        = _self.$rigEl.find('h1')
     _self.$rigSummary      = $('#rig-' + _self.rigID + '-summary')
     _self.$loader          = _self.$rigSummary.find('img[alt="loading"]')
+    _self.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
+    _self.deviceCollection = new DeviceCollection(rigID)
+    _self.init          = true
     _self.manageBtn        = '<li>' +
                             '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                             'Summary ' +
                             '<i class="icon icon-dotlist"></i>' +
                             '</a>' +
                             '</li>'
-    _self.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
-    _self.deviceCollection = new DeviceCollection(rigID)
-    _self.init          = true
-
-    // _self.$rigNavEl.append('<li>' +
-    //                         '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
-    //                         'Summary ' +
-    //                         '<i class="icon icon-dotlist"></i>' +
-    //                         '</a>' +
-    //                         '</li>')
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/
