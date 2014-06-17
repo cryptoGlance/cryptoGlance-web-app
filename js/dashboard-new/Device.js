@@ -77,7 +77,7 @@
     _self.utility      = deviceObj.utility || '0m'
     _self.frequency    = deviceObj.frequency || 0
 
-    _self._setStatus(_self.health)
+    // _self._setStatus(_self.health)
 
     for (var key in deviceObj) {
       if ('object' !== typeof deviceObj[key] && 'id' !== key && 'enabled' !== key) {
@@ -123,58 +123,58 @@
            '</div>'
   }
 
-  Device.prototype._setStatus = function (status) {
-    status = status.toLowerCase()
+  // Device.prototype._setStatus = function (status) {
+  //   status = status.toLowerCase()
 
-    if (this.HW_ENABLED && this.hw_errors >= this.HW_DANGER) {
-      status = 'dead'
-    }
+  //   if (this.HW_ENABLED && this.hw_errors >= this.HW_DANGER) {
+  //     status = 'dead'
+  //   }
 
-    if (this.HW_ENABLED && this.hw_errors >= this.HW_WARNING) {
-      status = 'sick'
-    }
+  //   if (this.HW_ENABLED && this.hw_errors >= this.HW_WARNING) {
+  //     status = 'sick'
+  //   }
 
-    if (this.HEAT_DANGER <= this.temperature) {
-      status = 'hot'
-    }
+  //   if (this.HEAT_DANGER <= this.temperature) {
+  //     status = 'hot'
+  //   }
 
-    if (this.HEAT_WARNING <= this.temperature) {
-      status = 'warm'
-    }
+  //   if (this.HEAT_WARNING <= this.temperature) {
+  //     status = 'warm'
+  //   }
 
-    switch (status) {
-      case 'disabled':
-        this.status.colour = 'grey'
-        this.status.icon   = 'ban-circle'
-        this.panel         = 'offline'
-        break
-      case 'dead':
+  //   switch (status) {
+  //     case 'disabled':
+  //       this.status.colour = 'grey'
+  //       this.status.icon   = 'ban-circle'
+  //       this.panel         = 'offline'
+  //       break
+  //     case 'dead':
 
-        this.status.colour = 'red'
-        this.status.icon   = 'danger'
-        this.panel         = 'danger'
-        break
-      case 'sick':
-        this.status.colour = 'orange'
-        this.status.icon   = 'warning-sign'
-        this.panel         = 'warning'
-        break
-      case 'hot':
-        this.status.colour = 'red'
-        this.status.icon   = 'hot'
-        this.panel         = 'danger'
-        break
-      case 'warm':
-        this.status.colour = 'orange'
-        this.status.icon   = 'fire'
-        this.panel         = 'warning'
-        break
-      default:
-        this.status.colour = 'green'
-        this.status.icon   = 'cpu-processor'
-        this.panel         = ''
-    }
-  }
+  //       this.status.colour = 'red'
+  //       this.status.icon   = 'danger'
+  //       this.panel         = 'danger'
+  //       break
+  //     case 'sick':
+  //       this.status.colour = 'orange'
+  //       this.status.icon   = 'warning-sign'
+  //       this.panel         = 'warning'
+  //       break
+  //     case 'hot':
+  //       this.status.colour = 'red'
+  //       this.status.icon   = 'hot'
+  //       this.panel         = 'danger'
+  //       break
+  //     case 'warm':
+  //       this.status.colour = 'orange'
+  //       this.status.icon   = 'fire'
+  //       this.panel         = 'warning'
+  //       break
+  //     default:
+  //       this.status.colour = 'green'
+  //       this.status.icon   = 'cpu-processor'
+  //       this.panel         = ''
+  //   }
+  // }
 
 
   /*-----  End of Device Private Methods  ------*/
