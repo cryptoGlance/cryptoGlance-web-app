@@ -37,6 +37,7 @@
                             '<i class="icon icon-dotlist"></i>' +
                             '</a>' +
                             '</li>'
+    _self.panelStatus       = ''
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/
@@ -85,7 +86,10 @@
       }
     }
     var deviceHtml = _self.deviceCollection.update(devices)
-    _self.$rigEl[0].className = 'panel panel-primary panel-rig ' + overview.status.panel
+    if (_self.panelStatus !== overview.status.panel) {
+      _self.panelStatus = overview.status.panel
+      _self.$rigEl[0].className = 'panel panel-primary panel-rig ' + _self.panelStatus
+    }
     _self.$rigNavEl.html(_self.summaryBtn + deviceHtml.nav)
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
@@ -103,9 +107,6 @@
   /*===========================================
   =            Rig Private Methods            =
   ===========================================*/
-
-  Rig.prototype._setPanelStatus = function (status) {
-  }
 
   Rig.prototype._buildStatus = function (statusObj) {
     var statusHtml = ''
