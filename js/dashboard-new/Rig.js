@@ -14,26 +14,32 @@
   ===================================================*/
 
   var Rig = function (rigID) {
+    var _self = this
+
     /* Rig properties */
-    this.rigID            = rigID
-    this.$rigEl           = $('#rig-' + rigID)
-    this.$rigNavEl        = this.$rigEl.find('.nav')
-    this.$rigTabContentEl = this.$rigEl.find('.tab-content')
-    this.$rigTitle        = this.$rigEl.find('h1')
-    this.$rigSummary      = $('#rig-' + this.rigID + '-summary')
-    this.$loader          = this.$rigSummary.find('img[alt="loading"]')
-    this.manageBtn        = '<li>' +
+    _self.rigID            = rigID
+    _self.$rigEl           = $('#rig-' + rigID)
+    _self.$rigNavEl        = _self.$rigEl.find('.nav')
+    _self.$rigTabContentEl = _self.$rigEl.find('.tab-content')
+    _self.$rigTitle        = _self.$rigEl.find('h1')
+    _self.$rigSummary      = $('#rig-' + _self.rigID + '-summary')
+    _self.$loader          = _self.$rigSummary.find('img[alt="loading"]')
+    _self.manageBtn        = '<li>' +
                             '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                             'Summary ' +
                             '<i class="icon icon-dotlist"></i>' +
                             '</a>' +
                             '</li>'
-    // this.$overview        = $('#overview')
-    // this.$overviewTable   = this.$overview.find('.panel-body-overview div table tbody');
-    // this.$rigOverviewRow  = this.$overviewTable.find('tr[data-rig="'+ rigID +'"]')
-    this.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
-    this.deviceCollection = new DeviceCollection(rigID)
-    this.init          = true
+    _self.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
+    _self.deviceCollection = new DeviceCollection(rigID)
+    _self.init          = true
+
+    _self.$rigNavEl.append('<li>' +
+                            '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
+                            'Summary ' +
+                            '<i class="icon icon-dotlist"></i>' +
+                            '</a>' +
+                            '</li>')
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/

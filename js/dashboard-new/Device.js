@@ -61,6 +61,7 @@
     var _self = this
     var deviceStatus = []
 
+    _self.id           = deviceObj.id
     _self.name         = deviceObj.name || 'Device'
     _self.status       = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
     _self.health       = deviceObj.health || 'Alive'
@@ -92,7 +93,7 @@
              '</tr>',
       status: deviceStatus.join(''),
       nav: '<li>' +
-           '<a class="rig-3-ASC-3 green" href="#rig-3-ASC-3" data-toggle="tab">' + _self.name + _self.id + ' <i class="icon icon-cpu-processor"></i></a>' +
+           '<a class="rig-' + _self.id  + '-' + _self.name + '-' +_self.id + ' ' + _self.status.colour + '" href="#rig-' + _self.id  + '-' + _self.name + '-' +_self.id +'" data-toggle="tab">' + _self.name + _self.id + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
            '</li>'
     }
   }
