@@ -31,7 +31,7 @@
     _self.deviceCollection  = new DeviceCollection(rigID)
     _self.init              = true
     _self.ready             = true
-    _self.manageBtn        = '<li>' +
+    _self.summaryBtn        = '<li>' +
                             '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                             'Summary ' +
                             '<i class="icon icon-dotlist"></i>' +
@@ -70,6 +70,9 @@
     var summary = data.summary || {}
     var devices = data.devs || []
     var sharePercent = 0
+    var $activeNav = _self.$rigNavEl.find('.active')
+    var activeNavIndex = $activeNav.index()
+    var activeTab = $activeNav.find('a').prop('href')
 
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
@@ -79,10 +82,12 @@
       }
     }
     var deviceHtml = _self.deviceCollection.update(devices)
-    _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
+    _self.$rigNavEl.html(_self.summaryBtn + deviceHtml.nav)
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
     _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHTML + deviceHtml.status)
+    _self.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')
+    $(activeTab).addClass('active')
   }
 
   /*-----  End of Rig Public Methods  ------*/
