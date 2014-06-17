@@ -79,9 +79,8 @@
     }
 
     var deviceHtml = _self.deviceCollection.update(devices)
-    console.log(deviceHtml)
     _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
-    _self.$rigSummary.html(_self._buildStatus(summary))
+    _self.$rigSummaryTable.html(_self._buildStatus(summary))
     _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHtml + deviceHtml.summary)
 
     // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
