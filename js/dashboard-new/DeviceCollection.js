@@ -14,7 +14,6 @@
   var DeviceCollection = function (rigID) {
     this.collection        = []
     // this.rigID             = rigID
-    // this.$summaryTable     = $('#rig-' + rigID + '-summary table')
     // this.$summaryTableBody = $('#rig-' + rigID + '-summary table tbody')
     // this.$deviceNav        = $('#rig-' + rigID + ' .nav')
     // this.$deviceStatus     = $('#rig-' + rigID + ' .tab-content')
@@ -44,7 +43,6 @@
       deviceNav.push(deviceUpdate.nav)
       deviceStatus.push(deviceUpdate.status)
     })
-    this.$summaryTable.show()
 
     return {
       nav: deviceNav.join(''),

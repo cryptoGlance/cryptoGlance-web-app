@@ -22,7 +22,8 @@
     _self.$rigNavEl        = _self.$rigEl.find('.nav')
     _self.$rigTabContentEl = _self.$rigEl.find('.tab-content')
     _self.$rigTitle        = _self.$rigEl.find('h1')
-    _self.$rigSummary      = $('#rig-' + _self.rigID + '-summary')
+    _self.$rigSummary      = $('#rig-' + rigID + '-summary')
+    _self.$summaryTable     = _self.$rigSummary.find('table')
     _self.$loader          = _self.$rigSummary.find('img[alt="loading"]')
     _self.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
     _self.deviceCollection = new DeviceCollection(rigID)
@@ -44,25 +45,25 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
+    var _self = this
     if ('undefined' === typeof data.summary || !data.devs.length) {
-      this._off()
-      this.ready = false
+      _self._off()
+      _self.ready = false
       return
     }
-    else if (!this.ready) {
-      this.ready = true
-      this._on()
+    else if (!_self.ready) {
+      _self.ready = true
+      _self._on()
     }
 
-    if (this.init) {
-      this._on()
+    if (_self.init) {
+      _self._on()
 
-      this.$loader.remove()
+      _self.$loader.remove()
 
-      this.$rigNavEl.append(this.manageBtn)
+      _self.$summaryTable.show()
     }
 
-    var _self = this
     var stats = ''
     var summary = data.summary || {}
     var devices = data.devs || []
