@@ -78,7 +78,7 @@
     _self.frequency    = deviceObj.frequency || 0
 
     for (var key in deviceObj) {
-      if ('object' !== deviceObj[key]) {
+      if ('object' !== typeof deviceObj[key]) {
         deviceStatus.push(_self._buildStatusHtml(key, deviceObj[key]))
       }
     }
