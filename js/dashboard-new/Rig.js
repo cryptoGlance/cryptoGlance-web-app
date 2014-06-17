@@ -23,8 +23,8 @@
     _self.$rigTabContentEl  = _self.$rigEl.find('.tab-content')
     _self.$rigTitle         = _self.$rigEl.find('h1')
     _self.$rigSummary       = $('#rig-' + rigID + '-summary')
-    _self.$summaryTable     = _self.$rigSummary.find('table')
-    _self.$summaryTableBody = _self.$summaryTable.find('tbody')
+    _self.$rigSummaryTable     = _self.$rigSummary.find('table')
+    _self.$rigSummaryTableBody = _self.$rigSummaryTable.find('tbody')
     _self.$loader           = _self.$rigSummary.find('img[alt="loading"]')
     _self.$rigSummaryBody   = _self.$rigSummary.find('.panel-body-summary')
     _self.deviceCollection  = new DeviceCollection(rigID)
@@ -62,7 +62,7 @@
 
       _self.$loader.remove()
 
-      _self.$summaryTable.show()
+      _self.$rigSummaryTable.show()
     }
 
     var stats = ''
