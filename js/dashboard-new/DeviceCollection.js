@@ -47,7 +47,7 @@
     this.$summaryTable.show()
     this.$deviceNav.html(deviceNav.join(''))
     this.$summaryTableBody.html(deviceSummary.join(''))
-    this.$deviceStatus.html(this.deviceStatus.join(''))
+    this.$deviceStatus.html(deviceStatus.join(''))
   }
 
   /*-----  End of DeviceCollection Public Methods  ------*/
