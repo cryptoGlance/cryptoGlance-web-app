@@ -27,6 +27,10 @@
   Pool.prototype.update = function (poolObj) {
     var summary = ''
     for (var key in poolObj) {
+      if (!poolObj[key]) {
+        summary = null
+        break
+      }
       switch (key) {
         case 'type':
           break
@@ -49,8 +53,9 @@
           summary += this._buildStatusHtml('', key, poolObj[key])
       }
     }
-
-    this.$poolContentEl.html(summary)
+    if (summary) {
+      this.$poolContentEl.html(summary)
+    }
   }
 
   /*-----  End of Pool Public Methods  ------*/
