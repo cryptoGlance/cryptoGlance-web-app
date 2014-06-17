@@ -58,112 +58,43 @@
   ================================================*/
 
   Device.prototype.update = function (deviceObj) {
-    this.name         = deviceObj.name || 'Device'
-    this.status       = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
-    this.health       = deviceObj.health || 'Alive'
-    this.icon         = deviceObj.status.icon || 'check'
-    this.enabled      = deviceObj.enabled || 'N'
-    this.hashrate_avg = deviceObj.hashrate_avg || '0 KH/s'
-    this.hashrate_5s  = deviceObj.hashrate_5s || '0 KH/s'
-    this.temperature  = deviceObj.temperature || 'n/a'
-    this.accepted     = deviceObj.accepted || '0 (0%)'
-    this.rejected     = deviceObj.rejected || '0 (0%)'
-    this.hw_errors    = deviceObj.hw_errors || '0 (0%)'
-    this.utility      = deviceObj.utility || '0m'
-    this.frequency    = deviceObj.frequency || 0
-    // var $summaryContentTabTable = this.$rigTabContentEl.find('#rig-' + rigId + '-summary').find('.table-summary')
-    // var $summaryContentTabTableHead = this.$rigTabContentEl.find('thead')
-    // var $summaryContentTabTableBody = this.$rigTabContentEl.find('tbody')
-    // var removeTable = false
-    // $summaryContentTabTable.find('tr').remove()
+    var _self = this
+    var deviceStatus = []
 
-    // if ((typeof devices.GPU != 'undefined' && devices.GPU.length > 0) ||
-    //      typeof devices.ASC != 'undefined' && devices.ASC.length > 0) {
-    //     $summaryContentTabTableHead.append(this.TAB_HEADER);
-    // } else {
-    //   removeTable = true
-    //   $summaryContentTabTable.remove()
-    // }
+    _self.name         = deviceObj.name || 'Device'
+    _self.status       = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
+    _self.health       = deviceObj.health || 'Alive'
+    _self.icon         = deviceObj.status.icon || 'check'
+    _self.enabled      = deviceObj.enabled || 'N'
+    _self.hashrate_avg = deviceObj.hashrate_avg || '0 KH/s'
+    _self.hashrate_5s  = deviceObj.hashrate_5s || '0 KH/s'
+    _self.temperature  = deviceObj.temperature || 'n/a'
+    _self.accepted     = deviceObj.accepted || '0 (0%)'
+    _self.rejected     = deviceObj.rejected || '0 (0%)'
+    _self.hw_errors    = deviceObj.hw_errors || '0 (0%)'
+    _self.utility      = deviceObj.utility || '0m'
+    _self.frequency    = deviceObj.frequency || 0
 
-    // Update Devices
-    // var deviceList = ''
-    // var deviceTabToRemove = []
-    // var deviceTabs = ''
-    // var deviceTabsContent = ''
-    // this.icon = 'cpu-processor'
-    // this.panel = ''
-    // for (var deviceType in devices) {
-    //   for (var deviceIndex in devices[deviceType]) {
-        // Status colours
-        // this.health = deviceIndex.health
-        // if (this.enabled === 'N') {
-        //   this._setStatus('disabled')
-        // }
-        // else if (this.health === 'Dead' || (this.HW_ENABLED && this.hw_errors >= this.HW_DANGER)) {
-        //   this._setStatus('dead')
-        // }
-        // else if (this.health === 'Sick' || (this.HW_ENABLED && this.hw_errors >= this.HW_WARNING)) {
-        //   this._setStatus('sick')
-        // }
-        // else if (this.HEAT_DANGER <= this.temperature) {
-        //   this._setStatus('hot')
-        // }
-        // else if (this.HEAT_WARNING <= this.temperature) {
-        //   this._setStatus('warm')
-        // }
+    for (var key in deviceObj) {
+      deviceStatus.push(_self._buildStatusHtml(key, deviceObj[key]))
+    }
 
-        // deviceList += '<li>' +
-        //               '<a class="rig-' + this.rigId + '-' + deviceType + '-' + deviceIndex + ' ' + this.status + '" href="#rig-' + this.rigId  + '-' + deviceType + '-' + deviceIndex + '" data-toggle="tab">' + deviceType + deviceIndex + ' ' +
-        //               '<i class="icon icon-'+ this.icon +'"></i>' +
-        //               '</a>' +
-        //               '</li>'
-        // deviceTabToRemove.push('#rig-'+ this.rigId +'-'+ deviceType +'-'+ deviceIndex)
-        // deviceTabsContent += '<div class="tab-pane fade in" id="rig-'+ this.rigId +'-'+ deviceType +'-'+ deviceIndex +'">' +
-        //               '<div class="panel-body panel-body-stats"></div>' +
-        //               '</div>'
-    //   }
-    // }
-
-    // if (this.panel !== '') {
-    //   this.$rigEl.addClass('panel-' + this.panel)
-    // }
-
-    // add dev to Nav
-    // this.$rigNavEl.append(deviceList)
-    // this.$rigTabContentEl.find(deviceTabToRemove).remove()
-    // this.$rigTabContentEl.append(deviceTabsContent)
-
-    // Updating DEV Content Tab
-    // var $devContentTab = this.$rigTabContentEl.find('#rig-' + this.rigId +'-' + this.id).find('.panel-body-stats')
-    // $devContentTab.find('div').remove()
-    // for (var key in devices) {
-    //   switch (key) {
-    //     case 'hashrate_5s':
-    //     case 'hashrate_avg':
-    //       deviceTabs += this._buildStat(key, Util.getSpeed(devices[key]), null, null)
-    //       break
-    //     default:
-    //       deviceTabs += this._buildStat(key, devices[key], null, null)
-    //   }
-    // }
-
-    // $devContentTab.append(deviceTabs)
-
-    // Update Summary Page of DEVs
-    // if (!removeTable) {
-    //   dev.hashrate_5s = Util.getSpeed(dev.hashrate_5s)
-
-    return '<tr>' +
-           '<td><i class="icon icon-'+ this.status.icon + ' ' + this.status.colour + '"></i></td>' +
-           '<td class="' + this.status.colour + '">' + this.name + ' ' + this.id + '</td>' +
-           '<td>' + this.temperature + '</td>' +
-           '<td>' + this.hashrate_5s + '</td>' +
-           '<td>' + this.accepted + '</td>' +
-           '<td>' + this.rejected + '</td>' +
-           '<td>' + this.hw_errors + '</td>' +
-           '<td>' + this.utility + '</td>' +
-           '</tr>'
-    // }
+    return {
+      summary: '<tr>' +
+             '<td><i class="icon icon-'+ _self.status.icon + ' ' + _self.status.colour + '"></i></td>' +
+             '<td class="' + _self.status.colour + '">' + _self.name + ' ' + _self.id + '</td>' +
+             '<td>' + _self.temperature + '</td>' +
+             '<td>' + _self.hashrate_5s + '</td>' +
+             '<td>' + _self.accepted + '</td>' +
+             '<td>' + _self.rejected + '</td>' +
+             '<td>' + _self.hw_errors + '</td>' +
+             '<td>' + _self.utility + '</td>' +
+             '</tr>',
+      status: deviceStatus.join(''),
+      nav: '<li>' +
+           '<a class="rig-3-ASC-3 green" href="#rig-3-ASC-3" data-toggle="tab">' + _self.name + _self.id + ' <i class="icon icon-cpu-processor"></i></a>' +
+           '</li>'
+    }
   }
 
   /*-----  End of Device Public Methods  ------*/
@@ -173,16 +104,12 @@
   =            Device Private Methods            =
   =================================================*/
 
-  Device.prototype._buildStatusHtml = function (name, value, progress, share) {
+  Device.prototype._buildStatusHtml = function (name, value) {
     return '<div class="stat-pair">' +
            '<div class="stat-value">' + value + '</div>' +
            '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
            '</div>'
   }
-
-  // Device.prototype._registerDevice = function (device) {
-  //   this.deviceCollection.push(new RigDevice(device))
-  // }
 
   Device.prototype._setStatus = function (status) {
     switch (status) {
