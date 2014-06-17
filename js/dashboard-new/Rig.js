@@ -144,12 +144,14 @@
 
   Rig.prototype._off = function () {
     this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
+    this.$rigEl.find('.btn-manage-rig').hide()
     this.rigPanel.hide()
   }
 
   Rig.prototype._on = function() {
     this.init = false
     this.$rigEl.removeClass('panel-offline')
+    this.$rigEl.find('.btn-manage-rig').show()
     this.rigPanel.show()
   }
 
