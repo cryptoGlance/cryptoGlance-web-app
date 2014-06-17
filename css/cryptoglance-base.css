@@ -1738,18 +1738,18 @@ a#dash-add-panel.flash {
     font-size: 13px;
 }
 
-.stat-pair span, .panel-rig table tr td span {
+.panel-rig .stat-pair span, .panel-rig table tr td span {
   font-size: 0.75em;
   color: #aaa;
 }
 
-.stat-pair span {
+.panel-rig .stat-pair span {
   display: inline-block;
   line-height: normal;
   margin-left: 3px;
 }
 
-.stat-pair span.superscript {
+.panel-rig .stat-pair span.superscript {
   vertical-align: top;
 }
 
