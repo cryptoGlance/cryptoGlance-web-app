@@ -20,7 +20,7 @@ if ($walletId != 0) {
     
     if (!empty($wallet)) {
         $walletObj = new Wallets();
-        $walletData = $walletObj->update($walletId);
+        $walletData = $walletObj->getUpdate($walletId);
         $wallet['data'] = $walletData[0];
     }
 }
