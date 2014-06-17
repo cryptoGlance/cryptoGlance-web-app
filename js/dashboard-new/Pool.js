@@ -46,7 +46,7 @@
           }
           break
         default:
-          summary += this._buildStatusHtml('green', key, poolObj[key])
+          summary += this._buildStatusHtml('', key, poolObj[key])
       }
     }
 
