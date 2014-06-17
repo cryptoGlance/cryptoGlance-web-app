@@ -13,7 +13,7 @@
   =            Device Class/Object/Constructor            =
   ==========================================================*/
 
-  var Device = function (deviceID) {
+  var Device = function (deviceID, rigID) {
     /* Device constants */
     this.HEAT_WARNING     = root.devHeatWarning;
     this.HEAT_DANGER      = root.devHeatDanger;
@@ -34,6 +34,7 @@
 
     /* Device properties*/
     this.id           = deviceID
+    this.rigID        = rigID
     this.name         = 'Device'
     this.status       = { icon: 'cpu-processor', colour: 'green' }
     this.health       = 'Alive'
@@ -101,7 +102,7 @@
               '</div>' +
               '</div>',
       nav: '<li>' +
-           '<a class="rig-' + _self.id  + '-' + _self.name + '-' +_self.id + ' ' + _self.status.colour + '" href="#rig-' + _self.id  + '-' + _self.name + '-' +_self.id +'" data-toggle="tab">' + _self.name + _self.id + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
+           '<a class="rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id + ' ' + _self.status.colour + '" href="#rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id +'" data-toggle="tab">' + _self.name + _self.id + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
            '</li>'
     }
   }

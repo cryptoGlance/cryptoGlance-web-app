@@ -19,6 +19,7 @@
     /* Rig properties */
     _self.rigID             = rigID
     _self.$rigEl            = $('#rig-' + rigID)
+    _self.rigPanel          = _self.rigEl.find('.panel-content')
     _self.$rigNavEl         = _self.$rigEl.find('.nav')
     _self.$rigTabContentEl  = _self.$rigEl.find('.tab-content')
     _self.$rigTitle         = _self.$rigEl.find('h1')
@@ -69,7 +70,6 @@
     var summary = data.summary || {}
     var devices = data.devs || []
     var sharePercent = 0
-    // summary.hashrate_5s = summary.hashrate_5s !== 0 ? summary.hashrate_5s : summary.hashrate_avg
 
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
@@ -78,15 +78,11 @@
         _self.deviceCollection.add(devices[i].id)
       }
     }
-
     var deviceHtml = _self.deviceCollection.update(devices)
     _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
     _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHTML + deviceHtml.status)
-
-    // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
-    // this.$rigTabContentEl.find('.tab-pane:eq('+ this.selectedNav +')').addClass('active')
   }
 
   /*-----  End of Rig Public Methods  ------*/
@@ -137,32 +133,14 @@
   }
 
   Rig.prototype._off = function () {
-    // this.$rigEl.find('.toggle-panel-body, .panel-footer').hide()
-    this.$rigNavEl.hide()
-    this.$rigTabContentEl.hide()
-
-    // if (this.$rigOverviewRow.length == 0) {
-    //   $this.overviewTable.append('<tr data-rig="'+ this.rigID +'"></tr>')
-    // }
-    // this.$rigOverviewRow.html('<tr data-rig="'+ this.rigID +'">' +
-    //                           '<td><i class="icon icon-ban-circle grey"></i></td>' +
-    //                           '<td><a href="#rig-'+ this.rigID +'" class="anchor-offset rig-'+ this.rigID +' grey">'+ this.$rigTitle.html().replace(' - OFFLINE', '') +'</a></td>' +
-    //                           '<td>--</td>' +
-    //                           '<td>--</td>' +
-    //                           '<td>--</td>' +
-    //                           '</tr>')
-
     this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
-    this.$rigEl.find('.btn-manage-rig').hide()
+    this.rigPanel.hide()
   }
 
   Rig.prototype._on = function() {
     this.init = false
-    this.$rigEl.find('.toggle-panel-body, .panel-footer').show()
-    this.$rigNavEl.show()
-    this.$rigTabContentEl.show()
     this.$rigEl.removeClass('panel-offline')
-    this.$rigEl.find('.btn-manage-rig').show()
+    this.rigPanel.show()
   }
 
   /*-----  End of Rig Private Methods  ------*/
