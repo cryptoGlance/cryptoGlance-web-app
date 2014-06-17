@@ -102,12 +102,6 @@
   =            Rig Private Methods            =
   ===========================================*/
 
-  // Rig.prototype._clearNav = function () {
-  //   var $selectedNav = this.$rigNavEl.find('.active')
-  //   this.selectedNav = $selectedNav[0] ? $selectedNav.index() : 0
-  //   this.$rigNavEl.find('li').remove()
-  // }
-
   Rig.prototype._buildStatus = function (statusObj) {
     var statusHtml = ''
     var totalShares = statusObj.accepted + statusObj.rejected + statusObj.stale
