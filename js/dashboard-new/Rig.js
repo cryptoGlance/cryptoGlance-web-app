@@ -27,6 +27,7 @@
     _self.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
     _self.deviceCollection = new DeviceCollection(rigID)
     _self.init          = true
+    _self.ready         = true
     _self.manageBtn        = '<li>' +
                             '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                             'Summary ' +
@@ -45,7 +46,12 @@
   Rig.prototype.update = function (data) {
     if ('undefined' === typeof data.summary || !data.devs.length) {
       this._off()
+      this.ready = false
       return
+    }
+    else if (!this.ready) {
+      this.ready = true
+      this._on()
     }
 
     if (this.init) {
