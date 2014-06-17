@@ -25,7 +25,7 @@
     _self.$rigSummary      = $('#rig-' + rigID + '-summary')
     _self.$summaryTable     = _self.$rigSummary.find('table')
     _self.$loader          = _self.$rigSummary.find('img[alt="loading"]')
-    _self.$rigSummary      = $('#rig-' + rigID + '-summary').find('.panel-body-summary')
+    _self.$rigSummaryBody      = _self.$rigSummary.find('.panel-body-summary')
     _self.deviceCollection = new DeviceCollection(rigID)
     _self.init          = true
     _self.ready         = true
@@ -80,8 +80,9 @@
 
     var deviceHtml = _self.deviceCollection.update(devices)
     _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
-    _self.$rigSummaryTable.html(_self._buildStatus(summary))
-    _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHtml + deviceHtml.summary)
+    _self.$rigSummaryBody.html(_self._buildStatus(summary))
+    _self.$rigSummaryTable.html(deviceHtml.summary)
+    _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHtml + deviceHtml.status)
 
     // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
     // this.$rigTabContentEl.find('.tab-pane:eq('+ this.selectedNav +')').addClass('active')
