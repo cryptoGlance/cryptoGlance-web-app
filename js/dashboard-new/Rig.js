@@ -62,6 +62,7 @@
       this.$rigNavEl.append(this.manageBtn)
     }
 
+    var _self = this
     var stats = ''
     var summary = data.summary || {}
     var devices = data.devs || []
@@ -70,15 +71,16 @@
 
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
-    if (this.deviceCollection.count < devices.length) {
+    if (_self.deviceCollection.count < devices.length) {
       for (var i = 0; i < devices.length; i++) {
-        this.deviceCollection.add(devices[i].id)
+        _self.deviceCollection.add(devices[i].id)
       }
     }
 
-    // this._clearNav()
-    this.$rigSummary.html(this._buildStatus(summary))
-    this.deviceCollection.update(devices)
+    var deviceHtml = _self.deviceCollection.update(devices)
+    _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
+    _self.$rigSummary.html(_self._buildStatus(summary))
+    _self.$rigTabContentEl.html(_self.$rigSummary.html() + deviceHtml.summary)
 
     // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
     // this.$rigTabContentEl.find('.tab-pane:eq('+ this.selectedNav +')').addClass('active')
