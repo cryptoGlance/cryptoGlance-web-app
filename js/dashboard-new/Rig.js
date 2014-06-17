@@ -34,12 +34,12 @@
     _self.deviceCollection = new DeviceCollection(rigID)
     _self.init          = true
 
-    _self.$rigNavEl.append('<li>' +
-                            '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
-                            'Summary ' +
-                            '<i class="icon icon-dotlist"></i>' +
-                            '</a>' +
-                            '</li>')
+    // _self.$rigNavEl.append('<li>' +
+    //                         '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
+    //                         'Summary ' +
+    //                         '<i class="icon icon-dotlist"></i>' +
+    //                         '</a>' +
+    //                         '</li>')
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/
@@ -77,7 +77,7 @@
       }
     }
 
-    this._clearNav()
+    // this._clearNav()
     this.$rigSummary.html(this._buildStatus(summary))
     this.deviceCollection.update(devices)
 
@@ -92,11 +92,11 @@
   =            Rig Private Methods            =
   ===========================================*/
 
-  Rig.prototype._clearNav = function () {
-    var $selectedNav = this.$rigNavEl.find('.active')
-    this.selectedNav = $selectedNav[0] ? $selectedNav.index() : 0
-    this.$rigNavEl.find('li').remove()
-  }
+  // Rig.prototype._clearNav = function () {
+  //   var $selectedNav = this.$rigNavEl.find('.active')
+  //   this.selectedNav = $selectedNav[0] ? $selectedNav.index() : 0
+  //   this.$rigNavEl.find('li').remove()
+  // }
 
   Rig.prototype._buildStatus = function (statusObj) {
     var statusHtml = ''
