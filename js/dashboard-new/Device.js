@@ -92,7 +92,11 @@
              '<td>' + _self.utility + '</td>' +
              '</tr>',
       status: '<div class="tab-pane fade" id="rig-' + _self.id  + '-' + _self.name + '-' +_self.id + '">' +
+              '<div class="panel-body panel-body-stats">' +
+              '<div class="panel-body-summary">' +
               deviceStatus.join('') +
+              '</div>' +
+              '</div>' +
               '</div>',
       nav: '<li>' +
            '<a class="rig-' + _self.id  + '-' + _self.name + '-' +_self.id + ' ' + _self.status.colour + '" href="#rig-' + _self.id  + '-' + _self.name + '-' +_self.id +'" data-toggle="tab">' + _self.name + _self.id + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
