@@ -89,8 +89,9 @@
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
     _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHTML + deviceHtml.status)
     if ($activeNav.length) {
+      _self.$rigTabContentEl.find('.active.in').removeClass('in active')
       _self.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')
-      $(activeTab).addClass('active')
+      $(activeTab).addClass('in active')
     }
   }
 
