@@ -83,7 +83,7 @@
     _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
-    _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHtml + deviceHtml.status)
+    _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHTML + deviceHtml.status)
 
     // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
     // this.$rigTabContentEl.find('.tab-pane:eq('+ this.selectedNav +')').addClass('active')
