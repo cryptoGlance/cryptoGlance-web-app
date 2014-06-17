@@ -17,18 +17,19 @@
     var _self = this
 
     /* Rig properties */
-    _self.rigID            = rigID
-    _self.$rigEl           = $('#rig-' + rigID)
-    _self.$rigNavEl        = _self.$rigEl.find('.nav')
-    _self.$rigTabContentEl = _self.$rigEl.find('.tab-content')
-    _self.$rigTitle        = _self.$rigEl.find('h1')
-    _self.$rigSummary      = $('#rig-' + rigID + '-summary')
+    _self.rigID             = rigID
+    _self.$rigEl            = $('#rig-' + rigID)
+    _self.$rigNavEl         = _self.$rigEl.find('.nav')
+    _self.$rigTabContentEl  = _self.$rigEl.find('.tab-content')
+    _self.$rigTitle         = _self.$rigEl.find('h1')
+    _self.$rigSummary       = $('#rig-' + rigID + '-summary')
     _self.$summaryTable     = _self.$rigSummary.find('table')
-    _self.$loader          = _self.$rigSummary.find('img[alt="loading"]')
-    _self.$rigSummaryBody      = _self.$rigSummary.find('.panel-body-summary')
-    _self.deviceCollection = new DeviceCollection(rigID)
-    _self.init          = true
-    _self.ready         = true
+    _self.$summaryTableBody = _self.$summaryTable.find('tbody')
+    _self.$loader           = _self.$rigSummary.find('img[alt="loading"]')
+    _self.$rigSummaryBody   = _self.$rigSummary.find('.panel-body-summary')
+    _self.deviceCollection  = new DeviceCollection(rigID)
+    _self.init              = true
+    _self.ready             = true
     _self.manageBtn        = '<li>' +
                             '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                             'Summary ' +
@@ -81,7 +82,7 @@
     var deviceHtml = _self.deviceCollection.update(devices)
     _self.$rigNavEl.html(_self.manageBtn + deviceHtml.nav)
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
-    _self.$rigSummaryTable.html(deviceHtml.summary)
+    _self.$rigSummaryTableBody.html(deviceHtml.summary)
     _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHtml + deviceHtml.status)
 
     // this.$rigNavEl.find('li:eq('+ this.selectedNav +')').addClass('active')
