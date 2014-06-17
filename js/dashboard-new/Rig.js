@@ -67,6 +67,7 @@
     }
 
     var stats = ''
+    var overview = data.overview || {}
     var summary = data.summary || {}
     var devices = data.devs || []
     var sharePercent = 0
@@ -84,6 +85,7 @@
       }
     }
     var deviceHtml = _self.deviceCollection.update(devices)
+    _self.$rigEl[0].className = 'panel panel-primary panel-rig ' + overview.status.panel
     _self.$rigNavEl.html(_self.summaryBtn + deviceHtml.nav)
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
@@ -101,6 +103,9 @@
   /*===========================================
   =            Rig Private Methods            =
   ===========================================*/
+
+  Rig.prototype._setPanelStatus = function (status) {
+  }
 
   Rig.prototype._buildStatus = function (statusObj) {
     var statusHtml = ''
