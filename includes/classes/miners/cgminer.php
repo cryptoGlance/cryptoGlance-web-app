@@ -70,6 +70,7 @@ class Miners_Cgminer extends Miners_Abstract {
             if (isset($dev['GPU'])) {
                 $devices[] = array(
                     'id' => $dev['GPU'],
+                    'name' => 'GPU',
                     'status' => $this->_devStatus[$devKey],
                     'enabled' => $dev['Enabled'],
                     'health' => $dev['Status'],
@@ -88,8 +89,9 @@ class Miners_Cgminer extends Miners_Abstract {
                     'utility' => $dev['Utility'] . '/m',
                 );
             } else if (isset($dev['ASC']) || isset($dev['PGA'])) {
-                $devices[] = array(
+                $data = array(
                     'id' => (isset($dev['ASC']) ? $dev['ASC'] : $dev['PGA']),
+                    'name' => (isset($dev['ASC']) ? 'ASC' : 'PGA'),
                     'status' => $this->_devStatus[$devKey],
                     'enabled' => $dev['Enabled'],
                     'health' => $dev['Status'],
@@ -102,6 +104,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'utility' => $dev['Utility'] . '/m',
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
                 );
+                $data['name'] = (isset($dev['Name']) ? $dev['Name'] : $data['name']);
+                $devices[] = $data;
             }
         }
         
