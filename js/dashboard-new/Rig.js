@@ -19,7 +19,7 @@
     /* Rig properties */
     _self.rigID             = rigID
     _self.$rigEl            = $('#rig-' + rigID)
-    _self.rigPanel          = _self.rigEl.find('.panel-content')
+    _self.rigPanel          = _self.$rigEl.find('.panel-content')
     _self.$rigNavEl         = _self.$rigEl.find('.nav')
     _self.$rigTabContentEl  = _self.$rigEl.find('.tab-content')
     _self.$rigTitle         = _self.$rigEl.find('h1')
