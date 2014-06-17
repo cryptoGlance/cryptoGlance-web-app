@@ -77,6 +77,8 @@
     _self.utility      = deviceObj.utility || '0m'
     _self.frequency    = deviceObj.frequency || 0
 
+    _self._setStatus(_self.health)
+
     for (var key in deviceObj) {
       if ('object' !== typeof deviceObj[key] && 'id' !== key && 'enabled' !== key) {
         deviceStatus.push(_self._buildStatusHtml(key, deviceObj[key]))
@@ -122,6 +124,24 @@
   }
 
   Device.prototype._setStatus = function (status) {
+    status = status.toLowerCase()
+
+    if (this.HW_ENABLED && this.hw_errors >= this.HW_DANGER) {
+      status = 'dead'
+    }
+
+    if (this.HW_ENABLED && this.hw_errors >= this.HW_WARNING) {
+      status = 'sick'
+    }
+
+    if (this.HEAT_DANGER <= this.temperature) {
+      status = 'hot'
+    }
+
+    if (this.HEAT_WARNING <= this.temperature) {
+      status = 'warm'
+    }
+
     switch (status) {
       case 'disabled':
         this.status.colour = 'grey'
@@ -129,6 +149,7 @@
         this.panel         = 'offline'
         break
       case 'dead':
+
         this.status.colour = 'red'
         this.status.icon   = 'danger'
         this.panel         = 'danger'
