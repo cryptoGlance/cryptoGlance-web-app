@@ -47,14 +47,14 @@ class Miners_Cgminer extends Miners_Abstract {
     
     public function summary() {
         $totalShares = $this->_summary['Difficulty Accepted'] + $this->_summary['Difficulty Rejected'] + $this->_summary['Difficulty Stale'];
-        $hePercent = round(($this->_summary['Hardware Errors'] / ($this->_summary['Difficulty Accepted'] + $this->_summary['Difficulty Rejected'] + $this->_summary['Hardware Errors'])) * 100, 3);
+        $hePercent = round(($this->_summary['Hardware Errors'] / ($this->_summary['Difficulty Accepted'] + $this->_summary['Difficulty Rejected'] + $this->_summary['Hardware Errors'])) * 100, 2);
         
         return array(
             'hashrate_avg' => $this->getFormattedHashrate($this->_summary['MHS av']),
             'blocks_found' => $this->_summary['Found Blocks'],
-            'accepted' => round($this->_summary['Difficulty Accepted']) . ' <span>'. round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 3) .'%</span>',
-            'rejected' => round($this->_summary['Difficulty Rejected']) . ' <span>'. round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 3) .'%</span>',
-            'stale' => round($this->_summary['Difficulty Stale']) . ' <span>'. round(($this->_summary['Difficulty Stale']/$totalShares)*100, 3) .'%</span>',
+            'accepted' => round($this->_summary['Difficulty Accepted']) . ' <span>'. round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2) .'%</span>',
+            'rejected' => round($this->_summary['Difficulty Rejected']) . ' <span>'. round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2) .'%</span>',
+            'stale' => round($this->_summary['Difficulty Stale']) . ' <span>'. round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2) .'%</span>',
             'hw_errors' => $this->_summary['Hardware Errors'] . ' <span>'.$hePercent.'%</span>',
             'work_utility' => $this->_summary['Work Utility'] . '/m',
         );
@@ -65,7 +65,7 @@ class Miners_Cgminer extends Miners_Abstract {
 
         foreach ($this->_devs as $devKey => $dev) {
             $totalShares = $dev['Difficulty Accepted'] + $dev['Difficulty Rejected'];
-            $hePercent = round(($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100, 3);
+            $hePercent = round(($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100, 2);
             
             if (isset($dev['GPU'])) {
                 $devices[] = array(
@@ -83,8 +83,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'memory_clock' => $dev['Memory Clock'],
                     'gpu_voltage' => $dev['GPU Voltage']  . 'V',
                     'powertune' => $dev['Powertune']  . '%',
-                    'accepted' => round($dev['Difficulty Accepted']) . ' <span>('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)</span>',
-                    'rejected' => round($dev['Difficulty Rejected']) . ' <span>('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)</span>',
+                    'accepted' => round($dev['Difficulty Accepted']) . ' <span>('. round(($dev['Difficulty Accepted']/$totalShares)*100, 2) .'%)</span>',
+                    'rejected' => round($dev['Difficulty Rejected']) . ' <span>('. round(($dev['Difficulty Rejected']/$totalShares)*100, 2) .'%)</span>',
                     'hw_errors' => $dev['Hardware Errors'] . ' <span>('.$hePercent.'%)</span>',
                     'utility' => $dev['Utility'] . '/m',
                 );
@@ -98,8 +98,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
                     'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
                     'temperature' => ($dev['Temperature'] > 0) ? $dev['Temperature'] . '&deg;<sup>C</sup> / ' . ((($dev['Temperature']*9)/5)+32) .'&deg;<sup>F</sup>' : '0&deg;<sup>C</sup>/0&deg;<sup>F</sup>',
-                    'accepted' => round($dev['Difficulty Accepted']) . ' <span>('. round(($dev['Difficulty Accepted']/$totalShares)*100, 3) .'%)</span>',
-                    'rejected' => round($dev['Difficulty Rejected']) . ' <span>('. round(($dev['Difficulty Rejected']/$totalShares)*100, 3) .'%)</span>',
+                    'accepted' => round($dev['Difficulty Accepted']) . ' <span>('. round(($dev['Difficulty Accepted']/$totalShares)*100, 2) .'%)</span>',
+                    'rejected' => round($dev['Difficulty Rejected']) . ' <span>('. round(($dev['Difficulty Rejected']/$totalShares)*100, 2) .'%)</span>',
                     'hw_errors' => $dev['Hardware Errors'] . ' <span>('.$hePercent.'%)</span>',
                     'utility' => $dev['Utility'] . '/m',
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
@@ -251,7 +251,7 @@ class Miners_Cgminer extends Miners_Abstract {
         $rigStatus = array(
             'colour' => 'grey',
             'icon' => 'ban-circle',
-            'panel' => 'offline',
+            'panel' => 'panel-offline',
         );
         
         foreach ($this->_devStatus as $status) {
@@ -259,13 +259,13 @@ class Miners_Cgminer extends Miners_Abstract {
                 $rigStatus = array(
                     'colour' => 'red',
                     'icon' => $status['icon'],
-                    'panel' => 'danger',
+                    'panel' => 'panel-danger',
                 );
             } else if ($status['colour'] == 'orange' && $rigStatus['colour'] != 'red') {
                 $rigStatus = array(
                     'colour' => 'orange',
                     'icon' => $status['icon'],
-                    'panel' => 'warning',
+                    'panel' => 'panel-warning',
                 );
             } else if ($status['colour'] == 'green' && $rigStatus['colour'] != 'red' && $rigStatus['colour'] != 'orange') {
                 $rigStatus = array(
