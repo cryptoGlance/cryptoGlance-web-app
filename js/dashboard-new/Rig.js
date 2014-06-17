@@ -70,9 +70,11 @@
     var summary = data.summary || {}
     var devices = data.devs || []
     var sharePercent = 0
+
+    // everything below is so incredibly dirty...
     var $activeNav = _self.$rigNavEl.find('.active')
     var activeNavIndex = $activeNav.index()
-    var activeTab = $activeNav.find('a').prop('href')
+    var activeTab = $activeNav.find('a')[0].getAttribute('href')
 
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
