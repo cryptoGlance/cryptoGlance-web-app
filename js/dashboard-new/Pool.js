@@ -27,10 +27,10 @@
   Pool.prototype.update = function (poolObj) {
     var summary = ''
     for (var key in poolObj) {
-      if (!poolObj[key]) {
-        summary = null
-        break
-      }
+      // if (!poolObj[key]) {
+      //   summary = null
+      //   break
+      // }
       switch (key) {
         case 'type':
           break
