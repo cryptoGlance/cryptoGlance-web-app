@@ -251,7 +251,7 @@ class Miners_Cgminer extends Miners_Abstract {
         $rigStatus = array(
             'colour' => 'grey',
             'icon' => 'ban-circle',
-            'panel' => 'offline',
+            'panel' => 'panel-offline',
         );
         
         foreach ($this->_devStatus as $status) {
@@ -259,13 +259,13 @@ class Miners_Cgminer extends Miners_Abstract {
                 $rigStatus = array(
                     'colour' => 'red',
                     'icon' => $status['icon'],
-                    'panel' => 'danger',
+                    'panel' => 'panel-danger',
                 );
             } else if ($status['colour'] == 'orange' && $rigStatus['colour'] != 'red') {
                 $rigStatus = array(
                     'colour' => 'orange',
                     'icon' => $status['icon'],
-                    'panel' => 'warning',
+                    'panel' => 'panel-warning',
                 );
             } else if ($status['colour'] == 'green' && $rigStatus['colour'] != 'red' && $rigStatus['colour'] != 'orange') {
                 $rigStatus = array(
