@@ -28,8 +28,8 @@
                             '<th>Hashrate 5s</th>' +
                             '<th>Accepted</th>' +
                             '<th>Rejected</th>' +
+                            '<th>Utility</th>' +
                             '<th>HW Errors</th>' +
-                            '<th>WTFUtility</th>' +
                             '</tr>'
 
     /* Device properties*/
@@ -91,8 +91,8 @@
              '<td>' + _self.hashrate_5s + '</td>' +
              '<td>' + _self.accepted + '</td>' +
              '<td>' + _self.rejected + '</td>' +
-             '<td>' + _self.hw_errors + '</td>' +
              '<td>' + _self.utility + '</td>' +
+             '<td>' + _self.hw_errors + '</td>' +
              '</tr>',
       status: '<div class="tab-pane fade" id="rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id + '">' +
               '<div class="panel-body panel-body-stats">' +
