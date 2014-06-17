@@ -74,7 +74,7 @@
     // everything below is so incredibly dirty...
     var $activeNav = _self.$rigNavEl.find('.active')
     var activeNavIndex = $activeNav.index()
-    var activeTab = $activeNav.find('a')[0].getAttribute('href')
+    var activeTab = $activeNav[0] && $activeNav.find('a')[0].getAttribute('href')
 
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
@@ -88,8 +88,10 @@
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
     _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHTML + deviceHtml.status)
-    _self.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')
-    $(activeTab).addClass('active')
+    if ($activeNav[0]) {
+      _self.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')
+      $(activeTab).addClass('active')
+    }
   }
 
   /*-----  End of Rig Public Methods  ------*/
