@@ -94,7 +94,7 @@
              '<td>' + _self.hw_errors + '</td>' +
              '<td>' + _self.utility + '</td>' +
              '</tr>',
-      status: '<div class="tab-pane fade" id="rig-' + _self.id  + '-' + _self.name + '-' +_self.id + '">' +
+      status: '<div class="tab-pane fade" id="rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id + '">' +
               '<div class="panel-body panel-body-stats">' +
               '<div class="panel-body-summary">' +
               deviceStatus.join('') +
