@@ -88,7 +88,7 @@
     return {
       summary: '<tr>' +
              '<td><i class="icon icon-'+ _self.status.icon + ' ' + _self.status.colour + '"></i></td>' +
-             '<td class="' + _self.status.colour + '">' + _self.name + ' ' + _self.id + '</td>' +
+             '<td class="' + _self.status.colour + '"><a data-toggle="tab" href="#rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id +'">' + _self.name + ' ' + _self.id + '</a></td>' +
              '<td>' + _self.temperature + '</td>' +
              '<td>' + _self.hashrate_5s + '</td>' +
              '<td>' + _self.accepted + '</td>' +
@@ -122,59 +122,6 @@
            '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
            '</div>'
   }
-
-  // Device.prototype._setStatus = function (status) {
-  //   status = status.toLowerCase()
-
-  //   if (this.HW_ENABLED && this.hw_errors >= this.HW_DANGER) {
-  //     status = 'dead'
-  //   }
-
-  //   if (this.HW_ENABLED && this.hw_errors >= this.HW_WARNING) {
-  //     status = 'sick'
-  //   }
-
-  //   if (this.HEAT_DANGER <= this.temperature) {
-  //     status = 'hot'
-  //   }
-
-  //   if (this.HEAT_WARNING <= this.temperature) {
-  //     status = 'warm'
-  //   }
-
-  //   switch (status) {
-  //     case 'disabled':
-  //       this.status.colour = 'grey'
-  //       this.status.icon   = 'ban-circle'
-  //       this.panel         = 'offline'
-  //       break
-  //     case 'dead':
-
-  //       this.status.colour = 'red'
-  //       this.status.icon   = 'danger'
-  //       this.panel         = 'danger'
-  //       break
-  //     case 'sick':
-  //       this.status.colour = 'orange'
-  //       this.status.icon   = 'warning-sign'
-  //       this.panel         = 'warning'
-  //       break
-  //     case 'hot':
-  //       this.status.colour = 'red'
-  //       this.status.icon   = 'hot'
-  //       this.panel         = 'danger'
-  //       break
-  //     case 'warm':
-  //       this.status.colour = 'orange'
-  //       this.status.icon   = 'fire'
-  //       this.panel         = 'warning'
-  //       break
-  //     default:
-  //       this.status.colour = 'green'
-  //       this.status.icon   = 'cpu-processor'
-  //       this.panel         = ''
-  //   }
-  // }
 
 
   /*-----  End of Device Private Methods  ------*/
