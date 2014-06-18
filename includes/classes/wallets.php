@@ -62,7 +62,6 @@ class Wallets {
     
     public function getUpdate() {
         $data = array();
-        
         foreach ($this->_wallets as $wallet) {
             $walletAddressData = array();
             $totalBalance = 0;
@@ -83,8 +82,8 @@ class Wallets {
                 'addresses' => $walletAddressData,
             );
         }
-        
-        echo json_encode($data);
+                
+        return $data;
     }
 
 }

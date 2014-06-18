@@ -33,5 +33,7 @@ require_once('includes/autoloader.inc.php');
 //$className = 'Class_' . $type;
 //$obj = new $className();
 $obj = new $type();
-$obj->$action();
+$result = $obj->$action();
+
+echo json_encode($result);
 ?>

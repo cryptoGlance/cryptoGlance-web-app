@@ -45,7 +45,7 @@ class Rigs {
             $data[] = $rig->overview();
         }
         
-        echo json_encode(array('overview' => $data));
+        return array('overview' => $data);
     }
     
     public function getUpdate() {
@@ -54,7 +54,7 @@ class Rigs {
             $data[] = $rig->update();
         }
         
-        echo json_encode($data);
+        return $data;
     }
     
 }
