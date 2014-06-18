@@ -152,6 +152,7 @@
     this.init = false
     this.$rigEl.removeClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').show()
+    this.$rigSummary.find('table').show()
     this.rigPanel.show()
   }
 
