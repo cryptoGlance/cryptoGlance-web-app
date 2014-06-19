@@ -1,5 +1,7 @@
 !function ($){
 
+  var $document = $(document)
+
   /*================================
   =            The Rigs            =
   =================================*/
@@ -34,9 +36,8 @@
   =            Global Event Handling            =
   =============================================*/
 
-  $(document)
   // Manage Rig
-  .on('click', '.btn-manage-rig', function (evt) {
+  $document.on('click', '.btn-manage-rig', function (evt) {
     var minerId = this.getAttribute('data-attr')
     var $manageRig = $('#manageRig')
 
@@ -46,8 +47,9 @@
 
     prettifyInputs()
   })
+
   // Switch Pools
-  .on('click', '#manageRig .btn-switchpool', function (evt) {
+  $document.on('click', '#manageRig .btn-switchpool', function (evt) {
     var minerId = this.getAttribute('data-attr')
     var $switchPoolModal = $('#switchPool .checkbox')
     $switchPoolModal.html('<img src="images/ajax-loader.gif" alt="Loading..." class="ajax-loader" />')
@@ -82,7 +84,8 @@
       }
     })
   })
-  .on('click', '#switchPool .btn-success', function (evt) {
+
+  $document.on('click', '#switchPool .btn-success', function (evt) {
     var minerId = this.getAttribute('data-attr')
     var selectedPoolId = $('input[name=switchPoolList]:checked', '#switchPool .checkbox').val()
     if (typeof selectedPoolId != 'undefined') {
@@ -102,8 +105,9 @@
       });
     }
   })
+
   // Restart
-  .on('click', '#manageRig .btn-restart', function (evt) {
+  $document.on('click', '#manageRig .btn-restart', function (evt) {
     var minerId = this.getAttribute('data-attr')
     $.ajax({
       type: 'post',
@@ -116,11 +120,17 @@
       dataType: 'json'
     })
   })
-  .on('shown.bs.tab', 'a[data-toggle="tab"]', function (evt) {
+
+  $document.on('shown.bs.tab', 'a[data-toggle="tab"]', function (evt) {
     var siteLayout = $.cookie('use_masonry_layout');
     if (siteLayout == 'yes') {
         initMasonry();
     }
+  })
+
+  $document.on('click', '[id$="-summary"] [data-toggle=\'tab\']', function (evt) {
+    evt.preventDefault();
+    var $target = $(this.getAttribute('data-target')).trigger('click');
   })
 
   /*-----  End of Global Event Handling  ------*/

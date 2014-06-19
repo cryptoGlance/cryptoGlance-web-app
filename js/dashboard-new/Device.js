@@ -90,7 +90,7 @@
       summary: '<tr>' +
                '<td><i class="icon icon-'+ _self.status.icon + ' ' + _self.status.colour + '"></i></td>' +
                '<td class="' + _self.status.colour + '">' +
-               '<a href="#" onclick="function(evt){evt.preventDefault();$(\'.' + DOMId +':eq(' + _self.id +')\').trigger(\'click\');}">' + deviceName + '</a>' +
+               '<a href="#" data-target="#' + DOMId + '">' + deviceName + '</a>' +
                '</td>' +
                '<td>' + _self.temperature + '</td>' +
                '<td>' + _self.hashrate_5s + '</td>' +
