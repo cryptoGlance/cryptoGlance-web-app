@@ -52,7 +52,7 @@
             _self._update(wallets)
           })
         }
-      }, window.interval)
+      }, root.walletUpdateTime)
     })
   }
 

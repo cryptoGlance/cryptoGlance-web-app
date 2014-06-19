@@ -60,7 +60,7 @@
           _self._ready = false
           _self._update()
         }
-      }, interval)
+      }, root.rigUpdateTime)
     })
   }
 

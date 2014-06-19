@@ -49,7 +49,7 @@
             _self._update(pools)
           })
         }
-      }, window.interval)
+      }, root.poolUpdateTime)
     })
   }
 
