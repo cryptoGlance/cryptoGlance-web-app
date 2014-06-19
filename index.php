@@ -8,21 +8,16 @@ if (!$_SESSION['login_string']) {
 session_write_close();
 
 $jsArray = array(
-    'dashboard-new/Util',
-    'dashboard-new/RigCollection',
-    'dashboard-new/Rig',
-    'dashboard-new/DeviceCollection',
-    'dashboard-new/Device',
-    'dashboard-new/PoolCollection',
-    'dashboard-new/Pool',
-    'dashboard-new/WalletCollection',
-    'dashboard-new/Wallet',
-    'dashboard-new/script'
-    // 'ajax',
-    // 'dashboard/script',
-    // 'dashboard/rigs',
-    // 'dashboard/pools',
-    // 'dashboard/wallets',
+    'dashboard/Util',
+    'dashboard/RigCollection',
+    'dashboard/Rig',
+    'dashboard/DeviceCollection',
+    'dashboard/Device',
+    'dashboard/PoolCollection',
+    'dashboard/Pool',
+    'dashboard/WalletCollection',
+    'dashboard/Wallet',
+    'dashboard/script'
 );
 
 include("includes/header.php");
