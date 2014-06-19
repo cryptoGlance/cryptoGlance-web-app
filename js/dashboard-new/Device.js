@@ -77,7 +77,8 @@
     _self.utility      = deviceObj.utility || '0m'
     _self.frequency    = deviceObj.frequency || 0
 
-    // _self._setStatus(_self.health)
+    var DOMId = 'rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id
+    var deviceName = _self.name + ' ' + _self.id
 
     for (var key in deviceObj) {
       if ('object' !== typeof deviceObj[key] && 'id' !== key && 'enabled' !== key) {
@@ -87,16 +88,18 @@
 
     return {
       summary: '<tr>' +
-             '<td><i class="icon icon-'+ _self.status.icon + ' ' + _self.status.colour + '"></i></td>' +
-             '<td class="' + _self.status.colour + '"><a data-toggle="tab" href="#rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id +'">' + _self.name + ' ' + _self.id + '</a></td>' +
-             '<td>' + _self.temperature + '</td>' +
-             '<td>' + _self.hashrate_5s + '</td>' +
-             '<td>' + _self.accepted + '</td>' +
-             '<td>' + _self.rejected + '</td>' +
-             '<td>' + _self.utility + '</td>' +
-             '<td>' + _self.hw_errors + '</td>' +
-             '</tr>',
-      status: '<div class="tab-pane fade" id="rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id + '">' +
+               '<td><i class="icon icon-'+ _self.status.icon + ' ' + _self.status.colour + '"></i></td>' +
+               '<td class="' + _self.status.colour + '">' +
+               '<a data-toggle="tab" href="#' + DOMId +'">' + deviceName + '</a>' +
+               '</td>' +
+               '<td>' + _self.temperature + '</td>' +
+               '<td>' + _self.hashrate_5s + '</td>' +
+               '<td>' + _self.accepted + '</td>' +
+               '<td>' + _self.rejected + '</td>' +
+               '<td>' + _self.utility + '</td>' +
+               '<td>' + _self.hw_errors + '</td>' +
+               '</tr>',
+      status: '<div class="tab-pane fade" id="' + DOMId + '">' +
               '<div class="panel-body panel-body-stats">' +
               '<div class="panel-body-summary">' +
               deviceStatus.join('') +
@@ -104,7 +107,7 @@
               '</div>' +
               '</div>',
       nav: '<li>' +
-           '<a class="rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id + ' ' + _self.status.colour + '" href="#rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id +'" data-toggle="tab">' + _self.name + ' ' + _self.id + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
+           '<a class="' + DOMId + ' ' + _self.status.colour + '" href="#' + DOMId +'" data-toggle="tab">' + deviceName + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
            '</li>'
     }
   }
