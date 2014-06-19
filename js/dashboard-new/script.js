@@ -67,15 +67,15 @@
       if (typeof data != 'undefined') {
         $('#switchPool').attr('data-minerId', minerId);
         $.each(data, function (v,k) {
-            var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '').slice(poolUrl.indexOf("/") + 2)
+          var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '').slice(poolUrl.indexOf("/") + 2)
 
-            $switchPoolModal.append('<label for="rig'+ minerId +'-pool'+ k.id +'">' +
-                                    '<input type="radio" name="switchPoolList" id="rig'+ minerId +'-pool'+ k.id +'" value="'+ k.id +'">' +
-                                    '<span>'+ poolUrl +'</span>' +
-                                    '</label>')
-            if (k.active == 1) {
-                $('input:radio[id=rig'+ minerId +'-pool'+ k.id +']', $switchPoolModal).prop('checked', true);
-            }
+          $switchPoolModal.append('<label for="rig'+ minerId +'-pool'+ k.id +'">' +
+                                  '<input type="radio" name="switchPoolList" id="rig'+ minerId +'-pool'+ k.id +'" value="'+ k.id +'">' +
+                                  '<span>'+ poolUrl +'</span>' +
+                                  '</label>')
+          if (k.active == 1) {
+            $('input:radio[id=rig'+ minerId +'-pool'+ k.id +']', $switchPoolModal).prop('checked', true);
+          }
         });
 
         prettifyInputs()
@@ -100,9 +100,6 @@
         url: 'ajax.php',
         dataType: 'json'
       })
-      .done(function (data) {
-          ajaxUpdateCall('rig');
-      });
     }
   })
 
@@ -128,6 +125,7 @@
     }
   })
 
+  // click event handler to link clicking device name, to opening device tab
   $document.on('click', '[id$="-summary"] a[data-target]', function (evt) {
     evt.preventDefault();
     $(evt.target.getAttribute('data-target')).trigger('click');
