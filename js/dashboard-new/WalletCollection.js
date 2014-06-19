@@ -38,7 +38,7 @@
 
       /*==========  Generate collection  ==========*/
       wallets.forEach(function (wallet, index) {
-        _self._add(index)
+        _self._add(index+1)
       })
 
       /*==========  Initial wallet update in DOM  ==========*/

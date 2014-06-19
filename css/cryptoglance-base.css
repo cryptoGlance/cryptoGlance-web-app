@@ -189,19 +189,19 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   color: #9c9c9c !important;
 }
 
-.green {
+.green, .green a {
   color: #62C462 !important;
 }
 
-.orange {
+.orange, .orange a {
   color: #F89406 !important;
 }
 
-.red {
+.red, .red a {
   color: #ED3838 !important;
 }
 
-.blue {
+.blue, .blue a {
   color: #33b5e5 !important;
 }
 
