@@ -128,9 +128,9 @@
     }
   })
 
-  $document.on('click', '[id$="-summary"] [data-toggle=\'tab\']', function (evt) {
+  $document.on('click', '[id$="-summary"] a[data-target]', function (evt) {
     evt.preventDefault();
-    var $target = $(this.getAttribute('data-target')).trigger('click');
+    $(evt.target.getAttribute('data-target')).trigger('click');
   })
 
   /*-----  End of Global Event Handling  ------*/
