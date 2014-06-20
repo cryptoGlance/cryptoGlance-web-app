@@ -34,6 +34,6 @@ require_once('includes/autoloader.inc.php');
 //$obj = new $className();
 $obj = new $type();
 $result = $obj->$action();
-
+header('Content-Type: application/json');
 echo json_encode($result);
 ?>
