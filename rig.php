@@ -1,6 +1,4 @@
 <?php
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
 
 include('includes/inc.php');
 
@@ -26,11 +24,11 @@ require_once("includes/header.php");
 
 $cryptoGlance = new CryptoGlance();
 
-$rigsObj = new Miners();
-$rigObj = $rigsObj->getMiner($rigId);
-$rigData = $rigObj->getSettings();
+$rigsObj = new Rigs($rigId);
+$rigDevices = $rigsObj->getDevices();
+$rigSettings = $rigsObj->getSettings();
 
-$rigData['config'] = $cryptoGlance->getMiners($rigId);
+//$rigData['config'] = $cryptoGlance->getMiners($rigId);
 if (is_null($rigData)) {
     die('Rig is offline'); // this needs to be prettier.
 }
@@ -39,7 +37,7 @@ if (is_null($rigData)) {
        
     <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $rigId;?>">
     <?php
-        foreach($rigData['devs'] as $devType => $devs) {
+        foreach($rigDevices[0] as $devType => $devs) {
     ?>
         <div id="rigDeviceDetails" class="panel panel-primary panel-no-grid panel-rig">
             <h1><?php echo (!empty($rigData['config']['name']) ? $rigData['config']['name'] : $rigData['config']['host']); ?></h1>

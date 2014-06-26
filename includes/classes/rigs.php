@@ -16,26 +16,46 @@ class Rigs {
         
         if (isset($_GET['id'])) {
             $rigId = intval($_GET['id'])-1;
-            $this->addRig($rigs[$rigId]['type'], $rigs[$rigId]['host'], $rigs[$rigId]['port']);
+            $this->addRig($rigs[$rigId]);
         } else if (!empty($rigs)) {
             foreach ($rigs as $rigId => $rig) {
-                $name = (!empty($rig['name']) ? $rig['name'] : $rig['host']);
-                if (empty($rig['settings'])) {
-                    $rig['settings'] = array();
-                }
-                $this->addRig($rig['type'], $rig['host'], $rig['port'], $name, $rig['settings']);
+                $this->addRig($rig);
             }
         }
     }
 
-    private function addRig($type, $host, $port, $name, $settings) {
-        if (empty($type) || empty($host) || empty($port)) {
+    private function addRig($rig) {
+        
+        if (empty($rig['type']) || empty($rig['host']) || empty($rig['port'])) {
             return false;
         }
-
-        $class = 'Miners_' . ucwords(strtolower($type));
-        $obj = new $class($host, $port, $name, $settings);
+        
+        $name = (!empty($rig['name']) ? $rig['name'] : $rig['host']);
+        if (empty($rig['settings'])) {
+            $rig['settings'] = array();
+        }
+    
+        $class = 'Miners_' . ucwords(strtolower($rig['type']));
+        $obj = new $class($rig['host'], $rig['port'], $name, $rig['settings']);
         $this->_rigs[] = $obj;
+    }
+    
+    public function getDevices() {
+        $data = array();
+        foreach ($this->_rigs as $rig) {
+            $data[] = $rig->devices();
+        }
+        
+        return $data;
+    }
+    
+    public function getSettings() {
+        $data = array();
+        foreach ($this->_rigs as $rig) {
+            $data[] = $rig->getSettings();
+        }
+        
+        return $data;
     }
     
     // Get Overview of Rigs

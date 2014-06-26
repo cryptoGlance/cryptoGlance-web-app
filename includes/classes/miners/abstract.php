@@ -37,5 +37,12 @@ class Miners_Abstract {
         }
     }
     
+    public function getSettings() {
+        return array(
+            'name' => $this->_name,
+            'settings' => $this->_settings
+        );
+    }
+    
 }
 ?>
