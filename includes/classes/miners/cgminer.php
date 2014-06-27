@@ -57,10 +57,14 @@ class Miners_Cgminer extends Miners_Abstract {
         return array(
             'hashrate_avg' => $this->getFormattedHashrate($this->_summary['MHS av']),
             'blocks_found' => $this->_summary['Found Blocks'],
-            'accepted' => round($this->_summary['Difficulty Accepted']) . ' <span>'. round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2) .'%</span>',
-            'rejected' => round($this->_summary['Difficulty Rejected']) . ' <span>'. round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2) .'%</span>',
-            'stale' => round($this->_summary['Difficulty Stale']) . ' <span>'. round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2) .'%</span>',
-            'hw_errors' => $this->_summary['Hardware Errors'] . ' <span>'.round($hePercent,3).'%</span>',
+            'accepted' => round($this->_summary['Difficulty Accepted']),
+            'accepted_%' => round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2) . '%',
+            'rejected' => round($this->_summary['Difficulty Rejected']),
+            'rejected_%' => round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2) . '%',
+            'stale' => round($this->_summary['Difficulty Stale']),
+            'stale_%' => round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2) . '%',
+            'hw_errors' => $this->_summary['Hardware Errors'],
+            'hw_errors_%' => round($hePercent,3) . '%',
             'work_utility' => $this->_summary['Work Utility'] . '/m',
         );
     }
