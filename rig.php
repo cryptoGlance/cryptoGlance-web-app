@@ -72,6 +72,7 @@ if (is_null($rigDevices)) {
                                     <option value="scrypt" <?php echo ($rigSettings['settings']['algorithm'] == 'scrypt') ? 'selected' : '';?>>scrypt</option>
                                     <option value="scrypt-n" <?php echo ($rigSettings['settings']['algorithm'] == 'scrypt-n') ? 'selected' : '';?>>scrypt-n</option>
                                     <option value="x11" <?php echo ($rigSettings['settings']['algorithm'] == 'x11') ? 'selected' : '';?>>x11</option>
+                                    <option value="x13" <?php echo ($rigSettings['settings']['algorithm'] == 'x13') ? 'selected' : '';?>>x13</option>
                                 </select>
                             </div>
                         </div>
