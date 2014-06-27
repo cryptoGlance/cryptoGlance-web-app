@@ -19,39 +19,15 @@ if (isset($_POST['general'])) {
     $data = array(
         'update' => intval($updatesEnabled),
         'updateType' => $_POST['updateType'],
-        'tempWarning' => intval($_POST['tempWarning']),
-        'tempDanger' => intval($_POST['tempDanger']),
-        'hwErrorsEnabled' => intval($hwErrorsEnabled),
-        'hwWarning' => intval($_POST['hwWarning']),
-        'hwDanger' => intval($_POST['hwDanger']),
+//        'tempWarning' => intval($_POST['tempWarning']),
+//        'tempDanger' => intval($_POST['tempDanger']),
+//        'hwErrorsEnabled' => intval($hwErrorsEnabled),
+//        'hwWarning' => intval($_POST['hwWarning']),
+//        'hwDanger' => intval($_POST['hwDanger']),
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
     );
-    
-// not ready
-//    if ($data['tempWarning'] <= 0) {
-//        $errors['tempWarning'] = true;
-//    }
-//    if ($data['tempDanger'] <= 0 && $data['tempDanger'] <= $data['tempWarning']) {
-//        $errors['tempDanger'] = true;
-//    }
-//    if ($data['hwWarning'] <= 0) {
-//        $errors['hwWarning'] = true;
-//    }
-//    if ($data['hwDanger'] <= 0 && $data['hwDanger'] <= $data['hwWarning']) {
-//        $errors['hwDanger'] = true;
-//    }
-//    if ($data['rigUpdateTime'] < 2) {
-//        $errors['rigUpdateTime'] = true;
-//    }
-//    if ($data['poolUpdateTime'] < 120) {
-//        $errors['poolUpdateTime'] = true;
-//    }
-//    if ($data['walletUpdateTime'] < 600) {
-//        $errors['walletUpdateTime'] = true;
-//    }
-// end not ready
     
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
     $cryptoGlance = new CryptoGlance();
@@ -82,40 +58,6 @@ require_once("includes/header.php");
           <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST">
               <fieldset>
-                <h3>Temperature Thresholds:</h3>                
-                <div class="form-group setting-thresholds setting-temperature">
-                  <div class="setting-warning orange">
-                    <input type="text" class="form-control" id="inputTempWarning" name="tempWarning" value="<?php echo $settings['general']['temps']['warning'] ?>" placeholder="<?php echo $settings['general']['temps']['warning'] ?>" maxlength="3">
-                    <span>&deg;C</span>
-                    <label for="inputTempWarning" class="control-label">Warning</label>
-                  </div>
-                  <div class="setting-danger red">
-                    <input type="text" class="form-control" id="inputTempDanger" name="tempDanger" value="<?php echo $settings['general']['temps']['danger'] ?>" placeholder="<?php echo $settings['general']['temps']['danger'] ?>" maxlength="3">
-                    <span>&deg;C</span>
-                    <label for="inputTempDanger" class="control-label">Danger</label>
-                  </div>
-                </div>
-                <span class="help-block"><i class="icon icon-info-sign"></i> Set the points where <span class="orange">warning</span> and <span class="red">danger</span> labels will appear (<span class="red">danger</span> must be greater than <span class="orange">warning</span>).</span>
-                <h3>HW Error Thresholds:</h3>               
-                <div class="form-group checkbox">
-                  <label>
-                    <input type="checkbox" name="hwErrorsEnabled" <?php echo ($settings['general']['hardwareErrors']['enabled']) ? 'checked' : '' ?>>
-                    Enable Hardware Error Reporting
-                  </label>
-                </div>
-                <div class="form-group setting-hwerror">
-                  <div class="setting-hw-errors setting-thresholds">
-                    <div class="setting-warning orange">
-                      <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" maxlength="2">
-                      <label for="inputHWErrWarning" class="control-label">Warning</label>
-                    </div>
-                    <div class="setting-danger red">
-                      <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" maxlength="2">
-                      <label for="inputHWErrDanger" class="control-label">Danger</label>
-                    </div>
-                  </div>
-                  <span class="help-block"><i class="icon icon-info-sign"></i> Set the count of hardware errors that will trigger each status.</span>
-                </div>
                 <h3>Stat Refresh Intervals:</h3>                
                 <div class="form-group">
                   <label class="col-sm-5 control-label">Rigs:</label>

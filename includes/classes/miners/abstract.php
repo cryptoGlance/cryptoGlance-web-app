@@ -8,9 +8,9 @@ class Miners_Abstract {
     protected $_name;
     protected $_settings;
     
-    public function __construct($name, $settings) {
-        $this->_name = $name;
-        $this->_settings = $settings;
+    public function __construct($rig) {
+        $this->_name = $rig['name'];
+        $this->_settings = $rig['settings'];
         
         if (empty($this->_settings)) {
             // defining default values for settings if not set
@@ -21,11 +21,11 @@ class Miners_Abstract {
                     'type' => 'percent',
                     'danger' => array(
                         'percent' => '10',
-                        'number' => '10',
+                        'int' => '10',
                     ),
                     'warning' => array(
                         'percent' => '5',
-                        'number' => '5',
+                        'int' => '5',
                     ),
                 ),
                 'temps' => array(

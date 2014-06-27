@@ -36,8 +36,17 @@ class Rigs {
         }
     
         $class = 'Miners_' . ucwords(strtolower($rig['type']));
-        $obj = new $class($rig['host'], $rig['port'], $name, $rig['settings']);
+        $obj = new $class($rig);
         $this->_rigs[] = $obj;
+    }
+    
+    public function getPools() {
+        $data = array();
+        foreach ($this->_rigs as $rig) {
+            $data[] = $rig->pools();
+        }
+        
+        return $data;
     }
     
     public function getDevices() {

@@ -23,10 +23,10 @@ class Miners_Cgminer extends Miners_Abstract {
 
 
     // PUBLIC
-    public function __construct($host, $port, $name, $settings) {
-        parent::__construct($name, $settings);
-        $this->_host = $host;
-        $this->_port = $port;
+    public function __construct($rig) {
+        parent::__construct($rig);
+        $this->_host = $rig['host'];
+        $this->_port = $rig['port'];
         
         if ($this->fetchData() == null) {
             return null;
@@ -84,6 +84,7 @@ class Miners_Cgminer extends Miners_Abstract {
             if (isset($dev['GPU'])) {
                 $devices[] = array(
                     'id' => $dev['GPU'],
+                    'type' => 'GPU',
                     'name' => 'GPU',
                     'status' => $this->_devStatus[$devKey],
                     'enabled' => $dev['Enabled'],
@@ -110,6 +111,7 @@ class Miners_Cgminer extends Miners_Abstract {
             } else if (isset($dev['ASC']) || isset($dev['PGA'])) {
                 $data = array(
                     'id' => (isset($dev['ASC']) ? $dev['ASC'] : $dev['PGA']),
+                    'type' => (isset($dev['ASC']) ? 'ASC' : 'PGA'),
                     'name' => (isset($dev['ASC']) ? 'ASC' : 'PGA'),
                     'status' => $this->_devStatus[$devKey],
                     'enabled' => $dev['Enabled'],
@@ -135,6 +137,22 @@ class Miners_Cgminer extends Miners_Abstract {
         return $devices;
     }
     
+    public function pools() {
+        $pools = array();
+        foreach ($this->_pools as $pool) {
+            $pools[] = array(
+                'id' => $pool['POOL'],
+                'active' => ($pool['POOL'] == $this->_activePool['id']) ? 1 : 0,
+                'url' => $pool['URL'],
+                'user' => $pool['User'],
+                'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
+                'priority' => $pool['Priority'],
+            );
+        }
+        
+        return $pools;
+    }
+    
     public function update() {
         $data = array(
             'overview' => $this->overview(),
@@ -143,6 +161,14 @@ class Miners_Cgminer extends Miners_Abstract {
         );
         
         return $data;
+    }
+    
+    public function getSettings() {
+        $settings = parent::getSettings();
+        $settings['host'] = $this->_host;
+        $settings['port'] = $this->_port;
+        
+        return $settings;
     }
     
     
