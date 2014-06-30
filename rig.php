@@ -1,7 +1,4 @@
 <?php
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
-
 include('includes/inc.php');
 
 if (!$_SESSION['login_string']) {
@@ -26,25 +23,131 @@ require_once("includes/header.php");
 
 $cryptoGlance = new CryptoGlance();
 
-$rigsObj = new Miners();
-$rigObj = $rigsObj->getMiner($rigId);
-$rigData = $rigObj->getSettings();
+$rigsObj = new Rigs($rigId);
+$rigDevices = $rigsObj->getDevices();
+$rigDevices = $rigDevices[0];
+$rigPools = $rigsObj->getPools();
+$rigPools = $rigPools[0];
+$rigSettings = $rigsObj->getSettings();
+$rigSettings = $rigSettings[0];
 
-$rigData['config'] = $cryptoGlance->getMiners($rigId);
-if (is_null($rigData)) {
+if (is_null($rigDevices)) {
     die('Rig is offline'); // this needs to be prettier.
 }
 
 ?>
        
     <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $rigId;?>">
-    <?php
-        foreach($rigData['devs'] as $devType => $devs) {
-    ?>
-        <div id="rigDeviceDetails" class="panel panel-primary panel-no-grid panel-rig">
-            <h1><?php echo (!empty($rigData['config']['name']) ? $rigData['config']['name'] : $rigData['config']['host']); ?></h1>
+        <div id="rigDetails" class="panel panel-default panel-no-grid">
+            <h1>Rig Details</h1>
             <div class="panel-heading">
-                <h2 class="panel-title"><?php echo $devType; ?> Settings<i class="icon icon-pixelpickaxe"></i></h2>
+                <h2 class="panel-title"><i class="icon icon-detailsalt"></i></h2>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="inputRigLabel" class="col-sm-5 control-label">Label</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputRigLabel" name="label" placeholder="Name of this rig" value="<?php echo $rigSettings['name'];?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRigIP" class="col-sm-5 control-label">Hostname / IP</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputRigIP" name="ip_address" value="<?php echo $rigSettings['host'];?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRigPort" class="col-sm-5 control-label">API Port</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="port" placeholder="4028" value="<?php echo $rigSettings['port'];?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRigAlgor" class="col-sm-5 control-label">Algorithm</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" id="inputRigAlgor" name="algorithm">
+                                    <option value="sha256" <?php echo ($rigSettings['settings']['algorithm'] == 'sha256') ? 'selected' : '';?>>sha256</option>
+                                    <option value="scrypt" <?php echo ($rigSettings['settings']['algorithm'] == 'scrypt') ? 'selected' : '';?>>scrypt</option>
+                                    <option value="scrypt-n" <?php echo ($rigSettings['settings']['algorithm'] == 'scrypt-n') ? 'selected' : '';?>>scrypt-n</option>
+                                    <option value="x11" <?php echo ($rigSettings['settings']['algorithm'] == 'x11') ? 'selected' : '';?>>x11</option>
+                                    <option value="x13" <?php echo ($rigSettings['settings']['algorithm'] == 'x13') ? 'selected' : '';?>>x13</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <h3>Temperature Thresholds:</h3>      
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" name="temperatureEnabled" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?>> Enable Temperature Warnings
+                            </label>
+                        </div>
+                        <div class="form-group setting-thresholds setting-temperature">
+                            <div class="setting-warning orange">
+                                <input type="text" class="form-control" id="inputTempWarning" name="tempWarning" value="<?php echo $rigSettings['settings']['temps']['warning'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['warning'] ?>" maxlength="3">
+                                <span>&deg;C</span>
+                                <label for="inputTempWarning" class="control-label">Warning</label>
+                            </div>
+                            <div class="setting-danger red">
+                                <input type="text" class="form-control" id="inputTempDanger" name="tempDanger" value="<?php echo $rigSettings['settings']['temps']['danger'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['danger'] ?>" maxlength="3">
+                                <span>&deg;C</span>
+                                <label for="inputTempDanger" class="control-label">Danger</label>
+                            </div>
+                        </div>
+                        <span class="help-block"><i class="icon icon-info-sign"></i> Set the points where <span class="orange">warning</span> and <span class="red">danger</span> labels will appear (<span class="red">danger</span> must be greater than <span class="orange">warning</span>).</span>
+                        <h3>HW Error Thresholds:</h3>
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['enabled']) ? 'checked' : '' ?>> Enable Hardware Error Warnings
+                            </label>
+                        </div>
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?>> Percent
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label>
+                                <input type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?>> Number
+                            </label>
+                        </div>
+                        <div class="form-group setting-hwerror hwErrorInt">
+                            <div class="setting-hw-errors setting-thresholds">
+                                <div class="setting-warning orange">
+                                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>">
+                                    <label for="inputHWErrWarning" class="control-label">Warning</label>
+                                </div>
+                                <div class="setting-danger red">
+                                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>">
+                                    <label for="inputHWErrDanger" class="control-label">Danger</label>
+                                </div>
+                            </div>
+                            <span class="help-block"><i class="icon icon-info-sign"></i> Set the count of hardware errors that will trigger each status.</span>
+                        </div>
+                        <div class="form-group setting-hwerror hwErrorPercent">
+                            <div class="setting-hw-errors setting-thresholds">
+                                <div class="setting-warning orange">
+                                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%">
+                                    <label for="inputHWErrWarning" class="control-label">Warning</label>
+                                </div>
+                                <div class="setting-danger red">
+                                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%">
+                                    <label for="inputHWErrDanger" class="control-label">Danger</label>
+                                </div>
+                            </div>
+                            <span class="help-block"><i class="icon icon-info-sign"></i> Set the percent of hardware errors that will trigger each status.</span>
+                        </div>
+                    </fieldset>
+                    <button type="button" class="btn btn-lg btn-success" id="btnSaveRig"><i class="icon icon-save-floppy"></i> Save Rig Details</button>
+                    <br /><br />
+                </form>
+            </div>
+        </div>
+        
+        <div id="rigDeviceDetails" class="panel panel-primary panel-no-grid panel-rig">
+            <h1><?php echo (!empty($rigSettings['name']) ? $rigSettings['name'] : $rigSettings['host'].':'.$rigSettings['port']); ?></h1>
+            <div class="panel-heading">
+                <h2 class="panel-title"><?php echo $rigDevices[0]['type']; ?> Settings<i class="icon icon-pixelpickaxe"></i></h2>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -56,7 +159,7 @@ if (is_null($rigData)) {
                                     <th>Device</th>
                                     <th>Enabled</th>
                                     <th>Hashrate (5s)</th>
-                                <?php if ($devType == 'GPU') { ?>
+                                <?php if ($rigDevices[0]['type'] == 'GPU') { ?>
                                     <th>Temperature</th>
                                     <th>Intensity</th>
                                     <th>Fan Percent</th>
@@ -64,57 +167,29 @@ if (is_null($rigData)) {
                                     <th>Memory Clock</th>
                                     <th>Voltage</th>
                                     <th>Powertune</th>
-                                <?php } else if ($devType == 'ASC') { ?>
+                                <?php } else if ($rigDevices[0]['type'] == 'ASC' || $rigDevices[0]['type'] == 'PGA') { ?>
                                     <th>Frequency</th>
                                 <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($devs as $dev) {
-                                $status = 'green'; // alive
-                                $icon = 'cpu-processor';
-                                if ($dev['enabled'] == 'N') {
-                                    $status = 'grey';
-                                    $icon = 'ban-circle';
-                                } else if ($dev['health'] == 'Dead') {
-                                    $status = 'red';
-                                    $icon = 'danger';
-                                } else if ($dev['health'] == 'Sick') {
-                                    $status = 'orange';
-                                    $icon = 'warning-sign';
-                                } else if ($dev['health'] == 'Hot') {
-                                    $status = 'red';
-                                    $icon = 'hot';
-                                } else if ($dev['health'] == 'Warm') {
-                                    $status = 'orange';
-                                    $icon = 'fire';
-                                }
+                            foreach ($rigDevices as $dev) {
                             ?>
-                                <tr data-devType="<?php echo $devType; ?>" data-devId="<?php echo $dev['id']; ?>" data-icon="<?php echo $icon; ?>" data-status="<?php echo $status; ?>">
-                                  <td><i class="icon icon-<?php echo $icon; ?> <?php echo $status; ?>"></i></td>
-                                  <td class="<?php echo $status; ?>"><?php echo $devType . $dev['id']; ?></td>
+                                <tr data-devType="<?php echo $dev['type']; ?>" data-devId="<?php echo $dev['id']; ?>" data-icon="<?php echo $dev['status']['icon']; ?>" data-status="<?php echo $dev['status']['colour']; ?>">
+                                  <td><i class="icon icon-<?php echo $dev['status']['icon']; ?> <?php echo $dev['status']['colour']; ?>"></i></td>
+                                  <td class="<?php echo $dev['status']['colour']; ?>"><?php echo $dev['type'] . $dev['id']; ?></td>
                                   <td><input type="checkbox" class="enableDev" name="enabledDev<?php echo $dev['id']; ?>" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
-                                  <td><?php
-                                    if ($dev['hashrate_5s'] < 1) {
-                                        $dev['hashrate_5s'] = ($dev['hashrate_5s']*1000) . ' KH/S';
-                                    } else if (v > 1000) {
-                                        $dev['hashrate_5s'] = floatval($dev['hashrate_5s']/1000).round(2) . ' GH/S';
-                                    } else {
-                                        $dev['hashrate_5s'] = $dev['hashrate_5s'] . ' MH/S';
-                                    }
-                                    
-                                    echo $dev['hashrate_5s'];
-                                  ?></td>
-                                  <?php if ($devType == 'GPU') { ?>
-                                  <td><?php echo (!empty($dev['temperature']) ? $dev['temperature'] . '&deg;C' : '--'); ?></td>
+                                  <td><?php echo $dev['hashrate_5s']; ?></td>
+                                  <?php if ($dev['type'] == 'GPU') { ?>
+                                  <td><?php echo $dev['temperature_c'] . '<span>&deg;C</span>/' . $dev['temperature_f'] . '<span>&deg;F</span>'; ?></td>
                                   <td><input type="text" class="form-control" value="<?php echo $dev['intensity']; ?>" /></td>
                                   <td><input type="text" class="form-control" value="<?php echo $dev['fan_percent']; ?>" /></td>
                                   <td><input type="text" class="form-control" value="<?php echo $dev['engine_clock']; ?>" /></td>
                                   <td><input type="text" class="form-control" value="<?php echo $dev['memory_clock']; ?>" /></td>
                                   <td><input type="text" class="form-control" value="<?php echo $dev['gpu_voltage']; ?>" /></td>
                                   <td><input type="text" class="form-control" value="<?php echo $dev['powertune']; ?>" /></td>
-                                  <?php } else if ($devType == 'ASC') { ?>
+                                  <?php } else if ($dev['type'] == 'ASC' || $dev['type'] == 'PGA') { ?>
                                   <td><input type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" /></td>
                                   <?php } ?>
                                 </tr>
@@ -133,9 +208,6 @@ if (is_null($rigData)) {
                 </div>
             </div><!-- / .panel-body -->
         </div>
-        <?php
-        }
-        ?>
         
         <div id="rigPoolDetails" class="panel panel-default panel-no-grid">
             <h1>Available Pools</h1>
@@ -160,20 +232,15 @@ if (is_null($rigData)) {
                         </thead>
                         <tbody>
                         <?php
-                        foreach ($rigData['pools'] as $pool) {
-                            if ($rigData['active_pool']['id'] == $pool['POOL']) {
-                                $active = true;
-                            } else {
-                                $active = false;
-                            }
+                        foreach ($rigPools as $pool) {
                         ?>
-                            <tr data-poolId="<?php echo $pool['POOL']; ?>">
-                              <td><input type="radio" name="enabledPool" class="form-control"  <?php echo ($active) ? 'checked' : ''; ?> /></td>
+                            <tr data-poolId="<?php echo $pool['id']; ?>">
+                              <td><input type="radio" name="enabledPool" class="form-control"  <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
                               <td>---</td>
-                              <td><?php echo $pool['URL']; ?></td>
-                              <td><?php echo $pool['User']; ?></td>
+                              <td><?php echo $pool['url']; ?></td>
+                              <td><?php echo $pool['user']; ?></td>
                               <td>********</td>
-                              <td class="priority"><?php echo $pool['Priority']; ?></td>
+                              <td class="priority"><?php echo $pool['priority']; ?></td>
                               <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
                               <br>
                               </td>
@@ -230,44 +297,6 @@ if (is_null($rigData)) {
                       <br>
                       <br>
                     </div><!-- end add-new-pool-wrapper -->
-                </form>
-            </div>
-        </div>
-        
-        <div id="rigDetails" class="panel panel-default panel-no-grid">
-            <h1>Rig Details</h1>
-            <div class="panel-heading">
-                <h2 class="panel-title"><i class="icon icon-detailsalt"></i></h2>
-            </div>
-            <div class="panel-body">
-                <form class="form-horizontal" role="form">
-                  <div class="form-group">
-                    <label for="inputRigLabel" class="col-sm-5 control-label">Label</label>
-                    <div class="col-sm-5">
-                      <input type="text" class="form-control" id="inputRigLabel" name="label" placeholder="Name of this rig">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputRigIP" class="col-sm-5 control-label">Hostname / IP</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control" id="inputRigIP" name="ip_address">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputRigPort" class="col-sm-5 control-label">API Port</label>
-                    <div class="col-sm-2">
-                      <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="port" placeholder="4028">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputRigHashrate" class="col-sm-5 control-label">Desired Hashrate <small>(MH/s)</small></label>
-                    <div class="col-sm-2">
-                      <input type="text" class="form-control" id="inputRigHashrate" maxLength="5">
-                    </div>
-                  </div>
-                   <button type="button" class="btn btn-lg btn-success" id="btnSaveRig"><i class="icon icon-save-floppy"></i> Save Rig Details</button>
-                    <br>
-                    <br>
                 </form>
             </div>
         </div>
