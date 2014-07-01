@@ -31,7 +31,7 @@
     _self.deviceCollection  = new DeviceCollection(rigID)
     _self.init              = true
     _self.ready             = true
-    _self.summaryBtn        = '<li>' +
+    _self.summaryBtn        = '<li class="active">' +
                             '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                             'Summary ' +
                             '<i class="icon icon-dotlist"></i>' +
