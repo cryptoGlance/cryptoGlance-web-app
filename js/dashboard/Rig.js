@@ -102,6 +102,8 @@
       _self.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')
       $(activeTab).addClass('in active')
     }
+
+    _self.init = false
   }
 
   /*-----  End of Rig Public Methods  ------*/
@@ -152,7 +154,6 @@
   }
 
   Rig.prototype._on = function() {
-    this.init = false
     this.$rigEl.removeClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').show()
     this.$rigSummary.find('table').show()
