@@ -70,7 +70,8 @@
     _self.enabled      = deviceObj.enabled || 'N'
     _self.hashrate_avg = deviceObj.hashrate_avg || '0 KH/s'
     _self.hashrate_5s  = deviceObj.hashrate_5s || '0 KH/s'
-    _self.temperature  = deviceObj.temperature || 'n/a'
+    _self.temperature_c  = deviceObj.temperature_c || 'n/a'
+    _self.temperature_f  = deviceObj.temperature_f || 'n/a'
     _self.accepted     = deviceObj.accepted || '0 (0%)'
     _self.rejected     = deviceObj.rejected || '0 (0%)'
     _self.hw_errors    = deviceObj.hw_errors || '0 (0%)'
@@ -92,7 +93,7 @@
                '<td class="' + _self.status.colour + '">' +
                '<a href="#" data-target=".' + DOMId + '[data-toggle=\'tab\']">' + deviceName + '</a>' +
                '</td>' +
-               '<td>' + _self.temperature + '</td>' +
+               '<td>' + _self.temperature_c + '&deg;C/' + _self.temperature_f + '&deg;F</td>' +
                '<td>' + _self.hashrate_5s + '</td>' +
                '<td>' + _self.accepted + '</td>' +
                '<td>' + _self.rejected + '</td>' +
