@@ -67,16 +67,16 @@
     _self.status       = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
     _self.health       = deviceObj.health || 'Alive'
     _self.icon         = deviceObj.status.icon || 'check'
-    _self.enabled      = deviceObj.enabled || 'N'
-    _self.hashrate_avg = deviceObj.hashrate_avg || '0 KH/s'
-    _self.hashrate_5s  = deviceObj.hashrate_5s || '0 KH/s'
-    _self.temperature_c  = deviceObj.temperature_c || 'n/a'
-    _self.temperature_f  = deviceObj.temperature_f || 'n/a'
-    _self.accepted     = deviceObj.accepted || '0 (0%)'
-    _self.rejected     = deviceObj.rejected || '0 (0%)'
-    _self.hw_errors    = deviceObj.hw_errors || '0 (0%)'
-    _self.utility      = deviceObj.utility || '0m'
-    _self.frequency    = deviceObj.frequency || 0
+    _self.enabled      = deviceObj.enabled + '' || 'N'
+    _self.hashrate_avg = deviceObj.hashrate_avg + '' || '0 KH/s'
+    _self.hashrate_5s  = deviceObj.hashrate_5s + '' || '0 KH/s'
+    _self.temperature_c  = deviceObj.temperature_c + '' || 'n/a'
+    _self.temperature_f  = deviceObj.temperature_f + '' || 'n/a'
+    _self.accepted     = deviceObj.accepted + '' || '0 (0%)'
+    _self.rejected     = deviceObj.rejected + '' || '0 (0%)'
+    _self.hw_errors    = deviceObj.hw_errors + '' || '0 (0%)'
+    _self.utility      = deviceObj.utility + '' || '0m'
+    _self.frequency    = deviceObj.frequency + '' || 0
 
     var DOMId = 'rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id
     var deviceName = _self.name + ' ' + _self.id
