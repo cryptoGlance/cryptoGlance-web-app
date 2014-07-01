@@ -17,27 +17,27 @@
     var _self = this
 
     /* Rig properties */
-    _self.rigID             = rigID
-    _self.$rigEl            = $('#rig-' + rigID)
-    _self.rigPanel          = _self.$rigEl.find('.panel-content')
-    _self.$rigNavEl         = _self.$rigEl.find('.nav')
-    _self.$rigTabContentEl  = _self.$rigEl.find('.tab-content')
-    _self.$rigTitle         = _self.$rigEl.find('h1')
-    _self.$rigSummary       = $('#rig-' + rigID + '-summary')
+    _self.rigID                = rigID
+    _self.$rigEl               = $('#rig-' + rigID)
+    _self.rigPanel             = _self.$rigEl.find('.panel-content')
+    _self.$rigNavEl            = _self.$rigEl.find('.nav')
+    _self.$rigTabContentEl     = _self.$rigEl.find('.tab-content')
+    _self.$rigTitle            = _self.$rigEl.find('h1')
+    _self.$rigSummary          = $('#rig-' + rigID + '-summary')
     _self.$rigSummaryTable     = _self.$rigSummary.find('table')
     _self.$rigSummaryTableBody = _self.$rigSummaryTable.find('tbody')
-    _self.$loader           = _self.$rigSummary.find('img[alt="loading"]')
-    _self.$rigSummaryBody   = _self.$rigSummary.find('.panel-body-summary')
-    _self.deviceCollection  = new DeviceCollection(rigID)
-    _self.init              = true
-    _self.ready             = true
-    _self.summaryBtn        = '<li class="active">' +
-                            '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
-                            'Summary ' +
-                            '<i class="icon icon-dotlist"></i>' +
-                            '</a>' +
-                            '</li>'
-    _self.panelStatus       = ''
+    _self.$loader              = _self.$rigSummary.find('img[alt="loading"]')
+    _self.$rigSummaryBody      = _self.$rigSummary.find('.panel-body-summary')
+    _self.deviceCollection     = new DeviceCollection(rigID)
+    _self.init                 = true
+    _self.ready                = true
+    _self.summaryBtn           = '<li>' +
+                                 '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
+                                 'Summary ' +
+                                 '<i class="icon icon-dotlist"></i>' +
+                                 '</a>' +
+                                 '</li>'
+    _self.panelStatus          = ''
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/
@@ -67,16 +67,16 @@
       _self.$rigSummaryTable.show()
     }
 
-    var stats = ''
-    var overview = data.overview || {}
-    var summary = data.summary || {}
-    var devices = data.devs || []
-    var sharePercent = 0
+    var stats          = ''
+    var overview       = data.overview || {}
+    var summary        = data.summary || {}
+    var devices        = data.devs || []
+    var sharePercent   = 0
 
     // everything below is so incredibly dirty...
-    var $activeNav = _self.$rigNavEl.find('.active')
+    var $activeNav     = _self.$rigNavEl.find('.active')
     var activeNavIndex = $activeNav.index()
-    var activeTab = $activeNav.length ? $activeNav.find('a')[0].getAttribute('href') : ''
+    var activeTab      = $activeNav.length ? $activeNav.find('a')[0].getAttribute('href') : ''
 
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
@@ -91,6 +91,9 @@
       _self.$rigEl[0].className = 'panel panel-primary panel-rig ' + _self.panelStatus
     }
     _self.$rigNavEl.html(_self.summaryBtn + deviceHtml.nav)
+    if (_self.init) {
+      _self.$rigNavEl.find('li:first-child').addClass('active')
+    }
     _self.$rigSummaryBody.html(_self._buildStatus(summary))
     _self.$rigSummaryTableBody.html(deviceHtml.summary)
     _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHTML + deviceHtml.status)
