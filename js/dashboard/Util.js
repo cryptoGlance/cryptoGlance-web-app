@@ -32,7 +32,7 @@
       return parseFloat(value/1e3).toFixed(2) + ' MH/s'
     }
 
-    return value + ' KH/s'
+    return value.toFixed(2) + ' KH/s'
   }
 
   Util.extractHashrate = function (hashrate) {
