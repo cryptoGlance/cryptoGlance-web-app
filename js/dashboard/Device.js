@@ -63,7 +63,7 @@
     this.enabled       = deviceObj.enabled + '' || 'N'
     this.hashrate_avg  = deviceObj.hashrate_avg + '' || '0 KH/s'
     this.hashrate_5s   = deviceObj.hashrate_5s + '' || '0 KH/s'
-    this.temperature = deviceObj.temperature || { celsius: 'n/a', farenheit: 'n/a' }
+    this.temperature = deviceObj.temperature || { celsius: 'n/a', fahrenheit: 'n/a' }
     this.accepted      = deviceObj.accepted || { raw: 'n/a', percent: '%' }
     this.rejected      = deviceObj.rejected || { raw: 'n/a', percent: '%' }
     this.hw_errors     = deviceObj.hw_errors || { raw: 'n/a', percent: '%' }
@@ -80,12 +80,12 @@
         case 'status':
           break // skip these values
         case 'temperature':
-          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].farenheit + '&deg;F')
+          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].fahrenheit + '&deg;F')
           break
         case 'accepted':
         case 'rejected':
         case 'hw_errors':
-          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + '%)</span>'))
+          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>'))
           break
         default:
           deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))

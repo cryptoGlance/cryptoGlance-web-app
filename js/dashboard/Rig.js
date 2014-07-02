@@ -108,13 +108,25 @@
     var totalShares = statusObj.accepted + statusObj.rejected + statusObj.stale
     for (var key in statusObj) {
       switch (key) {
-        case 'accepted':
-          statusHtml += this._getStatusHtml(key, statusObj[key], 'success', ((statusObj[key]/totalShares) * 100).toFixed(0))
+        case 'temperature':
+          statusHtml += this._getStatusHtml(key, statusObj[key], 'success', statusObj[key].celsius + '&deg;C / ' + statusObj[key].fahrenheit + '&deg;F')
           break
+        case 'accepted':
+          statusHtml += this._getStatusHtml(key, statusObj[key], 'success', statusObj[key].raw + ' <span>(' + statusObj[key].percent + ')</span>')
         case 'rejected':
         case 'stale':
-          statusHtml += this._getStatusHtml(key, statusObj[key], 'danger', ((statusObj[key]/totalShares) * 100).toFixed(0))
+          statusHtml += this._getStatusHtml(key, statusObj[key], 'danger', statusObj[key].raw + ' <span>(' + statusObj[key].percent + ')</span>')
           break
+        case 'hw_errors':
+          statusHtml += this._getStatusHtml(key, statusObj[key], null, statusObj[key].raw + ' <span>(' + statusObj[key].percent + ')</span>')
+          break
+        // case 'accepted':
+        //   statusHtml += this._getStatusHtml(key, statusObj[key], 'success', ((statusObj[key]/totalShares) * 100).toFixed(0))
+        //   break
+        // case 'rejected':
+        // case 'stale':
+        //   statusHtml += this._getStatusHtml(key, statusObj[key], 'danger', ((statusObj[key]/totalShares) * 100).toFixed(0))
+        //   break
         case 'hashrate_5s':
         case 'hashrate_avg':
           statusHtml += this._getStatusHtml(key, Util.getSpeed(Util.extractHashrate(statusObj[key])), null, null)
