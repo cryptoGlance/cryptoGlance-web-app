@@ -105,7 +105,7 @@
 
   Rig.prototype._buildStatus = function (statusObj) {
     var statusHtml = ''
-    var totalShares = statusObj.accepted + statusObj.rejected + statusObj.stale
+    // var totalShares = statusObj.accepted + statusObj.rejected + statusObj.stale
     for (var key in statusObj) {
       switch (key) {
         case 'temperature':

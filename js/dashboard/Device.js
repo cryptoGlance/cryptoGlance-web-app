@@ -63,7 +63,7 @@
     this.enabled       = deviceObj.enabled + '' || 'N'
     this.hashrate_avg  = deviceObj.hashrate_avg + '' || '0 KH/s'
     this.hashrate_5s   = deviceObj.hashrate_5s + '' || '0 KH/s'
-    this.temperature = deviceObj.temperature || { celsius: 'n/a', fahrenheit: 'n/a' }
+    this.temperature = deviceObj.temperature || { celsius: 0, fahrenheit: 0 }
     this.accepted      = deviceObj.accepted || { raw: 'n/a', percent: '%' }
     this.rejected      = deviceObj.rejected || { raw: 'n/a', percent: '%' }
     this.hw_errors     = deviceObj.hw_errors || { raw: 'n/a', percent: '%' }
@@ -101,12 +101,12 @@
                '<td class="' + this.status.colour + '">' +
                '<a href="#" data-target=".' + DOMId + '[data-toggle=\'tab\']">' + deviceName + '</a>' +
                '</td>' +
-               '<td>' + this.temperature_c + '&deg;C/' + this.temperature_f + '&deg;F</td>' +
+               '<td>' + this.temperature.celsius + '&deg;C / ' + this.temperature.fahrenheit + '&deg;F</td>' +
                '<td>' + this.hashrate_5s + '</td>' +
-               '<td>' + this.accepted + '</td>' +
-               '<td>' + this.rejected + '</td>' +
+               '<td>' + this.accepted.raw + ' <span>(' + this.accepted.percent + ')</span>' + '</td>' +
+               '<td>' + this.rejected.raw + ' <span>(' + this.rejected.percent + ')</span>' + '</td>' +
                '<td>' + this.utility + '</td>' +
-               '<td>' + this.hw_errors + '</td>' +
+               '<td>' + this.hw_errors.raw + ' <span>(' + this.hw_errors.percent + ')</span>' + '</td>' +
                '</tr>',
       status: '<div class="tab-pane fade" id="' + DOMId + '">' +
               '<div class="panel-body panel-body-stats">' +
