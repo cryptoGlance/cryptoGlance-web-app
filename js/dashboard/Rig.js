@@ -151,12 +151,11 @@
   }
   Rig.prototype._getStatusHtml = function (name, value, progress, share) {
     return '<div class="stat-pair">' +
-           '<div class="stat-value">' + value + '</div>' +
-           '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
-           '<div class="progress progress-striped">' +
-           '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share +'%">' +
-           '</div>' +
-           '</div>' +
+            '<div class="stat-value">' + value + '</div>' +
+            '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
+            '<div class="progress progress-striped">' +
+             '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share + '"></div>' +
+            '</div>' +
            '</div>'
   }
 

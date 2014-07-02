@@ -80,19 +80,32 @@
         case 'status':
           break // skip these values
         case 'temperature':
-          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].fahrenheit + '&deg;F'))
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].fahrenheit + '&deg;F',
+                                                  null,
+                                                  null))
           break
         case 'accepted':
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>',
+                                                  'success',
+                                                  deviceObj[key].percent))
+          break
         case 'rejected':
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>',
+                                                  'danger',
+                                                  deviceObj[key].percent))
+          break
         case 'hw_errors':
-          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>'))
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>',
+                                                  null,
+                                                  deviceObj[key].percent))
           break
         default:
           deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))
       }
-      // if ('object' !== typeof deviceObj[key] && 'id' !== key && 'enabled' !== key) {
-      //   deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))
-      // }
     }
 
     return {
@@ -128,10 +141,13 @@
   =            Device Private Methods            =
   =================================================*/
 
-  Device.prototype._buildStatusHtml = function (name, value) {
+  Device.prototype._buildStatusHtml = function (name, value, progress, share) {
     return '<div class="stat-pair">' +
-           '<div class="stat-value">' + value + '</div>' +
-           '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
+            '<div class="stat-value">' + value + '</div>' +
+            '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
+            '<div class="progress progress-striped">' +
+             '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share + '"></div>' +
+            '</div>' +
            '</div>'
   }
 
