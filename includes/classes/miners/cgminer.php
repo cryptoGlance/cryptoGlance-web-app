@@ -57,14 +57,22 @@ class Miners_Cgminer extends Miners_Abstract {
         return array(
             'hashrate_avg' => $this->getFormattedHashrate($this->_summary['MHS av']),
             'blocks_found' => $this->_summary['Found Blocks'],
-            'accepted' => round($this->_summary['Difficulty Accepted']),
-            'accepted_%' => round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2) . '%',
-            'rejected' => round($this->_summary['Difficulty Rejected']),
-            'rejected_%' => round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2) . '%',
-            'stale' => round($this->_summary['Difficulty Stale']),
-            'stale_%' => round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2) . '%',
-            'hw_errors' => $this->_summary['Hardware Errors'],
-            'hw_errors_%' => round($hePercent,3) . '%',
+            'accepted' => array(
+                'raw' => round($this->_summary['Difficulty Accepted']),
+                'percent' => round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2) . '%',
+            ),
+            'rejected' => array(
+                'raw' => round($this->_summary['Difficulty Rejected']),
+                'percent' => round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2) . '%',
+            ),
+            'stale' => array(
+                'raw' => round($this->_summary['Difficulty Stale']),
+                'percent' => round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2) . '%',
+            ),
+            'hw_errors' => array(
+                'raw' => $this->_summary['Hardware Errors'],
+                'percent' => round($hePercent,3) . '%',
+            ),
             'work_utility' => $this->_summary['Work Utility'] . '/m',
         );
     }
@@ -92,20 +100,30 @@ class Miners_Cgminer extends Miners_Abstract {
                     'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
                     'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
                     'intensity' => $dev['Intensity'],
-                    'temperature_c' => $dev['Temperature'],
-                    'temperature_f' => ((($dev['Temperature']*9)/5)+32),
-                    'fan_speed' => $dev['Fan Speed'] . ' RPM',
-                    'fan_speed_%' => $dev['Fan Percent'],
+                    'temperature' => array(
+                        'celsius' => $dev['Temperature'],
+                        'farenheit' => ((($dev['Temperature']*9)/5)+32),
+                    ),
+                    'fan_speed' => array(
+                        'raw' => $dev['Fan Speed'] . ' RPM',
+                        'percent' => $dev['Fan Percent'],
+                    ),
                     'engine_clock' => $dev['GPU Clock'],
                     'memory_clock' => $dev['Memory Clock'],
                     'gpu_voltage' => $dev['GPU Voltage'] . 'V',
                     'powertune' => $dev['Powertune'] . '%',
-                    'accepted' => round($dev['Difficulty Accepted']),
-                    'accepted_%' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2) . '%',
-                    'rejected' => round($dev['Difficulty Rejected']),
-                    'rejected_%' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2) . '%',
-                    'hw_errors' => $dev['Hardware Errors'],
-                    'hw_errors_%' => round($hePercent,3) . '%',
+                    'accepted' => array(
+                        'raw' => round($dev['Difficulty Accepted']),
+                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2) . '%',
+                    ),
+                    'rejected' => array(
+                        'raw' => round($dev['Difficulty Rejected']),
+                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2) . '%',
+                    ),
+                    'hw_errors' => array(
+                        'raw' => $dev['Hardware Errors'],
+                        'percent' => round($hePercent,3) . '%',
+                    ),
                     'utility' => $dev['Utility'] . '/m',
                 );
             } else if (isset($dev['ASC']) || isset($dev['PGA'])) {
@@ -118,16 +136,24 @@ class Miners_Cgminer extends Miners_Abstract {
                     'health' => $dev['Status'],
                     'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
                     'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
-                    'temperature_c' => $dev['Temperature'],
-                    'temperature_f' => ((($dev['Temperature']*9)/5)+32),
-                    'accepted' => round($dev['Difficulty Accepted']),
-                    'accepted_%' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2) . '%',
-                    'rejected' => round($dev['Difficulty Rejected']),
-                    'rejected_%' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2) . '%',
-                    'hw_errors' => $dev['Hardware Errors'],
-                    'hw_errors_%' => round($hePercent,3) . '%',
-                    'utility' => $dev['Utility'] . '/m',
+                    'temperature' => array(
+                        'celsius' => $dev['Temperature'],
+                        'farenheit' => ((($dev['Temperature']*9)/5)+32),
+                    ),
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
+                    'accepted' => array(
+                        'raw' => round($dev['Difficulty Accepted']),
+                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2) . '%',
+                    ),
+                    'rejected' => array(
+                        'raw' => round($dev['Difficulty Rejected']),
+                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2) . '%',
+                    ),
+                    'hw_errors' => array(
+                        'raw' => $dev['Hardware Errors'],
+                        'percent' => round($hePercent,3) . '%',
+                    ),
+                    'utility' => $dev['Utility'] . '/m',
                 );
                 $data['name'] = (isset($dev['Name']) ? $dev['Name'] : $data['name']);
                 $devices[] = $data;
