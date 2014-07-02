@@ -252,7 +252,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] <= $dev['Hardware Errors']) ||
                     (
                         $this->_settings['hwErrors']['type'] == 'percent' &&
-                        $this->_settings['hwErrors']['danger']['percent'] <= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
+                        $this->_settings['hwErrors']['danger']['percent'] <= $dev['Device Hardware%']
                     )
                 ) {
                     $status = array (
@@ -263,7 +263,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] <= $dev['Hardware Errors']) ||
                     (
                         $this->_settings['hwErrors']['type'] == 'percent' &&
-                        $this->_settings['hwErrors']['warning']['percent'] <= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
+                        $this->_settings['hwErrors']['warning']['percent'] <= $dev['Device Hardware%']
                     )
                 ) {
                     $status = array (
