@@ -25,13 +25,13 @@
   ===========================================*/
 
   Util.getSpeed = function (value) {
-    if (value > 1e12) {
+    if (value > 1e9) {
       return parseFloat(value/1e12).toFixed(2) + ' PH/s'
     }
-    else if (value > 1e9) {
+    else if (value > 1e6) {
       return parseFloat(value/1e9).toFixed(2) + ' TH/s'
     }
-    else if (value > 1e6) {
+    else if (value > 1e3) {
       return parseFloat(value/1e6).toFixed(2) + ' GH/s'
     }
     else if (value < 1) {
