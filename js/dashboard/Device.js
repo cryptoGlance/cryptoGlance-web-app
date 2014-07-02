@@ -1,10 +1,3 @@
-/**
-
-  TODO:
-  - Finish general structure of Device class
-
-**/
-
 !function (root, $) {
 
   'use strict';
@@ -42,7 +35,8 @@
     this.enabled      = 'N'
     this.hashrate_avg = '0 KH/s'
     this.hashrate_5s  = '0 KH/s'
-    this.temperature  = 'n/a'
+    this.temperature_c  = 'n/a'
+    this.temperature_f  = 'n/a'
     this.accepted     = '0 (0%)'
     this.rejected     = '0 (0%)'
     this.hw_errors    = '0 (0%)'
@@ -59,46 +53,45 @@
   ================================================*/
 
   Device.prototype.update = function (deviceObj) {
-    var _self = this
     var deviceStatus = []
 
-    _self.id           = deviceObj.id
-    _self.name         = deviceObj.name || 'Device'
-    _self.status       = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
-    _self.health       = deviceObj.health || 'Alive'
-    _self.icon         = deviceObj.status.icon || 'check'
-    _self.enabled      = deviceObj.enabled + '' || 'N'
-    _self.hashrate_avg = deviceObj.hashrate_avg + '' || '0 KH/s'
-    _self.hashrate_5s  = deviceObj.hashrate_5s + '' || '0 KH/s'
-    _self.temperature_c  = deviceObj.temperature_c + '' || 'n/a'
-    _self.temperature_f  = deviceObj.temperature_f + '' || 'n/a'
-    _self.accepted     = deviceObj.accepted + '' || '0 (0%)'
-    _self.rejected     = deviceObj.rejected + '' || '0 (0%)'
-    _self.hw_errors    = deviceObj.hw_errors + '' || '0 (0%)'
-    _self.utility      = deviceObj.utility + '' || '0m'
-    _self.frequency    = deviceObj.frequency + '' || 0
+    this.id            = deviceObj.id
+    this.name          = deviceObj.name || 'Device'
+    this.status        = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
+    this.health        = deviceObj.health || 'Alive'
+    this.icon          = deviceObj.status.icon || 'check'
+    this.enabled       = deviceObj.enabled + '' || 'N'
+    this.hashrate_avg  = deviceObj.hashrate_avg + '' || '0 KH/s'
+    this.hashrate_5s   = deviceObj.hashrate_5s + '' || '0 KH/s'
+    this.temperature_c = deviceObj.temperature_c + '' || 'n/a'
+    this.temperature_f = deviceObj.temperature_f + '' || 'n/a'
+    this.accepted      = deviceObj.accepted + '' || '0 (0%)'
+    this.rejected      = deviceObj.rejected + '' || '0 (0%)'
+    this.hw_errors     = deviceObj.hw_errors + '' || '0 (0%)'
+    this.utility       = deviceObj.utility + '' || '0m'
+    this.frequency     = deviceObj.frequency + '' || 0
 
-    var DOMId = 'rig-' + _self.rigID  + '-' + _self.name + '-' +_self.id
-    var deviceName = _self.name + ' ' + _self.id
+    var DOMId = 'rig-' + this.rigID  + '-' + this.name + '-' +this.id
+    var deviceName = this.name + ' ' + this.id
 
     for (var key in deviceObj) {
       if ('object' !== typeof deviceObj[key] && 'id' !== key && 'enabled' !== key) {
-        deviceStatus.push(_self._buildStatusHtml(key, deviceObj[key]))
+        deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))
       }
     }
 
     return {
       summary: '<tr>' +
-               '<td><i class="icon icon-'+ _self.status.icon + ' ' + _self.status.colour + '"></i></td>' +
-               '<td class="' + _self.status.colour + '">' +
+               '<td><i class="icon icon-'+ this.status.icon + ' ' + this.status.colour + '"></i></td>' +
+               '<td class="' + this.status.colour + '">' +
                '<a href="#" data-target=".' + DOMId + '[data-toggle=\'tab\']">' + deviceName + '</a>' +
                '</td>' +
-               '<td>' + _self.temperature_c + '&deg;C/' + _self.temperature_f + '&deg;F</td>' +
-               '<td>' + _self.hashrate_5s + '</td>' +
-               '<td>' + _self.accepted + '</td>' +
-               '<td>' + _self.rejected + '</td>' +
-               '<td>' + _self.utility + '</td>' +
-               '<td>' + _self.hw_errors + '</td>' +
+               '<td>' + this.temperature_c + '&deg;C/' + this.temperature_f + '&deg;F</td>' +
+               '<td>' + this.hashrate_5s + '</td>' +
+               '<td>' + this.accepted + '</td>' +
+               '<td>' + this.rejected + '</td>' +
+               '<td>' + this.utility + '</td>' +
+               '<td>' + this.hw_errors + '</td>' +
                '</tr>',
       status: '<div class="tab-pane fade" id="' + DOMId + '">' +
               '<div class="panel-body panel-body-stats">' +
@@ -108,7 +101,7 @@
               '</div>' +
               '</div>',
       nav: '<li>' +
-           '<a class="' + DOMId + ' ' + _self.status.colour + '" href="#' + DOMId +'" data-toggle="tab">' + deviceName + ' <i class="icon icon-' + _self.status.icon + '"></i></a>' +
+           '<a class="' + DOMId + ' ' + this.status.colour + '" href="#' + DOMId +'" data-toggle="tab">' + deviceName + ' <i class="icon icon-' + this.status.icon + '"></i></a>' +
            '</li>'
     }
   }

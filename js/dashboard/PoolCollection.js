@@ -1,10 +1,3 @@
-/**
-
-  TODO:
-  - scaffold PoolCollection class
-
-**/
-
 !function (root, $) {
 
   /*===============================================================
@@ -13,11 +6,8 @@
 
   var PoolCollection = function () {
     this.collection = []
-    this.apiData = {
-      type: 'pools',
-      action: 'update'
-    }
-    this.ready = true
+    this.apiData    = { type: 'pools', action: 'update' }
+    this.ready      = true
   }
 
   /*-----  End of PoolCollection Class/Object/Constructor  ------*/
@@ -28,7 +18,7 @@
   =====================================================*/
 
   PoolCollection.prototype.start = function () {
-    var _self = this
+    var _self = this // caching self ref for passing down in scope
 
     /*==========  Generate collection  ==========*/
     $('[data-type="pool"]').each(function (pool) {
@@ -36,7 +26,7 @@
     })
 
     /*==========  Initial data call  ==========*/
-    _self._getData(function (pools) {
+    this._getData(function (pools) {
 
       /*==========  Initial pools update in DOM  ==========*/
       _self._update(pools)
@@ -65,15 +55,17 @@
   }
 
   PoolCollection.prototype._update = function (pools) {
-    var _self = this
-    _self.collection.forEach(function (pool, index) {
+    var _self = this // caching self ref for passing down in scope
+
+    this.collection.forEach(function (pool, index) {
       pool.update(pools[index])
     })
-    _self.ready = true
+    this.ready = true
   }
 
   PoolCollection.prototype._getData = function (callback) {
-    var _self = this
+    var _self = this // caching self ref for passing down in scope
+
     $.ajax({
       url: 'ajax.php',
       data: _self.apiData,

@@ -1,10 +1,3 @@
-/**
-
-  TODO:
-  - scaffold Device Collection class
-
-**/
-
 !function (root, $) {
 
   /*=================================================================
@@ -34,6 +27,7 @@
     var deviceSummary = []
     var deviceNav = []
     var deviceStatus = []
+
     this.collection.forEach(function (device, index) {
       deviceUpdate = device.update(deviceList[index] || {})
       deviceSummary.push(deviceUpdate.summary)

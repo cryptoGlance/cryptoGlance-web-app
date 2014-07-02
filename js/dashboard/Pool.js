@@ -1,10 +1,3 @@
-/**
-
-  TODO:
-  - scaffold Pool class
-
-**/
-
 !function (root, $) {
 
   /*=====================================================
@@ -26,6 +19,7 @@
 
   Pool.prototype.update = function (poolObj) {
     var summary = ''
+
     for (var key in poolObj) {
       if (null === poolObj[key]) {
         summary += this._buildStatusHtml('', key, 'n/a')

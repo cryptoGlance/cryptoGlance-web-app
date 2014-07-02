@@ -1,10 +1,3 @@
-/**
-
-  TODO:
-  - scaffold WalletCollection class
-
-**/
-
 !function (root, $) {
 
   /*=================================================================
@@ -12,14 +5,11 @@
   =================================================================*/
 
   var WalletCollection = function () {
-    this.collection = []
+    this.collection          = []
 
-    this.apiData = {
-      type: 'wallets',
-      action: 'update'
-    }
-    this.walletOverviewHtml = ''
-    this.ready = true
+    this.apiData             = { type: 'wallets', action: 'update' }
+    this.walletOverviewHtml  = ''
+    this.ready               = true
 
     this.$walletOverviewBody = $('#wallet .panel-body')
   }
@@ -31,10 +21,10 @@
   =======================================================*/
 
   WalletCollection.prototype.start = function () {
-    var _self = this
+    var _self = this // caching self ref for passing down in scope
 
     /*==========  Initial data call  ==========*/
-    _self._getData(function (wallets) {
+    this._getData(function (wallets) {
 
       /*==========  Generate collection  ==========*/
       wallets.forEach(function (wallet, index) {
@@ -68,17 +58,19 @@
   }
 
   WalletCollection.prototype._update = function (wallets) {
-    var _self = this
-    _self.walletOverviewHtml = ''
-    _self.collection.forEach(function (wallet, index) {
+    var _self = this // caching self ref for passing down in scope
+
+    this.walletOverviewHtml = ''
+    this.collection.forEach(function (wallet, index) {
       _self.walletOverviewHtml += wallet.update(wallets[index])
     })
-    _self.$walletOverviewBody.html(_self.walletOverviewHtml)
-    _self.ready = true
+    this.$walletOverviewBody.html(this.walletOverviewHtml)
+    this.ready = true
   }
 
   WalletCollection.prototype._getData = function (callback) {
-    var _self = this
+    var _self = this // caching self ref for passing down in scope
+
     $.ajax({
       url: 'ajax.php',
       data: _self.apiData,

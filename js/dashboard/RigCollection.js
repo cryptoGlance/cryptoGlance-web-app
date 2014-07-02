@@ -1,11 +1,3 @@
-/**
-
-  TODO:
-  - finish general structure of RigCollection class
-  - setup data synchronization of RigCollection overview
-
-**/
-
 !function (root, $) {
 
   'use strict';
@@ -15,21 +7,18 @@
   ==============================================================*/
 
   var RigCollection = function () {
-    this.collection = []
+    this.collection         = []
 
-    this.apiData = {
-      type: 'rigs',
-      action: 'update'
-    }
-    this.overallHashrate = 0
-    this._ready = true
-    this._rigCount = 0
-    this._rigsResponded = 0
+    this.apiData            = { type: 'rigs', action: 'update' }
+    this.overallHashrate    = 0
+    this._ready             = true
+    this._rigCount          = 0
+    this._rigsResponded     = 0
 
-    this.$overview = $('#overview')
-    this.$overviewTable = $('#overview table')
+    this.$overview          = $('#overview')
+    this.$overviewTable     = $('#overview table')
     this.$overviewTableBody = $('#overview tbody')
-    this.overviewTableData = ''
+    this.overviewTableData  = ''
   }
 
   /*-----  End of RigCollection Class/Object/Constructor  ------*/
@@ -40,7 +29,7 @@
   ====================================================*/
 
   RigCollection.prototype.start = function (data) {
-    var _self = this
+    var _self = this // caching self ref for passing down in scope
 
     /*==========  Generate collection  ==========*/
     $('.panel-rig').each(function() {
@@ -49,7 +38,7 @@
     })
 
     /*==========  Initial data call  ==========*/
-    _self._getData(function (data) {
+    this._getData(function (data) {
       _self._rigCount = data.length
       _self._buildOverview(data)
 
@@ -76,9 +65,10 @@
   }
 
   RigCollection.prototype._update = function () {
-    var _self = this
+    var _self = this // caching self ref for passing down in scope
     var overviewData = []
-    _self.collection.forEach(function (rig, index) {
+
+    this.collection.forEach(function (rig, index) {
       _self.apiData.id = rig.rigID
       _self._getData(function (data) {
         _self._rigsResponded++
@@ -94,7 +84,8 @@
   }
 
   RigCollection.prototype._getData = function (callback) {
-    var _self = this
+    var _self = this // caching self ref for passing down in scope
+
     $.ajax({
       url: 'ajax.php',
       data : _self.apiData,
@@ -107,23 +98,24 @@
   }
 
   RigCollection.prototype._buildOverview = function (data) {
-    var _self = this
-    _self.overviewTableData = ''
-    _self.overallHashrate = 0
+    var _self = this // caching self ref for passing down in scope
+
+    this.overviewTableData = ''
+    this.overallHashrate = 0
 
     data.forEach(function (res, index) {
-    res = res.overview // TEMP
-    _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
-    _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
+      res = res.overview // TEMP
+      _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
+      _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
     })
 
-    _self.overallHashrate = Util.getSpeed(_self.overallHashrate)
+    this.overallHashrate = Util.getSpeed(this.overallHashrate)
 
-    _self.$overviewTableBody.html(_self.overviewTableData)
+    this.$overviewTableBody.html(this.overviewTableData)
 
-    $('.total-hashrate').html('<span class="hashrate-algo">scrypt</span>' + _self.overallHashrate)
+    $('.total-hashrate').html('<span class="hashrate-algo">scrypt</span>' + this.overallHashrate)
 
-    _self._updateDocumentTitle(_self.overallHashrate)
+    this._updateDocumentTitle(this.overallHashrate)
 
   }
 

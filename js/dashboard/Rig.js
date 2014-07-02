@@ -1,10 +1,3 @@
-/**
-
-  TODO:
-  - finish general structure of Rig class
-
-**/
-
 !function (root, $) {
 
   'use strict';
@@ -14,30 +7,28 @@
   ===================================================*/
 
   var Rig = function (rigID) {
-    var _self = this
-
     /* Rig properties */
-    _self.rigID                = rigID
-    _self.$rigEl               = $('#rig-' + rigID)
-    _self.rigPanel             = _self.$rigEl.find('.panel-content')
-    _self.$rigNavEl            = _self.$rigEl.find('.nav')
-    _self.$rigTabContentEl     = _self.$rigEl.find('.tab-content')
-    _self.$rigTitle            = _self.$rigEl.find('h1')
-    _self.$rigSummary          = $('#rig-' + rigID + '-summary')
-    _self.$rigSummaryTable     = _self.$rigSummary.find('table')
-    _self.$rigSummaryTableBody = _self.$rigSummaryTable.find('tbody')
-    _self.$loader              = _self.$rigSummary.find('img[alt="loading"]')
-    _self.$rigSummaryBody      = _self.$rigSummary.find('.panel-body-summary')
-    _self.deviceCollection     = new DeviceCollection(rigID)
-    _self.init                 = true
-    _self.ready                = true
-    _self.summaryBtn           = '<li>' +
+    this.rigID                = rigID
+    this.$rigEl               = $('#rig-' + rigID)
+    this.rigPanel             = this.$rigEl.find('.panel-content')
+    this.$rigNavEl            = this.$rigEl.find('.nav')
+    this.$rigTabContentEl     = this.$rigEl.find('.tab-content')
+    this.$rigTitle            = this.$rigEl.find('h1')
+    this.$rigSummary          = $('#rig-' + rigID + '-summary')
+    this.$rigSummaryTable     = this.$rigSummary.find('table')
+    this.$rigSummaryTableBody = this.$rigSummaryTable.find('tbody')
+    this.$loader              = this.$rigSummary.find('img[alt="loading"]')
+    this.$rigSummaryBody      = this.$rigSummary.find('.panel-body-summary')
+    this.deviceCollection     = new DeviceCollection(rigID)
+    this.init                 = true
+    this.ready                = true
+    this.summaryBtn           = '<li>' +
                                  '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
                                  'Summary ' +
                                  '<i class="icon icon-dotlist"></i>' +
                                  '</a>' +
                                  '</li>'
-    _self.panelStatus          = ''
+    this.panelStatus          = ''
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/
@@ -48,23 +39,22 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
-    var _self = this
     if ('undefined' === typeof data.summary || !data.devs.length) {
-      _self._off()
-      _self.ready = false
+      this._off()
+      this.ready = false
       return
     }
-    else if (!_self.ready) {
-      _self.ready = true
-      _self._on()
+    else if (!this.ready) {
+      this.ready = true
+      this._on()
     }
 
-    if (_self.init) {
-      _self._on()
+    if (this.init) {
+      this._on()
 
-      _self.$loader.remove()
+      this.$loader.remove()
 
-      _self.$rigSummaryTable.show()
+      this.$rigSummaryTable.show()
     }
 
     var stats          = ''
@@ -74,36 +64,36 @@
     var sharePercent   = 0
 
     // everything below is so incredibly dirty...
-    var $activeNav     = _self.$rigNavEl.find('.active')
+    var $activeNav     = this.$rigNavEl.find('.active')
     var activeNavIndex = $activeNav.index()
     var activeTab      = $activeNav.length ? $activeNav.find('a')[0].getAttribute('href') : ''
 
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
-    if (_self.deviceCollection.count < devices.length) {
+    if (this.deviceCollection.count < devices.length) {
       for (var i = 0; i < devices.length; i++) {
-        _self.deviceCollection.add(devices[i].id)
+        this.deviceCollection.add(devices[i].id)
       }
     }
-    var deviceHtml = _self.deviceCollection.update(devices)
-    if (_self.panelStatus !== overview.status.panel) {
-      _self.panelStatus = overview.status.panel
-      _self.$rigEl[0].className = 'panel panel-primary panel-rig ' + _self.panelStatus
+    var deviceHtml = this.deviceCollection.update(devices)
+    if (this.panelStatus !== overview.status.panel) {
+      this.panelStatus = overview.status.panel
+      this.$rigEl[0].className = 'panel panel-primary panel-rig ' + this.panelStatus
     }
-    _self.$rigNavEl.html(_self.summaryBtn + deviceHtml.nav)
-    if (_self.init) {
-      _self.$rigNavEl.find('li:first-child').addClass('active')
+    this.$rigNavEl.html(this.summaryBtn + deviceHtml.nav)
+    if (this.init) {
+      this.$rigNavEl.find('li:first-child').addClass('active')
     }
-    _self.$rigSummaryBody.html(_self._buildStatus(summary))
-    _self.$rigSummaryTableBody.html(deviceHtml.summary)
-    _self.$rigTabContentEl.html(_self.$rigSummary[0].outerHTML + deviceHtml.status)
+    this.$rigSummaryBody.html(this._buildStatus(summary))
+    this.$rigSummaryTableBody.html(deviceHtml.summary)
+    this.$rigTabContentEl.html(this.$rigSummary[0].outerHTML + deviceHtml.status)
     if ($activeNav.length) {
-      _self.$rigTabContentEl.find('.active.in').removeClass('in active')
-      _self.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')
+      this.$rigTabContentEl.find('.active.in').removeClass('in active')
+      this.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')
       $(activeTab).addClass('in active')
     }
 
-    _self.init = false
+    this.init = false
   }
 
   /*-----  End of Rig Public Methods  ------*/
