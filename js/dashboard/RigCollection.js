@@ -40,7 +40,7 @@
     /*==========  Initial data call  ==========*/
     this._getData(function (data) {
       _self._rigCount = data.length
-      _self._buildOverview(data.overview)
+      _self._buildOverview(data)
 
       _self.apiData = { type: 'rigs', action: 'update' }
 
@@ -105,8 +105,9 @@
     this.overviewTableData = ''
     this.overallHashrate = 0
 
+    data = data.overview
+
     data.forEach(function (res, index) {
-      res = res.overview // TEMP
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
       _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
     })
