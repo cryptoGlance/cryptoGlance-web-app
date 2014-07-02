@@ -62,13 +62,13 @@
 
       switch (unit) {
         case 'ph/s':
-          value = value * 1e12
-          break
-        case 'th/s':
           value = value * 1e9
           break
-        case 'gh/s':
+        case 'th/s':
           value = value * 1e6
+          break
+        case 'gh/s':
+          value = value * 1e3
           break
         case 'kh/s':
           value = value / 1e3
