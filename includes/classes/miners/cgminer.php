@@ -13,7 +13,7 @@ class Miners_Cgminer extends Miners_Abstract {
     protected $_summary = array();
     protected $_devs = array();
     protected $_pools = array();
-    
+
     // Common Data
     protected $_devStatus = array();
     protected $_rigStatus = array();
@@ -27,12 +27,12 @@ class Miners_Cgminer extends Miners_Abstract {
         parent::__construct($rig);
         $this->_host = $rig['host'];
         $this->_port = $rig['port'];
-        
+
         if ($this->fetchData() == null) {
             return null;
         }
     }
-    
+
     public function overview() {
         return array(
             'name' => $this->_name,
@@ -44,16 +44,16 @@ class Miners_Cgminer extends Miners_Abstract {
             'uptime' => $this->_upTime,
         );
     }
-    
+
     public function summary() {
         $totalShares = $this->_summary['Difficulty Accepted'] + $this->_summary['Difficulty Rejected'] + $this->_summary['Difficulty Stale'];
-        
+
         if (!isset($this->_summary['Device Hardware%'])) {
             $hePercent = $this->calculateHwPercent($this->_summary['Hardware Errors'], $this->_summary['Difficulty Accepted'], $this->_summary['Difficulty Rejected']);
         } else {
             $hePercent = $this->_summary['Device Hardware%'];
         }
-        
+
         return array(
             'hashrate_avg' => $this->getFormattedHashrate($this->_summary['MHS av']),
             'blocks_found' => $this->_summary['Found Blocks'],
@@ -76,19 +76,19 @@ class Miners_Cgminer extends Miners_Abstract {
             'work_utility' => $this->_summary['Work Utility'] . '/m',
         );
     }
-    
+
     public function devices() {
         $devices = array();
 
         foreach ($this->_devs as $devKey => $dev) {
             $totalShares = $dev['Difficulty Accepted'] + $dev['Difficulty Rejected'];
-            
+
             if (!isset($dev['Device Hardware%'])) {
                 $hePercent = $this->calculateHwPercent($dev['Hardware Errors'], $dev['Difficulty Accepted'], $dev['Difficulty Rejected']);
             } else {
                 $hePercent = $dev['Device Hardware%'];
             }
-            
+
             if (isset($dev['GPU'])) {
                 $devices[] = array(
                     'id' => $dev['GPU'],
@@ -102,7 +102,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     'intensity' => $dev['Intensity'],
                     'temperature' => array(
                         'celsius' => $dev['Temperature'],
-                        'farenheit' => ((($dev['Temperature']*9)/5)+32),
+                        'fahrenheit' => ((($dev['Temperature']*9)/5)+32),
                     ),
                     'fan_speed' => array(
                         'raw' => $dev['Fan Speed'] . ' RPM',
@@ -138,7 +138,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
                     'temperature' => array(
                         'celsius' => $dev['Temperature'],
-                        'farenheit' => ((($dev['Temperature']*9)/5)+32),
+                        'fahrenheit' => ((($dev['Temperature']*9)/5)+32),
                     ),
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
                     'accepted' => array(
@@ -159,10 +159,10 @@ class Miners_Cgminer extends Miners_Abstract {
                 $devices[] = $data;
             }
         }
-        
+
         return $devices;
     }
-    
+
     public function pools() {
         $pools = array();
         foreach ($this->_pools as $pool) {
@@ -175,34 +175,34 @@ class Miners_Cgminer extends Miners_Abstract {
                 'priority' => $pool['Priority'],
             );
         }
-        
+
         return $pools;
     }
-    
+
     public function update() {
         $data = array(
             'overview' => $this->overview(),
             'summary' => $this->summary(),
             'devs' => $this->devices(),
         );
-        
+
         return $data;
     }
-    
+
     public function getSettings() {
         $settings = parent::getSettings();
         $settings['host'] = $this->_host;
         $settings['port'] = $this->_port;
-        
+
         return $settings;
     }
-    
-    
+
+
     // PRIVATE
     private function cmd($cmd) {
         $response = '';
         $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, 1);
-                
+
         if (!$socket || $errno != 0) {
             return null;
         } else {
@@ -212,10 +212,10 @@ class Miners_Cgminer extends Miners_Abstract {
             }
             fclose($socket);
         }
-        
-        return str_replace("\0", '', $response); // JSON response has ASCII BOM at the begining. 
+
+        return str_replace("\0", '', $response); // JSON response has ASCII BOM at the begining.
     }
-    
+
     private function getActivePool() {
         foreach ($this->_pools as $pool) {
             if ($pool['Priority'] == 0) {
@@ -226,30 +226,30 @@ class Miners_Cgminer extends Miners_Abstract {
                 return true;
             }
         }
-        
-        if (!empty($this->_pools)) {        
+
+        if (!empty($this->_pools)) {
             $this->_activePool = array(
                 'id' => $this->_pools[0]['POOL'],
                 'url' => $this->_pools[0]['Stratum URL'],
             );
-            
+
             return true;
         }
-        
+
         return array();
     }
-    
+
     private function getDevStatus() {
         foreach ($this->_devs as $devKey => $dev) {
             // Might as well get the hashrate
             $this->_rigHashrate += $dev['MHS 5s'];
-        
+
             $status = array();
-            
+
             // Start with hardware errors
             if ($this->_settings['hwErrors']['enabled']) {
                 if (
-                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] <= $dev['Hardware Errors']) || 
+                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] <= $dev['Hardware Errors']) ||
                     (
                         $this->_settings['hwErrors']['type'] == 'percent' &&
                         $this->_settings['hwErrors']['danger']['percent'] <= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
@@ -260,7 +260,7 @@ class Miners_Cgminer extends Miners_Abstract {
                         'icon' => 'danger'
                     );
                 } else if (
-                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] <= $dev['Hardware Errors']) || 
+                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] <= $dev['Hardware Errors']) ||
                     (
                         $this->_settings['hwErrors']['type'] == 'percent' &&
                         $this->_settings['hwErrors']['warning']['percent'] <= (($dev['Hardware Errors'] / ($dev['Difficulty Accepted'] + $dev['Difficulty Rejected'] + $dev['Hardware Errors'])) * 100)
@@ -272,7 +272,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     );
                 }
             }
-            
+
             // If no hardware errors, check the health
             if (empty($status)) {
                 if ($dev['Status'] == 'Dead') {
@@ -287,7 +287,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     );
                 }
             }
-            
+
             // If no hardware errors and health is okay, do temperatures
             if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
                 if ($dev['Temperature'] >= $this->_settings['temps']['danger']) {
@@ -302,7 +302,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     );
                 }
             }
-            
+
             // If all pass somehow... Mark it good to go!
             if (empty($status) && $dev['Enabled'] == 'Y') {
                 $status = array(
@@ -310,7 +310,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     'icon' => 'cpu-processor'
                 );
             }
-            
+
             // If still empty, we must be offline
             if (empty($status)) {
                 $status = array(
@@ -318,7 +318,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     'icon' => 'ban-circle',
                 );
             }
-            
+
             $this->_devStatus[$devKey] = $status;
         }
     }
@@ -328,7 +328,7 @@ class Miners_Cgminer extends Miners_Abstract {
             'icon' => 'ban-circle',
             'panel' => 'panel-offline',
         );
-        
+
         foreach ($this->_devStatus as $status) {
             if ($status['colour'] == 'red') {
                 $rigStatus = array(
@@ -350,30 +350,30 @@ class Miners_Cgminer extends Miners_Abstract {
                 );
             }
         }
-        
+
         $this->_rigStatus = $rigStatus;
     }
-    
+
     private function getFormattedHashrate($hashrate) {
         $hashrate *= 1000;
-        
+
         // Math Stuffs
         $units = array('KH', 'MH', 'GH', 'TH', 'PH');
-        
+
         $pow = min(floor(($hashrate ? log($hashrate) : 0) / log(1000)), count($units) - 1);
         $hashrate /= pow(1000, $pow);
         $hashrate = round($hashrate, 2) . ' ' . $units[$pow] . '/s';
-        
+
         return $hashrate;
     }
-    
+
     private function getUptime() {
         if (isset($this->_summary['Elapsed'])) {
             $seconds = $this->_summary['Elapsed'];
-            
+
             $from = new DateTime("@0");
             $to = new DateTime("@$seconds");
-            
+
             if ($seconds < 86400) {
                 $format = '%hH %iM %sS';
             } else if ($seconds <= 604800) {
@@ -381,25 +381,25 @@ class Miners_Cgminer extends Miners_Abstract {
             } else {
                 $format = '%wW %aD %hH';
             }
-            
+
             $uptime = $from->diff($to)->format($format);
-            
+
             $this->_upTime = $uptime;
-            
+
             return true;
         }
-        
+
         return null;
     }
-    
+
     private function calculateHwPercent($hwErrors, $diffA, $diffR ) {
         return ($hwErrors / ($diffA + $diffR + $hwErrors)) * 100;
     }
-    
+
     private function onlineCheck() {
         return $this->cmd('{"command":"version"}');
     }
-    
+
     private function fetchData() {
         if ($this->onlineCheck() != null) {
             // Cgminer Summary
@@ -411,18 +411,18 @@ class Miners_Cgminer extends Miners_Abstract {
             $this->_devs = $dev['DEVS'];
             $this->getDevStatus(); // gets status of each device
             $this->getRigStatus(); // Determins the rigs status
-        
+
             // Pools
             $pools = json_decode($this->cmd('{"command":"pools"}'), true);
             $this->_pools = $pools['POOLS'];
             $this->getActivePool();
-    
+
             //Misc data
             $this->getUptime();
 
             return true;
         }
-        
+
         return null;
     }
 }
