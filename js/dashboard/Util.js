@@ -26,13 +26,13 @@
 
   Util.getSpeed = function (value) {
     if (value > 1e6) {
-      return parseFloat(value/1e6).toFixed(2) + ' GH/S'
+      return parseFloat(value/1e6).toFixed(2) + ' GH/s'
     }
     else if (value > 1e3) {
-      return parseFloat(value/1e3).toFixed(2) + ' MH/S'
+      return parseFloat(value/1e3).toFixed(2) + ' MH/s'
     }
 
-    return value + ' KH/S'
+    return value + ' KH/s'
   }
 
   Util.extractHashrate = function (hashrate) {

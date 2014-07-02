@@ -118,7 +118,7 @@
     data.forEach(function (res, index) {
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
       _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
-      algorithms[res.algorithm] += res.raw_hashrate
+      algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
     })
 
     this.overallHashrate = Util.getSpeed(this.overallHashrate)
