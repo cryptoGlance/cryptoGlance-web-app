@@ -119,6 +119,7 @@
                                             statusObj[key].raw + ' <span>(' + statusObj[key].percent + ')</span>',
                                             'success',
                                             statusObj[key].percent)
+          break
         case 'rejected':
         case 'stale':
           statusHtml += this._getStatusHtml(key,
