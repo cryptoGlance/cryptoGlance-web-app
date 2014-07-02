@@ -80,7 +80,7 @@
         case 'status':
           break // skip these values
         case 'temperature':
-          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].fahrenheit + '&deg;F')
+          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].fahrenheit + '&deg;F'))
           break
         case 'accepted':
         case 'rejected':
