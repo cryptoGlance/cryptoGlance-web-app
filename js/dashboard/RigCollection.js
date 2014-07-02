@@ -106,7 +106,7 @@
       'scrypt': 0,
       'sha256': 0,
       'x11': 0,
-      'scryptn': 0,
+      'scrypt-n': 0,
       'x13': 0
     }
 
