@@ -9,7 +9,7 @@
   var RigCollection = function () {
     this.collection         = []
 
-    this.apiData            = { type: 'rigs', action: 'update' }
+    this.apiData            = { type: 'rigs', action: 'overview' }
     this.overallHashrate    = 0
     this._ready             = true
     this._rigCount          = 0
@@ -41,6 +41,8 @@
     this._getData(function (data) {
       _self._rigCount = data.length
       _self._buildOverview(data)
+
+      _self.apiData = { type: 'rigs', action: 'update' }
 
       /*==========  Setup polling  ==========*/
       setInterval(function () {
