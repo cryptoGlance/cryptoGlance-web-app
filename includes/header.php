@@ -3,14 +3,14 @@
 <?php require_once("includes/head.php"); ?>
    <body>
       <?php require_once("templates/modals/add_panel.php"); ?>
-      
+
       <!-- -->
       <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-ltc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-vtc.php"); ?>
       <?php require_once("templates/modals/qrcode-donate-doge.php"); ?>
       <!-- -->
-      
+
       <div class="page-container">
       <div class="dark-overlay"></div>
       <!-- Fixed navbar -->
@@ -67,14 +67,16 @@
             <!--/.nav-collapse -->
          </div>
       </div>
-      
+
       <?php if ($currentPage == 'index') { ?>
       <ul id="total-hashrates">
-        <li><a id="hashrate_sha256" class="total-hashrate">0 <small>MH/s</small></a>
-        <a id="hashrate_scrypt" class="total-hashrate">0 <small>MH/s</small></a>
-        <a id="hashrate_scrypt-n" class="total-hashrate">0 <small>MH/s</small></a>
-        <a id="hashrate_x11" class="total-hashrate">0 <small>MH/s</small></a></li>
+        <li>
+          <a id="hashrate_sha256" class="total-hashrate">0 <small>MH/s</small></a>
+          <a id="hashrate_scrypt" class="total-hashrate">0 <small>MH/s</small></a>
+          <a id="hashrate_scrypt-n" class="total-hashrate">0 <small>MH/s</small></a>
+          <a id="hashrate_x11" class="total-hashrate">0 <small>MH/s</small></a>
+        </li>
       </ul>
-      
+
       <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>
       <?php } ?>
