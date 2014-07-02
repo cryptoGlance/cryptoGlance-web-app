@@ -102,6 +102,14 @@
   RigCollection.prototype._buildOverview = function (data) {
     var _self = this // caching self ref for passing down in scope
 
+    var algorithms = {
+      'scrypt': 0,
+      'sha256': 0,
+      'x11': 0,
+      'scryptn': 0,
+      'x13': 0
+    }
+
     this.overviewTableData = ''
     this.overallHashrate = 0
 
@@ -110,13 +118,21 @@
     data.forEach(function (res, index) {
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
       _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
+      algorithms[res.algorithm] += res.raw_hashrate
     })
 
     this.overallHashrate = Util.getSpeed(this.overallHashrate)
 
     this.$overviewTableBody.html(this.overviewTableData)
 
-    $('.total-hashrate').html('<span class="hashrate-algo">scrypt</span>' + this.overallHashrate)
+    for (var key in algorithms) {
+      if (algorithms[key]) {
+        $('#hashrate_' + key).html('<span class="hashrate-algo">' + key + '</span>' + algorithms[key])
+      }
+      else {
+        $('#total-hashrates').remove('#hashrate_' + key)
+      }
+    }
 
     this._updateDocumentTitle(this.overallHashrate)
 
