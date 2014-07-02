@@ -127,10 +127,10 @@
 
     for (var key in algorithms) {
       if (algorithms[key]) {
-        $('#hashrate_' + key).html('<span class="hashrate-algo">' + key + '</span>' + algorithms[key])
+        $('#hashrate_' + key).html('<span class="hashrate-algo">' + key + '</span>' + Util.getSpeed(algorithms[key]))
       }
       else {
-        $('#total-hashrates').remove('#hashrate_' + key)
+        $('#total-hashrates #hashrate_' + key).remove()
       }
     }
 
