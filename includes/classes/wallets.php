@@ -17,6 +17,7 @@ class Wallets {
         'litecoin' => 'LTC',
         'dogecoin' => 'DOGE',
         'vertcoin' => 'VTC',
+        'darkcoin' => 'DRK',
     );
 
     public function __construct() {
