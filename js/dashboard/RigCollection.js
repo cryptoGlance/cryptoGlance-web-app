@@ -40,7 +40,7 @@
     /*==========  Initial data call  ==========*/
     this._getData(function (data) {
       _self._rigCount = data.length
-      _self._buildOverview(data)
+      _self._buildOverview(data.overview)
 
       _self.apiData = { type: 'rigs', action: 'update' }
 
