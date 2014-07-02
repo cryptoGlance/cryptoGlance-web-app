@@ -116,7 +116,6 @@
           statusHtml += this._getStatusHtml(key, statusObj[key], 'danger', ((statusObj[key]/totalShares) * 100).toFixed(0))
           break
         case 'hashrate_5s':
-          // hashrateCollection[this.rigID] = statusObj[key]
         case 'hashrate_avg':
           statusHtml += this._getStatusHtml(key, Util.getSpeed(Util.extractHashrate(statusObj[key])), null, null)
           break
@@ -128,13 +127,13 @@
   }
   Rig.prototype._getStatusHtml = function (name, value, progress, share) {
     return '<div class="stat-pair">' +
-            '<div class="stat-value">' + value + '</div>' +
-            '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
-            '<div class="progress progress-striped">' +
-            '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share +'%">' +
-            '</div>' +
-            '</div>' +
-            '</div>'
+           '<div class="stat-value">' + value + '</div>' +
+           '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
+           '<div class="progress progress-striped">' +
+           '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share +'%">' +
+           '</div>' +
+           '</div>' +
+           '</div>'
   }
 
   Rig.prototype._off = function () {

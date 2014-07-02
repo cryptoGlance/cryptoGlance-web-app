@@ -63,21 +63,36 @@
     this.enabled       = deviceObj.enabled + '' || 'N'
     this.hashrate_avg  = deviceObj.hashrate_avg + '' || '0 KH/s'
     this.hashrate_5s   = deviceObj.hashrate_5s + '' || '0 KH/s'
-    this.temperature_c = deviceObj.temperature_c + '' || 'n/a'
-    this.temperature_f = deviceObj.temperature_f + '' || 'n/a'
-    this.accepted      = deviceObj.accepted + '' || '0 (0%)'
-    this.rejected      = deviceObj.rejected + '' || '0 (0%)'
-    this.hw_errors     = deviceObj.hw_errors + '' || '0 (0%)'
+    this.temperature = deviceObj.temperature || { celsius: 'n/a', farenheit: 'n/a' }
+    this.accepted      = deviceObj.accepted || { raw: 'n/a', percent: '%' }
+    this.rejected      = deviceObj.rejected || { raw: 'n/a', percent: '%' }
+    this.hw_errors     = deviceObj.hw_errors || { raw: 'n/a', percent: '%' }
     this.utility       = deviceObj.utility + '' || '0m'
     this.frequency     = deviceObj.frequency + '' || 0
 
-    var DOMId = 'rig-' + this.rigID  + '-' + this.name + '-' +this.id
+    var DOMId = 'rig-' + this.rigID  + '-' + this.name + '-' + this.id
     var deviceName = this.name + ' ' + this.id
 
     for (var key in deviceObj) {
-      if ('object' !== typeof deviceObj[key] && 'id' !== key && 'enabled' !== key) {
-        deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))
+      switch (key) {
+        case 'id':
+        case 'enabled':
+        case 'status':
+          break // skip these values
+        case 'temperature':
+          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].farenheit + '&deg;F')
+          break
+        case 'accepted':
+        case 'rejected':
+        case 'hw_errors':
+          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + '%)</span>'))
+          break
+        default:
+          deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))
       }
+      // if ('object' !== typeof deviceObj[key] && 'id' !== key && 'enabled' !== key) {
+      //   deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))
+      // }
     }
 
     return {
