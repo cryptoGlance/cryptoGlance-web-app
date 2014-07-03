@@ -38,43 +38,43 @@
 
   // Manage Rig
   $document.on('click', '.btn-manage-rig', function (evt) {
-    var minerId = this.getAttribute('data-attr')
+    var rigId = this.getAttribute('data-attr')
     var $manageRig = $('#manageRig')
 
-    $manageRig.attr('data-attr', minerId)
-    $manageRig.find('.rig-name').html($('#rig-' + minerId + ' .panel-title .value').text())
-    $manageRig.find('.btn-details').attr('href', 'rig.php?id=' + minerId)
+    $manageRig.attr('data-attr', rigId)
+    $manageRig.find('.rig-name').html($('#rig-' + rigId + ' .panel-title .value').text())
+    $manageRig.find('.btn-details').attr('href', 'rig.php?id=' + rigId)
 
     prettifyInputs()
   })
 
   // Switch Pools
   $document.on('click', '#manageRig .btn-switchpool', function (evt) {
-    var minerId = this.getAttribute('data-attr')
+    var rigId = $('#manageRig').attr('data-attr');
     var $switchPoolModal = $('#switchPool .checkbox')
     $switchPoolModal.html('<img src="images/ajax-loader.gif" alt="Loading..." class="ajax-loader" />')
     $.ajax({
-        type: 'post',
-        data: {
-          type: 'miner',
-          action: 'get-pools',
-          miner: minerId
-        },
         url: 'ajax.php',
+        data: {
+          type: 'rigs',
+          action: 'pools',
+          id: rigId
+        },
         dataType: 'json'
     })
     .done(function (data) {
       if (typeof data != 'undefined') {
-        $('#switchPool').attr('data-minerId', minerId);
-        $.each(data, function (v,k) {
-            var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '').slice(poolUrl.indexOf("/") + 2)
+        $('#switchPool').attr('data-minerId', rigId);
+        $.each(data[0], function (v,k) {
+            var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '');
+            poolUrl = poolUrl.slice(poolUrl.indexOf("/") + 2)
 
-            $switchPoolModal.append('<label for="rig'+ minerId +'-pool'+ k.id +'">' +
-                                    '<input type="radio" name="switchPoolList" id="rig'+ minerId +'-pool'+ k.id +'" value="'+ k.id +'">' +
+            $switchPoolModal.append('<label for="rig'+ rigId +'-pool'+ k.id +'">' +
+                                    '<input type="radio" name="switchPoolList" id="rig'+ rigId +'-pool'+ k.id +'" value="'+ k.id +'">' +
                                     '<span>'+ poolUrl +'</span>' +
                                     '</label>')
             if (k.active == 1) {
-                $('input:radio[id=rig'+ minerId +'-pool'+ k.id +']', $switchPoolModal).prop('checked', true);
+                $('input:radio[id=rig'+ rigId +'-pool'+ k.id +']', $switchPoolModal).prop('checked', true);
             }
         });
 
