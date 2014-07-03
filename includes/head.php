@@ -42,11 +42,6 @@
         var DATA_FOLDER = '<?php echo DATA_FOLDER; ?>';
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
         <?php echo ($settings['general']['updates']['enabled'] == '1') ? 'var updateType = "' . $updateFeed[$settings['general']['updates']['type']]['feed'] . '";' : '' ?>
-        var devHeatWarning = <?php echo $settings['general']['temps']['warning'] ?>;
-        var devHeatDanger = <?php echo $settings['general']['temps']['danger'] ?>;
-        var devHWEnabled = <?php echo $settings['general']['hardwareErrors']['enabled'] ?>;
-        var devHWWarning = <?php echo $settings['general']['hardwareErrors']['warning'] ?>;
-        var devHWDanger = <?php echo $settings['general']['hardwareErrors']['danger'] ?>;
         var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig'] ?>;
         var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool'] ?>;
         var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet'] ?>;
