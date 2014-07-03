@@ -136,7 +136,7 @@
         case 'hashrate_5s':
         case 'hashrate_avg':
           statusHtml += this._getStatusHtml(key,
-                                            Util.getSpeed(Util.extractHashrate(statusObj[key])),
+                                            Util.getSpeed(statusObj[key]),
                                             null,
                                             null)
           break

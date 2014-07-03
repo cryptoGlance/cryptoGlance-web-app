@@ -62,7 +62,7 @@
     this.icon          = deviceObj.status.icon || 'check'
     this.enabled       = deviceObj.enabled + '' || 'N'
     this.hashrate_avg  = deviceObj.hashrate_avg + '' || '0 KH/s'
-    this.hashrate_5s   = deviceObj.hashrate_5s + '' || '0 KH/s'
+    this.hashrate_5s   = Util.getSpeed(deviceObj.hashrate_5s) + '' || '0 KH/s'
     this.temperature = deviceObj.temperature || { celsius: 0, fahrenheit: 0 }
     this.accepted      = deviceObj.accepted || { raw: 'n/a', percent: '%' }
     this.rejected      = deviceObj.rejected || { raw: 'n/a', percent: '%' }
@@ -102,6 +102,13 @@
                                                   deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>',
                                                   null,
                                                   deviceObj[key].percent))
+          break
+        case 'hashrate_5s':
+        case 'hashrate_avg':
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  Util.getSpeed(deviceObj[key]),
+                                                  null,
+                                                  null))
           break
         default:
           deviceStatus.push(this._buildStatusHtml(key, deviceObj[key]))

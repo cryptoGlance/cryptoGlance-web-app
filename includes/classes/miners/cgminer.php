@@ -38,7 +38,7 @@ class Miners_Cgminer extends Miners_Abstract {
             'name' => $this->_name,
             'status' => $this->_rigStatus,
             'algorithm' => $this->_settings['algorithm'],
-            'hashrate_5s' => $this->getFormattedHashrate($this->_rigHashrate),
+            'hashrate_5s' => $this->_rigHashrate,
             'raw_hashrate' => $this->_rigHashrate,
             'active_pool' => $this->_activePool,
             'uptime' => $this->_upTime,
@@ -55,7 +55,7 @@ class Miners_Cgminer extends Miners_Abstract {
         }
 
         return array(
-            'hashrate_avg' => $this->getFormattedHashrate($this->_summary['MHS av']),
+            'hashrate_avg' => $this->_summary['MHS av'],
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => array(
                 'raw' => round($this->_summary['Difficulty Accepted']),
@@ -97,8 +97,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'status' => $this->_devStatus[$devKey],
                     'enabled' => $dev['Enabled'],
                     'health' => $dev['Status'],
-                    'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
-                    'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
+                    'hashrate_avg' => $dev['MHS av'],
+                    'hashrate_5s' => ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']),
                     'intensity' => $dev['Intensity'],
                     'temperature' => array(
                         'celsius' => $dev['Temperature'],
@@ -134,8 +134,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'status' => $this->_devStatus[$devKey],
                     'enabled' => $dev['Enabled'],
                     'health' => $dev['Status'],
-                    'hashrate_avg' => $this->getFormattedHashrate($dev['MHS av']),
-                    'hashrate_5s' => $this->getFormattedHashrate($dev['MHS 5s']),
+                    'hashrate_avg' => $dev['MHS av'],
+                    'hashrate_5s' => ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']),
                     'temperature' => array(
                         'celsius' => $dev['Temperature'],
                         'fahrenheit' => ((($dev['Temperature']*9)/5)+32),
