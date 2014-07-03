@@ -354,6 +354,7 @@ class Miners_Cgminer extends Miners_Abstract {
         $this->_rigStatus = $rigStatus;
     }
 
+    // Unused
     private function getFormattedHashrate($hashrate) {
         $hashrate *= 1000;
 
@@ -366,6 +367,7 @@ class Miners_Cgminer extends Miners_Abstract {
 
         return $hashrate;
     }
+    /////////////////////
 
     private function getUptime() {
         if (isset($this->_summary['Elapsed'])) {
