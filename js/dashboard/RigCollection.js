@@ -12,7 +12,7 @@
     this.apiData            = { type: 'rigs', action: 'overview' }
     this.overallHashrate    = 0
     this._ready             = true
-    this._rigCount          = 0
+    this._rigsActive        = 0
     this._rigsResponded     = 0
 
     this.$overview          = $('#overview')
@@ -28,7 +28,7 @@
   =            RigCollection Public Methods            =
   ====================================================*/
 
-  RigCollection.prototype.start = function (data) {
+  RigCollection.prototype.start = function () {
     var _self = this // caching self ref for passing down in scope
 
     /*==========  Generate collection  ==========*/
@@ -39,7 +39,12 @@
 
     /*==========  Initial data call  ==========*/
     this._getData(function (data) {
-      _self._rigCount = data.length
+      data.forEach(function (rig) {
+        if (rig.status.length) {
+          _self._rigsActive++
+        }
+      })
+      // _self._rigsActive = data.length
       _self._buildOverview(data)
 
       _self.apiData = { type: 'rigs', action: 'update' }
@@ -73,11 +78,19 @@
     this.collection.forEach(function (rig, index) {
       _self.apiData.id = rig.rigID
       _self._getData(function (data) {
-        _self._rigsResponded++
         data = data[0]
+
+        // if (data.status.length) {
+        //   _self._rigsResponded++
+        //   if (_self._rigsResponded > _self._rigsActive) {
+        //     _self._rigsActive = _self._rigsResponded
+        //   }
+        // }
+
         rig.update(data)
         overviewData[index] = data
-        if (_self._rigsResponded === _self._rigCount) {
+        // if (_self._rigsResponded === _self._rigsActive) {
+        if (overviewData.length === _self.collection.length) {
           _self._ready = true
           _self._buildOverview(overviewData)
         }
