@@ -115,7 +115,9 @@
     }
 
     function build(res, index) {
-      res = res.overview
+      if (res.overview) {
+        res = res.overview
+      }
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
       _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
       algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
