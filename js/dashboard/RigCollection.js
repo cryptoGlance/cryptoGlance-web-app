@@ -39,12 +39,6 @@
 
     /*==========  Initial data call  ==========*/
     this._getData(function (data) {
-      // data.forEach(function (rig) {
-      //   if (rig.status.length) {
-      //     _self._rigsActive++
-      //   }
-      // })
-      // _self._rigsActive = data.length
       _self._buildOverview(data)
 
       _self.apiData = { type: 'rigs', action: 'update' }
@@ -52,7 +46,7 @@
       /*==========  Setup polling  ==========*/
       setInterval(function () {
         if (_self._ready) {
-          // _self._rigsResponded = 0
+          _self._rigsResponded = 0
           _self._ready = false
           _self._update()
         }
@@ -80,8 +74,8 @@
       _self._getData(function (data) {
         rig.update(data)
         overviewData[index] = data
-        // if (_self._rigsResponded === _self._rigsActive) {
-        if (overviewData.length === _self.collection.length) {
+        _self._rigsResponded++
+        if (_self._rigsResponded === _self.collection.length) {
           _self._ready = true
           _self._buildOverview(overviewData)
         }
