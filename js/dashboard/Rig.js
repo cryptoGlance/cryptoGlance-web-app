@@ -8,27 +8,28 @@
 
   var Rig = function (rigID) {
     /* Rig properties */
-    this.rigID                = rigID
-    this.$rigEl               = $('#rig-' + rigID)
-    this.rigPanel             = this.$rigEl.find('.panel-content')
-    this.$rigNavEl            = this.$rigEl.find('.nav')
-    this.$rigTabContentEl     = this.$rigEl.find('.tab-content')
-    this.$rigTitle            = this.$rigEl.find('h1')
-    this.$rigSummary          = $('#rig-' + rigID + '-summary')
-    this.$rigSummaryTable     = this.$rigSummary.find('table')
-    this.$rigSummaryTableBody = this.$rigSummaryTable.find('tbody')
-    this.$loader              = this.$rigSummary.find('img[alt="loading"]')
-    this.$rigSummaryBody      = this.$rigSummary.find('.panel-body-summary')
-    this.deviceCollection     = new DeviceCollection(rigID)
-    this.init                 = true
-    this.ready                = true
-    this.summaryBtn           = '<li>' +
-                                 '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
-                                 'Summary ' +
-                                 '<i class="icon icon-dotlist"></i>' +
-                                 '</a>' +
-                                 '</li>'
-    this.panelStatus          = ''
+    this.rigID                   = rigID
+    this.$rigEl                  = $('#rig-' + rigID)
+    this.rigPanel                = this.$rigEl.find('.panel-content')
+    this.$rigNavEl               = this.$rigEl.find('.nav')
+    this.$rigTabContentEl        = this.$rigEl.find('.tab-content')
+    this.$rigTitle               = this.$rigEl.find('h1')
+    this.$rigSummary             = $('#rig-' + rigID + '-summary')
+    this.$rigSummaryTableWrapper = this.$rigSummary.find('.table-summary')
+    this.$rigSummaryTable        = this.$rigSummary.find('table')
+    this.$rigSummaryTableBody    = this.$rigSummaryTable.find('tbody')
+    this.$loader                 = this.$rigSummary.find('img[alt="loading"]')
+    this.$rigSummaryBody         = this.$rigSummary.find('.panel-body-summary')
+    this.deviceCollection        = new DeviceCollection(rigID)
+    this.init                    = true
+    this.ready                   = true
+    this.summaryBtn              = '<li>' +
+                                   '<a class="blue" href="#rig-'+ rigID +'-summary" data-toggle="tab">' +
+                                   'Summary ' +
+                                   '<i class="icon icon-dotlist"></i>' +
+                                   '</a>' +
+                                   '</li>'
+    this.panelStatus             = ''
   }
 
   /*-----  End of Rig Class/Object/Constructor  ------*/
@@ -62,6 +63,7 @@
     var summary        = data.summary || {}
     var devices        = data.devs || []
     var sharePercent   = 0
+    var scrollPosition = this.$rigSummaryTableWrapper.scrollLeft()
 
     // everything below is so incredibly dirty...
     var $activeNav     = this.$rigNavEl.find('.active')
@@ -86,6 +88,7 @@
     }
     this.$rigSummaryBody.html(this._buildStatus(summary))
     this.$rigSummaryTableBody.html(deviceHtml.summary)
+    this.$rigSummaryTableWrapper.scrollLeft(scrollPosition)
     this.$rigTabContentEl.html(this.$rigSummary[0].outerHTML + deviceHtml.status)
     if ($activeNav.length) {
       this.$rigTabContentEl.find('.active.in').removeClass('in active')
