@@ -39,11 +39,11 @@
 
     /*==========  Initial data call  ==========*/
     this._getData(function (data) {
-      data.forEach(function (rig) {
-        if (rig.status.length) {
-          _self._rigsActive++
-        }
-      })
+      // data.forEach(function (rig) {
+      //   if (rig.status.length) {
+      //     _self._rigsActive++
+      //   }
+      // })
       // _self._rigsActive = data.length
       _self._buildOverview(data)
 
@@ -52,7 +52,7 @@
       /*==========  Setup polling  ==========*/
       setInterval(function () {
         if (_self._ready) {
-          _self._rigsResponded = 0
+          // _self._rigsResponded = 0
           _self._ready = false
           _self._update()
         }
