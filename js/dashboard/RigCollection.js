@@ -115,6 +115,7 @@
     }
 
     function build(res, index) {
+      res = res.overview
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
       _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
       algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
@@ -123,7 +124,7 @@
     this.overviewTableData = ''
     this.overallHashrate = 0
 
-    data = data.overview
+    // data = data.overview
 
     // if (Array.isArray(data)) {
       data.forEach(build)

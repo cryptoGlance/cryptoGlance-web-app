@@ -78,11 +78,11 @@ class Rigs {
     }
 
     public function getUpdate() {
-        $data = array();
+        // $data = array();
         // $data;
         foreach ($this->_rigs as $rig) {
-            $data[] = $rig->update();
-            // $data = $rig->update();
+            // $data[] = $rig->update();
+            $data = $rig->update();
         }
 
         return $data;
