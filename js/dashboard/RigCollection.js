@@ -126,7 +126,7 @@
     this.overviewTableData = ''
     this.overallHashrate = 0
 
-    data = data[0].overview
+    data = data.overview
 
     data.forEach(function (res, index) {
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
