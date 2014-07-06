@@ -5,9 +5,9 @@
   =================================================================*/
 
   var DeviceCollection = function (rigID) {
-    this.collection        = []
-    this.rigID             = rigID
-    this.count             = 0
+    this.collection = []
+    this.rigID      = rigID
+    this.count      = 0
   }
 
   /*-----  End of DeviceCollection Class/Object/Constructor  ------*/
@@ -25,8 +25,8 @@
   DeviceCollection.prototype.update = function (deviceList) {
     var deviceUpdate
     var deviceSummary = []
-    var deviceNav = []
-    var deviceStatus = []
+    var deviceNav     = []
+    var deviceStatus  = []
 
     this.collection.forEach(function (device, index) {
       deviceUpdate = device.update(deviceList[index] || {})

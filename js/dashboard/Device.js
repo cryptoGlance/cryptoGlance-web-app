@@ -53,25 +53,25 @@
   ================================================*/
 
   Device.prototype.update = function (deviceObj) {
-    var deviceStatus = []
+    var deviceStatus  = []
 
-    this.id            = deviceObj.id
-    this.name          = deviceObj.name || 'Device'
-    this.status        = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
-    this.health        = deviceObj.health || 'Alive'
-    this.icon          = deviceObj.status.icon || 'check'
-    this.enabled       = deviceObj.enabled + '' || 'N'
-    this.hashrate_avg  = deviceObj.hashrate_avg + '' || '0 KH/s'
-    this.hashrate_5s   = Util.getSpeed(deviceObj.hashrate_5s) + '' || '0 KH/s'
-    this.temperature = deviceObj.temperature || { celsius: 0, fahrenheit: 0 }
-    this.accepted      = deviceObj.accepted || { raw: 'n/a', percent: '%' }
-    this.rejected      = deviceObj.rejected || { raw: 'n/a', percent: '%' }
-    this.hw_errors     = deviceObj.hw_errors || { raw: 'n/a', percent: '%' }
-    this.utility       = deviceObj.utility + '' || '0m'
-    this.frequency     = deviceObj.frequency + '' || 0
+    this.id           = deviceObj.id
+    this.name         = deviceObj.name || 'Device'
+    this.status       = deviceObj.status || { icon: 'cpu-processor', colour: 'green' }
+    this.health       = deviceObj.health || 'Alive'
+    this.icon         = deviceObj.status.icon || 'check'
+    this.enabled      = deviceObj.enabled + '' || 'N'
+    this.hashrate_avg = deviceObj.hashrate_avg + '' || '0 KH/s'
+    this.hashrate_5s  = Util.getSpeed(deviceObj.hashrate_5s) + '' || '0 KH/s'
+    this.temperature  = deviceObj.temperature || { celsius: 0, fahrenheit: 0 }
+    this.accepted     = deviceObj.accepted || { raw: 'n/a', percent: '%' }
+    this.rejected     = deviceObj.rejected || { raw: 'n/a', percent: '%' }
+    this.hw_errors    = deviceObj.hw_errors || { raw: 'n/a', percent: '%' }
+    this.utility      = deviceObj.utility + '' || '0m'
+    this.frequency    = deviceObj.frequency + '' || 0
 
-    var DOMId = 'rig-' + this.rigID  + '-' + this.name + '-' + this.id
-    var deviceName = this.name + ' ' + this.id
+    var DOMId         = 'rig-' + this.rigID  + '-' + this.name + '-' + this.id
+    var deviceName    = this.name + ' ' + this.id
 
     for (var key in deviceObj) {
       switch (key) {
