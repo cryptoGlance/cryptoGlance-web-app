@@ -88,7 +88,6 @@
     }
     this.$rigSummaryBody.html(this._buildStatus(summary))
     this.$rigSummaryTableBody.html(deviceHtml.summary)
-    $rigSummaryTableWrapper.scrollLeft(scrollPosition)
     this.$rigTabContentEl.html(this.$rigSummary[0].outerHTML + deviceHtml.status)
     if ($activeNav.length) {
       this.$rigTabContentEl.find('.active.in').removeClass('in active')
@@ -97,6 +96,8 @@
     }
 
     this.init = false
+
+    $rigSummaryTableWrapper.scrollLeft(scrollPosition)
   }
 
   /*-----  End of Rig Public Methods  ------*/
