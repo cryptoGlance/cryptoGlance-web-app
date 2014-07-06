@@ -124,7 +124,9 @@
     this.overviewTableData = ''
     this.overallHashrate = 0
 
-    // data = data.overview
+    if (data.overview) {
+      data = data.overview
+    }
 
     // if (Array.isArray(data)) {
       data.forEach(build)
