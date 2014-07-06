@@ -83,7 +83,7 @@
         // if (_self._rigsResponded === _self._rigsActive) {
         if (overviewData.length === _self.collection.length) {
           _self._ready = true
-          _self._buildOverview(overviewData, index)
+          _self._buildOverview(overviewData)
         }
       })
     })
