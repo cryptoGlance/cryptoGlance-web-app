@@ -62,8 +62,7 @@
     var summary        = data.summary || {}
     var devices        = data.devs || []
     var sharePercent   = 0
-    var $rigSummaryTableWrapper = this.$rigSummary.find('.table-summary')
-    var scrollPosition = $rigSummaryTableWrapper.scrollLeft()
+    var scrollPosition = this.$rigSummary.find('.table-summary').scrollLeft()
 
     // everything below is so incredibly dirty...
     var $activeNav     = this.$rigNavEl.find('.active')
@@ -97,7 +96,7 @@
 
     this.init = false
 
-    $rigSummaryTableWrapper.scrollLeft(scrollPosition)
+    this.$rigSummary.find('.table-summary').scrollLeft(scrollPosition)
   }
 
   /*-----  End of Rig Public Methods  ------*/
