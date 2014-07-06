@@ -15,7 +15,6 @@
     this.$rigTabContentEl        = this.$rigEl.find('.tab-content')
     this.$rigTitle               = this.$rigEl.find('h1')
     this.$rigSummary             = $('#rig-' + rigID + '-summary')
-    this.$rigSummaryTableWrapper = this.$rigSummary.find('.table-summary')
     this.$rigSummaryTable        = this.$rigSummary.find('table')
     this.$rigSummaryTableBody    = this.$rigSummaryTable.find('tbody')
     this.$loader                 = this.$rigSummary.find('img[alt="loading"]')
@@ -63,7 +62,8 @@
     var summary        = data.summary || {}
     var devices        = data.devs || []
     var sharePercent   = 0
-    var scrollPosition = this.$rigSummaryTableWrapper.scrollLeft()
+    var $rigSummaryTableWrapper = this.$rigSummary.find('.table-summary')
+    var scrollPosition = $rigSummaryTableWrapper.scrollLeft()
 
     // everything below is so incredibly dirty...
     var $activeNav     = this.$rigNavEl.find('.active')
@@ -88,7 +88,7 @@
     }
     this.$rigSummaryBody.html(this._buildStatus(summary))
     this.$rigSummaryTableBody.html(deviceHtml.summary)
-    this.$rigSummaryTableWrapper.scrollLeft(scrollPosition)
+    $rigSummaryTableWrapper.scrollLeft(scrollPosition)
     this.$rigTabContentEl.html(this.$rigSummary[0].outerHTML + deviceHtml.status)
     if ($activeNav.length) {
       this.$rigTabContentEl.find('.active.in').removeClass('in active')
