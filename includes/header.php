@@ -71,10 +71,10 @@
       <?php if ($currentPage == 'index') { ?>
       <ul id="total-hashrates">
         <li>
-          <a id="hashrate_sha256" class="total-hashrate">0 <small>MH/s</small></a>
-          <a id="hashrate_scrypt" class="total-hashrate">0 <small>MH/s</small></a>
-          <a id="hashrate_scrypt-n" class="total-hashrate">0 <small>MH/s</small></a>
-          <a id="hashrate_x11" class="total-hashrate">0 <small>MH/s</small></a>
+          <a id="hashrate_sha256" class="total-hashrate hidden">0 <small>MH/s</small></a>
+          <a id="hashrate_scrypt" class="total-hashrate hidden">0 <small>MH/s</small></a>
+          <a id="hashrate_scrypt-n" class="total-hashrate hidden">0 <small>MH/s</small></a>
+          <a id="hashrate_x11" class="total-hashrate hidden">0 <small>MH/s</small></a>
         </li>
       </ul>
 
