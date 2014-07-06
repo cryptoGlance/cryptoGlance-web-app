@@ -78,21 +78,12 @@
     this.collection.forEach(function (rig, index) {
       _self.apiData.id = rig.rigID
       _self._getData(function (data) {
-        // data = data[0]
-
-        // if (data.status.length) {
-        //   _self._rigsResponded++
-        //   if (_self._rigsResponded > _self._rigsActive) {
-        //     _self._rigsActive = _self._rigsResponded
-        //   }
-        // }
-
         rig.update(data)
         overviewData[index] = data
         // if (_self._rigsResponded === _self._rigsActive) {
         if (overviewData.length === _self.collection.length) {
           _self._ready = true
-          _self._buildOverview(overviewData)
+          _self._buildOverview(overviewData, index)
         }
       })
     })
@@ -123,16 +114,24 @@
       'x13': 0
     }
 
+    function build(res, index) {
+      _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
+      _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
+      algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
+    }
+
     this.overviewTableData = ''
     this.overallHashrate = 0
 
     data = data.overview
 
-    data.forEach(function (res, index) {
-      _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
-      _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
-      algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
-    })
+    // if (Array.isArray(data)) {
+      data.forEach(build)
+    // }
+    // else {
+      // build(data)
+    // }
+
 
     this.overallHashrate = Util.getSpeed(this.overallHashrate)
 
