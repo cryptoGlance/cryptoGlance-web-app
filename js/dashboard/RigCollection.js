@@ -78,7 +78,7 @@
     this.collection.forEach(function (rig, index) {
       _self.apiData.id = rig.rigID
       _self._getData(function (data) {
-        data = data[0]
+        // data = data[0]
 
         // if (data.status.length) {
         //   _self._rigsResponded++
