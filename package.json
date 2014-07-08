@@ -1,0 +1,32 @@
+{
+  "name": "CryptoGlance",
+  "version": "1.1.0",
+  "description": "CryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot.",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cryptoGlance/cryptoGlance-web-app"
+  },
+  "keywords": [
+    "bitcoin",
+    "php",
+    "crypto",
+    "currency",
+    "javascript"
+  ],
+  "author": "cryptoGlance",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cryptoGlance/cryptoGlance-web-app/issues"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.5",
+    "gulp-watch": "~0.6.8",
+    "gulp-uglify": "~0.3.1",
+    "gulp-concat": "~2.2.0",
+    "gulp-cssmin": "~0.1.6"
+  }
+}

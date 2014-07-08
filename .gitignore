@@ -10,3 +10,4 @@ web.config
 *.bak
 Thumbs.db
 example-*.*
+node_modules
