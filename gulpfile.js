@@ -29,10 +29,17 @@ gulp.task('html', function () {
 })
 
 gulp.task('watch', function() {
-  gulp.watch('js/dashboard/**/*.js', ['scripts'])
-  .on('change', function (evt) {
+  function notify(evt){
     console.log('File ' + evt.path + ' was ' + evt.type + ', running tasks...')
-  })
+  }
+
+  gulp.watch('js/dashboard/**/*.js', ['scripts'])
+  .on('change', notify)
+
+  gulp.watch('css/**/*.css', ['styles'])
+  .on('change', notify)
+
+  gulp.watch(['includes/head.php', 'includes/scripts.php'], ['html'])
 })
 
 gulp.task('default', ['watch', 'styles', 'scripts', 'html'])
