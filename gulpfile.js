@@ -2,6 +2,7 @@ var gulp = require('gulp')
 var uglify = require('gulp-uglify')
 var concat = require('gulp-concat')
 var cssmin = require('gulp-cssmin')
+var processhtml = require('gulp-processhtml')
 
 gulp.task('styles', function () {
   gulp.src('css/**/*.css')
@@ -17,6 +18,16 @@ gulp.task('scripts', function () {
   .pipe(gulp.dest('build/js/dashboard/'))
 })
 
+gulp.task('html', function () {
+  gulp.src('includes/head.php')
+  .pipe(processhtml('head.php'))
+  .pipe(gulp.dest('build/includes/'))
+
+  gulp.src('includes/scripts.php')
+  .pipe(processhtml('scripts.php'))
+  .pipe(gulp.dest('build/includes/'))
+})
+
 gulp.task('watch', function() {
   gulp.watch('js/dashboard/**/*.js', ['scripts'])
   .on('change', function (evt) {
@@ -24,4 +35,4 @@ gulp.task('watch', function() {
   })
 })
 
-gulp.task('default', ['watch', 'styles', 'scripts'])
+gulp.task('default', ['watch', 'styles', 'scripts', 'html'])

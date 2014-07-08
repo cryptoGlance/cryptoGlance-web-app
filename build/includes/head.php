@@ -18,20 +18,7 @@
     <?php echo ($currentPage == 'rig') ? 'Rig Details' : '' ?>
     <?php echo ($currentPage == 'update') ? 'Updating cryptoGlance...' : '' ?>
     :: cryptoGlance</title>
-    <!--build:css styles.css-->
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery Toast Message Plugin (https://github.com/akquinet/jquery-toastmessage-plugin) styles -->
-    <link href="css/jquery.toastmessage.css" rel="stylesheet">
-    <!-- jQuery Slider styles -->
-    <link href="css/slider.css" rel="stylesheet">
-    <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
-    <link href="css/whhg.css" rel="stylesheet">
-    <!-- extend Bootstrap styles -->
-    <link href="css/bootstrap-switch.min.css" rel="stylesheet">
-    <!-- Custom cryptoGlance styles -->
-    <link href="css/cryptoglance-base.css" rel="stylesheet">
-    <!--/build-->
+    <link rel="stylesheet" href="styles.css">
 
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
