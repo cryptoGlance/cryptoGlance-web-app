@@ -120,6 +120,13 @@ class CryptoGlance {
                 'name' => ($label ? $label : 'WafflePool'),
                 'address' => $address,
             );
+        } else if ($type == 'trademybit' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'TradeMyBit'),
+                'apikey' => $api,
+            );
+
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
