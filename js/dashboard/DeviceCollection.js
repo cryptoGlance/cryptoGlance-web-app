@@ -7,7 +7,7 @@
   var DeviceCollection = function (rigID) {
     this.collection = []
     this.rigID      = rigID
-    this.count      = 0
+    this.length      = 0
   }
 
   /*-----  End of DeviceCollection Class/Object/Constructor  ------*/
@@ -18,7 +18,7 @@
   =======================================================*/
 
   DeviceCollection.prototype.add = function(deviceID) {
-    this.count++
+    this.length++
     this.collection.push(new this.SubClass(deviceID, this.rigID))
   }
 
