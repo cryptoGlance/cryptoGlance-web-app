@@ -69,9 +69,8 @@
     var activeNavIndex = $activeNav.index()
     var activeTab      = $activeNav.length ? $activeNav.find('a')[0].getAttribute('href') : ''
 
-    // ensure newly added devices are accounted for
-    // console.log(this.deviceCollection.count, devices.length)
-    if (this.deviceCollection.length < devices.length) {
+    // ensure newly added/removed devices are accounted for
+    if (this.deviceCollection.length !== devices.length) {
       this.deviceCollection = new DeviceCollection(this.rigID)
       for (var i = 0; i < devices.length; i++) {
         this.deviceCollection.add(devices[i].id)
