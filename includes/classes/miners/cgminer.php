@@ -91,7 +91,7 @@ class Miners_Cgminer extends Miners_Abstract {
 
             if (isset($dev['GPU'])) {
                 $devices[] = array(
-                    'id' => $dev['GPU'],
+                    'id' => $devKey,
                     'type' => 'GPU',
                     'name' => 'GPU',
                     'status' => $this->_devStatus[$devKey],
@@ -128,7 +128,7 @@ class Miners_Cgminer extends Miners_Abstract {
                 );
             } else if (isset($dev['ASC']) || isset($dev['PGA'])) {
                 $data = array(
-                    'id' => (isset($dev['ASC']) ? $dev['ASC'] : $dev['PGA']),
+                    'id' => $devKey,
                     'type' => (isset($dev['ASC']) ? 'ASC' : 'PGA'),
                     'name' => (isset($dev['ASC']) ? 'ASC' : 'PGA'),
                     'status' => $this->_devStatus[$devKey],
