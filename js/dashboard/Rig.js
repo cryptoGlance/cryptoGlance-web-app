@@ -167,7 +167,8 @@
     this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').hide()
     this.rigPanel.hide()
-    this.$rigTabContentEl.html('')
+    this.$rigNavEl.html('')
+    this.$rigSummaryTableBody.html('')
   }
 
   Rig.prototype._on = function() {
