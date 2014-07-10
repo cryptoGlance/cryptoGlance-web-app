@@ -19,7 +19,7 @@
     this.$rigSummaryTableBody    = this.$rigSummaryTable.find('tbody')
     this.$loader                 = this.$rigSummary.find('img[alt="loading"]')
     this.$rigSummaryBody         = this.$rigSummary.find('.panel-body-summary')
-    this.deviceCollection        = new DeviceCollection(rigID)
+    this.deviceCollection        = []//new DeviceCollection(rigID)
     this.init                    = true
     this.ready                   = true
     this.summaryBtn              = '<li>' +
@@ -72,6 +72,7 @@
     // ensure newly added devices are accounted for
     // console.log(this.deviceCollection.count, devices.length)
     if (this.deviceCollection.count < devices.length) {
+      this.deviceCollection = new DeviceCollection(this.rigID)
       for (var i = 0; i < devices.length; i++) {
         this.deviceCollection.add(devices[i].id)
       }
