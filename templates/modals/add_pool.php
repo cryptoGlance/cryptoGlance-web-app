@@ -23,6 +23,7 @@
                  <option value="eclipse">Eclipse</option>
                  <option value="mpos">MPOS</option>
                  <option value="multipoolus">Multipool.us</option>
+                 <option value="nicehash">NiceHash</option>
                  <option value="simplecoin">SimpleCoin</option>
                  <option value="trademybit">TradeMyBit</option>
                  <option value="wafflepool">WafflePool</option>
@@ -47,7 +48,7 @@
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">
              </div>
            </div>
-           <div class="form-group wafflepool" style="display: none;">
+           <div class="form-group wafflepool nicehash" style="display: none;">
              <label for="inputAddress" class="col-sm-3 control-label">BTC Address</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputAddress" name="address">

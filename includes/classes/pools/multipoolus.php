@@ -47,11 +47,11 @@ class Pools_MultiPoolUS extends Pools_Abstract {
 
             $poolData =  $this->curlDownload( $this->_apiURL  . '?api_key='. $this->_apiKey ) ;
 
-
+            $data=array();
             // Payout Information
             $data['type'] = 'multipoolus';
 
-            $data=array();
+            
             $data['total_hash_rate'] = 0 ;
 
 
