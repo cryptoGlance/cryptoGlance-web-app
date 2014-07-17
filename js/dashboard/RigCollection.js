@@ -93,7 +93,7 @@
     })
     .done(callback)
     .fail(function (xhr, status, message) {
-      console.error(message)
+      //console.error(message)
     })
   }
 

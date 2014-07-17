@@ -82,7 +82,7 @@
       }
     })
     .fail(function (xhr, status, message) {
-      console.error(xhr, status, message)
+      //console.error(xhr, status, message)
     })
     .done(callback)
   }

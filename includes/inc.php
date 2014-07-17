@@ -4,6 +4,8 @@ ini_set("display_errors", 1);
 error_reporting(E_ERROR);
 //error_reporting(E_ALL);
 
+date_default_timezone_set("GMT");
+
 session_name('cryptoGlance'); // feel free to rename this!
 
 if (!extension_loaded('sockets')) {
