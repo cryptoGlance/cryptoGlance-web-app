@@ -85,21 +85,27 @@
                                                   null,
                                                   null))
           break
+        case 'fan_speed':
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  deviceObj[key].raw + ' RPM (' + deviceObj[key].percent + '%)',
+                                                  null,
+                                                  null))
+          break
         case 'accepted':
           deviceStatus.push(this._buildStatusHtml(key,
-                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>',
+                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + '%)</span>',
                                                   'success',
                                                   deviceObj[key].percent))
           break
         case 'rejected':
           deviceStatus.push(this._buildStatusHtml(key,
-                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>',
+                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + '%)</span>',
                                                   'danger',
                                                   deviceObj[key].percent))
           break
         case 'hw_errors':
           deviceStatus.push(this._buildStatusHtml(key,
-                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + ')</span>',
+                                                  deviceObj[key].raw + ' <span>(' + deviceObj[key].percent + '%)</span>',
                                                   null,
                                                   deviceObj[key].percent))
           break
@@ -123,10 +129,10 @@
                '</td>' +
                '<td>' + this.temperature.celsius + '&deg;C / ' + this.temperature.fahrenheit + '&deg;F</td>' +
                '<td>' + this.hashrate_5s + '</td>' +
-               '<td>' + this.accepted.raw + ' <span>(' + this.accepted.percent + ')</span>' + '</td>' +
-               '<td>' + this.rejected.raw + ' <span>(' + this.rejected.percent + ')</span>' + '</td>' +
+               '<td>' + this.accepted.raw + ' <span>(' + this.accepted.percent + '%)</span>' + '</td>' +
+               '<td>' + this.rejected.raw + ' <span>(' + this.rejected.percent + '%)</span>' + '</td>' +
                '<td>' + this.utility + '</td>' +
-               '<td>' + this.hw_errors.raw + ' <span>(' + this.hw_errors.percent + ')</span>' + '</td>' +
+               '<td>' + this.hw_errors.raw + ' <span>(' + this.hw_errors.percent + '%)</span>' + '</td>' +
                '</tr>',
       status: '<div class="tab-pane fade" id="' + DOMId + '">' +
               '<div class="panel-body panel-body-stats">' +

@@ -59,19 +59,19 @@ class Miners_Cgminer extends Miners_Abstract {
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => array(
                 'raw' => round($this->_summary['Difficulty Accepted']),
-                'percent' => round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2) . '%',
+                'percent' => round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2),
             ),
             'rejected' => array(
                 'raw' => round($this->_summary['Difficulty Rejected']),
-                'percent' => round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2) . '%',
+                'percent' => round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2),
             ),
             'stale' => array(
                 'raw' => round($this->_summary['Difficulty Stale']),
-                'percent' => round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2) . '%',
+                'percent' => round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2),
             ),
             'hw_errors' => array(
                 'raw' => $this->_summary['Hardware Errors'],
-                'percent' => round($hePercent,3) . '%',
+                'percent' => round($hePercent,3),
             ),
             'work_utility' => $this->_summary['Work Utility'] . '/m',
         );
@@ -105,7 +105,7 @@ class Miners_Cgminer extends Miners_Abstract {
                         'fahrenheit' => ((($dev['Temperature']*9)/5)+32),
                     ),
                     'fan_speed' => array(
-                        'raw' => $dev['Fan Speed'] . ' RPM',
+                        'raw' => $dev['Fan Speed'],
                         'percent' => $dev['Fan Percent'],
                     ),
                     'engine_clock' => $dev['GPU Clock'],
@@ -114,15 +114,15 @@ class Miners_Cgminer extends Miners_Abstract {
                     'powertune' => $dev['Powertune'] . '%',
                     'accepted' => array(
                         'raw' => round($dev['Difficulty Accepted']),
-                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2) . '%',
+                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2),
                     ),
                     'rejected' => array(
                         'raw' => round($dev['Difficulty Rejected']),
-                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2) . '%',
+                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2),
                     ),
                     'hw_errors' => array(
                         'raw' => $dev['Hardware Errors'],
-                        'percent' => round($hePercent,3) . '%',
+                        'percent' => round($hePercent,3),
                     ),
                     'utility' => $dev['Utility'] . '/m',
                 );
@@ -143,15 +143,15 @@ class Miners_Cgminer extends Miners_Abstract {
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
                     'accepted' => array(
                         'raw' => round($dev['Difficulty Accepted']),
-                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2) . '%',
+                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2),
                     ),
                     'rejected' => array(
                         'raw' => round($dev['Difficulty Rejected']),
-                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2) . '%',
+                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2),
                     ),
                     'hw_errors' => array(
                         'raw' => $dev['Hardware Errors'],
-                        'percent' => round($hePercent,3) . '%',
+                        'percent' => round($hePercent,3),
                     ),
                     'utility' => $dev['Utility'] . '/m',
                 );
