@@ -536,7 +536,7 @@ $(document).ready(function() {
         if (type == 'simplecoin') {
             $('#inputPoolURL').attr('placeholder', 'http://simpledoge.com');
         } else if (type == 'mpos') {
-            $('#inputPoolURL').attr('placeholder', 'http://vertsquad.com');
+            $('#inputPoolURL').attr('placeholder', 'http://rddpool.com');
         }
         
         prettifyInputs();

@@ -6,9 +6,7 @@
 
       <!-- -->
       <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-ltc.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-vtc.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-doge.php"); ?>
+      <?php require_once("templates/modals/qrcode-donate-rdd.php"); ?>
       <!-- -->
 
       <div class="page-container">
