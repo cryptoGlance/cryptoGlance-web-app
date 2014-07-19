@@ -14,8 +14,9 @@ class Rigs {
         $fh = new FileHandler('configs/miners.json');
         $rigs = json_decode($fh->read(), true);
 
-        if (isset($_GET['id'])) {
-            $rigId = intval($_GET['id'])-1;
+        if (isset($_GET['id']) || isset($_POST['id'])) {
+            $rigId = ($_GET['id']) ? $_GET['id'] : $_POST['id'];
+            $rigId = intval($rigId)-1;
             $this->addRig($rigs[$rigId]);
         } else if (!empty($rigs)) {
             foreach ($rigs as $rigId => $rig) {
@@ -23,6 +24,10 @@ class Rigs {
             }
         }
     }
+    
+    /*
+     * Specific to class
+     */
 
     private function addRig($rig) {
 
@@ -39,6 +44,19 @@ class Rigs {
         $obj = new $class($rig);
         $this->_rigs[] = $obj;
     }
+
+    
+    /*
+     * POST
+     */
+         
+    public function restart() {
+        $this->_rigs[0]->restart();
+    }
+    
+    /*
+     * GET
+     */
 
     public function getPools() {
         $data = array();

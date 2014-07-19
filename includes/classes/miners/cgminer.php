@@ -178,6 +178,10 @@ class Miners_Cgminer extends Miners_Abstract {
 
         return $pools;
     }
+    
+    public function restart() {
+        return $this->getData('{"command":"restart"}');
+    }
 
     public function update() {
         $data = array(
