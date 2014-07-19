@@ -108,7 +108,7 @@
 
   // Restart
   $document.on('click', '#manageRig .btn-restart', function (evt) {
-    var minerId = this.getAttribute('data-attr')
+    var minerId = $('#manageRig').data('attr')
     $.ajax({
       type: 'post',
       data: {
