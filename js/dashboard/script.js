@@ -108,13 +108,13 @@
 
   // Restart
   $document.on('click', '#manageRig .btn-restart', function (evt) {
-    var minerId = $('#manageRig').data('attr')
+    var rigId = $('#manageRig').data('attr')
     $.ajax({
       type: 'post',
       data: {
-        type: 'miners',
+        type: 'sigs',
         action: 'restart',
-        miner: minerId
+        miner: rigId
       },
       url: 'ajax.php',
       dataType: 'json'
