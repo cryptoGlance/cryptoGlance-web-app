@@ -21,14 +21,7 @@ class CryptoGlance {
     //////////
     // Rigs //
     //////////
-    public function getMiners($minerId = null) {
-        if (!is_null($minerId) && $minerId != 0) {
-            $minerId -= 1; // Arrays start at 0... 1 less than the ID on frontend
-            if (!empty($this->_config['miners'][$minerId])) {
-                return $this->_config['miners'][$minerId];
-            }
-        }
-        
+    public function getMiners() {
         return $this->_config['miners'];
     }
     public function addRig() {
@@ -127,6 +120,19 @@ class CryptoGlance {
                 'name' => ($label ? $label : 'WafflePool'),
                 'address' => $address,
             );
+        } else if ($type == 'trademybit' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'TradeMyBit'),
+                'apikey' => $api,
+            );
+          } else if ($type == 'multipoolus' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'MultiPool.us'),
+                'apikey' => $api,
+            );
+
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
@@ -285,6 +291,21 @@ class CryptoGlance {
         }
         if (empty($settings['general']['updates']['type'])) {
             $settings['general']['updates']['type'] = 'release';
+        }
+        if (empty($settings['general']['temps']['warning'])) {
+            $settings['general']['temps']['warning'] = 75;
+        }
+        if (empty($settings['general']['temps']['danger'])) {
+            $settings['general']['temps']['danger'] = 85;
+        }
+        if (empty($settings['general']['hardwareErrors']['enabled'])) {
+            $settings['general']['hardwareErrors']['enabled'] = 1;
+        }
+        if (empty($settings['general']['hardwareErrors']['warning'])) {
+            $settings['general']['hardwareErrors']['warning'] = 5;
+        }
+        if (empty($settings['general']['hardwareErrors']['danger'])) {
+            $settings['general']['hardwareErrors']['danger'] = 15;
         }
         if (empty($settings['general']['updateTimes']['rig'])) {
             $settings['general']['updateTimes']['rig'] = 3000;

@@ -119,20 +119,20 @@
           break
         case 'accepted':
           statusHtml += this._getStatusHtml(key,
-                                            statusObj[key].raw + ' <span>(' + statusObj[key].percent + ')</span>',
+                                            statusObj[key].raw + ' <span>(' + statusObj[key].percent + '%)</span>',
                                             'success',
                                             statusObj[key].percent)
           break
         case 'rejected':
         case 'stale':
           statusHtml += this._getStatusHtml(key,
-                                            statusObj[key].raw + ' <span>(' + statusObj[key].percent + ')</span>',
+                                            statusObj[key].raw + ' <span>(' + statusObj[key].percent + '%)</span>',
                                             'danger',
                                             statusObj[key].percent)
           break
         case 'hw_errors':
           statusHtml += this._getStatusHtml(key,
-                                            statusObj[key].raw + ' <span>(' + statusObj[key].percent + ')</span>',
+                                            statusObj[key].raw + ' <span>(' + statusObj[key].percent + '%)</span>',
                                             null,
                                             statusObj[key].percent)
           break

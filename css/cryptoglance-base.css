@@ -581,8 +581,9 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
 .total-wallet-balance span {
   font-size: 32px;
   letter-spacing: -1px;
-  display: block;
-  text-shadow: -2px 2px 0 #222;
+    display: inline-block;
+    text-shadow: -2px 2px 0px #222;
+    margin-right: 10px;
 }
 
 .total-wallet-balance img {
@@ -1234,6 +1235,19 @@ a#dash-add-panel.flash {
   height: auto;
 }
 
+.panel-body .col-has-icon img {
+    max-height: 38px;
+    width: auto;
+    max-width: none;
+    height: auto;
+    float: left;
+}
+
+.panel-body .table-responsive img, .panel-body form label img {
+  max-height: 24px;
+  width: auto;
+}
+
 .panel-rig ul {
   margin: 0;
   padding: 0;
@@ -1407,6 +1421,11 @@ a#dash-add-panel.flash {
   text-align: center;
   margin: 0px 0px -6px -1px;
   overflow: hidden;
+    position: relative;
+}
+
+.panel-wallet .panel-body .stat-pair {
+    border-color: #656565 #656565 #656565 #555;
 }
 
 .panel-body .stat-pair-dropzone {
@@ -1445,7 +1464,13 @@ a#dash-add-panel.flash {
   text-shadow: 0 1px 0 #000;
 }
 
+.panel-body .stat-pair .stat-label *, .panel-body .stat-pair .stat-value * {
+    position: relative;
+    z-index: 10;
+}
+
 .panel-body .stat-pair .stat-label {
+    position: relative;
   background: url(../images/darkdenim3.png) repeat #424750;
   border-radius: 0;
   font-family: robotocondensed;
@@ -1478,10 +1503,15 @@ a#dash-add-panel.flash {
 }
 
 .panel-body .stat-pair .stat-value {
+    position: relative;
   background: url(../images/inflicted.png) repeat #111;
   font-size: 20px;
   border-radius: 0;
   padding: 0 10px;
+}
+
+.panel-wallet .stat-pair .stat-value {
+    text-align: right;
 }
 
 .panel-body .stat-pair.feed-item {
@@ -1549,16 +1579,29 @@ a#dash-add-panel.flash {
 
 .panel-body-addresses .stat-pair .address-label {
   display: block;
-  font-size: 20px;
-  color: #888;
-  margin-top: -10px;
+  font-size: 13px;
+    font-family: robotocondensed, sans-serif;
+  color: #ccc;
+  margin: 0 0 -5px;
+}
+
+.panel-body-addresses .stat-value span {
+    display: block;
+    margin: 0px 0px -7px;
+}
+
+.panel-body-addresses .stat-value span:last-child {
+    padding: 0px 0px 7px;
 }
 
 .panel-body-addresses img {
-  max-height: 32px;
+  max-height: 92px;
+    opacity: 0.3;
   width: auto;
-  margin: 5px 20px 0 0;
-  float: left;
+    position: absolute;
+    bottom: -14px;
+    left: -14px;
+    z-index: 1;
 }
 
 #inputNewAddress {
@@ -1582,6 +1625,10 @@ a#dash-add-panel.flash {
 .social-box {
   text-align: center;
   padding: 6px 0;
+}
+
+.social-box .btn {
+    width: 100%;
 }
 
 .social-icon img {
@@ -1732,6 +1779,10 @@ a#dash-add-panel.flash {
   font-weight: bold;
   padding: 3px 10px;
   vertical-align: middle;
+}
+
+.panel-wallet .panel-body .table tr th, .panel-wallet .panel-body .table tr td {
+    text-align: right;
 }
 
 .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
@@ -1913,6 +1964,12 @@ a#dash-add-panel.flash {
   a.navbar-brand img {
     height: 68px;
   }
+
+    .panel-in-footer .panel-body .stat-pair-qr .stat-label {
+        height: auto;
+        min-height: 92px;
+        text-align: left;
+    }
 
   .donate-address {
     font-size: 15px;
@@ -2175,6 +2232,11 @@ a#dash-add-panel.flash {
   .panel {
     margin-bottom: 70px;
   }
+
+  .panel-narrow {
+      width: 600px;
+      margin: 0 auto 45px;
+  }
   
   .full-content .panel-body {
     padding: 0 20px;
@@ -2217,8 +2279,14 @@ a#dash-add-panel.flash {
     min-width: 260px;
   }
 
-  .panel-body-addresses img {
-    max-height: 48px;
+    .panel-body-addresses .stat-pair .address-label {
+        font-size: 16px;
+        margin: -10px 0 -8px;
+    }
+
+    .panel-body-addresses img {
+    max-height: 130px;
+    left: -20px;
   }
   
   .panel-body .stat-pair .stat-label .stat-pair-icon {
@@ -2233,9 +2301,7 @@ a#dash-add-panel.flash {
   }
   
   .panel-in-footer .panel-body .stat-pair-qr .stat-label {
-    height: auto;
-    min-height: 147px;
-    text-align: left;
+    min-height: 82px;
   }
   
   .panel-body .stat-pair.feed-item .stat-value {
