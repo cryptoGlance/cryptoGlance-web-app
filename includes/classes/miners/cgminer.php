@@ -180,7 +180,7 @@ class Miners_Cgminer extends Miners_Abstract {
     }
     
     public function restart() {
-        return $this->getData('{"command":"restart"}');
+        return $this->cmd('{"command":"restart"}');
     }
 
     public function update() {

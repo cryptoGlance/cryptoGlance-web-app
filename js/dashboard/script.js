@@ -112,9 +112,9 @@
     $.ajax({
       type: 'post',
       data: {
-        type: 'miners',
-        action: 'restart',
-        miner: minerId
+        id: minerId,
+        type: 'rigs',
+        action: 'restart'
       },
       url: 'ajax.php',
       dataType: 'json'
