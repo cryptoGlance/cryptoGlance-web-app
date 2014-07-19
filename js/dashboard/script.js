@@ -56,9 +56,9 @@
     $.ajax({
         url: 'ajax.php',
         data: {
+          id: rigId,
           type: 'rigs',
-          action: 'pools',
-          id: rigId
+          action: 'pools'
         },
         dataType: 'json'
     })
@@ -86,15 +86,15 @@
   })
 
   $document.on('click', '#switchPool .btn-success', function (evt) {
-    var minerId = this.getAttribute('data-attr')
+    var rigId = $('#manageRig').data('attr')
     var selectedPoolId = $('input[name=switchPoolList]:checked', '#switchPool .checkbox').val()
     if (typeof selectedPoolId != 'undefined') {
       $.ajax({
         type: 'post',
         data: {
-          type: 'miners',
+          id: rigId,
+          type: 'rigs',
           action: 'switch-pool',
-          miner: minerId,
           pool: parseInt(selectedPoolId, 10) + 1
         },
         url: 'ajax.php',
