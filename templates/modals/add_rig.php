@@ -34,6 +34,17 @@
                   <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="port" placeholder="4028" value="4028">
                 </div>
               </div>
+              <div class="form-group">
+                <label for="inputRigAlgo" class="col-sm-4 control-label">Algorithm</label>
+                <div class="col-sm-5">
+                  <select class="form-control" id="selectRigAlgo" name="minerAlgo">
+                    <option>Scrypt</option>
+                    <option>Scrypt-N</option>
+                    <option>X11</option>
+                    <option>X13</option>
+                  </select>
+                </div>
+              </div>
 <!--              <div class="form-group">-->
 <!--                <label for="inputRigHashrate" class="col-sm-5 control-label">Desired Hashrate <small>(MH/s)</small></label>-->
 <!--                <div class="col-sm-3">-->
