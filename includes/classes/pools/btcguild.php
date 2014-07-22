@@ -6,41 +6,25 @@ require_once('abstract.php');
 class Pools_Btcguild extends Pools_Abstract {
 
     // Pool Information
-    protected $_apiKey; // 7d717abbe83e8304e83c2691d800f144
+    protected $_apiKey;
+    protected $_type = 'btcguild';
 
     public function __construct($params) {
-        parent::__construct(array('apiurl' => 'https://www.btcguild.com')); // /api.php?api_key=
+        parent::__construct(array('apiurl' => 'https://www.btcguild.com'));
         $this->_apiKey = $params['apikey'];
-        $this->_fileHandler = new FileHandler('pools/btcguild/'. $params['address'] .'.json');
+        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['address']) .'.json');
     }
 
     public function update() {
-        if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
-            $curl = curl_init($this->_apiURL  . '/api.php?api_key='. $this->_apiKey);
-            
-            curl_setopt($curl, CURLOPT_FAILONERROR, true);
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_SSLVERSION, 3);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
-            
-            $poolData = json_decode(curl_exec($curl), true);
-            curl_close($curl);
-            
-            // Math Stuffs
-            $units = array('MH', 'GH', 'TH');
-            $units2 = array('GH', 'TH');
+        if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
+        
+            $poolData = curlCall($this->_apiURL  . '/api.php?api_key='. $this->_apiKey);
             
             // Data Order
-            $data['type'] = 'btcguild';
+            $data['type'] = $this->_type;
 
             // Pool Speed
-            $pow = min(floor(($poolData['pool']['pool_speed'] ? log($poolData['pool']['pool_speed']) : 0) / log(1000)), count($units) - 1);
-            $poolData['pool']['pool_speed'] /= pow(1000, $pow);
-            $data['pool_hashrate'] = round($poolData['pool']['pool_speed'], 2) . ' ' . $units[$pow] . '/s';
+            $data['pool_hashrate'] = formatHashRate($poolData['pool']['pool_speed']*1000);
             $data['user_hashrate'] = 0;
             
             // BTC Payout            

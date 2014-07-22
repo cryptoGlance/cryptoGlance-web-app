@@ -13,4 +13,3 @@ class Pools_Abstract {
     }
     
 }
-?>

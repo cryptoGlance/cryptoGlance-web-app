@@ -8,12 +8,11 @@ if (!$_SESSION['login_string']) {
 
 session_write_close();
 
-global $CACHED;
+$CACHED = true;
 if (isset($_GET['cached']) && $_GET['cached'] == 0) {
     $CACHED = false;
-} else {
-    $CACHED = true;
 }
+$GLOBALS['cached'] = $CACHED;
 
 $type = ucwords(strtolower($_GET['type']));
 

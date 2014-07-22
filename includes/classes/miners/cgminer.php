@@ -20,6 +20,9 @@ class Miners_Cgminer extends Miners_Abstract {
     protected $_rigHashrate = 0;
     protected $_activePool = array();
     protected $_upTime;
+    
+    // Version Handling
+    protected $_shareTypePrefix = ''; // This will set shares to 'Difficulty Accepted' or just 'Accepted'
 
 
     // PUBLIC
@@ -46,10 +49,14 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     public function summary() {
-        $totalShares = $this->_summary['Difficulty Accepted'] + $this->_summary['Difficulty Rejected'] + $this->_summary['Difficulty Stale'];
+        if ($this->_summary['Difficulty Accepted'] > $this->_summary['Accepted']) {
+            $this->_shareTypePrefix = 'Difficulty ';
+        }
+        
+        $totalShares = $this->_summary[$this->_shareTypePrefix.'Accepted'] + $this->_summary[$this->_shareTypePrefix.'Rejected'] + $this->_summary[$this->_shareTypePrefix.'Stale'];
 
         if (!isset($this->_summary['Device Hardware%'])) {
-            $hePercent = $this->calculateHwPercent($this->_summary['Hardware Errors'], $this->_summary['Difficulty Accepted'], $this->_summary['Difficulty Rejected']);
+            $hePercent = $this->calculateHwPercent($this->_summary['Hardware Errors'], $this->_summary[$this->_shareTypePrefix.'Accepted'], $this->_summary[$this->_shareTypePrefix.'Rejected']);
         } else {
             $hePercent = $this->_summary['Device Hardware%'];
         }
@@ -58,16 +65,16 @@ class Miners_Cgminer extends Miners_Abstract {
             'hashrate_avg' => $this->_summary['MHS av'],
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => array(
-                'raw' => round($this->_summary['Difficulty Accepted']),
-                'percent' => round(($this->_summary['Difficulty Accepted']/$totalShares)*100, 2),
+                'raw' => round($this->_summary[$this->_shareTypePrefix.'Accepted']),
+                'percent' => round(($this->_summary[$this->_shareTypePrefix.'Accepted']/$totalShares)*100, 2),
             ),
             'rejected' => array(
-                'raw' => round($this->_summary['Difficulty Rejected']),
-                'percent' => round(($this->_summary['Difficulty Rejected']/$totalShares)*100, 2),
+                'raw' => round($this->_summary[$this->_shareTypePrefix.'Rejected']),
+                'percent' => round(($this->_summary[$this->_shareTypePrefix.'Rejected']/$totalShares)*100, 2),
             ),
             'stale' => array(
-                'raw' => round($this->_summary['Difficulty Stale']),
-                'percent' => round(($this->_summary['Difficulty Stale']/$totalShares)*100, 2),
+                'raw' => round($this->_summary[$this->_shareTypePrefix.'Stale']),
+                'percent' => round(($this->_summary[$this->_shareTypePrefix.'Stale']/$totalShares)*100, 2),
             ),
             'hw_errors' => array(
                 'raw' => $this->_summary['Hardware Errors'],
@@ -81,10 +88,10 @@ class Miners_Cgminer extends Miners_Abstract {
         $devices = array();
 
         foreach ($this->_devs as $devKey => $dev) {
-            $totalShares = $dev['Difficulty Accepted'] + $dev['Difficulty Rejected'];
+            $totalShares = $dev[$this->_shareTypePrefix.'Accepted'] + $dev[$this->_shareTypePrefix.'Rejected'];
 
             if (!isset($dev['Device Hardware%'])) {
-                $hePercent = $this->calculateHwPercent($dev['Hardware Errors'], $dev['Difficulty Accepted'], $dev['Difficulty Rejected']);
+                $hePercent = $this->calculateHwPercent($dev['Hardware Errors'], $dev[$this->_shareTypePrefix.'Accepted'], $dev[$this->_shareTypePrefix.'Rejected']);
             } else {
                 $hePercent = $dev['Device Hardware%'];
             }
@@ -113,12 +120,12 @@ class Miners_Cgminer extends Miners_Abstract {
                     'gpu_voltage' => $dev['GPU Voltage'] . 'V',
                     'powertune' => $dev['Powertune'] . '%',
                     'accepted' => array(
-                        'raw' => round($dev['Difficulty Accepted']),
-                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2),
+                        'raw' => round($dev[$this->_shareTypePrefix.'Accepted']),
+                        'percent' => round(($dev[$this->_shareTypePrefix.'Accepted']/$totalShares)*100, 2),
                     ),
                     'rejected' => array(
-                        'raw' => round($dev['Difficulty Rejected']),
-                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2),
+                        'raw' => round($dev[$this->_shareTypePrefix.'Rejected']),
+                        'percent' => round(($dev[$this->_shareTypePrefix.'Rejected']/$totalShares)*100, 2),
                     ),
                     'hw_errors' => array(
                         'raw' => $dev['Hardware Errors'],
@@ -142,12 +149,12 @@ class Miners_Cgminer extends Miners_Abstract {
                     ),
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
                     'accepted' => array(
-                        'raw' => round($dev['Difficulty Accepted']),
-                        'percent' => round(($dev['Difficulty Accepted']/$totalShares)*100, 2),
+                        'raw' => round($dev[$this->_shareTypePrefix.'Accepted']),
+                        'percent' => round(($dev[$this->_shareTypePrefix.'Accepted']/$totalShares)*100, 2),
                     ),
                     'rejected' => array(
-                        'raw' => round($dev['Difficulty Rejected']),
-                        'percent' => round(($dev['Difficulty Rejected']/$totalShares)*100, 2),
+                        'raw' => round($dev[$this->_shareTypePrefix.'Rejected']),
+                        'percent' => round(($dev[$this->_shareTypePrefix.'Rejected']/$totalShares)*100, 2),
                     ),
                     'hw_errors' => array(
                         'raw' => $dev['Hardware Errors'],
@@ -358,46 +365,6 @@ class Miners_Cgminer extends Miners_Abstract {
         $this->_rigStatus = $rigStatus;
     }
 
-    // Unused
-    private function getFormattedHashrate($hashrate) {
-        $hashrate *= 1000;
-
-        // Math Stuffs
-        $units = array('KH', 'MH', 'GH', 'TH', 'PH');
-
-        $pow = min(floor(($hashrate ? log($hashrate) : 0) / log(1000)), count($units) - 1);
-        $hashrate /= pow(1000, $pow);
-        $hashrate = round($hashrate, 2) . ' ' . $units[$pow] . '/s';
-
-        return $hashrate;
-    }
-    /////////////////////
-
-    private function getUptime() {
-        if (isset($this->_summary['Elapsed'])) {
-            $seconds = $this->_summary['Elapsed'];
-
-            $from = new DateTime("@0");
-            $to = new DateTime("@$seconds");
-
-            if ($seconds < 86400) {
-                $format = '%hH %iM %sS';
-            } else if ($seconds <= 604800) {
-                $format = '%aD %hH %iM';
-            } else {
-                $format = '%wW %aD %hH';
-            }
-
-            $uptime = $from->diff($to)->format($format);
-
-            $this->_upTime = $uptime;
-
-            return true;
-        }
-
-        return null;
-    }
-
     private function calculateHwPercent($hwErrors, $diffA, $diffR ) {
         return ($hwErrors / ($diffA + $diffR + $hwErrors)) * 100;
     }
@@ -424,7 +391,7 @@ class Miners_Cgminer extends Miners_Abstract {
             $this->getActivePool();
 
             //Misc data
-            $this->getUptime();
+            $this->_upTime = formatTimeElapsed($this->_summary['Elapsed']);
 
             return true;
         }

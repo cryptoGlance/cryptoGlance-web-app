@@ -12,7 +12,7 @@ class Wallets_Continuum extends Wallets_Abstract {
     }
     
     public function update() {
-        if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
+        if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
             $addressBalance = $this->apiCall($this->_apiURL);
             
             $data = array (

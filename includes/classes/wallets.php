@@ -7,9 +7,8 @@
  *
  * @author Stoyvo
  */
-class Wallets {
+class Wallets extends Config_Wallets {
 
-    protected $_wallets = array();
     protected $_currencies = array(
         'bitcoin' => 'BTC',
         'continuum' => 'CTM',
@@ -53,7 +52,7 @@ class Wallets {
             $addessData[] = new $class($address['label'], $address['address']);
         }
         
-        $this->_wallets[] = array (
+        $this->_objs[] = array (
             'currency' => $currency,
             'label' => $label,
             'addresses' => $addessData,
@@ -62,7 +61,7 @@ class Wallets {
     
     public function getUpdate() {
         $data = array();
-        foreach ($this->_wallets as $wallet) {
+        foreach ($this->_objs as $wallet) {
             $walletAddressData = array();
             $totalBalance = 0;
             
