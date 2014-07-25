@@ -37,6 +37,8 @@ class Pools_Wafflepool extends Pools_Abstract {
             }
             $data['active_worker(s)'] = $activeWorkers;
             
+            $data['url'] = $this->_apiURL;
+            
             $this->_fileHandler->write(json_encode($data));
             return $data;
         }

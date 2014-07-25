@@ -43,6 +43,11 @@
             summary += this._buildStatusHtml('', key, '<a href="' + poolObj.url + '/index.php?page=statistics&action=round&height=' + poolObj[key] + '" target="_blank" rel="external">' + poolObj[key] + '</a>')
           }
           break
+        case 'url':
+          if ('undefined' !== typeof poolObj[key]) {
+            summary += this._buildStatusHtml('', key, '<a href="' + poolObj[key] + '" target="_blank" rel="external" style="color: #c8c8c8;">' + poolObj[key] + '</a>')
+          }
+          break
         default:
           summary += this._buildStatusHtml('', key, poolObj[key])
       }
