@@ -62,6 +62,7 @@ class Miners_Cgminer extends Miners_Abstract {
         }
 
         return array(
+            'algorithm' => $this->_settings['algorithm'],
             'hashrate_avg' => $this->_summary['MHS av'],
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => array(

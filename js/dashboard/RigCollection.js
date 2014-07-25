@@ -101,11 +101,15 @@
     var _self = this // caching self ref for passing down in scope
 
     var algorithms = {
-      'scrypt': 0,
+      'blake-256': 0,
+      'keccak': 0,
+      'nist5': 0,
       'sha256': 0,
-      'x11': 0,
+      'scrypt': 0,
       'scrypt-n': 0,
-      'x13': 0
+      'x11': 0,
+      'x13': 0,
+      'x15': 0
     }
 
     function build(res, index) {
@@ -162,6 +166,7 @@
     return '<tr data-rig="'+ index +'">' +
            '<td><i class="icon icon-'+ icon +' '+ colour +'"></i></td>' +
            '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
+           '<td>'+ overview.algorithm +'</td>' +
            '<td>'+ hashrate_5s +'</td>' +
            '<td>'+ active_pool_url +'</td>' +
            '<td>'+ uptime +'</td>' +
