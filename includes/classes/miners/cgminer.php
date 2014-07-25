@@ -81,6 +81,7 @@ class Miners_Cgminer extends Miners_Abstract {
                 'percent' => round($hePercent,3),
             ),
             'work_utility' => $this->_summary['Work Utility'] . '/m',
+            'active_pool' => $this->_activePool,
         );
     }
 

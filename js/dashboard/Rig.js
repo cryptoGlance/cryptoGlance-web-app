@@ -143,6 +143,12 @@
                                             null,
                                             null)
           break
+        case 'active_pool':
+          statusHtml += this._getStatusHtml(key,
+                                            statusObj[key].url,
+                                            null,
+                                            null)
+          break
         default:
           statusHtml += this._getStatusHtml(key,
                                             statusObj[key],

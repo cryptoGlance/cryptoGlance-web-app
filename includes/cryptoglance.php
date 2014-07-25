@@ -6,6 +6,7 @@ class CryptoGlance {
         'cryptoglance',
         'miners',
         'pools',
+//        'rss',
         'wallets',
     );
     
