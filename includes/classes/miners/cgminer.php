@@ -187,7 +187,11 @@ class Miners_Cgminer extends Miners_Abstract {
     }
     
     public function restart() {
-        return $this->cmd('{"command":"restart"}');
+        $this->cmd('{"command":"restart"}');
+    }
+    
+    public function switchPool($poolId) {
+        $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
 
     public function update() {

@@ -5,8 +5,11 @@
  */
 class Rss_Abstract {
     
-    public function __construct() {
-        
+    protected $_url;
+    protected $_fileHandler;
+    
+    public function __construct($params) {
+        $this->_url = $params['url'];
     }
     
 }

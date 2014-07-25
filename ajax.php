@@ -14,9 +14,12 @@ if (isset($_GET['cached']) && $_GET['cached'] == 0) {
 }
 $GLOBALS['cached'] = $CACHED;
 
-$type = ucwords(strtolower($_GET['type']));
+$type = (!empty($_GET['type']) ? $_GET['type'] : $_POST['type']);
+$action = (!empty($_GET['action']) ? $_GET['action'] : $_POST['action']);
 
-$action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($_GET['action'])));
+$type = ucwords(strtolower($type));
+
+$action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($action)));
 
 // If we're not posting, it's a get function
 if (empty($_POST)) {

@@ -39,6 +39,10 @@ class Rigs extends Config_Rigs {
         $this->_objs[0]->restart();
     }
     
+    public function switchPool() {
+        $this->_objs[0]->switchPool(intval($_POST['pool'])-1);
+    }
+    
     
     /*
      * GET
