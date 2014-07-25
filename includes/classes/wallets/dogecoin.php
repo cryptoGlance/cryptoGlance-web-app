@@ -13,7 +13,7 @@ class Wallets_Dogecoin extends Wallets_Abstract {
     
     public function update() {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
-            $walletBalance = $this->apiCall($this->_apiURL); // this comes back as a single value (total doge in the wallet)
+            $walletBalance = curlCall($this->_apiURL); // this comes back as a single value (total doge in the wallet)
             
             $data = array (
                 'label' => $this->_label,

@@ -18,45 +18,10 @@ class Wallets extends Config_Wallets {
         'reddcoin' => 'RDD',
         'vertcoin' => 'VTC',
     );
-
-    public function __construct() {
-        $fh = new FileHandler('configs/wallets.json');
-        $wallets = json_decode($fh->read(), true);
-
-        if (isset($_GET['id'])) {
-            $walletId = intval($_GET['id'])-1;
-            $this->addWallet($wallets[$walletId]['currency'], $wallets[$walletId]['label'], $wallets[$walletId]['addresses']);
-        } else if (!empty($wallets)) {
-            foreach ($wallets as $key => $wallet) {
-                $this->addWallet($wallet['currency'], $wallet['label'], $wallet['addresses']);
-            }
-        }
-    }
     
     public function getCurrencies() {
         // Making room for possible addition of data here.
         return $this->_currencies;
-    }
-
-    private function addWallet($currency, $label, $addresses) {
-        if (empty($currency)) {
-            return false;
-        }
-        
-        $class = 'Wallets_' . ucwords(strtolower($currency));
-        
-        $walletData = array();
-        $addessData = array();
-        
-        foreach ($addresses as $address) {
-            $addessData[] = new $class($address['label'], $address['address']);
-        }
-        
-        $this->_objs[] = array (
-            'currency' => $currency,
-            'label' => $label,
-            'addresses' => $addessData,
-        );
     }
     
     public function getUpdate() {
@@ -72,11 +37,20 @@ class Wallets extends Config_Wallets {
                 $totalBalance += $addressData['balance'];
             }
             
+            $btcIndex = new BitcoinIndex();
+            $convert = $btcIndex->convert($wallet['fiat'], $this->_currencies[$wallet['currency']]);
+            $fiat = 0;
+            if (!empty($convert['result']['conversion'])) {
+                $fiat = round($convert['result']['conversion'] * $totalBalance, 2);
+            }
+            
             $data[] = array (
                 'currency' => $wallet['currency'],
                 'currency_code' => $this->_currencies[$wallet['currency']],
                 'label' => $wallet['label'],
                 'balance' => $totalBalance,
+                'fiat' => $fiat,
+                'fiat_code' => $wallet['fiat'],
                 'total_addresses' => count($wallet['addresses']), // needed?
                 'addresses' => $walletAddressData,
             );

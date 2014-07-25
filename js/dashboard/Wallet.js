@@ -8,6 +8,8 @@
     this.id              = walletId
     this.currency        = 'CDN'
     this.balance         = 0
+    this.fiat            = 0
+    this.fiat_code       = 0
     this.currency_code   = 0
     this.total_addresses = 0
     this.label           = 'money'
@@ -26,8 +28,8 @@
 
       // TODO: Wire up new fiat stuff below
 
-    this.fiat_balance    = walletObj.fiat_balance
     this.currency_code   = walletObj.currency_code
+    this.fiat    = walletObj.fiat
     this.fiat_code       = walletObj.fiat_code
     this.total_addresses = walletObj.total_addresses
     this.label           = walletObj.label
@@ -48,11 +50,7 @@
            '<div class="stat-value">' +
            '<span class="green">' + this.balance + ' ' + this.currency_code + '</span>' +
            '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +
-
-        // TODO: Wire up new fiat stuff below
-        // '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
-           '<span class="blue">69 696 696 USD</span>' +
-
+           '<span class="blue">' + this.fiat + ' ' + this.fiat_code + '</span>' +
            '</div>' +
            '<div class="stat-label">' +
            '<a href="wallet.php?id=' + this.id + '" class="stat-pair-icon">' + this.label + ' <i class="icon icon-walletalt"></i></a>' +

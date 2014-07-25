@@ -15,7 +15,7 @@ class Miners_Abstract {
         if (empty($this->_settings)) {
             // defining default values for settings if not set
             $this->_settings = array(
-                'algorithm' => 'sha256', // scrypt, scrypt-n, x11
+                'algorithm' => 'sha256', // blake-256, keccak, nist5, sha256, scrypt, scrypt-n, x11, x13, x15
                 'hwErrors' => array(
                     'enabled' => 1,
                     'type' => 'percent',

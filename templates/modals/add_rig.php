@@ -38,10 +38,15 @@
                 <label for="inputRigAlgo" class="col-sm-4 control-label">Algorithm</label>
                 <div class="col-sm-5">
                   <select class="form-control" id="selectRigAlgo" name="minerAlgo">
-                    <option>Scrypt</option>
-                    <option>Scrypt-N</option>
-                    <option>X11</option>
-                    <option>X13</option>
+                    <option value="blake-256">blake-256</option>
+                    <option value="keccak">keccak</option>
+                    <option value="nist5">nist5</option>
+                    <option value="sha256">sha256</option>
+                    <option value="scrypt">scrypt</option>
+                    <option value="scrypt-n">scrypt-n</option>
+                    <option value="x11">x11</option>
+                    <option value="x13">x13</option>
+                    <option value="x15">x15</option>
                   </select>
                 </div>
               </div>

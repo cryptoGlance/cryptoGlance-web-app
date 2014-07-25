@@ -14,7 +14,7 @@ class Wallets_Bitcoin extends Wallets_Abstract {
     
     public function update() {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
-            $walletData = $this->apiCall($this->_apiURL);
+            $walletData = curlCall($this->_apiURL);
             
             $data = array (
                 'label' => $this->_label,

@@ -31,6 +31,7 @@ class Config_Wallets extends Config_Abstract {
         
         $this->_objs[] = array (
             'currency' => $wallet['currency'],
+            'fiat' => (!empty($wallet['fiat']) ? $wallet['fiat'] : 'USD'),
             'label' => $wallet['label'],
             'addresses' => $addessData,
         );
