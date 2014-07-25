@@ -64,7 +64,7 @@
     })
     .done(function (data) {
       if (typeof data != 'undefined') {
-        $('#switchPool').attr('data-minerId', rigId);
+        $('#switchPool').attr('data-attr', rigId);
         $.each(data[0], function (v,k) {
             var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '');
             poolUrl = poolUrl.slice(poolUrl.indexOf("/") + 2)
@@ -101,7 +101,7 @@
         dataType: 'json'
       })
       .done(function (data) {
-          ajaxUpdateCall('rig');
+          rigCollection._update()
       });
     }
   })
@@ -119,6 +119,9 @@
       url: 'ajax.php',
       dataType: 'json'
     })
+    .done(function (data) {
+        rigCollection._update()
+    });
   })
 
   $document.on('shown.bs.tab', 'a[data-toggle="tab"]', function (evt) {
