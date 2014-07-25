@@ -69,8 +69,9 @@ class Pools_Mpos extends Pools_Abstract {
             $data['last_block'] = $poolData['getpoolstatus']['lastblock'];
             $data['blocks_pool_found'] = $poolData['getblockstats']['TotalValid'];
 
-            $data['url'] = $this->_apiURL;
             $data['username'] = $poolData['getuserstatus']['username'];
+            
+            $data['url'] = $this->_apiURL;
             
             $this->_fileHandler->write(json_encode($data));
             return $data;

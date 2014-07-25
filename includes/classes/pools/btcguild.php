@@ -73,6 +73,8 @@ class Pools_Btcguild extends Pools_Abstract {
                     unset($data[$key]);
                 }
             }
+            
+            $data['url'] = $this->_apiURL;
 
             $this->_fileHandler->write(json_encode($data));
             return $data;
