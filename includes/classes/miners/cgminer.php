@@ -259,7 +259,7 @@ class Miners_Cgminer extends Miners_Abstract {
     private function getDevStatus() {
         foreach ($this->_devs as $devKey => $dev) {
             // Might as well get the hashrate
-            $this->_rigHashrate += $dev['MHS 5s'];
+            $this->_rigHashrate += ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']);
 
             $status = array();
 
