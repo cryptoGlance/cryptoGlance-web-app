@@ -146,7 +146,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     'hashrate_avg' => $dev['MHS av'],
                     'hashrate_5s' => ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']),
                     'temperature' => array(
-                        'celsius' => $dev['Temperature'],
+                        'celsius' => ($dev['Temperature'] ? $dev['Temperature'] : 0),
                         'fahrenheit' => ((($dev['Temperature']*9)/5)+32),
                     ),
                     'frequency' => (isset($dev['Frequency']) ? $dev['Frequency'] : null),
