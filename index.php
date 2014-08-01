@@ -33,12 +33,12 @@ include("includes/header.php");
     if (count($cryptoGlance->getMiners()) > 0) {
         include("templates/modals/manage_rig.php");
 
-        include("templates/panel-overview.php");
+        include("templates/panels/overview.php");
 
         // Miners
         foreach ($cryptoGlance->getMiners() as $minerId => $miner) {
             $minerId++; // Doing this because minerID 0 means all devices in ajax calls
-            include("templates/panel-rig.php");
+            include("templates/panels/rig.php");
         }
         include("templates/modals/switch-pool.php");
     }
@@ -48,19 +48,19 @@ include("includes/header.php");
       <?php
       foreach ($cryptoGlance->getPools() as $poolId => $pool) {
         $poolId++;
-        include("templates/panel-pool.php");
+        include("templates/panels/pool.php");
       }
       ?>
 
-      <?php //require_once("templates/panel-news_feed.php"); ?>
+      <?php //require_once("templates/panels/news_feed.php"); ?>
 
-      <?php //require_once("templates/panel-subreddit_feed.php"); ?>
+      <?php //require_once("templates/panels/subreddit_feed.php"); ?>
 
-      <?php //require_once("templates/panel-coinwatcher.php"); ?>
+      <?php //require_once("templates/panels/coinwatcher.php"); ?>
 
       <?php
       if (count($cryptoGlance->getWallets()) > 0) {
-        include("templates/panel-wallet.php");
+        include("templates/panels/wallet.php");
       }
 
       if (count($cryptoGlance->getMiners()) > 0 || count($cryptoGlance->getPools()) > 0) {
