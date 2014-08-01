@@ -1449,6 +1449,10 @@ a#dash-add-panel.flash {
   height: 100px;
   width: 260px;
 }
+.panel-wallet .panel-body .panel-body-thanks {
+    margin-top: 10px;
+    font-size: 14px;
+}
 
 .panel-body.ui-sortable .stat-pair:hover {
   cursor: move;

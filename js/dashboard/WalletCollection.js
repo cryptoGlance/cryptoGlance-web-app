@@ -11,7 +11,7 @@
     this.walletOverviewHtml  = ''
     this.ready               = true
 
-    this.$walletOverviewBody = $('#wallet .panel-body')
+    this.$walletOverviewBody = $('#wallet .panel-body-addresses')
   }
 
   /*-----  End of WalletCollection Class/Object/Constructor  ------*/
