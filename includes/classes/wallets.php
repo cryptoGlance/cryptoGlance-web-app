@@ -15,6 +15,7 @@ class Wallets {
         'bitcoin' => 'BTC',
         'continuum' => 'CTM',
         'litecoin' => 'LTC',
+        'feathercoin' => 'FTC',
         'dogecoin' => 'DOGE',
         'vertcoin' => 'VTC',
     );
