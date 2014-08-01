@@ -46,7 +46,7 @@
 
   Wallet.prototype._buildStatusHtml = function () {
     return '<div class="stat-pair" id="wallet-address-' + this.id + '">' +
-           '<img src="images/icon-' + this.currency + '.png" alt="' + this.currency + '" />' +
+           '<img src="images/coin/' + this.currency + '.png" alt="' + this.currency + '" />' +
            '<div class="stat-value">' +
            '<span class="green">' + this.balance + ' ' + this.currency_code + '</span>' +
            '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +

@@ -19,7 +19,7 @@
                <span class="sr-only">Toggle navigation</span>
                <i class="icon icon-dropmenu"></i>
                </button>
-               <a class="navbar-brand" href="index.php"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
+               <a class="navbar-brand" href="index.php"><img src="images/logo-landscape.png" alt="cryptoGlance" /></a>
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav<?php echo ($currentPage != 'index') ? ' no-dash' : '' ?>">

@@ -9,12 +9,12 @@
 */
 
 html {
-  background: url(../images/dark_mosaic.png) repeat #272B30;
+  background: url(../images/background/dark_mosaic.png) repeat #272B30;
   height: 100%;
 }
 
 body {
-  background: url(../images/cryptoglance-watermark.png) no-repeat bottom right fixed transparent;
+  background: url(../images/watermark.png) no-repeat bottom right fixed transparent;
   background-size: contain;
   font-family: robotolight, sans-serif;
   font-size: 16px;
@@ -437,7 +437,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 */
 
 .modal-header .close {
-    background:url(../images/toast-close.png);
+    background:url(../images/toast/close.png);
     width:22px;
     height:22px;
     position: absolute;
@@ -449,7 +449,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 }
 
 .modal-header .close:hover {
-    background:url(../images/toast-close-hover.png);
+    background:url(../images/toast/close-hover.png);
 }
 
 
@@ -966,7 +966,7 @@ a#dash-add-panel.flash {
   position: fixed;
   top: 53px;
   right: 0;
-  background: url('../images/inflicted.png') repeat scroll 0% 0% #111;
+  background: url('../images/background/inflicted.png') repeat scroll 0% 0% #111;
   border-radius: 0 0 0 5px;
   z-index: 1000;
   overflow: hidden;
@@ -1471,7 +1471,7 @@ a#dash-add-panel.flash {
 
 .panel-body .stat-pair .stat-label {
     position: relative;
-  background: url(../images/darkdenim3.png) repeat #424750;
+  background: url(../images/background/darkdenim3.png) repeat #424750;
   border-radius: 0;
   font-family: robotocondensed;
   text-transform: lowercase;
@@ -1504,7 +1504,7 @@ a#dash-add-panel.flash {
 
 .panel-body .stat-pair .stat-value {
     position: relative;
-  background: url(../images/inflicted.png) repeat #111;
+  background: url(../images/background/inflicted.png) repeat #111;
   font-size: 20px;
   border-radius: 0;
   padding: 0 10px;
@@ -1655,7 +1655,7 @@ a#dash-add-panel.flash {
 }
 
 .panel-in-footer .panel-body .stat-label {
-  background: url(../images/black_denim.png) repeat #111;
+  background: url(../images/background/black_denim.png) repeat #111;
 }
 
 .panel-in-footer .panel-body .stat-pair, .donate-address {
@@ -1769,7 +1769,7 @@ a#dash-add-panel.flash {
   font-weight: normal;
   font-family: robotolight, sans-serif;
   text-transform: lowercase;
-  background: url(../images/darkdenim3.png) repeat #424750;
+  background: url(../images/background/darkdenim3.png) repeat #424750;
   text-align: center;
   vertical-align: middle;
   padding: 0 10px;

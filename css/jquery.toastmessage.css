@@ -30,7 +30,7 @@
 
 
 .toast-item-close {
-    background:url(../images/toast-close.png);
+    background:url(../images/toast/close.png);
     width:22px;
     height:22px;
     position: absolute;
@@ -40,7 +40,7 @@
 }
 
 .toast-item-close:hover {
-    background:url(../images/toast-close-hover.png);
+    background:url(../images/toast/close-hover.png);
 }
 
 .toast-item span {
@@ -58,19 +58,19 @@
 }
 
 .toast-item-image-notice {
-    background:url(../images/toast-notice.png);
+    background:url(../images/toast/notice.png);
 }
 
 .toast-item-image-success {
-    background:url(../images/toast-success.png);
+    background:url(../images/toast/success.png);
 }
 
 .toast-item-image-warning {
-    background:url(../images/toast-warning.png);
+    background:url(../images/toast/warning.png);
 }
 
 .toast-item-image-error {
-    background:url(../images/toast-error.png);
+    background:url(../images/toast/error.png);
 }
 
 

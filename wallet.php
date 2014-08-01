@@ -37,7 +37,7 @@ if ($walletId != 0) {
             </div>
             <div class="panel-body">
                 <div class="total-wallet-balance">
-                    <span class="green"><?php echo $wallet['data']['balance'] ?> <img src="images/icon-<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></span> <span>//</span> <span class="blue">69 696 969 <img src="images/icon-fiat.png" /> USD</span>
+                    <span class="green"><?php echo $wallet['data']['balance'] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></span> <span>//</span> <span class="blue">69 696 969 <img src="images/coin/fiat.png" /> USD</span>
                 </div>
                 <div class="table-responsive">
                     <form role="form">
@@ -58,8 +58,8 @@ if ($walletId != 0) {
                                 <?php foreach($wallet['addresses'] as $addressKey => $address) { ?>
                                 <tr data-key="<?php echo ($addressKey+1); ?>">
                                     <td data-name="label"><?php echo $address['label']?></td>
-                                    <td><?php echo $wallet['data']['addresses'][$address['address']] ?> <img src="images/icon-<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></td>
-                                    <td>696 <img src="images/icon-fiat.png" /> USD</td>
+                                    <td><?php echo $wallet['data']['addresses'][$address['address']] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['data']['currency_code'] ?></td>
+                                    <td>696 <img src="images/coin/fiat.png" /> USD</td>
 
                                     </td>
                                     <td data-name="address"><?php echo $address['address']?></td>
@@ -108,7 +108,7 @@ if ($walletId != 0) {
                             </select>
                         </div>
                         <div class="col-sm-2 col-has-icon">
-                            <img src="images/icon-<?php echo $wallet['currency'] ?>.png" />
+                            <img src="images/coin/<?php echo $wallet['currency'] ?>.png" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -125,7 +125,7 @@ if ($walletId != 0) {
                             </select>
                         </div>
                         <div class="col-sm-1 col-has-icon">
-                            <img src="images/icon-fiat.png" />
+                            <img src="images/coin/fiat.png" />
                         </div>
                     </div>
                     <div class="form-group">
