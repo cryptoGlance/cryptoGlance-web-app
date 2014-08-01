@@ -121,19 +121,24 @@ class CryptoGlance {
                 'name' => ($label ? $label : 'WafflePool'),
                 'address' => $address,
             );
+        } else if ($type == 'eligius' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'Eligius'),
+                'address' => $address,
+            );
         } else if ($type == 'trademybit' && !empty($api)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : 'TradeMyBit'),
                 'apikey' => $api,
             );
-          } else if ($type == 'multipoolus' && !empty($api)) {
+        } else if ($type == 'multipoolus' && !empty($api)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : 'MultiPool.us'),
                 'apikey' => $api,
             );
-
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
@@ -293,21 +298,6 @@ class CryptoGlance {
         if (empty($settings['general']['updates']['type'])) {
             $settings['general']['updates']['type'] = 'release';
         }
-        if (empty($settings['general']['temps']['warning'])) {
-            $settings['general']['temps']['warning'] = 75;
-        }
-        if (empty($settings['general']['temps']['danger'])) {
-            $settings['general']['temps']['danger'] = 85;
-        }
-        if (empty($settings['general']['hardwareErrors']['enabled'])) {
-            $settings['general']['hardwareErrors']['enabled'] = 1;
-        }
-        if (empty($settings['general']['hardwareErrors']['warning'])) {
-            $settings['general']['hardwareErrors']['warning'] = 5;
-        }
-        if (empty($settings['general']['hardwareErrors']['danger'])) {
-            $settings['general']['hardwareErrors']['danger'] = 15;
-        }
         if (empty($settings['general']['updateTimes']['rig'])) {
             $settings['general']['updateTimes']['rig'] = 3000;
         }
@@ -330,15 +320,6 @@ class CryptoGlance {
                 'updates' => array(
                     'enabled' => $data['general']['update'],
                     'type' => $data['general']['updateType'],
-                ),
-                'temps' => array(
-                    'warning' => $data['general']['tempWarning'],
-                    'danger' => $data['general']['tempDanger'],
-                ),
-                'hardwareErrors' => array(
-                    'enabled' => $data['general']['hwErrorsEnabled'],
-                    'warning' => $data['general']['hwWarning'],
-                    'danger' => $data['general']['hwDanger'],
                 ),
                 'updateTimes' => array(
                     'rig' => $data['general']['rigUpdateTime']*1000,
