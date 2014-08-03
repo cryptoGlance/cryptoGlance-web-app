@@ -234,26 +234,20 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     private function getActivePool() {
+        $activePool = array();
+        $activePool['Last Share Time'] = 0;
         foreach ($this->_pools as $pool) {
-            if ($pool['Priority'] == 0) {
-                $this->_activePool = array(
+            if ($pool['Status'] != 'Dead' && $pool['Last Share Time'] > $activePool['Last Share Time']) {
+                $activePool = array(
                     'id' => $pool['POOL'],
                     'url' => $pool['Stratum URL'],
+                    'Last Share Time' => $pool['Last Share Time'],
                 );
-                return true;
             }
         }
-
-        if (!empty($this->_pools)) {
-            $this->_activePool = array(
-                'id' => $this->_pools[0]['POOL'],
-                'url' => $this->_pools[0]['Stratum URL'],
-            );
-
-            return true;
-        }
-
-        return array();
+        
+        unset($activePool['Last Share Time']);
+        $this->_activePool = $activePool;
     }
 
     private function getDevStatus() {
