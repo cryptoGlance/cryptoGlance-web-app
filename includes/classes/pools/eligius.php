@@ -51,7 +51,7 @@ class Pools_Eligius extends Pools_Abstract {
             
             $data['url'] = $this->_apiURL;
             
-//            $this->_fileHandler->write(json_encode($data));
+            $this->_fileHandler->write(json_encode($data));
             return $data;
         }
         

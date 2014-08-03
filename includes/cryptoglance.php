@@ -127,6 +127,12 @@ class CryptoGlance {
                 'name' => ($label ? $label : 'Eligius'),
                 'address' => $address,
             );
+        } else if ($type == 'magicpool' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'MagicPool'),
+                'address' => $address,
+            );
         } else if ($type == 'trademybit' && !empty($api)) {
             $pool = array(
                 'type' => $type,

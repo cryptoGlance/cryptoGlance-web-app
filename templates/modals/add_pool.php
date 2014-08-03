@@ -22,6 +22,7 @@
                  <option value="btcguild">BTC Guild</option>
                  <option value="eclipse">Eclipse</option>
                  <option value="eligius">Eligius</option>
+                 <option value="magicpool">MagicPool</option>
                  <option value="mpos">MPOS</option>
                  <option value="multipoolus">Multipool.us</option>
                  <option value="simplecoin">SimpleCoin</option>
@@ -48,7 +49,7 @@
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">
              </div>
            </div>
-           <div class="form-group wafflepool eligius" style="display: none;">
+           <div class="form-group wafflepool eligius magicpool" style="display: none;">
              <label for="inputAddress" class="col-sm-3 control-label">BTC Address</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputAddress" name="address">
