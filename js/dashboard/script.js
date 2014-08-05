@@ -134,6 +134,24 @@
         rigCollection._update()
     });
   })
+  
+  // Reset
+  $document.on('click', '#manageRig .btn-reset', function (evt) {
+    var rigId = $('#manageRig').data('attr')
+    $.ajax({
+      type: 'post',
+      data: {
+        id: rigId,
+        type: 'rigs',
+        action: 'reset-stats'
+      },
+      url: 'ajax.php',
+      dataType: 'json'
+    })
+    .done(function (data) {
+        rigCollection._update()
+    });
+  })
 
   $document.on('shown.bs.tab', 'a[data-toggle="tab"]', function (evt) {
     var siteLayout = $.cookie('use_masonry_layout');

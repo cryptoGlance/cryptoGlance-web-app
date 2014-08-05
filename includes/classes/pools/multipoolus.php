@@ -26,15 +26,20 @@ class Pools_MultiPoolUS extends Pools_Abstract {
             $poolHashrate = 0;
             $userHashrate = 0;
             foreach ($poolData['currency'] as $coin => $values) {
-                if (!empty($values['round_shares'])) {
-                    $data[$coin.'_balance'] = $values['estimated_rewards'];
+                if ($values['confirmed_rewards'] != 0) {
+                    $data[$coin.'_balance'] = number_format($values['confirmed_rewards'], 8);
+                }
+                if ($values['estimated_rewards'] != 0) {
+                    $data[$coin.'_unconfirmed_balance'] = number_format($values['estimated_rewards'], 8);
+                }
                     // removed until we find a better way to display this information. Right now it's way too cluttered
                     // if ($values['hashrate'] != '0') {
                     //     $data[$coin.'_hashrate'] =  formatHashrate($values['hashrate']);
                     // }
+                if ($values['hashrate'] != 0) {
                     $userHashrate += $values['hashrate'];
-                    $poolHashrate += $values['pool_hashrate'];
                 }
+                    $poolHashrate += $values['pool_hashrate'];
             }
             
             $data['pool_hashrate'] = $poolHashrate;

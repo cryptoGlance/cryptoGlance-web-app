@@ -195,6 +195,9 @@ class Miners_Cgminer extends Miners_Abstract {
     public function switchPool($poolId) {
         $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
+    public function resetStats() {
+        $this->cmd('{"command":"zero","parameter":"all,false"}');
+    }
 
     public function update() {
         $data = array(
