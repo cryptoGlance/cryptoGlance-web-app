@@ -25,18 +25,9 @@
         summary += this._buildStatusHtml('', key, 'n/a')
         continue
       }
+      
       switch (key) {
         case 'type':
-          break
-        case 'balance':
-        case 'paid_BTC':
-        case 'paid_NMC':
-          summary += this._buildStatusHtml('green', key, poolObj[key])
-          break
-        case 'unconfirmed_balance':
-        case 'unpaid_BTC':
-        case 'unpaid_NMC':
-          summary += this._buildStatusHtml('red', key, poolObj[key])
           break
         case 'last_block':
           if (poolObj.type === 'mpos' &&  'undefined' !== typeof poolObj.url) {
@@ -49,7 +40,13 @@
           }
           break
         default:
-          summary += this._buildStatusHtml('', key, poolObj[key])
+            if (key.match(/unconfirmed/i) || key.match(/unpaid/i)) {
+                summary += this._buildStatusHtml('red', key, poolObj[key])
+            } else if (key.match(/balance/i)) {
+                summary += this._buildStatusHtml('green', key, poolObj[key])
+            } else {
+                summary += this._buildStatusHtml('', key, poolObj[key])
+            }
       }
     }
     if (summary) {

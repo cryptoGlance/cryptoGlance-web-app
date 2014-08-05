@@ -22,29 +22,43 @@ class Pools_MultiPoolUS extends Pools_Abstract {
 
             // Payout Information
             $data['type'] = $this->_type;
-
-            $data = array();
-            $data['total_hash_rate'] = 0 ;
-
-
+            
+            $poolHashrate = 0;
+            $userHashrate = 0;
             foreach ($poolData['currency'] as $coin => $values) {
-                if (!$values['round_shares'] === false) {
-                    $data[$coin.'_reward'] = $values['estimated_rewards'];
-                    $data[$coin.'_hashrate'] =  formatHashrate($values['hashrate']);
-                    $data['total_hash_rate'] = $data['total_hash_rate'] + $values['hashrate'];
-                }
-            }
-            $data['total_hash_rate'] = formatHashrate($data['total_hash_rate']);
-
-            // Clear data if it's missing
-            foreach ( $data as $key => $value ) {
-                if ( $value == 0 ) {
-                    unset( $data[$key] );
+                if (!empty($values['round_shares'])) {
+                    $data[$coin.'_balance'] = $values['estimated_rewards'];
+                    // removed until we find a better way to display this information. Right now it's way too cluttered
+                    // if ($values['hashrate'] != '0') {
+                    //     $data[$coin.'_hashrate'] =  formatHashrate($values['hashrate']);
+                    // }
+                    $userHashrate += $values['hashrate'];
+                    $poolHashrate += $values['pool_hashrate'];
                 }
             }
             
+            $data['pool_hashrate'] = $poolHashrate;
+            $data['user_hashrate'] = $userHashrate;
+            
+            $userWorkers = array();
+            foreach ($poolData['workers'] as $coin => $workers) {
+                foreach ($workers as $name => $worker) {
+                    if ($worker['hashrate'] != 0) {
+                        $userWorkers[$name] += $worker['hashrate'];
+                    }
+                }
+            }
+            
+            foreach ($userWorkers as $name => $worker) {
+                $name = explode('.', $name);
+                $data['worker_'.$name[1]] = formatHashrate($worker);
+            }
+            
+            $data['pool_hashrate'] = formatHashrate($data['pool_hashrate']);
+            $data['user_hashrate'] = formatHashrate($data['user_hashrate']);
+            
             $data['url'] = $this->_apiURL;
-
+            
             $this->_fileHandler->write(json_encode($data));
             
             return $data;
