@@ -51,8 +51,9 @@
   // Switch Pools
   $document.on('click', '#manageRig .btn-switchpool', function (evt) {
     var rigId = $('#manageRig').attr('data-attr');
-    var $switchPoolModal = $('#switchPool .checkbox')
-    $switchPoolModal.html('<img src="images/ajax-loader.gif" alt="Loading..." class="ajax-loader" />')
+    var $switchPoolModalBody = $('#switchPool .modal-body')
+    $('.table tbody', $switchPoolModalBody).html('');
+    $('.ajax-loader', $switchPoolModalBody).html('<img src="images/ajax-loader.gif" alt="Loading..." class="ajax-loader" />')
     $.ajax({
         url: 'ajax.php',
         data: {
@@ -68,26 +69,36 @@
         $.each(data[0], function (v,k) {
             var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '');
             poolUrl = poolUrl.slice(poolUrl.indexOf("/") + 2)
+            
+            var active = (k.active == 1) ? 'Yes' : 'No';
+            var status = (k.status == 1) ? 'Alive' : 'Dead';
 
-            $switchPoolModal.append('<label for="rig'+ rigId +'-pool'+ k.id +'">' +
-                                    '<input type="radio" name="switchPoolList" id="rig'+ rigId +'-pool'+ k.id +'" value="'+ k.id +'">' +
-                                    '<span>'+ poolUrl +'</span>' +
-                                    '</label>')
+            $('.table tbody', $switchPoolModalBody).append(
+                '<tr data-pool="'+ k.id +'">' +
+                    '<td>'+ k.id +'</td>' +
+                    '<td>'+ '<input type="radio" name="switchPoolList" id="rig'+ rigId +'-pool'+ k.id +'" value="'+ k.id +'">' +'</td>' +
+                    '<td>'+ status +'</td>' +
+                    '<td>'+ poolUrl +'</td>' +
+//                    '<td>'+ k.user +'</td>' +
+                    '<td>'+ k.priority +'</td>' +
+                '</tr>'
+            );
+
             if (k.active == 1) {
-                $('input:radio[id=rig'+ rigId +'-pool'+ k.id +']', $switchPoolModal).prop('checked', true);
+                $('input:radio[id=rig'+ rigId +'-pool'+ k.id +']', $switchPoolModalBody).prop('checked', true);
             }
         });
-
+        
+        $switchPoolModalBody.find('.ajax-loader').remove()
+        $('.table', $switchPoolModalBody).show();
         prettifyInputs()
-
-        $switchPoolModal.find('.ajax-loader').remove()
       }
     })
   })
 
   $document.on('click', '#switchPool .btn-success', function (evt) {
     var rigId = $('#manageRig').data('attr')
-    var selectedPoolId = $('input[name=switchPoolList]:checked', '#switchPool .checkbox').val()
+    var selectedPoolId = $('input[name=switchPoolList]:checked', '#switchPool').val()
     if (typeof selectedPoolId != 'undefined') {
       $.ajax({
         type: 'post',

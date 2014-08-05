@@ -177,10 +177,10 @@ class Miners_Cgminer extends Miners_Abstract {
         foreach ($this->_pools as $pool) {
             $pools[] = array(
                 'id' => $pool['POOL'],
+                'status' => ($pool['Status'] == 'Alive') ? 1 : 0,
                 'active' => ($pool['POOL'] == $this->_activePool['id']) ? 1 : 0,
                 'url' => $pool['URL'],
-                'user' => $pool['User'],
-                'alive' => ($pool['Status'] == 'Alive') ? 1 : 0,
+//                'user' => $pool['User'],
                 'priority' => $pool['Priority'],
             );
         }

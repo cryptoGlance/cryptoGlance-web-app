@@ -1,4 +1,4 @@
-// UI JavaScript for RigWatch
+// UI JavaScript for CryptoGlance
 // 	by George Merlocco (george@merloc.co) // https://github.com/scar45/
 
 // ***** NOTE ***** JS optimization/clean-up is needed, don't laugh!
@@ -15,78 +15,6 @@ function externalLinks() {
       anchor.target = "_blank";
   }
 }
-
-
-// Dashboard Panel Sorting and Repositioning
-//
-
-// $(function() {
-//   $( "#dashboard-wrap:not(.login-container)" ).sortable({
-//     placeholder: "panel",
-//     opacity: 0.75,
-//     scrollSpeed: 50,
-//     handle: '.panel-heading',
-//     containment: '#dashboard-wrap',    
-//     forcePlaceholderSize: false,
-//     scroll: true,
-//     scrollSensitivity: 100,
-//     update: function(event, ui) {
-//       var cooked = [];
-//       $("#dashboard-wrap:not(.login-container)").each(function(index, domEle){ cooked[index]=  $(domEle).sortable('toArray');});
-//       $.cookie('cookie_dashboard_layout', 'x'+cooked.join('|'), { expires: 365, path: '/'});
-//     }
-//   }).disableSelection();
-// });
-// 
-// 
-// function restoreDashboard() {
-//   var cookie = $.cookie('cookie_dashboard_layout');
-//   if (!cookie) return;
-//   var SavedID = cookie.split('|');
-//   for ( var u=0, ul=SavedID.length; u < ul; u++ ){ SavedID[u] = SavedID[u].split(',');}
-//   for (var Scolumn=0, n = SavedID.length; Scolumn < n; Scolumn++) {
-//     for (var Sitem=0, m = SavedID[Scolumn].length; Sitem < m; Sitem++) {
-//       $("#dashboard-wrap:not(.login-container)").eq(Scolumn).append($("#dashboard-wrap:not(.login-container)").children("#" + SavedID[Scolumn][Sitem]));
-//     }
-//   }
-// }
-
-// Wallet/Address stat-pair Sorting and Repositioning
-//
-
-// TEMP DISABLED (bug when ajax fires and wallets refresh)
-
-// $(function() {
-//  $( "#wallet .panel-body" ).sortable({
-//     placeholder: "stat-pair-dropzone",
-//     handle: ".stat-value img",
-//     opacity: 0.75,
-//     scrollSpeed: 50,
-//     forcePlaceholderSize: true,
-//     scroll: true,
-//     scrollSensitivity: 100,
-//     update: function(event, ui) {
-//      var cooked = [];
-//      $("#wallet-1 .panel-body").each(function(index, domEle){ cooked[index]=  $(domEle).sortable('toArray');});
-//      $.cookie('cookie_wallet_panel', 'x'+cooked.join('|'), { expires: 31, path: '/'});
-//     }
-//  });
-// //  $( "#wallet-1 .panel-body" ).disableSelection();
-// });
-// 
-// 
-// function restoreWalletOrder() {
-//    var cookie = $.cookie('cookie_wallet_panel');
-//    if (!cookie) return;
-//    var SavedID = cookie.split('|');
-//    for ( var u=0, ul=SavedID.length; u < ul; u++ ){ SavedID[u] = SavedID[u].split(',');}
-//    for (var Scolumn=0, n = SavedID.length; Scolumn < n; Scolumn++) {
-//     for (var Sitem=0, m = SavedID[Scolumn].length; Sitem < m; Sitem++) {
-//        $("#wallet-1 .panel-body").eq(Scolumn).append($("#wallet-1 .panel-body").children("#" + SavedID[Scolumn][Sitem]));
-//     }
-//    }
-// }
-
 
 // Setup Masonry Layout
 function initMasonry() {
