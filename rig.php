@@ -105,10 +105,10 @@ if (is_null($rigDevices)) {
                         </div>
                         <div class="form-group checkbox">
                             <label>
-                                <input type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?>> Percent
+                                <input type="radio" name="hwErrorsType" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?>> Percent
                             </label>&nbsp;&nbsp;&nbsp;
                             <label>
-                                <input type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?>> Number
+                                <input type="radio" name="hwErrorsType" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?>> Number
                             </label>
                         </div>
                         <div class="form-group setting-hwerror hwErrorInt">
