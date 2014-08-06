@@ -304,53 +304,57 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   color: #111;
 }
 
+.panel-body .table-settings > tbody > tr > td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.panel-body .table-settings > tbody > tr > td:first-child {
+  text-align: right;
+}
+
 .form-horizontal .form-group {
   margin: 15px 0;
   text-align: center;
 }
 
-.form-horizontal .setting-thresholds {
-  width: 320px;
-  margin: 0 auto 20px;
+.form-horizontal .setting-hwerror {
   text-align: center;
 }
 
-.form-horizontal .setting-thresholds div {
-  width: 130px;
-  margin: 0 10px;
-  display: inline-block;
-}
-
-.form-horizontal .setting-thresholds.setting-hwerror div {
-  width: 84px;
-  display: inline-block;
+.form-horizontal .setting-hwerror div {
+  display: block;
 }
 
 .form-horizontal .setting-thresholds input {
-  width: 81px;
-  height: 55px;
-  font-size: 2.2em;
-  margin-right: 5px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #333;
+  display: inline-block;
+  width: 90px;
+  height: auto;
   text-align: center;
-  letter-spacing: -3px;
-  float: left;
-  line-height: 1.05em;
+  font-size: 1.6em;
+}
+
+.form-horizontal .table-settings div.bootstrap-switch {
+  margin-bottom: 6px;
+}
+
+.form-horizontal .setting-thresholds input:first-child {
+  margin-bottom: 5px;
 }
 
 .form-horizontal .setting-thresholds div.setting-warning input {
-  border: 2px solid #F89406;
+  border-color: #F89406;
 }
 
 .form-horizontal .setting-thresholds div.setting-danger input {
-  border: 2px solid #ED3838;
+  border-color: #ED3838;
 }
 
-.form-horizontal .setting-thresholds span {
+.form-horizontal .setting-hwerror span {
   font-size: 1.8em;
-}
-
-.form-horizontal .setting-thresholds label {
-  float: left;
 }
 
 .help-block {
@@ -1248,20 +1252,21 @@ a#dash-add-panel.flash {
   width: auto;
 }
 
-.panel-rig ul {
+ul.nav-pills {
   margin: 0;
   padding: 0;
   clear: both;
 }
 
-.panel-rig ul li {
+ul.nav-pills li {
   float: none;
   display: inline-block;
   margin: 0;
   text-align: center;
+  text-transform: uppercase;
 }
 
-.panel-rig ul li a {
+ul.nav-pills li a {
   font-family: roboto;
   font-weight: bold;
   font-size: 15px;
@@ -1273,7 +1278,7 @@ a#dash-add-panel.flash {
 }
 
 
-.panel-rig ul li a.pill-primary {
+ul.nav-pills li a.pill-primary {
   color: rgb(255, 255, 255);
   background-color: rgb(122, 130, 136);
   border-color: rgb(122, 130, 136);
@@ -1282,14 +1287,14 @@ a#dash-add-panel.flash {
   filter: none;
 }
 
-.panel-rig ul li a.pill-primary:hover, .panel-rig ul li.active a.pill-primary {
+ul.nav-pills li a.pill-primary:hover, ul.nav-pills li.active a.pill-primary {
   background-image: linear-gradient(rgb(64, 68, 72), rgb(78, 84, 88) 40%, rgb(88, 94, 98));
   background-repeat: no-repeat;
   filter: none;
 }
 
 
-.panel-rig ul li a.pill-info {
+ul.nav-pills li a.pill-info {
   color: rgb(255, 255, 255);
   background-color: rgb(91, 192, 222);
   border-color: rgb(91, 192, 222);
@@ -1298,14 +1303,14 @@ a#dash-add-panel.flash {
   filter: none;
 }
 
-.panel-rig ul li a.pill-info:hover, .panel-rig ul li.active a.pill-info {
+ul.nav-pills li a.pill-info:hover, ul.nav-pills li.active a.pill-info {
   background-image: linear-gradient(rgb(32, 130, 159), rgb(37, 150, 184) 40%, rgb(40, 164, 201));
   background-repeat: no-repeat;
   filter: none;
 }
 
 
-.panel-rig ul li a.pill-success, a#dash-add-panel {
+ul.nav-pills li a.pill-success, a#dash-add-panel {
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(98, 196, 98);
@@ -1315,13 +1320,13 @@ a#dash-add-panel.flash {
   filter: none;
 }
 
-.panel-rig ul li a.pill-success:hover, .panel-rig ul li.active a.pill-success, #dash-add-panel:hover {
+ul.nav-pills li a.pill-success:hover, ul.nav-pills li.active a.pill-success, #dash-add-panel:hover {
   background-image: linear-gradient(rgb(47, 125, 47), rgb(55, 147, 55) 40%, rgb(61, 162, 61));
   background-repeat: no-repeat;
   filter: none;
 }
 
-.panel-rig ul li a.pill-warning {
+ul.nav-pills li a.pill-warning {
   color: rgb(255, 255, 255);
   background-color: rgb(248, 148, 6);
   border-color: rgb(248, 148, 6);
@@ -1330,13 +1335,13 @@ a#dash-add-panel.flash {
   filter: none;
 }
 
-.panel-rig ul li a.pill-warning:hover, .panel-rig ul li.active a.pill-warning {
+ul.nav-pills li a.pill-warning:hover, ul.nav-pills li.active a.pill-warning {
   background-image: linear-gradient(rgb(128, 77, 3), rgb(158, 95, 4) 40%, rgb(178, 106, 4));
   background-repeat: no-repeat;
   filter: none;
 }
 
-.panel-rig ul li a.pill-danger {
+ul.nav-pills li a.pill-danger {
   color: rgb(255, 255, 255);
   background-color: rgb(238, 95, 91);
   border-color: rgb(238, 95, 91);
@@ -1345,16 +1350,16 @@ a#dash-add-panel.flash {
   filter: none;
 }
 
-.panel-rig ul li a.pill-danger:hover, .panel-rig ul li.active a.pill-danger {
+ul.nav-pills li a.pill-danger:hover, ul.nav-pills li.active a.pill-danger {
   background-image: linear-gradient(rgb(187, 24, 19), rgb(215, 28, 22) 40%, rgb(231, 32, 26));
   background-repeat: no-repeat;
   filter: none;
 }
 
-.panel-rig ul li a.pill-danger {
+ul.nav-pills li a.pill-danger {
 }
 
-.panel-rig ul li i {
+ul.nav-pills li i {
   margin: 0 0 0 9px;
 }
 
@@ -1791,6 +1796,11 @@ a#dash-add-panel.flash {
 
 .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
     font-size: 13px;
+}
+
+.panel-body .table-settings {
+  width: auto;
+  margin: 0 auto;
 }
 
 .panel-rig .stat-pair span, .panel-rig table tr td span {
@@ -2283,12 +2293,12 @@ a#dash-add-panel.flash {
     min-width: 260px;
   }
 
-    .panel-body-addresses .stat-pair .address-label {
-        font-size: 16px;
-        margin: -10px 0 -8px;
-    }
+  .panel-body-addresses .stat-pair .address-label {
+      font-size: 16px;
+      margin: -10px 0 -8px;
+  }
 
-    .panel-body-addresses img {
+  .panel-body-addresses img {
     max-height: 130px;
     left: -20px;
   }
@@ -2328,13 +2338,27 @@ a#dash-add-panel.flash {
     display: table-cell;
   }
   
+  fieldset {
+    clear: both;
+  }
   
+  fieldset.floated {
+    clear: none;
+    display: inline-block;
+    border-bottom: 0;
+    margin: 0 10px;
+  }
+  
+  .form-horizontal .setting-thresholds input {
+    font-size: 2.2em;
+    letter-spacing: -3px;
+  }
+
   .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
       font-size: 16px;
   }
-
   
-  .panel-rig ul li a {
+  ul.nav-pills li a {
     font-size: 17px;
     padding: 3px 15px;
   }
@@ -2383,6 +2407,10 @@ a#dash-add-panel.flash {
     height: 48px;
     width: 48px;
     margin: 0 10px;
+  }
+  
+  fieldset.floated {
+    margin: 0 30px;
   }
 
 }
@@ -2482,6 +2510,10 @@ a#dash-add-panel.flash {
     width: 100%;
   }
 
+  fieldset.floated {
+    margin: 0 60px;
+  }
+    
 }
 
 
