@@ -1252,13 +1252,13 @@ a#dash-add-panel.flash {
   width: auto;
 }
 
-ul.nav-pills {
+.panel ul.nav-pills {
   margin: 0;
   padding: 0;
   clear: both;
 }
 
-ul.nav-pills li {
+.panel ul.nav-pills li {
   float: none;
   display: inline-block;
   margin: 0;
@@ -1266,7 +1266,7 @@ ul.nav-pills li {
   text-transform: uppercase;
 }
 
-ul.nav-pills li a {
+.panel ul.nav-pills li a {
   font-family: roboto;
   font-weight: bold;
   font-size: 15px;
@@ -1278,7 +1278,7 @@ ul.nav-pills li a {
 }
 
 
-ul.nav-pills li a.pill-primary {
+.panel ul.nav-pills li a.pill-primary {
   color: rgb(255, 255, 255);
   background-color: rgb(122, 130, 136);
   border-color: rgb(122, 130, 136);
@@ -1287,14 +1287,14 @@ ul.nav-pills li a.pill-primary {
   filter: none;
 }
 
-ul.nav-pills li a.pill-primary:hover, ul.nav-pills li.active a.pill-primary {
+.panel ul.nav-pills li a.pill-primary:hover, .panel ul.nav-pills li.active a.pill-primary {
   background-image: linear-gradient(rgb(64, 68, 72), rgb(78, 84, 88) 40%, rgb(88, 94, 98));
   background-repeat: no-repeat;
   filter: none;
 }
 
 
-ul.nav-pills li a.pill-info {
+.panel ul.nav-pills li a.pill-info {
   color: rgb(255, 255, 255);
   background-color: rgb(91, 192, 222);
   border-color: rgb(91, 192, 222);
@@ -1303,14 +1303,14 @@ ul.nav-pills li a.pill-info {
   filter: none;
 }
 
-ul.nav-pills li a.pill-info:hover, ul.nav-pills li.active a.pill-info {
+.panel ul.nav-pills li a.pill-info:hover, .panel ul.nav-pills li.active a.pill-info {
   background-image: linear-gradient(rgb(32, 130, 159), rgb(37, 150, 184) 40%, rgb(40, 164, 201));
   background-repeat: no-repeat;
   filter: none;
 }
 
 
-ul.nav-pills li a.pill-success, a#dash-add-panel {
+.panel ul.nav-pills li a.pill-success, a#dash-add-panel {
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(98, 196, 98);
@@ -1320,13 +1320,13 @@ ul.nav-pills li a.pill-success, a#dash-add-panel {
   filter: none;
 }
 
-ul.nav-pills li a.pill-success:hover, ul.nav-pills li.active a.pill-success, #dash-add-panel:hover {
+.panel ul.nav-pills li a.pill-success:hover, .panel ul.nav-pills li.active a.pill-success, #dash-add-panel:hover {
   background-image: linear-gradient(rgb(47, 125, 47), rgb(55, 147, 55) 40%, rgb(61, 162, 61));
   background-repeat: no-repeat;
   filter: none;
 }
 
-ul.nav-pills li a.pill-warning {
+.panel ul.nav-pills li a.pill-warning {
   color: rgb(255, 255, 255);
   background-color: rgb(248, 148, 6);
   border-color: rgb(248, 148, 6);
@@ -1335,13 +1335,13 @@ ul.nav-pills li a.pill-warning {
   filter: none;
 }
 
-ul.nav-pills li a.pill-warning:hover, ul.nav-pills li.active a.pill-warning {
+.panel ul.nav-pills li a.pill-warning:hover, .panel ul.nav-pills li.active a.pill-warning {
   background-image: linear-gradient(rgb(128, 77, 3), rgb(158, 95, 4) 40%, rgb(178, 106, 4));
   background-repeat: no-repeat;
   filter: none;
 }
 
-ul.nav-pills li a.pill-danger {
+.panel ul.nav-pills li a.pill-danger {
   color: rgb(255, 255, 255);
   background-color: rgb(238, 95, 91);
   border-color: rgb(238, 95, 91);
@@ -1350,16 +1350,16 @@ ul.nav-pills li a.pill-danger {
   filter: none;
 }
 
-ul.nav-pills li a.pill-danger:hover, ul.nav-pills li.active a.pill-danger {
+.panel ul.nav-pills li a.pill-danger:hover, .panel ul.nav-pills li.active a.pill-danger {
   background-image: linear-gradient(rgb(187, 24, 19), rgb(215, 28, 22) 40%, rgb(231, 32, 26));
   background-repeat: no-repeat;
   filter: none;
 }
 
-ul.nav-pills li a.pill-danger {
+.panel ul.nav-pills li a.pill-danger {
 }
 
-ul.nav-pills li i {
+.panel ul.nav-pills li i {
   margin: 0 0 0 9px;
 }
 
@@ -2358,7 +2358,7 @@ ul.nav-pills li i {
       font-size: 16px;
   }
   
-  ul.nav-pills li a {
+  .panel ul.nav-pills li a {
     font-size: 17px;
     padding: 3px 15px;
   }
