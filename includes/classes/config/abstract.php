@@ -27,6 +27,10 @@ class Config_Abstract {
         }
     }
     
+    public function create() {
+        
+    }
+    
     public function remove() {
         // Remove functionality is only available one at a time
         if (!isset($_POST['id'])) {

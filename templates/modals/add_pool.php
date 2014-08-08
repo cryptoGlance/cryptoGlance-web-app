@@ -17,7 +17,7 @@
           <div class="form-group all">
             <label for="selectPoolType" class="col-sm-3 control-label">Type</label>
             <div class="col-sm-4">
-              <select class="form-control" id="selectPoolType" name="poolType">
+              <select class="form-control" id="selectPoolType" name="pool">
                  <option disabled selected>Select A Pool</option>
                  <option value="btcguild">BTC Guild</option>
                  <option value="eclipse">Eclipse</option>

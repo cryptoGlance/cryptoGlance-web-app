@@ -193,11 +193,34 @@
         }, btnTimeout);
     });
     
+    // Add Config BTN
+    $document.on('click', 'button.btn-addConfig', function (evt) {
+        var modal = $(this).parentsUntil('.modal').parent();
+        
+        console.log($('form', modal).serialize());
+        
+        /*
+        $.ajax({
+            type: 'post',
+            url: 'ajax.php',
+            data: $('form', modal).serialize(),
+            statusCode: {
+                202: function() {
+//                    location.reload(true);
+                },
+                406: function() {
+                    // error - Not Accepted
+                }
+            }
+        });
+        */
+    });
+    
     // Remove Config BTN
     $document.on('click', 'button.btn-removeConfig', function (evt) {
         var prompt = $('#deletePrompt');
         $.ajax({
-            type: "POST",
+            type: "post",
             url: 'ajax.php',
             data: { type: prompt.attr('data-type'), action: 'remove', id: prompt.attr('data-id') },
             dataType: 'json',
