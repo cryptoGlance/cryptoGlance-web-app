@@ -60,9 +60,14 @@ class Miners_Cgminer extends Miners_Abstract {
         } else {
             $hePercent = $this->_summary['Device Hardware%'];
         }
-
+        
+        $algorithm = $this->_settings['algorithm'];
+        if (!is_null($this->_activePool['algorithm'])) {
+            $algorithm = $this->_activePool['algorithm'];
+        }
+        
         return array(
-            'algorithm' => $this->_settings['algorithm'],
+            'algorithm' => $algorithm,
             'hashrate_avg' => $this->_summary['MHS av'],
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => array(
@@ -245,7 +250,11 @@ class Miners_Cgminer extends Miners_Abstract {
                     'id' => $pool['POOL'],
                     'url' => $pool['Stratum URL'],
                     'Last Share Time' => $pool['Last Share Time'],
+                    'algorithm' => null,
                 );
+                if (array_key_exists('Algorithm Type', $pool)) {
+                    $activePool['algorithm'] = $pool['Algorithm Type'];
+                }
             }
         }
         

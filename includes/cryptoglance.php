@@ -10,6 +10,22 @@ class CryptoGlance {
         'wallets',
     );
     
+    private $_algorithms = array(
+        'FRESH'     =>  'Fresh',
+        'FUGUE'     =>  'Fugue256',
+        'KECCAK'    =>  'Keccak',
+        'NIST'      =>  'NIST',
+        'NSCRYPT'   =>  'NScrypt',
+        'QUARK'     =>  'Quarkcoin',
+        'SCRYPT'    =>  'Scrypt',
+        'TWE'       =>  'Twecoin',
+        'UNK'       =>  'Unknown',
+        'X11'       =>  'X11',
+        'X13'       =>  'X13',
+        'X14'       =>  'X14',
+        'X15'       =>  'X15',
+    );
+    
     private $_config;
 
     public function __construct() {
@@ -17,6 +33,13 @@ class CryptoGlance {
             $fh = $fileHandler = new FileHandler('configs/' . $configType . '.json');
             $this->_config[$configType] = json_decode($fh->read(), true);
         }
+    }
+    
+    public function supportedAlgorithms($reversed = false) {
+        if ($reversed) {
+            return array_flip($this->_algorithms);
+        }
+        return $this->_algorithms;
     }
     
     //////////
