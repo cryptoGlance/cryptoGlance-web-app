@@ -37,10 +37,15 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     public function overview() {
+        $algorithm = $this->_settings['algorithm'];
+        if (!is_null($this->_activePool['algorithm'])) {
+            $algorithm = $this->_activePool['algorithm'];
+        }
+        
         return array(
             'name' => $this->_name,
             'status' => $this->_rigStatus,
-            'algorithm' => $this->_settings['algorithm'],
+            'algorithm' => $algorithm,
             'hashrate_5s' => $this->_rigHashrate,
             'raw_hashrate' => $this->_rigHashrate,
             'active_pool' => $this->_activePool,
