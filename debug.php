@@ -9,6 +9,7 @@ error_reporting(E_ERROR);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $summary = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"summary"}'), true);        
     $dev = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"devs"}'), true);
+    $pools = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"pools"}'), true);
             
     echo "<pre>";
     echo $_POST['type'];
@@ -18,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "<br />------------";
     echo "<pre>DEVICES:";
     print_r($dev);
+    echo "<br />------------";
+    echo "<pre>POOLS:";
+    print_r($pools);
     die();
 }
 
