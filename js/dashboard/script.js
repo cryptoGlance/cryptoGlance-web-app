@@ -8,60 +8,6 @@
 
   var rigCollection = new RigCollection()
   rigCollection.start()
-
-  /*-----  End of The Rigs  ------*/
-
-
-  /*=================================
-  =            The Pools            =
-  =================================*/
-
-  var poolCollection = new PoolCollection()
-  poolCollection.start()
-
-  /*-----  End of The Pools  ------*/
-
-
-  /*===================================
-  =            The Wallets            =
-  ===================================*/
-
-  var walletCollection = new WalletCollection()
-  walletCollection.start()
-
-  /*-----  End of The Wallets  ------*/
-
-
-  /*=============================================
-  =            Global Event Handling            =
-  =============================================*/
-
-    // Update BTN
-    $document.on('click', 'button.btn-updater', function (evt) {
-        var $currentButton = $(this);
-        
-        $currentButton.html("<i class='icon icon-refresh'></i> Updating...");
-        $currentButton.children().addClass('icon-spin');
-        $currentButton.prop({ disabled: true });
-        
-        var type = this.getAttribute('data-type');
-        var btnTimeout = 3000;
-        
-        if (type == 'rig') {
-            if (rigCollection._update()) {
-                btnTimeout = 500;
-            }
-        } else if (type == 'wallet') {
-            if (walletCollection.update()) {
-                btnTimeout = 500;
-            }
-        }
-        
-        setTimeout(function() {
-            $currentButton.html("<i class='icon icon-refresh'></i> Update");
-            $currentButton.prop({ disabled: false });  
-        }, btnTimeout);
-    });
   
   // Manage Rig
   $document.on('click', '.btn-manage-rig', function (evt) {
@@ -191,6 +137,84 @@
     evt.preventDefault();
     $(evt.target.getAttribute('data-target')).trigger('click');
   })
+  
+
+  /*-----  End of The Rigs  ------*/
+
+
+  /*=================================
+  =            The Pools            =
+  =================================*/
+
+  var poolCollection = new PoolCollection()
+  poolCollection.start()
+
+  /*-----  End of The Pools  ------*/
+
+
+  /*===================================
+  =            The Wallets            =
+  ===================================*/
+
+  var walletCollection = new WalletCollection()
+  walletCollection.start()
+
+  /*-----  End of The Wallets  ------*/
+
+
+  /*=============================================
+  =            Global Event Handling            =
+  =============================================*/
+
+    // Update BTN
+    $document.on('click', 'button.btn-updater', function (evt) {
+        var $currentButton = $(this);
+        
+        $currentButton.html("<i class='icon icon-refresh'></i> Updating...");
+        $currentButton.children().addClass('icon-spin');
+        $currentButton.prop({ disabled: true });
+        
+        var type = this.getAttribute('data-type');
+        var btnTimeout = 3000;
+        
+        if (type == 'rig') {
+            if (rigCollection._update()) {
+                btnTimeout = 500;
+            }
+        } else if (type == 'wallet') {
+            if (walletCollection.update()) {
+                btnTimeout = 500;
+            }
+        }
+        
+        setTimeout(function() {
+            $currentButton.html("<i class='icon icon-refresh'></i> Update");
+            $currentButton.prop({ disabled: false });  
+        }, btnTimeout);
+    });
+    
+    // Remove Config BTN
+    $document.on('click', 'button.btn-removeConfig', function (evt) {
+        var prompt = $('#deletePrompt');
+        $.ajax({
+            type: "POST",
+            url: 'ajax.php',
+            data: { type: prompt.attr('data-type'), action: 'remove', id: prompt.attr('data-id') },
+            dataType: 'json',
+            statusCode: {
+                401: function() {
+                    window.location.assign('login.php');
+                },
+                202: function() {
+                    location.reload(true);
+                }
+            }
+        })
+        .fail(function (xhr, status, message) {
+            //console.error(xhr, status, message)
+        })
+        .done()
+    });
 
   /*-----  End of Global Event Handling  ------*/
 

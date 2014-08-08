@@ -48,6 +48,9 @@ class Pools_MultiPoolUS extends Pools_Abstract {
             $userWorkers = array();
             foreach ($poolData['workers'] as $coin => $workers) {
                 foreach ($workers as $name => $worker) {
+                    if (!array_key_exists($name, $userWorkers)) {
+                        $userWorkers[$name] = 0;
+                    }
                     if ($worker['hashrate'] != 0) {
                         $userWorkers[$name] += $worker['hashrate'];
                     }

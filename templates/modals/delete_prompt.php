@@ -11,7 +11,7 @@
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> No, keep it!</button>
-           <button type="button" class="btn btn-lg btn-danger submitRemoveConfig" data-dismiss="modal"><i class="icon icon-circledelete"></i> Delete it!</button>
+           <button type="button" class="btn btn-lg btn-danger btn-removeConfig" data-dismiss="modal"><i class="icon icon-circledelete"></i> Delete it!</button>
          </div>
          <input type="hidden" name="type" />
          <input type="hidden" name="id" />

@@ -29,8 +29,7 @@ class Pools extends Config_Pools {
     /*
      * POST
      */
-    
-    
+     
     
     /*
      * GET

@@ -423,7 +423,7 @@ $(document).ready(function() {
     $('.btn-delete').click(function() {
         var panelType = $(this).parentsUntil('.panel').parent().attr('data-type');
         var panelId = $(this).parentsUntil('.panel').parent().attr('data-id');
-        $('#deletePrompt').attr('data-type', panelType);
+        $('#deletePrompt').attr('data-type', (panelType+'s'));
         $('#deletePrompt').attr('data-id', panelId);
         $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
         prettifyInputs();

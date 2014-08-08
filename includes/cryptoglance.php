@@ -57,21 +57,6 @@ class CryptoGlance {
         $fh->write(json_encode($this->_config['miners']));
         header("HTTP/1.0 202 Accepted"); // accepted
     }
-    public function removeRig(){
-        $rigId = intval($_POST['id']);
-        
-        if ($rigId == 0 || empty($this->_config['miners'][$rigId-1])) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return null;
-        }
-        $rigId -= 1;
-        
-        unset($this->_config['miners'][$rigId]);
-        $this->_config['miners'] = array_values($this->_config['miners']);
-        $fh = $fileHandler = new FileHandler('configs/miners.json');
-        $fh->write(json_encode($this->_config['miners']));
-        header("HTTP/1.0 202 Accepted"); // accepted
-    }
     
     ///////////
     // Pools //
@@ -151,21 +136,6 @@ class CryptoGlance {
         }
         
         $this->_config['pools'][] = $pool;
-        $fh = $fileHandler = new FileHandler('configs/pools.json');
-        $fh->write(json_encode($this->_config['pools']));
-        header("HTTP/1.0 202 Accepted"); // accepted
-    }
-    public function removePool(){
-        $poolId = intval($_POST['id']);
-        
-        if ($poolId == 0 || empty($this->_config['pools'][$poolId-1])) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return null;
-        }
-        $poolId -= 1;
-        
-        unset($this->_config['pools'][$poolId]);
-        $this->_config['pools'] = array_values($this->_config['pools']);
         $fh = $fileHandler = new FileHandler('configs/pools.json');
         $fh->write(json_encode($this->_config['pools']));
         header("HTTP/1.0 202 Accepted"); // accepted

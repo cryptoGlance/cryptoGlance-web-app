@@ -21,22 +21,3 @@ $('.submitAddConfig').click(function(e) {
         }
     });
 });
-
-// Remove Config
-$('.submitRemoveConfig').click(function(e) {
-    e.preventDefault();
-    // put this somewhere: .replace(/%PANNELNAME%/g, 'pannelname');
-    $.ajax({
-        type: 'post',
-        url: 'ajax.php?type=update&action=remove-config',
-        data: $(this).parentsUntil('form').parent().serialize(),
-        statusCode: {
-            202: function() {
-                location.reload(true);
-            },
-            406: function() {
-                // error - Not Accepted
-            }
-        }
-    });
-});
