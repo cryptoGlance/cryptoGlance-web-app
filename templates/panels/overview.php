@@ -2,10 +2,7 @@
 <div id="overview" class="panel panel-primary panel-overview">
    <h1>Overview</h1>
    <div class="panel-heading">
-      <!-- <button type="button" class="panel-header-button" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true" style="display: none;"><i class="icon icon-circledelete"></i></button> -->
       <button type="button" class="panel-header-button btn-updater" data-type="rig"><i class="icon icon-refresh"></i> Update</button>
-      <!-- <a href="#goDirectlyToHelpPageAnchor"><button type="button" class="panel-header-button"><i class="icon icon-question-sign"></i></button></a>
-      <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>  -->
       <h2 class="panel-title"><i class="icon icon-eye-view"></i> Current Rigs</h2>
    </div>
    <div class="panel-body panel-body-overview">
