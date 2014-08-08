@@ -383,24 +383,6 @@ $(document).ready(function() {
      $toggleButton.html("<i class='icon icon-chevron-up'></i>");
     }
   });
-    
-  $('button.btn-updater').click(function() {
-    var $currentButton = $(this);
-    
-    $currentButton.html("<i class='icon icon-refresh'></i> Updating...");
-    $currentButton.children().addClass('icon-spin');
-    $currentButton.prop({
-     disabled: true
-    });
-    setTimeout(function() { 
-     $currentButton.html("<i class='icon icon-refresh'></i> Update");
-     $currentButton.prop({
-        disabled: false
-     });
-    }, 3000);
-
-  });  
-
   $('.anchor-offset').click(function() {
     var target = $(this).attr('href');
     $('body').scrollTo(target, 750, { margin: true, offset: -120 });

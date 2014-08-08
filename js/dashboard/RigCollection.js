@@ -43,6 +43,8 @@
 
       _self.apiData = { type: 'rigs', action: 'update' }
 
+      _self._update()
+
       /*==========  Setup polling  ==========*/
       setInterval(function () {
         if (_self._ready) {
@@ -81,6 +83,8 @@
         }
       })
     })
+    
+    return true;
   }
 
   RigCollection.prototype._getData = function (callback) {
@@ -128,13 +132,7 @@
       data = data.overview
     }
 
-    // if (Array.isArray(data)) {
-      data.forEach(build)
-    // }
-    // else {
-      // build(data)
-    // }
-
+    data.forEach(build)
 
     this.overallHashrate = Util.getSpeed(this.overallHashrate)
 

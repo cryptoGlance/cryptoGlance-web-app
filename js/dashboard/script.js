@@ -36,6 +36,29 @@
   =            Global Event Handling            =
   =============================================*/
 
+    // Update BTN
+    $document.on('click', 'button.btn-updater', function (evt) {
+        var $currentButton = $(this);
+        
+        $currentButton.html("<i class='icon icon-refresh'></i> Updating...");
+        $currentButton.children().addClass('icon-spin');
+        $currentButton.prop({ disabled: true });
+        
+        var type = this.getAttribute('data-type');
+        var btnTimeout = 3000;
+        
+        if (type == 'rig') {
+            if (rigCollection._update()) {
+                btnTimeout = 500;
+            }
+        }
+        
+        setTimeout(function() {
+            $currentButton.html("<i class='icon icon-refresh'></i> Update");
+            $currentButton.prop({ disabled: false });  
+        }, btnTimeout);
+    });
+  
   // Manage Rig
   $document.on('click', '.btn-manage-rig', function (evt) {
     var rigId = this.getAttribute('data-attr')
