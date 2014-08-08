@@ -45,6 +45,17 @@
       }, root.walletUpdateTime)
     })
   }
+  
+  WalletCollection.prototype.update = function () {
+    var _self = this
+    
+    _self._getData(function (wallets) {
+        _self._update(wallets)
+    })
+    
+    return true;
+  }
+  
 
   /*-----  End of WalletCollection Public Methods  ------*/
 

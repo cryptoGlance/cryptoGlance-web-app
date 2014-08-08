@@ -51,6 +51,10 @@
             if (rigCollection._update()) {
                 btnTimeout = 500;
             }
+        } else if (type == 'wallet') {
+            if (walletCollection.update()) {
+                btnTimeout = 500;
+            }
         }
         
         setTimeout(function() {
