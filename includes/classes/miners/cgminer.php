@@ -203,7 +203,7 @@ class Miners_Cgminer extends Miners_Abstract {
     }
     
     public function switchPool($poolId) {
-        $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
+        return $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
     public function resetStats() {
         $this->cmd('{"command":"zero","parameter":"all,false"}');
@@ -247,10 +247,17 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     private function getActivePool() {
+        $pools = array();
+        foreach ($this->_pools as $pool) {
+            if ($pool['Status'] != 'Dead' && $pool['Stratum Active'] == 1) {
+                $pools[] = $pool;
+            }
+        }
+    
         $activePool = array();
         $activePool['Last Share Time'] = 0;
-        foreach ($this->_pools as $pool) {
-            if ($pool['Status'] != 'Dead' && $pool['Last Share Time'] > $activePool['Last Share Time']) {
+        foreach ($pools as $pool) {
+            if ($pool['Last Share Time'] > $activePool['Last Share Time']) {
                 $activePool = array(
                     'id' => $pool['POOL'],
                     'url' => $pool['Stratum URL'],

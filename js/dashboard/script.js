@@ -70,7 +70,7 @@
   })
 
   $document.on('click', '#switchPool .btn-success', function (evt) {
-    var rigId = $('#manageRig').data('attr')
+    var rigId = $('#switchPool').attr('data-attr')
     var selectedPoolId = $('input[name=switchPoolList]:checked', '#switchPool').val()
     if (typeof selectedPoolId != 'undefined') {
       $.ajax({
@@ -92,7 +92,7 @@
 
   // Restart
   $document.on('click', '#manageRig .btn-restart', function (evt) {
-    var rigId = $('#manageRig').data('attr')
+    var rigId = $('#manageRig').attr('data-attr')
     $.ajax({
       type: 'post',
       data: {
@@ -110,7 +110,7 @@
   
   // Reset
   $document.on('click', '#manageRig .btn-reset', function (evt) {
-    var rigId = $('#manageRig').data('attr')
+    var rigId = $('#manageRig').attr('data-attr')
     $.ajax({
       type: 'post',
       data: {
