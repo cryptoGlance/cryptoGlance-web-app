@@ -17,6 +17,7 @@
     $manageRig.attr('data-attr', rigId)
     $manageRig.find('.rig-name').html($('#rig-' + rigId + ' .panel-title .value').text())
     $manageRig.find('.btn-details').attr('href', 'rig.php?id=' + rigId)
+    $manageRig.find('.rig-name').html($('#rig-' + rigId + ' h1').html())
 
     prettifyInputs()
   })
@@ -225,9 +226,6 @@
             data: { type: prompt.attr('data-type'), action: 'remove', id: prompt.attr('data-id') },
             dataType: 'json',
             statusCode: {
-                // 401: function() {
-                //     window.location.assign('login.php');
-                // },
                 202: function() {
                     location.reload(true);
                 }
@@ -238,6 +236,7 @@
         })
         .done()
     });
+
 
     $document.ajaxError(function (evt, jqxhr, settings, thrownError) {
       switch (jqxhr.status) {
