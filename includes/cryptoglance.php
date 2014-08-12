@@ -17,7 +17,7 @@ class CryptoGlance {
         'NIST'      =>  'NIST',
         'NSCRYPT'   =>  'NScrypt',
         'QUARK'     =>  'Quarkcoin',
-        'sha256'    =>  'SHA-256',
+        'SHA256'    =>  'SHA-256',
         'SCRYPT'    =>  'Scrypt',
         'TWE'       =>  'Twecoin',
         'UNK'       =>  'Unknown',
