@@ -8,7 +8,7 @@
 
   var rigCollection = new RigCollection()
   rigCollection.start()
-  
+
   // Manage Rig
   $document.on('click', '.btn-manage-rig', function (evt) {
     var rigId = this.getAttribute('data-attr')
@@ -42,7 +42,7 @@
         $.each(data[0], function (v,k) {
             var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '');
             poolUrl = poolUrl.slice(poolUrl.indexOf("/") + 2)
-            
+
             var active = (k.active == 1) ? 'Yes' : 'No';
             var status = (k.status == 1) ? 'Alive' : 'Dead';
 
@@ -61,7 +61,7 @@
                 $('input:radio[id=rig'+ rigId +'-pool'+ k.id +']', $switchPoolModalBody).prop('checked', true);
             }
         });
-        
+
         $switchPoolModalBody.find('.ajax-loader').remove()
         $('.table', $switchPoolModalBody).show();
         prettifyInputs()
@@ -107,7 +107,7 @@
         rigCollection._update()
     });
   })
-  
+
   // Reset
   $document.on('click', '#manageRig .btn-reset', function (evt) {
     var rigId = $('#manageRig').attr('data-attr')
@@ -137,7 +137,7 @@
     evt.preventDefault();
     $(evt.target.getAttribute('data-target')).trigger('click');
   })
-  
+
 
   /*-----  End of The Rigs  ------*/
 
@@ -169,14 +169,14 @@
     // Update BTN
     $document.on('click', 'button.btn-updater', function (evt) {
         var $currentButton = $(this);
-        
+
         $currentButton.html("<i class='icon icon-refresh'></i> Updating...");
         $currentButton.children().addClass('icon-spin');
         $currentButton.prop({ disabled: true });
-        
+
         var type = this.getAttribute('data-type');
         var btnTimeout = 3000;
-        
+
         if (type == 'rig') {
             if (rigCollection._update()) {
                 btnTimeout = 500;
@@ -186,19 +186,19 @@
                 btnTimeout = 500;
             }
         }
-        
+
         setTimeout(function() {
             $currentButton.html("<i class='icon icon-refresh'></i> Update");
-            $currentButton.prop({ disabled: false });  
+            $currentButton.prop({ disabled: false });
         }, btnTimeout);
     });
-    
+
     // Add Config BTN
     $document.on('click', 'button.btn-addConfig', function (evt) {
         var modal = $(this).parentsUntil('.modal').parent();
-        
+
         console.log($('form', modal).serialize());
-        
+
         /*
         $.ajax({
             type: 'post',
@@ -215,7 +215,7 @@
         });
         */
     });
-    
+
     // Remove Config BTN
     $document.on('click', 'button.btn-removeConfig', function (evt) {
         var prompt = $('#deletePrompt');
@@ -225,9 +225,9 @@
             data: { type: prompt.attr('data-type'), action: 'remove', id: prompt.attr('data-id') },
             dataType: 'json',
             statusCode: {
-                401: function() {
-                    window.location.assign('login.php');
-                },
+                // 401: function() {
+                //     window.location.assign('login.php');
+                // },
                 202: function() {
                     location.reload(true);
                 }
@@ -238,6 +238,23 @@
         })
         .done()
     });
+
+    $document.ajaxError(function (evt, jqxhr, settings, thrownError) {
+      console.log(jqxhr.status)
+      switch (jqxhr.status) {
+        case 400: // Bad Request
+          break;
+        case 401: // Unauthorized
+          window.location.assign('login.php')
+          break;
+        case 404: // Not found
+          break;
+        case 500: // Internal Server Error
+          break;
+        default:
+          return;
+      }
+    })
 
   /*-----  End of Global Event Handling  ------*/
 
