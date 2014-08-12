@@ -36,12 +36,17 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                        <span class="error"></span>
+                </div>
+              </div>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
            <button type="button" class="btn btn-lg btn-success btn-addConfig" id="btnAddHost"><i class="icon icon-save-floppy"></i> Save</button>
          </div>
-         <input type="hidden" name="type" value="rig" />
+         <input type="hidden" name="type" value="rigs" />
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -197,24 +197,29 @@
     // Add Config BTN
     $document.on('click', 'button.btn-addConfig', function (evt) {
         var modal = $(this).parentsUntil('.modal').parent();
+        var errorMsg = $('.error', modal);
 
-        console.log($('form', modal).serialize());
-
-        /*
         $.ajax({
             type: 'post',
-            url: 'ajax.php',
+            url: 'ajax.php?action=create',
             data: $('form', modal).serialize(),
             statusCode: {
                 202: function() {
-//                    location.reload(true);
+                //    location.reload(true);
+                    errorMsg.html('');
                 },
                 406: function() {
-                    // error - Not Accepted
+                    errorMsg.html(msg.responseText);
+                },
+                409: function(msg) {
+                    errorMsg.html('Looks like this rig already exists as ' + msg.responseText);
                 }
             }
-        });
-        */
+        })
+        .fail(function (xhr, status, message) {
+            //console.error(xhr, status, message)
+        })
+        .done()
     });
 
     // Remove Config BTN

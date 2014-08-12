@@ -14,6 +14,7 @@ require_once('config.php');
 set_time_limit(20);
 ini_set("display_errors", 1);
 error_reporting(E_ERROR);
+// error_reporting(E_ALL);
 
 date_default_timezone_set("GMT");
 

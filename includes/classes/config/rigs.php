@@ -9,8 +9,8 @@ require_once('abstract.php');
 class Config_Rigs extends Config_Abstract {
 
     protected $_config = 'configs/miners.json';
-    
-    
+
+
     /*
      * Specific to class
      */
@@ -30,5 +30,31 @@ class Config_Rigs extends Config_Abstract {
         $obj = new $class($rig);
         $this->_objs[] = $obj;
     }
-    
+
+    public function create() {
+        if (empty($_POST['ip_address']) || empty($_POST['port'])) {
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
+            return 'Missing IP Address or Port';
+        }
+
+        foreach ($this->_data as $rig) {
+            if ($_POST['ip_address'] == $rig['host'] && $_POST['port'] == $rig['port']) {
+                header("HTTP/1.0 409 Conflict"); // conflict
+                return (!empty($rig['name']) ? $rig['name'] : $rig['host'].':'.$rig['port']);
+            }
+        }
+
+        $this->_data[] = array(
+            'name' => (!empty($_POST['label']) ? $_POST['label'] : $_POST['ip_address']),
+            'type' => 'cgminer',
+            'host' => $_POST['ip_address'],
+            'port' => $_POST['port'],
+            'settings' => array(
+                    'algorithm' => $_POST['algorithm']
+            ),
+        );
+
+        return $this->write();
+    }
+
 }
