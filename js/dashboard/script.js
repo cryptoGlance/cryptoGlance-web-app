@@ -1,6 +1,7 @@
 !function ($){
 
   var $document = $(document)
+  var keyboardState = []
 
   /*================================
   =            The Rigs            =
@@ -250,6 +251,35 @@
           break;
         default:
           return;
+      }
+    })
+
+
+    // Global Keyboard Shortcuts
+    //
+    // Ctrl+D = redirect to debug.php
+    $document
+    .on('keydown', function (evt) {
+      switch (evt.keyCode) {
+        case 17: // CTRL
+          keyboardState.indexOf('ctrl') === -1 && keyboardState.push('ctrl')
+          break;
+        case 68: // D
+          keyboardState.indexOf('D') === -1 && keyboardState.push('D')
+          break;
+      }
+      if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('D') !== -1) {
+        window.location.assign('debug.php')
+      }
+    })
+    .on('keyup', function (evt) {
+      switch (evt.keyCode) {
+        case 17:
+          keyboardState.splice(keyboardState.indexOf('ctrl'), 1)
+          break;
+        case 68:
+          keyboardState.splice(keyboardState.indexOf('D'), 1)
+          break;
       }
     })
 
