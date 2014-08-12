@@ -16,7 +16,7 @@ class Config_Pools extends Config_Abstract {
      */
 
     protected function add($pool) {
-    
+
         if (empty($pool['type'])) {
             return false;
         }
@@ -24,6 +24,82 @@ class Config_Pools extends Config_Abstract {
         $class = 'Pools_' . ucwords(strtolower($pool['type']));
         $obj = new $class($pool);
         $this->_objs[] = $obj;
+    }
+
+    public function create() {
+        $label = $_POST['label'];
+        $type = $_POST['poolType'];
+        $url = rtrim($_POST['url'], '/');
+        $address = $_POST['address'];
+        $api = $_POST['api'];
+        $userid = $_POST['userid'];
+
+        $pool = array();
+         if ($type == 'btcguild' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'BTC Guild'),
+                'apikey' => $api,
+            );
+        } else if ($type == 'eclipse' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'Eclipse'),
+                'apikey' => $api,
+            );
+        } else if ($type == 'mpos' && !empty($url) && !empty($api) && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
+                'apiurl' => rtrim($url, '/'),
+                'apikey' => $api,
+                'userid' => $userid,
+            );
+        } else if ($type == 'simplecoin' && !empty($api) && !empty($url)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
+                'apiurl' => rtrim($url, '/'),
+                'apikey' => $api,
+            );
+        } else if ($type == 'wafflepool' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'WafflePool'),
+                'address' => $address,
+            );
+        } else if ($type == 'eligius' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'Eligius'),
+                'address' => $address,
+            );
+        } else if ($type == 'magicpool' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'MagicPool'),
+                'address' => $address,
+            );
+        } else if ($type == 'trademybit' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'TradeMyBit'),
+                'apikey' => $api,
+            );
+        } else if ($type == 'multipoolus' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'MultiPool.us'),
+                'apikey' => $api,
+            );
+        } else {
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
+            return 'All fields are required on this form.';
+        }
+
+        $this->_data[] = $pool;
+
+        return $this->write();
     }
 
 }

@@ -55,12 +55,17 @@
                <input type="text" class="form-control" id="inputAddress" name="address">
              </div>
            </div>
+           <div class="form-group">
+             <div class="col-sm-12">
+                     <span class="error"></span>
+             </div>
+           </div>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
            <button type="button" class="btn btn-lg btn-success submitAddConfig" id="btnAddPool"><i class="icon icon-save-floppy"></i> Save</button>
          </div>
-         <input type="hidden" name="type" value="pool" />
+         <input type="hidden" name="type" value="pools" />
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

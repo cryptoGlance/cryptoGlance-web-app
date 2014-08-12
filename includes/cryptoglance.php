@@ -49,38 +49,6 @@ class CryptoGlance {
     public function getMiners() {
         return $this->_config['miners'];
     }
-    public function addRig() {
-        $label = $_POST['label'];
-//        $type = $_POST['minerType'];
-        $ipAddress = $_POST['ip_address'];
-        $port = intval($_POST['port']);
-
-//        if (empty($type) || empty($ipAddress) || empty($port)) {
-        if (empty($ipAddress) || empty($port)) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return null;
-        }
-
-        foreach ($this->_config['miners'] as $rig) {
-            if ($ipAddress == $rig['host'] && $port == $rig['port']) {
-                header("HTTP/1.0 409 Conflict"); // conflict
-                return null;
-            }
-        }
-
-        $rig = array(
-            'name' => (!empty($label) ? $label : $ipAddress),
-//            'type' => $type, // can be dynamic. cgminer will work for the majority
-            'type' => 'cgminer',
-            'host' => $ipAddress,
-            'port' => $port,
-        );
-
-        $this->_config['miners'][] = $rig;
-        $fh = $fileHandler = new FileHandler('configs/miners.json');
-        $fh->write(json_encode($this->_config['miners']));
-        header("HTTP/1.0 202 Accepted"); // accepted
-    }
 
     ///////////
     // Pools //
@@ -88,83 +56,6 @@ class CryptoGlance {
     public function getPools() {
         return $this->_config['pools'];
     }
-    public function addPool() {
-        $label = $_POST['label'];
-        $type = $_POST['poolType'];
-        $url = rtrim($_POST['url'], '/');
-        $address = $_POST['address'];
-        $api = $_POST['api'];
-        $userid = $_POST['userid'];
-
-        $pool = array();
-         if ($type == 'btcguild' && !empty($api)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : 'BTC Guild'),
-                'apikey' => $api,
-            );
-        } else if ($type == 'eclipse' && !empty($api)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : 'Eclipse'),
-                'apikey' => $api,
-            );
-        } else if ($type == 'mpos' && !empty($url) && !empty($api) && !empty($userid)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
-                'apiurl' => rtrim($url, '/'),
-                'apikey' => $api,
-                'userid' => $userid,
-            );
-        } else if ($type == 'simplecoin' && !empty($api) && !empty($url)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
-                'apiurl' => rtrim($url, '/'),
-                'apikey' => $api,
-            );
-        } else if ($type == 'wafflepool' && !empty($address)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : 'WafflePool'),
-                'address' => $address,
-            );
-        } else if ($type == 'eligius' && !empty($address)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : 'Eligius'),
-                'address' => $address,
-            );
-        } else if ($type == 'magicpool' && !empty($address)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : 'MagicPool'),
-                'address' => $address,
-            );
-        } else if ($type == 'trademybit' && !empty($api)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : 'TradeMyBit'),
-                'apikey' => $api,
-            );
-        } else if ($type == 'multipoolus' && !empty($api)) {
-            $pool = array(
-                'type' => $type,
-                'name' => ($label ? $label : 'MultiPool.us'),
-                'apikey' => $api,
-            );
-        } else {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return null;
-        }
-
-        $this->_config['pools'][] = $pool;
-        $fh = $fileHandler = new FileHandler('configs/pools.json');
-        $fh->write(json_encode($this->_config['pools']));
-        header("HTTP/1.0 202 Accepted"); // accepted
-    }
-
 
     //////////////
     // Wallets //
@@ -327,10 +218,6 @@ class CryptoGlance {
                     'wallet' => $data['general']['walletUpdateTime']*1000,
                 )
             );
-        }
-
-        if ($data['email']) {
-            // add logic eventually
         }
 
         $this->_config['cryptoglance'] = $settings;
