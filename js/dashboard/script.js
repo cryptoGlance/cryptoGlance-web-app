@@ -240,7 +240,6 @@
     });
 
     $document.ajaxError(function (evt, jqxhr, settings, thrownError) {
-      console.log(jqxhr.status)
       switch (jqxhr.status) {
         case 400: // Bad Request
           break;
