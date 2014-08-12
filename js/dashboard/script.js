@@ -15,9 +15,8 @@
     var $manageRig = $('#manageRig')
 
     $manageRig.attr('data-attr', rigId)
-    $manageRig.find('.rig-name').html($('#rig-' + rigId + ' .panel-title .value').text())
-    $manageRig.find('.btn-details').attr('href', 'rig.php?id=' + rigId)
     $manageRig.find('.rig-name').html($('#rig-' + rigId + ' h1').html())
+    $manageRig.find('.btn-details').attr('href', 'rig.php?id=' + rigId)
 
     prettifyInputs()
   })
