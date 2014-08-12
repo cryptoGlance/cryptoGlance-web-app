@@ -113,7 +113,8 @@
       switch (key) {
         case 'temperature':
           statusHtml += this._getStatusHtml(key,
-                                            statusObj[key].celsius + '&deg;C / ' + statusObj[key].fahrenheit + '&deg;F',
+                                            statusObj[key].celsius + '&deg;C / ' +
+                                            statusObj[key].fahrenheit + '&deg;F',
                                             null,
                                             null)
           break
