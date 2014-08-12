@@ -205,10 +205,10 @@
             data: $('form', modal).serialize(),
             statusCode: {
                 202: function() {
-                //    location.reload(true);
                     errorMsg.html('');
+                    location.reload(true);
                 },
-                406: function() {
+                406: function(msg) {
                     errorMsg.html(msg.responseText);
                 },
                 409: function(msg) {
