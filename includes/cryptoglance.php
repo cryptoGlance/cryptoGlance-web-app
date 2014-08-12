@@ -9,7 +9,7 @@ class CryptoGlance {
 //        'rss',
         'wallets',
     );
-    
+
     private $_algorithms = array(
         'FRESH'     =>  'Fresh',
         'FUGUE'     =>  'Fugue256',
@@ -17,6 +17,7 @@ class CryptoGlance {
         'NIST'      =>  'NIST',
         'NSCRYPT'   =>  'NScrypt',
         'QUARK'     =>  'Quarkcoin',
+        'sha256'    =>  'SHA-256',
         'SCRYPT'    =>  'Scrypt',
         'TWE'       =>  'Twecoin',
         'UNK'       =>  'Unknown',
@@ -25,7 +26,7 @@ class CryptoGlance {
         'X14'       =>  'X14',
         'X15'       =>  'X15',
     );
-    
+
     private $_config;
 
     public function __construct() {
@@ -34,14 +35,14 @@ class CryptoGlance {
             $this->_config[$configType] = json_decode($fh->read(), true);
         }
     }
-    
+
     public function supportedAlgorithms($reversed = false) {
         if ($reversed) {
             return array_flip($this->_algorithms);
         }
         return $this->_algorithms;
     }
-    
+
     //////////
     // Rigs //
     //////////
@@ -53,20 +54,20 @@ class CryptoGlance {
 //        $type = $_POST['minerType'];
         $ipAddress = $_POST['ip_address'];
         $port = intval($_POST['port']);
-        
+
 //        if (empty($type) || empty($ipAddress) || empty($port)) {
         if (empty($ipAddress) || empty($port)) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
-        
+
         foreach ($this->_config['miners'] as $rig) {
             if ($ipAddress == $rig['host'] && $port == $rig['port']) {
                 header("HTTP/1.0 409 Conflict"); // conflict
                 return null;
             }
         }
-        
+
         $rig = array(
             'name' => (!empty($label) ? $label : $ipAddress),
 //            'type' => $type, // can be dynamic. cgminer will work for the majority
@@ -74,13 +75,13 @@ class CryptoGlance {
             'host' => $ipAddress,
             'port' => $port,
         );
-        
+
         $this->_config['miners'][] = $rig;
         $fh = $fileHandler = new FileHandler('configs/miners.json');
         $fh->write(json_encode($this->_config['miners']));
         header("HTTP/1.0 202 Accepted"); // accepted
     }
-    
+
     ///////////
     // Pools //
     ///////////
@@ -94,7 +95,7 @@ class CryptoGlance {
         $address = $_POST['address'];
         $api = $_POST['api'];
         $userid = $_POST['userid'];
-        
+
         $pool = array();
          if ($type == 'btcguild' && !empty($api)) {
             $pool = array(
@@ -157,14 +158,14 @@ class CryptoGlance {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
-        
+
         $this->_config['pools'][] = $pool;
         $fh = $fileHandler = new FileHandler('configs/pools.json');
         $fh->write(json_encode($this->_config['pools']));
         header("HTTP/1.0 202 Accepted"); // accepted
     }
-    
-    
+
+
     //////////////
     // Wallets //
     /////////////
@@ -179,7 +180,7 @@ class CryptoGlance {
         $walletId = intval($_POST['walletId']);
         $label = $_POST['label'];
         $currency = $_POST['currency'];
-        
+
         if ($walletId != 0) {
             $walletId -= 1;
             if (empty($label)) {
@@ -196,9 +197,9 @@ class CryptoGlance {
                 'currency' => $currency,
                 'label' => $label,
                 'addresses' => array()
-            );        
+            );
         }
-        
+
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
         header("HTTP/1.0 202 Accepted"); // accepted
@@ -206,13 +207,13 @@ class CryptoGlance {
     }
     public function removeWallet() {
         $walletId = intval($_POST['walletId']);
-        
+
         if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1])) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         $walletId -= 1;
-        
+
         unset($this->_config['wallets'][$walletId]);
         $this->_config['wallets'] = array_values($this->_config['wallets']);
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
@@ -223,25 +224,25 @@ class CryptoGlance {
         $walletId = intval($_POST['walletId']);
         $newLabel = $_POST['label'];
         $newAddress = $_POST['address'];
-        
+
         if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1]) || empty($newLabel) || empty($newAddress)) {
             hheader("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
-        
+
         $walletId -= 1;
-        
+
         foreach ($this->_config['wallets'][$walletId]['addresses'] as $address) {
             if ($newAddress == $address['address']) {
                 header("HTTP/1.0 409 Conflict"); // not accepted
                 return null;
             }
         }
-        
+
         $this->_config['wallets'][$walletId]['addresses'][] = array(
             'label' => $newLabel,
             'address' => $newAddress,
-        );            
+        );
 
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
@@ -251,7 +252,7 @@ class CryptoGlance {
         $walletId = intval($_POST['walletId']);
         $addrId = intval($_POST['addrId']);
         $newLabel = $_POST['label'];
-        
+
         if ($walletId == 0 || $addrId == 0 || empty($this->_config['wallets'][$walletId-1]['addresses'][$addrId-1]) || empty($newLabel)) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
@@ -259,7 +260,7 @@ class CryptoGlance {
 
         $walletId -= 1;
         $addrId -= 1;
-        
+
         $this->_config['wallets'][$walletId]['addresses'][$addrId]['label'] = $newLabel;
 
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
@@ -269,22 +270,22 @@ class CryptoGlance {
     public function removeAddress() {
         $walletId = intval($_POST['walletId']);
         $addrId = intval($_POST['addrId']);
-        
+
         if ($walletId == 0 || empty($this->_config['wallets'][$walletId-1]) || $addrId == 0 || empty($this->_config['wallets'][$walletId-1]['addresses'][$addrId-1])) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return null;
         }
         $walletId -= 1;
         $addrId -= 1;
-        
+
         unset($this->_config['wallets'][$walletId]['addresses'][$addrId]);
         $this->_config['wallets'][$walletId]['addresses'] = array_values($this->_config['wallets'][$walletId]['addresses']);
         $fh = $fileHandler = new FileHandler('configs/wallets.json');
         $fh->write(json_encode($this->_config['wallets']));
         header("HTTP/1.0 202 Accepted"); // accepted
     }
-    
-    
+
+
     ///////////////
     // Settings //
     //////////////
@@ -309,11 +310,11 @@ class CryptoGlance {
 
         return $settings;
     }
-    
+
     public function saveSettings($data) {
         $fh = $fileHandler = new FileHandler('configs/cryptoglance.json');
         $settings = json_decode($fh->read(), true);
-        
+
         if ($data['general']) {
             $settings['general'] = array(
                 'updates' => array(
@@ -327,13 +328,13 @@ class CryptoGlance {
                 )
             );
         }
-        
+
         if ($data['email']) {
             // add logic eventually
         }
-        
+
         $this->_config['cryptoglance'] = $settings;
-        
+
         if ($fh->write(json_encode($settings)) !== false) {
             return true;
         } else {
