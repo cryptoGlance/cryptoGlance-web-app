@@ -19,7 +19,8 @@ $action = (!empty($_GET['action']) ? $_GET['action'] : $_POST['action']);
 
 $type = ucwords(strtolower($type));
 
-$action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($action)));
+// $action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($action)));
+$action = str_replace(' ', '', lcfirst(ucfirst(str_replace('-', ' ', strtolower($action)))));
 
 // If we're not posting, it's a get function
 if (empty($_POST)) {
