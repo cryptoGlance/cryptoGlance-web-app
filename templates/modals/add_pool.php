@@ -29,6 +29,7 @@
                  <option value="simplecoin">SimpleCoin</option>
                  <option value="trademybit">TradeMyBit</option>
                  <option value="wafflepool">WafflePool</option>
+                 <option value="wemineftc">We Mine FTC</option>
               </select>
             </div>
           </div>
@@ -38,7 +39,7 @@
                <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://vertsquad.com/">
              </div>
            </div>
-           <div class="form-group mpos btcguild simplecoin eclipse trademybit multipoolus" style="display: none;">
+           <div class="form-group mpos btcguild simplecoin eclipse trademybit multipoolus wemineftc" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">
