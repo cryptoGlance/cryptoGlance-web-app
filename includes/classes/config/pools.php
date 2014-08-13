@@ -32,6 +32,7 @@ class Config_Pools extends Config_Abstract {
         $url = rtrim($_POST['url'], '/');
         $address = $_POST['address'];
         $api = $_POST['api'];
+        $coin = $_POST['coin'];
         $userid = $_POST['userid'];
 
         $pool = array();
@@ -91,6 +92,14 @@ class Config_Pools extends Config_Abstract {
                 'type' => $type,
                 'name' => ($label ? $label : 'MultiPool.us'),
                 'apikey' => $api,
+            );
+        } else if ($type == 'nomp' && !empty($address) && !empty($url) && !empty($coin)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
+                'apiurl' => rtrim($url, '/'),
+                'address' => $address,
+                'coin' => $coin,
             );
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted

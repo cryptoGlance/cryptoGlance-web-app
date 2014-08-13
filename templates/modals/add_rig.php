@@ -38,7 +38,7 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-12">
-                        <span class="error"></span>
+                    <span class="error"></span>
                 </div>
               </div>
          </div>

@@ -34,13 +34,14 @@ class Config_Rigs extends Config_Abstract {
     public function create() {
         if (empty($_POST['ip_address']) || empty($_POST['port'])) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return 'Missing IP Address or Port';
+
+            return 'Missing ' . (empty($_POST['ip_address']) ? 'IP Address' : 'Port');
         }
 
         foreach ($this->_data as $rig) {
             if ($_POST['ip_address'] == $rig['host'] && $_POST['port'] == $rig['port']) {
                 header("HTTP/1.0 409 Conflict"); // conflict
-                return (!empty($rig['name']) ? $rig['name'] : $rig['host'].':'.$rig['port']);
+                return 'This rig already exists as ' . (!empty($rig['name']) ? $rig['name'] : $rig['host'].':'.$rig['port']);
             }
         }
 
@@ -50,7 +51,7 @@ class Config_Rigs extends Config_Abstract {
             'host' => $_POST['ip_address'],
             'port' => $_POST['port'],
             'settings' => array(
-                    'algorithm' => $_POST['algorithm']
+                'algorithm' => $_POST['algorithm']
             ),
         );
 

@@ -39,16 +39,16 @@ function destroyMasonry() {
 function restoreSiteLayout() {
   var siteLayout = $.cookie('use_masonry_layout');
   var viewportWidth  = $(window).width();
-    
+
   if (siteLayout == null) {
     $('#layout-grid').removeClass('active-layout');
     $('#layout-list').addClass('active-layout');
-  } 
+  }
   else if (viewportWidth >= 1600 && siteLayout == 'yes') {
     initMasonry();
     $('#layout-list').removeClass('active-layout');
     $('#layout-grid').addClass('active-layout');
-  }  
+  }
 }
 
 // Modify Panel width
@@ -58,7 +58,7 @@ $(function() {
 
   //Store frequently elements in variables
   var slider  = $('#slider');
-  
+
   //Call the Slider
   slider.slider({
     range: "min",
@@ -82,7 +82,7 @@ $(function() {
         actualWidth.html(value + '%');
         $.cookie("cookie_panel_width", value);
      }
-          
+
     },
 
     stop: function(event,ui) {
@@ -90,7 +90,7 @@ $(function() {
         siteLayout = $.cookie('use_masonry_layout');
       if (siteLayout == 'yes' && viewportWidth > 1200) {
         initMasonry();
-      }  
+      }
     },
   });
 
@@ -101,7 +101,7 @@ function restorePanelWidth() {
     siteLayout = $.cookie('use_masonry_layout');
 
   if (!panelWidth) return;
-  
+
   if (siteLayout != "yes") {
     $('#dashboard-wrap, .full-content').css('width', panelWidth + '%');
     $('.width-reading').html(panelWidth + '%');
@@ -115,7 +115,7 @@ function mobileWidthFixer() {
     container = $('#dashboard-wrap, .full-content'),
     siteLayout = $.cookie('use_masonry_layout'),
     currentWidth = $('#slider').slider("option", "value");
-    
+
   if(viewportWidth < 770) {
     container.css('width', '99%');
   } else if (viewportWidth < 1200) {
@@ -125,7 +125,7 @@ function mobileWidthFixer() {
       container.css('width', currentWidth + '%');
     }
   }
-  
+
 }
 
 function expandAllPanels() {
@@ -134,15 +134,15 @@ function expandAllPanels() {
 }
 
 function collapseAllPanels() {
-  $('#dashboard-wrap .panel-body:not(.tab-content .panel-body), #dashboard-wrap .panel-footer, #dashboard-wrap .tab-content, #dashboard-wrap .panel-rig .nav-pills').slideUp('slow'); 
+  $('#dashboard-wrap .panel-body:not(.tab-content .panel-body), #dashboard-wrap .panel-footer, #dashboard-wrap .tab-content, #dashboard-wrap .panel-rig .nav-pills').slideUp('slow');
     return false;
 }
-  
+
 
 // Close navbar after click on mobile
 //
 
-$(function(){ 
+$(function(){
   var navMain = $(".navbar-collapse");
 
   navMain.on("click", "a:not(a.dropdown-toggle, .site-width-slider a)", null, function () {
@@ -153,8 +153,8 @@ $(function(){
     }
   });
 });
-  
-  
+
+
 // Pretty checkable styling
 function prettifyInputs() {
   var inputs = $('input[type=radio], input[type=checkbox]').each(function() {
@@ -165,9 +165,9 @@ function prettifyInputs() {
       'offColor':'danger'
     });
   });
-} 
+}
 
- 
+
 // Toggle Mobile Navbar
 //
 function toggleMobileNavbar() {
@@ -213,7 +213,7 @@ function fixApp() {
 
 // Smooth scrolling
 //
-  
+
 function scrollTo(id){
   $('html,body').animate({scrollTop: $(id).offset().top},'slow');
 };
@@ -228,8 +228,8 @@ $(function() {
         $('body').scrollTo(target, 750, { margin: true, offset: -100 });
     });
 });
-    
-    
+
+
 // Setup Toast Messages
 //
 function setToasts() {
@@ -258,7 +258,7 @@ function showToastSettingsSaved() {
     text    : '<b>Success!</b> Your configuration was saved.',
     type    : 'success'
   });
-  
+
 }
 
 // (Toast) Unable to save settings
@@ -268,7 +268,7 @@ function showToastSettingsNOTSaved() {
     text    : '<b>Failure!</b> Your configuration was <b>not</b> updated. Check your user data or refer to the <a href="help.php#faq">FAQ in the README</a>.',
     type    : 'error'
   });
-  
+
 }
 
 // (Toast) Unable to write to dir
@@ -295,13 +295,13 @@ function showToastNoHTACCESS() {
 //
 
 $(window).resize(function() {
-  mobileWidthFixer();  
+  mobileWidthFixer();
 });
 
 $(window).ready(function() {
-  restoreSiteLayout();  
+  restoreSiteLayout();
 });
-  
+
 // Execute when the DOM is ready
 //
 $(document).ready(function() {
@@ -309,18 +309,10 @@ $(document).ready(function() {
   externalLinks();
   prettifyInputs();
   restoreSiteLayout();
-  
+
   //restoreDashboard();
   restorePanelWidth();
-  
-  // Reveal hidden settings
-  //
-  $('#btnAddPool').click( function() {
-    $(this).fadeOut('fast', function() {
-      $(this).next('.add-new-wrapper').fadeIn('slow');
-    });
-  });
-  
+
   // Pulsate "Add Panel" button
   //
   $('#flash-add-panel').click( function() {
@@ -328,26 +320,26 @@ $(document).ready(function() {
     $('#dash-add-panel').addClass('flash');
     });
   });
-  
+
   // Start Update Process
   $('#btn-update-process').click( function() {
     $(this).attr('disabled', true);
     $('iframe').slideDown();
   });
-  
+
   // Toggle App Update Types
   //
   $('input[name="update"]', '#settings-wrap').on('switchChange.bootstrapSwitch', function(event, state) {
     $('.app-update-types').fadeToggle();
   });
-  
+
   $('#layout-grid').click(function() {
     initMasonry();
     $('#layout-list').removeClass('active-layout');
     $(this).addClass('active-layout');
     return false;
   });
-  
+
   $('#layout-list').click(function() {
     destroyMasonry();
     $('#layout-grid').removeClass('active-layout');
@@ -355,7 +347,7 @@ $(document).ready(function() {
     restorePanelWidth();
     return false;
   });
-  
+
   $('#collapse-all-panels').click(function(event) {
     event.preventDefault();
     collapseAllPanels();
@@ -372,9 +364,9 @@ $(document).ready(function() {
 
   $('.toggle-panel-body').click(function() {
     var $toggleButton = $(this);
-    
+
     $(this).parent().nextAll('.panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideToggle('slow');
-    
+
     $toggleButton.toggleClass("minimized");
 
     if ($toggleButton.hasClass("minimized")) {
@@ -387,38 +379,29 @@ $(document).ready(function() {
     var target = $(this).attr('href');
     $('body').scrollTo(target, 750, { margin: true, offset: -120 });
     return false;
-  });  
+  });
 
   $('.anchor').click(function() {
     var target = $(this).attr('href');
     $('body').scrollTo(target, 750, { margin: true });
     return false;
-  });  
+  });
 
   $('#btnSaveHost').click(function() {
     $("#alert-saved-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
     prettifyInputs();
-  });  
+  });
 
   $('#btnAddHost').click(function() {
     $("#alert-added-host").fadeIn('slow').delay( 4000 ).fadeOut(3000);
     prettifyInputs();
-  }); 
-  
+  });
+
   $('#btnSaveWallets').click(function() {
     $("#alert-saved-wallet").fadeIn('slow').delay( 4000 ).fadeOut(3000);
     prettifyInputs();
-  });  
+  });
 
-  
-//  $('#btnSavePool').click(function() {
-//    $("#alert-saved-pool").fadeIn('slow').delay( 4000 ).fadeOut(3000);
-//  })  
-//
-//  $('#btnAddPool').click(function() {
-//    $("#alert-added-pool").fadeIn('slow').delay( 4000 ).fadeOut(3000);
-//  })
-  
     // Delete
     $('.btn-delete').click(function() {
         var panelType = $(this).parentsUntil('.panel').parent().attr('data-type');
@@ -428,30 +411,30 @@ $(document).ready(function() {
         $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
         prettifyInputs();
     });
-  
+
     $('#deletePrompt').on('shown.bs.modal', function () {
         $('input[name="type"]', this).val($(this).attr('data-type'));
         $('input[name="id"]', this).val($(this).attr('data-id'));
         prettifyInputs();
     });
-    
-        
+
+
     // Pool modal
     $('#selectPoolType').change(function() {
         var type = $(this).val();
         $('#addPool').find('.form-group').hide();
         $('#addPool').find('.' + type).show();
         $('#addPool').find('.all').show();
-        
+
         if (type == 'simplecoin') {
             $('#inputPoolURL').attr('placeholder', 'http://simpledoge.com');
         } else if (type == 'mpos') {
-            $('#inputPoolURL').attr('placeholder', 'http://rddpool.com');
+            $('#inputPoolURL').attr('placeholder', 'http://coinhuntr.com');
         }
-        
+
         prettifyInputs();
     });
-    
+
     // Wallet Page \\
     // Edit Address Action
     $('#walletAddresses').on('click', '.editAddress', function(e) {
@@ -459,11 +442,11 @@ $(document).ready(function() {
         // row Parent
         var addrRow = $(this).parents('tr');
         $(addrRow).addClass('wallet-inline-edit');
-        
+
         // Get Label and value
         var addrLabelTd = $('[data-name="label"]', addrRow);
         var addrLabelVal = $(addrLabelTd).html();
-        
+
         // Create input field, populate, and style
         var addrLabelInput = document.createElement("input");
         $(addrLabelInput).val(addrLabelVal);
@@ -478,15 +461,15 @@ $(document).ready(function() {
     // Save Edit Address Action
     $('#walletAddresses').on('click', '.saveEditAddress', function(e) {
         e.preventDefault();
-        
+
         // Wallet Id
         var walletId = $('#walletAddresses').attr('data-walletId');
-        
+
         // row Parent
         var addrRow = $(this).parents('tr');
         var addrKey = $(addrRow).attr('data-key');
         var addrLabelInput = $('[name="label"]', addrRow);
-        
+
         // on done:
         $.ajax({
             type: 'post',
@@ -497,10 +480,10 @@ $(document).ready(function() {
                     var addrLabelTd = $('[data-name="label"]', addrRow);
                     $(addrLabelTd).html($(addrLabelInput).val());
                     $(addrLabelInput).remove();
-                    
+
                     $('#alert-save-fail-address').fadeOut();
                     $('#alert-saved-address').fadeIn();
-                    
+
                     // get Last column (action buttons)
                     var actionTd = $('td:last', addrRow);
                     $(actionTd).html('<a href="#editAddress" class="editAddress"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removeAddress" class="removeAddress"><span class="red"><i class="icon icon-remove"></i></span></a>');
@@ -518,14 +501,14 @@ $(document).ready(function() {
     // Remove Address Action
     $('#walletAddresses').on('click', '.removeAddress', function(e) {
         e.preventDefault();
-        
+
         // Wallet Id
         var walletId = $('#walletAddresses').attr('data-walletId');
-        
+
         // row Parent
         var addrRow = $(this).parents('tr');
         var addrKey = $(addrRow).attr('data-key');
-        
+
         // on done:
         $.ajax({
             type: 'post',
@@ -541,16 +524,16 @@ $(document).ready(function() {
     // Add Address Action
     $('#walletAddresses').on('click', '.saveNewAddress', function(e) {
         e.preventDefault();
-        
+
         // Wallet Id
         var walletId = $('#walletAddresses').attr('data-walletId');
-        
+
         // row Parent
         var addrRow = $(this).parents('tr');
         var addrKey = $(addrRow).attr('data-key');
         var addrLabel = $('[name="label"]', addrRow);
         var addrAddress = $('[name="address"]', addrRow);
-        
+
         // on done:
         $.ajax({
             type: 'post',

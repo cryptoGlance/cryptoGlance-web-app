@@ -212,7 +212,7 @@
                     errorMsg.html(msg.responseText);
                 },
                 409: function(msg) {
-                    errorMsg.html('Looks like this rig already exists as ' + msg.responseText);
+                    errorMsg.html(msg.responseText);
                 }
             }
         })
