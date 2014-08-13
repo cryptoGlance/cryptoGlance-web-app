@@ -14,6 +14,7 @@ class Wallets extends Config_Wallets {
         'continuum' => 'CTM',
         'darkcoin' => 'DRK',
         'dogecoin' => 'DOGE',
+        'feathercoin' => 'FTC',
         'litecoin' => 'LTC',
         'reddcoin' => 'RDD',
         'vertcoin' => 'VTC',
