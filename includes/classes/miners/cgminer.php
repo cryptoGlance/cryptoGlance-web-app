@@ -20,7 +20,7 @@ class Miners_Cgminer extends Miners_Abstract {
     protected $_rigHashrate = 0;
     protected $_activePool = array();
     protected $_upTime;
-    
+
     // Version Handling
     protected $_shareTypePrefix = ''; // This will set shares to 'Difficulty Accepted' or just 'Accepted'
 
@@ -41,7 +41,7 @@ class Miners_Cgminer extends Miners_Abstract {
         if (!is_null($this->_activePool['algorithm'])) {
             $algorithm = $this->_activePool['algorithm'];
         }
-        
+
         return array(
             'name' => $this->_name,
             'status' => $this->_rigStatus,
@@ -57,7 +57,7 @@ class Miners_Cgminer extends Miners_Abstract {
         if ($this->_summary['Difficulty Accepted'] > $this->_summary['Accepted']) {
             $this->_shareTypePrefix = 'Difficulty ';
         }
-        
+
         $totalShares = $this->_summary[$this->_shareTypePrefix.'Accepted'] + $this->_summary[$this->_shareTypePrefix.'Rejected'] + $this->_summary[$this->_shareTypePrefix.'Stale'];
 
         if (!isset($this->_summary['Device Hardware%'])) {
@@ -65,12 +65,12 @@ class Miners_Cgminer extends Miners_Abstract {
         } else {
             $hePercent = $this->_summary['Device Hardware%'];
         }
-        
+
         $algorithm = $this->_settings['algorithm'];
         if (!is_null($this->_activePool['algorithm'])) {
             $algorithm = $this->_activePool['algorithm'];
         }
-        
+
         return array(
             'algorithm' => $algorithm,
             'hashrate_avg' => $this->_summary['MHS av'],
@@ -197,11 +197,11 @@ class Miners_Cgminer extends Miners_Abstract {
 
         return $pools;
     }
-    
+
     public function restart() {
         $this->cmd('{"command":"restart"}');
     }
-    
+
     public function switchPool($poolId) {
         return $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
@@ -249,15 +249,20 @@ class Miners_Cgminer extends Miners_Abstract {
     private function getActivePool() {
         $pools = array();
         foreach ($this->_pools as $pool) {
-            if ($pool['Status'] != 'Dead' && $pool['Stratum Active'] == 1) {
+            if ($pool['Status'] == 'Alive' && $pool['Stratum Active'] == '1') {
                 $pools[] = $pool;
             }
         }
-    
+
         $activePool = array();
         $activePool['Last Share Time'] = 0;
+        $totalPools = count($pools);
         foreach ($pools as $pool) {
-            if ($pool['Last Share Time'] > $activePool['Last Share Time']) {
+            if (
+                ($totalPools > 1 && $pool['Last Share Time'] > $activePool['Last Share Time'])
+                ||
+                ($totalPools == 1)
+            ) {
                 $activePool = array(
                     'id' => $pool['POOL'],
                     'url' => $pool['Stratum URL'],
@@ -269,7 +274,7 @@ class Miners_Cgminer extends Miners_Abstract {
                 }
             }
         }
-        
+
         unset($activePool['Last Share Time']);
         $this->_activePool = $activePool;
     }
