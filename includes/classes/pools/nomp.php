@@ -13,7 +13,7 @@ class Pools_Nomp extends Pools_Abstract {
         parent::__construct($params);
         $this->_address = $params['address'];
         $this->_coin = $params['coin'];
-        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['address']) .'.json');
+        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. $this->_apiURL . '/' . hash('md4', $params['address']) .'.json');
     }
 
     public function update() {
