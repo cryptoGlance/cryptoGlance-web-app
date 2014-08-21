@@ -83,7 +83,7 @@
         }
       })
     })
-    
+
     return true;
   }
 
@@ -104,17 +104,7 @@
   RigCollection.prototype._buildOverview = function (data) {
     var _self = this // caching self ref for passing down in scope
 
-    var algorithms = {
-      'blake-256': 0,
-      'keccak': 0,
-      'nist5': 0,
-      'sha256': 0,
-      'scrypt': 0,
-      'scrypt-n': 0,
-      'x11': 0,
-      'x13': 0,
-      'x15': 0
-    }
+    var algorithms = { }
 
     function build(res, index) {
       if (res.overview) {
@@ -122,7 +112,12 @@
       }
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
       _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
-      algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
+
+      if (typeof algorithms[res.algorithm] == 'undefined') {
+        var algorithm = res.algorithm;
+        algorithms[algorithm] = 0;
+        algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
+      }
     }
 
     this.overviewTableData = ''
@@ -140,6 +135,12 @@
 
     for (var key in algorithms) {
       if (algorithms[key]) {
+        if ($('#hashrate_' + key).length == 0) {
+          var aTag = document.createElement('a');
+          aTag.setAttribute('id',"hashrate_"+key);
+          aTag.setAttribute('class',"total-hashrate hidden");
+          $('#total-hashrates li').append(aTag)
+        }
         $('#hashrate_' + key).removeClass('hidden').html('<span class="hashrate-algo">' + key + '</span>' + Util.getSpeed(algorithms[key]))
       }
       else {
