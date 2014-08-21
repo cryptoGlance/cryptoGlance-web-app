@@ -14,14 +14,26 @@ if ($rigId == 0) {
 
 session_write_close();
 
+require_once('includes/autoloader.inc.php');
+
+// Start our rig class
+$rigsObj = new Rigs($rigId);
+
+if (!empty($_POST)) {
+
+    print_r($_POST);
+    die();
+
+}
+
 $jsArray = array(
     'rig/script',
 );
 
-require_once('includes/autoloader.inc.php');
 require_once("includes/header.php");
 
-$rigsObj = new Rigs($rigId);
+
+// Fetch Page Information
 $rigDevices = $rigsObj->getDevices();
 $rigDevices = $rigDevices[0];
 
@@ -31,10 +43,18 @@ $rigPools = $rigPools[0];
 $rigSettings = $rigsObj->getSettings();
 $rigSettings = $rigSettings[0];
 
-if (is_null($rigDevices)) {
-    die('Rig is offline'); // this needs to be prettier.
+// If no devices are found, show some kind of warning
+if (empty($rigDevices)) {
+?>
+<script type="text/javascript">
+!function ($){
+    setTimeout(function() {
+        showToastRigOffline('<?php echo (!empty($rigSettings['name']) ? $rigSettings['name'] : $rigSettings['host'].':'.$rigSettings['port']); ?>');
+    }, 1000);
+}(window.jQuery)
+</script>
+<?php
 }
-
 ?>
 
     <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $rigId;?>">
@@ -86,24 +106,19 @@ if (is_null($rigDevices)) {
                                         </div>
                                     </div>
                                 </fieldset>
+                                <input type="hidden" name="type" value="details" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
                     <div class="tab-pane fade" id="rig-settings-thresholds">
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
-
-                        <!-- TODO: Make the actual setting divs fade in ONLY if the checkbox is checked (temps + HW errors) -->
-
-
                                 <fieldset class="floated">
                                     <h3>Temperature Thresholds</h3>
                                     <div class="form-group checkbox">
-                                        <label>
-                                            <input type="checkbox" name="temperatureEnabled" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?>> Enable Temperature Warnings
-                                        </label>
+                                        <input id="threshold-temps" class="enabler" type="checkbox" name="temperatureEnabled" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?>> <label for="threshold-temps">Enable Temperature Warnings</label>
                                     </div>
-                                    <div class="form-group setting-thresholds setting-temperature">
+                                    <div class="form-group setting-thresholds">
                                         <table class="table table-hover table-striped table-settings">
                                             <thead>
                                                 <tr>
@@ -142,11 +157,9 @@ if (is_null($rigDevices)) {
                                 <fieldset class="floated">
                                     <h3>HW Error Thresholds</h3>
                                     <div class="form-group checkbox">
-                                        <label>
-                                            <input type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['enabled']) ? 'checked' : '' ?>> Enable Hardware Error Warnings
-                                        </label>
+                                        <input id="threshold-hwerrors" class="enabler" type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['enabled']) ? 'checked' : '' ?>> <label for="threshold-hwerrors">Enable Hardware Error Warnings</label>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group setting-thresholds ">
                                         <table class="table table-hover table-striped table-settings">
                                             <thead>
                                                 <tr>
@@ -207,13 +220,14 @@ if (is_null($rigDevices)) {
                                         </table>
                                     </div>
                                 </fieldset>
+                                <input type="hidden" name="type" value="thresholds" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
                     <div class="tab-pane fade" id="rig-settings-devices">
                         <div class="panel-body">
                             <h3>Available Device(s)</h3>
-                            <form role="form">
+                            <form class="form-horizontal" role="form">
                                 <table class="table table-hover table-striped table-devices">
                                     <thead>
                                         <tr>
@@ -242,7 +256,7 @@ if (is_null($rigDevices)) {
                                           <td><i class="icon icon-<?php echo $dev['status']['icon']; ?> <?php echo $dev['status']['colour']; ?>"></i></td>
                                           <td class="<?php echo $dev['status']['colour']; ?>"><?php echo $dev['type'] . $dev['id']; ?></td>
                                           <td><input type="checkbox" class="enableDev" name="enabledDev<?php echo $dev['id']; ?>" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
-                                          <td><?php echo $dev['hashrate_5s']; ?></td>
+                                          <td><?php echo formatHashrate($dev['hashrate_5s']*1000); ?></td>
                                           <?php if ($dev['type'] == 'GPU') { ?>
                                           <td><?php echo $dev['temperature_c'] . '<span>&deg;C</span>/' . $dev['temperature_f'] . '<span>&deg;F</span>'; ?></td>
                                           <td><input type="text" class="form-control" value="<?php echo $dev['intensity']; ?>" /></td>
@@ -265,6 +279,7 @@ if (is_null($rigDevices)) {
                                 <div class="inline-edit-control">
                                   <button type="button" disabled class="btn btn-warning btn-space" id="btnRevertDevices"><i class="icon icon-undo"></i> Revert Changes</button>
                                 </div>
+                                <input type="hidden" name="type" value="devices" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
@@ -351,6 +366,7 @@ if (is_null($rigDevices)) {
                                   <br>
                                   <br>
                                 </div><!-- end add-new-pool-wrapper -->
+                                <input type="hidden" name="type" value="pools" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>

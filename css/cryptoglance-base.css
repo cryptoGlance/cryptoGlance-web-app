@@ -2521,7 +2521,25 @@ a#dash-add-panel.flash {
 }
 
 
+/* Ajax Loader Images */
+.ajax-loader {
+    background: url('../images/ajax-loader.gif') transparent center center no-repeat;
+}
+.ajax-saver {
+    background: url('../images/ajax-saver.png') transparent center center no-repeat;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    -webkit-animation: rotation 1s infinite linear;
+}
+.ajax-saver:before {
+    content: '';
+}
 
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
+}
 
 
 /* Font Support

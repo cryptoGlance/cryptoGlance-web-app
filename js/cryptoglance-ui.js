@@ -290,6 +290,15 @@ function showToastNoHTACCESS() {
   });
 }
 
+// (Toast) No .htaccess in user_data
+function showToastRigOffline(name) {
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : 'cryptoGlance cannot connect to the rig "' + name + '".<br />This probably means the rig is offline.',
+    type    : 'warning'
+  });
+}
+
 
 // Only change custom width (via slider) for viewports over 1200px
 //
