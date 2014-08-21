@@ -9,19 +9,21 @@
                 </div>
                 <div class="modal-body">
                     <div class="ajax-loader"></div>
-                    <table class="table table-hover table-striped" style="display: none;">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Selected</th>
-                                <th>Active</th>
-                                <th>URL</th>
-<!--                                <th>User</th>-->
-                                <th>Priority</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Selected</th>
+                                    <th>Active</th>
+                                    <th>URL</th>
+    <!--                                <th>User</th>-->
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-lg btn-primary" data-dismiss="modal"><i class="icon icon-undo"></i> Stay in current pool</button>

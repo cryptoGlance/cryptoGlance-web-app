@@ -41,8 +41,7 @@
       if (typeof data != 'undefined') {
         $('#switchPool').attr('data-attr', rigId);
         $.each(data[0], function (v,k) {
-            var poolUrl = k.url.replace(/\:[0-9]{1,4}/, '');
-            poolUrl = poolUrl.slice(poolUrl.indexOf("/") + 2)
+            var poolUrl = k.url.slice(k.url.indexOf("/") + 2)
 
             var active = (k.active == 1) ? 'Yes' : 'No';
             var status = (k.status == 1) ? 'Alive' : 'Dead';
@@ -53,7 +52,6 @@
                     '<td>'+ '<input type="radio" name="switchPoolList" id="rig'+ rigId +'-pool'+ k.id +'" value="'+ k.id +'">' +'</td>' +
                     '<td>'+ status +'</td>' +
                     '<td>'+ poolUrl +'</td>' +
-//                    '<td>'+ k.user +'</td>' +
                     '<td>'+ k.priority +'</td>' +
                 '</tr>'
             );
