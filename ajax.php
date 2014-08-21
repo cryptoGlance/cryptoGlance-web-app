@@ -19,7 +19,6 @@ $action = (!empty($_GET['action']) ? $_GET['action'] : $_POST['action']);
 
 $type = ucwords(strtolower($type));
 
-// $action = str_replace('-', '', preg_replace_callback('/(\w+)/', function($match){ return ucfirst($match[1]); }, strtolower($action)));
 $action = str_replace(' ', '', lcfirst(ucfirst(str_replace('-', ' ', strtolower($action)))));
 
 // If we're not posting, it's a get function
@@ -33,8 +32,6 @@ if (empty($type) || empty($action)) {
 
 require_once('includes/autoloader.inc.php');
 
-//$className = 'Class_' . $type;
-//$obj = new $className();
 $obj = new $type();
 $result = $obj->$action();
 header('Content-Type: application/json');
