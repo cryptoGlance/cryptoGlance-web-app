@@ -37,15 +37,10 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     public function overview() {
-        $algorithm = $this->_settings['algorithm'];
-        if (!is_null($this->_activePool['algorithm'])) {
-            $algorithm = $this->_activePool['algorithm'];
-        }
-
         return array(
             'name' => $this->_name,
             'status' => $this->_rigStatus,
-            'algorithm' => $algorithm,
+            'algorithm' => $this->_settings['algorithm'],
             'hashrate_5s' => $this->_rigHashrate,
             'raw_hashrate' => $this->_rigHashrate,
             'active_pool' => $this->_activePool,
@@ -66,14 +61,9 @@ class Miners_Cgminer extends Miners_Abstract {
             $hePercent = $this->_summary['Device Hardware%'];
         }
 
-        $algorithm = $this->_settings['algorithm'];
-        if (!is_null($this->_activePool['algorithm'])) {
-            $algorithm = $this->_activePool['algorithm'];
-        }
-
         return array(
-            'algorithm' => $algorithm,
-            'hashrate_avg' => $this->_summary['MHS av'],
+            'algorithm' => $this->_settings['algorithm'],
+            'hashrate_avg' => (isset($this->_summary['MHS av'])) ? $this->_summary['MHS av'] : $this->_summary['GHS av'],
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => array(
                 'raw' => round($this->_summary[$this->_shareTypePrefix.'Accepted']),
@@ -190,7 +180,7 @@ class Miners_Cgminer extends Miners_Abstract {
                 'status' => ($pool['Status'] == 'Alive') ? 1 : 0,
                 'active' => ($pool['POOL'] == $this->_activePool['id']) ? 1 : 0,
                 'url' => $pool['URL'],
-//                'user' => $pool['User'],
+                'user' => $pool['User'],
                 'priority' => $pool['Priority'],
             );
         }
@@ -270,7 +260,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     'algorithm' => null,
                 );
                 if (array_key_exists('Algorithm Type', $pool)) {
-                    $activePool['algorithm'] = $pool['Algorithm Type'];
+                    $this->_settings['algorithm'] = $pool['Algorithm Type'];
                 }
             }
         }

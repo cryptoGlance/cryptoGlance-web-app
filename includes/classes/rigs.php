@@ -87,10 +87,7 @@ class Rigs extends Config_Rigs {
     }
 
     public function getUpdate() {
-        // $data = array();
-        // $data;
         foreach ($this->_objs as $rig) {
-            // $data[] = $rig->update();
             $data = $rig->update();
         }
 

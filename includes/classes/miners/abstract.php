@@ -7,7 +7,7 @@ class Miners_Abstract {
 
     protected $_name;
     protected $_settings = array(
-        'algorithm' => 'sha256',
+        'algorithm' => 'SHA256',
         'hwErrors' => array(
             'enabled' => 1,
             'type' => 'percent',

@@ -21,13 +21,13 @@ $jsArray = array(
 require_once('includes/autoloader.inc.php');
 require_once("includes/header.php");
 
-$cryptoGlance = new CryptoGlance();
-
 $rigsObj = new Rigs($rigId);
 $rigDevices = $rigsObj->getDevices();
 $rigDevices = $rigDevices[0];
+
 $rigPools = $rigsObj->getPools();
 $rigPools = $rigPools[0];
+
 $rigSettings = $rigsObj->getSettings();
 $rigSettings = $rigSettings[0];
 
@@ -36,7 +36,7 @@ if (is_null($rigDevices)) {
 }
 
 ?>
-       
+
     <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $rigId;?>">
         <div id="rigDetails" class="panel panel-primary panel-no-grid">
             <h1><?php echo (!empty($rigSettings['name']) ? $rigSettings['name'] : $rigSettings['host'].':'.$rigSettings['port']); ?></h1>
@@ -50,15 +50,13 @@ if (is_null($rigDevices)) {
                     <li><a href="#rig-settings-devices" data-toggle="tab" role="tab">Devices <i class="icon icon-cpu-processor"></i></a></li>
                     <li><a href="#rig-settings-pools" data-toggle="tab" role="tab">Pools <i class="icon icon-communitysmall"></i></a></li>
                 </ul>
-                
-                <!-- TODO: WARNING!!!!!!!!!! The <form> tags are all fuct up below per tab -- this needs to be cleaned by a PHP expert ;) -->
-                
+
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="rig-settings-basic">
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
                                 <fieldset>
-                                    <h3>Rig Details</h3>      
+                                    <h3>Rig Details</h3>
                                     <div class="form-group">
                                         <label for="inputRigLabel" class="col-sm-5 control-label">Label</label>
                                         <div class="col-sm-5">
@@ -81,11 +79,9 @@ if (is_null($rigDevices)) {
                                         <label for="inputRigAlgor" class="col-sm-5 control-label">Algorithm</label>
                                         <div class="col-sm-2">
                                             <select class="form-control" id="inputRigAlgor" name="algorithm">
-                                                <option value="sha256" <?php echo ($rigSettings['settings']['algorithm'] == 'sha256') ? 'selected' : '';?>>sha256</option>
-                                                <option value="scrypt" <?php echo ($rigSettings['settings']['algorithm'] == 'scrypt') ? 'selected' : '';?>>scrypt</option>
-                                                <option value="scrypt-n" <?php echo ($rigSettings['settings']['algorithm'] == 'scrypt-n') ? 'selected' : '';?>>scrypt-n</option>
-                                                <option value="x11" <?php echo ($rigSettings['settings']['algorithm'] == 'x11') ? 'selected' : '';?>>x11</option>
-                                                <option value="x13" <?php echo ($rigSettings['settings']['algorithm'] == 'x13') ? 'selected' : '';?>>x13</option>
+                                                <?php foreach($cryptoGlance->supportedAlgorithms() as $val => $name) { ?>
+                                                <option value="<?php echo $val; ?>" <?php echo (strtolower($rigSettings['settings']['algorithm']) == strtolower($val)) ? 'selected' : '' ?>><?php echo $name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -96,12 +92,12 @@ if (is_null($rigDevices)) {
                     <div class="tab-pane fade" id="rig-settings-thresholds">
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
-                                
+
                         <!-- TODO: Make the actual setting divs fade in ONLY if the checkbox is checked (temps + HW errors) -->
-                    
+
 
                                 <fieldset class="floated">
-                                    <h3>Temperature Thresholds</h3>      
+                                    <h3>Temperature Thresholds</h3>
                                     <div class="form-group checkbox">
                                         <label>
                                             <input type="checkbox" name="temperatureEnabled" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?>> Enable Temperature Warnings
@@ -117,24 +113,6 @@ if (is_null($rigDevices)) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            
-                                                <!-- TODO: Rip out the temp scale toggles if needed (we only stick with Celsius) -->
-                                            
-                                                <tr>
-                                                    <td>
-                                                        <label class="control-label"><small>Temp Scale</small></label>
-                                                    </td>
-                                                    <td>
-                                                        <label>
-                                                            Celsius<br><input type="radio" name="hwTempScale">
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <label>
-                                                            Fahrenheit<br><input type="radio" name="hwTempScale">
-                                                        </label>
-                                                    </td>
-                                                </tr>
                                                 <tr>
                                                     <td colspan="2">
                                                         <label for="inputTempWarning" class="control-label orange">Warning</label>
@@ -157,7 +135,7 @@ if (is_null($rigDevices)) {
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </tbody>                                    
+                                            </tbody>
                                         </table>
                                     </div>
                                 </fieldset>
@@ -225,16 +203,16 @@ if (is_null($rigDevices)) {
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </tbody>                                    
+                                            </tbody>
                                         </table>
                                     </div>
-                                </fieldset>                            
+                                </fieldset>
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
                     <div class="tab-pane fade" id="rig-settings-devices">
                         <div class="panel-body">
-                            <h3>Available Device(s)</h3>      
+                            <h3>Available Device(s)</h3>
                             <form role="form">
                                 <table class="table table-hover table-striped table-devices">
                                     <thead>
@@ -282,32 +260,24 @@ if (is_null($rigDevices)) {
                                     ?>
                                     </tbody>
                                 </table>
-                                
+
                                 <!-- TODO: Remove the 'disabled' state on the revert button below once the user has changed ANY value in the table above -->
                                 <div class="inline-edit-control">
-                                  <button type="button" disabled class="btn btn-warning btn-space" id="btnRevertDevices"><i class="icon icon-undo"></i> Revert Changes</button> 
-                                  
-                                  <!-- TODO: Determine if we need a unique SAVE button for the devices 
-                                  
-                                  &nbsp; 
-                                  <button type="button" class="btn btn-success btn-space" id="btnSaveDevices"><i class="icon icon-save-floppy"></i> Save Device Settings</button> 
-                                  
-                                  --->
+                                  <button type="button" disabled class="btn btn-warning btn-space" id="btnRevertDevices"><i class="icon icon-undo"></i> Revert Changes</button>
                                 </div>
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
                     <div class="tab-pane fade" id="rig-settings-pools">
                         <div class="panel-body">
-                            <h3>Pool Management</h3>      
+                            <h3>Pool Management</h3>
                             <form class="form-horizontal" role="form">
-                            
+
                               <!-- TODO: Replace with same output as switch-pool-modal -->
                               <table class="table table-hover table-striped table-devices">
                                     <thead>
                                         <tr>
                                             <th>Active</th>
-                                            <th>Name</th>
                                             <th>Pool URL</th>
                                             <th>Worker</th>
                                             <th>Password</th>
@@ -321,7 +291,6 @@ if (is_null($rigDevices)) {
                                     ?>
                                         <tr data-poolId="<?php echo $pool['id']; ?>">
                                           <td><input type="radio" name="enabledPool" class="form-control"  <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
-                                          <td>---</td>
                                           <td><?php echo $pool['url']; ?></td>
                                           <td><?php echo $pool['user']; ?></td>
                                           <td>********</td>
@@ -346,7 +315,7 @@ if (is_null($rigDevices)) {
                                 </table>
                                 <button type="button" class="btn btn-primary btn-space" id="btnAddPool"><i class="icon icon-plus-sign"></i> Add New Pool</button>
                                 <div id="addNewPool" class="add-new-wrapper">
-                                  <h3>Add a new pool:</h3>                
+                                  <h3>Add a new pool:</h3>
                                   <div class="form-group">
                                     <label for="inputPoolLabel" class="col-sm-5 control-label">Pool Label</label>
                                     <div class="col-sm-5">
@@ -402,7 +371,7 @@ if (is_null($rigDevices)) {
       <?php require_once("includes/footer.php"); ?>
       </div>
       <!-- /page-container -->
-      
+
       <?php require_once("includes/scripts.php"); ?>
    </body>
 </html>
