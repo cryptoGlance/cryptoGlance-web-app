@@ -17,7 +17,6 @@
                                     <th>Selected</th>
                                     <th>Active</th>
                                     <th>URL</th>
-    <!--                                <th>User</th>-->
                                     <th>Priority</th>
                                 </tr>
                             </thead>
