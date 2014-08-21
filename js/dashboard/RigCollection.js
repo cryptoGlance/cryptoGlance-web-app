@@ -116,8 +116,8 @@
       if (typeof algorithms[res.algorithm] == 'undefined') {
         var algorithm = res.algorithm;
         algorithms[algorithm] = 0;
-        algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
       }
+      algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
     }
 
     this.overviewTableData = ''
