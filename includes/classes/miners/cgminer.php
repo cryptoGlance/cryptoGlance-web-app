@@ -255,7 +255,7 @@ class Miners_Cgminer extends Miners_Abstract {
             ) {
                 $activePool = array(
                     'id' => $pool['POOL'],
-                    'url' => $pool['Stratum URL'],
+                    'url' => ltrim(stristr($pool['URL'], '//'), '//'),
                     'Last Share Time' => $pool['Last Share Time'],
                     'algorithm' => null,
                 );
