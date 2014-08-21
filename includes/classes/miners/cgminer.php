@@ -63,7 +63,7 @@ class Miners_Cgminer extends Miners_Abstract {
 
         return array(
             'algorithm' => $this->_settings['algorithm'],
-            'hashrate_avg' => (isset($this->_summary['MHS av'])) ? $this->_summary['MHS av'] : $this->_summary['GHS av'],
+            'hashrate_avg' => (isset($this->_summary['MHS av'])) ? $this->_summary['MHS av'] : $this->_summary['GHS av']*1000,
             'blocks_found' => $this->_summary['Found Blocks'],
             'accepted' => array(
                 'raw' => round($this->_summary[$this->_shareTypePrefix.'Accepted']),
