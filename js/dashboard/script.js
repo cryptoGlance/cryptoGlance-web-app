@@ -258,49 +258,6 @@
     })
 
 
-    $document.on('click', '.editPoolConfig', function (evt) {
-      evt.preventDefault()
-
-      var $tr = $(this).parents('tr')
-      var $td = $tr.children().slice(1, 4)
-
-      $td.each(function(){
-        var input = document.createElement('input')
-        input.value = this.textContent
-        input.type = /\*/.test(this.textContent) ? 'password' : 'text'
-        this.textContent = ''
-        this.appendChild(input)
-      })
-
-      $(this).addClass('savePoolConfig')
-      .removeClass('editPoolConfig')
-      .find('.icon')
-      .removeClass('icon-edit')
-      .addClass('icon-save-floppy')
-    })
-
-    $document.on('click', '.savePoolConfig', function (evt) {
-      evt.preventDefault()
-
-      var $tr = $(this).parents('tr')
-      var $inputs = $tr.children().slice(1, 4).find('input')
-      var values = []
-
-      $inputs.each(function(){
-        values.push(this.value)
-        this.parentNode.textContent = this.value
-      })
-
-      $(this).addClass('editPoolConfig')
-      .removeClass('savePoolConfig')
-      .find('.icon')
-      .removeClass('icon-save-floppy')
-      .addClass('icon-edit')
-
-      alert('do ajax-y stuff with ' + values.join('|') + ' here')
-    })
-
-
 
     // Global Keyboard Shortcuts
     //
