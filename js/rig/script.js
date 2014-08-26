@@ -47,11 +47,15 @@
 
       var $tr = $(this).parents('tr')
       var $td = $tr.children().slice(1, 4)
+      var poolId = $tr.attr('data-id')
 
       $td.each(function(){
         var input = document.createElement('input')
+        input.name = 'pools[' + poolId + '][' + $(this).attr('data-name') + ']'
+        input.className = 'form-control'
         input.value = this.textContent
         input.type = /\*/.test(this.textContent) ? 'password' : 'text'
+        $(this).attr('data-val', this.textContent)
         this.textContent = ''
         this.appendChild(input)
       })
@@ -66,6 +70,9 @@
       .next()
       .addClass('cancelPoolConfig')
       .removeClass('removePoolConfig')
+      .find('.red')
+      .removeClass('red')
+      .addClass('blue')
       .find('.icon')
       .removeClass('icon-remove')
       .addClass('icon-undo')
@@ -94,6 +101,9 @@
       .next()
       .addClass('removePoolConfig')
       .removeClass('cancelPoolConfig')
+      .find('.blue')
+      .removeClass('blue')
+      .addClass('red')
       .find('.icon')
       .removeClass('icon-undo')
       .addClass('icon-remove')
@@ -106,16 +116,17 @@
 
       var $tr = $(this).parents('tr')
       var $inputs = $tr.children().slice(1, 4).find('input')
-      var values = []
 
       $inputs.each(function(){
-        values.push(this.value)
-        this.parentNode.textContent = this.value
+        this.parentNode.textContent = $(this).parent().attr('data-val')
       })
 
       $(this)
       .addClass('removePoolConfig')
       .removeClass('cancelPoolConfig')
+      .find('.blue')
+      .removeClass('blue')
+      .addClass('red')
       .find('.icon')
       .removeClass('icon-undo')
       .addClass('icon-remove')
