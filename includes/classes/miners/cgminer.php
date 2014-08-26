@@ -16,7 +16,7 @@ class Miners_Cgminer extends Miners_Abstract {
 
     // Common Data
     protected $_devStatus = array();
-    protected $_rigStatus = array();
+    protected $_rigStatus = 'offline';
     protected $_rigHashrate = 0;
     protected $_activePool = array();
     protected $_upTime;
@@ -31,7 +31,7 @@ class Miners_Cgminer extends Miners_Abstract {
         $this->_host = $rig['host'];
         $this->_port = $rig['port'];
 
-        if ($this->fetchData() == null) {
+        if ($this->fetchData() === false) {
             return null;
         }
     }
@@ -42,7 +42,6 @@ class Miners_Cgminer extends Miners_Abstract {
             'status' => $this->_rigStatus,
             'algorithm' => $this->_settings['algorithm'],
             'hashrate_5s' => $this->_rigHashrate,
-            'raw_hashrate' => $this->_rigHashrate,
             'active_pool' => $this->_activePool,
             'uptime' => $this->_upTime,
         );
@@ -277,31 +276,7 @@ class Miners_Cgminer extends Miners_Abstract {
             $status = array();
 
             // Start with hardware errors
-            if ($this->_settings['hwErrors']['enabled']) {
-                if (
-                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] <= $dev['Hardware Errors']) ||
-                    (
-                        $this->_settings['hwErrors']['type'] == 'percent' &&
-                        $this->_settings['hwErrors']['danger']['percent'] <= $dev['Device Hardware%']
-                    )
-                ) {
-                    $status = array (
-                        'colour' => 'red',
-                        'icon' => 'danger'
-                    );
-                } else if (
-                    ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] <= $dev['Hardware Errors']) ||
-                    (
-                        $this->_settings['hwErrors']['type'] == 'percent' &&
-                        $this->_settings['hwErrors']['warning']['percent'] <= $dev['Device Hardware%']
-                    )
-                ) {
-                    $status = array (
-                        'colour' => 'orange',
-                        'icon' => 'warning-sign'
-                    );
-                }
-            }
+            $status = $this->statusHardwareErrors($dev);
 
             // If no hardware errors, check the health
             if (empty($status)) {
@@ -359,23 +334,34 @@ class Miners_Cgminer extends Miners_Abstract {
             'panel' => 'panel-offline',
         );
 
-        foreach ($this->_devStatus as $status) {
-            if ($status['colour'] == 'red') {
-                $rigStatus = array(
-                    'colour' => 'red',
-                    'icon' => $status['icon'],
-                    'panel' => 'panel-danger',
-                );
-            } else if ($status['colour'] == 'orange' && $rigStatus['colour'] != 'red') {
-                $rigStatus = array(
-                    'colour' => 'orange',
-                    'icon' => $status['icon'],
-                    'panel' => 'panel-warning',
-                );
-            } else if ($status['colour'] == 'green' && $rigStatus['colour'] != 'red' && $rigStatus['colour'] != 'orange') {
+        if (count($this->_devStatus) > 0) {
+            foreach ($this->_devStatus as $status) {
+                if ($status['colour'] == 'red') {
+                    $rigStatus = array(
+                        'colour' => 'red',
+                        'icon' => $status['icon'],
+                        'panel' => 'panel-danger',
+                    );
+                } else if ($status['colour'] == 'orange' && $rigStatus['colour'] != 'red') {
+                    $rigStatus = array(
+                        'colour' => 'orange',
+                        'icon' => $status['icon'],
+                        'panel' => 'panel-warning',
+                    );
+                } else if ($status['colour'] == 'green' && $rigStatus['colour'] != 'red' && $rigStatus['colour'] != 'orange') {
+                    $rigStatus = array(
+                        'colour' => 'green',
+                        'icon' => $status['icon'],
+                        'panel' => '',
+                    );
+                }
+            }
+        } else {
+            $rigStatus = $this->statusHardwareErrors($this->_summary);
+            if ($rigStatus === false) {
                 $rigStatus = array(
                     'colour' => 'green',
-                    'icon' => $status['icon'],
+                    'icon' => 'cpu-processor',
                     'panel' => '',
                 );
             }
@@ -390,6 +376,40 @@ class Miners_Cgminer extends Miners_Abstract {
 
     private function onlineCheck() {
         return $this->cmd('{"command":"version"}');
+    }
+
+    // Returns status or false if hardware errors exceed limit
+    private function statusHardwareErrors($data) {
+        // Start with hardware errors
+        if ($this->_settings['hwErrors']['enabled']) {
+            if (
+                ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] <= $data['Hardware Errors']) ||
+                (
+                    $this->_settings['hwErrors']['type'] == 'percent' &&
+                    $this->_settings['hwErrors']['danger']['percent'] <= $data['Device Hardware%']
+                )
+            ) {
+                return array (
+                    'colour' => 'red',
+                    'icon' => 'danger',
+                    'panel' => 'panel-danger'
+                );
+            } else if (
+                ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] <= $data['Hardware Errors']) ||
+                (
+                    $this->_settings['hwErrors']['type'] == 'percent' &&
+                    $this->_settings['hwErrors']['warning']['percent'] <= $data['Device Hardware%']
+                )
+            ) {
+                return array (
+                    'colour' => 'orange',
+                    'icon' => 'warning-sign',
+                    'panel' => 'panel-warning'
+                );
+            }
+        }
+
+        return false;
     }
 
     private function fetchData() {
@@ -411,10 +431,17 @@ class Miners_Cgminer extends Miners_Abstract {
 
             //Misc data
             $this->_upTime = formatTimeElapsed($this->_summary['Elapsed']);
+            if (empty($this->_rigHashrate)) {
+                if (isset($this->_summary['MHS av'])) {
+                    $this->_rigHashrate = $this->_summary['MHS av'];
+                } else if (isset($this->_summary['GHS av'])) {
+                    $this->_rigHashrate = $this->_summary['GHS av']*1000;
+                }
+            }
 
             return true;
         }
 
-        return null;
+        return false;
     }
 }
