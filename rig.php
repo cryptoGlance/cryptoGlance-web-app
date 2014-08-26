@@ -19,16 +19,11 @@ require_once('includes/autoloader.inc.php');
 // Start our rig class
 $rigsObj = new Rigs($rigId);
 
+// Saving logic
 if (!empty($_POST)) {
-
     $rigs = new Rigs();
-    // echo "<pre>";
-    // print_r($rigs);
-    // die();
-
-    print_r($_POST);
-    die();
-
+    $rigs->update();
+    exit();
 }
 
 $jsArray = array(
@@ -179,12 +174,12 @@ if (empty($rigDevices)) {
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            Number (#)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?>>
+                                                            Number (#)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?> value="int">
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            Percent (%)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?>>
+                                                            Percent (%)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?> value="percent">
                                                         </label>
                                                     </td>
                                                 </tr>
@@ -199,10 +194,10 @@ if (empty($rigDevices)) {
                                                         <div class="form-group setting-hwerror hwErrorInt">
                                                             <div class="setting-hw-errors setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>">
+                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[int][hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>">
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>">
+                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[int][hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -211,10 +206,10 @@ if (empty($rigDevices)) {
                                                         <div class="form-group setting-hwerror hwErrorPercent">
                                                             <div class="setting-hw-errors setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%">
+                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[percent][hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%">
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%">
+                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[percent][hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -306,11 +301,11 @@ if (empty($rigDevices)) {
                                     <?php
                                     foreach ($rigPools as $pool) {
                                     ?>
-                                        <tr data-poolId="<?php echo $pool['id']; ?>">
+                                        <tr data-id="<?php echo $pool['id']; ?>">
                                           <td><input type="radio" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
-                                          <td><?php echo $pool['url']; ?></td>
-                                          <td><?php echo $pool['user']; ?></td>
-                                          <td>********</td>
+                                          <td data-name="url"><?php echo $pool['url']; ?></td>
+                                          <td data-name="user"><?php echo $pool['user']; ?></td>
+                                          <td data-name="password">********</td>
                                           <td class="priority"><?php echo $pool['priority']; ?></td>
                                           <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
                                           <br>
