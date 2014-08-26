@@ -21,6 +21,11 @@ $rigsObj = new Rigs($rigId);
 
 if (!empty($_POST)) {
 
+    $rigs = new Rigs();
+    // echo "<pre>";
+    // print_r($rigs);
+    // die();
+
     print_r($_POST);
     die();
 
@@ -80,25 +85,25 @@ if (empty($rigDevices)) {
                                     <div class="form-group">
                                         <label for="inputRigLabel" class="col-sm-5 control-label">Label</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="inputRigLabel" name="label" placeholder="Name of this rig" value="<?php echo $rigSettings['name'];?>">
+                                            <input type="text" class="form-control" id="inputRigLabel" name="details[label]" placeholder="Name of this rig" value="<?php echo $rigSettings['name'];?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputRigIP" class="col-sm-5 control-label">Hostname / IP</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="inputRigIP" name="ip_address" value="<?php echo $rigSettings['host'];?>">
+                                            <input type="text" class="form-control" id="inputRigIP" name="details[ip_address]" value="<?php echo $rigSettings['host'];?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputRigPort" class="col-sm-5 control-label">API Port</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="port" placeholder="4028" value="<?php echo $rigSettings['port'];?>">
+                                            <input type="text" class="form-control" id="inputRigPort" maxLength="5" name="details[port]" placeholder="4028" value="<?php echo $rigSettings['port'];?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputRigAlgor" class="col-sm-5 control-label">Algorithm</label>
                                         <div class="col-sm-2">
-                                            <select class="form-control" id="inputRigAlgor" name="algorithm">
+                                            <select class="form-control" id="inputRigAlgor" name="details[algorithm]">
                                                 <?php foreach($cryptoGlance->supportedAlgorithms() as $val => $name) { ?>
                                                 <option value="<?php echo $val; ?>" <?php echo (strtolower($rigSettings['settings']['algorithm']) == strtolower($val)) ? 'selected' : '' ?>><?php echo $name; ?></option>
                                                 <?php } ?>
@@ -106,7 +111,6 @@ if (empty($rigDevices)) {
                                         </div>
                                     </div>
                                 </fieldset>
-                                <input type="hidden" name="type" value="details" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
@@ -116,7 +120,7 @@ if (empty($rigDevices)) {
                                 <fieldset class="floated">
                                     <h3>Temperature Thresholds</h3>
                                     <div class="form-group checkbox">
-                                        <input id="threshold-temps" class="enabler" type="checkbox" name="temperatureEnabled" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?>> <label for="threshold-temps">Enable Temperature Warnings</label>
+                                        <input id="threshold-temps" class="enabler" type="checkbox" name="thresholds[temperatureEnabled]" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?>> <label for="threshold-temps">Enable Temperature Warnings</label>
                                     </div>
                                     <div class="form-group setting-thresholds">
                                         <table class="table table-hover table-striped table-settings">
@@ -139,11 +143,11 @@ if (empty($rigDevices)) {
                                                         <div class="form-group setting-hwerror hwErrorInt">
                                                             <div class="setting-hw-errors setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputTempWarning" name="tempWarning" value="<?php echo $rigSettings['settings']['temps']['warning'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['warning'] ?>" maxlength="3">
+                                                                    <input type="text" class="form-control" id="inputTempWarning" name="thresholds[tempWarning]" value="<?php echo $rigSettings['settings']['temps']['warning'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['warning'] ?>" maxlength="3">
                                                                     <span>&deg;C</span>
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputTempDanger" name="tempDanger" value="<?php echo $rigSettings['settings']['temps']['danger'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['danger'] ?>" maxlength="3">
+                                                                    <input type="text" class="form-control" id="inputTempDanger" name="thresholds[tempDanger]" value="<?php echo $rigSettings['settings']['temps']['danger'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['danger'] ?>" maxlength="3">
                                                                     <span>&deg;C</span>
                                                                 </div>
                                                             </div>
@@ -157,7 +161,7 @@ if (empty($rigDevices)) {
                                 <fieldset class="floated">
                                     <h3>HW Error Thresholds</h3>
                                     <div class="form-group checkbox">
-                                        <input id="threshold-hwerrors" class="enabler" type="checkbox" name="hwErrorsEnabled" <?php echo ($rigSettings['settings']['hwErrors']['enabled']) ? 'checked' : '' ?>> <label for="threshold-hwerrors">Enable Hardware Error Warnings</label>
+                                        <input id="threshold-hwerrors" class="enabler" type="checkbox" name="thresholds[hwErrorsEnabled]" <?php echo ($rigSettings['settings']['hwErrors']['enabled']) ? 'checked' : '' ?>> <label for="threshold-hwerrors">Enable Hardware Error Warnings</label>
                                     </div>
                                     <div class="form-group setting-thresholds ">
                                         <table class="table table-hover table-striped table-settings">
@@ -175,12 +179,12 @@ if (empty($rigDevices)) {
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            Number (#)<br><input type="radio" name="hwErrorsType" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?>>
+                                                            Number (#)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?>>
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            Percent (%)<br><input type="radio" name="hwErrorsType" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?>>
+                                                            Percent (%)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?>>
                                                         </label>
                                                     </td>
                                                 </tr>
@@ -195,10 +199,10 @@ if (empty($rigDevices)) {
                                                         <div class="form-group setting-hwerror hwErrorInt">
                                                             <div class="setting-hw-errors setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>">
+                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>">
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>">
+                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -207,10 +211,10 @@ if (empty($rigDevices)) {
                                                         <div class="form-group setting-hwerror hwErrorPercent">
                                                             <div class="setting-hw-errors setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%">
+                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%">
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%">
+                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -220,7 +224,6 @@ if (empty($rigDevices)) {
                                         </table>
                                     </div>
                                 </fieldset>
-                                <input type="hidden" name="type" value="thresholds" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
@@ -255,18 +258,18 @@ if (empty($rigDevices)) {
                                         <tr data-devType="<?php echo $dev['type']; ?>" data-devId="<?php echo $dev['id']; ?>" data-icon="<?php echo $dev['status']['icon']; ?>" data-status="<?php echo $dev['status']['colour']; ?>">
                                           <td><i class="icon icon-<?php echo $dev['status']['icon']; ?> <?php echo $dev['status']['colour']; ?>"></i></td>
                                           <td class="<?php echo $dev['status']['colour']; ?>"><?php echo $dev['type'] . $dev['id']; ?></td>
-                                          <td><input type="checkbox" class="enableDev" name="enabledDev<?php echo $dev['id']; ?>" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
+                                          <td><input type="checkbox" class="enableDev" name="devices[<?php echo $dev['id']; ?>][enabled]" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
                                           <td><?php echo formatHashrate($dev['hashrate_5s']*1000); ?></td>
                                           <?php if ($dev['type'] == 'GPU') { ?>
                                           <td><?php echo $dev['temperature_c'] . '<span>&deg;C</span>/' . $dev['temperature_f'] . '<span>&deg;F</span>'; ?></td>
-                                          <td><input type="text" class="form-control" value="<?php echo $dev['intensity']; ?>" /></td>
-                                          <td><input type="text" class="form-control" value="<?php echo $dev['fan_percent']; ?>" /></td>
-                                          <td><input type="text" class="form-control" value="<?php echo $dev['engine_clock']; ?>" /></td>
-                                          <td><input type="text" class="form-control" value="<?php echo $dev['memory_clock']; ?>" /></td>
-                                          <td><input type="text" class="form-control" value="<?php echo $dev['gpu_voltage']; ?>" /></td>
-                                          <td><input type="text" class="form-control" value="<?php echo $dev['powertune']; ?>" /></td>
+                                          <td><input name="devices[<?php echo $dev['id']; ?>][intensity]" type="text" class="form-control" value="<?php echo $dev['intensity']; ?>" /></td>
+                                          <td><input name="devices[<?php echo $dev['id']; ?>][fan_percent]" type="text" class="form-control" value="<?php echo $dev['fan_percent']; ?>" /></td>
+                                          <td><input name="devices[<?php echo $dev['id']; ?>][engine_clock]" type="text" class="form-control" value="<?php echo $dev['engine_clock']; ?>" /></td>
+                                          <td><input name="devices[<?php echo $dev['id']; ?>][memory_clock]" type="text" class="form-control" value="<?php echo $dev['memory_clock']; ?>" /></td>
+                                          <td><input name="devices[<?php echo $dev['id']; ?>][gpu_voltage]" type="text" class="form-control" value="<?php echo $dev['gpu_voltage']; ?>" /></td>
+                                          <td><input name="devices[<?php echo $dev['id']; ?>][powertune]" type="text" class="form-control" value="<?php echo $dev['powertune']; ?>" /></td>
                                           <?php } else if ($dev['type'] == 'ASC' || $dev['type'] == 'PGA') { ?>
-                                          <td><input type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" /></td>
+                                          <td><input name="devices[<?php echo $dev['id']; ?>][frequency]" type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" /></td>
                                           <?php } ?>
                                         </tr>
                                     <?php
@@ -279,7 +282,6 @@ if (empty($rigDevices)) {
                                 <div class="inline-edit-control">
                                   <button type="button" disabled class="btn btn-warning btn-space" id="btnRevertDevices"><i class="icon icon-undo"></i> Revert Changes</button>
                                 </div>
-                                <input type="hidden" name="type" value="devices" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
@@ -305,7 +307,7 @@ if (empty($rigDevices)) {
                                     foreach ($rigPools as $pool) {
                                     ?>
                                         <tr data-poolId="<?php echo $pool['id']; ?>">
-                                          <td><input type="radio" name="enabledPool" class="form-control"  <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
+                                          <td><input type="radio" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
                                           <td><?php echo $pool['url']; ?></td>
                                           <td><?php echo $pool['user']; ?></td>
                                           <td>********</td>
@@ -334,31 +336,31 @@ if (empty($rigDevices)) {
                                   <div class="form-group">
                                     <label for="inputPoolLabel" class="col-sm-5 control-label">Pool Label</label>
                                     <div class="col-sm-5">
-                                      <input type="text" class="form-control poolLabel" name="poolLabel" placeholder="Name of this pool">
+                                      <input type="text" class="form-control poolLabel" name="pools[new][poolLabel]" placeholder="Name of this pool">
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label for="inputPoolURL" class="col-sm-5 control-label">URL</label>
                                     <div class="col-sm-5">
-                                      <input type="text" class="form-control poolUrl" name="poolUrl" placeholder="Pool URL (including port #)">
+                                      <input type="text" class="form-control poolUrl" name="pools[new][poolUrl]" placeholder="Pool URL (including port #)">
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label for="inputPoolWorker" class="col-sm-5 control-label">Username/Worker</label>
                                     <div class="col-sm-4">
-                                      <input type="text" class="form-control poolUser" name="poolUser">
+                                      <input type="text" class="form-control poolUser" name="pools[new][poolUser]">
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label for="inputPoolPassword" class="col-sm-5 control-label">Password</label>
                                     <div class="col-sm-4">
-                                      <input type="password" class="form-control poolPassword" name="poolPassword" placeholder="password">
+                                      <input type="password" class="form-control poolPassword" name="pools[new][poolPassword]" placeholder="password">
                                     </div>
                                   </div>
                                   <div class="form-group">
                                     <label for="inputPoolPriority" class="col-sm-5 control-label">Priority</label>
                                     <div class="col-sm-2">
-                                      <input type="text" class="form-control poolPriority" maxlength="3" name="poolPriority">
+                                      <input type="text" class="form-control poolPriority" maxlength="3" name="pools[new][poolPriority]">
                                     </div>
                                   </div>
                                   <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>
@@ -366,7 +368,6 @@ if (empty($rigDevices)) {
                                   <br>
                                   <br>
                                 </div><!-- end add-new-pool-wrapper -->
-                                <input type="hidden" name="type" value="pools" />
                             </form>
                         </div><!-- / .panel-body -->
                     </div>

@@ -58,4 +58,8 @@ class Config_Rigs extends Config_Abstract {
         return $this->write();
     }
 
+    public function update() {
+        
+    }
+
 }
