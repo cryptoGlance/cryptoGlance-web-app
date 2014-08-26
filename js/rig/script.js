@@ -41,7 +41,7 @@
             $(btnIcon).removeClass('ajax-saver');
         }, 1300);
     });
-    
+
     $document.on('click', '.editPoolConfig', function (evt) {
       evt.preventDefault()
 
@@ -56,11 +56,20 @@
         this.appendChild(input)
       })
 
-      $(this).addClass('savePoolConfig')
+      $(this)
+      .addClass('savePoolConfig')
       .removeClass('editPoolConfig')
       .find('.icon')
       .removeClass('icon-edit')
       .addClass('icon-save-floppy')
+      .parents('.editPoolConfig')
+      .next()
+      .addClass('cancelPoolConfig')
+      .removeClass('removePoolConfig')
+      .find('.icon')
+      .removeClass('icon-remove')
+      .addClass('icon-undo')
+
     })
 
     $document.on('click', '.savePoolConfig', function (evt) {
@@ -75,13 +84,40 @@
         this.parentNode.textContent = this.value
       })
 
-      $(this).addClass('editPoolConfig')
+      $(this)
+      .addClass('editPoolConfig')
       .removeClass('savePoolConfig')
       .find('.icon')
       .removeClass('icon-save-floppy')
       .addClass('icon-edit')
+      .parents('.editPoolConfig')
+      .next()
+      .addClass('removePoolConfig')
+      .removeClass('cancelPoolConfig')
+      .find('.icon')
+      .removeClass('icon-undo')
+      .addClass('icon-remove')
 
       alert('do ajax-y stuff with ' + values.join('|') + ' here')
+    })
+
+    $document.on('click', '.cancelPoolConfig', function (evt) {
+      evt.preventDefault()
+
+      $(this)
+      .addClass('cancelPoolConfig')
+      .removeClass('removePoolConfig')
+      .find('.icon')
+      .removeClass('icon-undo')
+      .addClass('icon-remove')
+      .next()
+      .addClass('editPoolConfig')
+      .removeClass('savePoolConfig')
+      .find('.icon')
+      .removeClass('icon-save-floppy')
+      .addClass('icon-edit')
+      .parents('.editPoolConfig')
+
     })
 
 }(window.jQuery)
