@@ -1766,6 +1766,7 @@ a#dash-add-panel.flash {
 .table-responsive {
   margin-bottom: 0;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch; // momentum scrolling
 }
 
 .panel-body .table-summary {
