@@ -104,6 +104,15 @@
     $document.on('click', '.cancelPoolConfig', function (evt) {
       evt.preventDefault()
 
+      var $tr = $(this).parents('tr')
+      var $inputs = $tr.children().slice(1, 4).find('input')
+      var values = []
+
+      $inputs.each(function(){
+        values.push(this.value)
+        this.parentNode.textContent = this.value
+      })
+
       $(this)
       .addClass('removePoolConfig')
       .removeClass('cancelPoolConfig')
