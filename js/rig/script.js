@@ -129,4 +129,10 @@
 
     })
 
+    $document.on('click', '.removePoolConfig', function (evt) {
+      evt.preventDefault()
+
+      alert('pool removed!')
+    })
+
 }(window.jQuery)
