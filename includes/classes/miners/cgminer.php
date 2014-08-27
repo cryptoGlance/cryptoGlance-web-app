@@ -383,11 +383,8 @@ class Miners_Cgminer extends Miners_Abstract {
         // Start with hardware errors
         if ($this->_settings['hwErrors']['enabled']) {
             if (
-                ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['danger']['number'] <= $data['Hardware Errors']) ||
-                (
-                    $this->_settings['hwErrors']['type'] == 'percent' &&
-                    $this->_settings['hwErrors']['danger']['percent'] <= $data['Device Hardware%']
-                )
+                ($this->_settings['hwErrors']['type'] == 'int' && $this->_settings['hwErrors']['danger']['int'] <= $data['Hardware Errors']) ||
+                ($this->_settings['hwErrors']['type'] == 'percent' && $this->_settings['hwErrors']['danger']['percent'] <= $data['Device Hardware%'])
             ) {
                 return array (
                     'colour' => 'red',
@@ -395,11 +392,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'panel' => 'panel-danger'
                 );
             } else if (
-                ($this->_settings['hwErrors']['type'] == 'number' && $this->_settings['hwErrors']['warning']['number'] <= $data['Hardware Errors']) ||
-                (
-                    $this->_settings['hwErrors']['type'] == 'percent' &&
-                    $this->_settings['hwErrors']['warning']['percent'] <= $data['Device Hardware%']
-                )
+                ($this->_settings['hwErrors']['type'] == 'int' && $this->_settings['hwErrors']['warning']['int'] <= $data['Hardware Errors']) ||
+                ($this->_settings['hwErrors']['type'] == 'percent' && $this->_settings['hwErrors']['warning']['percent'] <= $data['Device Hardware%'])
             ) {
                 return array (
                     'colour' => 'orange',

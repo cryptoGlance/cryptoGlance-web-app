@@ -1,8 +1,5 @@
 !function ($){
 
-  var $document = $(document)
-  var keyboardState = []
-
   /*================================
   =            The Rigs            =
   =================================*/
@@ -239,53 +236,6 @@
         })
         .done()
     });
-
-
-    $document.ajaxError(function (evt, jqxhr, settings, thrownError) {
-      switch (jqxhr.status) {
-        case 400: // Bad Request
-          break;
-        case 401: // Unauthorized
-          window.location.assign('login.php')
-          break;
-        case 404: // Not found
-          break;
-        case 500: // Internal Server Error
-          break;
-        default:
-          return;
-      }
-    })
-
-
-
-    // Global Keyboard Shortcuts
-    //
-    // Ctrl+D = redirect to debug.php
-    $document
-    .on('keydown', function (evt) {
-      switch (evt.keyCode) {
-        case 17: // CTRL
-          keyboardState.indexOf('ctrl') === -1 && keyboardState.push('ctrl')
-          break;
-        case 68: // D
-          keyboardState.indexOf('D') === -1 && keyboardState.push('D')
-          break;
-      }
-      if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('D') !== -1) {
-        window.location.assign('debug.php')
-      }
-    })
-    .on('keyup', function (evt) {
-      switch (evt.keyCode) {
-        case 17:
-          keyboardState.splice(keyboardState.indexOf('ctrl'), 1)
-          break;
-        case 68:
-          keyboardState.splice(keyboardState.indexOf('D'), 1)
-          break;
-      }
-    })
 
   /*-----  End of Global Event Handling  ------*/
 

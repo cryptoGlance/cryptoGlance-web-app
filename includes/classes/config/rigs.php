@@ -40,24 +40,33 @@ class Config_Rigs extends Config_Abstract {
         ) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'Missing ' . (empty($data['ip_address']) ? 'IP Address' : 'Port');
-        } else if ($dataType == 'thresholds' && $data['temperatureEnabled'] == 'on' &&
-            (empty($data['tempWarning']) || empty($data['tempDanger']))
-        ) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return 'Temperature Warning and Danager values must be set!';
-        } else if ($dataType == 'thresholds' && $data['hwErrorsEnabled'] == 'on' && empty($data['hwErrorsType'])) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return 'Hardware errors require a Percent or Integer display type!';
-        } else if ($dataType == 'thresholds' && $data['hwErrorsEnabled'] == 'on' && $data['hwErrorsType'] == 'int' &&
-            (empty($data['int']['hwWarning']) || empty($data['int']['hwDanger']))
-        ) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return 'An integer value must be set!';
-        } else if ($dataType == 'thresholds' && $data['hwErrorsEnabled'] == 'on' && $data['hwErrorsType'] == 'percent' &&
-            (empty($data['percent']['hwWarning']) || empty($data['percent']['hwDanger']))
-        ) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return 'An percent value must be set!';
+        } else if ($dataType == 'thresholds') {
+            if ($data['temps']['enabled'] == 'on' &&
+            (empty($data['temps']['warning']) || empty($data['temps']['danger']))
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Temperature Warning and Danager values must be set!';
+            } else if ($data['hwErrors']['enabled'] == 'on' && empty($data['hwErrors']['type'])) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Hardware errors require a Percent or Integer display type!';
+            } else if ($data['hwErrors']['enabled'] == 'on' && $data['hwErrors']['type'] == 'int' &&
+                (empty($data['hwErrors']['warning']['int']) || empty($data['hwErrors']['danger']['int']))
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'An integer value must be set!';
+            } else if ($data['hwErrors']['enabled'] == 'on' && $data['hwErrors']['type'] == 'percent' &&
+                (empty($data['hwErrors']['warning']['percent']) || empty($data['hwErrors']['danger']['percent']))
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'An percent value must be set!';
+            } else if (
+                ($data['hwErrors']['warning']['percent'] >= $data['hwErrors']['danger']['percent']) ||
+                ($data['hwErrors']['warning']['int'] >= $data['hwErrors']['danger']['int']) ||
+                ($data['temps']['warning'] >= $data['temps']['danger'])
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Warning setting <b>cannot</b> be a higher value than your danger setting.';
+            }
         }
 
         return true;
@@ -104,7 +113,7 @@ class Config_Rigs extends Config_Abstract {
 
         foreach ($_POST as $dataType => $data) {
             $name = 'update' . ucfirst($dataType);
-            $this->$name($id, $dataType, $data);
+            return $this->$name($id, $dataType, $data);
         }
     }
 
@@ -132,27 +141,25 @@ class Config_Rigs extends Config_Abstract {
     }
 
     private function updateThresholds($id, $dataType, $data) {
+        // Some data scrubbing
+        $data['hwErrors']['warning']['percent'] = (float) preg_replace('/[^0-9.]*/', '', $data['hwErrors']['warning']['percent']);
+        $data['hwErrors']['danger']['percent'] = (float) preg_replace('/[^0-9.]*/', '', $data['hwErrors']['danger']['percent']);
+        if (!isset($data['temps']['enabled'])) {
+            $data['temps']['enabled'] = 0;
+        }
+        if (!isset($data['hwErrors']['enabled'])) {
+            $data['hwErrors']['enabled'] = 0;
+        }
+
+        // Validate post
         $isValid = $this->postValidate($dataType, $data);
         if ($isValid !== true) {
             return $isValid;
         }
 
-        print_r($data);
-        die('---');
+        $this->_data[$id]['settings'] = array_replace_recursive($this->_data[$id]['settings'], $data);
 
-        // $rig = array(
-        //     'name' => (!empty($data['label']) ? $data['label'] : $data['ip_address']),
-        //     'type' => 'cgminer',
-        //     'host' => $data['ip_address'],
-        //     'port' => $data['port'],
-        //     'settings' => array(
-        //         'algorithm' => $data['algorithm']
-        //     ),
-        // );
-        //
-        // $this->_data[$id] = array_replace_recursive($this->_data[$id], $rig);
-        //
-        // $this->write();
+        $this->write();
 
         return true;
     }

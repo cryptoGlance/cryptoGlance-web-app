@@ -1,7 +1,5 @@
 !function ($){
 
-    var $document = $(document)
-
     /*================================
     =           Thresholds           =
     =================================*/
@@ -18,29 +16,62 @@
         }
     });
 
-    /*-----  End of The Thresholds  ------*/
+    // Usability - Remove % sign when focused to edit
+    $document.on('focus', '#rig-settings-thresholds input[type="text"]', function (evt) {
+        var $input = $(this);
+        var percentValue = $(this).val().replace('%','');
+        $input.val(percentValue);
+    })
+
+    // Usability - Verify input is numeric
+    $document.on('blur', '#rig-settings-thresholds input[type="text"]', function (evt) {
+        var $input = $(this);
+        var percentValue = $(this).val();
+
+        if (isNaN(percentValue.replace('%',''))) {
+            percentValue = '0';
+        }
+    })
+
+    // Usability - Verify warning is not greater than danger
+    $document.on('blur', '#rig-settings-thresholds input[type="text"]', function (evt) {
+        var $input = $(this);
+
+        if ($input.hasClass('warning')) {
+            var warningVal = $input.val();
+            var dangerVal = $input.parent().next().find('input').val();
+        } else if ($input.hasClass('danger')) {
+            var dangerVal = $input.val();
+            var warningVal = $input.parent().prev().find('input').val();
+        }
+
+        warningVal = warningVal.replace('%','');
+        dangerVal = dangerVal.replace('%','');
+        if (parseFloat(warningVal) >= parseFloat(dangerVal)) {
+            $().toastmessage('showToast', {
+              sticky  : false,
+              text    : '<b>Error!</b> Warning setting <b>cannot</b> be a higher value than your danger setting.',
+              type    : 'error'
+            });
+        }
+    })
+
+    // Add % if not added
+    $document.on('blur', '.setting-hw-errors-percent input', function (evt) {
+        var $input = $(this);
+        var percentValue = $(this).val();
+
+        if (percentValue.indexOf('%') === -1) {
+            $input.val(percentValue + '%');
+        }
+    })
+
+    /*--  End of The Thresholds  ---*/
 
 
-    /*=============================================
-    =            Global Event Handling            =
-    =============================================*/
-
-    // Save Button
-    $document.on('click', '#btnSaveRig', function (evt) {
-        var btnIcon = $('i', this);
-        $(btnIcon).addClass('ajax-saver');
-
-        var form = $('form', '#rigDetails .tab-content .active');
-
-        $.post( document.URL, form.serialize())
-        .done(function( data ) {
-            console.log(data);
-            // $(btnIcon).removeClass('ajax-saver');
-        });
-        setTimeout(function() {
-            $(btnIcon).removeClass('ajax-saver');
-        }, 1300);
-    });
+    /*================================
+    =              Pools             =
+    =================================*/
 
     $document.on('click', '.editPoolConfig', function (evt) {
       evt.preventDefault()
@@ -145,5 +176,33 @@
 
       alert('pool removed!')
     })
+
+    /*-----  End of Pools  ------*/
+
+    /*=============================================
+    =            Global Event Handling            =
+    =============================================*/
+
+    // Save Button
+    $document.on('click', '#btnSaveRig', function (evt) {
+        var btnIcon = $('i', this);
+        $(btnIcon).addClass('ajax-saver');
+
+        var form = $('form', '#rigDetails .tab-content .active');
+
+        $.post( document.URL, form.serialize())
+        .done(function( data ) {
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+            }, 500);
+        })
+        .fail(function() {
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+            }, 500);
+        })
+    });
+
+    /*-----  End of Global Event Handling  ------*/
 
 }(window.jQuery)
