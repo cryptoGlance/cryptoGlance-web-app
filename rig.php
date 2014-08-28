@@ -5,24 +5,22 @@ if (!$_SESSION['login_string']) {
     header('Location: login.php');
     exit();
 }
+session_write_close();
 
-$rigId = intval($_GET['id']);
-if ($rigId == 0) {
+$id = intval($_GET['id']);
+if ($id == 0) {
     header('Location: index.php');
     exit();
 }
 
-session_write_close();
-
 require_once('includes/autoloader.inc.php');
 
 // Start our rig class
-$rigsObj = new Rigs($rigId);
+$rigsObj = new Rigs($id);
 
 // Saving logic
 if (!empty($_POST)) {
-    $rigs = new Rigs();
-    echo $rigs->update();
+    echo $rigsObj->update();
     exit();
 }
 
@@ -57,7 +55,7 @@ if (empty($rigDevices)) {
 }
 ?>
 
-    <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $rigId;?>">
+    <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $id;?>">
         <div id="rigDetails" class="panel panel-primary panel-no-grid">
             <h1><?php echo (!empty($rigSettings['name']) ? $rigSettings['name'] : $rigSettings['host'].':'.$rigSettings['port']); ?></h1>
             <div class="panel-heading">

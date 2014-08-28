@@ -25,18 +25,16 @@
   =============================================*/
 
   Wallet.prototype.update = function (walletObj) {
-    this.currency        = walletObj.currency
-    this.balance         = walletObj.balance
-
-      // TODO: Wire up new fiat stuff below
-
-    this.currency_code   = walletObj.currency_code
-    this.btc             = walletObj.btc
-    this.btc_code        = walletObj.btc_code
-    this.fiat            = walletObj.fiat
-    this.fiat_code       = walletObj.fiat_code
-    this.total_addresses = walletObj.total_addresses
-    this.label           = walletObj.label
+    this.label              = walletObj.label
+    this.currency           = walletObj.currency
+    this.currency_balance   = walletObj.currency_balance
+    this.currency_code      = walletObj.currency_code
+    this.coin_balance       = walletObj.coin_balance
+    this.coin_code          = walletObj.coin_code
+    this.coin_price          = walletObj.coin_price
+    this.fiat_balance       = walletObj.fiat_balance
+    this.fiat_code          = walletObj.fiat_code
+    this.total_addresses    = walletObj.total_addresses
 
     return this._buildStatusHtml()
   }
@@ -49,18 +47,28 @@
   ==============================================*/
 
   Wallet.prototype._buildStatusHtml = function () {
-    return '<div class="stat-pair" id="wallet-address-' + this.id + '">' +
-           '<img src="images/coin/' + this.currency + '.png" alt="' + this.currency + '" />' +
-           '<div class="stat-value">' +
-           '<span class="green">' + this.balance + ' ' + this.currency_code + '</span>' +
-           '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +
-           '<span class="blue">' + this.fiat + ' ' + this.fiat_code + '</span>' +
-           '<span class="address-label">(' + this.btc + ' ' + this.btc_code +')</span>' +
-           '</div>' +
-           '<div class="stat-label">' +
-           '<a href="wallet.php?id=' + this.id + '" class="stat-pair-icon">' + this.label + ' <i class="icon icon-walletalt"></i></a>' +
-           '</div>' +
-           '</div>'
+    var  output = '<div class="stat-pair" id="wallet-address-' + this.id + '">' +
+        '<img src="images/coin/' + this.currency + '.png" alt="' + this.currency + '" />' +
+        '<div class="stat-value">' +
+        '<span class="green">' + this.currency_balance + ' ' + this.currency_code + '</span>';
+
+    if (this.currency_code != this.coin_code) {
+        output += '<span class="blue">' + this.coin_balance + ' ' + this.coin_code +'</span>' +
+            '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
+            '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +
+            '<span class="address-label">(' + this.coin_price + ' ' + this.coin_code +')</span>';
+    } else {
+        output += '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
+            '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>';
+    }
+
+    output += '</div>' +
+        '<div class="stat-label">' +
+        '<a href="wallet.php?id=' + this.id + '" class="stat-pair-icon">' + this.label + ' <i class="icon icon-walletalt"></i></a>' +
+        '</div>' +
+        '</div>';
+
+    return output;
   }
 
   /*-----  End of Wallet Private Methods  ------*/
