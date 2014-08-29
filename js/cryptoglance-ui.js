@@ -48,19 +48,21 @@ function restoreSiteLayout() {
   var siteLayout = $.cookie('use_masonry_layout');
   var viewportWidth  = $(window).width();
 
-  if (viewportWidth < 1600 || siteLayout == null) {
-    destroyMasonry();
+  if (!siteLayout) {
     $('#layout-grid').removeClass('active-layout');
     $('#layout-list').addClass('active-layout');
   }
-  else if (viewportWidth >= 1600 && siteLayout == 'yes') {
+  else if (viewportWidth < 1600 && siteLayout === 'yes') {
+    destroyMasonry();
+  }
+  else if (viewportWidth >= 1600 && siteLayout === 'yes') {
     initMasonry();
     $('#layout-list').removeClass('active-layout');
     $('#layout-grid').addClass('active-layout');
   }
 }
 
-$document.on('masonry', function (evt) {
+$document.on('masonry-update', function (evt) {
   restoreSiteLayout()
 })
 

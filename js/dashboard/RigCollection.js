@@ -80,7 +80,7 @@
         if (_self._rigsResponded === _self.collection.length) {
           _self._ready = true
           _self._buildOverview(overviewData)
-          $(document).trigger('masonry')
+          $(document).trigger('masonry-update')
         }
       })
     })
