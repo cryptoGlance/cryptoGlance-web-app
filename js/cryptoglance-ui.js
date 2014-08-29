@@ -684,9 +684,3 @@ $(document).ready(function() {
     })
 
 });
-
-// issue #37
-// https://github.com/cryptoGlance/cryptoGlance-web-app/issues/37
-if (window.matchMedia("(min-width: 1600px)").matches) {
-  initMasonry()
-}
