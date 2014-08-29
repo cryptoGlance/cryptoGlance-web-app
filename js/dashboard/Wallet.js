@@ -53,10 +53,10 @@
         '<span class="green">' + this.currency_balance + ' ' + this.currency_code + '</span>';
 
     if (this.currency_code != this.coin_code) {
-        output += '<span class="blue">' + this.coin_balance + ' ' + this.coin_code +'</span>' +
+        output += '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +
             '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
-            '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +
-            '<span class="address-label">(' + this.coin_price + ' ' + this.coin_code +')</span>';
+            '<span class="address-label">' + this.coin_balance + ' ' + this.coin_code +' @ (' + this.coin_price + ' ' + this.coin_code +')</span>' +
+            '<span class="address-label"></span>';
     } else {
         output += '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
             '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>';

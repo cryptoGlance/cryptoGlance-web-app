@@ -921,7 +921,7 @@ a#dash-add-panel.flash {
 }
 
 #total-hashrates {
-  margin: 45px 0 1px;
+  margin: 53px 0 1px;
   text-align: center;
   position: fixed;
   right: 5px;
@@ -945,7 +945,7 @@ a#dash-add-panel.flash {
 .total-hashrate, #total-hashrates > li > a.total-hashrate {
   height: 100%;
   text-align: center;
-  font-size: 31px;
+  font-size: 26px;
   font-family: bebas;
   padding: 0 7px 3px;
   color: #8f8;
@@ -963,10 +963,10 @@ a#dash-add-panel.flash {
 
 #total-hashrates > li > a > span.hashrate-algo {
   display: block;
-  font-size: 0.45em;
+  font-size: 0.55em;
   color: #bbb;
   margin: -4px 0;
-  font-family: robotolight;
+  font-family: roboto;
 }
 
 #mobile-hashrate {
@@ -1256,15 +1256,15 @@ a#dash-add-panel.flash {
 }
 
 .panel ul.nav-pills {
-  margin: 0;
-  padding: 0;
+  margin: 0 0 -7px;
+  padding: 3px 2px 0;
   clear: both;
 }
 
 .panel ul.nav-pills li {
   float: none;
   display: inline-block;
-  margin: 0;
+  margin: 0 0 5px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -1274,12 +1274,21 @@ a#dash-add-panel.flash {
   font-weight: bold;
   font-size: 15px;
   color: #bbb;
-  -webkit-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 7px 7px 6px 6px;
+  border-radius: 7px 7px 6px 6px;
   margin: 0 3px;
   padding: 0 15px;
+  border: 1px solid rgba(0,0,0,0.6);
+  border-top-color: rgba(200,200,200,0.3);
 }
 
+.panel .nav-pills li.active a {
+  border-top-color: rgba(0,0,0,0.6);
+}
+
+.panel .nav-pills li.active a:hover {
+  border: 1px solid rgba(0,0,0,0.6);
+}
 
 .panel ul.nav-pills li a.pill-primary {
   color: rgb(255, 255, 255);
@@ -1592,7 +1601,8 @@ a#dash-add-panel.flash {
 .panel-body-addresses .stat-pair .address-label {
   display: block;
   font-size: 13px;
-    font-family: robotocondensed, sans-serif;
+  font-family: robotocondensed, sans-serif;
+  text-shadow: -1px -2px 1px #000;
   color: #ccc;
   margin: 0 0 -5px;
 }
@@ -2076,6 +2086,19 @@ a#dash-add-panel.flash {
     padding-right: 10px;
   }
 
+  #total-hashrates {
+    margin: 45px 8px 1px 0;
+  }
+
+  .total-hashrate, #total-hashrates > li > a.total-hashrate {
+    font-size: 31px;
+  }
+
+  #total-hashrates > li > a > span.hashrate-algo {
+    font-size: 0.45em;
+    font-family: robotolight;
+  }
+
   .total-hashrate {
     margin-right: 8px;
   }
@@ -2130,7 +2153,7 @@ a#dash-add-panel.flash {
     padding: 4px 13px 5px;
   }
 
-  .navbar .nav-pills:not(.no-dash) > li:nth-child(6) > a {
+  .navbar .nav-pills:not(.no-dash) > li:nth-child(2) > a {
     -webkit-border-radius: 0 0 0 9px;
     border-radius: 0 0 0 9px;
   }
@@ -2461,8 +2484,8 @@ a#dash-add-panel.flash {
 }
 
 
-/* Super-wide devices (1600px and up) */
-@media (min-width: 1600px) {
+/* Super-wide devices (1400px and up) */
+@media (min-width: 1400px) {
 
   .site-layout, .site-layout-btns {
     display: block;
