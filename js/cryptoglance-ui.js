@@ -1,7 +1,15 @@
+
 // UI JavaScript for CryptoGlance
 // 	by George Merlocco (george@merloc.co) // https://github.com/scar45/
 
 // ***** NOTE ***** JS optimization/clean-up is needed, don't laugh!
+
+var $document = null;
+var keyboardState = null;
+!function ($) {
+    $document = $(document)
+    keyboardState = []
+}(window.jQuery)
 
 // Javascript Open in New Window (validation workaround)
 //
@@ -265,7 +273,7 @@ function showToastSettingsSaved() {
 function showToastSettingsNOTSaved() {
   $().toastmessage('showToast', {
     sticky  : true,
-    text    : '<b>Failure!</b> Your configuration was <b>not</b> updated. Check your user data or refer to the <a href="help.php#faq">FAQ in the README</a>.',
+    text    : '<b>Error!</b> Your configuration was <b>not</b> updated. Check your user data or refer to the <a href="help.php#faq">FAQ in the README</a>.',
     type    : 'error'
   });
 
@@ -275,7 +283,7 @@ function showToastSettingsNOTSaved() {
 function showToastWriteError() {
   $().toastmessage('showToast', {
     sticky  : false,
-    text    : '<b>Failed!</b> Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.',
+    text    : '<b>Error!</b> Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.',
     type    : 'error'
   });
 }
@@ -623,6 +631,57 @@ $(document).ready(function() {
             });
         }
     });
+
+    // Global Stuff
+    $document.ajaxError(function (evt, jqxhr, settings, thrownError) {
+      switch (jqxhr.status) {
+        case 400: // Bad Request
+          break;
+        case 401: // Unauthorized
+          window.location.assign('login.php')
+          break;
+        case 404: // Not found
+          break;
+        case 406:
+            $().toastmessage('showToast', {
+              sticky  : false,
+              text    : '<b>Error!</b> ' + jqxhr.responseText,
+              type    : 'error'
+            });
+          break;
+        case 500: // Internal Server Error
+          break;
+        default:
+          return;
+      }
+    })
+
+    // Global Keyboard Shortcuts
+    //
+    // Ctrl+D = redirect to debug.php
+    $document.on('keydown', function (evt) {
+      switch (evt.keyCode) {
+        case 17: // CTRL
+          keyboardState.indexOf('ctrl') === -1 && keyboardState.push('ctrl')
+          break;
+        case 68: // D
+          keyboardState.indexOf('D') === -1 && keyboardState.push('D')
+          break;
+      }
+      if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('D') !== -1) {
+        window.location.assign('debug.php')
+      }
+    })
+    .on('keyup', function (evt) {
+      switch (evt.keyCode) {
+        case 17:
+          keyboardState.splice(keyboardState.indexOf('ctrl'), 1)
+          break;
+        case 68:
+          keyboardState.splice(keyboardState.indexOf('D'), 1)
+          break;
+      }
+    })
 
 });
 

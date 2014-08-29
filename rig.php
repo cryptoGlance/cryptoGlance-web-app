@@ -5,30 +5,23 @@ if (!$_SESSION['login_string']) {
     header('Location: login.php');
     exit();
 }
+session_write_close();
 
-$rigId = intval($_GET['id']);
-if ($rigId == 0) {
+$id = intval($_GET['id']);
+if ($id == 0) {
     header('Location: index.php');
     exit();
 }
 
-session_write_close();
-
 require_once('includes/autoloader.inc.php');
 
 // Start our rig class
-$rigsObj = new Rigs($rigId);
+$rigsObj = new Rigs($id);
 
+// Saving logic
 if (!empty($_POST)) {
-
-    $rigs = new Rigs();
-    // echo "<pre>";
-    // print_r($rigs);
-    // die();
-
-    print_r($_POST);
-    die();
-
+    echo $rigsObj->update();
+    exit();
 }
 
 $jsArray = array(
@@ -62,7 +55,7 @@ if (empty($rigDevices)) {
 }
 ?>
 
-    <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $rigId;?>">
+    <div id="rig-wrap" class="container sub-nav" data-rigId="<?php echo $id;?>">
         <div id="rigDetails" class="panel panel-primary panel-no-grid">
             <h1><?php echo (!empty($rigSettings['name']) ? $rigSettings['name'] : $rigSettings['host'].':'.$rigSettings['port']); ?></h1>
             <div class="panel-heading">
@@ -120,9 +113,9 @@ if (empty($rigDevices)) {
                                 <fieldset class="floated">
                                     <h3>Temperature Thresholds</h3>
                                     <div class="form-group checkbox">
-                                        <input id="threshold-temps" class="enabler" type="checkbox" name="thresholds[temperatureEnabled]" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?>> <label for="threshold-temps">Enable Temperature Warnings</label>
+                                        <input id="threshold-temps" class="enabler" type="checkbox" name="thresholds[temps][enabled]" <?php echo ($rigSettings['settings']['temps']['enabled']) ? 'checked' : '' ?> value="1"> <label for="threshold-temps">Enable Temperature Warnings</label>
                                     </div>
-                                    <div class="form-group setting-thresholds">
+                                    <div class="form-group setting-thresholds" <?php echo (!$rigSettings['settings']['temps']['enabled']) ? 'style="display: none;"' : '' ?>>
                                         <table class="table table-hover table-striped table-settings">
                                             <thead>
                                                 <tr>
@@ -135,19 +128,18 @@ if (empty($rigDevices)) {
                                                 <tr>
                                                     <td colspan="2">
                                                         <label for="inputTempWarning" class="control-label orange">Warning</label>
-                                                        <br>
-                                                        <br>
+                                                        <br><br>
                                                         <label for="inputTempDanger" class="control-label red">Danger</label>
                                                     </td>
                                                     <td>
                                                         <div class="form-group setting-hwerror hwErrorInt">
-                                                            <div class="setting-hw-errors setting-thresholds">
+                                                            <div class="setting-temps setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputTempWarning" name="thresholds[tempWarning]" value="<?php echo $rigSettings['settings']['temps']['warning'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['warning'] ?>" maxlength="3">
+                                                                    <input type="text" class="form-control warning" id="inputTempWarning" name="thresholds[temps][warning]" value="<?php echo $rigSettings['settings']['temps']['warning'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['warning'] ?>" maxlength="3">
                                                                     <span>&deg;C</span>
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputTempDanger" name="thresholds[tempDanger]" value="<?php echo $rigSettings['settings']['temps']['danger'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['danger'] ?>" maxlength="3">
+                                                                    <input type="text" class="form-control danger" id="inputTempDanger" name="thresholds[temps][danger]" value="<?php echo $rigSettings['settings']['temps']['danger'] ?>" placeholder="<?php echo $rigSettings['settings']['temps']['danger'] ?>" maxlength="3">
                                                                     <span>&deg;C</span>
                                                                 </div>
                                                             </div>
@@ -161,9 +153,9 @@ if (empty($rigDevices)) {
                                 <fieldset class="floated">
                                     <h3>HW Error Thresholds</h3>
                                     <div class="form-group checkbox">
-                                        <input id="threshold-hwerrors" class="enabler" type="checkbox" name="thresholds[hwErrorsEnabled]" <?php echo ($rigSettings['settings']['hwErrors']['enabled']) ? 'checked' : '' ?>> <label for="threshold-hwerrors">Enable Hardware Error Warnings</label>
+                                        <input id="threshold-hwerrors" class="enabler" type="checkbox" name="thresholds[hwErrors][enabled]" <?php echo ($rigSettings['settings']['hwErrors']['enabled']) ? 'checked' : '' ?> value="1"> <label for="threshold-hwerrors">Enable Hardware Error Warnings</label>
                                     </div>
-                                    <div class="form-group setting-thresholds ">
+                                    <div class="form-group setting-thresholds" <?php echo (!$rigSettings['settings']['hwErrors']['enabled']) ? 'style="display: none;"' : '' ?>>
                                         <table class="table table-hover table-striped table-settings">
                                             <thead>
                                                 <tr>
@@ -179,12 +171,12 @@ if (empty($rigDevices)) {
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            Number (#)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?>>
+                                                            Number (#)<br><input type="radio" name="thresholds[hwErrors][type]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'int') ? 'checked' : '' ?> value="int">
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            Percent (%)<br><input type="radio" name="thresholds[hwErrorsType]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?>>
+                                                            Percent (%)<br><input type="radio" name="thresholds[hwErrors][type]" <?php echo ($rigSettings['settings']['hwErrors']['type'] == 'percent') ? 'checked' : '' ?> value="percent">
                                                         </label>
                                                     </td>
                                                 </tr>
@@ -197,24 +189,24 @@ if (empty($rigDevices)) {
                                                     </td>
                                                     <td>
                                                         <div class="form-group setting-hwerror hwErrorInt">
-                                                            <div class="setting-hw-errors setting-thresholds">
+                                                            <div class="setting-hw-errors-int setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>">
+                                                                    <input type="text" class="form-control warning" id="inputHWErrWarningInt" name="thresholds[hwErrors][warning][int]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['int'] ?>">
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>">
+                                                                    <input type="text" class="form-control danger" id="inputHWErrDangerInt" name="thresholds[hwErrors][danger][int]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['int'] ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="form-group setting-hwerror hwErrorPercent">
-                                                            <div class="setting-hw-errors setting-thresholds">
+                                                            <div class="setting-hw-errors-percent setting-thresholds">
                                                                 <div class="setting-warning orange">
-                                                                    <input type="text" class="form-control" id="inputHWErrWarning" name="thresholds[hwWarning]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%">
+                                                                    <input type="text" class="form-control warning" id="inputHWErrWarningPercent" name="thresholds[hwErrors][warning][percent]" value="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['warning']['percent'] ?>%">
                                                                 </div>
                                                                 <div class="setting-danger red">
-                                                                    <input type="text" class="form-control" id="inputHWErrDanger" name="thresholds[hwDanger]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%">
+                                                                    <input type="text" class="form-control danger" id="inputHWErrDangerPercent" name="thresholds[hwErrors][danger][percent]" value="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%" placeholder="<?php echo $rigSettings['settings']['hwErrors']['danger']['percent'] ?>%">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -306,11 +298,11 @@ if (empty($rigDevices)) {
                                     <?php
                                     foreach ($rigPools as $pool) {
                                     ?>
-                                        <tr data-poolId="<?php echo $pool['id']; ?>">
+                                        <tr data-id="<?php echo $pool['id']; ?>">
                                           <td><input type="radio" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
-                                          <td><?php echo $pool['url']; ?></td>
-                                          <td><?php echo $pool['user']; ?></td>
-                                          <td>********</td>
+                                          <td data-name="url"><?php echo $pool['url']; ?></td>
+                                          <td data-name="user"><?php echo $pool['user']; ?></td>
+                                          <td data-name="password">********</td>
                                           <td class="priority"><?php echo $pool['priority']; ?></td>
                                           <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
                                           <br>

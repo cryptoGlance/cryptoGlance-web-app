@@ -15,6 +15,7 @@
     this.$rigTabContentEl        = this.$rigEl.find('.tab-content')
     this.$rigTitle               = this.$rigEl.find('h1')
     this.$rigSummary             = $('#rig-' + rigID + '-summary')
+    this.$rigSummaryTableSummary = this.$rigSummary.find('.table-summary')
     this.$rigSummaryTable        = this.$rigSummary.find('table')
     this.$rigSummaryTableBody    = this.$rigSummaryTable.find('tbody')
     this.$loader                 = this.$rigSummary.find('img[alt="loading"]')
@@ -39,7 +40,7 @@
   ==========================================*/
 
   Rig.prototype.update = function (data) {
-    if ('undefined' === typeof data.summary || !data.devs.length) {
+    if ('undefined' === typeof data.overview || data.overview.status == 'offline') {
       this._off()
       this.ready = false
       return
@@ -76,18 +77,27 @@
         this.deviceCollection.add(devices[i].id)
       }
     }
-    var deviceHtml = this.deviceCollection.update(devices)
+
     if (this.panelStatus !== overview.status.panel) {
       this.panelStatus = overview.status.panel
       this.$rigEl[0].className = 'panel panel-primary panel-rig ' + this.panelStatus
     }
-    this.$rigNavEl.html(this.summaryBtn + deviceHtml.nav)
+
+    if (this.deviceCollection.length > 0) {
+        var deviceHtml = this.deviceCollection.update(devices)
+        this.$rigNavEl.html(this.summaryBtn + deviceHtml.nav)
+        this.$rigSummaryTableBody.html(deviceHtml.summary)
+        this.$rigTabContentEl.html(this.$rigSummary[0].outerHTML + deviceHtml.status)
+        this.$rigSummaryTableSummary.show();
+    } else {
+        this.$rigSummaryTableSummary.hide();
+    }
+
+    this.$rigSummaryBody.html(this._buildStatus(summary))
+
     if (this.init) {
       this.$rigNavEl.find('li:first-child').addClass('active')
     }
-    this.$rigSummaryBody.html(this._buildStatus(summary))
-    this.$rigSummaryTableBody.html(deviceHtml.summary)
-    this.$rigTabContentEl.html(this.$rigSummary[0].outerHTML + deviceHtml.status)
     if ($activeNav.length) {
       this.$rigTabContentEl.find('.active.in').removeClass('in active')
       this.$rigNavEl.find('li:eq(' + activeNavIndex + ')').addClass('active')

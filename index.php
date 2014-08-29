@@ -8,7 +8,7 @@ if (!$_SESSION['login_string']) {
 session_write_close();
 
 $jsArray = array(
-    'dashboard/Util',
+    'Util',
     'dashboard/RigCollection',
     'dashboard/Rig',
     'dashboard/DeviceCollection',

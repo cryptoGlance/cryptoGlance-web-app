@@ -111,13 +111,13 @@
         res = res.overview
       }
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
-      _self.overallHashrate += Util.extractHashrate(res.hashrate_5s)
+      _self.overallHashrate += parseFloat(res.hashrate_5s)
 
       if (typeof algorithms[res.algorithm] == 'undefined') {
         var algorithm = res.algorithm;
         algorithms[algorithm] = 0;
       }
-      algorithms[res.algorithm] += parseFloat(res.raw_hashrate)
+      algorithms[res.algorithm] += parseFloat(res.hashrate_5s)
     }
 
     this.overviewTableData = ''

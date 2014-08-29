@@ -31,18 +31,68 @@ class Config_Rigs extends Config_Abstract {
         $this->_objs[] = $obj;
     }
 
-    public function create() {
-        if (empty($_POST['ip_address']) || empty($_POST['port'])) {
-            header("HTTP/1.0 406 Not Acceptable"); // not accepted
+    // validate posted data for rig
+    protected function postValidate($dataType, $data) {
+        // TO-DO: Rethink this... Maybe some kind of validator class that returns true/false
 
-            return 'Missing ' . (empty($_POST['ip_address']) ? 'IP Address' : 'Port');
+        if ($dataType == 'details' &&
+            (empty($data['ip_address']) || empty($data['port']))
+        ) {
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
+            return 'Missing ' . (empty($data['ip_address']) ? 'IP Address' : 'Port');
+        } else if ($dataType == 'thresholds') {
+            if ($data['temps']['enabled'] == 'on' &&
+            (empty($data['temps']['warning']) || empty($data['temps']['danger']))
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Temperature Warning and Danager values must be set!';
+            } else if ($data['hwErrors']['enabled'] == 'on' && empty($data['hwErrors']['type'])) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Hardware errors require a Percent or Integer display type!';
+            } else if ($data['hwErrors']['enabled'] == 'on' && $data['hwErrors']['type'] == 'int' &&
+                (empty($data['hwErrors']['warning']['int']) || empty($data['hwErrors']['danger']['int']))
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'An integer value must be set!';
+            } else if ($data['hwErrors']['enabled'] == 'on' && $data['hwErrors']['type'] == 'percent' &&
+                (empty($data['hwErrors']['warning']['percent']) || empty($data['hwErrors']['danger']['percent']))
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'An percent value must be set!';
+            } else if (
+                ($data['hwErrors']['warning']['percent'] >= $data['hwErrors']['danger']['percent']) ||
+                ($data['hwErrors']['warning']['int'] >= $data['hwErrors']['danger']['int']) ||
+                ($data['temps']['warning'] >= $data['temps']['danger'])
+            ) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Warning setting <b>cannot</b> be a higher value than your danger setting.';
+            }
         }
 
-        foreach ($this->_data as $rig) {
-            if ($_POST['ip_address'] == $rig['host'] && $_POST['port'] == $rig['port']) {
-                header("HTTP/1.0 409 Conflict"); // conflict
-                return 'This rig already exists as ' . (!empty($rig['name']) ? $rig['name'] : $rig['host'].':'.$rig['port']);
+        return true;
+    }
+    protected function isUnique($dataType, $data) {
+        if ($dataType == 'details') {
+            foreach ($this->_data as $rig) {
+                if ($data['ip_address'] == $rig['host'] && $data['port'] == $rig['port']) {
+                    header("HTTP/1.0 409 Conflict"); // conflict
+                    return 'This rig already exists as ' . (!empty($rig['name']) ? $rig['name'] : $rig['host'].':'.$rig['port']);
+                }
             }
+        }
+
+        return true;
+    }
+
+    public function create() {
+        $isValid = $this->postValidate(array('details' => $_POST));
+        if ($isValid !== true) {
+            return $isValid;
+        }
+
+        $isUnique = $this->isUnique(array('details' => $_POST));
+        if ($isUnique !== true) {
+            return $isUnique;
         }
 
         $this->_data[] = array(
@@ -59,7 +109,59 @@ class Config_Rigs extends Config_Abstract {
     }
 
     public function update() {
-        
+        $id = intval($_GET['id'])-1;
+
+        foreach ($_POST as $dataType => $data) {
+            $name = 'update' . ucfirst($dataType);
+            return $this->$name($id, $dataType, $data);
+        }
+    }
+
+    private function updateDetails($id, $dataType, $data) {
+        $isValid = $this->postValidate($dataType, $data);
+        if ($isValid !== true) {
+            return $isValid;
+        }
+
+        $rig = array(
+            'name' => (!empty($data['label']) ? $data['label'] : $data['ip_address']),
+            'type' => 'cgminer',
+            'host' => $data['ip_address'],
+            'port' => $data['port'],
+            'settings' => array(
+                'algorithm' => $data['algorithm']
+            ),
+        );
+
+        $this->_data[$id] = array_replace_recursive($this->_data[$id], $rig);
+
+        $this->write();
+
+        return true;
+    }
+
+    private function updateThresholds($id, $dataType, $data) {
+        // Some data scrubbing
+        $data['hwErrors']['warning']['percent'] = (float) preg_replace('/[^0-9.]*/', '', $data['hwErrors']['warning']['percent']);
+        $data['hwErrors']['danger']['percent'] = (float) preg_replace('/[^0-9.]*/', '', $data['hwErrors']['danger']['percent']);
+        if (!isset($data['temps']['enabled'])) {
+            $data['temps']['enabled'] = 0;
+        }
+        if (!isset($data['hwErrors']['enabled'])) {
+            $data['hwErrors']['enabled'] = 0;
+        }
+
+        // Validate post
+        $isValid = $this->postValidate($dataType, $data);
+        if ($isValid !== true) {
+            return $isValid;
+        }
+
+        $this->_data[$id]['settings'] = array_replace_recursive($this->_data[$id]['settings'], $data);
+
+        $this->write();
+
+        return true;
     }
 
 }

@@ -59,10 +59,6 @@ class CryptoGlance {
     //////////////
     // Wallets //
     /////////////
-    public function getCurrencies() {
-        $wallet = new Wallets();
-        return $wallet->getCurrencies();
-    }
     public function getWallets() {
         return $this->_config['wallets'];
     }
