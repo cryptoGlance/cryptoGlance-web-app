@@ -60,7 +60,7 @@ function restoreSiteLayout() {
   }
 }
 
-$document.('masonry', function (evt) {
+$document.on('masonry', function (evt) {
   restoreSiteLayout()
 })
 
