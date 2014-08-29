@@ -59,6 +59,10 @@ function restoreSiteLayout() {
   }
 }
 
+$(document).('masonry', function (evt) {
+  restoreSiteLayout()
+})
+
 // Modify Panel width
 //
 

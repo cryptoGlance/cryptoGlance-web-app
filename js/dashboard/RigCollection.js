@@ -80,15 +80,10 @@
         if (_self._rigsResponded === _self.collection.length) {
           _self._ready = true
           _self._buildOverview(overviewData)
+          $(document).trigger('masonry')
         }
       })
     })
-
-    // issue #37
-    // https://github.com/cryptoGlance/cryptoGlance-web-app/issues/37
-    if (window.matchMedia("(min-width: 1600px)").matches) {
-      initMasonry()
-    }
 
     return true;
   }
