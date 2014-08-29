@@ -48,7 +48,8 @@ function restoreSiteLayout() {
   var siteLayout = $.cookie('use_masonry_layout');
   var viewportWidth  = $(window).width();
 
-  if (siteLayout == null) {
+  if (viewportWidth < 1600 || siteLayout == null) {
+    destroyMasonry();
     $('#layout-grid').removeClass('active-layout');
     $('#layout-list').addClass('active-layout');
   }
