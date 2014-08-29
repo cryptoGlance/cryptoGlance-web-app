@@ -71,5 +71,5 @@
         <li></li>
       </ul>
 
-      <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>
+      <!-- old implement <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div> -->
       <?php } ?>
