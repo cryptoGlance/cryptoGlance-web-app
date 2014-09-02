@@ -21,7 +21,7 @@
     var _self = this // caching self ref for passing down in scope
 
     /*==========  Generate collection  ==========*/
-    $('[data-type="pool"]').each(function (pool) {
+    $('.panel-pool').each(function () {
       _self._add(this.getAttribute('data-id'))
     })
 
@@ -58,6 +58,9 @@
     var _self = this // caching self ref for passing down in scope
 
     this.collection.forEach(function (pool, index) {
+        // console.log(pool);
+        // console.log(index);
+        // console.log('-----------');
       pool.update(pools[index])
     })
     this.ready = true
@@ -69,12 +72,7 @@
     $.ajax({
       url: 'ajax.php',
       data: _self.apiData,
-      dataType: 'json',
-      statusCode: {
-        401: function() {
-          window.location.assign('login.php');
-        }
-      }
+      dataType: 'json'
     })
     .fail(function (xhr, status, message) {
       //console.error(message)

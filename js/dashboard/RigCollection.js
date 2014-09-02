@@ -33,8 +33,7 @@
 
     /*==========  Generate collection  ==========*/
     $('.panel-rig').each(function() {
-      var rigId = this.getAttribute('data-id')
-      _self._add(rigId)
+      _self._add(this.getAttribute('data-id'))
     })
 
     /*==========  Initial data call  ==========*/
