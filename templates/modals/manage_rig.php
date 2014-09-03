@@ -7,14 +7,10 @@
       </div>
       <div class="modal-body">
          <div class="new-panel-choices">
-            <a class="new-panel-btn btn-details" href="rig.php"><i class="icon icon-detailsalt"></i>Details</a>
+            <a class="new-panel-btn btn-details" href="rig.php" target="_blank"><i class="icon icon-detailsalt"></i>Details</a>
             <a class="new-panel-btn btn-switchpool" data-toggle="modal" data-target="#switchPool" data-backdrop="static" data-dismiss="modal"><i class="icon icon-refreshalt"></i>Switch Pool</a>
             <a class="new-panel-btn btn-reset" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-circlezero"></i>Reset Stats</a>
-<!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal"><i class="icon icon-eye-view"></i>View All Stats</a>-->
-<!--            <a class="new-panel-btn btn-pause" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-pause"></i>Pause Mining</a>-->
-<!--            <a class="new-panel-btn btn-play" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-play"></i>Continue Mining</a>-->
             <a class="new-panel-btn btn-restart" data-toggle="modal" data-backdrop="static" data-dismiss="modal"><i class="icon icon-restart"></i>Restart Miner</a>
-<!--            <a class="new-panel-btn" data-toggle="modal" data-target="#comingSoon" data-backdrop="static" data-dismiss="modal"><i class="icon icon-selectionremove"></i>Remove Rig</a>-->
          </div>
       </div>
       <div class="modal-footer">

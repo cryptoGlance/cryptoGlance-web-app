@@ -7,6 +7,14 @@
   var rigCollection = new RigCollection()
   rigCollection.start()
 
+  // Edit Rig
+  $document.on('click', '.btn-edit-rig', function (evt) {
+    var rigId = this.getAttribute('data-attr')
+    var rigUrl = this.getAttribute('data-url')
+
+    window.open(rigUrl + '?id=' + rigId, "_blank");
+  })
+
   // Manage Rig
   $document.on('click', '.btn-manage-rig', function (evt) {
     var rigId = this.getAttribute('data-attr')
@@ -86,6 +94,7 @@
     }
   })
 
+
   // Restart
   $document.on('click', '#manageRig .btn-restart', function (evt) {
     var rigId = $('#manageRig').attr('data-attr')
@@ -144,6 +153,18 @@
 
   var poolCollection = new PoolCollection()
   poolCollection.start()
+
+  // Manage Rig
+  $document.on('click', '.btn-edit-pool', function (evt) {
+    var poolId = this.getAttribute('data-attr')
+    var $addPool = $('#addPool')
+
+    $addPool.attr('data-attr', poolId)
+    // $addPool.find('.rig-name').html($('#rig-' + rigId + ' h1').html())
+    // $addPool.find('.btn-details').attr('href', 'rig.php?id=' + rigId)
+
+    prettifyInputs()
+  })
 
   /*-----  End of The Pools  ------*/
 

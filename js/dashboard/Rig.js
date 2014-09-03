@@ -183,6 +183,7 @@
   Rig.prototype._off = function () {
     this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').hide()
+    this.$rigEl.find('.btn-edit-rig').show()
     this.rigPanel.hide()
     this.$rigNavEl.html('')
     this.$rigSummaryTableBody.html('')
@@ -191,6 +192,7 @@
   Rig.prototype._on = function() {
     this.$rigEl.removeClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').show()
+    this.$rigEl.find('.btn-edit-rig').hide()
     this.$rigSummary.find('table').show()
     this.rigPanel.show()
   }
