@@ -154,14 +154,42 @@
   var poolCollection = new PoolCollection()
   poolCollection.start()
 
-  // Manage Rig
+  // Edit Pool
   $document.on('click', '.btn-edit-pool', function (evt) {
     var poolId = this.getAttribute('data-attr')
     var $addPool = $('#addPool')
 
     $addPool.attr('data-attr', poolId)
-    // $addPool.find('.rig-name').html($('#rig-' + rigId + ' h1').html())
-    // $addPool.find('.btn-details').attr('href', 'rig.php?id=' + rigId)
+
+    // Get Pool Config:
+    $.ajax({
+      type: 'get',
+      data: {
+        type: 'pools',
+        action: 'config',
+        id: poolId
+      },
+      url: 'ajax.php',
+      dataType: 'json'
+    })
+    .done(function (data) {
+        $.each(data, function(k, v) {
+            if (k == 'type') {
+                $addPool.find('select[name="poolType"]').val(v).change()
+            } else {
+                switch(k) {
+                    case 'name':
+                        k = 'label'
+                        break
+                    case 'apikey':
+                        k = 'api'
+                        break
+                }
+
+                $addPool.find('input[name="'+ k +'"]').val(v)
+            }
+        });
+    });
 
     prettifyInputs()
   })

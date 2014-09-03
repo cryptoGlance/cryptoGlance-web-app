@@ -19,6 +19,16 @@ class Wallets extends Config_Wallets {
         'vertcoin'  => 'VTC',
     );
 
+    
+    /*
+     * POST
+     */
+
+
+    /*
+     * GET
+     */
+
     public function getCurrencies() {
         // Making room for possible addition of data here.
         return $this->_currencies;

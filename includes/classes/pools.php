@@ -11,26 +11,10 @@ class Pools extends Config_Pools {
     protected $_config = 'configs/pools.json';
 
     /*
-     * Specific to class
-     */
-
-    protected function add($pool) {
-    
-        if (empty($pool['type'])) {
-            return false;
-        }
-
-        $class = 'Pools_' . ucwords(strtolower($pool['type']));
-        $obj = new $class($pool);
-        $this->_objs[] = $obj;
-    }
-
-    
-    /*
      * POST
      */
-     
-    
+
+
     /*
      * GET
      */

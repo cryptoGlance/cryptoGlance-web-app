@@ -36,7 +36,7 @@ class Config_Pools extends Config_Abstract {
         $userid = $_POST['userid'];
 
         $pool = array();
-         if ($type == 'btcguild' && !empty($api)) {
+        if ($type == 'btcguild' && !empty($api)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : 'BTC Guild'),
@@ -109,6 +109,13 @@ class Config_Pools extends Config_Abstract {
         $this->_data[] = $pool;
 
         return $this->write();
+    }
+
+    public function getConfig() {
+        $id = intval($_GET['id']);
+        if ($id != 0) {
+            return $this->_data[$id-1];
+        }
     }
 
 }
