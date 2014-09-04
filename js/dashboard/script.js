@@ -264,6 +264,13 @@
             //console.error(xhr, status, message)
         })
         .done()
+        .always(function() {
+            $('form', modal)[0].reset();
+        })
+    });
+    $document.on('click', 'button.btn-cancelAddConfig', function (evt) {
+        var modal = $(this).parentsUntil('.modal').parent();
+        $('form', modal)[0].reset();
     });
 
     // Remove Config BTN
