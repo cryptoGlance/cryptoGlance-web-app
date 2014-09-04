@@ -59,9 +59,9 @@ class Wallets extends Config_Wallets {
                 $addressData = $address->update();
                 $walletAddressData[$addressData['address']] = array(
                     'label' => $addressData['label'],
-                    'balance' => number_format($addressData['balance'], 8),
+                    'balance' => str_replace('.00000000', '', number_format($addressData['balance'], 8)),
                     'fiat_balance' => number_format($fiatPrice * $addressData['balance'], 2),
-                    'coin_balance' => number_format($coinPrice * $addressData['balance'], 8),
+                    'coin_balance' => str_replace('.00000000', '', number_format($coinPrice * $addressData['balance'], 8)),
                 );
                 $currencyBalance += number_format($addressData['balance'], 8, '.', '');
                 $fiatBalance += number_format($fiatPrice * $addressData['balance'], 2, '.', '');
@@ -76,7 +76,7 @@ class Wallets extends Config_Wallets {
                 'coin_balance' => str_replace('.00000000', '', number_format($coinBalance, 8, '.', ',')),
                 'coin_price' => str_replace('.00000000', '', $coinPrice),
                 'coin_code' => 'BTC',
-                'fiat_balance' => str_replace('.00000000', '', number_format($fiatBalance, 2, '.', ',')),
+                'fiat_balance' => number_format($fiatBalance, 2, '.', ','),
                 'fiat_code' => $wallet['fiat'],
                 'total_addresses' => count($wallet['addresses']),
                 'addresses' => $walletAddressData,
