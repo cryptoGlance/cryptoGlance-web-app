@@ -19,7 +19,7 @@ class Wallets extends Config_Wallets {
         'vertcoin'  => 'VTC',
     );
 
-    
+
     /*
      * POST
      */
@@ -71,12 +71,12 @@ class Wallets extends Config_Wallets {
             $data[] = array (
                 'label' => $wallet['label'],
                 'currency' => $wallet['currency'],
-                'currency_balance' => number_format($currencyBalance, 8, '.', ','),
+                'currency_balance' => str_replace('.00000000', '', number_format($currencyBalance, 8, '.', ',')),
                 'currency_code' => $this->_currencies[$wallet['currency']],
-                'coin_balance' => number_format($coinBalance, 8, '.', ','),
-                'coin_price' => $coinPrice,
+                'coin_balance' => str_replace('.00000000', '', number_format($coinBalance, 8, '.', ',')),
+                'coin_price' => str_replace('.00000000', '', $coinPrice),
                 'coin_code' => 'BTC',
-                'fiat_balance' => number_format($fiatBalance, 2, '.', ','),
+                'fiat_balance' => str_replace('.00000000', '', number_format($fiatBalance, 2, '.', ',')),
                 'fiat_code' => $wallet['fiat'],
                 'total_addresses' => count($wallet['addresses']),
                 'addresses' => $walletAddressData,
