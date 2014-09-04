@@ -74,7 +74,7 @@ if ($id != 0) {
                                 <tr class="wallet-inline-edit">
                                     <td colspan="2"><input type="text" name="label" class="form-control" placeholder="enter new name"></td>
                                     <td>0.00 <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code'] ?></td>
-                                    <td>0.00000000 <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code'] ?></td>
+                                    <td>0 <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code'] ?></td>
                                     <td><input type="text" name="address" class="form-control" placeholder="enter new address"></td>
                                     <td><a href="#saveAddress" class="saveNewAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a></td>
                                 </tr>
