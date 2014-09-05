@@ -17,7 +17,13 @@ class Rigs extends Config_Rigs {
     }
 
     public function switchPool() {
-        return $this->_objs[0]->switchPool(intval($_POST['pool'])-1);
+        $result = $this->_objs[0]->switchPool(intval($_POST['pool'])-1);
+
+        if ($_POST['reset']) {
+            $this->_objs[0]->resetStats();
+        }
+
+        return $result;
     }
     public function resetStats() {
         $this->_objs[0]->resetStats();

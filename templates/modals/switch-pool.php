@@ -7,7 +7,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h2><i class="icon icon-refreshalt"></i> Switch Active Mining Pool</h2>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="padding-bottom: 0px;">
                     <div class="ajax-loader"></div>
                     <div class="table-responsive">
                         <table class="table table-hover table-striped" style="display: none;">
@@ -22,6 +22,9 @@
                             </thead>
                             <tbody></tbody>
                         </table>
+                    </div>
+                    <div class="form-group checkbox resetStats" style="text-align: center;">
+                        <input id="resetStats" type="checkbox" name="resetStats" value="1"><label for="resetStats" style="display: inline;">Reset stats</label>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -68,6 +68,7 @@
 
         $switchPoolModalBody.find('.ajax-loader').remove()
         $('.table', $switchPoolModalBody).show();
+        $('.resetStats', $switchPoolModalBody).show();
         prettifyInputs()
       }
     })
@@ -76,6 +77,8 @@
   $document.on('click', '#switchPool .btn-success', function (evt) {
     var rigId = $('#switchPool').attr('data-attr')
     var selectedPoolId = $('input[name=switchPoolList]:checked', '#switchPool').val()
+    var resetStats = $('input[name=resetStats]:checked', '#switchPool').val()
+
     if (typeof selectedPoolId != 'undefined') {
       $.ajax({
         type: 'post',
@@ -83,7 +86,8 @@
           id: rigId,
           type: 'rigs',
           action: 'switch-pool',
-          pool: parseInt(selectedPoolId, 10) + 1
+          pool: parseInt(selectedPoolId, 10) + 1,
+          reset: resetStats
         },
         url: 'ajax.php',
         dataType: 'json'
