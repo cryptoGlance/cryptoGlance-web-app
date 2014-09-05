@@ -27,6 +27,7 @@ class Config_Pools extends Config_Abstract {
     }
 
     public function create() {
+        $id = intval($_POST['id']);
         $label = $_POST['label'];
         $type = $_POST['poolType'];
         $url = rtrim($_POST['url'], '/');
@@ -106,7 +107,11 @@ class Config_Pools extends Config_Abstract {
             return 'All fields are required on this form.';
         }
 
-        $this->_data[] = $pool;
+        if ($id != 0) {
+            $this->_data[$id-1] = $pool;
+        } else {
+            $this->_data[] = $pool;
+        }
 
         return $this->write();
     }

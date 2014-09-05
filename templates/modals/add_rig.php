@@ -43,8 +43,8 @@
               </div>
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
-           <button type="button" class="btn btn-lg btn-success btn-addConfig" id="btnAddHost"><i class="icon icon-save-floppy"></i> Save</button>
+           <button type="button" class="btn btn-lg btn-danger btn-cancelConfig" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
+           <button type="button" class="btn btn-lg btn-success btn-saveConfig" id="btnAddHost"><i class="icon icon-save-floppy"></i> Save</button>
          </div>
          <input type="hidden" name="type" value="rigs" />
       </form>

@@ -189,6 +189,7 @@
                 $addPool.find('input[name="'+ k +'"]').val(v)
             }
         });
+        $('<input type="hidden" name="id" value="'+poolId+'" />').appendTo($addPool.find('form'));
     });
 
     prettifyInputs()
@@ -239,7 +240,7 @@
     });
 
     // Add Config BTN
-    $document.on('click', 'button.btn-addConfig', function (evt) {
+    $document.on('click', 'button.btn-saveConfig', function (evt) {
         var modal = $(this).parentsUntil('.modal').parent();
         var errorMsg = $('.error', modal);
 
@@ -266,11 +267,13 @@
         .done()
         .always(function() {
             $('form', modal)[0].reset();
+            $('input[name="id"]', modal).remove();
         })
     });
-    $document.on('click', 'button.btn-cancelAddConfig', function (evt) {
+    $document.on('click', 'button.btn-cancelConfig, button.close', function (evt) {
         var modal = $(this).parentsUntil('.modal').parent();
         $('form', modal)[0].reset();
+        $('input[name="id"]', modal).remove();
     });
 
     // Remove Config BTN
