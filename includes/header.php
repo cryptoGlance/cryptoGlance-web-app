@@ -41,7 +41,7 @@
                            <span class="width-reading">90%</span> <!-- width-reading -->
                            <div id="slider"></div> <!-- the Slider -->
                         </li>
-                        <?php if ($currentPage == 'index') { ?><li class="dropdown-header chk-hashrate"><label>Show Total Hashrate(s)<input type="checkbox" for="lbl-total-hashrate"></label></li><?php } ?>
+                        <?php if ($currentPage == 'index') { ?><li class="dropdown-header chk-hashrate"><label for="show-total-hashrate">Show Total Hashrate(s)</label><input type="checkbox" id="showTotalHashrate" name="show-total-hashrate"></li><?php } ?>
                         <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
                         <!-- <div class="divider"></div> -->
                         <?php //require_once("includes/menu-active_panels.php"); ?>
@@ -67,9 +67,5 @@
       </div>
 
       <?php if ($currentPage == 'index') { ?>
-      <ul id="total-hashrates">
-        <li></li>
-      </ul>
-
-      <!-- old implement <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div> -->
+      <ul id="total-hashrates"><li></li></ul>
       <?php } ?>
