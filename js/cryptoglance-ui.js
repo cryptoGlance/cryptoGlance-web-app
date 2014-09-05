@@ -143,17 +143,6 @@ function mobileWidthFixer() {
 
 }
 
-function expandAllPanels() {
-  $('#dashboard-wrap .panel-body:not(.tab-content .panel-body), #dashboard-wrap .panel-footer, #dashboard-wrap .tab-content, #dashboard-wrap .panel-rig .nav-pills').slideDown();
-    return false;
-}
-
-function collapseAllPanels() {
-  $('#dashboard-wrap .panel-body:not(.tab-content .panel-body), #dashboard-wrap .panel-footer, #dashboard-wrap .tab-content, #dashboard-wrap .panel-rig .nav-pills').slideUp('slow');
-    return false;
-}
-
-
 // Close navbar after click on mobile
 //
 
@@ -235,7 +224,6 @@ function scrollTo(id){
 
 
 // Smooth scroll to active rig from the Overview panel
-
 $(function() {
     $('#overview').on('click', '.anchor-offset', function(e) {
         e.preventDefault();
@@ -246,7 +234,6 @@ $(function() {
 
 
 // Setup Toast Messages
-//
 function setToasts() {
   // setting toast defaults
   $().toastmessage({
@@ -372,20 +359,6 @@ $(document).ready(function() {
     return false;
   });
 
-  $('#collapse-all-panels').click(function(event) {
-    event.preventDefault();
-    collapseAllPanels();
-    $('.toggle-panel-body').addClass("minimized");
-    $('.toggle-panel-body').html("<i class='icon icon-chevron-down'></i>");
-  });
-
-  $('#expand-all-panels').click(function(event) {
-    event.preventDefault();
-    expandAllPanels();
-    $('.toggle-panel-body').removeClass("minimized");
-    $('.toggle-panel-body').html("<i class='icon icon-chevron-up'></i>");
-  });
-
   $('.toggle-panel-body').click(function() {
     var $toggleButton = $(this);
 
@@ -439,23 +412,6 @@ $(document).ready(function() {
     $('#deletePrompt').on('shown.bs.modal', function () {
         $('input[name="type"]', this).val($(this).attr('data-type'));
         $('input[name="id"]', this).val($(this).attr('data-id'));
-        prettifyInputs();
-    });
-
-
-    // Pool modal
-    $('#selectPoolType').change(function() {
-        var type = $(this).val();
-        $('#addPool').find('.form-group').hide();
-        $('#addPool').find('.' + type).show();
-        $('#addPool').find('.all').show();
-
-        if (type == 'simplecoin') {
-            $('#inputPoolURL').attr('placeholder', 'http://simpledoge.com');
-        } else if (type == 'mpos') {
-            $('#inputPoolURL').attr('placeholder', 'http://coinhuntr.com');
-        }
-
         prettifyInputs();
     });
 

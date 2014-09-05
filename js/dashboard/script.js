@@ -154,6 +154,22 @@
   var poolCollection = new PoolCollection()
   poolCollection.start()
 
+  // Pool modal
+  $('#selectPoolType').change(function() {
+      var type = $(this).val();
+      $('#addPool').find('.form-group').hide();
+      $('#addPool').find('.' + type).show();
+      $('#addPool').find('.all').show();
+
+      if (type == 'simplecoin') {
+          $('#inputPoolURL').attr('placeholder', 'http://simpledoge.com');
+      } else if (type == 'mpos') {
+          $('#inputPoolURL').attr('placeholder', 'http://coinhuntr.com');
+      }
+
+      prettifyInputs();
+  });
+
   // Edit Pool
   $document.on('click', '.btn-edit-pool', function (evt) {
     var poolId = this.getAttribute('data-attr')
