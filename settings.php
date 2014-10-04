@@ -106,11 +106,11 @@ require_once("includes/header.php");
                 <div class="form-group setting-hwerror">
                   <div class="setting-hw-errors setting-thresholds">
                     <div class="setting-warning orange">
-                      <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" maxlength="2">
+                      <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" maxlength="10">
                       <label for="inputHWErrWarning" class="control-label">Warning</label>
                     </div>
                     <div class="setting-danger red">
-                      <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" maxlength="2">
+                      <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" maxlength="10">
                       <label for="inputHWErrDanger" class="control-label">Danger</label>
                     </div>
                   </div>
