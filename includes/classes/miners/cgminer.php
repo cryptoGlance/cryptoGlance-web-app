@@ -76,6 +76,7 @@ class Miners_Cgminer {
         $data = array();
         $data = array(
             'id' => $devId,
+	    'name' => $devData['Name'] . $devData['ID'],
             'type' => 'ASC',
             'enabled' => $devData['Enabled'],
             'health' => $devData['Status'],

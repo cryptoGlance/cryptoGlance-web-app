@@ -178,9 +178,9 @@ function updateRigs(data) {
         $(summaryContentTabTableBody).find('tr').remove();
         var removeTable = false;
         if (typeof rig.devs.GPU != 'undefined' && rig.devs.GPU.length > 0) {
-            $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Temperature</th><th>Fan Speed</th><th>Fan %</th><th>Hashrate (5s)</th><th>Utility</th></tr>');
+            $(summaryContentTabTableHead).append('<tr><th></th><th>Name</th><th>Temperature</th><th>Fan Speed</th><th>Fan %</th><th>Hashrate (5s)</th><th>Utility</th></tr>');
         } else if (typeof rig.devs.ASC != 'undefined' && rig.devs.ASC.length > 0) {
-            $(summaryContentTabTableHead).append('<tr><th></th><th>DEV #</th><th>Hashrate 5s</th><th>Accepted</th><th>Rejected</th><th>Utility</th><th>HW Errors</th></tr>');
+            $(summaryContentTabTableHead).append('<tr><th></th><th>Name</th><th>Hashrate 5s</th><th>Accepted</th><th>Rejected</th><th>Utility</th><th>HW Errors</th></tr>');
         } else {
             removeTable = true;
             $(summaryContentTabTable).remove();
@@ -240,7 +240,7 @@ function updateRigs(data) {
                 }
                 
                 // add dev to Nav
-                $(rigNavElm).append('<li><a class="rig-'+ rigId +'-'+ devType +'-'+ devIndex +' '+ status +'" href="#rig-'+ rigId +'-'+ devType +'-'+ devIndex +'" data-toggle="tab">'+ devType + devIndex +' <i class="icon icon-'+ icon +'"></i></a></li>');
+                $(rigNavElm).append('<li><a class="rig-'+ rigId +'-'+ devType +'-'+ devIndex +' '+ status +'" href="#rig-'+ rigId +'-'+ devType +'-'+ devIndex +'" data-toggle="tab">'+ dev.name +' <i class="icon icon-'+ icon +'"></i></a></li>');
                 $(rigTabContentElm).find('#rig-'+ rigId +'-'+ devType +'-'+ devIndex).remove();
                 $(rigTabContentElm).append('<div class="tab-pane fade in" id="rig-'+ rigId +'-'+ devType +'-'+ devIndex +'"><div class="panel-body panel-body-stats"></div></div>');
                 
@@ -276,9 +276,9 @@ function updateRigs(data) {
                     }
                 
                     if (devType == 'GPU') {
-                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType + dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
+                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+devType+ dev.id+'</td><td>'+dev.temperature+'&deg;C</td><td>'+dev.fan_speed+'</td><td>'+dev.fan_percent+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.utility+'</td></tr>');
                     } else if(devType == 'ASC') {
-                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+ devType +dev.id+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
+                        $(summaryContentTabTableBody).append('<tr><td><i class="icon icon-'+ icon +' '+status+'"></i></td><td class="'+status+'">'+dev.name+'</td><td>'+dev.hashrate_5s+'</td><td>'+dev.accepted+'</td><td>'+dev.rejected+'</td><td>'+dev.utility+'</td><td>'+dev.hw_errors+'</td></tr>');
                     }
                 }
             
