@@ -67,6 +67,20 @@ class Config_Rigs extends Config_Abstract {
                 header("HTTP/1.0 406 Not Acceptable"); // not accepted
                 return 'Warning setting <b>cannot</b> be a higher value than your danger setting.';
             }
+        } else if ($dataType == 'pools') {
+            if (empty($data['new']['label'])) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Pool requires a label!';
+            } else if (empty($data['new']['url'])) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Pool requires a URL to connect to!';
+            } else if (empty($data['new']['user'])) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Pools require some sort of username. Either an coin address or a username/worker.';
+            } else if (empty($data['new']['password'])) {
+                header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                return 'Use atleast 1 character for a password. For example: "x".';
+            }
         }
 
         return true;
@@ -160,6 +174,19 @@ class Config_Rigs extends Config_Abstract {
         $this->_data[$id]['settings'] = array_replace_recursive($this->_data[$id]['settings'], $data);
 
         $this->write();
+
+        return true;
+    }
+
+    private function updatePools($id, $dataType, $data) {
+        // Validate post
+        $isValid = $this->postValidate($dataType, $data);
+        if ($isValid !== true) {
+            return $isValid;
+        }
+
+        // TO-DO: Eventually we will want some kind of profile... For now, just apply the pool to the rig
+
 
         return true;
     }

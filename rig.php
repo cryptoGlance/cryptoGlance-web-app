@@ -280,91 +280,79 @@ if (empty($rigDevices)) {
                     <div class="tab-pane fade" id="rig-settings-pools">
                         <div class="panel-body">
                             <h3>Pool Management</h3>
-                            <form class="form-horizontal" role="form">
-
-                              <!-- TODO: Replace with same output as switch-pool-modal -->
-                              <table class="table table-hover table-striped table-devices">
-                                    <thead>
-                                        <tr>
-                                            <th>Active</th>
-                                            <th>Pool URL</th>
-                                            <th>Worker</th>
-                                            <th>Password</th>
-                                            <th>Priority</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    foreach ($rigPools as $pool) {
-                                    ?>
-                                        <tr data-id="<?php echo $pool['id']; ?>">
-                                          <td><input type="radio" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
-                                          <td data-name="url"><?php echo $pool['url']; ?></td>
-                                          <td data-name="user"><?php echo $pool['user']; ?></td>
-                                          <td data-name="password">********</td>
-                                          <td class="priority"><?php echo $pool['priority']; ?></td>
-                                          <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
-                                          <br>
-                                          </td>
-                                        </tr>
-                                    <?php } ?>
-            <!--                            <tr>-->
-            <!--                              <td><input type="radio" name="gpu-enabled" class="form-control" /></td>-->
-            <!--                              <td><input type="text" class="form-control" value="EDITING EXAMPLE" /></td>-->
-            <!--                              <td><input type="text" class="form-control" value="scrypt.pool.url:3333" /></td>-->
-            <!--                              <td><input type="text" class="form-control" value="scar45.worker" /></td>-->
-            <!--                              <td><input type="text" class="form-control" value="password" /></td>-->
-            <!--                              <td><input type="text" class="form-control" maxlength="3" value="3" style="width: 50px;" /></td>-->
-            <!--                              <td><a href="#editPoolConfig" class="editPoolConfig"><span title="Save this pool" class="blue"><i class="icon icon-save-floppy"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span title="Cancel changes" class="orange"><i class="icon icon-undo"></i></span></a>-->
-            <!--                              <br>-->
-            <!--                              </td>-->
-            <!--                            </tr>-->
-                                    </tbody>
-                                </table>
-                                <button type="button" class="btn btn-primary btn-space" id="btnAddPool"><i class="icon icon-plus-sign"></i> Add New Pool</button>
-                                <div id="addNewPool" class="add-new-wrapper">
-                                  <h3>Add a new pool:</h3>
-                                  <div class="form-group">
-                                    <label for="inputPoolLabel" class="col-sm-5 control-label">Pool Label</label>
-                                    <div class="col-sm-5">
-                                      <input type="text" class="form-control poolLabel" name="pools[new][poolLabel]" placeholder="Name of this pool">
+                            <!-- TODO: Replace with same output as switch-pool-modal -->
+                            <table class="table table-hover table-striped table-devices">
+                                <thead>
+                                    <tr>
+                                        <th>Active</th>
+                                        <th>Pool URL</th>
+                                        <th>Worker</th>
+                                        <th>Password</th>
+                                        <th>Priority</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                foreach ($rigPools as $pool) {
+                                ?>
+                                    <tr data-id="<?php echo $pool['id']; ?>">
+                                      <td><input type="radio" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
+                                      <td data-name="url"><?php echo $pool['url']; ?></td>
+                                      <td data-name="user"><?php echo $pool['user']; ?></td>
+                                      <td data-name="password">********</td>
+                                      <td class="priority"><?php echo $pool['priority']; ?></td>
+                                      <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
+                                      <br>
+                                      </td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-primary btn-space" id="btnAddPool"><i class="icon icon-plus-sign"></i> Add New Pool</button>
+                            <div id="addNewPool" class="add-new-wrapper">
+                                <form class="form-horizontal" role="form">
+                                    <h3>Add a new pool:</h3>
+                                    <div class="form-group">
+                                        <label for="inputPoolLabel" class="col-sm-5 control-label">Pool Label</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control poolLabel" name="pools[new][label]" placeholder="Name of this pool">
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputPoolURL" class="col-sm-5 control-label">URL</label>
-                                    <div class="col-sm-5">
-                                      <input type="text" class="form-control poolUrl" name="pools[new][poolUrl]" placeholder="Pool URL (including port #)">
+                                    <div class="form-group">
+                                        <label for="inputPoolURL" class="col-sm-5 control-label">URL</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control poolUrl" name="pools[new][url]" placeholder="Pool URL (including port #)">
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputPoolWorker" class="col-sm-5 control-label">Username/Worker</label>
-                                    <div class="col-sm-4">
-                                      <input type="text" class="form-control poolUser" name="pools[new][poolUser]">
+                                    <div class="form-group">
+                                        <label for="inputPoolWorker" class="col-sm-5 control-label">Username/Worker</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control poolUser" name="pools[new][user]" placeholder="Username/Worker">
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputPoolPassword" class="col-sm-5 control-label">Password</label>
-                                    <div class="col-sm-4">
-                                      <input type="password" class="form-control poolPassword" name="pools[new][poolPassword]" placeholder="password">
+                                    <div class="form-group">
+                                        <label for="inputPoolPassword" class="col-sm-5 control-label">Password</label>
+                                        <div class="col-sm-4">
+                                            <input type="password" class="form-control poolPassword" name="pools[new][password]" placeholder="Password">
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputPoolPriority" class="col-sm-5 control-label">Priority</label>
-                                    <div class="col-sm-2">
-                                      <input type="text" class="form-control poolPriority" maxlength="3" name="pools[new][poolPriority]">
+                                    <div class="form-group">
+                                        <label for="inputPoolPriority" class="col-sm-5 control-label">Priority</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control poolPriority" maxlength="3" name="pools[new][priority]" placeholder="1">
+                                        </div>
                                     </div>
-                                  </div>
-                                  <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>
-                                  <button type="button" class="btn btn-lg btn-success" id="btnSavePool"><i class="icon icon-save-floppy"></i> Save New Pool</button>
-                                  <br>
-                                  <br>
-                                </div><!-- end add-new-pool-wrapper -->
-                            </form>
+                                    <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>
+                                    <button type="button" class="btn btn-lg btn-success" id="btnSavePool"><i class="icon icon-save-floppy"></i> Save New Pool</button>
+                                    <br><br>
+                                </form>
+                            </div><!-- end add-new-pool-wrapper -->
                         </div><!-- / .panel-body -->
                     </div>
                 </div>
             </div><!-- / .panel-content -->
+            <hr />
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <fieldset>

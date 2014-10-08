@@ -23,19 +23,21 @@ class Config_Wallets extends Config_Abstract {
 
         $class = 'Wallets_' . ucwords(strtolower($wallet['currency']));
 
-        $walletData = array();
-        $addessData = array();
+        if (class_exists($class)) {
+            $walletData = array();
+            $addessData = array();
 
-        foreach ($wallet['addresses'] as $address) {
-            $addessData[] = new $class($address['label'], $address['address']);
+            foreach ($wallet['addresses'] as $address) {
+                $addessData[] = new $class($address['label'], $address['address']);
+            }
+
+            $this->_objs[] = array (
+                'currency' => $wallet['currency'],
+                'fiat' => (!empty($wallet['fiat']) ? $wallet['fiat'] : 'USD'),
+                'label' => $wallet['label'],
+                'addresses' => $addessData,
+            );
         }
-
-        $this->_objs[] = array (
-            'currency' => $wallet['currency'],
-            'fiat' => (!empty($wallet['fiat']) ? $wallet['fiat'] : 'USD'),
-            'label' => $wallet['label'],
-            'addresses' => $addessData,
-        );
     }
 
 }

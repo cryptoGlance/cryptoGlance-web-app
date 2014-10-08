@@ -174,7 +174,46 @@
     $document.on('click', '.removePoolConfig', function (evt) {
       evt.preventDefault()
 
-      alert('pool removed!')
+      alert('pool removed btn clicked!')
+    })
+
+    $document.on('click', '#btnAddPool', function (evt) {
+        evt.preventDefault()
+
+        $.each($('#addNewPool input'), function(key, val) {
+            $(this).val('');
+        })
+
+        $('#btnAddPool').hide();
+        $('#addNewPool').show();
+    })
+
+    $document.on('click', '#btnCancelPool', function (evt) {
+        evt.preventDefault()
+
+        $('#addNewPool').hide();
+        $('#btnAddPool').show();
+    });
+
+    $document.on('click', '#btnSavePool', function (evt) {
+        evt.preventDefault()
+
+        var btnIcon = $('i', this);
+        $(btnIcon).addClass('ajax-saver');
+
+        var form = $('form', '#addNewPool');
+
+        $.post( document.URL, form.serialize())
+        .done(function( data ) {
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+            }, 500);
+        })
+        .fail(function() {
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+            }, 500);
+        })
     })
 
     /*-----  End of Pools  ------*/
