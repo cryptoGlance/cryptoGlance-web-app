@@ -49,7 +49,7 @@ class Pools_Mpos extends Pools_Abstract {
             $data['balance'] = $poolData['getuserbalance']['confirmed'];
             $data['unconfirmed_balance'] = $poolData['getuserbalance']['unconfirmed'];
             
-            $data['network_hashrate'] = formatHashrate($poolData['getpoolstatus']['nethashrate']/1000);
+            $data['network_hashrate'] = formatHashrate($poolData['getpoolstatus']['nethashrate']);
 
             $data['pool_hashrate'] = formatHashrate($poolData['getpoolstatus']['hashrate']);
             
