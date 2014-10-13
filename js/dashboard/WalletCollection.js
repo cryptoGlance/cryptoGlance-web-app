@@ -46,12 +46,19 @@
     })
   }
   
-  WalletCollection.prototype.update = function () {
+  WalletCollection.prototype.update = function (cached) {
     var _self = this
+    
+    cached = typeof cached !== 'undefined' ? cached : 1;
+    if (cached == 0)  {
+        _self.apiData.cached = 0;
+    }
     
     _self._getData(function (wallets) {
         _self._update(wallets)
     })
+    
+    delete _self.apiData.cached;
     
     return true;
   }

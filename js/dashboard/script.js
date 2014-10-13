@@ -248,7 +248,7 @@
                 btnTimeout = 500;
             }
         } else if (type == 'wallet') {
-            if (walletCollection.update()) {
+            if (walletCollection.update(0)) {
                 btnTimeout = 500;
             }
         }
