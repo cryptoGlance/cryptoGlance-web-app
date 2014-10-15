@@ -37,12 +37,12 @@ function runCMD($host, $port, $cmd) {
             <table>
                 <tr>
                     <td>IP Address:</td>
-                    <td><input type="text" name="address" value="<?=$_POST['address']?>" /></td>
+                    <td><input type="text" name="address" value="<?php echo $_POST['address']; ?>" /></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Port:</td>
-                    <td><input type="text" name="port" value="<?=$_POST['port']?>" /></td>
+                    <td><input type="text" name="port" value="<?php echo $_POST['port']; ?>" /></td>
                     <td></td>
                 </tr>
                 <tr>

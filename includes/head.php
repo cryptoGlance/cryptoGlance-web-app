@@ -30,7 +30,7 @@
     <!-- extend Bootstrap styles -->
     <link href="css/bootstrap-switch.min.css" rel="stylesheet">
     <!-- Custom cryptoGlance styles -->
-    <link href="css/cryptoglance-base.css" rel="stylesheet">
+    <link href="css/cryptoglance-base.css?v=<?php echo CURRENT_VERSION; ?>" rel="stylesheet">
     <!--/build-->
 
     <!--[if lt IE 9]>
