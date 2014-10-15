@@ -73,10 +73,14 @@ class Rigs extends Config_Rigs {
 
     public function getUpdate() {
         foreach ($this->_objs as $rig) {
-            $data = $rig->update();
+            $data[] = $rig->update();
         }
 
-        return $data;
+        if (count($data) > 1) {
+            return $data;
+        }
+
+        return $data[0];
     }
 
 }
