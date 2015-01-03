@@ -3,7 +3,6 @@
 
     FEATURES
     ========
-    - Major code-overhaul... Easier for future implementations
     - Re-amped Rig summary and device details (percentages, etc)
     - New debug command to see raw miner data: CTRL + D
     - New ability to edit Rigs and Pools
@@ -14,9 +13,7 @@
     - Rigs Algorithm is auto-set when using sgMiner v5+
     - Total Hashrates are now categorized by Rig Algorithms used
     - New Rig Details - Cleaner interface
-
     - [+COIN] ReddCoin
-
     - [+POOL] NOMP
     - [+POOL] MagicPool
     - [+POOL] Multipool.Us
