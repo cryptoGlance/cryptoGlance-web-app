@@ -1,12 +1,12 @@
 
-<script type="text/javascript" src="js/jquery-1.10.2.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
-<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
-<script type="text/javascript" src="js/jquery.cookie.js?v=<?php echo CURRENT_VERSION; ?>"></script>
-<script type="text/javascript" src="js/jquery.scrollTo.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
-<script type="text/javascript" src="js/masonry.pkgd.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
-<script type="text/javascript" src="js/bootstrap.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
-<script type="text/javascript" src="js/jquery.toastmessage.js?v=<?php echo CURRENT_VERSION; ?>"></script>
-<script type="text/javascript" src="js/bootstrap-switch.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/jquery-1.10.2.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/jquery-ui-1.10.3.custom.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/jquery.cookie.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/jquery.scrollTo.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/masonry.pkgd.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/bootstrap.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/jquery.toastmessage.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/bootstrap-switch.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/cryptoglance-ui.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/version.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <!--build:js scripts.js-->

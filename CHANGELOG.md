@@ -65,4 +65,4 @@
 
 ---
 
-_.end CHANGELOG.md_
+/*end CHANGELOG.md*
