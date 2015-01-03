@@ -1,91 +1,88 @@
 <?php
 /**
  * Description of wallets
- * 
+ *
  * This was refactored to add another level of management... I hope it still makes sense...
  * This class holds wallets, wallets have addresses within them.
  *
- * @author Timothy.Stoyanovski
+ * @author Stoyvo
  */
+class Wallets extends Config_Wallets {
 
-class Wallets {
-
-    protected $_wallets = array();
     protected $_currencies = array(
-        'bitcoin' => 'BTC',
+        'bitcoin'   => 'BTC',
         'continuum' => 'CTM',
-        'litecoin' => 'LTC',
-        'dogecoin' => 'DOGE',
-        'vertcoin' => 'VTC',
+        'darkcoin'  => 'DRK',
+        'dogecoin'  => 'DOGE',
+        'litecoin'  => 'LTC',
+        'reddcoin'  => 'RDD',
+        'vertcoin'  => 'VTC',
     );
 
-    public function __construct() {
-        $fh = new FileHandler('configs/wallets.json');
-        $wallets = json_decode($fh->read(), true);
 
-        if (!empty($wallets)) {
-            foreach ($wallets as $key => $wallet) {
-                $this->addWallet($wallet['currency'], $wallet['label'], $wallet['addresses']);
-            }
-        }
-    }
-    
+    /*
+     * POST
+     */
+
+
+    /*
+     * GET
+     */
+
     public function getCurrencies() {
-        // Making room for possible addition of data here.s
+        // Making room for possible addition of data here.
         return $this->_currencies;
     }
 
-    private function addWallet($currency, $label, $addresses) {
-        if (empty($currency)) {
-            return false;
-        }
-        
-        $class = 'Wallets_' . ucwords(strtolower($currency));
-        
-        $walletData = array();
-        $addessData = array();
-        
-        foreach ($addresses as $address) {
-            $addessData[] = new $class($address['label'], $address['address']);
-        }
-        
-        $this->_wallets[] = array (
-            'currency' => $currency,
-            'label' => $label,
-            'addresses' => $addessData,
-        );
-    }
-    
-    public function update($walletId = null) {
-        $data = $wallets = array();
-        $wallets = $this->_wallets;
-        
-        if (!empty($walletId) && $walletId != 0) {
-            $walletId -= 1;
-            $wallets = array($this->_wallets[$walletId]);
-        }
-        
-        foreach ($wallets as $key => $wallet) {
+    public function getUpdate() {
+        $data = array();
+        foreach ($this->_objs as $wallet) {
+            // Exchange information
+            $btcIndex = new BitcoinIndex();
+
+            // Get FIAT rate
+            $fiatPrice = $btcIndex->convert($wallet['fiat'], $this->_currencies[$wallet['currency']]);
+            $fiatPrice = number_format($fiatPrice['result']['conversion'], 8, '.', '');
+
+            // Get COIN rate
+            $coinPrice = $btcIndex->convert('btc', $this->_currencies[$wallet['currency']]); // 'btc' to be dynamic
+            $coinPrice = number_format($coinPrice['result']['conversion'], 8, '.', '');
+
+            // Wallet information
             $walletAddressData = array();
-            $totalBalance = 0;
-            
+            $currencyBalance = 0.00000000;
+            $fiatBalance = 0.00;
+            $coinBalance = 0.00000000;
+
             // Wallet actually contains a bunch of addresses and associated data
             foreach ($wallet['addresses'] as $address) {
                 $addressData = $address->update();
-                $walletAddressData[$addressData['address']] = $addressData['balance'];
-                $totalBalance += $addressData['balance'];
+                $walletAddressData[$addressData['address']] = array(
+                    'label' => $addressData['label'],
+                    'balance' => str_replace('.00000000', '', number_format($addressData['balance'], 8)),
+                    'fiat_balance' => number_format($fiatPrice * $addressData['balance'], 2),
+                    'coin_balance' => str_replace('.00000000', '', number_format($coinPrice * $addressData['balance'], 8)),
+                );
+                $currencyBalance += number_format($addressData['balance'], 8, '.', '');
+                $fiatBalance += number_format($fiatPrice * $addressData['balance'], 2, '.', '');
+                $coinBalance += number_format($coinPrice * $addressData['balance'], 8, '.', '');
             }
-            
-            $data[$key] = array (
-                'currency' => $wallet['currency'],
-                'currency_code' => $this->_currencies[$wallet['currency']],
+
+            $data[] = array (
                 'label' => $wallet['label'],
-                'balance' => $totalBalance,
-                'total_addresses' => count($wallet['addresses']), // needed?
+                'currency' => $wallet['currency'],
+                'currency_balance' => str_replace('.00000000', '', number_format($currencyBalance, 8, '.', ',')),
+                'currency_code' => $this->_currencies[$wallet['currency']],
+                'coin_balance' => str_replace('.00000000', '', number_format($coinBalance, 8, '.', ',')),
+                'coin_price' => str_replace('.00000000', '', $coinPrice),
+                'coin_code' => 'BTC',
+                'fiat_balance' => number_format($fiatBalance, 2, '.', ','),
+                'fiat_code' => $wallet['fiat'],
+                'total_addresses' => count($wallet['addresses']),
                 'addresses' => $walletAddressData,
             );
         }
-        
+
         return $data;
     }
 

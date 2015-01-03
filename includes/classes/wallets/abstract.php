@@ -15,8 +15,4 @@ class Wallets_Abstract {
         $this->_address = $address;
     }
     
-//    public function getAddressData() {
-//        return json_decode($this->_fileHandler->read(), true);
-//    }
 }
-?>

@@ -21,19 +21,24 @@
                  <option disabled selected>Select A Pool</option>
                  <option value="btcguild">BTC Guild</option>
                  <option value="eclipse">Eclipse</option>
+                 <option value="eligius">Eligius</option>
+                 <option value="magicpool">MagicPool</option>
                  <option value="mpos">MPOS</option>
+                 <option value="multipoolus">Multipool.us</option>
+                 <option value="nomp">NOMP</option>
                  <option value="simplecoin">SimpleCoin</option>
+                 <option value="trademybit">TradeMyBit</option>
                  <option value="wafflepool">WafflePool</option>
               </select>
             </div>
           </div>
-           <div class="form-group mpos simplecoin" style="display: none;">
+           <div class="form-group mpos simplecoin nomp" style="display: none;">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://vertsquad.com/">
              </div>
            </div>
-           <div class="form-group mpos btcguild simplecoin eclipse" style="display: none;">
+           <div class="form-group mpos btcguild simplecoin eclipse trademybit multipoolus" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">
@@ -45,18 +50,29 @@
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">
              </div>
            </div>
-           <div class="form-group wafflepool" style="display: none;">
-             <label for="inputAddress" class="col-sm-3 control-label">BTC Address</label>
+           <div class="form-group wafflepool eligius magicpool nomp" style="display: none;">
+             <label for="inputAddress" class="col-sm-3 control-label">Mining Address</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputAddress" name="address">
              </div>
            </div>
+           <div class="form-group nomp" style="display: none;">
+             <label for="inputCoin" class="col-sm-3 control-label">Coin</label>
+             <div class="col-sm-7">
+               <input type="text" class="form-control" id="inputCoin" name="coin" placeholder="megacoin">
+             </div>
+           </div>
+           <div class="form-group">
+             <div class="col-sm-12">
+                 <span class="error"></span>
+             </div>
+           </div>
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
-           <button type="button" class="btn btn-lg btn-success submitAddConfig" id="btnAddPool"><i class="icon icon-save-floppy"></i> Save</button>
+           <button type="button" class="btn btn-lg btn-danger btn-cancelConfig" data-dismiss="modal"><i class="icon icon-undo"></i> Cancel</button>
+           <button type="button" class="btn btn-lg btn-success btn-saveConfig" id="btnAddPool"><i class="icon icon-save-floppy"></i> Save</button>
          </div>
-         <input type="hidden" name="type" value="pool" />
+         <input type="hidden" name="type" value="pools" />
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

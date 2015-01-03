@@ -2,18 +2,13 @@
 <html lang="en">
 <?php require_once("includes/head.php"); ?>
    <body>
-      <?php require_once("templates/modals/coming_soon.php"); ?>
       <?php require_once("templates/modals/add_panel.php"); ?>
-      
-      <!-- TODO: Move these require_once modals to a better spot, only when a rig is actually added -->
-      <?php require_once("templates/modals/manage_rig.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-ltc.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-vtc.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-doge.php"); ?>
-      <?php require_once("templates/modals/manage_rig.php"); ?>
+
       <!-- -->
-      
+      <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
+      <?php require_once("templates/modals/qrcode-donate-rdd.php"); ?>
+      <!-- -->
+
       <div class="page-container">
       <div class="dark-overlay"></div>
       <!-- Fixed navbar -->
@@ -24,13 +19,10 @@
                <span class="sr-only">Toggle navigation</span>
                <i class="icon icon-dropmenu"></i>
                </button>
-               <a class="navbar-brand" href="index.php"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
+               <a class="navbar-brand" href="index.php"><img src="images/logo-landscape.png" alt="cryptoGlance" /></a>
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav nav-pills navbar-nav<?php echo ($currentPage != 'index') ? ' no-dash' : '' ?>">
-                  <?php if ($currentPage == 'index') { ?>  
-                  <li><a class="total-hashrate">0 <small>MH/s</small></a></li>
-                  <?php } ?>
                   <li class="<?php echo ($currentPage == 'index') ? 'active ' : '' ?>topnav topnav-icon"><a id="dash-link" href="index.php"><i class="icon icon-speed"></i> Dashboard</a>
                     <?php if ($currentPage == 'index') { ?><a id="dash-add-panel" class="grad-green" title="Add Panel" data-toggle="modal" data-target="#addPanel"><i class="icon icon-newtab"></i></a><?php } ?>
                   </li>
@@ -49,6 +41,7 @@
                            <span class="width-reading">90%</span> <!-- width-reading -->
                            <div id="slider"></div> <!-- the Slider -->
                         </li>
+                        <?php if ($currentPage == 'index') { ?><li class="dropdown-header chk-hashrate"><label for="show-total-hashrate">Show Total Hashrate(s)</label><input type="checkbox" id="showTotalHashrate" name="show-total-hashrate"></li><?php } ?>
                         <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
                         <!-- <div class="divider"></div> -->
                         <?php //require_once("includes/menu-active_panels.php"); ?>
@@ -67,13 +60,12 @@
                      </ul>
                   </li>
                   <li id="nav-login-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li>
-                  <!-- <li id="nav-logout-button" class="topnav topnav-icon"><a href="logout.php"><i class="icon icon-exitalt"></i> Logout</a></li> -->
                </ul>
             </div>
             <!--/.nav-collapse -->
          </div>
       </div>
-      
+
       <?php if ($currentPage == 'index') { ?>
-        <div id="mobile-hashrate"><a class="total-hashrate">0 <small>MH/s</small></a></div>
+      <ul id="total-hashrates"><li></li></ul>
       <?php } ?>
