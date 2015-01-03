@@ -7,6 +7,11 @@
   var rigCollection = new RigCollection()
   rigCollection.start()
 
+  // Manage Rig Details
+  $document.on('click', '#manageRig .btn-details', function (evt) {
+      $('#manageRig').modal('hide');
+  })
+
   // Edit Rig
   $document.on('click', '.btn-edit-rig', function (evt) {
     var rigId = this.getAttribute('data-attr')
