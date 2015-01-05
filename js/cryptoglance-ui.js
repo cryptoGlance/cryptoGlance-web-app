@@ -158,6 +158,27 @@ $(function(){
   });
 });
 
+// Navigation Bar Dropdown
+$(function(){
+    // Trigger Open
+    $('div.navbar-collapse .navbar-nav .dropdown .dropdown-toggle').on('click', function (event) {
+        if (!$(this).parent().hasClass('open')) {
+            $('div.navbar-collapse .navbar-nav .dropdown').removeClass('open');
+        }
+        $(this).parent().toggleClass("open");
+    });
+
+    // Trigger Close
+    $('body').on('click', function (e) {
+        if (
+            !$('div.navbar-collapse .navbar-nav .dropdown').is(e.target)
+            && $('div.navbar-collapse .navbar-nav .dropdown').has(e.target).length === 0
+            && $('div.navbar-collapse .navbar-nav .open').has(e.target).length === 0
+        ) {
+            $('div.navbar-collapse .navbar-nav .dropdown').removeClass('open');
+        }
+    });
+});
 
 // Pretty checkable styling
 function prettifyInputs() {
@@ -216,8 +237,6 @@ function fixApp() {
 
 
 // Smooth scrolling
-//
-
 function scrollTo(id){
   $('html,body').animate({scrollTop: $(id).offset().top},'slow');
 };
