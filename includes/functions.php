@@ -26,7 +26,7 @@ function curlCall($url) {
 
 function formatHashrate($hashrate, $precision = 2) { // h expected
     // Math Stuffs
-    $units = array('KH', 'MH', 'GH', 'TH', 'PH');
+    $units = array('KH', 'MH', 'GH', 'TH', 'PH', 'EH', 'ZH', 'YH');
 
     $pow = min(floor(($hashrate ? log($hashrate) : 0) / log(1000)), count($units) - 1);
     $hashrate /= pow(1000, $pow);
