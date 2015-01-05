@@ -56,7 +56,7 @@
                      <ul class="dropdown-menu">
                         <li class="dropdown-header">Learn more</li>
                         <li><a href="help.php"><i class="icon icon-preview"></i> View the README</a></li>
-                        <li><a href="changelog.php"><i class="icon icon-preview"></i> View the CHANGELOG</a></li>
+                        <li><a href="changelog.php"><i class="icon icon-notes"></i> View the CHANGELOG</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Official Links</li>
                         <li><a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external"><i class="icon icon-playstore"></i> Android Companion App</a></li>
