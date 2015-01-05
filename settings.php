@@ -19,22 +19,17 @@ if (isset($_POST['general'])) {
     $data = array(
         'update' => intval($updatesEnabled),
         'updateType' => $_POST['updateType'],
-//        'tempWarning' => intval($_POST['tempWarning']),
-//        'tempDanger' => intval($_POST['tempDanger']),
-//        'hwErrorsEnabled' => intval($hwErrorsEnabled),
-//        'hwWarning' => intval($_POST['hwWarning']),
-//        'hwDanger' => intval($_POST['hwDanger']),
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
     );
-    
+
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
     $cryptoGlance = new CryptoGlance();
     $settings = $cryptoGlance->getSettings();
 } else if (isset($_POST['email'])) {
     $data = array();
-    
+
     // do stuff
 
     $emailSaveResult = $cryptoGlance->saveSettings(array('email' => $data));
@@ -44,11 +39,7 @@ $jsArray = array('settings');
 
 require_once("includes/header.php");
 ?>
-       
-<!-- ### Below is the Settings page which contains common/site-wide preferences
-      
--->
-         
+
       <div id="settings-wrap" class="container sub-nav full-content">
         <div id="settings" class="panel panel-default panel-no-grid no-icon">
           <h1>Settings</h1>
@@ -58,7 +49,7 @@ require_once("includes/header.php");
           <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST">
               <fieldset>
-                <h3>Stat Refresh Intervals:</h3>                
+                <h3>Stat Refresh Intervals:</h3>
                 <div class="form-group">
                   <label class="col-sm-5 control-label">Rigs:</label>
                   <div class="col-sm-3 refresh-interval">
@@ -98,11 +89,11 @@ require_once("includes/header.php");
                     </select>
                   </div>
                 </div>
-                <h3>App Updates:</h3>                
+                <h3>App Updates:</h3>
                 <div class="form-group">
                   <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="update" <?php echo ($settings['general']['updates']['enabled']) ? 'checked' : '' ?>>
+                    <input id="enableUpdates" type="checkbox" name="update" <?php echo ($settings['general']['updates']['enabled']) ? 'checked' : '' ?>>
+                    <label for="enableUpdates">
                       Enable cryptoGlance Updates
                     </label>
                   </div>
@@ -163,7 +154,7 @@ require_once("includes/header.php");
 
       <?php require_once("includes/footer.php"); ?>
       <!-- /page-container -->
-      
+
       <?php require_once("includes/scripts.php"); ?>
    </body>
 </html>
