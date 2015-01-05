@@ -1,4 +1,26 @@
 
+    [ v2.0.0.432-nightly ]
+
+    FEATURES
+    ========
+    - Can Enable/Disable Total Hashrate via Tools dropdown
+
+    HOTFIXES
+    ========
+    - [POOL] MPOS network hashrate was incorrect. API returns deca instead of hecto
+    - Navigation dropdowns would close while using elements inside it.
+
+    KNOWN ISSUES
+    ========
+    - Wallet information creating/editing/deleting is wonky
+    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
+    - Rig Pools cannot be added/edited/deleted
+    - Rig device settings cannot be modified
+    - Settings Page - clicking App Updates red/green button does not work, you must click on the text "Enable cryptoGlance Updates"
+    - Pool and Wallet information may not load. Requires refresh (f5)
+
+---
+
     [ v2.0.0.422-nightly ]
 
     FEATURES
@@ -23,17 +45,6 @@
     HOTFIXES
     ========
     - [POOL] MPOS sometimes displayed the wrong information
-
-    KNOWN ISSUES
-    ========
-    - Wallet information creating/editing/deleting is wonky
-    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
-    - Rig Pools cannot be added/edited/deleted
-    - Rig device settings cannot be modified
-    - "Show Total Hashrate(s)" toggle does nothing
-    - Settings Page - clicking App Updates red/green button does not work, you must click on the text "Enable cryptoGlance Updates"
-    - Rig Details using windows app may not work... (Not Tested)
-    - Pool and Wallet information may not load. Requires refresh (f5)
 
 ---
 
