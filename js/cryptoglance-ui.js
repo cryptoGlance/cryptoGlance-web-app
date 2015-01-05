@@ -4,6 +4,9 @@
 
 // ***** NOTE ***** JS optimization/clean-up is needed, don't laugh!
 
+// CryptoGlance Namespace
+var cG = {};
+
 var $document = null;
 var keyboardState = null;
 !function ($) {
@@ -67,8 +70,6 @@ $document.on('masonry-update', function (evt) {
 })
 
 // Modify Panel width
-//
-
 $(function() {
 
   //Store frequently elements in variables
@@ -95,7 +96,7 @@ $(function() {
      if (viewportWidth > 1200) {
         container.css('width', value + '%');
         actualWidth.html(value + '%');
-        $.cookie("cookie_panel_width", value);
+        $.cookie("page_width", value);
      }
 
     },
@@ -112,8 +113,8 @@ $(function() {
 });
 
 function restorePanelWidth() {
-  var panelWidth = $.cookie('cookie_panel_width'),
-    siteLayout = $.cookie('use_masonry_layout');
+  var panelWidth = $.cookie('page_width');
+  var siteLayout = $.cookie('use_masonry_layout');
 
   if (!panelWidth) return;
 
@@ -158,6 +159,43 @@ $(function(){
   });
 });
 
+// Navigation Bar Dropdown
+$(function(){
+    // Trigger Open
+    $('div.navbar-collapse .navbar-nav .dropdown .dropdown-toggle').on('click', function (event) {
+        if (!$(this).parent().hasClass('open')) {
+            $('div.navbar-collapse .navbar-nav .dropdown').removeClass('open');
+        }
+        $(this).parent().toggleClass("open");
+    });
+
+    // Trigger Close
+    $('body').on('click', function (e) {
+        if (
+            !$('div.navbar-collapse .navbar-nav .dropdown').is(e.target)
+            && $('div.navbar-collapse .navbar-nav .dropdown').has(e.target).length === 0
+            && $('div.navbar-collapse .navbar-nav .open').has(e.target).length === 0
+        ) {
+            $('div.navbar-collapse .navbar-nav .dropdown').removeClass('open');
+        }
+    });
+
+    cG.showTotalHashrate = $.cookie('show_total_hashrate'); // Might make this a cryptoglance setting instead of cookie
+    if (typeof cG.showTotalHashrate == 'undefined') {
+        cG.showTotalHashrate = 'true';
+    }
+    $('#showTotalHashrate').on('switchChange.bootstrapSwitch', function (evt) {
+        if (evt.target.checked) {
+            $.cookie("show_total_hashrate", 'true');
+            cG.showTotalHashrate = 'true';
+            $('#total-hashrates').fadeIn();
+        } else {
+            $.cookie("show_total_hashrate", 'false');
+            cG.showTotalHashrate = 'false';
+            $('#total-hashrates').fadeOut();
+        }
+    });
+});
 
 // Pretty checkable styling
 function prettifyInputs() {
@@ -216,8 +254,6 @@ function fixApp() {
 
 
 // Smooth scrolling
-//
-
 function scrollTo(id){
   $('html,body').animate({scrollTop: $(id).offset().top},'slow');
 };

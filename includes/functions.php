@@ -7,20 +7,26 @@ function curlCall($url) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+    curl_setopt($curl, CURLOPT_SSLVERSION, 4);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
 
-    $data = json_decode(curl_exec($curl), true);
-    
+    $curlExec = curl_exec($curl);
+    if($curlExec === false) {
+        echo 'Curl error: ' . curl_error($curl);
+        $data = array();
+    } else {
+        $data = json_decode($curlExec, true);
+    }
+
     curl_close($curl);
-    
+
     return $data;
 }
 
 function formatHashrate($hashrate, $precision = 2) { // h expected
     // Math Stuffs
-    $units = array('KH', 'MH', 'GH', 'TH', 'PH');
+    $units = array('KH', 'MH', 'GH', 'TH', 'PH', 'EH', 'ZH', 'YH');
 
     $pow = min(floor(($hashrate ? log($hashrate) : 0) / log(1000)), count($units) - 1);
     $hashrate /= pow(1000, $pow);
@@ -31,7 +37,7 @@ function formatHashrate($hashrate, $precision = 2) { // h expected
 
 function formatTimeElapsed($elapsed) { // NOTE: This does not support weeks. Only days/months.
     if (isset($elapsed)) {
-    
+
         $seconds = $elapsed;
 
         $from = new DateTime("@0");
