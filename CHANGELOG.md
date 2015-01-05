@@ -1,10 +1,14 @@
 
-    [ v2.0.0.434-nightly ]
+    [ v2.0.0.438-nightly ]
+
+    FEATURES
+    ========
+    - [+COIN] NeosCoin
+    - Added Rig Update Times 1 second and 2 seconds
 
     HOTFIXES
     ========
-    - Settings Page - clicking App Updates red/green button does not work
-    - Changelog ICON changed
+    - Updated Toast messages to make notices easier to read
 
     KNOWN ISSUES
     ========
@@ -13,6 +17,15 @@
     - Rig Pools cannot be added/edited/deleted
     - Rig device settings cannot be modified
     - Pool and Wallet information may not load. Requires refresh (f5)
+
+---
+
+    [ v2.0.0.434-nightly ]
+
+    HOTFIXES
+    ========
+    - Settings Page - clicking App Updates red/green button does not work
+    - Changelog ICON changed
 
 ---
 
