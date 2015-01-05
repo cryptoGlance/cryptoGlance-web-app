@@ -4,6 +4,9 @@
 
 // ***** NOTE ***** JS optimization/clean-up is needed, don't laugh!
 
+// CryptoGlance Namespace
+var cG = {};
+
 var $document = null;
 var keyboardState = null;
 !function ($) {
@@ -67,8 +70,6 @@ $document.on('masonry-update', function (evt) {
 })
 
 // Modify Panel width
-//
-
 $(function() {
 
   //Store frequently elements in variables
@@ -95,7 +96,7 @@ $(function() {
      if (viewportWidth > 1200) {
         container.css('width', value + '%');
         actualWidth.html(value + '%');
-        $.cookie("cookie_panel_width", value);
+        $.cookie("page_width", value);
      }
 
     },
@@ -112,8 +113,8 @@ $(function() {
 });
 
 function restorePanelWidth() {
-  var panelWidth = $.cookie('cookie_panel_width'),
-    siteLayout = $.cookie('use_masonry_layout');
+  var panelWidth = $.cookie('page_width');
+  var siteLayout = $.cookie('use_masonry_layout');
 
   if (!panelWidth) return;
 
@@ -176,6 +177,22 @@ $(function(){
             && $('div.navbar-collapse .navbar-nav .open').has(e.target).length === 0
         ) {
             $('div.navbar-collapse .navbar-nav .dropdown').removeClass('open');
+        }
+    });
+
+    cG.showTotalHashrate = $.cookie('show_total_hashrate'); // Might make this a cryptoglance setting instead of cookie
+    if (typeof cG.showTotalHashrate == 'undefined') {
+        cG.showTotalHashrate = 'true';
+    }
+    $('#showTotalHashrate').on('switchChange.bootstrapSwitch', function (evt) {
+        if (evt.target.checked) {
+            $.cookie("show_total_hashrate", 'true');
+            cG.showTotalHashrate = 'true';
+            $('#total-hashrates').fadeIn();
+        } else {
+            $.cookie("show_total_hashrate", 'false');
+            cG.showTotalHashrate = 'false';
+            $('#total-hashrates').fadeOut();
         }
     });
 });

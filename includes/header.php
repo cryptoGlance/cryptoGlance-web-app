@@ -43,7 +43,7 @@
                         </li>
                         <?php if ($currentPage == 'index') { ?>
                         <li class="dropdown-header chk-hashrate">
-                            <label for="show-total-hashrate">Show Total Hashrate(s)</label><input type="checkbox" id="showTotalHashrate" name="show-total-hashrate" />
+                            <label for="show-total-hashrate">Show Total Hashrate(s)</label><input type="checkbox" id="showTotalHashrate" name="show-total-hashrate" <?php echo ($_COOKIE['show_total_hashrate'] === 'false') ? '' : 'checked="checked"'; ?> />
                         </li>
                         <?php } ?>
                         <li><a href="settings.php"><i class="icon icon-settingsandroid"></i> cryptoGlance Settings</a></li>
@@ -72,5 +72,5 @@
       </div>
 
       <?php if ($currentPage == 'index') { ?>
-      <ul id="total-hashrates"><li></li></ul>
+      <ul id="total-hashrates"<?php echo ($_COOKIE['show_total_hashrate'] === 'false') ? 'style="display: none;"' : ''; ?>><li></li></ul>
       <?php } ?>

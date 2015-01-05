@@ -133,19 +133,21 @@
 
     this.$overviewTableBody.html(this.overviewTableData)
 
-    for (var key in algorithms) {
-      if (algorithms[key]) {
-        if ($('#hashrate_' + key).length == 0) {
-          var aTag = document.createElement('a');
-          aTag.setAttribute('id',"hashrate_"+key);
-          aTag.setAttribute('class',"total-hashrate hidden");
-          $('#total-hashrates li').append(aTag)
+    if (cG.showTotalHashrate == 'true') {
+        for (var key in algorithms) {
+          if (algorithms[key]) {
+            if ($('#hashrate_' + key).length == 0) {
+              var aTag = document.createElement('a');
+              aTag.setAttribute('id',"hashrate_"+key);
+              aTag.setAttribute('class',"total-hashrate hidden");
+              $('#total-hashrates li').append(aTag)
+            }
+            $('#hashrate_' + key).removeClass('hidden').html('<span class="hashrate-algo">' + key + '</span>' + Util.getSpeed(algorithms[key]))
+          }
+          else {
+            $('#total-hashrates #hashrate_' + key).addClass('hidden')
+          }
         }
-        $('#hashrate_' + key).removeClass('hidden').html('<span class="hashrate-algo">' + key + '</span>' + Util.getSpeed(algorithms[key]))
-      }
-      else {
-        $('#total-hashrates #hashrate_' + key).addClass('hidden')
-      }
     }
 
     this._updateDocumentTitle(this.overallHashrate)
