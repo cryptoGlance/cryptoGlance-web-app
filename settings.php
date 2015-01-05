@@ -54,6 +54,8 @@ require_once("includes/header.php");
                   <label class="col-sm-5 control-label">Rigs:</label>
                   <div class="col-sm-3 refresh-interval">
                     <select class="form-control" name="rigUpdateTime">
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 1000) ? 'selected="selected"' : '' ?> value="1">1 seconds</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 2000) ? 'selected="selected"' : '' ?> value="2">2 seconds</option>
                       <option <?php echo ($settings['general']['updateTimes']['rig'] == 3000) ? 'selected="selected"' : '' ?> value="3">3 seconds</option>
                       <option <?php echo ($settings['general']['updateTimes']['rig'] == 5000) ? 'selected="selected"' : '' ?> value="5">5 seconds</option>
                       <option <?php echo ($settings['general']['updateTimes']['rig'] == 7000) ? 'selected="selected"' : '' ?> value="3">7 seconds</option>
