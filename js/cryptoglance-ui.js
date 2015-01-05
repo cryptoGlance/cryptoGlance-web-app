@@ -283,7 +283,7 @@ function setToasts() {
 function showToastUpdate(currentVersion, newestVersion) {
   $().toastmessage('showToast', {
     sticky  : true,
-    text    : '<b>Update available!</b> You are running <b class="current">'+currentVersion+'</b>, but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-refresh"></i> Update Now</button></a></span>',
+    text    : '<b>Update available!</b><br />You are running <b class="current">'+currentVersion+'</b>,<br />but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-refresh"></i> Update Now</button></a></span>',
     type    : 'notice'
   });
   $.cookie('cryptoglance_version', newestVersion, { expires: 1 });
@@ -293,7 +293,7 @@ function showToastUpdate(currentVersion, newestVersion) {
 function showToastSettingsSaved() {
   $().toastmessage('showToast', {
     sticky  : false,
-    text    : '<b>Success!</b> Your configuration was saved.',
+    text    : '<b>Success!</b><br />Your configuration was saved.',
     type    : 'success'
   });
 
@@ -303,7 +303,7 @@ function showToastSettingsSaved() {
 function showToastSettingsNOTSaved() {
   $().toastmessage('showToast', {
     sticky  : true,
-    text    : '<b>Error!</b> Your configuration was <b>not</b> updated. Check your user data or refer to the <a href="help.php#faq">FAQ in the README</a>.',
+    text    : '<b>Error!</b><br />Your configuration was <b>not</b> updated. Check your user data or refer to the <a href="help.php#faq">FAQ in the README</a>.',
     type    : 'error'
   });
 
@@ -313,7 +313,7 @@ function showToastSettingsNOTSaved() {
 function showToastWriteError() {
   $().toastmessage('showToast', {
     sticky  : false,
-    text    : '<b>Error!</b> Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.',
+    text    : '<b>Error!</b><br />Please make sure <em>/'+DATA_FOLDER+'/configs/</em> is writable.',
     type    : 'error'
   });
 }
@@ -323,7 +323,7 @@ function showToastWriteError() {
 function showToastNoHTACCESS() {
   $().toastmessage('showToast', {
     sticky  : true,
-    text    : '<b>No .htaccess in /'+DATA_FOLDER+'!</b> Using this file to block access to your user data directory is a good idea. It\'s included in the source, but for some reason it does not exist in your installation. Ensure it contains the <a href="https://raw.githubusercontent.com/cryptoGlance/cryptoGlance-web-app/master/user_data/.htaccess" rel="external">contents of the source file</a>.',
+    text    : '<b>No .htaccess in /'+DATA_FOLDER+'!</b><br />Using this file to block access to your user data directory is a good idea. It\'s included in the source, but for some reason it does not exist in your installation. Ensure it contains the <a href="https://raw.githubusercontent.com/cryptoGlance/cryptoGlance-web-app/master/user_data/.htaccess" rel="external">contents of the source file</a>.',
     type    : 'warning'
   });
 }
