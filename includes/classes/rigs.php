@@ -25,6 +25,19 @@ class Rigs extends Config_Rigs {
 
         return $result;
     }
+
+    public function editPool() {
+        $result = $this->_objs[0]->editPool($_POST['poolId'], $_POST['values']);
+
+        return $result;
+    }
+
+    public function removePool() {
+        $result = $this->_objs[0]->removePool($_POST['poolId']);
+
+        return $result;
+    }
+
     public function resetStats() {
         $this->_objs[0]->resetStats();
     }

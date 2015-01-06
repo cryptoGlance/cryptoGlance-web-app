@@ -301,7 +301,7 @@ if (empty($rigDevices)) {
                                       <td data-name="url"><?php echo $pool['url']; ?></td>
                                       <td data-name="user"><?php echo $pool['user']; ?></td>
                                       <td data-name="password">********</td>
-                                      <td class="priority"><?php echo $pool['priority']; ?></td>
+                                      <td data-name="priority"><?php echo $pool['priority']; ?></td>
                                       <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
                                       <br>
                                       </td>
@@ -314,14 +314,8 @@ if (empty($rigDevices)) {
                                 <form class="form-horizontal" role="form">
                                     <h3>Add a new pool:</h3>
                                     <div class="form-group">
-                                        <label for="inputPoolLabel" class="col-sm-5 control-label">Pool Label</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control poolLabel" name="pools[new][label]" placeholder="Name of this pool">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="inputPoolURL" class="col-sm-5 control-label">URL</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-4">
                                             <input type="text" class="form-control poolUrl" name="pools[new][url]" placeholder="Pool URL (including port #)">
                                         </div>
                                     </div>
@@ -344,7 +338,7 @@ if (empty($rigDevices)) {
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>
-                                    <button type="button" class="btn btn-lg btn-success" id="btnSavePool"><i class="icon icon-save-floppy"></i> Save New Pool</button>
+                                    <button type="button" class="btn btn-lg btn-success" id="btnSavePool"><i class="icon icon-plus-sign"></i> Add New Pool</button>
                                     <br><br>
                                 </form>
                             </div><!-- end add-new-pool-wrapper -->

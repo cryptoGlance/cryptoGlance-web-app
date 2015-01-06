@@ -194,6 +194,62 @@ class Miners_Cgminer extends Miners_Abstract {
     public function switchPool($poolId) {
         return $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
+
+    public function removePool($poolId) {
+        return $this->cmd('{"command":"removepool","parameter":"'. $poolId .'"}');
+    }
+
+    public function addPool($values) {
+        return $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
+    }
+
+    public function editPool($poolId, $values) {
+        $poolPriority = end($values);
+        array_pop($values);
+
+        $this->removePool($poolId);
+        $this->addPool($values);
+        $this->fetchPools(); // Update our collection of pools
+        $this->prioritizePools($poolPriority, null);
+
+        return;
+    }
+
+    public function prioritizePools($poolPriority, $poolId = null) {
+        if (!is_null($poolId)) {
+            foreach ($this->_pools as $pKey => $pool) {
+                if ($pool['POOL'] == $poolId) {
+                    $poolIndex = $pKey;
+                    break;
+                }
+            }
+        } else {
+            $pools = $this->_pools;
+            end($pools);
+            $poolIndex = key($pools);
+        }
+
+        $newPools = array();
+        $poolIdCollection = array();
+        foreach ($this->_pools as $pKey => $pool) {
+            if ($pKey == $poolIndex) {
+                continue;
+            } else {
+                if ($pKey == $poolPriority) {
+                    $newPools[] = $this->_pools[$poolIndex];
+                    $poolIdCollection[] = $this->_pools[$poolIndex]['POOL'];
+                }
+                $newPools[] = $pool;
+                $poolIdCollection[] = $pool['POOL'];
+            }
+        }
+
+        $this->_pools = $newPools;
+        $this->getActivePool();
+
+        return $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $poolIdCollection) .'"}');
+    }
+
     public function resetStats() {
         $this->cmd('{"command":"zero","parameter":"all,false"}');
     }
@@ -413,15 +469,10 @@ class Miners_Cgminer extends Miners_Abstract {
             $this->_summary = $summary['SUMMARY'][0];
 
             // Devices
-            $dev = json_decode($this->cmd('{"command":"devs"}'), true);
-            $this->_devs = $dev['DEVS'];
-            $this->getDevStatus(); // gets status of each device
-            $this->getRigStatus(); // Determins the rigs status
+            $this->fetchDevices();
 
             // Pools
-            $pools = json_decode($this->cmd('{"command":"pools"}'), true);
-            $this->_pools = $pools['POOLS'];
-            $this->getActivePool();
+            $this->fetchPools();
 
             //Misc data
             $this->_upTime = formatTimeElapsed($this->_summary['Elapsed']);
@@ -437,5 +488,18 @@ class Miners_Cgminer extends Miners_Abstract {
         }
 
         return false;
+    }
+
+    private function fetchDevices() {
+        $dev = json_decode($this->cmd('{"command":"devs"}'), true);
+        $this->_devs = $dev['DEVS'];
+        $this->getDevStatus(); // gets status of each device
+        $this->getRigStatus(); // Determins the rigs status
+    }
+
+    private function fetchPools() {
+        $pools = json_decode($this->cmd('{"command":"pools"}'), true);
+        $this->_pools = $pools['POOLS'];
+        $this->getActivePool();
     }
 }
