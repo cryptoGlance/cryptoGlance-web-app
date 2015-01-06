@@ -63,14 +63,14 @@ if (empty($rigDevices)) {
             </div>
             <div class="panel-content">
                 <ul class="nav nav-pills" role="tablist">
-                    <li class="active"><a href="#rig-settings-basic" data-toggle="tab" role="tab">Details <i class="icon icon-dotlist"></i></a></li>
-                    <li><a href="#rig-settings-thresholds" data-toggle="tab" role="tab">Thresholds <i class="icon icon-speed"></i></a></li>
-                    <li><a href="#rig-settings-devices" data-toggle="tab" role="tab">Devices <i class="icon icon-cpu-processor"></i></a></li>
-                    <li><a href="#rig-settings-pools" data-toggle="tab" role="tab">Pools <i class="icon icon-communitysmall"></i></a></li>
+                    <li class="active"><a href="#details" data-toggle="tab" role="tab">Details <i class="icon icon-dotlist"></i></a></li>
+                    <li><a href="#thresholds" data-toggle="tab" role="tab">Thresholds <i class="icon icon-speed"></i></a></li>
+                    <li><a href="#devices" data-toggle="tab" role="tab">Devices <i class="icon icon-cpu-processor"></i></a></li>
+                    <li><a href="#pools" data-toggle="tab" role="tab">Pools <i class="icon icon-communitysmall"></i></a></li>
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="rig-settings-basic">
+                    <div class="tab-pane fade in active" id="details">
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
                                 <fieldset>
@@ -107,7 +107,7 @@ if (empty($rigDevices)) {
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
-                    <div class="tab-pane fade" id="rig-settings-thresholds">
+                    <div class="tab-pane fade" id="thresholds">
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
                                 <fieldset class="floated">
@@ -219,7 +219,7 @@ if (empty($rigDevices)) {
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
-                    <div class="tab-pane fade" id="rig-settings-devices">
+                    <div class="tab-pane fade" id="devices">
                         <div class="panel-body">
                             <h3>Available Device(s)</h3>
                             <form class="form-horizontal" role="form">
@@ -277,7 +277,7 @@ if (empty($rigDevices)) {
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
-                    <div class="tab-pane fade" id="rig-settings-pools">
+                    <div class="tab-pane fade" id="pools">
                         <div class="panel-body">
                             <h3>Pool Management</h3>
                             <!-- TODO: Replace with same output as switch-pool-modal -->
@@ -316,25 +316,25 @@ if (empty($rigDevices)) {
                                     <div class="form-group">
                                         <label for="inputPoolURL" class="col-sm-5 control-label">URL</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control poolUrl" name="pools[new][url]" placeholder="Pool URL (including port #)">
+                                            <input type="text" class="form-control poolUrl" name="values[]" placeholder="Pool URL (including port #)">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPoolWorker" class="col-sm-5 control-label">Username/Worker</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control poolUser" name="pools[new][user]" placeholder="Username/Worker">
+                                            <input type="text" class="form-control poolUser" name="values[]" placeholder="Username/Worker">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPoolPassword" class="col-sm-5 control-label">Password</label>
                                         <div class="col-sm-4">
-                                            <input type="password" class="form-control poolPassword" name="pools[new][password]" placeholder="Password">
+                                            <input type="password" class="form-control poolPassword" name="values[]" placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPoolPriority" class="col-sm-5 control-label">Priority</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control poolPriority" maxlength="3" name="pools[new][priority]" placeholder="1">
+                                            <input type="text" class="form-control poolPriority" maxlength="3" name="values[]" placeholder="1">
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>

@@ -200,22 +200,24 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     public function addPool($values) {
+        if (count($values) > 3) {
+            array_splice($values, 3);
+        }
         return $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
     }
 
     public function editPool($poolId, $values) {
         $poolPriority = end($values);
-        array_pop($values);
 
         $this->removePool($poolId);
         $this->addPool($values);
-        $this->fetchPools(); // Update our collection of pools
         $this->prioritizePools($poolPriority, null);
 
         return;
     }
 
     public function prioritizePools($poolPriority, $poolId = null) {
+        $this->fetchPools();
         if (!is_null($poolId)) {
             foreach ($this->_pools as $pKey => $pool) {
                 if ($pool['POOL'] == $poolId) {

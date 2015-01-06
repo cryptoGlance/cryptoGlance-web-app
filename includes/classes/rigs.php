@@ -26,6 +26,16 @@ class Rigs extends Config_Rigs {
         return $result;
     }
 
+    public function addPool() {
+        $poolValues = $_POST['values'];
+        $result = $this->_objs[0]->addPool($poolValues);
+        if (!empty($poolValues[3])) {
+            $result = $this->_objs[0]->prioritizePools($poolValues[3], null);
+        }
+
+        return $result;
+    }
+
     public function editPool() {
         $result = $this->_objs[0]->editPool($_POST['poolId'], $_POST['values']);
 

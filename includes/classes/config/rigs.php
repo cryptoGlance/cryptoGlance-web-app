@@ -68,10 +68,7 @@ class Config_Rigs extends Config_Abstract {
                 return 'Warning setting <b>cannot</b> be a higher value than your danger setting.';
             }
         } else if ($dataType == 'pools') {
-            if (empty($data['new']['label'])) {
-                header("HTTP/1.0 406 Not Acceptable"); // not accepted
-                return 'Pool requires a label!';
-            } else if (empty($data['new']['url'])) {
+            if (empty($data['new']['url'])) {
                 header("HTTP/1.0 406 Not Acceptable"); // not accepted
                 return 'Pool requires a URL to connect to!';
             } else if (empty($data['new']['user'])) {
@@ -127,7 +124,9 @@ class Config_Rigs extends Config_Abstract {
 
         foreach ($_POST as $dataType => $data) {
             $name = 'update' . ucfirst($dataType);
-            return $this->$name($id, $dataType, $data);
+            if (class_exists($name)) {
+                return $this->$name($id, $dataType, $data);
+            }
         }
     }
 

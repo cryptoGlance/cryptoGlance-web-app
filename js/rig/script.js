@@ -120,6 +120,7 @@
                     alert('Sorry, ' + $(this).parent().attr('data-name') + ' cannot be empty.');
                 }
                 fieldsValue = false;
+                return false;
             }
         });
         if (!fieldsValue) {
@@ -139,7 +140,7 @@
                 type: 'rigs',
                 action: 'edit-pool',
                 poolId: poolId,
-                values: values // pool_url, worker, password
+                values: values // pool_url, worker, password, priority
             },
             url: 'ajax.php',
             dataType: 'json'
@@ -197,7 +198,7 @@
     $document.on('click', '#btnAddPool', function (evt) {
         evt.preventDefault()
 
-        $.each($('#addNewPool input'), function(key, val) {
+        $.each($('#addNewPool input:not([type="hidden"])'), function(key, val) {
             $(this).val('');
         })
 
@@ -219,18 +220,52 @@
         $(btnIcon).addClass('ajax-saver');
 
         var form = $('form', '#addNewPool');
+        var $inputs = form.find('input');
+        var values = [];
+        var ridId = $('#rig-wrap').attr('data-rigId');
 
-        $.post( document.URL, form.serialize())
+        var fieldsValue = true;
+        $inputs.each(function(){
+            if (this.value == '') {
+                alert('Sorry, ' + $(this).parent().parent().find('label').html() + ' cannot be empty.');
+                fieldsValue = false;
+                return false;
+            }
+        });
+        if (!fieldsValue) {
+            $(btnIcon).removeClass('ajax-saver');
+            return;
+        }
+
+        // If successfull, move on
+        $inputs.each(function(){
+            values.push(this.value);
+        });
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: ridId,
+                type: 'rigs',
+                action: 'add-pool',
+                values: values // pool_url, worker, password, priority
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
         .done(function( data ) {
             setTimeout(function() {
                 $(btnIcon).removeClass('ajax-saver');
+                $('#addNewPool').hide();
+                $('#btnAddPool').show();
+                location.reload(true);
             }, 500);
         })
         .fail(function() {
             setTimeout(function() {
                 $(btnIcon).removeClass('ajax-saver');
             }, 500);
-        })
+        });
     })
 
     /*-----  End of Pools  ------*/

@@ -197,6 +197,20 @@ $(function(){
     });
 });
 
+// Navigation hashtag URL
+$(function(){
+    // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav.nav-pills li a[href=#'+url.split('#')[1]+']').tab('show') ;
+    }
+
+    // Change hash for page-reload
+    $('.nav.nav-pills li a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+});
+
 // Pretty checkable styling
 function prettifyInputs() {
   var inputs = $('input[type=radio], input[type=checkbox]').each(function() {
