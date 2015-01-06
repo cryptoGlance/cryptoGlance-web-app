@@ -1,17 +1,24 @@
 
-    [ v2.0.0.443-nightly ]
+    [ v2.0.0.446-nightly ]
 
     HOTFIXES
     ========
-    - Corrected Javascript include on Update page
+    - Rig Pools can be added/edited/deleted
 
     KNOWN ISSUES
     ========
     - Wallet information creating/editing/deleting is wonky
     - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
-    - Rig Pools cannot be added/edited/deleted
     - Rig device settings cannot be modified
     - Pool and Wallet information may not load. Requires refresh (f5)
+
+---
+
+    [ v2.0.0.443-nightly ]
+
+    HOTFIXES
+    ========
+    - Corrected Javascript include on Update page
 
 ---
 
