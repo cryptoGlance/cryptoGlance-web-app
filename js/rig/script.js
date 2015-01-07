@@ -76,26 +76,22 @@
     $document.on('click', '.editPoolConfig', function (evt) {
       evt.preventDefault()
 
-      var $tr = $(this).parents('tr')
-      var $td = $tr.children().slice(1, 5)
-      var poolId = $tr.attr('data-id')
+      var $tr = $(this).parents('tr');
+      var $td = $tr.children().slice(1, 5);
+      var poolId = $tr.attr('data-id');
 
       $td.each(function(){
-        var input = document.createElement('input')
-        input.name = 'pools[' + poolId + '][' + $(this).attr('data-name') + ']'
-        input.className = 'form-control'
-        input.value = this.textContent
-        if (this.textContent == '********') {
-            input.value = '';
+        var elmText = $('span', this);
+        var elmInput = $('input', this);
+        if (elmText.val() == '********') {
+            elmInput.val('');
         }
-        input.type = 'text'
-        $(this).attr('data-val', this.textContent)
-        this.textContent = ''
-        this.appendChild(input)
+        elmInput.attr('type', 'text');
+        elmText.hide();
       })
 
       $(this).addClass('savePoolConfig').removeClass('editPoolConfig')
-      .find('.icon').removeClass('icon-edit').addClass('icon-save-floppy').parents('.savePoolConfig')
+      .find('.icon').removeClass('icon-edit').addClass('icon-ok').parents('.savePoolConfig')
       .next().addClass('cancelPoolConfig').removeClass('removePoolConfig')
       .find('.red').removeClass('red').addClass('blue')
       .find('.icon').removeClass('icon-remove').addClass('icon-undo');
@@ -106,93 +102,70 @@
         evt.preventDefault();
 
         var $tr = $(this).parents('tr');
-        var $inputs = $tr.children().slice(1, 5).find('input');
+        var $td = $tr.children().slice(1, 5);
         var values = [];
         var ridId = $('#rig-wrap').attr('data-rigId');
         var poolId = $tr.attr('data-id');
 
-        var fieldsValue = true;
-        $inputs.each(function(){
-            if (this.value == '') {
-                if ($(this).parent().attr('data-name') == 'password') {
-                    alert('Sorry, cgminer does not give us worker passwords. You need to set a password.');
-                } else {
-                    alert('Sorry, ' + $(this).parent().attr('data-name') + ' cannot be empty.');
-                }
-                fieldsValue = false;
-                return false;
-            }
-        });
-        if (!fieldsValue) {
-            return;
-        }
-
-        // If successfull, move on
-        $inputs.each(function(){
-            values.push(this.value);
-            this.parentNode.textContent = this.value;
-        });
-
-        $.ajax({
-            type: 'post',
-            data: {
-                id: ridId,
-                type: 'rigs',
-                action: 'edit-pool',
-                poolId: poolId,
-                values: values // pool_url, worker, password, priority
-            },
-            url: 'ajax.php',
-            dataType: 'json'
+        // Turn inputs into hidden, change span value to what input it
+        $td.each(function(){
+            var elmText = $('span', this);
+            var elmInput = $('input', this);
+            elmText.html(elmInput.val());
+            elmInput.attr('type', 'hidden');
+            elmText.show();
         })
-        .done(function (data) {
-            $(this).addClass('editPoolConfig').removeClass('savePoolConfig')
-            .find('.icon').removeClass('icon-save-floppy').addClass('icon-edit').parents('.editPoolConfig')
-            .next().addClass('removePoolConfig').removeClass('cancelPoolConfig')
-            .find('.blue').removeClass('blue').addClass('red')
-            .find('.icon').removeClass('icon-undo').addClass('icon-remove');
-        });
+
+        $(this).addClass('editPoolConfig').removeClass('savePoolConfig')
+        .find('.icon').removeClass('icon-ok').addClass('icon-edit').parents('.editPoolConfig')
+        .next().addClass('removePoolConfig').removeClass('cancelPoolConfig')
+        .find('.blue').removeClass('blue').addClass('red')
+        .find('.icon').removeClass('icon-undo').addClass('icon-remove');
     })
 
     $document.on('click', '.cancelPoolConfig', function (evt) {
-      evt.preventDefault()
+        evt.preventDefault()
 
-      var $tr = $(this).parents('tr')
-      var $inputs = $tr.children().slice(1, 4).find('input')
+        var $tr = $(this).parents('tr');
+        var $td = $tr.children().slice(1, 5);
 
-      $inputs.each(function(){
-        this.parentNode.textContent = $(this).parent().attr('data-val')
-      })
+        // Turn inputs into hidden, set input value from span value
+        $td.each(function(){
+            var elmText = $('span', this);
+            var elmInput = $('input', this);
+            if (elmText.html() != '********') {
+                elmInput.val(elmText.html());
+            }
+            elmInput.attr('type', 'hidden');
+            elmText.show();
+        })
 
-      $(this).addClass('removePoolConfig').removeClass('cancelPoolConfig')
-      .find('.blue').removeClass('blue').addClass('red')
-      .find('.icon').removeClass('icon-undo').addClass('icon-remove').parents('.removePoolConfig')
-      .prev().addClass('editPoolConfig').removeClass('savePoolConfig')
-      .find('.icon').removeClass('icon-save-floppy').addClass('icon-edit')
+        $(this).addClass('removePoolConfig').removeClass('cancelPoolConfig')
+        .find('.blue').removeClass('blue').addClass('red')
+        .find('.icon').removeClass('icon-undo').addClass('icon-remove').parents('.removePoolConfig')
+        .prev().addClass('editPoolConfig').removeClass('savePoolConfig')
+        .find('.icon').removeClass('icon-ok').addClass('icon-edit')
 
     })
 
     $document.on('click', '.removePoolConfig', function (evt) {
-      evt.preventDefault()
+        evt.preventDefault()
 
-      var $tr = $(this).parents('tr');
-      var ridId = $('#rig-wrap').attr('data-rigId');
-      var poolId = $tr.attr('data-id');
+        // Remove the pool
+        var $tr = $(this).parents('tr');
+        $tr.remove();
 
-      $.ajax({
-          type: 'post',
-          data: {
-              id: ridId,
-              type: 'rigs',
-              action: 'remove-pool',
-              poolId: poolId
-          },
-          url: 'ajax.php',
-          dataType: 'json'
-      })
-      .done(function (data) {
-          $tr.remove();
-      });
+        // re-calculate ids
+        var $rigPools = $('#pools .table-pools tr');
+        $rigPools.each(function(pKey, pVal){
+            var $poolRow = $(this);
+            var $inputs = $(this).find('input');
+            $poolRow.attr('data-id', pKey-1);
+            $inputs.each(function(iKey, iVal) {
+                $(this).attr('name', 'pool['+ (pKey-1) +']['+ $(this).parent().attr('data-type') +']');
+            });
+        });
+
     })
 
     $document.on('click', '#btnAddPool', function (evt) {
@@ -216,56 +189,70 @@
     $document.on('click', '#btnSavePool', function (evt) {
         evt.preventDefault()
 
-        var btnIcon = $('i', this);
-        $(btnIcon).addClass('ajax-saver');
+        var $form = $('form', '#addNewPool');
+        var $inputs = $form.find('input');
+        var $rigPools = $('#pools .table-pools');
+        var totalPools = $rigPools.find('tr').length-1;
 
-        var form = $('form', '#addNewPool');
-        var $inputs = form.find('input');
-        var values = [];
-        var ridId = $('#rig-wrap').attr('data-rigId');
-
-        var fieldsValue = true;
+        var poolInputsValid = true;
+        var invalidMsg = '';
         $inputs.each(function(){
-            if (this.value == '') {
-                alert('Sorry, ' + $(this).parent().parent().find('label').html() + ' cannot be empty.');
-                fieldsValue = false;
+            var elmType = $(this).attr('data-type');
+            if (elmType != 'priority' && $(this).val() == '') {
+                if (elmType == 'url') {
+                    invalidMsg = 'Pool requires a URL to connect to!';
+                } else if (elmType == 'user') {
+                    invalidMsg = 'Pools require some sort of username. Either an coin address or a username/worker.';
+                } else if (elmType == 'password') {
+                    invalidMsg = 'Use atleast 1 character for a password. For example: "x".';
+                }
+                poolInputsValid = false;
                 return false;
             }
         });
-        if (!fieldsValue) {
-            $(btnIcon).removeClass('ajax-saver');
-            return;
+        if (!poolInputsValid) {
+            $().toastmessage('showToast', {
+                sticky  : false,
+                text    : '<b>Error!</b><br />' + invalidMsg,
+                type    : 'error'
+            });
+            return false;
         }
 
-        // If successfull, move on
+        var elmTr = document.createElement('tr');
+        elmTr.setAttribute('data-id', totalPools);
+        elmTr.innerHTML += '<td><input type="radio" name="poolActive" class="form-control" /></td>';
         $inputs.each(function(){
-            values.push(this.value);
-        });
+            var elmTd = document.createElement('td');
+            var elmSpan = document.createElement('span');
+            var elmInput = document.createElement('input');
+            if ($(this).attr('data-type') == 'priority' && $(this).val() == '') {
+                $(this).val(totalPools);
+            }
 
-        $.ajax({
-            type: 'post',
-            data: {
-                id: ridId,
-                type: 'rigs',
-                action: 'add-pool',
-                values: values // pool_url, worker, password, priority
-            },
-            url: 'ajax.php',
-            dataType: 'json'
-        })
-        .done(function( data ) {
-            setTimeout(function() {
-                $(btnIcon).removeClass('ajax-saver');
-                $('#addNewPool').hide();
-                $('#btnAddPool').show();
-                location.reload(true);
-            }, 500);
-        })
-        .fail(function() {
-            setTimeout(function() {
-                $(btnIcon).removeClass('ajax-saver');
-            }, 500);
+            // Set TD type
+            elmTd.setAttribute('data-type', $(this).attr('data-type'));
+
+            // Set Span Value
+            elmSpan.textContent = $(this).val();
+            elmTd.appendChild(elmSpan);
+
+            // Set Input name, value, type
+            elmInput.type = 'hidden';
+            elmInput.value = $(this).val();
+            elmInput.className = 'form-control';
+            elmInput.name = 'pool['+ totalPools +']['+ $(this).attr('data-type') +']';
+            elmTd.appendChild(elmInput);
+
+            elmTr.appendChild(elmTd);
         });
+        elmTr.innerHTML += '<td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a><br /></td>';
+
+        $rigPools.append(elmTr);
+        prettifyInputs();
+
+        $('#addNewPool').hide();
+        $('#btnAddPool').show();
     })
 
     /*-----  End of Pools  ------*/

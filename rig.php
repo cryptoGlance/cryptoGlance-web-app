@@ -281,7 +281,7 @@ if (empty($rigDevices)) {
                         <div class="panel-body">
                             <h3>Pool Management</h3>
                             <!-- TODO: Replace with same output as switch-pool-modal -->
-                            <table class="table table-hover table-striped table-devices">
+                            <table class="table table-hover table-striped table-pools">
                                 <thead>
                                     <tr>
                                         <th>Active</th>
@@ -297,14 +297,27 @@ if (empty($rigDevices)) {
                                 foreach ($rigPools as $pool) {
                                 ?>
                                     <tr data-id="<?php echo $pool['id']; ?>">
-                                      <td><input type="radio" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
-                                      <td data-name="url"><?php echo $pool['url']; ?></td>
-                                      <td data-name="user"><?php echo $pool['user']; ?></td>
-                                      <td data-name="password">********</td>
-                                      <td data-name="priority"><?php echo $pool['priority']; ?></td>
-                                      <td><a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
-                                      <br>
-                                      </td>
+                                        <td><input type="radio" name="poolActive" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
+                                        <td data-type="url">
+                                            <span><?php echo $pool['url']; ?></span>
+                                            <input type="hidden" name="pool[<?php echo $pool['id']; ?>][url]" class="form-control" value="<?php echo $pool['url']; ?>" />
+                                        </td>
+                                        <td data-type="user">
+                                            <span><?php echo $pool['user']; ?></span>
+                                            <input type="hidden" name="pool[<?php echo $pool['id']; ?>][user]" class="form-control" value="<?php echo $pool['user']; ?>" />
+                                        </td>
+                                        <td data-type="password">
+                                            <span>********</span>
+                                            <input type="hidden" name="pool[<?php echo $pool['id']; ?>][password]" class="form-control" value="<?php echo $pool['password']; ?>" />
+                                        </td>
+                                        <td data-type="priority">
+                                            <span><?php echo $pool['priority']; ?></span>
+                                            <input type="hidden" name="pool[<?php echo $pool['id']; ?>][priority]" class="form-control" value="<?php echo $pool['priority']; ?>" />
+                                        </td>
+                                        <td>
+                                            <a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
+                                            <br />
+                                        </td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
@@ -316,25 +329,25 @@ if (empty($rigDevices)) {
                                     <div class="form-group">
                                         <label for="inputPoolURL" class="col-sm-5 control-label">URL</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control poolUrl" name="values[]" placeholder="Pool URL (including port #)">
+                                            <input type="text" class="form-control poolUrl" data-type="url" placeholder="Pool URL (including port #)">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPoolWorker" class="col-sm-5 control-label">Username/Worker</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control poolUser" name="values[]" placeholder="Username/Worker">
+                                            <input type="text" class="form-control poolUser" data-type="user" placeholder="Username/Worker">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPoolPassword" class="col-sm-5 control-label">Password</label>
                                         <div class="col-sm-4">
-                                            <input type="password" class="form-control poolPassword" name="values[]" placeholder="Password">
+                                            <input type="password" class="form-control" data-type="password" placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPoolPriority" class="col-sm-5 control-label">Priority</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control poolPriority" maxlength="3" name="values[]" placeholder="1">
+                                            <input type="text" class="form-control poolPriority" data-type="priority" maxlength="3" placeholder="1">
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>
