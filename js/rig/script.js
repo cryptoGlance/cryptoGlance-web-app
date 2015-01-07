@@ -162,7 +162,7 @@
             var $inputs = $(this).find('input');
             $poolRow.attr('data-id', pKey-1);
             $inputs.each(function(iKey, iVal) {
-                $(this).attr('name', 'pool['+ (pKey-1) +']['+ $(this).parent().attr('data-type') +']');
+                $(this).attr('name', 'pools['+ (pKey-1) +']['+ $(this).parent().attr('data-type') +']');
             });
         });
 
@@ -189,7 +189,7 @@
     $document.on('click', '#btnSavePool', function (evt) {
         evt.preventDefault()
 
-        var $form = $('form', '#addNewPool');
+        var $form = $('#addNewPool');
         var $inputs = $form.find('input');
         var $rigPools = $('#pools .table-pools');
         var totalPools = $rigPools.find('tr').length-1;
@@ -241,7 +241,7 @@
             elmInput.type = 'hidden';
             elmInput.value = $(this).val();
             elmInput.className = 'form-control';
-            elmInput.name = 'pool['+ totalPools +']['+ $(this).attr('data-type') +']';
+            elmInput.name = 'pools['+ totalPools +']['+ $(this).attr('data-type') +']';
             elmTd.appendChild(elmInput);
 
             elmTr.appendChild(elmTd);
