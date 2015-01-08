@@ -73,6 +73,8 @@
     var DOMId         = 'rig-' + this.rigID  + '-' + this.name + '-' + this.id
     var deviceName    = this.name + ' ' + this.id
 
+    var fanTest = new RegExp('fan_([0-9]+)');
+    var tempTest = new RegExp('temperature_([0-9]+)');
     for (var key in deviceObj) {
       switch (key) {
         case 'id':
@@ -88,6 +90,18 @@
         case 'fan_speed':
           deviceStatus.push(this._buildStatusHtml(key,
                                                   deviceObj[key].raw + ' RPM (' + deviceObj[key].percent + '%)',
+                                                  null,
+                                                  null))
+          break
+        case (key.match(/^fan_([0-9]+)/) || {}).input:
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  deviceObj[key] + ' RPM',
+                                                  null,
+                                                  null))
+          break
+        case (key.match(/^temperature_([0-9]+)/) || {}).input:
+          deviceStatus.push(this._buildStatusHtml(key,
+                                                  deviceObj[key].celsius + '&deg;C / ' + deviceObj[key].fahrenheit + '&deg;F',
                                                   null,
                                                   null))
           break
@@ -159,7 +173,7 @@
             '<div class="stat-value">' + value + '</div>' +
             '<div class="stat-label">' + name.replace(/_|-|\./g, ' ') + '</div>' +
             '<div class="progress progress-striped">' +
-             '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share + '"></div>' +
+             '<div class="progress-bar progress-bar-' + progress + '" style="width: ' + share + '%"></div>' +
             '</div>' +
            '</div>'
   }
