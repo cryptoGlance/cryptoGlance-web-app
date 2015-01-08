@@ -164,6 +164,26 @@ class Miners_Cgminer extends Miners_Abstract {
                     'utility' => $dev['Utility'] . '/m',
                 );
                 $data['name'] = (isset($dev['Name']) ? $dev['Name'] : $data['name']);
+
+                // Custom Handling based on eStats
+                if ($dev['fan_speeds']) {
+                    foreach ($dev['fan_speeds'] as $fKey => $fanSpeed) {
+                        $data['fan_'.($fKey+1)] = $fanSpeed;
+                    }
+                }
+                if ($dev['temperatures']) {
+                    foreach ($dev['temperatures'] as $tKey => $temperature) {
+                        $data['temperature_'.($tKey+1)] = array(
+                            'celsius' => $temperature,
+                            'fahrenheit' => ((($temperature*9)/5)+32),
+                        );
+                    }
+                }
+
+                if (!$data['frequency']) {
+                    unset($data['frequency']);
+                }
+
                 $devices[] = $data;
             }
         }
@@ -472,6 +492,8 @@ class Miners_Cgminer extends Miners_Abstract {
 
             // Devices
             $this->fetchDevices();
+            // Device Details
+            $this->fetchDeviceDetails();
 
             // Pools
             $this->fetchPools();
@@ -497,6 +519,45 @@ class Miners_Cgminer extends Miners_Abstract {
         $this->_devs = $dev['DEVS'];
         $this->getDevStatus(); // gets status of each device
         $this->getRigStatus(); // Determins the rigs status
+    }
+    private function fetchDeviceDetails() {
+        $eStats = json_decode($this->cmd('{"command":"estats","parameter":1}'), true);
+        $eStats = $eStats['STATS'];
+
+        // Add device details to dev data
+        foreach ($this->_devs as $dKey => $dev) {
+            $devId = $dev['Name'].$dev['ID'];
+            foreach ($eStats as $eKey => $stat) {
+                if ($devId = $stat['ID']) {
+                    if ($stat['frequency']) {
+                        $this->_devs[$dKey]['Frequency'] = $stat['frequency'];
+                    }
+
+                    // Get all fan speeds
+                    if ($stat['fan_num'] && $stat['fan_num'] > 0) {
+                        $this->_devs[$dKey]['fan_speeds'] = array();
+                        for ($i = 1; $i <= $stat['fan_num']; $i++) {
+                            if ($stat['fan'.$i] && $stat['fan'.$i] > 0) {
+                                $this->_devs[$dKey]['fan_speeds'][] = $stat['fan'.$i];
+                            }
+                        }
+                    }
+
+                    // Get all temperatures reported
+                    if ($stat['temp_num'] && $stat['temp_num'] > 0) {
+                        $this->_devs[$dKey]['temperatures'] = array();
+                        for ($i = 1; $i <= $stat['temp_num']; $i++) {
+                            if ($stat['temp'.$i] && $stat['temp'.$i] > 0) {
+                                $this->_devs[$dKey]['temperatures'][] = $stat['temp'.$i];
+                            }
+                        }
+                    }
+
+                    unset($eStats[$eKey]);
+                    break 1;
+                }
+            }
+        }
     }
 
     private function fetchPools() {

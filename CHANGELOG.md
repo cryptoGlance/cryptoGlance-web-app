@@ -1,16 +1,31 @@
 
-    [ v2.0.0.446-nightly ]
+    [ v2.0.0.452-nightly ]
+
+    FEATURES
+    ========
+    - Rig devices have two more types of details showing:
+        - Asic fan speed (fan 1, fan 2, fan 3, etc)
+        - Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
 
     HOTFIXES
     ========
-    - Rig Pools can be added/edited/deleted
+    - Rig ASIC frequency is now available
 
     KNOWN ISSUES
     ========
     - Wallet information creating/editing/deleting is wonky
     - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
     - Rig device settings cannot be modified
+    - Adding pools to a rig does not save
     - Pool and Wallet information may not load. Requires refresh (f5)
+
+---
+
+    [ v2.0.0.446-nightly ]
+
+    HOTFIXES
+    ========
+    - Rig Pools can be added/edited/deleted
 
 ---
 

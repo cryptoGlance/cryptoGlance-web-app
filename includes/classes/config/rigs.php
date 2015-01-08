@@ -124,9 +124,7 @@ class Config_Rigs extends Config_Abstract {
 
         foreach ($_POST as $dataType => $data) {
             $name = 'update' . ucfirst($dataType);
-            if (class_exists($name)) {
-                return $this->$name($id, $dataType, $data);
-            }
+            return $this->$name($id, $dataType, $data);
         }
     }
 
