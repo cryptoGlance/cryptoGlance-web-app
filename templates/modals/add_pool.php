@@ -20,13 +20,14 @@
               <select class="form-control" id="selectPoolType" name="poolType">
                  <option disabled selected>Select A Pool</option>
                  <option value="btcguild">BTC Guild</option>
+                 <option value="bitcoinaffiliatenetwork">Bitcoin Affiliate Network</option>
                  <option value="eclipse">Eclipse</option>
                  <option value="eligius">Eligius</option>
                  <option value="magicpool">MagicPool</option>
                  <option value="mpos">MPOS</option>
                  <option value="multipoolus">Multipool.us</option>
                  <option value="nomp">NOMP</option>
-                 <option value="simplecoin">SimpleCoin</option>
+                 <!-- <option value="simplecoin">SimpleCoin</option> -->
                  <option value="trademybit">TradeMyBit</option>
                  <option value="wafflepool">WafflePool</option>
               </select>
@@ -35,16 +36,16 @@
            <div class="form-group mpos simplecoin nomp" style="display: none;">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
-               <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://vertsquad.com/">
+               <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://pooldomain.com/">
              </div>
            </div>
-           <div class="form-group mpos btcguild simplecoin eclipse trademybit multipoolus" style="display: none;">
+           <div class="form-group mpos bitcoinaffiliatenetwork btcguild simplecoin eclipse trademybit multipoolus" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">
              </div>
            </div>
-           <div class="form-group mpos" style="display: none;">
+           <div class="form-group mpos bitcoinaffiliatenetwork" style="display: none;">
              <label for="inputPoolUserId" class="col-sm-3 control-label">User ID</label>
              <div class="col-sm-3">
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">

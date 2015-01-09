@@ -25,7 +25,7 @@
         summary += this._buildStatusHtml('', key, 'n/a')
         continue
       }
-      
+
       switch (key) {
         case 'type':
           break
@@ -42,7 +42,7 @@
         default:
             if (key.match(/unconfirmed/i) || key.match(/unpaid/i)) {
                 summary += this._buildStatusHtml('red', key, poolObj[key])
-            } else if (key.match(/balance/i)) {
+            } else if (key.match(/balance/i) || key.match(/payout/i)) {
                 summary += this._buildStatusHtml('green', key, poolObj[key])
             } else {
                 summary += this._buildStatusHtml('', key, poolObj[key])

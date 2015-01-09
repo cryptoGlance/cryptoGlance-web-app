@@ -170,12 +170,6 @@
       $('#addPool').find('.' + type).show();
       $('#addPool').find('.all').show();
 
-      if (type == 'simplecoin') {
-          $('#inputPoolURL').attr('placeholder', 'http://simpledoge.com');
-      } else if (type == 'mpos') {
-          $('#inputPoolURL').attr('placeholder', 'http://coinhuntr.com');
-      }
-
       prettifyInputs();
   });
 

@@ -11,7 +11,7 @@ if (!extension_loaded('sockets')) {
 require_once('config.php');
 
 // App Setup
-set_time_limit(60); // Allow up to 1 minute for all APIs to return information
+set_time_limit(120); // Allow up to 2 minutes for all APIs to return information
 ini_set("display_errors", 1);
 error_reporting(E_ERROR);
 // error_reporting(E_ALL);
