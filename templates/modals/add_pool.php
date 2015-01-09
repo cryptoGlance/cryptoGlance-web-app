@@ -28,7 +28,7 @@
                  <option value="multipoolus">Multipool.us</option>
                  <option value="nomp">NOMP</option>
                  <!-- <option value="simplecoin">SimpleCoin</option> -->
-                 <option value="trademybit">TradeMyBit</option>
+                 <!-- <option value="trademybit">TradeMyBit</option> -->
                  <option value="wafflepool">WafflePool</option>
               </select>
             </div>
