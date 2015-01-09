@@ -1,4 +1,21 @@
 
+    [ v2.0.0.458-nightly ]
+
+    HOTFIXES
+    ========
+    - Fixed an issue that occurs when adding [POOL] Bitcoin Affiliate Network
+    - Fixed issue with API calls when connection to a pool fails.
+
+    KNOWN ISSUES
+    ========
+    - Wallet information creating/editing/deleting is wonky
+    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
+    - Rig device settings cannot be modified
+    - Adding pools to a rig does not save
+    - Editing pool details does not work
+
+---
+
     [ v2.0.0.455-nightly ]
 
     FEATURES
@@ -11,14 +28,6 @@
     HOTFIXES
     ========
     - Bumped up code timeout to 2 minutes. This addresses API calls from pools and wallets
-
-    KNOWN ISSUES
-    ========
-    - Wallet information creating/editing/deleting is wonky
-    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
-    - Rig device settings cannot be modified
-    - Adding pools to a rig does not save
-    - Editing pool details does not work
 
 ---
 
