@@ -1,15 +1,16 @@
 
-    [ v2.0.0.452-nightly ]
+    [ v2.0.0.455-nightly ]
 
     FEATURES
     ========
-    - Rig devices have two more types of details showing:
-        - Asic fan speed (fan 1, fan 2, fan 3, etc)
-        - Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
+    - [+POOL] Bitcoin Affiliate Network (http://mining.bitcoinaffiliatenetwork.com)
+    - Clicking version number in the footer will check for a version update.
+      (This will be formally moved to the Settings page after it gets it's redesign.)
+    - Re-organized a part of the settings page.
 
     HOTFIXES
     ========
-    - Rig ASIC frequency is now available
+    - Bumped up code timeout to 2 minutes. This addresses API calls from pools and wallets
 
     KNOWN ISSUES
     ========
@@ -17,7 +18,21 @@
     - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
     - Rig device settings cannot be modified
     - Adding pools to a rig does not save
-    - Pool and Wallet information may not load. Requires refresh (f5)
+    - Editing pool details does not work
+
+---
+
+    [ v2.0.0.452-nightly ]
+
+    FEATURES
+    ========
+    - Rig devices have two more types of details showing:
+    - Asic fan speed (fan 1, fan 2, fan 3, etc)
+    - Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
+
+    HOTFIXES
+    ========
+    - Rig ASIC frequency is now available, for cgminer 4.0+ and bitmain devices
 
 ---
 
