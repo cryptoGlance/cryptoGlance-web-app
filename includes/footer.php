@@ -1,5 +1,5 @@
       <div class="panel panel-primary panel-in-footer">
-         <div class="panel-body">               
+         <div class="panel-body">
             <div class="stat-pair stat-pair-qr">
                <div class="stat-value">
                   Donations make us feel like champs <i class="icon icon-medal"></i>
@@ -14,7 +14,7 @@
                </div>
                <div class="stat-value">
                     <span class="icon-update-available"><a title="New version of cryptoGlance is available!" href="update.php"><i class="icon icon-circle-arrow-up green"></i></a></span>
-                    <?php echo CURRENT_VERSION ?>
+                    <span class="cgVersion" onclick="versionCheck()"><?php echo CURRENT_VERSION ?></span>
                     <span class="icon-update-available"><a title="New version of cryptoGlance is available!" href="update.php"><i class="icon icon-circle-arrow-up green"></i></a></span>
                </div>
             </div>

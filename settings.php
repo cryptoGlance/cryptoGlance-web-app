@@ -42,7 +42,7 @@ require_once("includes/header.php");
 
       <div id="settings-wrap" class="container sub-nav full-content">
         <div id="settings" class="panel panel-default panel-no-grid no-icon">
-          <h1>Settings</h1>
+          <h1>CryptoGlance Settings</h1>
           <div class="panel-heading">
               <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> General</h2>
           </div>
@@ -124,7 +124,7 @@ require_once("includes/header.php");
                     <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
                   </div>
                 </div>
-                <div class="form-group"></div>
+                <hr />
                 <div class="form-group">
                   <div class="col-sm-12">
                     <button type="submit" name="general" value="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>
@@ -132,11 +132,14 @@ require_once("includes/header.php");
                 </div>
               </fieldset>
             </form>
-            <br>
           </div>
-          <div class="panel-heading">
-              <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> Cookies</h2>
-          </div>
+        </div>
+
+        <div id="cookies" class="panel panel-default panel-no-grid no-icon">
+            <h1>Browser Settings</h1>
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> Cookies</h2>
+            </div>
           <div class="panel-body">
             <form class="form-horizontal" role="form">
               <fieldset>
