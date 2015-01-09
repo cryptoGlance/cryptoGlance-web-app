@@ -13,7 +13,8 @@ function curlCall($url) {
 
     $curlExec = curl_exec($curl);
     if($curlExec === false) {
-        echo 'Curl error: ' . curl_error($curl);
+        // Enable for debugging only!
+        // echo 'Curl error: ' . curl_error($curl);
         $data = array();
     } else {
         $data = json_decode($curlExec, true);
