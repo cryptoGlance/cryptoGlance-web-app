@@ -1,10 +1,14 @@
 
-    [ v2.0.0.458-nightly ]
+    [ v2.0.0.4xx-nightly ]
+
+    FEATURES
+    ========
+    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
+    - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
 
     HOTFIXES
     ========
-    - Fixed an issue that occurs when adding [POOL] Bitcoin Affiliate Network
-    - Fixed issue with API calls when connection to a pool fails.
+    - [-POOL] TradeMyBit was removed. This pool has shut down.
 
     KNOWN ISSUES
     ========
@@ -13,6 +17,15 @@
     - Rig device settings cannot be modified
     - Adding pools to a rig does not save
     - Editing pool details does not work
+
+---
+
+    [ v2.0.0.458-nightly ]
+
+    HOTFIXES
+    ========
+    - Fixed an issue that occurs when adding [POOL] Bitcoin Affiliate Network
+    - Fixed issue with API calls when connection to a pool fails.
 
 ---
 

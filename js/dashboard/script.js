@@ -227,9 +227,47 @@
   /*-----  End of The Wallets  ------*/
 
 
+  /*===================================
+  =          The Pool Picker          =
+  ===================================*/
+
+    var poolPicker = new PoolPicker()
+    poolPicker.start()
+
+    $document.on('click', 'a.new-pool-picker', function(evt) {
+        alert('clicked')
+        $.ajax({
+            type: 'post',
+            url: 'ajax.php?action=create',
+            data: {
+                type: 'pool-picker'
+            },
+            statusCode: {
+                202: function() {
+                    errorMsg.html('');
+                    location.reload(true);
+                },
+                406: function(msg) {
+                    errorMsg.html(msg.responseText);
+                },
+                409: function(msg) {
+                    errorMsg.html(msg.responseText);
+                }
+            }
+        })
+        .fail(function (xhr, status, message) {
+            //console.error(xhr, status, message)
+        })
+        .done();
+    });
+
+  /*-----  End of The Pool Picker  ------*/
+
+
   /*=============================================
   =            Global Event Handling            =
   =============================================*/
+
 
     // Update BTN
     $document.on('click', 'button.btn-updater', function (evt) {

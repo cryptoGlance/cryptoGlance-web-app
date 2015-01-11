@@ -1382,6 +1382,10 @@ a#dash-add-panel.flash {
   clear: both;
 }
 
+#pool-picker .panel-body {
+    padding: 0px;
+}
+
 .full-content .panel-body {
   font-size: 18px;
   text-align: left;
@@ -1392,8 +1396,19 @@ a#dash-add-panel.flash {
   margin: 0 0 50px;
 }
 
-.panel-pool .panel-body {
+.panel-pool .panel-body,
+.panel .panel-poolpicker,
+.panel .panel-poolpicker-body-thanks {
   background: rgba(7, 41, 53, 0.6);
+}
+
+.panel .panel-poolpicker,
+.panel .panel-poolpicker-body-thanks {
+    padding: 5px;
+}
+
+.panel .panel-poolpicker .stat-label {
+    text-transform: uppercase !important;
 }
 
 .panel-body-feed {
@@ -1525,10 +1540,13 @@ a#dash-add-panel.flash {
 
 .panel-body .stat-pair .stat-value {
     position: relative;
-  background: url(../images/background/inflicted.png) repeat #111;
-  font-size: 20px;
-  border-radius: 0;
-  padding: 0 10px;
+    background: url(../images/background/inflicted.png) repeat #111;
+    font-size: 20px;
+    border-radius: 0;
+    padding: 0 10px;
+}
+.panel-poolpicker .stat-pair .stat-value {
+    text-align: left;
 }
 
 .panel-wallet .stat-pair .stat-value {

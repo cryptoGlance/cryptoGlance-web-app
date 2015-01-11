@@ -17,20 +17,20 @@ $jsArray = array(
     'dashboard/Pool',
     'dashboard/WalletCollection',
     'dashboard/Wallet',
+    'dashboard/PoolPicker',
     'dashboard/script'
 );
 
 include("includes/header.php");
 ?>
 
-
-    <?php if (count($cryptoGlance->getMiners()) == 0 && count($cryptoGlance->getPools()) == 0 && count($cryptoGlance->getWallets()) == 0) { ?>
+    <?php if ($cryptoGlance->isNoPanels()) { ?>
     <div id="first-run-notice"><b>Start by adding a panel.</b><br>The Dashboard is comprised of a variety of panels, each showing a certain type of info.<span><a href="#add-panel" id="flash-add-panel"><button type="button" class="btn btn-lg btn-warning" data-type="all"><i class="icon icon-newtab"></i> Add Panel</button></a></span></div>
     <?php } ?>
    <div id="dashboard-wrap" class="container sub-nav">
     <?php
     // Overview
-    if (count($cryptoGlance->getMiners()) > 0) {
+    if ($cryptoGlance->isPanelAdded('miners')) {
         include("templates/modals/manage_rig.php");
 
         include("templates/panels/overview.php");
@@ -46,20 +46,26 @@ include("includes/header.php");
     ?>
 
       <?php
-      foreach ($cryptoGlance->getPools() as $poolId => $pool) {
-        $poolId++;
-        include("templates/panels/pool.php");
-      }
+        if ($cryptoGlance->isPanelAdded('pools')) {
+            foreach ($cryptoGlance->getPools() as $poolId => $pool) {
+                $poolId++;
+                include("templates/panels/pool.php");
+            }
+        }
       ?>
 
       <?php //require_once("templates/panels/news_feed.php"); ?>
 
       <?php //require_once("templates/panels/subreddit_feed.php"); ?>
 
-      <?php //require_once("templates/panels/coinwatcher.php"); ?>
+      <?php
+        //if ($cryptoGlance->isPanelAdded('pool-picker')) {
+            require_once("templates/panels/pool_picker.php");
+        //}
+      ?>
 
       <?php
-      if (count($cryptoGlance->getWallets()) > 0) {
+      if ($cryptoGlance->isPanelAdded('wallets')) {
         include("templates/panels/wallet.php");
       }
 

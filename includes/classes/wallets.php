@@ -15,8 +15,8 @@ class Wallets extends Config_Wallets {
         'darkcoin'  => 'DRK',
         'dogecoin'  => 'DOGE',
         'litecoin'  => 'LTC',
-        'neoscoin' => 'NEOS',
-        'paycoin' => 'XPY',
+        'neoscoin'  => 'NEOS',
+        'paycoin'   => 'XPY',
         'reddcoin'  => 'RDD',
         'vertcoin'  => 'VTC',
     );

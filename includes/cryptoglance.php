@@ -5,6 +5,7 @@ class CryptoGlance {
     private $_configTypes = array(
         'cryptoglance',
         'miners',
+        'panels',
         'pools',
         'wallets',
     );
@@ -40,6 +41,31 @@ class CryptoGlance {
             return array_flip($this->_algorithms);
         }
         return $this->_algorithms;
+    }
+
+    public function isPanelAdded($panel) {
+        if ($this->_config['panels'][$panel]) {
+            return $this->_config['panels'][$panel];
+        }
+        return $this->_config[$panel];
+    }
+
+    ///////////
+    // Panels //
+    ///////////
+    public function getPanels() {
+        $panels = $this->_config;
+        unset($panels['cryptoglance']);
+
+        return $panels;
+    }
+    public function isNoPanels() {
+        foreach ($this->getPanels() as $panel) {
+            if ($panel) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //////////
