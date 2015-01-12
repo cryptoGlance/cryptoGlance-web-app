@@ -12,6 +12,7 @@ class Miners_Cgminer extends Miners_Abstract {
     // Data
     protected $_summary = array();
     protected $_devs = array();
+    protected $_eStats = array();
     protected $_pools = array();
 
     // Common Data
@@ -522,7 +523,8 @@ class Miners_Cgminer extends Miners_Abstract {
     }
     private function fetchDeviceDetails() {
         $eStats = json_decode($this->cmd('{"command":"estats","parameter":1}'), true);
-        $eStats = $eStats['STATS'];
+        $eStats = (is_array($eStats['STATS']) : $eStats['STATS'] : array());
+        $this->_eStats = $eStats;
 
         // Add device details to dev data
         foreach ($this->_devs as $dKey => $dev) {
@@ -564,5 +566,21 @@ class Miners_Cgminer extends Miners_Abstract {
         $pools = json_decode($this->cmd('{"command":"pools"}'), true);
         $this->_pools = $pools['POOLS'];
         $this->getActivePool();
+    }
+
+
+    /* Private functions for independant product types. EG: Bitmain */
+    public function _checkBitmain() {
+        if (!empty($this->_eStats)) {
+            foreach ($this->_eStats as $eStats) {
+                // if a bitmain asic has an 'x' in it's data, that means an asic chip has failed
+                // and we will restart it automatically
+                for ($i=1; $eStats['miner_count'] >=$i; $i++) {
+                    if (strpos($eStats['chain_acs'.$i], 'x') !== false) {
+                        $this->restart();
+                    }
+                }
+            }
+        }
     }
 }
