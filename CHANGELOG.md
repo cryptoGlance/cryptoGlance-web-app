@@ -1,10 +1,11 @@
 
-    [ v2.0.0.4xx-nightly ]
+    [ v2.0.0.464-nightly ]
 
     FEATURES
     ========
-    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
     - Auto-Restart on BITMAIN asic failure (chain contains "x" instead of "0")
+    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
+    - [+POOL] CkPool | Note: This pool doesn't have a real API and might break once they update it
 
     HOTFIXES
     ========
