@@ -16,8 +16,20 @@ function curlCall($url) {
         // Enable for debugging only!
         // echo 'Curl error: ' . curl_error($curl);
         $data = array();
+    } else if(curl_errno($curl)){
+        // Enable for debugging only!
+        // echo 'Curl error: ' . curl_error($curl);
+        // echo "<pre>";
+        // print_r(curl_getinfo($curl));
+        // echo "</pre>";
+        $data = array();
     } else {
         $data = json_decode($curlExec, true);
+    }
+
+    if (empty($data)) {
+        // return non-jsonfied data
+        return $curlExec;
     }
 
     curl_close($curl);
