@@ -523,7 +523,7 @@ class Miners_Cgminer extends Miners_Abstract {
     }
     private function fetchDeviceDetails() {
         $eStats = json_decode($this->cmd('{"command":"estats","parameter":1}'), true);
-        $eStats = (is_array($eStats['STATS']) : $eStats['STATS'] : array());
+        $eStats = (is_array($eStats['STATS']) ? $eStats['STATS'] : array());
         $this->_eStats = $eStats;
 
         // Add device details to dev data
