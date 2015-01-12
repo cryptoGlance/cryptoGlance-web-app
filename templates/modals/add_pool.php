@@ -21,6 +21,7 @@
                  <option disabled selected>Select A Pool</option>
                  <option value="btcguild">BTC Guild</option>
                  <option value="bitcoinaffiliatenetwork">Bitcoin Affiliate Network</option>
+                 <option value="ckpool">CkPool</option>
                  <option value="eclipse">Eclipse</option>
                  <option value="eligius">Eligius</option>
                  <option value="magicpool">MagicPool</option>
@@ -28,12 +29,12 @@
                  <option value="multipoolus">Multipool.us</option>
                  <option value="nomp">NOMP</option>
                  <!-- <option value="simplecoin">SimpleCoin</option> -->
-                 <option value="trademybit">TradeMyBit</option>
+                 <!-- <option value="trademybit">TradeMyBit</option> -->
                  <option value="wafflepool">WafflePool</option>
               </select>
             </div>
           </div>
-           <div class="form-group mpos simplecoin nomp" style="display: none;">
+           <div class="form-group mpos simplecoin nomp ckpool" style="display: none;">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://pooldomain.com/">
@@ -51,10 +52,10 @@
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">
              </div>
            </div>
-           <div class="form-group wafflepool eligius magicpool nomp" style="display: none;">
+           <div class="form-group wafflepool eligius magicpool nomp ckpool" style="display: none;">
              <label for="inputAddress" class="col-sm-3 control-label">Mining Address</label>
              <div class="col-sm-7">
-               <input type="text" class="form-control" id="inputAddress" name="address">
+               <input type="text" class="form-control" id="inputAddress" name="address" placeholder="12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE">
              </div>
            </div>
            <div class="form-group nomp" style="display: none;">

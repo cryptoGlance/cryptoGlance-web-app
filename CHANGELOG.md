@@ -1,10 +1,15 @@
 
-    [ v2.0.0.458-nightly ]
+    [ v2.0.0.464-nightly ]
+
+    FEATURES
+    ========
+    - Auto-Restart on BITMAIN asic failure (chain contains "x" instead of "0")
+    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
+    - [+POOL] CkPool | Note: This pool doesn't have a real API and might break once they update it
 
     HOTFIXES
     ========
-    - Fixed an issue that occurs when adding [POOL] Bitcoin Affiliate Network
-    - Fixed issue with API calls when connection to a pool fails.
+    - [-POOL] TradeMyBit was removed. This pool has shut down.
 
     KNOWN ISSUES
     ========
@@ -13,6 +18,15 @@
     - Rig device settings cannot be modified
     - Adding pools to a rig does not save
     - Editing pool details does not work
+
+---
+
+    [ v2.0.0.458-nightly ]
+
+    HOTFIXES
+    ========
+    - Fixed an issue that occurs when adding [POOL] Bitcoin Affiliate Network
+    - Fixed issue with API calls when connection to a pool fails.
 
 ---
 
