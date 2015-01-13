@@ -226,17 +226,7 @@ class Miners_Cgminer extends Miners_Abstract {
         }
         return $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
     }
-
-    public function editPool($poolId, $values) {
-        $poolPriority = end($values);
-
-        $this->removePool($poolId);
-        $this->addPool($values);
-        $this->prioritizePools($poolPriority, null);
-
-        return;
-    }
-
+    
     public function prioritizePools($poolPriority, $poolId = null) {
         $this->fetchPools();
         if (!is_null($poolId)) {
