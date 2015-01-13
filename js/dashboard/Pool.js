@@ -35,9 +35,11 @@
           }
           break
         case 'url':
-          if ('undefined' !== typeof poolObj[key]) {
-            summary += this._buildStatusHtml('', key, '<a href="' + poolObj[key] + '" target="_blank" rel="external" style="color: #c8c8c8;">' + poolObj[key] + '</a>')
+          var url_name = poolObj[key];
+          if ('undefined' !== typeof poolObj[key+'_name']) {
+            url_name = poolObj[key+'_name'];
           }
+            summary += this._buildStatusHtml('', key, '<a href="' + poolObj[key] + '" target="_blank" rel="external" style="color: #c8c8c8;">' + url_name + '</a>')
           break
         default:
             if (key.match(/unconfirmed/i) || key.match(/unpaid/i)) {
