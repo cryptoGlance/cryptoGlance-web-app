@@ -31,7 +31,7 @@ $cryptoGlance = new CryptoGlance();
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
-define('CURRENT_VERSION', 'v2.0.0.464-nightly');
+define('CURRENT_VERSION', 'v2.0.0.470-nightly');
 
 
 // Misc function used throughout cryptoglance
