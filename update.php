@@ -61,7 +61,7 @@ if (isset($_POST['cryptoglance_version']) &&
     if ($settings['general']['updates']['enabled'] == 1) {
         $updateType = $settings['general']['updates']['type'];
 
-        echo '==> Starting Update...Please be patient<br />==> Downloading update zip...<br />'; ob_flush(); flush(); sleep(1);
+        echo '==> Starting Update...Please be patient<br />'; ob_flush(); flush(); sleep(1);
 
         // MAKE FOLDERS -----------------------
 
@@ -69,7 +69,7 @@ if (isset($_POST['cryptoglance_version']) &&
 
         if (!mkdir($currentDir . $updateDir, 0777, true)) {
             echo '==> ERROR: Failed to create the directory: ' . $updateDir . '<br />';  ob_flush(); flush(); sleep(1);
-            exit;
+            die('* Please contact support via reddit, bitcointalk, or IRC!');
         } else {
             echo '==> Successfully created temporary directory!<br />'; ob_flush(); flush(); sleep(1);
         }
@@ -95,7 +95,7 @@ if (isset($_POST['cryptoglance_version']) &&
         $page = curl_exec($curl);
         if (!$page) {
             echo '==> ERROR: ' . curl_error($curl) . '<br />';
-            exit;
+            die('* Please contact support via reddit, bitcointalk, or IRC!');
         } else {
             echo '==> Download Successful!<br />';
         }
@@ -108,10 +108,10 @@ if (isset($_POST['cryptoglance_version']) &&
         $zip = new ZipArchive;
         if (!$zip) {
             echo '==> ERROR: Could not create ZipArchive object...<br />'; ob_flush(); flush(); sleep(1);
-            exit;
+            die('* Please contact support via reddit, bitcointalk, or IRC!');
         } else if($zip->open($currentDir . $updateDir.'.zip') != "true") {
             echo '==> ERROR: Could not open ' . $file_zip . '<br />'; ob_flush(); flush(); sleep(1);
-            exit;
+            die('* Please contact support via reddit, bitcointalk, or IRC!');
         }
 
         echo '==> Unzipping archive to: '.$updateDir.'<br />'; ob_flush(); flush(); sleep(1);
@@ -123,16 +123,19 @@ if (isset($_POST['cryptoglance_version']) &&
 
         echo '==> Deleting update archive file!<br />'; ob_flush(); flush();
 
-        unlink($currentDir . $updateDir.'.zip');
-
-        echo '==> Update archive file deleted!<br />'; ob_flush(); flush(); sleep(1);
+        if (unlink($currentDir . $updateDir.'.zip')) {
+            echo '==> Deleted update archive file: ' . $currentDir . $updateDir.'.zip<br />'; ob_flush(); flush(); sleep(1);
+        } else {
+            echo '==> Cannot Delete Update Archive File: ' . $currentDir . $updateDir.'.zip<br />'; ob_flush(); flush();
+        }
 
         foreach (new DirectoryIterator($currentDir . $updateDir) as $file) {
             if($file->isDot() || !$file->isDir()) continue;
             if($file->isDir()) $extractedFolder = $updateDir.DIRECTORY_SEPARATOR.$file->getFilename();
         }
         if (empty($extractedFolder)) {
-            die('==> ERROR: Something bad happened. Extracted Folder is empty!');
+            echo '==> ERROR: Extracted Folder is empty!<br />'; ob_flush(); flush(); sleep(1);
+            die('* Please contact support via reddit, bitcointalk, or IRC!');
         }
 
         // START UPDATE -----------------------
@@ -154,6 +157,7 @@ if (isset($_POST['cryptoglance_version']) &&
                     echo '==> Deleted File: ' . $realFilePath . '<br />'; ob_flush(); flush();
                 } else {
                     echo '==> Cannot Delete File: ' . $realFilePath . '<br />'; ob_flush(); flush();
+                    die('* Please make sure your files are writable. If apache, user:group should be www-data:www-data.');
                 }
             }
         }
@@ -170,6 +174,7 @@ if (isset($_POST['cryptoglance_version']) &&
                 } else {
                     $failedFolders[] = $realFilePath;
                     echo '==> Cannot Delete Folder: ' . $realFilePath . '<br />'; ob_flush(); flush();
+                    die('* Please make sure your directories are writable. If apache, user:group should be www-data:www-data.');
                 }
             }
         }
@@ -180,6 +185,7 @@ if (isset($_POST['cryptoglance_version']) &&
                 echo '==> Deleted Folder: ' . $folderPath . '<br />'; ob_flush(); flush();
             } else {
                 echo '==> Cannot Delete Folder: ' . $folderPath . '<br />'; ob_flush(); flush();
+                die('* Please make sure your directories are writable. If apache, user:group should be www-data:www-data.');
             }
         }
         echo '==> Done deleting old files...<br />'; ob_flush(); flush(); sleep(1);

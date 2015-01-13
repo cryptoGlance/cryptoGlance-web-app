@@ -11,30 +11,27 @@ class Pools_Ckpool extends Pools_Abstract {
 
     public function __construct($params) {
         parent::__construct($params);
-        $this->_address = $params['address'];
-        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['address']) .'.json');
+        $this->_apiKey = $params['apikey'];
+        $this->_userId = $params['userid'];
+        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['apikey']) .'.json');
     }
 
     public function update() {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData = array();
-            $poolData = curlCall($this->_apiURL  . '/address.php?a='.$this->_address);
-
-            // For some reason CKPool returns information with HTML...
-            $poolData = strstr($poolData, '{');
-            $poolData = substr($poolData, 0, strrpos($poolData, '}')).'}';
-
-            $poolData = json_decode($poolData, true);
+            $poolData['user'] = curlCall($this->_apiURL  . '/index.php?k=api&json=y&username='.$this->_userId.'&api='.$this->_apiKey);
+            $poolData['workers'] = curlCall($this->_apiURL  . '/index.php?k=api&json=y&work=y&username='.$this->_userId.'&api='.$this->_apiKey);
 
             // Data Order
             $data['type'] = $this->_type;
 
-            $data['1_minute_hashrate'] = preg_replace('/(?<=[a-z])(?=\d)|(?<=\d)(?=[a-z])/i', ' ', $poolData['hashrate1m']).'H/S';
-            $data['5_minutes_hashrate'] = preg_replace('/(?<=[a-z])(?=\d)|(?<=\d)(?=[a-z])/i', ' ', $poolData['hashrate5m']).'H/S';
-            $data['1_hour_hashrate'] = preg_replace('/(?<=[a-z])(?=\d)|(?<=\d)(?=[a-z])/i', ' ', $poolData['hashrate1hr']).'H/S';
-            $data['1_day_hashrate'] = preg_replace('/(?<=[a-z])(?=\d)|(?<=\d)(?=[a-z])/i', ' ', $poolData['hashrate1d']).'H/S';
-            $data['7_day_hashrate'] = preg_replace('/(?<=[a-z])(?=\d)|(?<=\d)(?=[a-z])/i', ' ', $poolData['hashrate7d']).'H/S';
-            $data['workers'] = $poolData['workers'];
+            $data['user_hashrate5m'] = formatHashrate($poolData['user']['u_hashrate5m']/1000);
+            $data['pool_hashrate'] = formatHashrate($poolData['user']['p_hashrate5m']/1000);
+
+            for ($i=0; $poolData['workers']['rows'] > $i; $i++) {
+                $data[$poolData['workers']['workername:'.$i]] = formatHashrate($poolData['workers']['w_hashrate5m:'.$i]/1000);
+            }
+            $data['workers'] = $poolData['workers']['rows'];
 
             $data['url'] = $this->_apiURL;
 

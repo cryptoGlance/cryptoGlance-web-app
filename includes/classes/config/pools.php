@@ -77,12 +77,13 @@ class Config_Pools extends Config_Abstract {
                 'name' => ($label ? $label : 'WafflePool'),
                 'address' => $address,
             );
-        } else if ($type == 'ckpool' && !empty($address) && !empty($url)) {
+        } else if ($type == 'ckpool' && !empty($api) && !empty($userid) && !empty($url)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
-                'address' => $address,
                 'apiurl' => rtrim($url, '/'),
+                'apikey' => $api,
+                'userid' => $userid,
             );
         } else if ($type == 'eligius' && !empty($address)) {
             $pool = array(

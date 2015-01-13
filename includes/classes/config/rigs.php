@@ -68,15 +68,18 @@ class Config_Rigs extends Config_Abstract {
                 return 'Warning setting <b>cannot</b> be a higher value than your danger setting.';
             }
         } else if ($dataType == 'pools') {
-            if (empty($data['new']['url'])) {
-                header("HTTP/1.0 406 Not Acceptable"); // not accepted
-                return 'Pool requires a URL to connect to!';
-            } else if (empty($data['new']['user'])) {
-                header("HTTP/1.0 406 Not Acceptable"); // not accepted
-                return 'Pools require some sort of username. Either an coin address or a username/worker.';
-            } else if (empty($data['new']['password'])) {
-                header("HTTP/1.0 406 Not Acceptable"); // not accepted
-                return 'Use atleast 1 character for a password. For example: "x".';
+            foreach ($data as $poolData) {
+                if (empty($poolData['url'])) {
+                    header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                    return 'Pool requires a URL to connect to!';
+                } else if (empty($poolData['user'])) {
+                    header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                    return 'Pools require some sort of username. Either an coin address or a username/worker.';
+                }
+                //  else if (empty($data['new']['password'])) {
+                //     header("HTTP/1.0 406 Not Acceptable"); // not accepted
+                //     return 'Use atleast 1 character for a password. For example: "x".';
+                // }
             }
         }
 
@@ -181,6 +184,53 @@ class Config_Rigs extends Config_Abstract {
         if ($isValid !== true) {
             return $isValid;
         }
+
+        // Collection of pool data based on what we're looking for
+        $addedPools = array();
+        $removedPools = array();
+        $rigPools = $this->_objs[0]->pools();
+
+        // Look for new pools in the post
+        foreach ($data as $postedPool) {
+            $added = true;
+            foreach ($rigPools as $rigPool) {
+                if ($postedPool['url'] == $rigPool['url'] && $postedPool['user'] == $rigPool['user']) {
+                    $added = false;
+                }
+            }
+            if ($added) {
+                if (empty($postedPool['password'])) {
+                    $postedPool['password'] = 'x';
+                }
+                $addedPools[] = $postedPool;
+            }
+        }
+
+        // Look for removed pools in the post
+        foreach ($rigPools as $rigPoolId => $rigPool) {
+            $removed = true;
+            foreach ($data as $postedPool) {
+                if ($postedPool['url'] == $rigPool['url'] && $postedPool['user'] == $rigPool['user']) {
+                    $removed = false;
+                }
+            }
+            if ($removed) {
+                $removedPools[] = $rigPoolId;
+            }
+        }
+
+        // Send new pool to the rig
+        foreach ($addedPools as $pool) {
+            $this->_objs[0]->addPool($pool);
+        }
+
+        // Remove the pools that were deleted
+        foreach ($removedPools as $poolId) {
+            $this->_objs[0]->removePool($poolId);
+        }
+
+        // TO-DO: Prioritize pools
+
 
         // TO-DO: Eventually we will want some kind of profile... For now, just apply the pool to the rig
 
