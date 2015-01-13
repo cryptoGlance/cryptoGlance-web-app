@@ -1,4 +1,24 @@
 
+    [ v2.0.0.470-nightly ]
+
+    HOTFIXES
+    ========
+    - Change CkPool to require username and api key
+    - Updated Eligius URL to point to user stats page for more convience
+    - Updated Rig Pools to add/edit/remove pools
+    - Added more checks to the update functionality
+
+    KNOWN ISSUES
+    ========
+    - Wallet information creating/editing/deleting is wonky
+    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
+    - Rig device settings cannot be modified
+    - Editing pool details does not work
+    - Prioritizing rig pools does not work
+    - Able to save rig pool changes that aren't confirmed
+
+---
+
     [ v2.0.0.464-nightly ]
 
     FEATURES
@@ -10,14 +30,6 @@
     HOTFIXES
     ========
     - [-POOL] TradeMyBit was removed. This pool has shut down.
-
-    KNOWN ISSUES
-    ========
-    - Wallet information creating/editing/deleting is wonky
-    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
-    - Rig device settings cannot be modified
-    - Adding pools to a rig does not save
-    - Editing pool details does not work
 
 ---
 
