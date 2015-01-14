@@ -203,6 +203,9 @@
                     case 'apikey':
                         k = 'api'
                         break
+                    case 'apiurl':
+                        k = 'url'
+                        break
                 }
 
                 $addPool.find('input[name="'+ k +'"]').val(v)
