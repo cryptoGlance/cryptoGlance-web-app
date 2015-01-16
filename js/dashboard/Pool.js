@@ -28,6 +28,7 @@
 
       switch (key) {
         case 'type':
+        case 'url_name':
           break
         case 'last_block':
           if (poolObj.type === 'mpos' &&  'undefined' !== typeof poolObj.url) {
