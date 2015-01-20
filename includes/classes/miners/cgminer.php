@@ -282,6 +282,15 @@ class Miners_Cgminer extends Miners_Abstract {
         return $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $poolIdCollection) .'"}');
     }
 
+
+    public function enableDevice($devType, $devId) {
+        return $this->cmd('{"command":"'.$devType.'enable","parameter":"'. $devId .'"}');
+    }
+
+    public function disableDevice($devType, $devId) {
+        return $this->cmd('{"command":"'.$devType.'disable","parameter":"'. $devId .'"}');
+    }
+
     public function resetStats() {
         $this->cmd('{"command":"zero","parameter":"all,false"}');
     }

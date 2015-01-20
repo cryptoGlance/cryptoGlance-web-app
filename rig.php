@@ -247,10 +247,10 @@ if (empty($rigDevices)) {
                                     <?php
                                     foreach ($rigDevices as $dev) {
                                     ?>
-                                        <tr data-devType="<?php echo $dev['type']; ?>" data-devId="<?php echo $dev['id']; ?>" data-icon="<?php echo $dev['status']['icon']; ?>" data-status="<?php echo $dev['status']['colour']; ?>">
+                                        <tr data-type="<?php echo $dev['type']; ?>" data-id="<?php echo $dev['id']; ?>" data-icon="<?php echo $dev['status']['icon']; ?>" data-status="<?php echo $dev['status']['colour']; ?>">
                                           <td><i class="icon icon-<?php echo $dev['status']['icon']; ?> <?php echo $dev['status']['colour']; ?>"></i></td>
                                           <td class="<?php echo $dev['status']['colour']; ?>"><?php echo $dev['type'] . $dev['id']; ?></td>
-                                          <td><input type="checkbox" class="enableDev" name="devices[<?php echo $dev['id']; ?>][enabled]" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
+                                          <td><input type="checkbox" class="devEnabled" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
                                           <td><?php echo formatHashrate($dev['hashrate_5s']*1000); ?></td>
                                           <?php if ($dev['type'] == 'GPU') { ?>
                                           <td><?php echo $dev['temperature_c'] . '<span>&deg;C</span>/' . $dev['temperature_f'] . '<span>&deg;F</span>'; ?></td>

@@ -68,6 +68,34 @@
 
     /*--  End of The Thresholds  ---*/
 
+    /*================================
+    =             Devices            =
+    =================================*/
+
+    $document.on('switchChange.bootstrapSwitch', '.devEnabled', function (evt) {
+        var $tr = $(this).parents('tr');
+        var devEnabled = $(this).is(':checked');
+        var ridId = $('#rig-wrap').attr('data-rigId');
+        var devId = $tr.attr('data-id');
+        var devType = $tr.attr('data-type');
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: ridId,
+                type: 'rigs',
+                action: 'change-device-status',
+                devId: devId,
+                devType: devType,
+                enable: devEnabled
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        });
+    });
+
+    /*--  End of The Devices  ---*/
+
 
     /*================================
     =              Pools             =

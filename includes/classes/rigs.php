@@ -25,7 +25,6 @@ class Rigs extends Config_Rigs {
 
         return $result;
     }
-
     public function addPool() {
         $isValid = $this->postValidate('pools', $_POST['values']);
         if ($isValid !== true) {
@@ -53,6 +52,15 @@ class Rigs extends Config_Rigs {
             $result = $this->_objs[0]->enablePool($_POST['poolId']);
         } else {
             $result = $this->_objs[0]->disablePool($_POST['poolId']);
+        }
+        return $result;
+    }
+
+    public function changeDeviceStatus() {
+        if ($_POST['enable'] == 'true') {
+            $result = $this->_objs[0]->enableDevice(strtolower($_POST['devType']), $_POST['devId']);
+        } else {
+            $result = $this->_objs[0]->disableDevice(strtolower($_POST['devType']), $_POST['devId']);
         }
         return $result;
     }
