@@ -578,6 +578,10 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
   margin: 13px 0px 10px;
 }
 
+.table-pools td a {
+    cursor: pointer;
+}
+.table-pools input.form-control,
 .wallet-inline-edit input.form-control {
   font-size: 18px;
   padding: 0 5px;
