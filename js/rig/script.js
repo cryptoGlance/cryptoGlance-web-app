@@ -135,11 +135,9 @@
         var ridId = $('#rig-wrap').attr('data-rigId');
         var poolId = $tr.attr('data-id');
 
-        // If successfull, move on
         $inputs.each(function(){
             var typeName = $(this).parent().attr('data-type');
             values[typeName] = this.value;
-            this.parentNode.textContent = this.value;
         });
 
         $.ajax({
@@ -155,6 +153,10 @@
             dataType: 'json'
         })
         .done(function (data) {
+            $inputs.each(function(){
+                this.parentNode.textContent = this.value;
+            });
+
             $(this).addClass('editPoolConfig').removeClass('savePoolConfig')
             .find('.icon').removeClass('icon-save-floppy').addClass('icon-edit').parents('.editPoolConfig')
             .next().addClass('removePoolConfig').removeClass('cancelPoolConfig')
