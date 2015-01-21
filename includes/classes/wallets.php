@@ -11,7 +11,6 @@ class Wallets extends Config_Wallets {
 
     protected $_currencies = array(
         'bitcoin'   => 'BTC',
-        'continuum' => 'CTM',
         'darkcoin'  => 'DRK',
         'dogecoin'  => 'DOGE',
         'litecoin'  => 'LTC',
@@ -57,9 +56,10 @@ class Wallets extends Config_Wallets {
             $coinBalance = 0.00000000;
 
             // Wallet actually contains a bunch of addresses and associated data
-            foreach ($wallet['addresses'] as $address) {
+            foreach ($wallet['addresses'] as $addrKey => $address) {
                 $addressData = $address->update();
                 $walletAddressData[$addressData['address']] = array(
+                    'id' => $addrKey,
                     'label' => $addressData['label'],
                     'balance' => str_replace('.00000000', '', number_format($addressData['balance'], 8)),
                     'fiat_balance' => number_format($fiatPrice * $addressData['balance'], 2),
