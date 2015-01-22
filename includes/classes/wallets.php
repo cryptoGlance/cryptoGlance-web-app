@@ -17,7 +17,14 @@ class Wallets extends Config_Wallets {
         'neoscoin' => 'NEOS',
         'paycoin' => 'XPY',
         'reddcoin'  => 'RDD',
-        'vertcoin'  => 'VTC',
+        // 'vertcoin'  => 'VTC', // Disabled until blockchain works
+    );
+
+    protected $_fiat = array(
+        'CAD'   => 'Canadian Dollar',
+        'EUR'   => 'Euro',
+        'GBP'   => 'British Pound',
+        'USD'   => 'US Dollar',
     );
 
 
@@ -31,8 +38,10 @@ class Wallets extends Config_Wallets {
      */
 
     public function getCurrencies() {
-        // Making room for possible addition of data here.
         return $this->_currencies;
+    }
+    public function getFiat() {
+        return $this->_fiat;
     }
 
     public function getUpdate() {
@@ -59,7 +68,7 @@ class Wallets extends Config_Wallets {
             foreach ($wallet['addresses'] as $addrKey => $address) {
                 $addressData = $address->update();
                 $walletAddressData[$addressData['address']] = array(
-                    'id' => $addrKey,
+                    'id' => $addrKey+1,
                     'label' => $addressData['label'],
                     'balance' => str_replace('.00000000', '', number_format($addressData['balance'], 8)),
                     'fiat_balance' => number_format($fiatPrice * $addressData['balance'], 2),

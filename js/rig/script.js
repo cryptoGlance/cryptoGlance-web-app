@@ -106,7 +106,6 @@
 
       var $tr = $(this).parents('tr');
       var $td = $tr.children().slice(1, 5);
-      var poolId = $tr.attr('data-id');
 
       $td.each(function(){
         var elmText = $('span', this);
@@ -128,6 +127,8 @@
 
     $document.on('click', '.savePoolConfig', function (evt) {
         evt.preventDefault();
+
+        var $_self = $(this);
 
         var $tr = $(this).parents('tr');
         var $inputs = $tr.children().slice(1, 5).find('input');
@@ -154,10 +155,15 @@
         })
         .done(function (data) {
             $inputs.each(function(){
-                this.parentNode.textContent = this.value;
+                var $parent = $(this).parent();
+                var elmText = $('span', $parent);
+                var elmInput = $('input', $parent);
+                elmInput.attr('type', 'hidden');
+                elmText.text(this.value);
+                elmText.show();
             });
 
-            $(this).addClass('editPoolConfig').removeClass('savePoolConfig')
+            $_self.addClass('editPoolConfig').removeClass('savePoolConfig')
             .find('.icon').removeClass('icon-save-floppy').addClass('icon-edit').parents('.editPoolConfig')
             .next().addClass('removePoolConfig').removeClass('cancelPoolConfig')
             .find('.blue').removeClass('blue').addClass('red')
@@ -172,7 +178,6 @@
         var $inputs = $tr.children().slice(1, 5).find('input');
         var values = {};
         var ridId = $('#rig-wrap').attr('data-rigId');
-        var poolId = $tr.attr('data-id');
 
         // If successfull, move on
         $inputs.each(function(){

@@ -96,12 +96,12 @@ class Config_Rigs extends Config_Abstract {
     }
 
     public function create() {
-        $isValid = $this->postValidate(array('details' => $_POST));
+        $isValid = $this->postValidate('details', $_POST);
         if ($isValid !== true) {
             return $isValid;
         }
 
-        $isUnique = $this->isUnique(array('details' => $_POST));
+        $isUnique = $this->isUnique('details', $_POST);
         if ($isUnique !== true) {
             return $isUnique;
         }

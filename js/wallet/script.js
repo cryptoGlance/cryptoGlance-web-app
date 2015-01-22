@@ -1,217 +1,274 @@
 !function ($){
 
     /*================================
-    =            Addresses           =
+    =         Wallet Details         =
     =================================*/
 
-    // Edit Address Action
-    $('#walletAddresses').on('click', '.editAddress', function(e) {
-        e.preventDefault();
-        // row Parent
-        var addrRow = $(this).parents('tr');
-        $(addrRow).addClass('wallet-inline-edit');
-
-        // Get Label and value
-        var addrLabelTd = $('[data-name="label"]', addrRow);
-        var addrLabelVal = $(addrLabelTd).html();
-
-        // Create input field, populate, and style
-        var addrLabelInput = document.createElement("input");
-        $(addrLabelInput).val(addrLabelVal);
-        $(addrLabelInput).addClass('form-control');
-        $(addrLabelInput).attr('name', 'label');
-        $(addrLabelTd).html(addrLabelInput);
-
-        // get Last column (action buttons)
-        var actionTd = $('td:last', addrRow);
-        $(actionTd).html('<a href="#saveAddress" class="saveEditAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a>');
+    // Show/Hide panels
+    // $('.enabler', '#rig-settings-thresholds').on('switchChange.bootstrapSwitch', function (evt) {
+    $document.on('change', '#walletCurrency', function (evt) {
+        var selectedCurrency = $(this).val();
+        $('#currencyImage').attr('src', 'images/coin/'+selectedCurrency+'.png');
     });
-    // Save Edit Address Action
-    $('#walletAddresses').on('click', '.saveEditAddress', function(e) {
-        e.preventDefault();
-
-        // Wallet Id
-        var walletId = $('#walletAddresses').attr('data-walletId');
-
-        // row Parent
-        var addrRow = $(this).parents('tr');
-        var addrKey = $(addrRow).attr('data-key');
-        var addrLabelInput = $('[name="label"]', addrRow);
-
-        // on done:
-        $.ajax({
-            type: 'post',
-            url: 'ajax.php?type=update&action=edit-config',
-            data: { type: 'address', walletId: walletId, addrId: addrKey, label: $(addrLabelInput).val() },
-            statusCode: {
-                202: function() {
-                    var addrLabelTd = $('[data-name="label"]', addrRow);
-                    $(addrLabelTd).html($(addrLabelInput).val());
-                    $(addrLabelInput).remove();
-
-                    $('#alert-save-fail-address').fadeOut();
-                    $('#alert-saved-address').fadeIn();
-
-                    // get Last column (action buttons)
-                    var actionTd = $('td:last', addrRow);
-                    $(actionTd).html('<a href="#editAddress" class="editAddress"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removeAddress" class="removeAddress"><span class="red"><i class="icon icon-remove"></i></span></a>');
-                },
-                406: function() {
-                    $(addrLabelInput).removeClass('red');
-                    $(addrLabelInput).addClass('red');
-                    $('.errormsg', '#alert-save-fail-address').html('You need to provide a label for this address.');
-                    $('#alert-saved-address').fadeOut();
-                    $('#alert-save-fail-address').fadeIn();
-                }
-            }
-        });
-    });
-    // Remove Address Action
-    $('#walletAddresses').on('click', '.removeAddress', function(e) {
-        e.preventDefault();
-
-        // Wallet Id
-        var walletId = $('#walletAddresses').attr('data-walletId');
-
-        // row Parent
-        var addrRow = $(this).parents('tr');
-        var addrKey = $(addrRow).attr('data-key');
-
-        // on done:
-        $.ajax({
-            type: 'post',
-            url: 'ajax.php?type=update&action=remove-config',
-            data: { type: 'address', walletId: walletId, addrId: addrKey },
-            statusCode: {
-                202: function() {
-                    location.reload(true);
-                }
-            }
-        });
-    });
-    // Add Address Action
-    $('#walletAddresses').on('click', '.saveNewAddress', function(e) {
-        e.preventDefault();
-
-        // Wallet Id
-        var walletId = $('#walletAddresses').attr('data-walletId');
-
-        // row Parent
-        var addrRow = $(this).parents('tr');
-        var addrKey = $(addrRow).attr('data-key');
-        var addrLabel = $('[name="label"]', addrRow);
-        var addrAddress = $('[name="address"]', addrRow);
-
-        // on done:
-        $.ajax({
-            type: 'post',
-            url: 'ajax.php?type=update&action=add-config',
-            data: { type: 'address', walletId: walletId, addrId: addrKey, label: $(addrLabel).val(), address: $(addrAddress).val() },
-            statusCode: {
-                202: function() {
-                    location.reload(true);
-                },
-                406: function() {
-                    $(addrLabel).removeClass('red');
-                    $(addrAddress).removeClass('red');
-                    $(addrLabel).addClass('red');
-                    $(addrAddress).addClass('red');
-                    $('.errormsg', '#alert-save-fail-address').html('You need to provide a label and address.');
-                    $('#alert-save-fail-address').fadeIn();
-                },
-                409: function() {
-                    $(addrLabel).removeClass('red');
-                    $(addrAddress).removeClass('red');
-                    $(addrAddress).addClass('red');
-                    $('.errormsg', '#alert-save-fail-address').html('This address already exists in the wallet.');
-                    $('#alert-save-fail-address').fadeIn();
-                }
-            }
-        });
-    });
-
-
-    /*-----  End of Pools  ------*/
-
-    /*=============================================
-    =            Global Event Handling            =
-    =============================================*/
 
     // Save Button
-    // $document.on('click', '#btnSaveWallets', function (evt) {
-    //     var btnIcon = $('i', this);
-    //     $(btnIcon).addClass('ajax-saver');
-    //
-    //     var form = $('form', '#rigDetails .tab-content .active');
-    //
-    //     $.post( document.URL, form.serialize())
-    //     .done(function( data ) {
-    //         setTimeout(function() {
-    //             $(btnIcon).removeClass('ajax-saver');
-    //         }, 500);
-    //     })
-    //     .fail(function() {
-    //         setTimeout(function() {
-    //             $(btnIcon).removeClass('ajax-saver');
-    //         }, 500);
-    //     })
-    // });
+    $document.on('click', '#btnSaveWallet', function (evt) {
+        var btnIcon = $('i', this);
+        $(btnIcon).addClass('ajax-saver');
 
-    // Save Wallet
-    var btnSaveWallets = false;
-    $('#btnSaveWallets').click(function(e) {
-        e.preventDefault();
-        if (!btnSaveWallets) {
-            btnSaveWallets = true;
-            $.ajax({
-                type: 'post',
-                url: 'ajax.php?type=update&action=add-config',
-                data: $('form', '#walletDetails').serialize()
-            }).done(function(data, statusText, xhr) {
-                var status = xhr.status;
-                if (status == 202) {
-                    if ($('[name="walletId"]', '#walletDetails').val() == 0) {
-                        var walletId = data;
-                        window.location.href = 'wallet.php?id=' + walletId;
-                    }
-                    $('.panel-title', '#walletAddresses').html($('[name="label"]', '#walletDetails').val());
-                    $('#alert-saved-wallet').fadeIn();
-                    $('#alert-save-fail-wallet').fadeOut();
-                    btnSaveWallets = false;
-                }
-            }).fail(function(data, statusText, xhr) {
-                var status = data.status;
-                if (status == 406) {
-                    $('#alert-saved-wallet').fadeOut();
-                    $('#alert-save-fail-wallet').fadeIn();
-                    btnSaveWallets = false;
-                }
-            });
-        }
+        var walletId = $('#walletDetails').attr('data-id');
+        var form = $('form', '#walletDetails');
+        $('#btnDeleteWallet').attr('disabled', 'disabled');
+
+        $.ajax({
+            url: document.URL,
+            type: 'post',
+            data: {
+                id: walletId,
+                type: 'details',
+                action: 'update',
+                label: $('#walletName').val(),
+                currency: $('#walletCurrency').val(),
+                fiat: $('#walletFiat').val()
+            },
+            dataType: 'json'
+        })
+        .done(function( id ) {
+            $('#btnSaveWallet').attr('disabled', 'disabled');
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+
+                $().toastmessage('showToast', {
+                    sticky  : false,
+                    text    : '<b>Saved!</b><br />Your settings have successfully been saved.<br />Please wait while the wallet loads.',
+                    type    : 'success'
+                });
+
+                setTimeout(function() {
+                    window.location.href = 'wallet.php?id='+id;
+                }, 2500);
+            }, 500);
+        })
+        .fail(function() {
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+            }, 500);
+        })
     });
 
-    // Remove Wallet
-    var btnDeleteWallet = false;
-    $('#btnDeleteWallet').click(function(e) {
-        e.preventDefault();
-        if (!btnDeleteWallet) {
-            btnDeleteWallet = true;
-            $.ajax({
-                type: 'post',
-                url: 'ajax.php?type=update&action=remove-config',
-                data: $('form', '#walletDetails').serialize()
-            }).done(function(data, statusText, xhr){
-                var status = xhr.status;
-                if (status == 202) {
+    // Delete Wallet
+    $document.on('click', '#btnDeleteWallet', function (evt) {
+        var btnIcon = $('i', this);
+        $(btnIcon).addClass('ajax-saver');
+
+        var walletId = $('#walletDetails').attr('data-id');
+        $('#btnSaveWallet').attr('disabled', 'disabled');
+
+        $.ajax({
+            url: document.URL,
+            type: 'post',
+            data: {
+                id: walletId,
+                action: 'remove'
+            },
+            dataType: 'json'
+        })
+        .done(function( id ) {
+            $('#btnDeleteWallet').attr('disabled', 'disabled');
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+
+                $().toastmessage('showToast', {
+                    sticky  : false,
+                    text    : '<b>Saved!</b><br />Your wallet has successfully been deleted.<br />Will now bring you back to the dashboard.',
+                    type    : 'success'
+                });
+
+                setTimeout(function() {
                     window.location.href = 'index.php';
-                } else if (status == 406) {
-                    $('#alert-save-fail-wallet').fadeIn();
-                    btnDeleteWallet = false;
-                }
-            });
-        }
+                }, 2500);
+            }, 500);
+        })
+        .fail(function() {
+            setTimeout(function() {
+                $(btnIcon).removeClass('ajax-saver');
+            }, 500);
+        })
     });
 
-    /*-----  End of Global Event Handling  ------*/
+    /*--  End of Wallet Details  ---*/
+
+    /*================================
+    =        Wallet Addresses        =
+    =================================*/
+
+    $document.on('click', '.saveAddress', function (evt) {
+        evt.preventDefault();
+
+        var $_self = $(this);
+
+        var $tr = $(this).parents('tr');
+        var $inputs = $tr.children().find('input');
+        var values = {};
+        var walletId = $('#walletAddresses').attr('data-walletId');
+        var addressId = $tr.attr('data-id');
+
+        $inputs.each(function(){
+            var typeName = $(this).parent().attr('data-type');
+            values[typeName] = this.value;
+        });
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: walletId,
+                type: 'wallets',
+                action: 'edit-address',
+                addressId: addressId,
+                values: values // label, address
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function (data) {
+            if ($inputs[1].value != $($inputs[1]).parent().find('span').text()) {
+                $().toastmessage('showToast', {
+                    sticky  : false,
+                    text    : '<b>Saved!</b><br />Address was successfully modified<br />Please wait while the wallet loads.',
+                    type    : 'success'
+                });
+
+                setTimeout(function() {
+                    location.reload(true);
+                }, 2500);
+            }
+            $inputs.each(function(){
+                $inputs.each(function(){
+                    var $parent = $(this).parent();
+                    var elmText = $('span', $parent);
+                    var elmInput = $('input', $parent);
+                    elmInput.attr('type', 'hidden');
+                    elmText.text(this.value);
+                    elmText.show();
+                });
+            });
+
+            $_self.addClass('editAddress').removeClass('saveAddress')
+            .find('.icon').removeClass('icon-save-floppy').addClass('icon-edit').parents('.editAddress')
+            .next().addClass('removeAddress').removeClass('cancelAddress')
+            .find('.blue').removeClass('blue').addClass('red')
+            .find('.icon').removeClass('icon-undo').addClass('icon-remove');
+        });
+    })
+
+    $document.on('click', '.addAddress', function (evt) {
+        evt.preventDefault();
+
+        var $_self = $(this);
+        var $tr = $(this).parents('tr');
+        var $inputs = $tr.children().find('input');
+        var values = {};
+        var walletId = $('#walletAddresses').attr('data-walletId');
+
+        // If successfull, move on
+        $inputs.each(function(){
+            var typeName = $(this).parent().attr('data-type');
+            values[typeName] = this.value;
+        });
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: walletId,
+                type: 'wallets',
+                action: 'add-address',
+                values: values // label, address
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function( data ) {
+            $_self.find('i').removeClass('icon-save-floppy');
+            $_self.find('i').addClass('ajax-saver');
+            $().toastmessage('showToast', {
+                sticky  : false,
+                text    : '<b>Saved!</b><br />Address was successfully added to the wallet.<br />Please wait while the wallet loads.',
+                type    : 'success'
+            });
+
+            setTimeout(function() {
+                location.reload(true);
+            }, 2500);
+        })
+    })
+
+    $document.on('click', '.removeAddress', function (evt) {
+        evt.preventDefault()
+
+        var $tr = $(this).parents('tr');
+        var walletId = $('#walletAddresses').attr('data-walletId');
+        var addressId = $tr.attr('data-id');
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: walletId,
+                type: 'wallets',
+                action: 'remove-address',
+                addressId: addressId
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function (data) {
+            $tr.remove();
+        });
+    })
+
+    $document.on('click', '.editAddress', function (evt) {
+        evt.preventDefault()
+
+        var $tr = $(this).parents('tr');
+        var $inputs = $tr.children().find('input');
+
+        $inputs.each(function(){
+            var $td = $(this).parent();
+            var elmText = $('span', $td);
+            var elmInput = $('input', $td);
+            elmInput.attr('type', 'text');
+            elmText.hide();
+        })
+
+        $(this).addClass('saveAddress').removeClass('editAddress')
+        .find('.icon').removeClass('icon-edit').addClass('icon-save-floppy').parents('.saveAddress')
+        .next().addClass('cancelAddress').removeClass('removeAddress')
+        .find('.red').removeClass('red').addClass('blue')
+        .find('.icon').removeClass('icon-remove').addClass('icon-undo');
+
+    })
+
+    $document.on('click', '.cancelAddress', function (evt) {
+        evt.preventDefault()
+
+        var $tr = $(this).parents('tr');
+        var $inputs = $tr.children().find('input');
+
+        $inputs.each(function(){
+            var $td = $(this).parent();
+            var elmText = $('span', $td);
+            var elmInput = $('input', $td);
+            elmInput.attr('type', 'hidden');
+            elmText.show();
+        })
+
+        $(this).addClass('removeAddress').removeClass('cancelAddress')
+        .find('.blue').removeClass('blue').addClass('red')
+        .find('.icon').removeClass('icon-undo').addClass('icon-remove').parents('.removeAddress')
+        .prev().addClass('editAddress').removeClass('saveAddress')
+        .find('.icon').removeClass('icon-save-floppy').addClass('icon-edit')
+
+    })
+
+    /*--  End of Wallet Addresses ---*/
 
 }(window.jQuery)

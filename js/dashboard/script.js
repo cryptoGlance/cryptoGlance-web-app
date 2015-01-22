@@ -243,14 +243,14 @@
         $currentButton.prop({ disabled: true });
 
         var type = this.getAttribute('data-type');
-        var btnTimeout = 3000;
+        var btnTimeout = 500;
 
         if (type == 'rig') {
             if (rigCollection._update()) {
                 btnTimeout = 500;
             }
         } else if (type == 'wallet') {
-            if (walletCollection.update(0)) {
+            if (walletCollection.update()) {
                 btnTimeout = 500;
             }
         }
