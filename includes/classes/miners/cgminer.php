@@ -216,6 +216,14 @@ class Miners_Cgminer extends Miners_Abstract {
         return $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
 
+    public function enablePool($poolId) {
+        return $this->cmd('{"command":"enablepool","parameter":"'. $poolId .'"}');
+    }
+
+    public function disablePool($poolId) {
+        return $this->cmd('{"command":"disablepool","parameter":"'. $poolId .'"}');
+    }
+
     public function removePool($poolId) {
         return $this->cmd('{"command":"removepool","parameter":"'. $poolId .'"}');
     }
@@ -224,9 +232,20 @@ class Miners_Cgminer extends Miners_Abstract {
         if (count($values) > 3) {
             array_splice($values, 3);
         }
+
         return $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
     }
-    
+
+    public function editPool($poolId, $values) {
+        $poolPriority = end($values);
+        array_pop($values);
+        $this->removePool($poolId);
+        $this->addPool($values);
+        $this->fetchPools(); // Update our collection of pools
+        $this->prioritizePools($poolPriority, null);
+        return;
+    }
+
     public function prioritizePools($poolPriority, $poolId = null) {
         $this->fetchPools();
         if (!is_null($poolId)) {
@@ -261,6 +280,15 @@ class Miners_Cgminer extends Miners_Abstract {
         $this->getActivePool();
 
         return $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $poolIdCollection) .'"}');
+    }
+
+
+    public function enableDevice($devType, $devId) {
+        return $this->cmd('{"command":"'.$devType.'enable","parameter":"'. $devId .'"}');
+    }
+
+    public function disableDevice($devType, $devId) {
+        return $this->cmd('{"command":"'.$devType.'disable","parameter":"'. $devId .'"}');
     }
 
     public function resetStats() {

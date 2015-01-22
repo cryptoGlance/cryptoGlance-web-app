@@ -1,4 +1,23 @@
 
+    [ v2.0.0.482-nightly ]
+
+    HOTFIXES
+    ========
+    - Rewrote all Wallet handling + UI Updates
+    - If rig update time > 3 seconds, Rig summary would take an extended amount of time to appear
+    - Editing pool with URL field did not save
+    - Updated Rigs Pool page. Usability was greatly improved. Added ability to enable/disable pools.
+    - If no frequency is found for a device, it displays "Unknown" and is not changeable.
+    - [-COIN] Continuum - This coin is no longer being developed
+
+    KNOWN ISSUES
+    ========
+    - Rig device settings do not save
+    - Prioritizing rig pools does not work
+    - Wallets can take a long time to load
+
+---
+
     [ v2.0.0.470-nightly ]
 
     HOTFIXES
@@ -7,15 +26,6 @@
     - Updated Eligius URL to point to user stats page for more convience
     - Updated Rig Pools to add/edit/remove pools
     - Added more checks to the update functionality
-
-    KNOWN ISSUES
-    ========
-    - Wallet information creating/editing/deleting is wonky
-    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
-    - Rig device settings cannot be modified
-    - Editing pool details does not work
-    - Prioritizing rig pools does not work
-    - Able to save rig pool changes that aren't confirmed
 
 ---
 

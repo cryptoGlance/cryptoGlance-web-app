@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['submit'] == 'one') {
         $summary = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"summary"}'), true);
         $dev = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"devs"}'), true);
+        $devdetails = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"devdetails"}'), true);
         $eStats = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"estats","parameter":1}'), true);
         $pools = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"pools"}'), true);
 
@@ -72,6 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<br />------------<br /><br />";
         echo "<pre>DEVICES:";
         print_r($dev);
+        echo "</pre>";
+        echo "<pre>devdetails:";
+        print_r($devdetails);
         echo "</pre>";
         echo "<pre>eStats:";
         print_r($eStats);

@@ -247,10 +247,10 @@ if (empty($rigDevices)) {
                                     <?php
                                     foreach ($rigDevices as $dev) {
                                     ?>
-                                        <tr data-devType="<?php echo $dev['type']; ?>" data-devId="<?php echo $dev['id']; ?>" data-icon="<?php echo $dev['status']['icon']; ?>" data-status="<?php echo $dev['status']['colour']; ?>">
+                                        <tr data-type="<?php echo $dev['type']; ?>" data-id="<?php echo $dev['id']; ?>" data-icon="<?php echo $dev['status']['icon']; ?>" data-status="<?php echo $dev['status']['colour']; ?>">
                                           <td><i class="icon icon-<?php echo $dev['status']['icon']; ?> <?php echo $dev['status']['colour']; ?>"></i></td>
                                           <td class="<?php echo $dev['status']['colour']; ?>"><?php echo $dev['type'] . $dev['id']; ?></td>
-                                          <td><input type="checkbox" class="enableDev" name="devices[<?php echo $dev['id']; ?>][enabled]" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
+                                          <td><input type="checkbox" class="devEnabled" <?php echo (strtolower($dev['enabled']) == 'y' ? 'checked' : ''); ?> /></td>
                                           <td><?php echo formatHashrate($dev['hashrate_5s']*1000); ?></td>
                                           <?php if ($dev['type'] == 'GPU') { ?>
                                           <td><?php echo $dev['temperature_c'] . '<span>&deg;C</span>/' . $dev['temperature_f'] . '<span>&deg;F</span>'; ?></td>
@@ -261,7 +261,13 @@ if (empty($rigDevices)) {
                                           <td><input name="devices[<?php echo $dev['id']; ?>][gpu_voltage]" type="text" class="form-control" value="<?php echo $dev['gpu_voltage']; ?>" /></td>
                                           <td><input name="devices[<?php echo $dev['id']; ?>][powertune]" type="text" class="form-control" value="<?php echo $dev['powertune']; ?>" /></td>
                                           <?php } else if ($dev['type'] == 'ASC' || $dev['type'] == 'PGA') { ?>
-                                          <td><input name="devices[<?php echo $dev['id']; ?>][frequency]" type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" /></td>
+                                          <td>
+                                            <?php if ($dev['frequency']) { ?>
+                                              <input name="devices[<?php echo $dev['id']; ?>][frequency]" type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" />
+                                            <?php } else { ?>
+                                                Unknown
+                                            <?php } ?>
+                                          </td>
                                           <?php } ?>
                                         </tr>
                                     <?php
@@ -269,11 +275,6 @@ if (empty($rigDevices)) {
                                     ?>
                                     </tbody>
                                 </table>
-
-                                <!-- TODO: Remove the 'disabled' state on the revert button below once the user has changed ANY value in the table above -->
-                                <div class="inline-edit-control">
-                                  <button type="button" disabled class="btn btn-warning btn-space" id="btnRevertDevices"><i class="icon icon-undo"></i> Revert Changes</button>
-                                </div>
                             </form>
                         </div><!-- / .panel-body -->
                     </div>
@@ -297,7 +298,7 @@ if (empty($rigDevices)) {
                                 foreach ($rigPools as $pool) {
                                 ?>
                                     <tr data-id="<?php echo $pool['id']; ?>">
-                                        <td><input type="radio" name="poolActive" class="form-control" <?php echo ($pool['active'] == 1) ? 'checked' : ''; ?> /></td>
+                                        <td><input type="checkbox" class="form-control poolActive" <?php echo ($pool['status'] == 1) ? 'checked' : ''; ?> /></td>
                                         <td data-type="url">
                                             <span><?php echo $pool['url']; ?></span>
                                             <input type="hidden" name="pools[<?php echo $pool['id']; ?>][url]" class="form-control" value="<?php echo $pool['url']; ?>" />
@@ -315,44 +316,32 @@ if (empty($rigDevices)) {
                                             <input type="hidden" name="pools[<?php echo $pool['id']; ?>][priority]" class="form-control" value="<?php echo $pool['priority']; ?>" />
                                         </td>
                                         <td>
-                                            <a href="#editPoolConfig" class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a href="#removePoolConfig" class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
+                                            <a class="editPoolConfig"><span class="green"><i class="icon icon-edit"></i></span></a> &nbsp; <a class="removePoolConfig"><span class="red"><i class="icon icon-remove"></i></span></a>
                                             <br />
                                         </td>
                                     </tr>
                                 <?php } ?>
+                                    <tr>
+                                        <td></td>
+                                        <td data-type="url">
+                                            <input type="text" placeholder="Pool URL" name="pools[new][url]" class="form-control" />
+                                        </td>
+                                        <td data-type="user">
+                                            <input type="text" placeholder="Username" name="pools[new][user]" class="form-control" />
+                                        </td>
+                                        <td data-type="password">
+                                            <input type="text" placeholder="Password" name="pools[new][password]" class="form-control" />
+                                        </td>
+                                        <td data-type="priority">
+                                            <input type="text" placeholder="<?php echo count($rigPools); ?>" name="pools[new][priority]" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <a class="addPoolConfig"><span class="blue"><i class="icon icon-save-floppy"></i></span></a>
+                                            <br />
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-primary btn-space" id="btnAddPool"><i class="icon icon-plus-sign"></i> Add New Pool</button>
-                            <div id="addNewPool" class="add-new-wrapper">
-                                    <h3>Add a new pool:</h3>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label">URL</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" data-type="url" placeholder="Pool URL (including port #)" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label">Username/Worker</label>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" data-type="user" placeholder="Username/Worker" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label">Password</label>
-                                        <div class="col-sm-4">
-                                            <input type="password" class="form-control" data-type="password" placeholder="Password" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label">Priority</label>
-                                        <div class="col-sm-2">
-                                            <input type="text" class="form-control" data-type="priority" maxlength="3" placeholder="1" />
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-lg btn-primary" id="btnCancelPool"><i class="icon icon-undo"></i> Cancel</button>
-                                    <button type="button" class="btn btn-lg btn-success" id="btnSavePool"><i class="icon icon-plus-sign"></i> Add New Pool</button>
-                                    <br><br>
-                            </div><!-- end add-new-pool-wrapper -->
                         </form>
                         </div><!-- / .panel-body -->
                     </div>

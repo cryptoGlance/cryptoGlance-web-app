@@ -25,7 +25,7 @@ class Pools_Ckpool extends Pools_Abstract {
             // Data Order
             $data['type'] = $this->_type;
 
-            $data['user_hashrate5m'] = formatHashrate($poolData['user']['u_hashrate5m']/1000);
+            $data['user_hashrate'] = formatHashrate($poolData['user']['u_hashrate5m']/1000);
             $data['pool_hashrate'] = formatHashrate($poolData['user']['p_hashrate5m']/1000);
 
             for ($i=0; $poolData['workers']['rows'] > $i; $i++) {

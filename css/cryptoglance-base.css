@@ -111,6 +111,7 @@ a, a:visited, a:hover, a i, a:hover i {
   -ms-transition: color 300ms ease-in-out !important;
   -o-transition: color 300ms ease-in-out !important;
   transition: color 300ms ease-in-out !important;
+  cursor: pointer;
 }
 
 a, a:visited {
@@ -578,7 +579,11 @@ input.form-control, select.form-control, textarea.form-control, .modal-body inpu
   margin: 13px 0px 10px;
 }
 
-.wallet-inline-edit input.form-control {
+.table-pools td a {
+    cursor: pointer;
+}
+.table-pools input.form-control,
+.table-wallet input.form-control {
   font-size: 18px;
   padding: 0 5px;
   height: auto;
