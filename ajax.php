@@ -15,10 +15,10 @@ if (isset($_GET['cached']) && $_GET['cached'] == 0) {
 $GLOBALS['cached'] = $CACHED;
 
 $type = (!empty($_GET['type']) ? $_GET['type'] : $_POST['type']);
-$type = str_replace(' ', '', lcfirst(ucfirst(str_replace('-', ' ', strtolower($type)))));
-
 $action = (!empty($_GET['action']) ? $_GET['action'] : $_POST['action']);
-$action = str_replace(' ', '', lcfirst(ucfirst(str_replace('-', ' ', strtolower($action)))));
+
+$type = str_replace(' ', '', lcfirst(ucwords(str_replace('-', ' ', strtolower($type)))));
+$action = str_replace(' ', '', lcfirst(ucwords(str_replace('-', ' ', strtolower($action)))));
 
 // If we're not posting, it's a get function
 if (empty($_POST)) {

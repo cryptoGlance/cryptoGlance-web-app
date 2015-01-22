@@ -68,15 +68,15 @@ class Config_Rigs extends Config_Abstract {
                 return 'Warning setting <b>cannot</b> be a higher value than your danger setting.';
             }
         } else if ($dataType == 'pools') {
-            if (empty($data['new']['url'])) {
+            if (empty($data['url'])) {
                 header("HTTP/1.0 406 Not Acceptable"); // not accepted
                 return 'Pool requires a URL to connect to!';
-            } else if (empty($data['new']['user'])) {
+            } else if (empty($data['user'])) {
                 header("HTTP/1.0 406 Not Acceptable"); // not accepted
                 return 'Pools require some sort of username. Either an coin address or a username/worker.';
-            } else if (empty($data['new']['password'])) {
+            } else if (empty($data['password'])) {
                 header("HTTP/1.0 406 Not Acceptable"); // not accepted
-                return 'Use atleast 1 character for a password. For example: "x".';
+                return 'Please enter the password of this user.';
             }
         }
 
@@ -96,12 +96,12 @@ class Config_Rigs extends Config_Abstract {
     }
 
     public function create() {
-        $isValid = $this->postValidate(array('details' => $_POST));
+        $isValid = $this->postValidate('details', $_POST);
         if ($isValid !== true) {
             return $isValid;
         }
 
-        $isUnique = $this->isUnique(array('details' => $_POST));
+        $isUnique = $this->isUnique('details', $_POST);
         if ($isUnique !== true) {
             return $isUnique;
         }
@@ -171,19 +171,6 @@ class Config_Rigs extends Config_Abstract {
         $this->_data[$id]['settings'] = array_replace_recursive($this->_data[$id]['settings'], $data);
 
         $this->write();
-
-        return true;
-    }
-
-    private function updatePools($id, $dataType, $data) {
-        // Validate post
-        $isValid = $this->postValidate($dataType, $data);
-        if ($isValid !== true) {
-            return $isValid;
-        }
-
-        // TO-DO: Eventually we will want some kind of profile... For now, just apply the pool to the rig
-
 
         return true;
     }

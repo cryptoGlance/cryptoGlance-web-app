@@ -1,22 +1,58 @@
 
-    [ v2.0.0.4xx-nightly ]
+    [ v2.0.0.482-nightly ]
 
     FEATURES
     ========
-    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
     - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
+
+    HOTFIXES
+    ========
+    - Rewrote all Wallet handling + UI Updates
+    - If rig update time > 3 seconds, Rig summary would take an extended amount of time to appear
+    - Editing pool with URL field did not save
+    - Updated Rigs Pool page. Usability was greatly improved. Added ability to enable/disable pools.
+    - If no frequency is found for a device, it displays "Unknown" and is not changeable.
+    - [-COIN] Continuum - This coin is no longer being developed
+
+    KNOWN ISSUES
+    ========
+    - Rig device settings do not save
+    - Prioritizing rig pools does not work
+    - Wallets can take a long time to load
+
+---
+
+    [ v2.0.0.470-nightly ]
+
+    HOTFIXES
+    ========
+    - Change CkPool to require username and api key
+    - Updated Eligius URL to point to user stats page for more convience
+    - Updated Rig Pools to add/edit/remove pools
+    - Added more checks to the update functionality
+
+---
+
+    [ v2.0.0.464-nightly ]
+
+    FEATURES
+    ========
+    - Auto-Restart on BITMAIN asic failure (chain contains "x" instead of "0")
+    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
+    - [+POOL] CkPool | Note: This pool doesn't have a real API and might break once they update it
 
     HOTFIXES
     ========
     - [-POOL] TradeMyBit was removed. This pool has shut down.
 
-    KNOWN ISSUES
+---
+
+    [ v2.0.0.458-nightly ]
+
+    HOTFIXES
     ========
-    - Wallet information creating/editing/deleting is wonky
-    - If rig update time > 3 seconds, Rig summary will take an extended amount of time to appear
-    - Rig device settings cannot be modified
-    - Adding pools to a rig does not save
-    - Editing pool details does not work
+    - Fixed an issue that occurs when adding [POOL] Bitcoin Affiliate Network
+    - Fixed issue with API calls when connection to a pool fails.
 
 ---
 

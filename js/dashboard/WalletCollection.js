@@ -46,13 +46,10 @@
     })
   }
 
-  WalletCollection.prototype.update = function (cached) {
+  WalletCollection.prototype.update = function () {
     var _self = this
-
-    cached = typeof cached !== 'undefined' ? cached : 1;
-    if (cached == 0)  {
-        _self.apiData.cached = 0;
-    }
+    
+    _self.apiData.cached = 0;
 
     _self._getData(function (wallets) {
         _self._update(wallets)

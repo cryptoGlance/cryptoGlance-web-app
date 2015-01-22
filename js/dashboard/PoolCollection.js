@@ -58,9 +58,6 @@
     var _self = this // caching self ref for passing down in scope
 
     this.collection.forEach(function (pool, index) {
-        // console.log(pool);
-        // console.log(index);
-        // console.log('-----------');
       pool.update(pools[index])
     })
     this.ready = true

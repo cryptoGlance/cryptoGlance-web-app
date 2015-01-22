@@ -12,6 +12,7 @@ class Miners_Cgminer extends Miners_Abstract {
     // Data
     protected $_summary = array();
     protected $_devs = array();
+    protected $_eStats = array();
     protected $_pools = array();
 
     // Common Data
@@ -215,6 +216,14 @@ class Miners_Cgminer extends Miners_Abstract {
         return $this->cmd('{"command":"switchpool","parameter":"'. $poolId .'"}');
     }
 
+    public function enablePool($poolId) {
+        return $this->cmd('{"command":"enablepool","parameter":"'. $poolId .'"}');
+    }
+
+    public function disablePool($poolId) {
+        return $this->cmd('{"command":"disablepool","parameter":"'. $poolId .'"}');
+    }
+
     public function removePool($poolId) {
         return $this->cmd('{"command":"removepool","parameter":"'. $poolId .'"}');
     }
@@ -223,16 +232,17 @@ class Miners_Cgminer extends Miners_Abstract {
         if (count($values) > 3) {
             array_splice($values, 3);
         }
+
         return $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
     }
 
     public function editPool($poolId, $values) {
         $poolPriority = end($values);
-
+        array_pop($values);
         $this->removePool($poolId);
         $this->addPool($values);
+        $this->fetchPools(); // Update our collection of pools
         $this->prioritizePools($poolPriority, null);
-
         return;
     }
 
@@ -270,6 +280,15 @@ class Miners_Cgminer extends Miners_Abstract {
         $this->getActivePool();
 
         return $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $poolIdCollection) .'"}');
+    }
+
+
+    public function enableDevice($devType, $devId) {
+        return $this->cmd('{"command":"'.$devType.'enable","parameter":"'. $devId .'"}');
+    }
+
+    public function disableDevice($devType, $devId) {
+        return $this->cmd('{"command":"'.$devType.'disable","parameter":"'. $devId .'"}');
     }
 
     public function resetStats() {
@@ -522,7 +541,8 @@ class Miners_Cgminer extends Miners_Abstract {
     }
     private function fetchDeviceDetails() {
         $eStats = json_decode($this->cmd('{"command":"estats","parameter":1}'), true);
-        $eStats = $eStats['STATS'];
+        $eStats = (is_array($eStats['STATS']) ? $eStats['STATS'] : array());
+        $this->_eStats = $eStats;
 
         // Add device details to dev data
         foreach ($this->_devs as $dKey => $dev) {
@@ -564,5 +584,21 @@ class Miners_Cgminer extends Miners_Abstract {
         $pools = json_decode($this->cmd('{"command":"pools"}'), true);
         $this->_pools = $pools['POOLS'];
         $this->getActivePool();
+    }
+
+
+    /* Private functions for independant product types. EG: Bitmain */
+    public function _checkBitmain() {
+        if (!empty($this->_eStats)) {
+            foreach ($this->_eStats as $eStats) {
+                // if a bitmain asic has an 'x' in it's data, that means an asic chip has failed
+                // and we will restart it automatically
+                for ($i=1; $eStats['miner_count'] >=$i; $i++) {
+                    if (strpos($eStats['chain_acs'.$i], 'x') !== false) {
+                        $this->restart();
+                    }
+                }
+            }
+        }
     }
 }

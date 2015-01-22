@@ -42,14 +42,15 @@
 
       _self.apiData = { type: 'rigs', action: 'update' }
 
-      _self._update()
+      _self._update() // Populate all devices in the collection
+      _self._update() // Build out summary stats
 
       /*==========  Setup polling  ==========*/
       setInterval(function () {
         if (_self._ready) {
           _self._rigsResponded = 0
           _self._ready = false
-          _self._update()
+          _self._update() // Update both devices and summary stats
         }
       }, root.rigUpdateTime)
     })

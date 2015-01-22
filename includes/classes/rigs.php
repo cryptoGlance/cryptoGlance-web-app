@@ -25,26 +25,43 @@ class Rigs extends Config_Rigs {
 
         return $result;
     }
-
     public function addPool() {
-        $poolValues = $_POST['values'];
-        $result = $this->_objs[0]->addPool($poolValues);
-        if (!empty($poolValues[3])) {
-            $result = $this->_objs[0]->prioritizePools($poolValues[3], null);
+        $isValid = $this->postValidate('pools', $_POST['values']);
+        if ($isValid !== true) {
+            return $isValid;
         }
 
+        $result = $this->_objs[0]->addPool($_POST['values']);
         return $result;
     }
-
     public function editPool() {
-        $result = $this->_objs[0]->editPool($_POST['poolId'], $_POST['values']);
+        $isValid = $this->postValidate('pools', $_POST['values']);
+        if ($isValid !== true) {
+            return $isValid;
+        }
 
+        $result = $this->_objs[0]->editPool($_POST['poolId'], $_POST['values']);
         return $result;
     }
-
     public function removePool() {
         $result = $this->_objs[0]->removePool($_POST['poolId']);
+        return $result;
+    }
+    public function changePoolStatus() {
+        if ($_POST['active'] == 'true') {
+            $result = $this->_objs[0]->enablePool($_POST['poolId']);
+        } else {
+            $result = $this->_objs[0]->disablePool($_POST['poolId']);
+        }
+        return $result;
+    }
 
+    public function changeDeviceStatus() {
+        if ($_POST['enable'] == 'true') {
+            $result = $this->_objs[0]->enableDevice(strtolower($_POST['devType']), $_POST['devId']);
+        } else {
+            $result = $this->_objs[0]->disableDevice(strtolower($_POST['devType']), $_POST['devId']);
+        }
         return $result;
     }
 
