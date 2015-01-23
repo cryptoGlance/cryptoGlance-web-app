@@ -25,7 +25,6 @@ class Miners_Cgminer extends Miners_Abstract {
     // Version Handling
     protected $_shareTypePrefix = ''; // This will set shares to 'Difficulty Accepted' or just 'Accepted'
 
-
     // PUBLIC
     public function __construct($rig) {
         parent::__construct($rig);
@@ -289,6 +288,33 @@ class Miners_Cgminer extends Miners_Abstract {
 
     public function disableDevice($devType, $devId) {
         return $this->cmd('{"command":"'.$devType.'disable","parameter":"'. $devId .'"}');
+    }
+
+    public function updateDevice($deviceData) {
+        foreach ($deviceData as $devId => $settings) {
+            foreach ($settings as $key => $val) {
+                switch ($key) {
+                    case "frequency":
+                        // Currently no options for frequencies
+                        break;
+                    case "intensity":
+                        $this->cmd('{"command":"gpuintensity","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "fan_percent":
+                        $this->cmd('{"command":"gpufan","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "engine_clock":
+                        $this->cmd('{"command":"gpuengine","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "memory_clock":
+                        $this->cmd('{"command":"gpumem","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "gpu_voltage":
+                        $this->cmd('{"command":"gpuvddc","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                }
+            }
+        }
     }
 
     public function resetStats() {

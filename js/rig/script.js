@@ -308,9 +308,14 @@
             setTimeout(function() {
                 $(btnIcon).removeClass('ajax-saver');
 
+                var successMsg = '<b>Saved!</b><br />Your settings have successfully been saved.';
+                if ($('#rigDetails .nav-pills .active a').attr('href') == '#devices') {
+                    successMsg = '<b>Saved!</b><br />Attempted to save new device settings.<br />Some devices do not allow settings to be changed.';
+                }
+
                 $().toastmessage('showToast', {
                     sticky  : false,
-                    text    : '<b>Saved!</b><br />Your settings have successfully been saved.',
+                    text    : successMsg,
                     type    : 'success'
                 });
             }, 500);

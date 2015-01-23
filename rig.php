@@ -263,7 +263,7 @@ if (empty($rigDevices)) {
                                           <?php } else if ($dev['type'] == 'ASC' || $dev['type'] == 'PGA') { ?>
                                           <td>
                                             <?php if ($dev['frequency']) { ?>
-                                              <input name="devices[<?php echo $dev['id']; ?>][frequency]" type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" />
+                                              <input name="devices[<?php echo $dev['id']; ?>][frequency]" type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" disabled="disabled" />
                                             <?php } else { ?>
                                                 Unknown
                                             <?php } ?>

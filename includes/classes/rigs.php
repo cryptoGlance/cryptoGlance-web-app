@@ -65,6 +65,12 @@ class Rigs extends Config_Rigs {
         return $result;
     }
 
+    public function updateDevices() {
+        if ($_POST['devices']) {
+            return $this->_objs[0]->updateDevice($_POST['devices']);
+        }
+    }
+
     public function resetStats() {
         $this->_objs[0]->resetStats();
     }
