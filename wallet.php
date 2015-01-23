@@ -44,7 +44,7 @@ if ($id != 0) {
             </div>
             <div class="panel-body">
                 <div class="total-wallet-balance">
-                    <span class="green"><?php echo $wallet['currency_balance'] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['currency_code'] ?></span> <span>//</span> <span class="blue"><?php echo $wallet['fiat_balance'] ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code'] ?></span> <span>//</span>  <span class="blue"><?php echo $wallet['coin_balance'] ?> <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code'] ?></span>
+                    <span class="green"><?php echo $wallet['currency_balance'] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['currency_code'] ?></span> <span>//</span> <span class="blue"><?php echo $wallet['fiat_balance'] ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code'] ?></span> <?php if (strtolower($wallet['currency_code']) !== 'btc') { ?><span>//</span>  <span class="blue"><?php echo $wallet['coin_balance'] ?> <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code'] ?></span> <?php } ?>
                 </div>
                 <div class="table-responsive">
                     <form role="form">
@@ -87,7 +87,7 @@ if ($id != 0) {
                         </table>
                     </form>
                 </div>
-            </div><!-- / .panel-body -->
+            </div>
         </div>
         <?php } ?>
 
