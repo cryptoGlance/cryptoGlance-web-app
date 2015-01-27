@@ -194,7 +194,7 @@ class Miners_Cgminer extends Miners_Abstract {
     public function pools() {
         $pools = array();
         foreach ($this->_pools as $pool) {
-            $pools[] = array(
+            $pools[$pool['Priority']] = array(
                 'id' => $pool['POOL'],
                 'status' => ($pool['Status'] == 'Alive') ? 1 : 0,
                 'active' => ($pool['POOL'] == $this->_activePool['id']) ? 1 : 0,
@@ -203,6 +203,8 @@ class Miners_Cgminer extends Miners_Abstract {
                 'priority' => $pool['Priority'],
             );
         }
+
+        ksort($pools);
 
         return $pools;
     }
@@ -228,57 +230,48 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     public function addPool($values) {
-        if (count($values) > 3) {
-            array_splice($values, 3);
-        }
-
-        return $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
-    }
-
-    public function editPool($poolId, $values) {
         $poolPriority = end($values);
         array_pop($values);
-        $this->removePool($poolId);
-        $this->addPool($values);
-        $this->fetchPools(); // Update our collection of pools
-        $this->prioritizePools($poolPriority, null);
+        $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
+
+        // Now prioritize
+        $this->fetchPools();
+        $pools = $this->_pools;
+        $currentPool = end($pools);
+        $poolId = $currentPool['POOL'];
+
+        $this->prioritizePools($poolPriority, $poolId);
+
         return;
     }
 
-    public function prioritizePools($poolPriority, $poolId = null) {
+    public function editPool($poolId, $values) {
+        $this->removePool($poolId);
+        $this->addPool($values);
+
+        return;
+    }
+
+    public function prioritizePools($poolPriority, $poolId) {
+        foreach ($this->_pools as $key => $pool) {
+            if ($pool['POOL'] == $poolId) {
+                $this->_pools[$poolId]['Priority'] = $poolPriority;
+                break;
+            }
+        }
+
+        usort($this->_pools, array('Miners_Cgminer','prioritySort'));
+
+        $priorityList = array();
+        foreach ($this->_pools as $key => $pool) {
+            $priorityList[] = $pool['POOL'];
+        }
+
+        $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $priorityList) .'"}');
+
         $this->fetchPools();
-        if (!is_null($poolId)) {
-            foreach ($this->_pools as $pKey => $pool) {
-                if ($pool['POOL'] == $poolId) {
-                    $poolIndex = $pKey;
-                    break;
-                }
-            }
-        } else {
-            $pools = $this->_pools;
-            end($pools);
-            $poolIndex = key($pools);
-        }
 
-        $newPools = array();
-        $poolIdCollection = array();
-        foreach ($this->_pools as $pKey => $pool) {
-            if ($pKey == $poolIndex) {
-                continue;
-            } else {
-                if ($pKey == $poolPriority) {
-                    $newPools[] = $this->_pools[$poolIndex];
-                    $poolIdCollection[] = $this->_pools[$poolIndex]['POOL'];
-                }
-                $newPools[] = $pool;
-                $poolIdCollection[] = $pool['POOL'];
-            }
-        }
-
-        $this->_pools = $newPools;
-        $this->getActivePool();
-
-        return $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $poolIdCollection) .'"}');
+        return;
     }
 
 
@@ -614,7 +607,7 @@ class Miners_Cgminer extends Miners_Abstract {
 
 
     /* Private functions for independant product types. EG: Bitmain */
-    public function _checkBitmain() {
+    private function _checkBitmain() {
         if (!empty($this->_eStats)) {
             foreach ($this->_eStats as $eStats) {
                 // if a bitmain asic has an 'x' in it's data, that means an asic chip has failed
@@ -626,5 +619,10 @@ class Miners_Cgminer extends Miners_Abstract {
                 }
             }
         }
+    }
+
+    /* Private functions for things such as sorting */
+    private function prioritySort($a,$b) {
+        return ($a['Priority'] < $b['Priority']) ? -1 : 1;
     }
 }
