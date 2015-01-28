@@ -7,7 +7,7 @@
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
          <div class="container">
             <div class="navbar-header">
-               <a class="navbar-brand" href="index.php"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
+               <a class="navbar-brand" href="index.php"><img src="images/logo-landscape.png" alt="cryptoGlance" /></a>
             </div>
          </div>
       </div>

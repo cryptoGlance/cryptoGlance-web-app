@@ -19,46 +19,17 @@ if (isset($_POST['general'])) {
     $data = array(
         'update' => intval($updatesEnabled),
         'updateType' => $_POST['updateType'],
-        'tempWarning' => intval($_POST['tempWarning']),
-        'tempDanger' => intval($_POST['tempDanger']),
-        'hwErrorsEnabled' => intval($hwErrorsEnabled),
-        'hwWarning' => intval($_POST['hwWarning']),
-        'hwDanger' => intval($_POST['hwDanger']),
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
     );
-    
-// not ready
-//    if ($data['tempWarning'] <= 0) {
-//        $errors['tempWarning'] = true;
-//    }
-//    if ($data['tempDanger'] <= 0 && $data['tempDanger'] <= $data['tempWarning']) {
-//        $errors['tempDanger'] = true;
-//    }
-//    if ($data['hwWarning'] <= 0) {
-//        $errors['hwWarning'] = true;
-//    }
-//    if ($data['hwDanger'] <= 0 && $data['hwDanger'] <= $data['hwWarning']) {
-//        $errors['hwDanger'] = true;
-//    }
-//    if ($data['rigUpdateTime'] < 2) {
-//        $errors['rigUpdateTime'] = true;
-//    }
-//    if ($data['poolUpdateTime'] < 120) {
-//        $errors['poolUpdateTime'] = true;
-//    }
-//    if ($data['walletUpdateTime'] < 600) {
-//        $errors['walletUpdateTime'] = true;
-//    }
-// end not ready
-    
+
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
     $cryptoGlance = new CryptoGlance();
     $settings = $cryptoGlance->getSettings();
 } else if (isset($_POST['email'])) {
     $data = array();
-    
+
     // do stuff
 
     $emailSaveResult = $cryptoGlance->saveSettings(array('email' => $data));
@@ -68,59 +39,23 @@ $jsArray = array('settings');
 
 require_once("includes/header.php");
 ?>
-       
-<!-- ### Below is the Settings page which contains common/site-wide preferences
-      
--->
-         
+
       <div id="settings-wrap" class="container sub-nav full-content">
         <div id="settings" class="panel panel-default panel-no-grid no-icon">
-          <h1>Settings</h1>
+          <h1>CryptoGlance Settings</h1>
           <div class="panel-heading">
               <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> General</h2>
           </div>
           <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST">
               <fieldset>
-                <h3>Temperature Thresholds:</h3>                
-                <div class="form-group setting-thresholds setting-temperature">
-                  <div class="setting-warning orange">
-                    <input type="text" class="form-control" id="inputTempWarning" name="tempWarning" value="<?php echo $settings['general']['temps']['warning'] ?>" placeholder="<?php echo $settings['general']['temps']['warning'] ?>" maxlength="3">
-                    <span>&deg;C</span>
-                    <label for="inputTempWarning" class="control-label">Warning</label>
-                  </div>
-                  <div class="setting-danger red">
-                    <input type="text" class="form-control" id="inputTempDanger" name="tempDanger" value="<?php echo $settings['general']['temps']['danger'] ?>" placeholder="<?php echo $settings['general']['temps']['danger'] ?>" maxlength="3">
-                    <span>&deg;C</span>
-                    <label for="inputTempDanger" class="control-label">Danger</label>
-                  </div>
-                </div>
-                <span class="help-block"><i class="icon icon-info-sign"></i> Set the points where <span class="orange">warning</span> and <span class="red">danger</span> labels will appear (<span class="red">danger</span> must be greater than <span class="orange">warning</span>).</span>
-                <h3>HW Error Thresholds:</h3>               
-                <div class="form-group checkbox">
-                  <label>
-                    <input type="checkbox" name="hwErrorsEnabled" <?php echo ($settings['general']['hardwareErrors']['enabled']) ? 'checked' : '' ?>>
-                    Enable Hardware Error Reporting
-                  </label>
-                </div>
-                <div class="form-group setting-hwerror">
-                  <div class="setting-hw-errors setting-thresholds">
-                    <div class="setting-warning orange">
-                      <input type="text" class="form-control" id="inputHWErrWarning" name="hwWarning" value="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['warning'] ?>" maxlength="2">
-                      <label for="inputHWErrWarning" class="control-label">Warning</label>
-                    </div>
-                    <div class="setting-danger red">
-                      <input type="text" class="form-control" id="inputHWErrDanger" name="hwDanger" value="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" placeholder="<?php echo $settings['general']['hardwareErrors']['danger'] ?>" maxlength="2">
-                      <label for="inputHWErrDanger" class="control-label">Danger</label>
-                    </div>
-                  </div>
-                  <span class="help-block"><i class="icon icon-info-sign"></i> Set the count of hardware errors that will trigger each status.</span>
-                </div>
-                <h3>Stat Refresh Intervals:</h3>                
+                <h3>Stat Refresh Intervals:</h3>
                 <div class="form-group">
                   <label class="col-sm-5 control-label">Rigs:</label>
                   <div class="col-sm-3 refresh-interval">
                     <select class="form-control" name="rigUpdateTime">
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 1000) ? 'selected="selected"' : '' ?> value="1">1 second</option>
+                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 2000) ? 'selected="selected"' : '' ?> value="2">2 seconds</option>
                       <option <?php echo ($settings['general']['updateTimes']['rig'] == 3000) ? 'selected="selected"' : '' ?> value="3">3 seconds</option>
                       <option <?php echo ($settings['general']['updateTimes']['rig'] == 5000) ? 'selected="selected"' : '' ?> value="5">5 seconds</option>
                       <option <?php echo ($settings['general']['updateTimes']['rig'] == 7000) ? 'selected="selected"' : '' ?> value="3">7 seconds</option>
@@ -156,11 +91,11 @@ require_once("includes/header.php");
                     </select>
                   </div>
                 </div>
-                <h3>App Updates:</h3>                
+                <h3>App Updates:</h3>
                 <div class="form-group">
                   <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="update" <?php echo ($settings['general']['updates']['enabled']) ? 'checked' : '' ?>>
+                    <input id="enableUpdates" type="checkbox" name="update" <?php echo ($settings['general']['updates']['enabled']) ? 'checked' : '' ?>>
+                    <label for="enableUpdates">
                       Enable cryptoGlance Updates
                     </label>
                   </div>
@@ -189,7 +124,7 @@ require_once("includes/header.php");
                     <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
                   </div>
                 </div>
-                <div class="form-group"></div>
+                <hr />
                 <div class="form-group">
                   <div class="col-sm-12">
                     <button type="submit" name="general" value="general" class="btn btn-lg btn-success"><i class="icon icon-save-floppy"></i> Save General Settings</button>
@@ -197,11 +132,14 @@ require_once("includes/header.php");
                 </div>
               </fieldset>
             </form>
-            <br>
           </div>
-          <div class="panel-heading">
-              <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> Cookies</h2>
-          </div>
+        </div>
+
+        <div id="cookies" class="panel panel-default panel-no-grid no-icon">
+            <h1>Browser Settings</h1>
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="icon icon-settingsandroid"></i> Cookies</h2>
+            </div>
           <div class="panel-body">
             <form class="form-horizontal" role="form">
               <fieldset>
@@ -221,7 +159,7 @@ require_once("includes/header.php");
 
       <?php require_once("includes/footer.php"); ?>
       <!-- /page-container -->
-      
+
       <?php require_once("includes/scripts.php"); ?>
    </body>
 </html>

@@ -7,6 +7,7 @@ class Pools_Simplecoin extends Pools_Abstract {
 
     // Pool Information
     protected $_apiKey;
+    protected $_type = 'simplecoin';
     
     // api calls to make
     protected $_actions = array(
@@ -17,35 +18,18 @@ class Pools_Simplecoin extends Pools_Abstract {
         parent::__construct($params);
         $this->_apiKey = $params['apikey'];
         $this->_actions[] = $this->_apiKey;
-        $this->_fileHandler = new FileHandler('pools/simplecoin/'. $params['apikey'] .'.json');
+        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['apikey']) .'.json');
     }
 
     public function update() {
-        if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
+        if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData = array();
             foreach ($this->_actions as $action) {
-                $curl = curl_init($this->_apiURL  . '/api/'. $action);
-                
-                curl_setopt($curl, CURLOPT_FAILONERROR, true);
-                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-                curl_setopt($curl, CURLOPT_SSLVERSION, 3);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-                curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
-                
-                $poolData[$action] = array();
-                $poolData[$action] = json_decode(curl_exec($curl), true);
-                curl_close($curl);
+                $poolData[$action] = curlCall($this->_apiURL  . '/api/'. $action);
             }
-                
-            // Math Stuffs
-            $units = array('KH', 'MH', 'GH', 'TH'); 
-            $units2 = array('MH', 'GH', 'TH'); 
             
             // Data Order
-            $data['type'] = 'simplecoin';
+            $data['type'] = $this->_type;
             
             $data['total_paid'] = (!empty($poolData[$this->_apiKey]['total_paid']) ? $poolData[$this->_apiKey]['total_paid']/100000000 : 0);
             
@@ -53,13 +37,9 @@ class Pools_Simplecoin extends Pools_Abstract {
             $data['unconfirmed_balance'] = (!empty($poolData[$this->_apiKey]['unconfirmed_balance']) ? $poolData[$this->_apiKey]['unconfirmed_balance']/100000000 : 0);
             $data['estimated_round_payout'] = (!empty($poolData[$this->_apiKey]['est_round_payout']) ? number_format($poolData[$this->_apiKey]['est_round_payout'], 8) : 0);
             
-            $pow = min(floor(($poolData['pool_stats']['hashrate'] ? log($poolData['pool_stats']['hashrate']) : 0) / log(1000)), count($units) - 1);
-            $poolData['pool_stats']['hashrate'] /= pow(1000, $pow);
-            $data['pool_hashrate'] = round($poolData['pool_stats']['hashrate'], 2) . ' ' . $units[$pow] . '/s';
+            $data['pool_hashrate'] = formatHashrate($poolData['pool_stats']['hashrate']);
 
-            $pow = min(floor(($poolData[$this->_apiKey]['last_10_hashrate'] ? log($poolData[$this->_apiKey]['last_10_hashrate']) : 0) / log(1000)), count($units2) - 1);
-            $poolData[$this->_apiKey]['last_10_hashrate'] /= pow(1000, $pow);
-            $data['user_hashrate'] = round($poolData[$this->_apiKey]['last_10_hashrate'], 2) . ' ' . $units2[$pow] . '/s';
+            $data['user_hashrate'] = formatHashrate($poolData[$this->_apiKey]['last_10_hashrate'] * 1000);
             
             $data['pool_workers'] = $poolData['pool_stats']['workers'];
 
@@ -89,6 +69,7 @@ class Pools_Simplecoin extends Pools_Abstract {
             $data['url'] = $this->_apiURL;
             
             $this->_fileHandler->write(json_encode($data));
+            
             return $data;
         }
         

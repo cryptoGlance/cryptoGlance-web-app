@@ -7,6 +7,7 @@ class Pools_Eclipse extends Pools_Abstract {
 
     // Pool Information
     protected $_apiKey;
+    protected $_type = 'eclipse';
     
     // api calls to make
     protected $_actions = array(
@@ -18,35 +19,18 @@ class Pools_Eclipse extends Pools_Abstract {
         parent::__construct(array('apiurl' => 'https://eclipsemc.com'));
         // https://eclipsemc.com
         $this->_apiKey = $params['apikey'];
-        $this->_fileHandler = new FileHandler('pools/eclipse/'. $params['apikey'] .'.json');
+        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['apikey']) .'.json');
     }
 
     public function update() {
-        if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 60) { // updates every minute
+        if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData = array();
             foreach ($this->_actions as $action) {
-                $curl = curl_init($this->_apiURL  . '/api.php?key='.$this->_apiKey.'&action='. $action);
-                
-                curl_setopt($curl, CURLOPT_FAILONERROR, true);
-                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-                curl_setopt($curl, CURLOPT_SSLVERSION, 3);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-                curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
-                
-                $poolData[$action] = array();
-                $poolData[$action] = json_decode(curl_exec($curl), true);
-                curl_close($curl);
+                $poolData[$action] = curlCall($this->_apiURL  . '/api.php?key='.$this->_apiKey.'&action='. $action);
             }
-                
-            // Math Stuffs
-            $units = array('KH', 'MH', 'GH', 'TH'); 
-            $units2 = array('MH', 'GH', 'TH'); 
             
             // Data Order
-            $data['type'] = 'eclipse';
+            $data['type'] = $this->_type;
             
             $data['total_sent'] = $poolData['userstats']['data']['user']['total_payout'];
             $data['balance'] = $poolData['userstats']['data']['user']['confirmed_rewards'];
@@ -69,15 +53,13 @@ class Pools_Eclipse extends Pools_Abstract {
                 }
             }
             
-            $pow = min(floor(($data['user_hashrate'] ? log($data['user_hashrate']) : 0) / log(1000)), count($units2) - 1);
-            $data['user_hashrate'] /= pow(1000, $pow);
-            $data['user_hashrate'] = round($data['user_hashrate'], 2) . ' ' . $units2[$pow] . '/s';
+            $data['user_hashrate'] = formatHashRate($data['user_hashrate']*1000);
             
             $data['pool_workers'] = $poolData['poolstats']['active_workers'];
             
             // how to get active user workers and total hashrate?
-            
-            $data['time_since_last_block'] = date('H\H i\M s\S', strtotime('t'.$poolData['poolstats']['round_duration'])); // how to format? 00:52:44
+            $data['time_since_last_block'] = $poolData['poolstats']['round_duration']; // Would love to format this one day
+//            $data['time_since_last_block'] = formatTimeElapsed(); // how to format? 00:52:44
             
             $data['url'] = $this->_apiURL;
             

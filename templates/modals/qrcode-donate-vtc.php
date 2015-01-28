@@ -7,7 +7,7 @@
             <h2><i class="icon icon-value-coins"></i> Donate Vertcoin</h2>
          </div>
          <div class="modal-body">
-            <img src="images/qr-donate-vtc.png" alt="Vertcoin QRCode (CryptoGlance Donations)" />
+            <img src="images/qr/donate-vtc.png" alt="Vertcoin QRCode (CryptoGlance Donations)" />
             <p>The CryptoGlance team greatly appreciates any amount of Vertcoin that you are able to donate. It really helps us to continue development!</p>
             <h3>Our Vertcoin Address</h3>
             <p class="modal-donate-address">Vp9izfX1kM3BqGADtvan1Et5nBiU1s32Zp</p>
