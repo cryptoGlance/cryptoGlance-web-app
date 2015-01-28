@@ -277,7 +277,7 @@
         });
     });
 
-    $( "#rigDetails .table-pools tbody" ).sortable({
+    $('#rigDetails .table-pools tbody').sortable({
         items: 'tr:not(:last)',
         placeholder: "placeholder",
         opacity: 0.75,
@@ -288,9 +288,30 @@
         scroll: true,
         scrollSensitivity: 100,
         update: function(event, ui) {
-            // var cooked = [];
-            // $("#dashboard-wrap:not(.login-container)").each(function(index, domEle){ cooked[index]=  $(domEle).sortable('toArray');});
-            // $.cookie('cookie_dashboard_layout', 'x'+cooked.join('|'), { expires: 365, path: '/'});
+            var ridId = $('#rig-wrap').attr('data-rigId');
+            var poolId = ui.item[0].dataset.id;
+            var newPriority = $(ui.item[0]).index();
+
+            $.ajax({
+                type: 'post',
+                data: {
+                    id: ridId,
+                    type: 'rigs',
+                    action: 'prioritize-pool',
+                    poolId: poolId,
+                    priority: newPriority
+                },
+                url: 'ajax.php',
+                dataType: 'json'
+            })
+            .done(function (data) {
+                $('#rigDetails .table-pools tbody tr').each(function(k, v) {
+                    $(this).find('td[data-type="priority"] span').text(k);
+                    $(this).find('td[data-type="priority"] input').val(k);
+                });
+            });
+
+            $('#rigDetails .table-pools tbody').enableSelection();
         }
     }).disableSelection();
 

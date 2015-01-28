@@ -254,8 +254,11 @@ class Miners_Cgminer extends Miners_Abstract {
 
     public function prioritizePools($poolPriority, $poolId) {
         foreach ($this->_pools as $key => $pool) {
+            if ($pool['Priority'] == $poolPriority) {
+                $this->_pools[$key]['Priority']++;
+            }
             if ($pool['POOL'] == $poolId) {
-                $this->_pools[$poolId]['Priority'] = $poolPriority;
+                $this->_pools[$key]['Priority'] = $poolPriority;
                 break;
             }
         }
