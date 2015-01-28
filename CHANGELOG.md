@@ -1,172 +1,60 @@
 
-    [ v2.0.0.488-nightly ]
+    [ v2.0.0.489-beta ]
 
     FEATURES
     ========
-    - Ability to drag+drop pool priority
+    - Total Hashrates are now categorized by Rig Algorithms used
+    - Enable/Disable Total Hashrate via Tools dropdown
+    - New ability to edit Rigs and Pools
+    - Re-amped Rig summary and device details (percentages, etc)
+    - New Rig Details - Cleaner interface
+    - Ability to drag+drop pool priority for a rig
+    - Auto-Restart on BITMAIN asic failure (chain contains "x" instead of "0")
+    - Rig devices have two more types of details showing:
+      BITMAIN Asic fan speed (fan 1, fan 2, fan 3, etc)
+      BITMAIN Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
+    - Rigs have a new option for Algorithm
+    - Rigs Algorithm is auto-set when using sgMiner v5+
+    - Ability to reset rig stats
+    - Ability to reset rig stats on pool change
+    - New FIAT conversions for most coins (Thanks to FunkyC: https://bitcoinindex.es/)
+    - New debug command to see raw miner data: CTRL + D
 
-    HOTFIXES
-    ========
-    - Device settings attempt to save. Mainly a GPU feature as frequencies for asics are almost impossible to do remotely.
+    POOLS
+    =====
+    - [+POOL] Bitcoin Affiliate Network (http://mining.bitcoinaffiliatenetwork.com)
+    - [+POOL] CkPool
+    - [+POOL] Eligius
+    - [+POOL] MagicPool
+    - [+POOL] Multipool.Us
+    - [+POOL] NOMP
 
-    KNOWN ISSUES
-    ========
-    - Pools may not load sometimes
-    - Wallets can take a long time to load
+    COINS
+    =====
+    - [+COIN] NeosCoin
+    - [+COIN] ReddCoin
+    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
 
----
-
-    [ v2.0.0.482-nightly ]
 
     HOTFIXES
     ========
     - Rewrote all Wallet handling + UI Updates
     - If rig update time > 3 seconds, Rig summary would take an extended amount of time to appear
-    - Editing pool with URL field did not save
-    - Updated Rigs Pool page. Usability was greatly improved. Added ability to enable/disable pools.
+    - Updated Rigs Pool page. Usability was greatly improved. Added ability to enable/disable/add/edit/remove pools.
+    - Device settings attempt to save. Mainly a GPU feature as frequencies for asics are almost impossible to do remotely.
     - If no frequency is found for a device, it displays "Unknown" and is not changeable.
-    - [-COIN] Continuum - This coin is no longer being developed
-
----
-
-    [ v2.0.0.470-nightly ]
-
-    HOTFIXES
-    ========
-    - Change CkPool to require username and api key
-    - Updated Eligius URL to point to user stats page for more convience
-    - Updated Rig Pools to add/edit/remove pools
-    - Added more checks to the update functionality
-
----
-
-    [ v2.0.0.464-nightly ]
-
-    FEATURES
-    ========
-    - Auto-Restart on BITMAIN asic failure (chain contains "x" instead of "0")
-    - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
-    - [+POOL] CkPool | Note: This pool doesn't have a real API and might break once they update it
-
-    HOTFIXES
-    ========
-    - [-POOL] TradeMyBit was removed. This pool has shut down.
-
----
-
-    [ v2.0.0.458-nightly ]
-
-    HOTFIXES
-    ========
-    - Fixed an issue that occurs when adding [POOL] Bitcoin Affiliate Network
     - Fixed issue with API calls when connection to a pool fails.
-
----
-
-    [ v2.0.0.455-nightly ]
-
-    FEATURES
-    ========
-    - [+POOL] Bitcoin Affiliate Network (http://mining.bitcoinaffiliatenetwork.com)
-    - Clicking version number in the footer will check for a version update.
-      (This will be formally moved to the Settings page after it gets it's redesign.)
-    - Re-organized a part of the settings page.
-
-    HOTFIXES
-    ========
     - Bumped up code timeout to 2 minutes. This addresses API calls from pools and wallets
-
----
-
-    [ v2.0.0.452-nightly ]
-
-    FEATURES
-    ========
-    - Rig devices have two more types of details showing:
-    - Asic fan speed (fan 1, fan 2, fan 3, etc)
-    - Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
-
-    HOTFIXES
-    ========
-    - Rig ASIC frequency is now available, for cgminer 4.0+ and bitmain devices
-
----
-
-    [ v2.0.0.446-nightly ]
-
-    HOTFIXES
-    ========
-    - Rig Pools can be added/edited/deleted
-
----
-
-    [ v2.0.0.443-nightly ]
-
-    HOTFIXES
-    ========
-    - Corrected Javascript include on Update page
-
----
-
-    [ v2.0.0.438-nightly ]
-
-    FEATURES
-    ========
-    - [+COIN] NeosCoin
-    - Added Rig Update Times 1 second and 2 seconds
-
-    HOTFIXES
-    ========
     - Updated Toast messages to make notices easier to read
-
----
-
-    [ v2.0.0.434-nightly ]
-
-    HOTFIXES
-    ========
     - Settings Page - clicking App Updates red/green button does not work
     - Changelog ICON changed
-
----
-
-    [ v2.0.0.432-nightly ]
-
-    FEATURES
-    ========
-    - Can Enable/Disable Total Hashrate via Tools dropdown
-
-    HOTFIXES
-    ========
-    - [POOL] MPOS network hashrate was incorrect. API returns deca instead of hecto
     - Navigation dropdowns would close while using elements inside it.
+    - [POOL] MPOS network hashrate was incorrect. API returns deca instead of hecto
 
----
-
-    [ v2.0.0.422-nightly ]
-
-    FEATURES
+    KNOWN ISSUES
     ========
-    - Re-amped Rig summary and device details (percentages, etc)
-    - New debug command to see raw miner data: CTRL + D
-    - New ability to edit Rigs and Pools
-    - New functionality to reset rig stats
-    - New functionality to reset rig stats on pool change
-    - New FIAT conversions for most coins (Thanks to FunkyC: https://bitcoinindex.es/)
-    - Rigs have a new option for Algorithm
-    - Rigs Algorithm is auto-set when using sgMiner v5+
-    - Total Hashrates are now categorized by Rig Algorithms used
-    - New Rig Details - Cleaner interface
-    - [+COIN] ReddCoin
-    - [+POOL] NOMP
-    - [+POOL] MagicPool
-    - [+POOL] Multipool.Us
-    - [+POOL] Eligius
-    - [+POOL] TradeMyBit
-
-    HOTFIXES
-    ========
-    - [POOL] MPOS sometimes displayed the wrong information
+    - Pools may not load sometimes
+    - Wallets can take a long time to load
 
 ---
 
