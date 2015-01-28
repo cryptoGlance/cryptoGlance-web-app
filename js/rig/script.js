@@ -105,7 +105,7 @@
       evt.preventDefault()
 
       var $tr = $(this).parents('tr');
-      var $td = $tr.children().slice(1, 5);
+      var $td = $tr.children().slice(2, 6);
 
       $td.each(function(){
         var elmText = $('span', this);
@@ -131,7 +131,7 @@
         var $_self = $(this);
 
         var $tr = $(this).parents('tr');
-        var $inputs = $tr.children().slice(1, 5).find('input');
+        var $inputs = $tr.children().slice(2, 6).find('input');
         var values = {};
         var ridId = $('#rig-wrap').attr('data-rigId');
         var poolId = $tr.attr('data-id');
@@ -175,7 +175,7 @@
         evt.preventDefault();
 
         var $tr = $(this).parents('tr');
-        var $inputs = $tr.children().slice(1, 5).find('input');
+        var $inputs = $tr.children().slice(2, 6).find('input');
         var values = {};
         var ridId = $('#rig-wrap').attr('data-rigId');
 
@@ -205,7 +205,7 @@
         evt.preventDefault()
 
         var $tr = $(this).parents('tr');
-        var $td = $tr.children().slice(1, 5);
+        var $td = $tr.children().slice(2, 6);
 
         // Turn inputs into hidden, set input value from span value
         $td.each(function(){
@@ -230,6 +230,7 @@
         evt.preventDefault()
 
         var $tr = $(this).parents('tr');
+        var $table = $tr.parent();
         var ridId = $('#rig-wrap').attr('data-rigId');
         var poolId = $tr.attr('data-id');
 
@@ -246,6 +247,13 @@
         })
         .done(function (data) {
             $tr.remove();
+            $('tr', $table).each(function(k, v) {
+                if ($(this).attr('data-id') > poolId) {
+                    $(this).find('td[data-type="priority"] span').text(k);
+                    $(this).attr('data-id', ($(this).attr('data-id')-1));
+                }
+                $(this).find('td[data-type="priority"] input').val(k);
+            });
         });
     })
 
@@ -268,6 +276,44 @@
             dataType: 'json'
         });
     });
+
+    $('#rigDetails .table-pools tbody').sortable({
+        items: 'tr:not(:last)',
+        placeholder: "placeholder",
+        opacity: 0.75,
+        scrollSpeed: 70,
+        handle: '.poolGrip',
+        containment: 'parent',
+        forcePlaceholderSize: true,
+        scroll: true,
+        scrollSensitivity: 100,
+        update: function(event, ui) {
+            var ridId = $('#rig-wrap').attr('data-rigId');
+            var poolId = ui.item[0].dataset.id;
+            var newPriority = $(ui.item[0]).index();
+
+            $.ajax({
+                type: 'post',
+                data: {
+                    id: ridId,
+                    type: 'rigs',
+                    action: 'prioritize-pool',
+                    poolId: poolId,
+                    priority: newPriority
+                },
+                url: 'ajax.php',
+                dataType: 'json'
+            })
+            .done(function (data) {
+                $('#rigDetails .table-pools tbody tr').each(function(k, v) {
+                    $(this).find('td[data-type="priority"] span').text(k);
+                    $(this).find('td[data-type="priority"] input').val(k);
+                });
+            });
+
+            $('#rigDetails .table-pools tbody').enableSelection();
+        }
+    }).disableSelection();
 
     /*-----  End of Pools  ------*/
 
@@ -308,9 +354,14 @@
             setTimeout(function() {
                 $(btnIcon).removeClass('ajax-saver');
 
+                var successMsg = '<b>Saved!</b><br />Your settings have successfully been saved.';
+                if ($('#rigDetails .nav-pills .active a').attr('href') == '#devices') {
+                    successMsg = '<b>Saved!</b><br />Attempted to save new device settings.<br />Some devices do not allow settings to be changed.';
+                }
+
                 $().toastmessage('showToast', {
                     sticky  : false,
-                    text    : '<b>Saved!</b><br />Your settings have successfully been saved.',
+                    text    : successMsg,
                     type    : 'success'
                 });
             }, 500);

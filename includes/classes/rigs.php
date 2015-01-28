@@ -34,6 +34,10 @@ class Rigs extends Config_Rigs {
         $result = $this->_objs[0]->addPool($_POST['values']);
         return $result;
     }
+    public function prioritizePool() {
+        $result = $this->_objs[0]->prioritizePools($_POST['priority'], $_POST['poolId']);
+        return $result;
+    }
     public function editPool() {
         $isValid = $this->postValidate('pools', $_POST['values']);
         if ($isValid !== true) {
@@ -63,6 +67,12 @@ class Rigs extends Config_Rigs {
             $result = $this->_objs[0]->disableDevice(strtolower($_POST['devType']), $_POST['devId']);
         }
         return $result;
+    }
+
+    public function updateDevices() {
+        if ($_POST['devices']) {
+            return $this->_objs[0]->updateDevice($_POST['devices']);
+        }
     }
 
     public function resetStats() {

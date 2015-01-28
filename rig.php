@@ -263,7 +263,7 @@ if (empty($rigDevices)) {
                                           <?php } else if ($dev['type'] == 'ASC' || $dev['type'] == 'PGA') { ?>
                                           <td>
                                             <?php if ($dev['frequency']) { ?>
-                                              <input name="devices[<?php echo $dev['id']; ?>][frequency]" type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" />
+                                              <input name="devices[<?php echo $dev['id']; ?>][frequency]" type="text" class="form-control" value="<?php echo $dev['frequency']; ?>" disabled="disabled" />
                                             <?php } else { ?>
                                                 Unknown
                                             <?php } ?>
@@ -285,6 +285,7 @@ if (empty($rigDevices)) {
                             <table class="table table-hover table-striped table-pools">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Active</th>
                                         <th>Pool URL</th>
                                         <th>Worker</th>
@@ -298,6 +299,7 @@ if (empty($rigDevices)) {
                                 foreach ($rigPools as $pool) {
                                 ?>
                                     <tr data-id="<?php echo $pool['id']; ?>">
+                                        <td><a class="poolGrip"><span class="grey"><i class="icon icon-braillespace"></i></span></a></td>
                                         <td><input type="checkbox" class="form-control poolActive" <?php echo ($pool['status'] == 1) ? 'checked' : ''; ?> /></td>
                                         <td data-type="url">
                                             <span><?php echo $pool['url']; ?></span>
@@ -322,6 +324,7 @@ if (empty($rigDevices)) {
                                     </tr>
                                 <?php } ?>
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td data-type="url">
                                             <input type="text" placeholder="Pool URL" name="pools[new][url]" class="form-control" />
