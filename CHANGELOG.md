@@ -1,4 +1,21 @@
 
+    [ v2.0.0.488-nightly ]
+
+    FEATURES
+    ========
+    - Ability to drag+drop pool priority
+
+    HOTFIXES
+    ========
+    - Device settings attempt to save. Mainly a GPU feature as frequencies for asics are almost impossible to do remotely.
+
+    KNOWN ISSUES
+    ========
+    - Pools may not load sometimes
+    - Wallets can take a long time to load
+
+---
+
     [ v2.0.0.482-nightly ]
 
     HOTFIXES
@@ -9,12 +26,6 @@
     - Updated Rigs Pool page. Usability was greatly improved. Added ability to enable/disable pools.
     - If no frequency is found for a device, it displays "Unknown" and is not changeable.
     - [-COIN] Continuum - This coin is no longer being developed
-
-    KNOWN ISSUES
-    ========
-    - Rig device settings do not save
-    - Prioritizing rig pools does not work
-    - Wallets can take a long time to load
 
 ---
 
