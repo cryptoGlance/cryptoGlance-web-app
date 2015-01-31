@@ -1,4 +1,13 @@
 
+    [ v2.0.0.490-beta ]
+
+    HOTFIXES
+    ========
+    - Fixed issue with rig overview not updating properly on first load
+    - Changed total hashrate to use avg speed
+
+---
+
     [ v2.0.0.489-beta ]
 
     FEATURES
@@ -34,7 +43,6 @@
     - [+COIN] NeosCoin
     - [+COIN] ReddCoin
     - [+COIN] XPY - PayCoin | Note: Using ZenCloud or PayBase address may display balance of 0
-
 
     HOTFIXES
     ========
