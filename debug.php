@@ -61,13 +61,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo '<br /><hr /><br />';
 
     if ($_POST['submit'] == 'one') {
+        $config = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"config"}'), true);
+        $debug = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"debug"}'), true);
         $summary = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"summary"}'), true);
         $dev = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"devs"}'), true);
         $devdetails = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"devdetails"}'), true);
+        $stats = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"stats"}'), true);
         $eStats = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"estats","parameter":1}'), true);
         $pools = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"pools"}'), true);
         $ascset = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"ascset","parameter":"0, help"}'), true);
 
+        echo "<pre>config:";
+        print_r($config);
+        echo "</pre>";
+        echo "<pre>debug:";
+        print_r($debug);
+        echo "</pre>";
         echo "<pre>SUMMARY:";
         print_r($summary);
         echo "</pre>";
@@ -77,6 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "</pre>";
         echo "<pre>devdetails:";
         print_r($devdetails);
+        echo "</pre>";
+        echo "<pre>stats:";
+        print_r($stats);
         echo "</pre>";
         echo "<pre>eStats:";
         print_r($eStats);
