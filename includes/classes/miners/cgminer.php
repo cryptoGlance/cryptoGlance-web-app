@@ -18,7 +18,8 @@ class Miners_Cgminer extends Miners_Abstract {
     // Common Data
     protected $_devStatus = array();
     protected $_rigStatus = 'offline';
-    protected $_rigHashrate = 0;
+    protected $_rigHashrate_5s = 0;
+    protected $_rigHashrate_avg = 0;
     protected $_activePool = array();
     protected $_upTime;
 
@@ -41,7 +42,8 @@ class Miners_Cgminer extends Miners_Abstract {
             'name' => $this->_name,
             'status' => $this->_rigStatus,
             'algorithm' => $this->_settings['algorithm'],
-            'hashrate_5s' => $this->_rigHashrate,
+            'hashrate_avg' => $this->_rigHashrate_avg,
+            'hashrate_5s' => $this->_rigHashrate_5s,
             'active_pool' => $this->_activePool,
             'uptime' => $this->_upTime,
         );
@@ -272,8 +274,6 @@ class Miners_Cgminer extends Miners_Abstract {
 
         $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $priorityList) .'"}');
 
-        $this->fetchPools();
-
         return;
     }
 
@@ -390,7 +390,8 @@ class Miners_Cgminer extends Miners_Abstract {
     private function getDevStatus() {
         foreach ($this->_devs as $devKey => $dev) {
             // Might as well get the hashrate
-            $this->_rigHashrate += ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']);
+            $this->_rigHashrate_5s += ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']);
+            $this->_rigHashrate_avg += ($dev['MHS av'] ? $dev['MHS av'] : $dev['MHS av']);
 
             $status = array();
 
@@ -541,11 +542,18 @@ class Miners_Cgminer extends Miners_Abstract {
 
             //Misc data
             $this->_upTime = formatTimeElapsed($this->_summary['Elapsed']);
-            if (empty($this->_rigHashrate)) {
+            if (empty($this->_rigHashrate_5s)) {
                 if (isset($this->_summary['MHS av'])) {
-                    $this->_rigHashrate = $this->_summary['MHS av'];
+                    $this->_rigHashrate_5s = $this->_summary['MHS av'];
                 } else if (isset($this->_summary['GHS av'])) {
-                    $this->_rigHashrate = $this->_summary['GHS av']*1000;
+                    $this->_rigHashrate_5s = $this->_summary['GHS av']*1000;
+                }
+            }
+            if (empty($this->_rigHashrate_avg)) {
+                if (isset($this->_summary['MHS av'])) {
+                    $this->_rigHashrate_avg = $this->_summary['MHS av'];
+                } else if (isset($this->_summary['GHS av'])) {
+                    $this->_rigHashrate_avg = $this->_summary['GHS av']*1000;
                 }
             }
 
