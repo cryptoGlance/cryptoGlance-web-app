@@ -18,13 +18,13 @@ class Miners_Cgminer extends Miners_Abstract {
     // Common Data
     protected $_devStatus = array();
     protected $_rigStatus = 'offline';
-    protected $_rigHashrate = 0;
+    protected $_rigHashrate_5s = 0;
+    protected $_rigHashrate_avg = 0;
     protected $_activePool = array();
     protected $_upTime;
 
     // Version Handling
     protected $_shareTypePrefix = ''; // This will set shares to 'Difficulty Accepted' or just 'Accepted'
-
 
     // PUBLIC
     public function __construct($rig) {
@@ -42,7 +42,8 @@ class Miners_Cgminer extends Miners_Abstract {
             'name' => $this->_name,
             'status' => $this->_rigStatus,
             'algorithm' => $this->_settings['algorithm'],
-            'hashrate_5s' => $this->_rigHashrate,
+            'hashrate_avg' => $this->_rigHashrate_avg,
+            'hashrate_5s' => $this->_rigHashrate_5s,
             'active_pool' => $this->_activePool,
             'uptime' => $this->_upTime,
         );
@@ -195,7 +196,7 @@ class Miners_Cgminer extends Miners_Abstract {
     public function pools() {
         $pools = array();
         foreach ($this->_pools as $pool) {
-            $pools[] = array(
+            $pools[$pool['Priority']] = array(
                 'id' => $pool['POOL'],
                 'status' => ($pool['Status'] == 'Alive') ? 1 : 0,
                 'active' => ($pool['POOL'] == $this->_activePool['id']) ? 1 : 0,
@@ -204,6 +205,8 @@ class Miners_Cgminer extends Miners_Abstract {
                 'priority' => $pool['Priority'],
             );
         }
+
+        ksort($pools);
 
         return $pools;
     }
@@ -229,57 +232,49 @@ class Miners_Cgminer extends Miners_Abstract {
     }
 
     public function addPool($values) {
-        if (count($values) > 3) {
-            array_splice($values, 3);
-        }
-
-        return $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
-    }
-
-    public function editPool($poolId, $values) {
         $poolPriority = end($values);
         array_pop($values);
-        $this->removePool($poolId);
-        $this->addPool($values);
-        $this->fetchPools(); // Update our collection of pools
-        $this->prioritizePools($poolPriority, null);
+        $this->cmd('{"command":"addpool","parameter":"'. implode(',', $values) .'"}');
+
+        // Now prioritize
+        $this->fetchPools();
+        $pools = $this->_pools;
+        $currentPool = end($pools);
+        $poolId = $currentPool['POOL'];
+
+        $this->prioritizePools($poolPriority, $poolId);
+
         return;
     }
 
-    public function prioritizePools($poolPriority, $poolId = null) {
-        $this->fetchPools();
-        if (!is_null($poolId)) {
-            foreach ($this->_pools as $pKey => $pool) {
-                if ($pool['POOL'] == $poolId) {
-                    $poolIndex = $pKey;
-                    break;
-                }
-            }
-        } else {
-            $pools = $this->_pools;
-            end($pools);
-            $poolIndex = key($pools);
-        }
+    public function editPool($poolId, $values) {
+        $this->removePool($poolId);
+        $this->addPool($values);
 
-        $newPools = array();
-        $poolIdCollection = array();
-        foreach ($this->_pools as $pKey => $pool) {
-            if ($pKey == $poolIndex) {
-                continue;
-            } else {
-                if ($pKey == $poolPriority) {
-                    $newPools[] = $this->_pools[$poolIndex];
-                    $poolIdCollection[] = $this->_pools[$poolIndex]['POOL'];
-                }
-                $newPools[] = $pool;
-                $poolIdCollection[] = $pool['POOL'];
+        return;
+    }
+
+    public function prioritizePools($poolPriority, $poolId) {
+        foreach ($this->_pools as $key => $pool) {
+            if ($pool['Priority'] == $poolPriority) {
+                $this->_pools[$key]['Priority']++;
+            }
+            if ($pool['POOL'] == $poolId) {
+                $this->_pools[$key]['Priority'] = $poolPriority;
+                break;
             }
         }
 
-        $this->_pools = $newPools;
-        $this->getActivePool();
+        usort($this->_pools, array('Miners_Cgminer','prioritySort'));
 
-        return $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $poolIdCollection) .'"}');
+        $priorityList = array();
+        foreach ($this->_pools as $key => $pool) {
+            $priorityList[] = $pool['POOL'];
+        }
+
+        $this->cmd('{"command":"poolpriority","parameter":"'. implode(',', $priorityList) .'"}');
+
+        return;
     }
 
 
@@ -289,6 +284,33 @@ class Miners_Cgminer extends Miners_Abstract {
 
     public function disableDevice($devType, $devId) {
         return $this->cmd('{"command":"'.$devType.'disable","parameter":"'. $devId .'"}');
+    }
+
+    public function updateDevice($deviceData) {
+        foreach ($deviceData as $devId => $settings) {
+            foreach ($settings as $key => $val) {
+                switch ($key) {
+                    case "frequency":
+                        // Currently no options for frequencies
+                        break;
+                    case "intensity":
+                        $this->cmd('{"command":"gpuintensity","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "fan_percent":
+                        $this->cmd('{"command":"gpufan","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "engine_clock":
+                        $this->cmd('{"command":"gpuengine","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "memory_clock":
+                        $this->cmd('{"command":"gpumem","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                    case "gpu_voltage":
+                        $this->cmd('{"command":"gpuvddc","parameter":"'. $devId .', '. $val .'"}');
+                        break;
+                }
+            }
+        }
     }
 
     public function resetStats() {
@@ -368,7 +390,8 @@ class Miners_Cgminer extends Miners_Abstract {
     private function getDevStatus() {
         foreach ($this->_devs as $devKey => $dev) {
             // Might as well get the hashrate
-            $this->_rigHashrate += ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']);
+            $this->_rigHashrate_5s += ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']);
+            $this->_rigHashrate_avg += ($dev['MHS av'] ? $dev['MHS av'] : $dev['MHS av']);
 
             $status = array();
 
@@ -519,11 +542,18 @@ class Miners_Cgminer extends Miners_Abstract {
 
             //Misc data
             $this->_upTime = formatTimeElapsed($this->_summary['Elapsed']);
-            if (empty($this->_rigHashrate)) {
+            if (empty($this->_rigHashrate_5s)) {
                 if (isset($this->_summary['MHS av'])) {
-                    $this->_rigHashrate = $this->_summary['MHS av'];
+                    $this->_rigHashrate_5s = $this->_summary['MHS av'];
                 } else if (isset($this->_summary['GHS av'])) {
-                    $this->_rigHashrate = $this->_summary['GHS av']*1000;
+                    $this->_rigHashrate_5s = $this->_summary['GHS av']*1000;
+                }
+            }
+            if (empty($this->_rigHashrate_avg)) {
+                if (isset($this->_summary['MHS av'])) {
+                    $this->_rigHashrate_avg = $this->_summary['MHS av'];
+                } else if (isset($this->_summary['GHS av'])) {
+                    $this->_rigHashrate_avg = $this->_summary['GHS av']*1000;
                 }
             }
 
@@ -588,7 +618,7 @@ class Miners_Cgminer extends Miners_Abstract {
 
 
     /* Private functions for independant product types. EG: Bitmain */
-    public function _checkBitmain() {
+    private function _checkBitmain() {
         if (!empty($this->_eStats)) {
             foreach ($this->_eStats as $eStats) {
                 // if a bitmain asic has an 'x' in it's data, that means an asic chip has failed
@@ -600,5 +630,10 @@ class Miners_Cgminer extends Miners_Abstract {
                 }
             }
         }
+    }
+
+    /* Private functions for things such as sorting */
+    private function prioritySort($a,$b) {
+        return ($a['Priority'] < $b['Priority']) ? -1 : 1;
     }
 }

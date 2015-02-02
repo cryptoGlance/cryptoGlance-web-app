@@ -82,6 +82,8 @@
       this.panelStatus = overview.status.panel
       this.$rigEl[0].className = 'panel panel-primary panel-rig ' + this.panelStatus
     }
+    
+    this.$rigSummaryBody.html(this._buildStatus(summary))
 
     if (this.deviceCollection.length > 0) {
         var deviceHtml = this.deviceCollection.update(devices)
@@ -92,8 +94,6 @@
     } else {
         this.$rigSummaryTableSummary.hide();
     }
-
-    this.$rigSummaryBody.html(this._buildStatus(summary))
 
     if (this.init) {
       this.$rigNavEl.find('li:first-child').addClass('active')

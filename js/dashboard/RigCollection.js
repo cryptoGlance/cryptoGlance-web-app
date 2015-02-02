@@ -38,12 +38,11 @@
 
     /*==========  Initial data call  ==========*/
     this._getData(function (data) {
-      _self._buildOverview(data)
+    //   _self._buildOverview(data)
 
       _self.apiData = { type: 'rigs', action: 'update' }
 
       _self._update() // Populate all devices in the collection
-      _self._update() // Build out summary stats
 
       /*==========  Setup polling  ==========*/
       setInterval(function () {
@@ -77,6 +76,8 @@
         rig.update(data)
         overviewData[index] = data
         _self._rigsResponded++
+        console.log(_self);
+        console.log('-----');
         if (_self._rigsResponded === _self.collection.length) {
           _self._ready = true
           _self._buildOverview(overviewData)
@@ -111,14 +112,15 @@
       if (res.overview) {
         res = res.overview
       }
+
       _self.overviewTableData += _self._buildOverviewRow(res, index + 1)
-      _self.overallHashrate += parseFloat(res.hashrate_5s)
+      _self.overallHashrate += parseFloat(res.hashrate_avg)
 
       if (typeof algorithms[res.algorithm] == 'undefined') {
         var algorithm = res.algorithm;
         algorithms[algorithm] = 0;
       }
-      algorithms[res.algorithm] += parseFloat(res.hashrate_5s)
+      algorithms[res.algorithm] += parseFloat(res.hashrate_avg)
     }
 
     this.overviewTableData = ''
@@ -163,12 +165,14 @@
     var icon = overview.status.icon || 'ban-circle'
     var colour = overview.status.colour || 'grey'
     var hashrate_5s = colour !== 'grey' ? Util.getSpeed(overview.hashrate_5s) : '--'
+    var hashrate_avg = colour !== 'grey' ? Util.getSpeed(overview.hashrate_avg) : '--'
     var active_pool_url = overview.active_pool.url || '--'
     var uptime = overview.uptime || '--'
     return '<tr data-rig="'+ index +'">' +
            '<td><i class="icon icon-'+ icon +' '+ colour +'"></i></td>' +
            '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
            '<td>'+ overview.algorithm +'</td>' +
+           '<td>'+ hashrate_avg +'</td>' +
            '<td>'+ hashrate_5s +'</td>' +
            '<td>'+ active_pool_url +'</td>' +
            '<td>'+ uptime +'</td>' +

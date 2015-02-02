@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $devdetails = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"devdetails"}'), true);
         $eStats = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"estats","parameter":1}'), true);
         $pools = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"pools"}'), true);
+        $ascset = json_decode(runCMD($_POST['address'], $_POST['port'], '{"command":"ascset","parameter":"0, help"}'), true);
 
         echo "<pre>SUMMARY:";
         print_r($summary);
@@ -83,6 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<br />------------<br /><br />";
         echo "<pre>POOLS:";
         print_r($pools);
+        echo "</pre>";
+        echo "<pre>ascset:";
+        print_r($ascset);
         echo "</pre>";
     } else if ($_POST['submit'] == 'all') {
         // Show errors

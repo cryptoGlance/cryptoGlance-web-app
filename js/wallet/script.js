@@ -132,6 +132,9 @@
         })
         .done(function (data) {
             if ($inputs[1].value != $($inputs[1]).parent().find('span').text()) {
+                $_self.find('i').removeClass('icon-save-floppy');
+                $_self.find('i').addClass('ajax-saver');
+
                 $().toastmessage('showToast', {
                     sticky  : false,
                     text    : '<b>Saved!</b><br />Address was successfully modified<br />Please wait while the wallet loads.',
@@ -158,7 +161,11 @@
             .next().addClass('removeAddress').removeClass('cancelAddress')
             .find('.blue').removeClass('blue').addClass('red')
             .find('.icon').removeClass('icon-undo').addClass('icon-remove');
-        });
+        })
+        .fail(function() {
+            $_self.find('i').removeClass('ajax-saver');
+            $_self.find('i').addClass('icon-save-floppy');
+        })
     })
 
     $document.on('click', '.addAddress', function (evt) {
@@ -169,6 +176,10 @@
         var $inputs = $tr.children().find('input');
         var values = {};
         var walletId = $('#walletAddresses').attr('data-walletId');
+
+        // Fancy Animation
+        $_self.find('i').removeClass('icon-save-floppy');
+        $_self.find('i').addClass('ajax-saver');
 
         // If successfull, move on
         $inputs.each(function(){
@@ -188,8 +199,6 @@
             dataType: 'json'
         })
         .done(function( data ) {
-            $_self.find('i').removeClass('icon-save-floppy');
-            $_self.find('i').addClass('ajax-saver');
             $().toastmessage('showToast', {
                 sticky  : false,
                 text    : '<b>Saved!</b><br />Address was successfully added to the wallet.<br />Please wait while the wallet loads.',
@@ -199,6 +208,9 @@
             setTimeout(function() {
                 location.reload(true);
             }, 2500);
+        }).fail(function() {
+            $_self.find('i').removeClass('ajax-saver');
+            $_self.find('i').addClass('icon-save-floppy');
         })
     })
 
