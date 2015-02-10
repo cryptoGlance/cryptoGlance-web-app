@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   letter-spacing: 1px;
 }
-
+1
 hr {
   border-width: 1px 0px 1px;
   border-style: solid none solid;
@@ -454,6 +454,10 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   font-size: 25px;
 }
 
+#panel-screenies .panel-body a img {
+  margin: 15px;
+}
+
 #panel-source .panel-body {
   margin-bottom: 0;
   padding-top: 0;
@@ -505,7 +509,7 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .panel-body .stat-pair .stat-label {
-  background: url(../images/black-denim.png) repeat #111;
+  background: url(../images/black_denim.png) repeat #111;
   font-family: robotocondensed;
   font-size: 14px;
   text-transform: lowercase;
@@ -576,7 +580,6 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 }
 
 .donate-address {
-  border-bottom: 1px solid #444;
   text-align:left;
 }
 
@@ -940,6 +943,8 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
 
   .panel h2 {
     font-size: 30px;
+    clear: both;
+    padding-top: 45px;
   }
 
   .panel-body ul li {
@@ -995,10 +1000,6 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   
   .panel-body .stat-pair .stat-value {
     font-size: 30px;
-  }
-  
-  .panel-in-footer .panel-body .stat-pair {
-    min-height: 187px;
   }
 
   .panel-in-footer .panel-body .stat-pair-qr .stat-label {
@@ -1138,8 +1139,24 @@ a.dropdown-toggle:active, a.dropdown-toggle:focus {
   
 }
 
+.fancybox-skin {
+  background: none;
+}
 
+.fancybox-image {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
 
+.fancybox-title-float-wrap .child {
+  padding: 27px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.3em;
+  border: 1px solid #33b5e5;
+}
 
 	
 /* Font Support 

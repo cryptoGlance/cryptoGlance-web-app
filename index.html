@@ -20,6 +20,7 @@
       <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
       <link href="css/whhg.css" rel="stylesheet">
       <!-- Custom cryptoGlance styles -->
+      <link href="css/jquery.fancybox.css" rel="stylesheet">
       <link href="css/cryptoglance-base.css" rel="stylesheet">
       
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -92,11 +93,6 @@
                      <span>Each rig shows a summary which can easy be expanded upon via tabs. Detailed status of each device/GPU shows you everything.</span>
                   </div>
                </div>
-               <div class="stat-pair">
-                  <div class="stat-label">
-                     We're in the early, yet release-worthy stages of cryptoGlance development, so you can be sure that new features will be added as time goes on.
-                  </div>
-               </div>
                <h2>Complete Feature List</h2>
                 <ul>
                   <li>Standalone version with installer (for Windows), or run the source code within your own (PHP) web server environment</li>
@@ -108,6 +104,9 @@
                     <ul>
                       <li>Monitors detailed statistics, and manages core functions of multiple rigs/ASICs</li>
                       <li>Switch pools and restart miners remotely</li>
+                      <li>Change pool priority via drag and drop</li>
+                      <li>Optionally reset rig stats, useful when switching pools</li>
+                      <li>Auto-restart on BITMAIN ASIC failure</li>
                     </ul>
                   </li>
                   <li>Pools
@@ -117,8 +116,9 @@
                   </li>
                   <li>Wallets/Balances
                     <ul>
-                      <li>"Wallets" in cryptoGlance are basically collections of public addresses that you wish to check the balance of</li>
+                      <li>"Wallets" in cryptoGlance are collections of public addresses that you wish to check the balance of</li>
                       <li>You can create multiple wallets which will sum up the total balances of all addresses belonging</li>
+                      <li>FIAT conversions for most coins (Thanks to FunkyC: https://bitcoinindex.es/)</li>
                       <li>Multiple coin types are supported, with more being added regularly</li>
                     </ul>
                   </li>
@@ -132,8 +132,22 @@
                   <li>Configurable warning and danger status with visual cues</li>
                   <li>Void of malware or donation mining (does <strong>NOT</strong> require your private keys at all -- code is open source!)</li>
                   <li>Companion <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android app</a> which easily allows you to quickly access your cryptoGlance instance while on the go</li>
-                  <li><strong>MUCH MORE is planned!</strong> Follow our social accounts, or drop by our IRC channel to find out when new features are released!</li>
+                  <li><strong>MUCH MORE is planned, and <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/master/CHANGELOG.md">check our CHANGELOG.md</a> for the absolute latest changes!</strong> Follow our social accounts, or drop by our IRC channel to find out when new features are released!</li>
                 </ul>
+            </div>
+         </div>
+         <div id="panel-screenies" class="panel panel-primary">
+            <div class="panel-lighter">
+               <h1>Screenies</h1>
+            </div>         
+            <div class="panel-body">
+               <a class="fancybox" rel="group" href="images/screenie-desktop-1.png" title="Overview - Grid View"><img src="images/screenie-desktop-1-thumb.png" alt="screenie-1" /></a>
+               <a class="fancybox" rel="group" href="images/screenie-desktop-2.png" title="Overview - Stacked View"><img src="images/screenie-desktop-2-thumb.png" alt="screenie-2" /></a>
+               <a class="fancybox" rel="group" href="images/screenie-desktop-3.png" title="General Settings (Refresh times + Update options)"><img src="images/screenie-desktop-3-thumb.png" alt="screenie-3" /></a>
+               <a class="fancybox" rel="group" href="images/screenie-desktop-4.png" title="Rig Management Choices"><img src="images/screenie-desktop-4-thumb.png" alt="screenie-4" /></a>
+               <a class="fancybox" rel="group" href="images/screenie-desktop-5.png" title="Simple Pool Management"><img src="images/screenie-desktop-5-thumb.png" alt="screenie-5" /></a>
+               <a class="fancybox" rel="group" href="images/screenie-desktop-6.png" title="Set Temperature Thresholds"><img src="images/screenie-desktop-6-thumb.png" alt="screenie-6" /></a>
+               <a class="fancybox" rel="group" href="images/screenie-desktop-7.png" title="Wallet Details"><img src="images/screenie-desktop-7-thumb.png" alt="screenie-7" /></a>
             </div>
          </div>
          <div id="panel-source" class="panel panel-primary">
@@ -212,7 +226,7 @@
                     <div class="donate-address">
                         <a href="images/qr-donate-btc.png" rel="external" title="Donate some Bitcoin (BTC)"><img src="images/icon-bitcoin.png" alt="Bitcoin"></a> 12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE
                     </div>
-                    <div class="donate-address">
+                    <!-- div class="donate-address">
                         <a href="images/qr-donate-ltc.png" rel="external" title="Donate some Litecoin (LTC)"><img src="images/icon-litecoin.png" alt="Litecoin"></a> LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M
                     </div>
                     <div class="donate-address">
@@ -220,7 +234,7 @@
                     </div>
                     <div class="donate-address">
                         <a href="images/qr-donate-doge.png" rel="external" title="Donate some Dogecoin (DOGE)"><img src="images/icon-dogecoin.png" alt="Dogecoin"></a> D8bcNHYbkBDqwkvZKKpfu8oAyzqezJ5RvW
-                    </div>
+                    </div -->
                   </div>
                   <div class="stat-value">
                      Long live crypto-currency!
@@ -235,6 +249,7 @@
       </div>      
       <script src="js/jquery-1.10.2.min.js"></script>
       <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+      <script src="js/jquery.fancybox.pack.js"></script>
       <script src="js/jquery.easing.1.3.js"></script>
       <script src="js/jquery.scrollTo.min.js"></script>
       <script src="js/bootstrap.min.js"></script>

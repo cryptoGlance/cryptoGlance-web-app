@@ -1,4 +1,4 @@
-// UI JavaScript for RigWatch
+// UI JavaScript for cryptoGlance
 // 	by George Merlocco (george@merloc.co) // https://github.com/scar45/
 
 
@@ -38,19 +38,14 @@ $(function(){
    });
 });
    
-// Smooth scrolling
-//
   
-function scrollTo(id){
-   $('html,body').animate({scrollTop: $(id).offset().top},'slow');
-};
-   
  
 // Execute when the DOM is ready
 //
 $(document).ready(function() {
 
    externalLinks();
+   $(".fancybox").attr('rel', 'group').fancybox();
    
    $('.anchor-offset').click(function() {
       var target = $(this).attr('href');
