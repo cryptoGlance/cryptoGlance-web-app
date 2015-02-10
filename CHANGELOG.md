@@ -1,14 +1,5 @@
 
-    [ v2.0.0.490-beta ]
-
-    HOTFIXES
-    ========
-    - Fixed issue with rig overview not updating properly on first load
-    - Changed total hashrate to use avg speed
-
----
-
-    [ v2.0.0.489-beta ]
+    [ v2.0 ]
 
     FEATURES
     ========
