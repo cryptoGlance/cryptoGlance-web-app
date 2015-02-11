@@ -1,4 +1,18 @@
 
+    [ v2.0.1 ]
+
+    HOTFIXES
+    ========
+    - Fixed issue with rig settings when upgrading v1 to v2
+    - Added more data to the Eligius pool panel
+
+    KNOWN ISSUES
+    ========
+    - Pools may not load sometimes
+    - Wallets can take a long time to load
+
+---
+
     [ v2.0 ]
 
     FEATURES
@@ -11,8 +25,8 @@
     - Ability to drag+drop pool priority for a rig
     - Auto-Restart on BITMAIN asic failure (chain contains "x" instead of "0")
     - Rig devices have two more types of details showing:
-      BITMAIN Asic fan speed (fan 1, fan 2, fan 3, etc)
-      BITMAIN Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
+    BITMAIN Asic fan speed (fan 1, fan 2, fan 3, etc)
+    BITMAIN Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
     - Rigs have a new option for Algorithm
     - Rigs Algorithm is auto-set when using sgMiner v5+
     - Ability to reset rig stats
@@ -49,11 +63,6 @@
     - Changelog ICON changed
     - Navigation dropdowns would close while using elements inside it.
     - [POOL] MPOS network hashrate was incorrect. API returns deca instead of hecto
-
-    KNOWN ISSUES
-    ========
-    - Pools may not load sometimes
-    - Wallets can take a long time to load
 
 ---
 

@@ -29,10 +29,13 @@
       switch (key) {
         case 'type':
         case 'url_name':
+        case 'last_block_url':
           break
         case 'last_block':
-          if (poolObj.type === 'mpos' &&  'undefined' !== typeof poolObj.url) {
-            summary += this._buildStatusHtml('', key, '<a href="' + poolObj.url + '/index.php?page=statistics&action=round&height=' + poolObj[key] + '" target="_blank" rel="external">' + poolObj[key] + '</a>')
+          if ('undefined' !== typeof poolObj[key+'_url']) {
+            summary += this._buildStatusHtml('', key, '<a href="' + poolObj[key+'_url'] + '" target="_blank" rel="external">' + poolObj[key] + '</a>')
+          } else {
+            summary += this._buildStatusHtml('', key, poolObj[key])
           }
           break
         case 'url':
