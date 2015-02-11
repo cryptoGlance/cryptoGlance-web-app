@@ -67,6 +67,7 @@ class Pools_Mpos extends Pools_Abstract {
             $data['%_of_expected'] = round(($poolData['public']['shares_this_round'] / $poolData['getpoolstatus']['estshares']) * 100, 2) . '%';
             $data['current_block'] = $poolData['getpoolstatus']['currentnetworkblock'];
             $data['last_block'] = $poolData['getpoolstatus']['lastblock'];
+            $data['last_block_url'] = $this->_apiURL.'/index.php?page=statistics&action=round&height='.$poolData['getpoolstatus']['lastblock'];
             $data['blocks_pool_found'] = $poolData['getblockstats']['TotalValid'];
 
             $data['username'] = $poolData['getuserstatus']['username'];

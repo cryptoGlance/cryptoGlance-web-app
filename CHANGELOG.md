@@ -1,14 +1,13 @@
-
-    [ v2.0.0.490-beta ]
+    [ v2.0.1.687-beta ]
 
     HOTFIXES
     ========
-    - Fixed issue with rig overview not updating properly on first load
-    - Changed total hashrate to use avg speed
+    - Fixed issue with rig settings when upgrading v1 to v2
+    - Added more data to the Eligius pool panel
 
 ---
 
-    [ v2.0.0.489-beta ]
+    [ v2.0 ]
 
     FEATURES
     ========
@@ -20,8 +19,8 @@
     - Ability to drag+drop pool priority for a rig
     - Auto-Restart on BITMAIN asic failure (chain contains "x" instead of "0")
     - Rig devices have two more types of details showing:
-      BITMAIN Asic fan speed (fan 1, fan 2, fan 3, etc)
-      BITMAIN Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
+    BITMAIN Asic fan speed (fan 1, fan 2, fan 3, etc)
+    BITMAIN Asic temperatures (temperature 1, temperature 2, temperature 3, etc)
     - Rigs have a new option for Algorithm
     - Rigs Algorithm is auto-set when using sgMiner v5+
     - Ability to reset rig stats
