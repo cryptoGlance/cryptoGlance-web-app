@@ -50,8 +50,7 @@ function formatHashrate($hashrate, $precision = 2) { // h expected
 
 function formatTimeElapsed($elapsed) { // NOTE: This does not support weeks. Only days/months.
     if (isset($elapsed)) {
-
-        $seconds = $elapsed;
+        $elapsed = intval($elapsed);
 
         $from = new DateTime("@0");
         $to = new DateTime("@$elapsed");

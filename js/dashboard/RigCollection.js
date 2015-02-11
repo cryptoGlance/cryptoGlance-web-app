@@ -76,8 +76,6 @@
         rig.update(data)
         overviewData[index] = data
         _self._rigsResponded++
-        console.log(_self);
-        console.log('-----');
         if (_self._rigsResponded === _self.collection.length) {
           _self._ready = true
           _self._buildOverview(overviewData)
