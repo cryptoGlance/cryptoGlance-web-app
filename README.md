@@ -174,8 +174,8 @@ If you've made edits to {{ install-dir }}\settings.json (optional modification f
 
 With every major **Release**, <a href="changelog.php">we include a concise changelog</a> of all updates contained within. Alternatively, you can check out our live commits if you are running Beta or Nightlies:
 
-- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/beta" rel="external">Live **Beta** changelog</a>
-- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/nightly" rel="external">Live **Nightly** changelog</a>
+- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/beta/CHANGELOG.md" rel="external">Live **Beta** changelog</a>
+- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/nightly/CHANGELOG.md" rel="external">Live **Nightly** changelog</a>
 
 <a name="faq"></a>
 
