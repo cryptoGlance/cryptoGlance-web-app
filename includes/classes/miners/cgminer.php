@@ -365,11 +365,16 @@ class Miners_Cgminer extends Miners_Abstract {
         $activePool = array();
         $activePool['Last Share Time'] = 0;
         $totalPools = count($pools);
-        foreach ($pools as $pool) {
+        foreach ($pools as &$pool) {
+            if (strpos($pool['Last Share Time'], ':') !== FALSE) {
+                $pool['Last Share Time'] = preg_replace("/[^0-9]/", "", $pool['Last Share Time']);
+            }
             if (
                 ($totalPools > 1 && $pool['Last Share Time'] > $activePool['Last Share Time'])
                 ||
                 ($totalPools == 1)
+                ||
+                ($pool['Priority'] == 0)
             ) {
                 $activePool = array(
                     'id' => $pool['POOL'],
@@ -424,6 +429,20 @@ class Miners_Cgminer extends Miners_Abstract {
                     $status = array (
                         'colour' => 'orange',
                         'icon' => 'fire'
+                    );
+                }
+            }
+
+            // If rejects are higher than accepted
+            if (empty($status)) {
+                $totalShares = $dev[$this->_shareTypePrefix.'Accepted'] + $dev[$this->_shareTypePrefix.'Rejected'];
+                $acceptedPercent = round(($dev[$this->_shareTypePrefix.'Accepted']/$totalShares)*100, 2);
+                $rejectedPercent = round(($dev[$this->_shareTypePrefix.'Rejected']/$totalShares)*100, 2);
+
+                if ($rejectedPercent > $acceptedPercent) {
+                    $status = array (
+                        'colour' => 'red',
+                        'icon' => 'awstats'
                     );
                 }
             }
