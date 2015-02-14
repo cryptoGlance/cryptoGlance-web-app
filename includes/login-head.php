@@ -17,6 +17,8 @@
     <link href="css/whhg.css" rel="stylesheet">
     <!-- Custom cryptoGlance styles -->
     <link href="css/cryptoglance-base.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="js/packages/jquery-1.10.2.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
       
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

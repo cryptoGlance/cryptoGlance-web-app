@@ -67,17 +67,17 @@ include("includes/login-header.php");
          </div>
       </div>
       <!-- /container -->
-      <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-      <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-      <script type="text/javascript" src="js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="js/jquery.toastmessage.js"></script>
-      <script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
+      <script type="text/javascript" src="js/packages/jquery-1.10.2.min.js"></script>
+      <script type="text/javascript" src="js/packages/jquery-ui-1.10.3.custom.min.js"></script>
+      <script type="text/javascript" src="js/packages/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/packages/jquery.toastmessage.js"></script>
+      <script type="text/javascript" src="js/packages/bootstrap-switch.min.js"></script>
       
       <?php if (!$loginObj->firstLogin()) { ?>
       <script type="text/javascript">
           // (Toast) First login (no account.json)
           function showToastFirstLogin() {
-            var toastMsgFirstLogin = '<b>Read Carefully!</b> This is your first time logging into cryptoGlance. Please set a new username + password that will serve as your credentials.';
+            var toastMsgFirstLogin = '<b>Read Carefully!</b><br />This is your first time logging into cryptoGlance. Please set a new username + password that will serve as your credentials.';
             $().toastmessage('showToast', {
               sticky  : true,
               text    : toastMsgFirstLogin,
@@ -99,7 +99,7 @@ include("includes/login-header.php");
       <script type="text/javascript">
           // (Toast) Login error
           function showToastLoginError() {
-            var toastMsgLoginError = '<b>You shall NOT pass!</b> You\'ve entered incorrect credentials. (If you\'re having trouble, read the notes below the login button.)';
+            var toastMsgLoginError = '<b>You shall NOT pass!</b><br />You\'ve entered incorrect credentials. (If you\'re having trouble, read the notes below the login button.)';
             $().toastmessage('showToast', {
               sticky  : true,
               text    : toastMsgLoginError,
