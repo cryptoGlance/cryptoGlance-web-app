@@ -1,15 +1,29 @@
 
+    [ v2.0.2 ]
+    
+    FEATURES
+    ========
+    - If rejected shares are greater than accepted shares, rig status appears red (requires attention)
+
+    HOTFIXES
+    ========
+    - Windows App Update alert - This is a critical update for windows users who have external access enabled (eg web browser)
+    - Fixed issue where Active Pool was sometimes displaying as "--"
+    - Fixed login screen alerts on first login + login failure
+
+    KNOWN ISSUES
+    ========
+    - Pools may not load sometimes
+    - Wallets can take a long time to load
+
+---
+
     [ v2.0.1 ]
 
     HOTFIXES
     ========
     - Fixed issue with rig settings when upgrading v1 to v2
     - Added more data to the Eligius pool panel
-
-    KNOWN ISSUES
-    ========
-    - Pools may not load sometimes
-    - Wallets can take a long time to load
 
 ---
 
