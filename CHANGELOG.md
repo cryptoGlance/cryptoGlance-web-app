@@ -1,4 +1,24 @@
-    [ v2.0.1.687-beta ]
+
+    [ v2.0.2-beta ]
+    
+    FEATURES
+    ========
+    - If rejected shares are greater than accepted shares, rig status appears red (requires attention)
+
+    HOTFIXES
+    ========
+    - Windows App Update alert - This is a critical update for windows users who have external access enabled (eg web browser)
+    - Fixed issue where Active Pool was sometimes displaying as "--"
+    - Fixed login screen alerts on first login + login failure
+
+    KNOWN ISSUES
+    ========
+    - Pools may not load sometimes
+    - Wallets can take a long time to load
+
+---
+
+    [ v2.0.1 ]
 
     HOTFIXES
     ========
@@ -57,11 +77,6 @@
     - Changelog ICON changed
     - Navigation dropdowns would close while using elements inside it.
     - [POOL] MPOS network hashrate was incorrect. API returns deca instead of hecto
-
-    KNOWN ISSUES
-    ========
-    - Pools may not load sometimes
-    - Wallets can take a long time to load
 
 ---
 

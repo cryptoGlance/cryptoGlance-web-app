@@ -32,7 +32,8 @@
     <!-- Custom cryptoGlance styles -->
     <link href="css/cryptoglance-base.css?v=<?php echo CURRENT_VERSION; ?>" rel="stylesheet">
     <!--/build-->
-
+    
+    <script type="text/javascript" src="js/packages/jquery-1.10.2.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -42,9 +43,22 @@
         var documentTitle = document.title;
         var DATA_FOLDER = '<?php echo DATA_FOLDER; ?>';
         var CURRENT_VERSION = '<?php echo CURRENT_VERSION?>';
-        <?php echo ($settings['general']['updates']['enabled'] == '1') ? 'var updateType = "' . $updateFeed[$settings['general']['updates']['type']]['feed'] . '";' : '' ?>
+        <?php if ($settings['general']['updates']['enabled'] == '1') {
+            echo 'var updateType = "' . $updateFeed[$settings['general']['updates']['type']]['feed'] . '";';
+        } ?>
         var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig'] ?>;
         var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool'] ?>;
         var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet'] ?>;
+        
+        <?php if (isset($_SERVER['PHPDESKTOP_VERSION']) && floatval($_SERVER['PHPDESKTOP_VERSION']) < 31.9) { ?>
+        $(document).ready(function() {
+            $().toastmessage('showToast', {
+              sticky  : true,
+              text    : 'App Update!<br />There is a critical update for the Windows application. Please update your app to the latest version:<br /> <a href="http://sourceforge.net/projects/cryptoglance/files/latest/download?source=files" target="_blank" rel="external" style="word-wrap: break-word;">http://sourceforge.net/projects/cryptoglance/files/latest/download?source=files</a>',
+              type    : 'error',
+              position: 'top-center'
+            });
+        });
+        <?php } ?>
     </script>
 </head>
