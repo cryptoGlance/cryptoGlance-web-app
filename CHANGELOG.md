@@ -1,4 +1,17 @@
 
+    [ v2.0.2.693-nightly ]
+    
+    FEATURES
+    ========
+    - Added P2Pool
+
+    KNOWN ISSUES
+    ========
+    - Pools may not load sometimes
+    - Wallets can take a long time to load
+    
+---
+
     [ v2.0.2 ]
     
     FEATURES
@@ -10,11 +23,6 @@
     - Windows App Update alert - This is a critical update for windows users who have external access enabled (eg web browser)
     - Fixed issue where Active Pool was sometimes displaying as "--"
     - Fixed login screen alerts on first login + login failure
-
-    KNOWN ISSUES
-    ========
-    - Pools may not load sometimes
-    - Wallets can take a long time to load
 
 ---
 

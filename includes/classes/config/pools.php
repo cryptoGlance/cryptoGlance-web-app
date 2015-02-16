@@ -117,6 +117,13 @@ class Config_Pools extends Config_Abstract {
                 'address' => $address,
                 'coin' => $coin,
             );
+        } else if ($type == 'p2pool' && !empty($address) && !empty($url)) {
+           $pool = array(
+               'type' => $type,
+               'name' => ($label ? $label : 'MagicPool'),
+               'apiurl' => rtrim($url, '/'),
+               'address' => $address,
+           );
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'All fields are required on this form.';
