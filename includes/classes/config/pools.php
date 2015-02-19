@@ -124,7 +124,13 @@ class Config_Pools extends Config_Abstract {
                    'apiurl' => rtrim($url, '/'),
                    'address' => $address,
                );
-           } else {
+        } else if ($type == 'nicehash' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'NiceHash'),
+                'address' => $address,
+            );
+        } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'All fields are required on this form.';
         }

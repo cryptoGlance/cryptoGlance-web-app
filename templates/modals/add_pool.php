@@ -27,6 +27,7 @@
                  <option value="magicpool">MagicPool</option>
                  <option value="mpos">MPOS</option>
                  <option value="multipoolus">Multipool.us</option>
+                 <option value="nicehash">NiceHash</option>
                  <option value="nomp">NOMP</option>
                  <option value="p2pool">P2Pool</option>
                  <!-- <option value="simplecoin">SimpleCoin</option> -->
@@ -53,7 +54,7 @@
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">
              </div>
            </div>
-           <div class="form-group wafflepool eligius magicpool nomp p2pool" style="display: none;">
+           <div class="form-group wafflepool eligius magicpool nomp p2pool nicehash" style="display: none;">
              <label for="inputAddress" class="col-sm-3 control-label">Mining Address</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputAddress" name="address" placeholder="12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE">
