@@ -124,6 +124,20 @@ class Config_Pools extends Config_Abstract {
                'apiurl' => rtrim($url, '/'),
                'address' => $address,
            );
+        } else if ($type == 'nicehash' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'NiceHash'),
+                'apiurl' => 'https://www.nicehash.com',
+                'address' => $address,
+            );
+        } else if ($type == 'westhash' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'WestHash'),
+                'apiurl' => 'https://www.westhash.com',
+                'address' => $address,
+            );
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'All fields are required on this form.';

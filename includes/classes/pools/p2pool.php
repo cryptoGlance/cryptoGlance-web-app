@@ -14,6 +14,7 @@ class Pools_P2Pool extends Pools_Abstract {
         'current_payouts', // payout of this round
         'global_stats',
         'local_stats',
+        'web/currency_info',
     );
 
     public function __construct($params) {
@@ -32,7 +33,9 @@ class Pools_P2Pool extends Pools_Abstract {
             // Data Order
             $data['type'] = $this->_type;
 
-            $data['balance'] = $poolData['current_payouts'][$this->_addess];
+            $data['coin'] = $poolData['web/currency_info']['symbol'];
+
+            $data['balance'] = number_format($poolData['current_payouts'][$this->_addess], 8);
 
             $data['user_hashrate'] = formatHashrate($poolData['local_stats']['miner_hash_rates'][$this->_addess]/1000);
             $data['pool_hashrate'] = formatHashrate($poolData['global_stats']['pool_nonstale_hash_rate']/1000);

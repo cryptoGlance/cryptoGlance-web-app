@@ -1,19 +1,32 @@
 
-    [ v2.0.2.693-nightly ]
-    
+    [ v2.0.2.731-nightly ]
+
     FEATURES
     ========
-    - Added P2Pool
+    - Added NiceHash/WestHash
+
+    HOTFIXES
+    ========
+    - MPOS network hash x1000h too high
+    - Updated cgminer Reject warning priority
 
     KNOWN ISSUES
     ========
     - Pools may not load sometimes
     - Wallets can take a long time to load
-    
+
+---
+
+    [ v2.0.2.693-nightly ]
+
+    FEATURES
+    ========
+    - Added P2Pool
+
 ---
 
     [ v2.0.2 ]
-    
+
     FEATURES
     ========
     - If rejected shares are greater than accepted shares, rig status appears red (requires attention)
