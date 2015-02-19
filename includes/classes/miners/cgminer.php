@@ -403,6 +403,35 @@ class Miners_Cgminer extends Miners_Abstract {
             // Start with hardware errors
             $status = $this->statusHardwareErrors($dev);
 
+            // If rejects are higher than accepted
+            if (empty($status)) {
+                $totalShares = $dev[$this->_shareTypePrefix.'Accepted'] + $dev[$this->_shareTypePrefix.'Rejected'];
+                $acceptedPercent = round(($dev[$this->_shareTypePrefix.'Accepted']/$totalShares)*100, 2);
+                $rejectedPercent = round(($dev[$this->_shareTypePrefix.'Rejected']/$totalShares)*100, 2);
+
+                if ($rejectedPercent > $acceptedPercent) {
+                    $status = array (
+                        'colour' => 'red',
+                        'icon' => 'awstats'
+                    );
+                }
+            }
+            
+            // Check temperatures limits
+            if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
+                if ($dev['Temperature'] >= $this->_settings['temps']['danger']) {
+                    $status = array (
+                        'colour' => 'red',
+                        'icon' => 'hot'
+                    );
+                } else if ($dev['Temperature'] >= $this->_settings['temps']['warning']) {
+                    $status = array (
+                        'colour' => 'orange',
+                        'icon' => 'fire'
+                    );
+                }
+            }
+            
             // If no hardware errors, check the health
             if (empty($status)) {
                 if ($dev['Status'] == 'Dead') {
@@ -418,34 +447,6 @@ class Miners_Cgminer extends Miners_Abstract {
                 }
             }
 
-            // If no hardware errors and health is okay, do temperatures
-            if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
-                if ($dev['Temperature'] >= $this->_settings['temps']['danger']) {
-                    $status = array (
-                        'colour' => 'red',
-                        'icon' => 'hot'
-                    );
-                } else if ($dev['Temperature'] >= $this->_settings['temps']['warning']) {
-                    $status = array (
-                        'colour' => 'orange',
-                        'icon' => 'fire'
-                    );
-                }
-            }
-
-            // If rejects are higher than accepted
-            if (empty($status)) {
-                $totalShares = $dev[$this->_shareTypePrefix.'Accepted'] + $dev[$this->_shareTypePrefix.'Rejected'];
-                $acceptedPercent = round(($dev[$this->_shareTypePrefix.'Accepted']/$totalShares)*100, 2);
-                $rejectedPercent = round(($dev[$this->_shareTypePrefix.'Rejected']/$totalShares)*100, 2);
-
-                if ($rejectedPercent > $acceptedPercent) {
-                    $status = array (
-                        'colour' => 'red',
-                        'icon' => 'awstats'
-                    );
-                }
-            }
 
             // If all pass somehow... Mark it good to go!
             if (empty($status) && $dev['Enabled'] == 'Y') {
