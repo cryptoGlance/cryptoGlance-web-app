@@ -46,10 +46,10 @@ class Pools_Mpos extends Pools_Abstract {
             // Data Order
             $data['type'] = $this->_type;
 
-            $data['balance'] = $poolData['getuserbalance']['confirmed'];
-            $data['unconfirmed_balance'] = $poolData['getuserbalance']['unconfirmed'];
+            $data['balance'] = number_format($poolData['getuserbalance']['confirmed'], 8);
+            $data['unconfirmed_balance'] = number_format($poolData['getuserbalance']['unconfirmed'], 8);
 
-            $data['network_hashrate'] = formatHashrate($poolData['getpoolstatus']['nethashrate']/1000);
+            $data['network_hashrate'] = formatHashrate($poolData['getpoolstatus']['nethashrate']);
 
             $data['pool_hashrate'] = formatHashrate($poolData['getpoolstatus']['hashrate']);
 
