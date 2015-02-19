@@ -128,6 +128,14 @@ class Config_Pools extends Config_Abstract {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : 'NiceHash'),
+                'apiurl' => 'https://www.nicehash.com',
+                'address' => $address,
+            );
+        } else if ($type == 'westhash' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'WestHash'),
+                'apiurl' => 'https://www.westhash.com',
                 'address' => $address,
             );
         } else {

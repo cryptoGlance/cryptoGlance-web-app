@@ -10,9 +10,8 @@ class Pools_Nicehash extends Pools_Abstract {
     protected $_btcaddess;
     protected $_type = 'nicehash';
 
-    public function __construct( $params ) {
-
-        parent::__construct( array( 'apiurl' => 'https://www.nicehash.com/' ) );
+    public function __construct($params) {
+        parent::__construct($params);
         $this->_btcaddess = $params['address'];
         $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['address']) .'.json');
     }
@@ -57,7 +56,13 @@ class Pools_Nicehash extends Pools_Abstract {
     public function update() {
         if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData = array();
-            $poolData = curlCall($this->_apiURL  . 'api?method=stats.provider&addr='. $this->_btcaddess);
+            $poolData['user'] = curlCall($this->_apiURL  . '/api?method=stats.provider&addr='. $this->_btcaddess);
+            $poolData['global'] = curlCall($this->_apiURL  . '/api?method=stats.global.current');
+
+            $algoNetSpeed = array();
+            foreach ($poolData['global']['result']['stats'] as $values) {
+                $algoNetSpeed[$values['algo']] = $values['speed'];
+            }
 
             $data = array();
 
@@ -65,13 +70,14 @@ class Pools_Nicehash extends Pools_Abstract {
 
             $data['total_balance'] = 0;
 
-            foreach ($poolData['result']['stats'] as $stats => $values) {
+            foreach ($poolData['user']['result']['stats'] as $stats => $values) {
                 if ($values['accepted_speed'] > 0 || $values['balance'] > 0.00000000) {
                     $algo = $this->getAlgo($values['algo']);
                     $data['total_balance'] += $values['balance'];
                     $data[$algo.'_balance'] = $values['balance'] . ' BTC';
                     $data[$algo.'_accepted'] = formatHashrate($values['accepted_speed'] * 1000000);
                     $data[$algo.'_rejected'] = formatHashrate($values['rejected_speed'] * 1000000);
+                    $data[$algo.'_network_speed'] = formatHashrate($algoNetSpeed[$values['algo']] * 1000000);
                 }
             }
 
@@ -82,7 +88,7 @@ class Pools_Nicehash extends Pools_Abstract {
             $data['url'] = $this->_apiURL;
 
             $this->_fileHandler->write(json_encode($data));
-            
+
             return $data;
         }
 
