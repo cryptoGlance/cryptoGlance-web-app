@@ -1,41 +1,23 @@
 <?php
-require_once 'abstract.php';
+require_once('abstract.php');
 /*
  * @author Don Steele
+ * Misc changes made by Stoyvo
  */
 class Pools_Nicehash extends Pools_Abstract {
 
     // Pool Information
     protected $_btcaddess;
+    protected $_type = 'nicehash';
 
     public function __construct( $params ) {
-        
-        parent::__construct( array( 'apiurl' => 'https://www.nicehash.com/api' ) );
+
+        parent::__construct( array( 'apiurl' => 'https://www.nicehash.com/' ) );
         $this->_btcaddess = $params['address'];
-        $this->_fileHandler = new FileHandler( 'pools/nicehash/'. hash( 'sha256', $params['address'] ) .'.json' );
+        $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['address']) .'.json');
     }
 
-    function curlDownload( $url ) {
-        $curl = curl_init( $url );
-
-        curl_setopt( $curl, CURLOPT_FAILONERROR, true );
-        curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
-        curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, false );
-        curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
-        curl_setopt( $curl, CURLOPT_SSLVERSION, 3 );
-        curl_setopt( $curl, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json' ) );
-        curl_setopt( $curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')' );
-
-        $Data = json_decode( curl_exec( $curl ), true );
-
-        curl_close( $curl );
-        $curl='';
-        return $Data;
-
-    }
-
-    function getAlgo( $algoID ) {
+    function getAlgo($algoId) {
         /*
           according to https://nicehash.com/?p=api
           values are
@@ -48,46 +30,59 @@ class Pools_Nicehash extends Pools_Abstract {
             5 = Keccak
             6 = X15
             7 = Nist5
+            8 = NeoScrypt
+            9 = Lyra2RE
             100 = Multi-algorithm (only valid for global statistics)
         */
         $algoTypes = array (
-            0=>'Scrypt',
-            1=>'SHA256',
-            2=>'Scrypt-A.-Nf.',
-            3=>'X11',
-            4=>'X13',
-            5=>'Keccak',
-            6=>'X15',
-            7=>'Nist5',
+            0 => 'Scrypt',
+            1 => 'SHA256',
+            2 => 'Scrypt-A.-Nf.',
+            3 => 'X11',
+            4 => 'X13',
+            5 => 'Keccak',
+            6 => 'X15',
+            7 => 'Nist5',
+            8 => 'NeoScrypt',
+            9 => 'Lyra2RE',
             100=>'Multi-algorithm'
         );
-        if ( array_key_exists( $algoID, $algoTypes ) ) {
-            return $algoTypes[$algoID];
+        if (array_key_exists($algoId, $algoTypes)) {
+            return $algoTypes[$algoId];
         } else {
             return "Undefined";
         }
     }
 
     public function update() {
-        if ( $CACHED == false || $this->_fileHandler->lastTimeModified() >= 60 ) { // updates every minute
+        if ($CACHED == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
+            $poolData = array();
+            $poolData = curlCall($this->_apiURL  . 'api?method=stats.provider&addr='. $this->_btcaddess);
 
-            $poolData =  $this->curlDownload( $this->_apiURL  . '?method=stats.provider&addr='. $this->_btcaddess ) ;
+            $data = array();
 
-            $data=array();
+            $data['type'] = $this->_type;
 
-            $data['type'] = 'nicehash';
+            $data['total_balance'] = 0;
 
-            foreach ( $poolData['result']['stats'] as $stats => $values ) {
-                if ( $values['accepted_speed'] > 0 ) {
-                    $algo = $this->getAlgo( $values['algo'] );
+            foreach ($poolData['result']['stats'] as $stats => $values) {
+                if ($values['accepted_speed'] > 0 || $values['balance'] > 0.00000000) {
+                    $algo = $this->getAlgo($values['algo']);
+                    $data['total_balance'] += $values['balance'];
                     $data[$algo.'_balance'] = $values['balance'] . ' BTC';
-                    $data[$algo.'_accepted'] = $values['accepted_speed'] * 1000 . ' Mh/s'; //values are given in GH/s
-                    $data[$algo.'_rejected'] = $values['rejected_speed'] * 1000 . ' Mh/s'; //values are given in GH/s
-
+                    $data[$algo.'_accepted'] = formatHashrate($values['accepted_speed'] * 1000000);
+                    $data[$algo.'_rejected'] = formatHashrate($values['rejected_speed'] * 1000000);
                 }
             }
 
-            $this->_fileHandler->write( json_encode( $data ) );
+            $data['total_balance'] = number_format($data['total_balance'], 8) . ' BTC';
+
+            $data['address'] = $this->_btcaddess;
+
+            $data['url'] = $this->_apiURL;
+
+            $this->_fileHandler->write(json_encode($data));
+            
             return $data;
         }
 
