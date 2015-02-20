@@ -25,6 +25,7 @@ class Wallets extends Config_Wallets {
         'CAD'   => 'Canadian Dollar',
         'EUR'   => 'Euro',
         'GBP'   => 'British Pound',
+        'NZD'   => 'New Zealand Dollar',
         'USD'   => 'US Dollar',
     );
 
