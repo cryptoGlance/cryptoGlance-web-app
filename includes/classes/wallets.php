@@ -88,9 +88,9 @@ class Wallets extends Config_Wallets {
                 'coin_balance' => str_replace('.00000000', '', number_format($coinBalance, 8, '.', ',')),
                 'coin_price' => str_replace('.00000000', '', $coinPrice),
                 'coin_code' => 'BTC',
+                'coin_value' => number_format($fiatPrice, 4, '.', ','),
                 'fiat_balance' => number_format($fiatBalance, 2, '.', ','),
                 'fiat_code' => $wallet['fiat'],
-                'total_addresses' => count($wallet['addresses']),
                 'addresses' => $walletAddressData,
             );
         }
