@@ -13,6 +13,7 @@ class Wallets extends Config_Wallets {
         'bitcoin'   => 'BTC',
         'darkcoin'  => 'DRK',
         'dogecoin'  => 'DOGE',
+        'dogecoindark'  => 'DOGED',
         'litecoin'  => 'LTC',
         'neoscoin' => 'NEOS',
         'paycoin' => 'XPY',
