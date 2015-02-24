@@ -9,7 +9,7 @@ if (!$_SESSION['login_string']) {
 session_write_close();
 
 $CACHED = true;
-if (isset($_GET['cached']) && $_GET['cached'] == 0) {
+if (isset($_GET['cached']) && !$_GET['cached']) {
     $CACHED = false;
 }
 $GLOBALS['cached'] = $CACHED;
