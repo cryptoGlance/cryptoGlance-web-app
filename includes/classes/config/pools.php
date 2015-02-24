@@ -33,11 +33,20 @@ class Config_Pools extends Config_Abstract {
         $url = rtrim($_POST['url'], '/');
         $address = $_POST['address'];
         $api = $_POST['api'];
+        $secret = $_POST['secret'];
         $coin = $_POST['coin'];
         $userid = $_POST['userid'];
 
         $pool = array();
-        if ($type == 'btcguild' && !empty($api)) {
+        if ($type == 'antpool' && !empty($api) && !empty($secret) && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'AntPool'),
+                'apikey' => $api,
+                'apisecret' => $secret,
+                'userid' => $userid,
+            );
+        } else if ($type == 'btcguild' && !empty($api)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : 'BTC Guild'),

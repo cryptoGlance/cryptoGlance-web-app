@@ -1,6 +1,6 @@
 <?php
 
-function curlCall($url) {
+function curlCall($url, $params = null, $key = null, $sig = null) {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_FAILONERROR, true);
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
@@ -8,20 +8,27 @@ function curlCall($url) {
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_SSLVERSION, 4);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+    if (!is_null($params) && !is_null($key) && !is_null($sig)) {
+        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded', 'key: '.$key, 'sig: '.$sig));
+    } else {
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    }
     curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
 
     $curlExec = curl_exec($curl);
     if($curlExec === false) {
         // Enable for debugging only!
-        // echo 'Curl error: ' . curl_error($curl);
+        echo 'Curl error: ' . curl_error($curl);
         $data = array();
     } else if(curl_errno($curl)){
         // Enable for debugging only!
-        // echo 'Curl error: ' . curl_error($curl);
-        // echo "<pre>";
-        // print_r(curl_getinfo($curl));
-        // echo "</pre>";
+        echo 'Curl error: ' . curl_error($curl);
+        echo "<pre>";
+        print_r(curl_getinfo($curl));
+        echo "</pre>";
         $data = array();
     } else {
         $data = json_decode($curlExec, true);
