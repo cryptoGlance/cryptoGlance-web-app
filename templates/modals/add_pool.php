@@ -16,11 +16,12 @@
            </div>
           <div class="form-group all">
             <label for="selectPoolType" class="col-sm-3 control-label">Type</label>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <select class="form-control" id="selectPoolType" name="poolType">
                  <option disabled selected>Select A Pool</option>
                  <option value="btcguild">BTC Guild</option>
                  <option value="bitcoinaffiliatenetwork">Bitcoin Affiliate Network</option>
+                 <option value="slush">BitcoinCZ aka Slush</option>
                  <option value="ckpool">CkPool</option>
                  <option value="eclipse">Eclipse</option>
                  <option value="eligius">Eligius</option>
@@ -43,7 +44,7 @@
                <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://pooldomain.com/">
              </div>
            </div>
-           <div class="form-group mpos bitcoinaffiliatenetwork btcguild simplecoin eclipse trademybit multipoolus ckpool" style="display: none;">
+           <div class="form-group mpos bitcoinaffiliatenetwork btcguild simplecoin eclipse trademybit multipoolus ckpool slush" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">
