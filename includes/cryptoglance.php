@@ -85,6 +85,15 @@ class CryptoGlance {
         if (empty($settings['general']['updateTimes']['wallet'])) {
             $settings['general']['updateTimes']['wallet'] = 600000;
         }
+        if (empty($settings['general']['mobileminer']['enabled'])) {
+            $settings['general']['mobileminer']['enabled'] = 0;
+        }
+        if (empty($settings['general']['mobileminer']['username'])) {
+            $settings['general']['mobileminer']['username'] = '';
+        }
+        if (empty($settings['general']['mobileminer']['apikey'])) {
+            $settings['general']['mobileminer']['apikey'] = '';
+        }
 
         return $settings;
     }
@@ -103,7 +112,12 @@ class CryptoGlance {
                     'rig' => $data['general']['rigUpdateTime']*1000,
                     'pool' => $data['general']['poolUpdateTime']*1000,
                     'wallet' => $data['general']['walletUpdateTime']*1000,
-                )
+                ),
+                'mobileminer' => array(
+                    'enabled' => $data['general']['mobileminer'],
+                    'username' => $data['general']['mobileminerUsername'],
+                    'apikey' => $data['general']['mobileminerAPIKey'],
+                ),
             );
         }
 

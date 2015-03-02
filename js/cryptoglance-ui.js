@@ -388,12 +388,6 @@ $(document).ready(function() {
     $('iframe').slideDown();
   });
 
-  // Toggle App Update Types
-  //
-  $('input[name="update"]', '#settings-wrap').on('switchChange.bootstrapSwitch', function(event, state) {
-    $('.app-update-types').fadeToggle();
-  });
-
   $('#layout-grid').click(function() {
     initMasonry();
     $('#layout-list').removeClass('active-layout');
