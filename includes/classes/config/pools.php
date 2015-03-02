@@ -46,6 +46,13 @@ class Config_Pools extends Config_Abstract {
                 'apisecret' => $secret,
                 'userid' => $userid,
             );
+        } else if ($type == 'bitminter' && !empty($api) && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'BitMinter'),
+                'apikey' => $api,
+                'userid' => $userid,
+            );
         } else if ($type == 'btcguild' && !empty($api)) {
             $pool = array(
                 'type' => $type,
