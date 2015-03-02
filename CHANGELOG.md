@@ -1,14 +1,24 @@
 
-    [ v2.0.2.731-nightly ]
+    [ v2.0.2.742-nightly ]
 
     FEATURES
     ========
-    - Added NiceHash/WestHash
+    - Added New Zealand Dollar as a Fiat option in wallets
+    - Added current FIAT price of a coin
+
+    COINS
+    =====
+    - [+COIN] DogeCoin Dark
+
+    POOLS
+    =====
+    - [+POOL] BitcoinCZ aka Slush
+    - [+POOL] AntPool
+    - [+POOL] BitMinter
 
     HOTFIXES
     ========
-    - MPOS network hash x1000h too high
-    - Updated cgminer Reject warning priority
+    - Removed useless BTC column when looking at a BTC wallet
 
     KNOWN ISSUES
     ========
@@ -17,11 +27,24 @@
 
 ---
 
+    [ v2.0.2.731-nightly ]
+
+    POOLS
+    =====
+    - [+POOL] NiceHash/WestHash
+
+    HOTFIXES
+    ========
+    - MPOS network hash x1000h too high
+    - Updated cgminer Reject warning priority
+
+---
+
     [ v2.0.2.693-nightly ]
 
-    FEATURES
-    ========
-    - Added P2Pool
+    POOLS
+    =====
+    - [+POOL] P2Pool
 
 ---
 

@@ -33,11 +33,27 @@ class Config_Pools extends Config_Abstract {
         $url = rtrim($_POST['url'], '/');
         $address = $_POST['address'];
         $api = $_POST['api'];
+        $secret = $_POST['secret'];
         $coin = $_POST['coin'];
         $userid = $_POST['userid'];
 
         $pool = array();
-        if ($type == 'btcguild' && !empty($api)) {
+        if ($type == 'antpool' && !empty($api) && !empty($secret) && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'AntPool'),
+                'apikey' => $api,
+                'apisecret' => $secret,
+                'userid' => $userid,
+            );
+        } else if ($type == 'bitminter' && !empty($api) && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'BitMinter'),
+                'apikey' => $api,
+                'userid' => $userid,
+            );
+        } else if ($type == 'btcguild' && !empty($api)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : 'BTC Guild'),
@@ -137,6 +153,12 @@ class Config_Pools extends Config_Abstract {
                 'name' => ($label ? $label : 'WestHash'),
                 'apiurl' => 'https://www.westhash.com',
                 'address' => $address,
+            );
+        } else if ($type == 'slush' && !empty($api)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'mining.bitcoin.cz'),
+                'apikey' => $api,
             );
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
