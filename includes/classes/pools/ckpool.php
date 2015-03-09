@@ -33,6 +33,8 @@ class Pools_Ckpool extends Pools_Abstract {
             }
             $data['workers'] = $poolData['workers']['rows'];
 
+            $data['round_duration'] = formatTimeElapsed(time() - $poolData['user']['lastblock']);
+
             $data['url'] = $this->_apiURL;
 
             $this->_fileHandler->write(json_encode($data));

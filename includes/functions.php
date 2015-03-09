@@ -9,10 +9,15 @@ function curlCall($url, $params = null, $key = null, $sig = null) {
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_SSLVERSION, 4);
 
+
     if (!is_null($params) && !is_null($key) && !is_null($sig)) {
         curl_setopt($curl, CURLOPT_POST, TRUE);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded', 'key: '.$key, 'sig: '.$sig));
+    } else if (!is_null($params)) {
+        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     } else {
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     }
