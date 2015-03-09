@@ -11,6 +11,7 @@ class Wallets extends Config_Wallets {
 
     protected $_currencies = array(
         'bitcoin'   => 'BTC',
+        'burstcoin'   => 'BURST',
         'darkcoin'  => 'DRK',
         'dogecoin'  => 'DOGE',
         'dogecoindark'  => 'DOGED',
@@ -18,7 +19,7 @@ class Wallets extends Config_Wallets {
         'neoscoin' => 'NEOS',
         'paycoin' => 'XPY',
         'reddcoin'  => 'RDD',
-        // 'vertcoin'  => 'VTC', // Disabled until blockchain works
+        // 'vertcoin'  => 'VTC', // Disabled until blockchain explorer works
     );
 
     protected $_fiat = array(
