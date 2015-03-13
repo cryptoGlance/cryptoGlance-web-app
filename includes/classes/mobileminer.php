@@ -32,6 +32,12 @@ class MobileMiner {
     // The app will simply update all the device data to the mobileminer api
     public function getUpdate() {
 
+        $data = curlCall('https://api.mobileminerapp.com/MiningStatisticsInput?emailAddress=email@address.com&applicationKey=appkey&apiKey=apikey');
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        die();
+
         // Do nothing if it's not enabled
         if (!$GLOBALS['settings']['general']['mobileminer']['enabled']) {
             return;
