@@ -23,20 +23,20 @@ function curlCall($url, $params = null, $key = null, $sig = null) {
     }
     curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
 
-        // curl_setopt($curl, CURLOPT_POST, TRUE);
-        // curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+    // curl_setopt($curl, CURLOPT_POST, TRUE);
+    // curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 
     $curlExec = curl_exec($curl);
     if($curlExec === false) {
         // Enable for debugging only!
-//        echo 'Curl error: ' . curl_error($curl);
+        // echo 'Curl error: ' . curl_error($curl);
         $data = array();
-    } else if(curl_errno($curl)){
+    } else if(curl_errno($curl)) {
         // Enable for debugging only!
-//        echo 'Curl error: ' . curl_error($curl);
-//        echo "<pre>";
-//        print_r(curl_getinfo($curl));
-//        echo "</pre>";
+        // echo 'Curl error: ' . curl_error($curl);
+        // echo "<pre>";
+        // print_r(curl_getinfo($curl));
+        // echo "</pre>";
         $data = array();
     } else {
         $data = json_decode($curlExec, true);

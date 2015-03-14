@@ -27,4 +27,10 @@ $(document).ready(function() {
     $('.mobileminer-settings').fadeToggle();
   });
 
+  // Hide Manual Update check if setting has changed
+  //
+  $('input[name="updateType"]').change(function() {
+    $('.checkForUpdates').fadeOut();
+  });
+  
 });

@@ -12,7 +12,7 @@ $errors = array();
 $generalSaveResult = null;
 $emailSaveResult = null;
 
-if (isset($_POST['general'])) {
+if (isset($_POST)) {
     $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
     $mobileminerEnabled = ($_POST['mobileminer'] == 'on') ? 1 : 0;
     $data = array();
@@ -30,12 +30,6 @@ if (isset($_POST['general'])) {
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
     $cryptoGlance = new CryptoGlance();
     $settings = $cryptoGlance->getSettings();
-} else if (isset($_POST['email'])) {
-    $data = array();
-
-    // do stuff
-
-    $emailSaveResult = $cryptoGlance->saveSettings(array('email' => $data));
 }
 
 $jsArray = array('settings');
@@ -61,6 +55,9 @@ require_once("includes/header.php");
                       </div>
                     </div>
                     <div class="form-group app-update-types" style="display: <?php echo ($settings['general']['updates']['enabled']) ? 'block' : 'none' ?>;">
+                    <?php if ($settings['general']['updates']['enabled']) { ?>
+                      <span class="help-block checkForUpdates" style="  margin: 0 0 10px 0;"><a href="#" onclick="versionCheck()" style="color: #33b5e5;"><i class="icon icon-uploadalt"></i> Check for updates now</a></span>
+                    <?php } ?>
                       <span class="help-block"><i class="icon icon-info-sign"></i> Choose which type of updates you would like to be notified for:</span>
                       <div class="col-sm-4">
                         <label>

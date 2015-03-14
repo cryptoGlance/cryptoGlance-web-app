@@ -76,7 +76,7 @@ class Config_Pools extends Config_Abstract {
         } else if ($type == 'bitcoinaffiliatenetwork' && !empty($api) && !empty($userid)) {
             $pool = array(
                 'type' => $type,
-                'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
+                'name' => ($label ? $label : 'Bitcoin Affiliate Network'),
                 'apikey' => $api,
                 'userid' => $userid,
             );
