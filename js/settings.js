@@ -2,11 +2,15 @@
 $('button').click(function(e) {
     if ($(this).attr('name') == 'clearCookies') {
         e.preventDefault();
-        
+
         for (var cookie in $.cookie()) {
             $.removeCookie(cookie);
         }
 
         window.location.assign('logout.php');
     }
+});
+
+$('input[name="updateType"]').change(function() {
+    $('.checkForUpdates').fadeOut();
 });

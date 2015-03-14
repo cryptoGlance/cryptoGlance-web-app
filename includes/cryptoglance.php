@@ -118,6 +118,11 @@ class CryptoGlance {
         $this->_config['cryptoglance'] = $settings;
 
         if ($fh->write(json_encode($settings)) !== false) {
+            if (isset($_COOKIE['cryptoglance_version'])) {
+                unset($_COOKIE['cryptoglance_version']);
+                setcookie('cryptoglance_version', null, -1, '/');
+            }
+
             return true;
         } else {
             return false;
