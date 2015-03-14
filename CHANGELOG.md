@@ -1,5 +1,42 @@
 
-    [ v2.0.2.xxx ]
+    [ v2.0.2.753 ]
+
+    FEATURES
+    ========
+    - Added manual update check in Settings page
+
+    ALGORITHMS
+    ==========
+    - [+Algorithm] Blake-256
+    - [+Algorithm] Groestl
+    - [+Algorithm] Jackpot
+    - [+Algorithm] Lyra2RE
+    - [+Algorithm] Neos-Blake
+    - [+Algorithm] NeoScrypt
+    - [+Algorithm] WHIRL
+    - [+Algorithm] X17
+
+    COINS
+    =====
+    - [+COIN] Burstcoin
+
+    HOTFIXES
+    ========
+    - Fixed issue with pools not loading
+    - Added round duration to CKPool
+    - Fixed incorrect BTC Guild pool hashrate
+    - Fixed incorrect BTC Guild worker count
+    - Fixed issue with Bitcoin Affiliate Network saving an empty name/label
+
+    KNOWN ISSUES
+    ========
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+    - Sometimes Update does not work
+
+---
+
+    [ v2.0.2.742 ]
 
     FEATURES
     ========
@@ -20,12 +57,8 @@
     ========
     - Removed useless BTC column when looking at a BTC wallet
 
-    KNOWN ISSUES
-    ========
-    - Pools may not load sometimes
-    - Wallets can take a long time to load
-
 ---
+
     [ v2.0.2.731 ]
 
     POOLS
