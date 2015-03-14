@@ -10,20 +10,28 @@ class CryptoGlance {
     );
 
     private $_algorithms = array(
+        'BLAKE256'  =>  'Blake-256',
         'FRESH'     =>  'Fresh',
-        'FUGUE'     =>  'Fugue256',
+        'FUGUE'     =>  'Fugue-256',
+        'GROESTL'   =>  'Groestl',
+        'JHA'       =>  'Jackpot',
         'KECCAK'    =>  'Keccak',
-        'NIST'      =>  'NIST',
-        'NSCRYPT'   =>  'NScrypt',
-        'QUARK'     =>  'Quarkcoin',
-        'SHA256'    =>  'SHA-256',
+        'LYRA2RE'   =>  'Lyra2RE',
+        'NEOSBLAKE' =>  'Neos-Blake',
+        'NEOSCRYPT' =>  'NeoScrypt',
+        'NIST'      =>  'Nist5',
+        'NSCRYPT'   =>  'Scrypt-N',
+        'QUARK'     =>  'Quark',
         'SCRYPT'    =>  'Scrypt',
+        'SHA256'    =>  'SHA-256',
         'TWE'       =>  'Twecoin',
         'UNK'       =>  'Unknown',
+        'WHIRL'     =>  'WHIRL',
         'X11'       =>  'X11',
         'X13'       =>  'X13',
         'X14'       =>  'X14',
         'X15'       =>  'X15',
+        'X17'       =>  'X17',
     );
 
     private $_config;
