@@ -5,6 +5,7 @@ function curlCall($url, $params = null, $key = null, $sig = null) {
     curl_setopt($curl, CURLOPT_FAILONERROR, true);
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_SSLVERSION, 4);
@@ -13,6 +14,10 @@ function curlCall($url, $params = null, $key = null, $sig = null) {
         curl_setopt($curl, CURLOPT_POST, TRUE);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded', 'key: '.$key, 'sig: '.$sig));
+    } else if (!is_null($params)) {
+        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     } else {
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     }
@@ -21,14 +26,14 @@ function curlCall($url, $params = null, $key = null, $sig = null) {
     $curlExec = curl_exec($curl);
     if($curlExec === false) {
         // Enable for debugging only!
-        echo 'Curl error: ' . curl_error($curl);
+        // echo 'Curl error: ' . curl_error($curl);
         $data = array();
     } else if(curl_errno($curl)){
         // Enable for debugging only!
-        echo 'Curl error: ' . curl_error($curl);
-        echo "<pre>";
-        print_r(curl_getinfo($curl));
-        echo "</pre>";
+        // echo 'Curl error: ' . curl_error($curl);
+        // echo "<pre>";
+        // print_r(curl_getinfo($curl));
+        // echo "</pre>";
         $data = array();
     } else {
         $data = json_decode($curlExec, true);

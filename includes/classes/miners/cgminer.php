@@ -380,11 +380,8 @@ class Miners_Cgminer extends Miners_Abstract {
                     'id' => $pool['POOL'],
                     'url' => ltrim(stristr($pool['URL'], '//'), '//'),
                     'Last Share Time' => $pool['Last Share Time'],
-                    'algorithm' => null,
+                    'algorithm' => (array_key_exists('Algorithm Type', $pool) ? $pool['Algorithm Type'] : null),
                 );
-                if (array_key_exists('Algorithm Type', $pool)) {
-                    $this->_settings['algorithm'] = $pool['Algorithm Type'];
-                }
             }
         }
 
@@ -416,7 +413,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     );
                 }
             }
-            
+
             // Check temperatures limits
             if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
                 if ($dev['Temperature'] >= $this->_settings['temps']['danger']) {
@@ -431,7 +428,7 @@ class Miners_Cgminer extends Miners_Abstract {
                     );
                 }
             }
-            
+
             // If no hardware errors, check the health
             if (empty($status)) {
                 if ($dev['Status'] == 'Dead') {

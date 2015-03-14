@@ -359,6 +359,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 }
 
 .help-block {
+  clear: both;
   font-weight: bold;
   font-family: roboto;
   font-style: italic;
