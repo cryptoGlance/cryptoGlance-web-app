@@ -9,6 +9,8 @@ var cG = {};
 
 var $document = null;
 var keyboardState = null;
+var currFFZoom = 1;
+var currIEZoom = 100;
 !function ($) {
     $document = $(document)
     keyboardState = []
@@ -388,12 +390,6 @@ $(document).ready(function() {
     $('iframe').slideDown();
   });
 
-  // Toggle App Update Types
-  //
-  $('input[name="update"]', '#settings-wrap').on('switchChange.bootstrapSwitch', function(event, state) {
-    $('.app-update-types').fadeToggle();
-  });
-
   $('#layout-grid').click(function() {
     initMasonry();
     $('#layout-list').removeClass('active-layout');
@@ -493,6 +489,7 @@ $(document).ready(function() {
     //
     // Ctrl+D = redirect to debug.php
     $document.on('keydown', function (evt) {
+        console.log(evt.keyCode);
       switch (evt.keyCode) {
         case 17: // CTRL
           keyboardState.indexOf('ctrl') === -1 && keyboardState.push('ctrl')
@@ -500,9 +497,43 @@ $(document).ready(function() {
         case 68: // D
           keyboardState.indexOf('D') === -1 && keyboardState.push('D')
           break;
+        case 188: // <
+          keyboardState.indexOf('<') === -1 && keyboardState.push('<')
+          break;
+        case 190: // >
+          keyboardState.indexOf('>') === -1 && keyboardState.push('>')
+          break;
+        case 191: // /
+          keyboardState.indexOf('/') === -1 && keyboardState.push('/')
+          break;
       }
       if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('D') !== -1) {
         window.location.assign('debug.php')
+      } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('>') !== -1) { // zoom in
+        // firefox
+        currFFZoom += 0.02;
+        $('body').css('MozTransform','scale(' + currFFZoom + ')');
+
+        // everything else
+        currIEZoom += 2;
+        $('body').css('zoom', currIEZoom + '%');
+      } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('<') !== -1) { // zoom out
+        // firefox
+        if (currFFZoom > 0.02) {
+            currFFZoom -= 0.02;
+            $('body').css('MozTransform','scale(' + currFFZoom + ')');
+        }
+
+        // everything else
+        if (currIEZoom > 2) {
+            currIEZoom -= 2;
+            $('body').css('zoom', currIEZoom + '%');
+        }
+      } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('/') !== -1) { // zoom out
+        // firefox
+        $('body').css('MozTransform','scale(1)');
+        // everything else
+        $('body').css('zoom', '100%');
       }
     })
     .on('keyup', function (evt) {
@@ -512,6 +543,15 @@ $(document).ready(function() {
           break;
         case 68:
           keyboardState.splice(keyboardState.indexOf('D'), 1)
+          break;
+        case 188: // <
+        keyboardState.splice(keyboardState.indexOf('<'), 1)
+          break;
+        case 190: // >
+        keyboardState.splice(keyboardState.indexOf('>'), 1)
+          break;
+        case 191: // /
+        keyboardState.splice(keyboardState.indexOf('/'), 1)
           break;
       }
     })
