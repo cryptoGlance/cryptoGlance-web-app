@@ -121,7 +121,7 @@
     - Rigs Algorithm is auto-set when using sgMiner v5+
     - Ability to reset rig stats
     - Ability to reset rig stats on pool change
-    - New FIAT conversions for most coins (Thanks to FunkyC: https://bitcoinindex.es/)
+    - New FIAT conversions for most coins (Thanks to FunkyC: https://firstrally.com/)
     - New debug command to see raw miner data: CTRL + D
 
     POOLS
