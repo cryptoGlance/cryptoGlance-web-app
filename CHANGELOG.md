@@ -1,4 +1,30 @@
 
+    [ v2.0.2.763 ]
+
+    FEATURES
+    ========
+    - Added app specific way to zoom in/out
+        - Zoom Out:     CTRL + <
+        - Zoom In:      CTRL + >
+        - Reset Zoom:   CTRL + /
+
+    HOTFIXES
+    ========
+    - Changed from BitcoinIndex.es to FirstRally.com
+    - Fixed incorrect reporting of rejected share warning
+    - Update page will now display correctly for those with slow connections
+    - Added permission checking to the update process
+    - Fixed permissionfix script, should correctly set permissions on parent folder
+
+    KNOWN ISSUES
+    ========
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+    - Pools do not show an offline mode
+    - Sometimes Update process does not work (Should be fixed as per this release)
+
+---
+
     [ v2.0.2.753 ]
 
     FEATURES
@@ -27,12 +53,6 @@
     - Fixed incorrect BTC Guild pool hashrate
     - Fixed incorrect BTC Guild worker count
     - Fixed issue with Bitcoin Affiliate Network saving an empty name/label
-
-    KNOWN ISSUES
-    ========
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
-    - Sometimes Update does not work
 
 ---
 
