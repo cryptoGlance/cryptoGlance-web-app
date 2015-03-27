@@ -531,8 +531,10 @@ $(document).ready(function() {
         }
       } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('/') !== -1) { // zoom out
         // firefox
+        currFFZoom = 1;
         $('body').css('MozTransform','scale(1)');
         // everything else
+        currIEZoom = 100;
         $('body').css('zoom', '100%');
       }
     })
