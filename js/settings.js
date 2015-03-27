@@ -11,6 +11,20 @@ $('button').click(function(e) {
     }
 });
 
-$('input[name="updateType"]').change(function() {
+// Execute when the DOM is ready
+//
+$(document).ready(function() {
+
+  // Toggle App Update Types
+  //
+  $('input[name="update"]', '#settings-wrap').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('.app-update-types').fadeToggle();
+  });
+
+  // Hide Manual Update check if setting has changed
+  //
+  $('input[name="updateType"]').change(function() {
     $('.checkForUpdates').fadeOut();
+  });
+  
 });
