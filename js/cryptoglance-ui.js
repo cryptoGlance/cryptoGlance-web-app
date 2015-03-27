@@ -511,28 +511,29 @@ $(document).ready(function() {
         window.location.assign('debug.php')
       } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('>') !== -1) { // zoom in
         // firefox
-        currFFZoom += 0.02;
+        currFFZoom += 0.10;
         $('body').css('MozTransform','scale(' + currFFZoom + ')');
 
         // everything else
-        currIEZoom += 2;
+        currIEZoom += 10;
         $('body').css('zoom', currIEZoom + '%');
       } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('<') !== -1) { // zoom out
         // firefox
-        if (currFFZoom > 0.02) {
-            currFFZoom -= 0.02;
+        if (currFFZoom > 0.10) {
+            currFFZoom -= 0.10;
             $('body').css('MozTransform','scale(' + currFFZoom + ')');
         }
 
         // everything else
-        if (currIEZoom > 2) {
-            currIEZoom -= 2;
+        if (currIEZoom > 10) {
+            currIEZoom -= 10;
             $('body').css('zoom', currIEZoom + '%');
         }
       } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('/') !== -1) { // zoom out
         // firefox
         currFFZoom = 1;
         $('body').css('MozTransform','scale(1)');
+
         // everything else
         currIEZoom = 100;
         $('body').css('zoom', '100%');
@@ -547,13 +548,16 @@ $(document).ready(function() {
           keyboardState.splice(keyboardState.indexOf('D'), 1)
           break;
         case 188: // <
-        keyboardState.splice(keyboardState.indexOf('<'), 1)
+          keyboardState.splice(keyboardState.indexOf('<'), 1)
+          $(document).trigger('masonry-update');
           break;
         case 190: // >
-        keyboardState.splice(keyboardState.indexOf('>'), 1)
+          keyboardState.splice(keyboardState.indexOf('>'), 1)
+          $(document).trigger('masonry-update');
           break;
         case 191: // /
-        keyboardState.splice(keyboardState.indexOf('/'), 1)
+          keyboardState.splice(keyboardState.indexOf('/'), 1)
+          $(document).trigger('masonry-update');
           break;
       }
     })
