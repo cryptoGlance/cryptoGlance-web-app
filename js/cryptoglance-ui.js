@@ -510,31 +510,14 @@ $(document).ready(function() {
       if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('D') !== -1) {
         window.location.assign('debug.php')
       } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('>') !== -1) { // zoom in
-        // firefox
-        currFFZoom += 0.10;
-        $('body').css('MozTransform','scale(' + currFFZoom + ')');
-
-        // everything else
         currIEZoom += 10;
         $('body').css('zoom', currIEZoom + '%');
       } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('<') !== -1) { // zoom out
-        // firefox
-        if (currFFZoom > 0.10) {
-            currFFZoom -= 0.10;
-            $('body').css('MozTransform','scale(' + currFFZoom + ')');
-        }
-
-        // everything else
         if (currIEZoom > 10) {
             currIEZoom -= 10;
             $('body').css('zoom', currIEZoom + '%');
         }
       } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('/') !== -1) { // zoom out
-        // firefox
-        currFFZoom = 1;
-        $('body').css('MozTransform','scale(1)');
-
-        // everything else
         currIEZoom = 100;
         $('body').css('zoom', '100%');
       }
