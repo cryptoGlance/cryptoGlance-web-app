@@ -14,7 +14,7 @@
     }
 ?>
 
-<?php if ($generalSaveResult) { ?>
+<?php if ($generalSaveResult && !is_null($generalSaveResult)) { ?>
   <script type="text/javascript">$(document).ready(function() {
       showToastSettingsSaved();
     });</script>

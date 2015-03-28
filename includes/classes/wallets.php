@@ -51,7 +51,7 @@ class Wallets extends Config_Wallets {
         $data = array();
         foreach ($this->_objs as $wallet) {
             // Exchange information
-            $btcIndex = new BitcoinIndex();
+            $btcIndex = new FirstRally();
 
             // Get FIAT rate
             $fiatPrice = $btcIndex->convert($wallet['fiat'], $this->_currencies[$wallet['currency']]);

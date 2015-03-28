@@ -1,5 +1,31 @@
 
-    [ v2.0.2.753-nightly ]
+    [ v2.0.2.763 ]
+
+    FEATURES
+    ========
+    - Added app specific way to zoom in/out
+        - Zoom Out:     CTRL + <
+        - Zoom In:      CTRL + >
+        - Reset Zoom:   CTRL + /
+
+    HOTFIXES
+    ========
+    - Changed from BitcoinIndex.es to FirstRally.com
+    - Fixed incorrect reporting of rejected share warning
+    - Update page will now display correctly for those with slow connections
+    - Added permission checking to the update process
+    - Fixed permissionfix script, should correctly set permissions on parent folder
+
+    KNOWN ISSUES
+    ========
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+    - Pools do not show an offline mode
+    - Sometimes Update process does not work (Should be fixed as per this release)
+
+---
+
+    [ v2.0.2.753 ]
 
     FEATURES
     ========
@@ -28,15 +54,9 @@
     - Fixed incorrect BTC Guild worker count
     - Fixed issue with Bitcoin Affiliate Network saving an empty name/label
 
-    KNOWN ISSUES
-    ========
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
-    - Sometimes Update does not work
-
 ---
 
-    [ v2.0.2.742-nightly ]
+    [ v2.0.2.742 ]
 
     FEATURES
     ========
@@ -59,7 +79,7 @@
 
 ---
 
-    [ v2.0.2.731-nightly ]
+    [ v2.0.2.731 ]
 
     POOLS
     =====
@@ -72,7 +92,7 @@
 
 ---
 
-    [ v2.0.2.693-nightly ]
+    [ v2.0.2.693 ]
 
     POOLS
     =====
@@ -121,7 +141,7 @@
     - Rigs Algorithm is auto-set when using sgMiner v5+
     - Ability to reset rig stats
     - Ability to reset rig stats on pool change
-    - New FIAT conversions for most coins (Thanks to FunkyC: https://bitcoinindex.es/)
+    - New FIAT conversions for most coins (Thanks to FunkyC: https://firstrally.com/)
     - New debug command to see raw miner data: CTRL + D
 
     POOLS
