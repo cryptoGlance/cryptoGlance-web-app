@@ -12,7 +12,7 @@ $errors = array();
 $generalSaveResult = null;
 $emailSaveResult = null;
 
-if (isset($_POST)) {
+if (isset($_POST) && !empty($_POST)) {
     $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
     $data = array();
     $data = array(

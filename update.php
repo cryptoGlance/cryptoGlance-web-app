@@ -287,7 +287,7 @@ if (isset($_POST['cryptoglance_version']) &&
         } else {
             echo '==> Cannot Delete Folder: ' . $currentDir.'update' . '<br />'; ob_flush(); flush();
         }
-        echo '==> Done cleaning up...<br />'; ob_flush(); flush(); sleep(1);
+        echo '==> Done cleaning up...<br />'; ob_flush(); flush(); sleep(2);
 
         // FINISHED -----------------------
 
