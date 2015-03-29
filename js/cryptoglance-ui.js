@@ -489,7 +489,6 @@ $(document).ready(function() {
     //
     // Ctrl+D = redirect to debug.php
     $document.on('keydown', function (evt) {
-        console.log(evt.keyCode);
       switch (evt.keyCode) {
         case 17: // CTRL
           keyboardState.indexOf('ctrl') === -1 && keyboardState.push('ctrl')
