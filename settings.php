@@ -52,7 +52,7 @@ require_once("includes/header.php");
                     </div>
                     <div class="form-group app-update-types" style="display: <?php echo ($settings['general']['updates']['enabled']) ? 'block' : 'none' ?>;">
                     <?php if ($settings['general']['updates']['enabled']) { ?>
-                      <span class="help-block checkForUpdates" style="  margin: 0 0 10px 0;"><a href="#" onclick="versionCheck()" style="color: #33b5e5;"><i class="icon icon-uploadalt"></i> Check for updates now</a></span>
+                      <span class="help-block checkForUpdates" style="  margin: 0 0 10px 0;"><a href="#" onclick="versionCheck(true)" style="color: #33b5e5;"><i class="icon icon-uploadalt"></i> Check for updates now</a></span>
                     <?php } ?>
                       <span class="help-block"><i class="icon icon-info-sign"></i> Choose which type of updates you would like to be notified for:</span>
                       <div class="col-sm-4">
