@@ -241,6 +241,9 @@ if (isset($_POST['cryptoglance_version']) &&
         echo '----------<br />';
         echo '==> Cleaning up... <br />'; ob_flush(); flush(); sleep(1);
         echo '==> Deleting update files:<br />'; ob_flush(); flush(); sleep(1);
+        if (unlink($currentDir . $updateDir.'.zip')) {
+            echo '==> Deleted File: ' . $currentDir . $updateDir.'.zip' . '<br />'; ob_flush(); flush();
+        }
         $it = new RecursiveDirectoryIterator($currentDir . 'update', RecursiveDirectoryIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         // first delete files
@@ -292,10 +295,20 @@ if (isset($_POST['cryptoglance_version']) &&
         // FINISHED -----------------------
 
         echo '----------<br />';
-        echo '** cryptoGlance was updated successfully! **<br />You can navigate back to the Dashboard now.';
+        echo '** cryptoGlance was updated successfully! **';
         echo '<div id="done"></div>'; // this is purely for JS to stop scrolling down
         ob_flush();
         flush();
+
+        if (isset($_SERVER['HTTP_COOKIE'])) {
+            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+            foreach($cookies as $cookie) {
+                $parts = explode('=', $cookie);
+                $name = trim($parts[0]);
+                setcookie($name, '', time()-1000);
+                setcookie($name, '', time()-1000, '/');
+            }
+        }        
     } else {
         echo "==> ERROR: Updates not enabled!";
         ob_flush();

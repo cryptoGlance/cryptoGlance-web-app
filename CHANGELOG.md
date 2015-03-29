@@ -1,4 +1,20 @@
 
+    [ v2.0.2.767 ]
+
+    HOTFIXES
+    ========
+    - Attempt to fix issue where the update.zip does not delete in some cases
+    - Fixed cookie issue caused in last update
+
+    KNOWN ISSUES
+    ========
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+    - Pools do not show an offline mode
+    - Sometimes Update process does not work (Should be fixed as per this release)
+
+---
+
     [ v2.0.2.763 ]
 
     FEATURES
@@ -15,13 +31,6 @@
     - Update page will now display correctly for those with slow connections
     - Added permission checking to the update process
     - Fixed permissionfix script, should correctly set permissions on parent folder
-
-    KNOWN ISSUES
-    ========
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
-    - Pools do not show an offline mode
-    - Sometimes Update process does not work (Should be fixed as per this release)
 
 ---
 

@@ -20,7 +20,7 @@ function versionCheck() {
             showToastUpdate(CURRENT_VERSION, data.commit.commit.message);
             $('.icon-update-available').show();
         } else {
-            $.removeCookie('cryptoglance_version', { path: '/' });
+            $.removeCookie('cryptoglance_version');
             $('.icon-update-available').hide();
         }
     });
