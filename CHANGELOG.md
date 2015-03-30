@@ -1,21 +1,19 @@
 
-    [ v2.0.2.767 ]
+    [ v2.0.2.771 ]
 
-    HOTFIXES
+    FEATURES
     ========
-    - Attempt to fix issue where the update.zip does not delete in some cases
-    - Fixed cookie issue caused in last update
+    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
 
     KNOWN ISSUES
-    ========
+    ============
     - Miner Failover may report incorrect active pool
     - Wallets can take a long time to load
     - Pools do not show an offline mode
-    - Sometimes Update process does not work (Should be fixed as per this release)
 
 ---
 
-    [ v2.0.2.763 ]
+    [ v2.0.3-beta ]
 
     FEATURES
     ========
@@ -23,22 +21,17 @@
         - Zoom Out:     CTRL + <
         - Zoom In:      CTRL + >
         - Reset Zoom:   CTRL + /
-
-    HOTFIXES
-    ========
-    - Changed from BitcoinIndex.es to FirstRally.com
-    - Fixed incorrect reporting of rejected share warning
-    - Update page will now display correctly for those with slow connections
-    - Added permission checking to the update process
-    - Fixed permissionfix script, should correctly set permissions on parent folder
-
----
-
-    [ v2.0.2.753 ]
-
-    FEATURES
-    ========
     - Added manual update check in Settings page
+    - Added New Zealand Dollar as a Fiat option in wallets
+    - Added current FIAT price of a coin
+
+    POOLS
+    =====
+    - [+POOL] NiceHash/WestHash
+    - [+POOL] BitcoinCZ aka Slush
+    - [+POOL] AntPool
+    - [+POOL] BitMinter
+    - [+POOL] P2Pool
 
     ALGORITHMS
     ==========
@@ -54,58 +47,23 @@
     COINS
     =====
     - [+COIN] Burstcoin
+    - [+COIN] DogeCoin Dark
 
     HOTFIXES
     ========
-    - Fixed issue with pools not loading
+    - Changed from BitcoinIndex.es to FirstRally.com
+    - Fixed issue with Bitcoin Affiliate Network saving an empty name/label
+    - Fixed incorrect reporting of rejected share warning
+    - Added permission checking to the update process
+    - Fixed permissionfix script, should correctly set permissions on parent folder
+    - Fixed issue with pools not loading sometimes
     - Added round duration to CKPool
     - Fixed incorrect BTC Guild pool hashrate
     - Fixed incorrect BTC Guild worker count
-    - Fixed issue with Bitcoin Affiliate Network saving an empty name/label
-
----
-
-    [ v2.0.2.742 ]
-
-    FEATURES
-    ========
-    - Added New Zealand Dollar as a Fiat option in wallets
-    - Added current FIAT price of a coin
-
-    COINS
-    =====
-    - [+COIN] DogeCoin Dark
-
-    POOLS
-    =====
-    - [+POOL] BitcoinCZ aka Slush
-    - [+POOL] AntPool
-    - [+POOL] BitMinter
-
-    HOTFIXES
-    ========
     - Removed useless BTC column when looking at a BTC wallet
-
----
-
-    [ v2.0.2.731 ]
-
-    POOLS
-    =====
-    - [+POOL] NiceHash/WestHash
-
-    HOTFIXES
-    ========
     - MPOS network hash x1000h too high
-    - Updated cgminer Reject warning priority
-
----
-
-    [ v2.0.2.693 ]
-
-    POOLS
-    =====
-    - [+POOL] P2Pool
+    - Update page will now display correctly for those with slow connections
+    - Attempt to fix issue where the update.zip does not delete in some cases
 
 ---
 
