@@ -9,7 +9,7 @@ $( window ).ready(function() {
     }
 });
 
-function versionCheck() {
+function versionCheck(alwaysDisplayModal) {
     $.ajax({
         type: 'get',
         url: updateType,
@@ -20,7 +20,10 @@ function versionCheck() {
             showToastUpdate(CURRENT_VERSION, data.commit.commit.message);
             $('.icon-update-available').show();
         } else {
-            $.removeCookie('cryptoglance_version', { path: '/' });
+            if (typeof alwaysDisplayModal !== 'undefined' && alwaysDisplayModal == true) {
+                showToastNoUpdate(CURRENT_VERSION);
+            }
+            $.removeCookie('cryptoglance_version');
             $('.icon-update-available').hide();
         }
     });

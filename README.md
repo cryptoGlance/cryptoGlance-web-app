@@ -69,7 +69,7 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
   <li>Rigs Algorithm is auto-set when using sgMiner v5+</li>
   <li>Ability to reset rig stats</li>
   <li>Ability to reset rig stats on pool change</li>
-  <li>New FIAT conversions for most coins (Thanks to FunkyC: <a href="https://bitcoinindex.es/" rel="external">https://bitcoinindex.es/</a>)</li>
+  <li>New FIAT conversions for most coins (Thanks to FunkyC: <a href="https://firstrally.com/" rel="external">https://firstrally.com/</a>)</li>
   <li>New debug command to see raw miner data: CTRL + D</li>
 </ul>
 **Recently Added Features:**

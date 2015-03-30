@@ -59,6 +59,7 @@ if (isset($_POST['cryptoglance_version']) &&
         <pre style=\"font-family: Menlo,Monaco,Consolas,Courier New,monospace;margin:0;white-space: pre-wrap;\">";
     if (ob_get_level() == 0) ob_start();
     if ($settings['general']['updates']['enabled'] == 1) {
+
         $updateType = $settings['general']['updates']['type'];
 
         echo '==> Starting Update...Please be patient<br />'; ob_flush(); flush(); sleep(1);
@@ -69,9 +70,22 @@ if (isset($_POST['cryptoglance_version']) &&
 
         if (!mkdir($currentDir . $updateDir, 0777, true)) {
             echo '==> ERROR: Failed to create the directory: ' . $updateDir . '<br />';  ob_flush(); flush(); sleep(1);
-            die('* Please contact support via reddit, bitcointalk, or IRC!');
+            echo '********************' . '<br />';
+            echo 'There is a problem with the user permissions that will not allow CryptoGlance to update.' . '<br />';
+            echo 'Please run the command "sudo sh permissionfix.sh" in the root of the CryptoGlance directory to fix this issue.' . '<br />';
+            echo '********************' . '<br />';
+            die('* Please contact support via reddit, bitcointalk, or IRC if you need assistance!');
         } else {
             echo '==> Successfully created temporary directory!<br />'; ob_flush(); flush(); sleep(1);
+        }
+
+        // Permission Check
+        if (!is_writable($currentDir . 'includes' . DIRECTORY_SEPARATOR . 'inc.php')) {
+            echo '********************' . '<br />';
+            echo 'There is a problem with the user permissions that will not allow CryptoGlance to update.' . '<br />';
+            echo 'Please run the command "sudo sh permissionfix.sh" in the root of the CryptoGlance directory to fix this issue.' . '<br />';
+            echo '********************' . '<br />';
+            die('* Please contact support via reddit, bitcointalk, or IRC if you need assistance!');
         }
 
         // DOWNLOADING -----------------------
@@ -227,6 +241,9 @@ if (isset($_POST['cryptoglance_version']) &&
         echo '----------<br />';
         echo '==> Cleaning up... <br />'; ob_flush(); flush(); sleep(1);
         echo '==> Deleting update files:<br />'; ob_flush(); flush(); sleep(1);
+        if (unlink($currentDir . $updateDir.'.zip')) {
+            echo '==> Deleted File: ' . $currentDir . $updateDir.'.zip' . '<br />'; ob_flush(); flush();
+        }
         $it = new RecursiveDirectoryIterator($currentDir . 'update', RecursiveDirectoryIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         // first delete files
@@ -273,15 +290,25 @@ if (isset($_POST['cryptoglance_version']) &&
         } else {
             echo '==> Cannot Delete Folder: ' . $currentDir.'update' . '<br />'; ob_flush(); flush();
         }
-        echo '==> Done cleaning up...<br />'; ob_flush(); flush(); sleep(1);
+        echo '==> Done cleaning up...<br />'; ob_flush(); flush(); sleep(2);
 
         // FINISHED -----------------------
 
         echo '----------<br />';
-        echo '** cryptoGlance was updated successfully! **<br />You can navigate back to the Dashboard now.';
+        echo '** cryptoGlance was updated successfully! **';
         echo '<div id="done"></div>'; // this is purely for JS to stop scrolling down
         ob_flush();
         flush();
+
+        if (isset($_SERVER['HTTP_COOKIE'])) {
+            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+            foreach($cookies as $cookie) {
+                $parts = explode('=', $cookie);
+                $name = trim($parts[0]);
+                setcookie($name, '', time()-1000);
+                setcookie($name, '', time()-1000, '/');
+            }
+        }        
     } else {
         echo "==> ERROR: Updates not enabled!";
         ob_flush();
@@ -289,6 +316,36 @@ if (isset($_POST['cryptoglance_version']) &&
     }
     ob_end_flush();
     echo "</pre>
+    </body>
+</html>";
+    exit;
+} else if ($_GET['view'] == 'update') {
+    echo "<html>
+    <head>
+        <script type=\"text/javascript\" src=\"js/packages/jquery-1.10.2.min.js\"></script>
+        <script type=\"text/javascript\">
+            $(document).ready(function() {
+                setInterval(function() {
+                    $('pre', 'body').append(' .');
+                }, 2500);
+            });
+        </script>
+        <style type=\"text/css\">
+            body {
+              background: #030;
+              color: #090;
+              display: block;
+              font-size: 15px;
+              line-height: 26px;
+              padding: 0 10px;
+              text-shadow: 0px 0px 1px rgba(0, 255, 0, 0.3);
+              text-align: left;
+              text-transform: none;
+            }
+        </style>
+    </head>
+    <body>
+        <pre style=\"font-family: Menlo,Monaco,Consolas,Courier New,monospace;margin:0;white-space: pre-wrap;\">==> Loading, please wait . . .</pre>
     </body>
 </html>";
     exit;
@@ -314,7 +371,7 @@ require_once("includes/header.php");
                     <p>It is advised that you backup your <span class="blue">/<?php echo DATA_FOLDER; ?></span> folder prior to running the update process.</p>
                     <button type="button" class="btn btn-primary" id="btn-update-process" onClick="submit()"><i class="icon icon-restart"></i> Start Update Process</button>
                     <input type="hidden" name="cryptoglance_version" value="<?php echo $_COOKIE['cryptoglance_version'] ?>" />
-                    <iframe name="cg_update" src="#" style="display:none;overflow:hidden;" scrolling="auto"></iframe>
+                    <iframe name="cg_update" src="update.php?view=update" style="display:none;overflow:hidden;" scrolling="auto"></iframe>
                   </form>
                 </div>
               </div>

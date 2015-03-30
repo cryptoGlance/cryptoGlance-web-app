@@ -9,7 +9,7 @@
 
     this.apiData             = { type: 'wallets', action: 'update' }
     this.walletOverviewHtml  = ''
-    this.ready               = true
+    this._ready               = true
 
     this.$walletOverviewBody = $('#wallet .panel-body-addresses')
   }
@@ -36,8 +36,8 @@
 
       /*==========  Setup polling  ==========*/
       setInterval(function () {
-        if (_self.ready) {
-          _self.ready = false
+        if (_self._ready) {
+          _self._ready = false
           _self._getData(function (wallets) {
             _self._update(wallets)
           })
@@ -48,7 +48,7 @@
 
   WalletCollection.prototype.update = function () {
     var _self = this
-    
+
     _self.apiData.cached = 0;
 
     _self._getData(function (wallets) {
@@ -56,8 +56,6 @@
     })
 
     delete _self.apiData.cached;
-
-    return true;
   }
 
 
@@ -80,7 +78,7 @@
       _self.walletOverviewHtml += wallet.update(wallets[index])
     })
     this.$walletOverviewBody.html(this.walletOverviewHtml)
-    this.ready = true
+    this._ready = true
   }
 
   WalletCollection.prototype._getData = function (callback) {

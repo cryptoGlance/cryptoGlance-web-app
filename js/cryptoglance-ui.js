@@ -9,6 +9,8 @@ var cG = {};
 
 var $document = null;
 var keyboardState = null;
+var currFFZoom = 1;
+var currIEZoom = 100;
 !function ($) {
     $document = $(document)
     keyboardState = []
@@ -300,7 +302,14 @@ function showToastUpdate(currentVersion, newestVersion) {
     text    : '<b>Update available!</b><br />You are running <b class="current">'+currentVersion+'</b>,<br />but the latest release is <b class="latest">'+newestVersion+'</b>.<span><a href="update.php"><button type="button" class="btn btn-warning btn-xs" data-type="all"><i class="icon icon-refresh"></i> Update Now</button></a></span>',
     type    : 'notice'
   });
-  $.cookie('cryptoglance_version', newestVersion, { expires: 1,  path: '/' });
+  $.cookie('cryptoglance_version', newestVersion, { expires: 1 });
+}
+function showToastNoUpdate(currentVersion) {
+  $().toastmessage('showToast', {
+    sticky  : true,
+    text    : '<b>No Update Available</b><br />You are currently running the latest build (<b class="current">'+currentVersion+'</b>) of CryptoGlance.',
+    type    : 'notice'
+  });
 }
 
 // (Toast) Saved settings
@@ -494,9 +503,29 @@ $(document).ready(function() {
         case 68: // D
           keyboardState.indexOf('D') === -1 && keyboardState.push('D')
           break;
+        case 188: // <
+          keyboardState.indexOf('<') === -1 && keyboardState.push('<')
+          break;
+        case 190: // >
+          keyboardState.indexOf('>') === -1 && keyboardState.push('>')
+          break;
+        case 191: // /
+          keyboardState.indexOf('/') === -1 && keyboardState.push('/')
+          break;
       }
       if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('D') !== -1) {
         window.location.assign('debug.php')
+      } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('>') !== -1) { // zoom in
+        currIEZoom += 10;
+        $('body').css('zoom', currIEZoom + '%');
+      } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('<') !== -1) { // zoom out
+        if (currIEZoom > 10) {
+            currIEZoom -= 10;
+            $('body').css('zoom', currIEZoom + '%');
+        }
+      } else if (keyboardState.indexOf('ctrl') !== -1 && keyboardState.indexOf('/') !== -1) { // zoom out
+        currIEZoom = 100;
+        $('body').css('zoom', '100%');
       }
     })
     .on('keyup', function (evt) {
@@ -506,6 +535,18 @@ $(document).ready(function() {
           break;
         case 68:
           keyboardState.splice(keyboardState.indexOf('D'), 1)
+          break;
+        case 188: // <
+          keyboardState.splice(keyboardState.indexOf('<'), 1)
+          $(document).trigger('masonry-update');
+          break;
+        case 190: // >
+          keyboardState.splice(keyboardState.indexOf('>'), 1)
+          $(document).trigger('masonry-update');
+          break;
+        case 191: // /
+          keyboardState.splice(keyboardState.indexOf('/'), 1)
+          $(document).trigger('masonry-update');
           break;
       }
     })

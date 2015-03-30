@@ -83,8 +83,6 @@
         }
       })
     })
-
-    return true;
   }
 
   RigCollection.prototype._getData = function (callback) {

@@ -402,9 +402,13 @@ class Miners_Cgminer extends Miners_Abstract {
 
             // If rejects are higher than accepted
             if (empty($status)) {
-                $totalShares = $dev[$this->_shareTypePrefix.'Accepted'] + $dev[$this->_shareTypePrefix.'Rejected'];
-                $acceptedPercent = round(($dev[$this->_shareTypePrefix.'Accepted']/$totalShares)*100, 2);
-                $rejectedPercent = round(($dev[$this->_shareTypePrefix.'Rejected']/$totalShares)*100, 2);
+                $shareTypePrefix = '';
+                if ($this->_summary['Difficulty Accepted'] > $this->_summary['Accepted']) {
+                    $shareTypePrefix = 'Difficulty ';
+                }
+                $totalShares = $dev[$shareTypePrefix.'Accepted'] + $dev[$shareTypePrefix.'Rejected'];
+                $acceptedPercent = round(($dev[$shareTypePrefix.'Accepted']/$totalShares)*100, 2);
+                $rejectedPercent = round(($dev[$shareTypePrefix.'Rejected']/$totalShares)*100, 2);
 
                 if ($rejectedPercent > $acceptedPercent) {
                     $status = array (

@@ -8,6 +8,6 @@
    </div>
    <div class="panel-body">
       <div class="panel-body-addresses"><img src="images/ajax-loader.gif" alt="loading" style="position: relative; float:none; opacity: 1; bottom: 0; left: 0;" /></div>
-      <div class="panel-body-thanks">Conversions powered by <a href="https://bitcoinindex.es" target="_external">https://bitcoinindex.es</a></div>
+      <div class="panel-body-thanks">Conversions powered by <a href="https://firstrally.com/" target="_external">https://firstrally.com/</a></div>
    </div>
 </div>
