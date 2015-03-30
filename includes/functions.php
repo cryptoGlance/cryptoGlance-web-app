@@ -1,14 +1,26 @@
 <?php
 
-function curlCall($url) {
+function curlCall($url, $params = null, $key = null, $sig = null) {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_FAILONERROR, true);
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($curl, CURLOPT_SSLVERSION, 4);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+    if (!is_null($params) && !is_null($key) && !is_null($sig)) {
+        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded', 'key: '.$key, 'sig: '.$sig));
+    } else if (!is_null($params)) {
+        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+    } else {
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    }
     curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; cryptoGlance ' . CURRENT_VERSION . '; PHP/' . phpversion() . ')');
 
     $curlExec = curl_exec($curl);

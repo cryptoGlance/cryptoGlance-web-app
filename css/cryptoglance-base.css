@@ -74,8 +74,7 @@ h1, h2, h3, h4, h5, h6 {
 #settings-wrap h3, #rigPoolDetails h3 {
   text-align: center;
   font-size: 1.6em;
-  margin: 30px 0 20px;
-  padding-top: 20px;
+  margin: 20px 0;
   border-top: 1px solid #888;
   box-shadow: 0px -20px 20px -10px rgba(0,0,0, 0.4);
 }
@@ -359,6 +358,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 }
 
 .help-block {
+  clear: both;
   font-weight: bold;
   font-family: roboto;
   font-style: italic;

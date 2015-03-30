@@ -12,9 +12,8 @@ $errors = array();
 $generalSaveResult = null;
 $emailSaveResult = null;
 
-if (isset($_POST['general'])) {
+if (isset($_POST) && !empty($_POST)) {
     $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
-    $hwErrorsEnabled = ($_POST['hwErrorsEnabled'] == 'on') ? 1 : 0;
     $data = array();
     $data = array(
         'update' => intval($updatesEnabled),
@@ -27,12 +26,6 @@ if (isset($_POST['general'])) {
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
     $cryptoGlance = new CryptoGlance();
     $settings = $cryptoGlance->getSettings();
-} else if (isset($_POST['email'])) {
-    $data = array();
-
-    // do stuff
-
-    $emailSaveResult = $cryptoGlance->saveSettings(array('email' => $data));
 }
 
 $jsArray = array('settings');
@@ -49,80 +42,83 @@ require_once("includes/header.php");
           <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST">
               <fieldset>
-                <h3>Stat Refresh Intervals:</h3>
-                <div class="form-group">
-                  <label class="col-sm-5 control-label">Rigs:</label>
-                  <div class="col-sm-3 refresh-interval">
-                    <select class="form-control" name="rigUpdateTime">
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 1000) ? 'selected="selected"' : '' ?> value="1">1 second</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 2000) ? 'selected="selected"' : '' ?> value="2">2 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 3000) ? 'selected="selected"' : '' ?> value="3">3 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 5000) ? 'selected="selected"' : '' ?> value="5">5 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 7000) ? 'selected="selected"' : '' ?> value="3">7 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 10000) ? 'selected="selected"' : '' ?> value="10">10 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 15000) ? 'selected="selected"' : '' ?> value="15">15 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 30000) ? 'selected="selected"' : '' ?> value="30">30 seconds</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 60000) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
-                      <option <?php echo ($settings['general']['updateTimes']['rig'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
-                    </select>
-                  </div>
+                <div id="appUpdates">
+                    <h3>App Updates:</h3>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <input id="enableUpdates" type="checkbox" name="update" <?php echo ($settings['general']['updates']['enabled']) ? 'checked' : '' ?>>
+                        <label for="enableUpdates">Enable cryptoGlance Updates</label>
+                      </div>
+                    </div>
+                    <div class="form-group app-update-types" style="display: <?php echo ($settings['general']['updates']['enabled']) ? 'block' : 'none' ?>;">
+                    <?php if ($settings['general']['updates']['enabled']) { ?>
+                      <span class="help-block checkForUpdates" style="  margin: 0 0 10px 0;"><a href="#" onclick="versionCheck(true)" style="color: #33b5e5;"><i class="icon icon-uploadalt"></i> Check for updates now</a></span>
+                    <?php } ?>
+                      <span class="help-block"><i class="icon icon-info-sign"></i> Choose which type of updates you would like to be notified for:</span>
+                      <div class="col-sm-4">
+                        <label>
+                          <input type="radio" name="updateType" value="release" <?php echo ($settings['general']['updates']['type'] == 'release') ? 'checked' : '' ?>> Release
+                        </label>
+                        <span class="help-block">Stable builds suitable for every-day use</span>
+                      </div>
+                      <div class="col-sm-4">
+                        <label>
+                          <input type="radio" name="updateType" value="beta" <?php echo ($settings['general']['updates']['type'] == 'beta') ? 'checked' : '' ?>/> Beta
+                        </label>
+                        <span class="help-block">New features and bug fixes, but not fully tested</span>
+                      </div>
+                      <div class="col-sm-4">
+                        <label>
+                          <input type="radio" name="updateType" value="nightly" <?php echo ($settings['general']['updates']['type'] == 'nightly') ? 'checked' : '' ?>> Nightly
+                        </label>
+                        <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
+                      </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-5 control-label">Pools:</label>
-                  <div class="col-sm-3 refresh-interval">
-                    <select class="form-control" name="poolUpdateTime">
-                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 60000) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
-                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['pool'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-5 control-label">Wallets:</label>
-                  <div class="col-sm-3 refresh-interval">
-                    <select class="form-control" name="walletUpdateTime">
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 1800000) ? 'selected="selected"' : '' ?> value="1800">30 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 2700000) ? 'selected="selected"' : '' ?> value="2700">45 minutes</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 3600000) ? 'selected="selected"' : '' ?> value="3600">1 hour</option>
-                      <option <?php echo ($settings['general']['updateTimes']['wallet'] == 7200000) ? 'selected="selected"' : '' ?> value="7200">2 hours</option>
-                    </select>
-                  </div>
-                </div>
-                <h3>App Updates:</h3>
-                <div class="form-group">
-                  <div class="checkbox">
-                    <input id="enableUpdates" type="checkbox" name="update" <?php echo ($settings['general']['updates']['enabled']) ? 'checked' : '' ?>>
-                    <label for="enableUpdates">
-                      Enable cryptoGlance Updates
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group app-update-types" style="display: <?php echo ($settings['general']['updates']['enabled']) ? 'block' : 'none' ?>;">
-                  <span class="help-block"><i class="icon icon-info-sign"></i> Choose which type of updates you would like to be notified for:</span>
-                  <div class="col-sm-4">
-                    <label>
-                      <input type="radio" name="updateType" value="release" <?php echo ($settings['general']['updates']['type'] == 'release') ? 'checked' : '' ?>>
-                      Release
-                    </label>
-                    <span class="help-block">Stable builds suitable for every-day use</span>
-                  </div>
-                  <div class="col-sm-4">
-                    <label>
-                      <input type="radio" name="updateType" value="beta" <?php echo ($settings['general']['updates']['type'] == 'beta') ? 'checked' : '' ?>/>
-                      Beta
-                    </label>
-                    <span class="help-block">New features and bug fixes, but not fully tested</span>
-                  </div>
-                  <div class="col-sm-4">
-                    <label>
-                      <input type="radio" name="updateType" value="nightly" <?php echo ($settings['general']['updates']['type'] == 'nightly') ? 'checked' : '' ?>>
-                      Nightly
-                    </label>
-                    <span class="help-block">Bleeding-edge code updates, may contain bugs</span>
-                  </div>
+                <hr />
+                <div id="updateIntervals">
+                    <h3>Update Intervals:</h3>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Rigs:</label>
+                      <div class="col-sm-3 refresh-interval">
+                        <select class="form-control" name="rigUpdateTime">
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 1000) ? 'selected="selected"' : '' ?> value="1">1 second</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 2000) ? 'selected="selected"' : '' ?> value="2">2 seconds</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 3000) ? 'selected="selected"' : '' ?> value="3">3 seconds</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 5000) ? 'selected="selected"' : '' ?> value="5">5 seconds</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 7000) ? 'selected="selected"' : '' ?> value="3">7 seconds</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 10000) ? 'selected="selected"' : '' ?> value="10">10 seconds</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 15000) ? 'selected="selected"' : '' ?> value="15">15 seconds</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 30000) ? 'selected="selected"' : '' ?> value="30">30 seconds</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 60000) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Pools:</label>
+                      <div class="col-sm-3 refresh-interval">
+                        <select class="form-control" name="poolUpdateTime">
+                          <option <?php echo ($settings['general']['updateTimes']['pool'] == 60000) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
+                          <option <?php echo ($settings['general']['updateTimes']['pool'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['pool'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['pool'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Wallets:</label>
+                      <div class="col-sm-3 refresh-interval">
+                        <select class="form-control" name="walletUpdateTime">
+                          <option <?php echo ($settings['general']['updateTimes']['wallet'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['wallet'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['wallet'] == 1800000) ? 'selected="selected"' : '' ?> value="1800">30 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['wallet'] == 2700000) ? 'selected="selected"' : '' ?> value="2700">45 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['wallet'] == 3600000) ? 'selected="selected"' : '' ?> value="3600">1 hour</option>
+                          <option <?php echo ($settings['general']['updateTimes']['wallet'] == 7200000) ? 'selected="selected"' : '' ?> value="7200">2 hours</option>
+                        </select>
+                      </div>
+                    </div>
                 </div>
                 <hr />
                 <div class="form-group">

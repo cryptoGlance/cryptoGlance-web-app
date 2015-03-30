@@ -245,20 +245,23 @@
         var type = this.getAttribute('data-type');
         var btnTimeout = 500;
 
+        var updateObject = null;
         if (type == 'rig') {
-            if (rigCollection._update()) {
-                btnTimeout = 500;
-            }
+            updateObject = rigCollection;
+            updateObject._update();
         } else if (type == 'wallet') {
-            if (walletCollection.update()) {
-                btnTimeout = 500;
-            }
+            updateObject = walletCollection;
+            updateObject.update();
         }
 
-        setTimeout(function() {
-            $currentButton.html("<i class='icon icon-refresh'></i> Update");
-            $currentButton.prop({ disabled: false });
-        }, btnTimeout);
+        var updateReadyCheck = setInterval(function() {
+            if (updateObject._ready === true) {
+                $currentButton.html("<i class='icon icon-refresh'></i> Update");
+                $currentButton.prop({ disabled: false });
+                clearInterval(updateReadyCheck);
+            }
+        }, 1000);
+
     });
 
     // Add Config BTN

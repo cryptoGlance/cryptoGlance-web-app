@@ -1,6 +1,66 @@
 
-    [ v2.0.2-beta ]
+    [ v2.0.3-beta ]
+
+    FEATURES
+    ========
+    - Added app specific way to zoom in/out
+        - Zoom Out:     CTRL + <
+        - Zoom In:      CTRL + >
+        - Reset Zoom:   CTRL + /
+    - Added manual update check in Settings page
+    - Added New Zealand Dollar as a Fiat option in wallets
+    - Added current FIAT price of a coin
+
+    POOLS
+    =====
+    - [+POOL] NiceHash/WestHash
+    - [+POOL] BitcoinCZ aka Slush
+    - [+POOL] AntPool
+    - [+POOL] BitMinter
+    - [+POOL] P2Pool
     
+    ALGORITHMS
+    ==========
+    - [+Algorithm] Blake-256
+    - [+Algorithm] Groestl
+    - [+Algorithm] Jackpot
+    - [+Algorithm] Lyra2RE
+    - [+Algorithm] Neos-Blake
+    - [+Algorithm] NeoScrypt
+    - [+Algorithm] WHIRL
+    - [+Algorithm] X17
+    
+    COINS
+    =====
+    - [+COIN] Burstcoin
+    - [+COIN] DogeCoin Dark
+    
+    HOTFIXES
+    ========
+    - Changed from BitcoinIndex.es to FirstRally.com
+    - Fixed issue with Bitcoin Affiliate Network saving an empty name/label
+    - Fixed incorrect reporting of rejected share warning
+    - Added permission checking to the update process
+    - Fixed permissionfix script, should correctly set permissions on parent folder
+    - Fixed issue with pools not loading sometimes
+    - Added round duration to CKPool
+    - Fixed incorrect BTC Guild pool hashrate
+    - Fixed incorrect BTC Guild worker count
+    - Removed useless BTC column when looking at a BTC wallet
+    - MPOS network hash x1000h too high
+    - Update page will now display correctly for those with slow connections
+    - Attempt to fix issue where the update.zip does not delete in some cases
+
+    KNOWN ISSUES
+    ========
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+    - Pools do not show an offline mode
+
+---
+
+    [ v2.0.2 ]
+
     FEATURES
     ========
     - If rejected shares are greater than accepted shares, rig status appears red (requires attention)
@@ -10,11 +70,6 @@
     - Windows App Update alert - This is a critical update for windows users who have external access enabled (eg web browser)
     - Fixed issue where Active Pool was sometimes displaying as "--"
     - Fixed login screen alerts on first login + login failure
-
-    KNOWN ISSUES
-    ========
-    - Pools may not load sometimes
-    - Wallets can take a long time to load
 
 ---
 
@@ -45,7 +100,7 @@
     - Rigs Algorithm is auto-set when using sgMiner v5+
     - Ability to reset rig stats
     - Ability to reset rig stats on pool change
-    - New FIAT conversions for most coins (Thanks to FunkyC: https://bitcoinindex.es/)
+    - New FIAT conversions for most coins (Thanks to FunkyC: https://firstrally.com/)
     - New debug command to see raw miner data: CTRL + D
 
     POOLS
