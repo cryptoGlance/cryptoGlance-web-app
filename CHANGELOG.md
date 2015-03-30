@@ -1,4 +1,18 @@
 
+    [ v2.0.3.1-beta ]
+
+    FEATURES
+    ========
+    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
+
+    KNOWN ISSUES
+    ============
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+    - Pools do not show an offline mode
+
+---
+
     [ v2.0.3-beta ]
 
     FEATURES
@@ -18,7 +32,15 @@
     - [+POOL] AntPool
     - [+POOL] BitMinter
     - [+POOL] P2Pool
-    
+
+    POOLS
+    =====
+    - [+POOL] NiceHash/WestHash
+    - [+POOL] BitcoinCZ aka Slush
+    - [+POOL] AntPool
+    - [+POOL] BitMinter
+    - [+POOL] P2Pool
+
     ALGORITHMS
     ==========
     - [+Algorithm] Blake-256
@@ -29,12 +51,12 @@
     - [+Algorithm] NeoScrypt
     - [+Algorithm] WHIRL
     - [+Algorithm] X17
-    
+
     COINS
     =====
     - [+COIN] Burstcoin
     - [+COIN] DogeCoin Dark
-    
+
     HOTFIXES
     ========
     - Changed from BitcoinIndex.es to FirstRally.com
@@ -50,12 +72,6 @@
     - MPOS network hash x1000h too high
     - Update page will now display correctly for those with slow connections
     - Attempt to fix issue where the update.zip does not delete in some cases
-
-    KNOWN ISSUES
-    ========
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
-    - Pools do not show an offline mode
 
 ---
 
