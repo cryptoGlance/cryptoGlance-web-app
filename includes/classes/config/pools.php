@@ -125,7 +125,7 @@ class Config_Pools extends Config_Abstract {
                 'name' => ($label ? $label : 'MultiPool.us'),
                 'apikey' => $api,
             );
-        } else if ($type == 'nomp' && !empty($address) && !empty($url) && !empty($coin)) {
+        } else if ($type == 'nomp' && !empty($address) && !empty($url)) {
             $pool = array(
                 'type' => $type,
                 'name' => ($label ? $label : preg_replace('#^https?://#', '', $url)),
