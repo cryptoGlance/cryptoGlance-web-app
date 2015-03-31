@@ -230,6 +230,18 @@
   /*-----  End of The Wallets  ------*/
 
 
+  /*===================================
+  =            MobileMiner            =
+  ===================================*/
+
+    if (typeof MobileMiner != 'undefined') {
+        var mobileMiner = new MobileMiner();
+        mobileMiner.start();
+    }
+
+  /*-----  End of MobileMiner  ------*/
+
+
   /*=============================================
   =            Global Event Handling            =
   =============================================*/
