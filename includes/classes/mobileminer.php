@@ -40,11 +40,11 @@ class MobileMiner {
             return;
         }
 
-        // Post Pools
-        $this->_postPools();
-
         // Listen for response from server
         $this->_listen();
+
+        // Post Pools
+        $this->_postPools();
 
         // Post Stats
         $this->_postStatistics();
@@ -80,7 +80,12 @@ class MobileMiner {
                         // $this->_rigs->_objs[$rigId]->restart();
                         break;
                 }
-                curlCall($this->_url .'RemoteCommands'. $this->_urlParams .'&machineName='. urlencode($rig['name']) .'&commandId='. $data[0]['Id']);
+                curlCall(
+                    $this->_url .'RemoteCommands'. $this->_urlParams .'&machineName='. urlencode($rig['name']) .'&commandId='. $data[0]['Id'],
+                    null,
+                    'application/json',
+                    array('custom_request' => 'DELETE')
+                );
             }
         }
     }
