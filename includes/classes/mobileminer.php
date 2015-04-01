@@ -91,6 +91,9 @@ class MobileMiner {
     }
 
     protected function _postStatistics() {
+        $cryptoglance = new CryptoGlance();
+        $algorithms = $cryptoglance->supportedAlgorithms();
+
         // build out machine statistics
         $postData = array();
         foreach ($this->_rigs->getUpdate() as $rigId => $rig) {
@@ -101,7 +104,7 @@ class MobileMiner {
                 $rigData['MinerName'] = 'CryptoGlance';
                 $rigData['CoinSymbol'] = '';
                 $rigData['CoinName'] = '';
-                $rigData['Algorithm'] = $rig['overview']['algorithm'];
+                $rigData['Algorithm'] = $algorithms[$rig['overview']['algorithm']];
 
                 // Device Specific
                 $rigData['Kind'] = $dev['type'];
