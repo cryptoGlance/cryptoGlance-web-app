@@ -74,10 +74,10 @@ class MobileMiner {
                         $this->_rigs->_objs[$rigId]->restart();
                         break;
                     case 'START':
-                        // $this->_rigs->_objs[$rigId]->restart();
+                        $this->_rigs->_objs[$rigId]->enablePools();
                         break;
                     case 'STOP':
-                        // $this->_rigs->_objs[$rigId]->restart();
+                        $this->_rigs->_objs[$rigId]->disablePools();
                         break;
                 }
                 curlCall(
