@@ -6,7 +6,8 @@ require_once('abstract.php');
 class Pools_Ckpool extends Pools_Abstract {
 
     // Pool Information
-    protected $_btcaddess;
+    protected $_apiKey;
+    protected $_userId;
     protected $_type = 'ckpool';
 
     public function __construct($params) {

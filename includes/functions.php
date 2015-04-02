@@ -57,6 +57,9 @@ function formatHashrate($hashrate, $precision = 2) { // h expected
 
     return $hashrate;
 }
+function formatCapacity($hashrate, $precision = 2) { // h expected
+    return str_replace('H/s', 'B', formatHashrate($hashrate, $precision));
+}
 
 function formatTimeElapsed($elapsed) { // NOTE: This does not support weeks. Only days/months.
     if (isset($elapsed)) {
