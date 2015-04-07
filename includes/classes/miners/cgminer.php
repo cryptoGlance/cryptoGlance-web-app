@@ -83,6 +83,7 @@ class Miners_Cgminer extends Miners_Abstract {
                 'percent' => round($hePercent,3),
             ),
             'work_utility' => $this->_summary['Work Utility'] . '/m',
+            'best_share' => $this->_summary['Best Share'],
             'active_pool' => (empty($this->_activePool) ? array('url' => '--') : $this->_activePool),
         );
     }
