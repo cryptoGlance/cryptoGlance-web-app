@@ -62,7 +62,7 @@ class Pools_Eligius extends Pools_Abstract {
             $data['last_block'] = $poolData['livedata']['lastblockheight'];
             $data['last_block_url'] = $this->_apiURL  . '/blocks.php';
 
-            $data['url_name'] = $this->_apiURL;
+            $data['url_name'] = 'http://eligius.st';
             $data['url'] = $this->_apiURL . '/userstats.php/' . $this->_btcaddess;
 
             $this->_fileHandler->write(json_encode($data));
