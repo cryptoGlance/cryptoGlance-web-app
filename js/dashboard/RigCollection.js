@@ -133,8 +133,14 @@
     this.$overviewTableBody.html(this.overviewTableData)
 
     if (cG.showTotalHashrate == 'true') {
+        var algorithmContainer = $('#total-hashrates li a');
+        // get each hashrate
+        var existingAlgorithms = [];
+        algorithmContainer.each(function(k, v) {
+            existingAlgorithms[$(v).attr('id').replace('hashrate_', '')] = k;
+        });
+
         for (var key in algorithms) {
-          if (algorithms[key]) {
             if ($('#hashrate_' + key).length == 0) {
               var aTag = document.createElement('a');
               aTag.setAttribute('id',"hashrate_"+key);
@@ -142,10 +148,15 @@
               $('#total-hashrates li').append(aTag)
             }
             $('#hashrate_' + key).removeClass('hidden').html('<span class="hashrate-algo">' + key + '</span>' + Util.getSpeed(algorithms[key]))
-          }
-          else {
-            $('#total-hashrates #hashrate_' + key).addClass('hidden')
-          }
+
+            if (typeof existingAlgorithms[key] != 'undefined') {
+                delete existingAlgorithms[key];
+            }
+        }
+
+        for (var key in existingAlgorithms) {
+            $('#hashrate_' + key).remove();
+            delete existingAlgorithms[key];
         }
     }
 
