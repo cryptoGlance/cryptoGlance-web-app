@@ -1,15 +1,31 @@
 
-    [ v2.0.2.771 ]
+    [ v2.0.2.796 ]
 
     FEATURES
     ========
-    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
+    - MobileMiner support. Can be enabled via Settings. http://www.mobileminerapp.com/
+
+    POOLS
+    =====
+    - [+POOL] Burst.Ninja
+    
+    HOTFIXES
+    ========
+    - Fixed issue where offline rigs would randomly appear/disappear in the overview panel
 
     KNOWN ISSUES
     ============
     - Miner Failover may report incorrect active pool
     - Wallets can take a long time to load
     - Pools do not show an offline mode
+
+---
+
+    [ v2.0.2.771 ]
+
+    FEATURES
+    ========
+    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
 
 ---
 
