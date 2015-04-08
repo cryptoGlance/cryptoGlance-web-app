@@ -6,7 +6,6 @@
 
       <!-- -->
       <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
-      <?php require_once("templates/modals/qrcode-donate-rdd.php"); ?>
       <!-- -->
 
       <div class="page-container">

@@ -45,7 +45,15 @@ class Pools_Antpool extends Pools_Abstract {
                     'signature' => $hmacSig
                 ));
 
-                $poolData[$action] = curlCall($this->_apiURL  . '/api/'.$action.'.htm', $postParams, $this->_apiKey, $hmacSig);
+                $poolData[$action] = curlCall(
+                    $this->_apiURL  . '/api/'.$action.'.htm',
+                    $postParams,
+                    'application/x-www-form-urlencoded',
+                    array(
+                        'key' => $this->_apiKey,
+                        'sig' => $hmacSig
+                    )
+                );
                 $poolData[$action] = $poolData[$action]['data'];
             }
 

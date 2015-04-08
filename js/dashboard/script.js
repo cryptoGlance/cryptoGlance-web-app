@@ -230,6 +230,18 @@
   /*-----  End of The Wallets  ------*/
 
 
+  /*===================================
+  =            MobileMiner            =
+  ===================================*/
+
+    if (typeof MobileMiner != 'undefined') {
+        var mobileMiner = new MobileMiner();
+        mobileMiner.start();
+    }
+
+  /*-----  End of MobileMiner  ------*/
+
+
   /*=============================================
   =            Global Event Handling            =
   =============================================*/
@@ -244,18 +256,19 @@
 
         var type = this.getAttribute('data-type');
         var btnTimeout = 500;
+        var updateReturn = true;
 
         var updateObject = null;
         if (type == 'rig') {
             updateObject = rigCollection;
-            updateObject._update();
+            updateReturn = updateObject._update();
         } else if (type == 'wallet') {
             updateObject = walletCollection;
-            updateObject.update();
+            updateReturn = updateObject.update();
         }
 
         var updateReadyCheck = setInterval(function() {
-            if (updateObject._ready === true) {
+            if (updateObject._ready === true || updateReturn === false) {
                 $currentButton.html("<i class='icon icon-refresh'></i> Update");
                 $currentButton.prop({ disabled: false });
                 clearInterval(updateReadyCheck);

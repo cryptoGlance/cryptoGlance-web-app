@@ -13,7 +13,7 @@ class Wallets_Burstcoin extends Wallets_Abstract {
 
     public function update() {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
-            $data = curlCall($this->_apiURL, http_build_query(array('account' => $this->_address)));
+            $data = curlCall($this->_apiURL, http_build_query(array('account' => $this->_address)), 'application/x-www-form-urlencoded');
 
             $data = array (
                 'label' => $this->_label,

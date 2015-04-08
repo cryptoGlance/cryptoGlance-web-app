@@ -59,6 +59,12 @@ class Config_Pools extends Config_Abstract {
                 'name' => ($label ? $label : 'BTC Guild'),
                 'apikey' => $api,
             );
+        } else if ($type == 'burstninja' && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'Burst.Ninja'),
+                'userid' => $userid,
+            );
         } else if ($type == 'eclipse' && !empty($api)) {
             $pool = array(
                 'type' => $type,
