@@ -10,7 +10,7 @@ class Pools_Burstninja extends Pools_Abstract {
     protected $_type = 'burstninja';
 
     public function __construct($params) {
-        parent::__construct(array('apiurl' => 'http://burstpool.shmtech.biz:8124/webAPI/pool'));
+        parent::__construct(array('apiurl' => 'http://burst.ninja/webAPI/pool'));
         $this->_userId = $params['userid'];
         $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['userid']) .'.json');
     }
