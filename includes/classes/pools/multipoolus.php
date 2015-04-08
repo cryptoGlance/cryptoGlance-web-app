@@ -66,7 +66,7 @@ class Pools_MultiPoolUS extends Pools_Abstract {
             $data['user_hashrate'] = formatHashrate($data['user_hashrate']);
             
             $data['url_name'] = 'https://multipool.us';
-            $data['url'] = $this->_apiURL;
+            $data['url'] = 'https://multipool.us/';
             
             $this->_fileHandler->write(json_encode($data));
             
