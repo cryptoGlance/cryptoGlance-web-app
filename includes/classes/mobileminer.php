@@ -14,10 +14,10 @@ class MobileMiner {
 
     // Settings
     protected $_username = '';
-    protected $_apiKey = '';
+    protected $_appKey = '';
 
     // cryptoGlance Specific
-    protected $_appKey = 'VEdP-Tmom-kiDA';
+    protected $_apiKey = 'ozhjiY941gooFo';
 
     // API Specific
     protected $_url = 'https://api.mobileminerapp.com/';
@@ -28,7 +28,7 @@ class MobileMiner {
 
     public function __construct() {
         $this->_username = $GLOBALS['settings']['general']['mobileminer']['username'];
-        $this->_apiKey = $GLOBALS['settings']['general']['mobileminer']['apikey'];
+        $this->_appKey = $GLOBALS['settings']['general']['mobileminer']['appkey'];
         $this->_urlParams = '?apiKey='.$this->_apiKey . '&emailAddress='.$this->_username . '&applicationKey='.$this->_appKey;
         $this->_rigs = new Rigs();
     }

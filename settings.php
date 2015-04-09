@@ -25,7 +25,7 @@ if (isset($_POST) && !empty($_POST)) {
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
         'mobileminer' => intval($mobileminerEnabled),
         'mobileminerUsername' => $_POST['mobileminerUsername'],
-        'mobileminerAPIKey' => $_POST['mobileminerAPIKey'],
+        'mobileminerAppKey' => $_POST['mobileminerAppKey'],
     );
 
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
@@ -142,9 +142,9 @@ require_once("includes/header.php");
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="col-sm-5 control-label">API Key:</label>
+                          <label class="col-sm-5 control-label">App Key:</label>
                           <div class="col-sm-4 refresh-interval">
-                            <input type="text" class="form-control" name="mobileminerAPIKey" placeholder="provided-api-key" value="<?php echo $settings['general']['mobileminer']['apikey']; ?>" />
+                            <input type="text" class="form-control" name="mobileminerAppKey" placeholder="xxxx-xxxx-xxxx" value="<?php echo $settings['general']['mobileminer']['appkey']; ?>" />
                           </div>
                         </div>
                     </div>
