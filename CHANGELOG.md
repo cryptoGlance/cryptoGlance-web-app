@@ -1,4 +1,18 @@
 
+    [ v2.0.2.799 ]
+
+    HOTFIXES
+    ========
+    - MobileMiner swapped the api key and app key
+
+    KNOWN ISSUES
+    ============
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+    - Pools do not show an offline mode
+
+---
+
     [ v2.0.2.796 ]
 
     FEATURES
@@ -8,16 +22,10 @@
     POOLS
     =====
     - [+POOL] Burst.Ninja
-    
+
     HOTFIXES
     ========
     - Fixed issue where offline rigs would randomly appear/disappear in the overview panel
-
-    KNOWN ISSUES
-    ============
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
-    - Pools do not show an offline mode
 
 ---
 

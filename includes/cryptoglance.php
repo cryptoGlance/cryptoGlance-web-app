@@ -124,7 +124,7 @@ class CryptoGlance {
                 'mobileminer' => array(
                     'enabled' => $data['general']['mobileminer'],
                     'username' => $data['general']['mobileminerUsername'],
-                    'apikey' => $data['general']['mobileminerAPIKey'],
+                    'appkey' => $data['general']['mobileminerAppKey'],
                 ),
             );
         }
