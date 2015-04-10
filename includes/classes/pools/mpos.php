@@ -43,6 +43,11 @@ class Pools_Mpos extends Pools_Abstract {
                 }
             }
 
+            // Offline Check
+            if (empty($poolData[$this->_actions[0]])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 

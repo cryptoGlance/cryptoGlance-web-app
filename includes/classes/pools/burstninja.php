@@ -20,6 +20,11 @@ class Pools_Burstninja extends Pools_Abstract {
             $poolData = array();
             $poolData = curlCall($this->_apiURL  . '?accountId='.$this->_userId);
 
+            // Offline Check
+            if (empty($poolData)) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 

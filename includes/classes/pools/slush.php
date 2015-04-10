@@ -22,6 +22,11 @@ class Pools_Slush extends Pools_Abstract {
             $poolData['global'] = curlCall($this->_apiURL  . '/stats/json/'. $this->_apiKey);
             $poolData['user'] = curlCall($this->_apiURL  . '/accounts/profile/json/'. $this->_apiKey);
 
+            // Offline Check
+            if (empty($poolData['global']) || empty($poolData['user'])) {
+                return;
+            }
+
             $data = array();
 
             $data['type'] = $this->_type;

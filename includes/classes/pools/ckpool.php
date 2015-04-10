@@ -23,6 +23,11 @@ class Pools_Ckpool extends Pools_Abstract {
             $poolData['user'] = curlCall($this->_apiURL  . '/index.php?k=api&json=y&username='.$this->_userId.'&api='.$this->_apiKey);
             $poolData['workers'] = curlCall($this->_apiURL  . '/index.php?k=api&json=y&work=y&username='.$this->_userId.'&api='.$this->_apiKey);
 
+            // Offline Check
+            if (empty($poolData['user']) || empty($poolData['workers'])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 
