@@ -6,7 +6,8 @@ require_once('abstract.php');
 class Pools_Ckpool extends Pools_Abstract {
 
     // Pool Information
-    protected $_btcaddess;
+    protected $_apiKey;
+    protected $_userId;
     protected $_type = 'ckpool';
 
     public function __construct($params) {
@@ -22,6 +23,11 @@ class Pools_Ckpool extends Pools_Abstract {
             $poolData['user'] = curlCall($this->_apiURL  . '/index.php?k=api&json=y&username='.$this->_userId.'&api='.$this->_apiKey);
             $poolData['workers'] = curlCall($this->_apiURL  . '/index.php?k=api&json=y&work=y&username='.$this->_userId.'&api='.$this->_apiKey);
 
+            // Offline Check
+            if (empty($poolData['user']) || empty($poolData['workers'])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 
@@ -32,6 +38,8 @@ class Pools_Ckpool extends Pools_Abstract {
                 $data[$poolData['workers']['workername:'.$i]] = formatHashrate($poolData['workers']['w_hashrate5m:'.$i]/1000);
             }
             $data['workers'] = $poolData['workers']['rows'];
+
+            $data['round_duration'] = formatTimeElapsed(time() - $poolData['user']['lastblock']);
 
             $data['url'] = $this->_apiURL;
 

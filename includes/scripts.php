@@ -1,5 +1,3 @@
-
-<script type="text/javascript" src="js/packages/jquery-1.10.2.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/packages/jquery-ui-1.10.3.custom.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/packages/jquery.cookie.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/packages/jquery.scrollTo.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
@@ -16,7 +14,7 @@
     }
 ?>
 
-<?php if ($generalSaveResult) { ?>
+<?php if ($generalSaveResult && !is_null($generalSaveResult)) { ?>
   <script type="text/javascript">$(document).ready(function() {
       showToastSettingsSaved();
     });</script>

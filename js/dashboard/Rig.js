@@ -82,7 +82,7 @@
       this.panelStatus = overview.status.panel
       this.$rigEl[0].className = 'panel panel-primary panel-rig ' + this.panelStatus
     }
-    
+
     this.$rigSummaryBody.html(this._buildStatus(summary))
 
     if (this.deviceCollection.length > 0) {
@@ -184,6 +184,7 @@
     this.$rigEl.removeClass('panel-warning panel-danger').addClass('panel-offline')
     this.$rigEl.find('.btn-manage-rig').hide()
     this.$rigEl.find('.btn-edit-rig').show()
+    this.$rigEl.find('.rig-label').text('Rig Offline');
     this.rigPanel.hide()
     this.$rigNavEl.html('')
     this.$rigSummaryTableBody.html('')
@@ -191,6 +192,7 @@
 
   Rig.prototype._on = function() {
     this.$rigEl.removeClass('panel-offline')
+    this.$rigEl.find('.rig-label').text('Rig Stats');
     this.$rigEl.find('.btn-manage-rig').show()
     this.$rigEl.find('.btn-edit-rig').hide()
     this.$rigSummary.find('table').show()

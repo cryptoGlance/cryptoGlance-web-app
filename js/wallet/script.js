@@ -36,8 +36,6 @@
         .done(function( id ) {
             $('#btnSaveWallet').attr('disabled', 'disabled');
             setTimeout(function() {
-                $(btnIcon).removeClass('ajax-saver');
-
                 $().toastmessage('showToast', {
                     sticky  : false,
                     text    : '<b>Saved!</b><br />Your settings have successfully been saved.<br />Please wait while the wallet loads.',
@@ -76,8 +74,6 @@
         .done(function( id ) {
             $('#btnDeleteWallet').attr('disabled', 'disabled');
             setTimeout(function() {
-                $(btnIcon).removeClass('ajax-saver');
-
                 $().toastmessage('showToast', {
                     sticky  : false,
                     text    : '<b>Saved!</b><br />Your wallet has successfully been deleted.<br />Will now bring you back to the dashboard.',

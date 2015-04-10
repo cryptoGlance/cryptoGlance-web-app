@@ -8,13 +8,13 @@ class Pools_Eclipse extends Pools_Abstract {
     // Pool Information
     protected $_apiKey;
     protected $_type = 'eclipse';
-    
+
     // api calls to make
     protected $_actions = array(
         'poolstats',
         'userstats',
     );
-    
+
     public function __construct($params) {
         parent::__construct(array('apiurl' => 'https://eclipsemc.com'));
         // https://eclipsemc.com
@@ -28,18 +28,23 @@ class Pools_Eclipse extends Pools_Abstract {
             foreach ($this->_actions as $action) {
                 $poolData[$action] = curlCall($this->_apiURL  . '/api.php?key='.$this->_apiKey.'&action='. $action);
             }
-            
+
+            // Offline Check
+            if (empty($poolData[$this->_actions[0]])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
-            
+
             $data['total_sent'] = $poolData['userstats']['data']['user']['total_payout'];
             $data['balance'] = $poolData['userstats']['data']['user']['confirmed_rewards'];
             $data['unconfirmed_balance'] = $poolData['userstats']['data']['user']['unconfirmed_rewards'];
             $data['estimated_rewards'] = $poolData['userstats']['data']['user']['estimated_rewards'];
-            
+
             $data['pool_hashrate'] = $poolData['poolstats']['hashrate'];
-            
-            
+
+
             $data['user_hashrate'] = 0;
             $speedMultiplier = array(
                 'GH/s' => 1000,
@@ -52,21 +57,21 @@ class Pools_Eclipse extends Pools_Abstract {
                     $data['user_hashrate'] += $hashrate * $speedMultiplier[$hashspeed];
                 }
             }
-            
+
             $data['user_hashrate'] = formatHashRate($data['user_hashrate']*1000);
-            
+
             $data['pool_workers'] = $poolData['poolstats']['active_workers'];
-            
+
             // how to get active user workers and total hashrate?
             $data['time_since_last_block'] = $poolData['poolstats']['round_duration']; // Would love to format this one day
 //            $data['time_since_last_block'] = formatTimeElapsed(); // how to format? 00:52:44
-            
+
             $data['url'] = $this->_apiURL;
-            
+
             $this->_fileHandler->write(json_encode($data));
             return $data;
         }
-        
+
         return json_decode($this->_fileHandler->read(), true);
     }
 

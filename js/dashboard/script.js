@@ -266,6 +266,17 @@
 
   /*-----  End of The Pool Picker  ------*/
 
+  /*===================================
+  =            MobileMiner            =
+  ===================================*/
+
+    if (typeof MobileMiner != 'undefined') {
+        var mobileMiner = new MobileMiner();
+        mobileMiner.start();
+    }
+
+  /*-----  End of MobileMiner  ------*/
+
 
   /*=============================================
   =            Global Event Handling            =
@@ -282,21 +293,25 @@
 
         var type = this.getAttribute('data-type');
         var btnTimeout = 500;
+        var updateReturn = true;
 
+        var updateObject = null;
         if (type == 'rig') {
-            if (rigCollection._update()) {
-                btnTimeout = 500;
-            }
+            updateObject = rigCollection;
+            updateReturn = updateObject._update();
         } else if (type == 'wallet') {
-            if (walletCollection.update()) {
-                btnTimeout = 500;
-            }
+            updateObject = walletCollection;
+            updateReturn = updateObject.update();
         }
 
-        setTimeout(function() {
-            $currentButton.html("<i class='icon icon-refresh'></i> Update");
-            $currentButton.prop({ disabled: false });
-        }, btnTimeout);
+        var updateReadyCheck = setInterval(function() {
+            if (updateObject._ready === true || updateReturn === false) {
+                $currentButton.html("<i class='icon icon-refresh'></i> Update");
+                $currentButton.prop({ disabled: false });
+                clearInterval(updateReadyCheck);
+            }
+        }, 1000);
+
     });
 
     // Add Config BTN

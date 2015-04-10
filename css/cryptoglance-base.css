@@ -27,12 +27,12 @@ body {
   scrollbar-dark-shadow-color: #999;
 }
 
-::-webkit-scrollbar { width: 7px; height: 3px;}
+::-webkit-scrollbar { width: 7px; height: 7px;}
 ::-webkit-scrollbar-button {  background-color: #666; }
 ::-webkit-scrollbar-track {  background-color: #999;}
 ::-webkit-scrollbar-track-piece { background-color: #000;}
 ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
-::-webkit-scrollbar-corner { background-color: #999;}}
+::-webkit-scrollbar-corner { background-color: #999;}
 ::-webkit-resizer { background-color: #666;}
 
 @-moz-document url-prefix(http://),url-prefix(https://) {
@@ -74,8 +74,7 @@ h1, h2, h3, h4, h5, h6 {
 #settings-wrap h3, #rigPoolDetails h3 {
   text-align: center;
   font-size: 1.6em;
-  margin: 30px 0 20px;
-  padding-top: 20px;
+  margin: 20px 0;
   border-top: 1px solid #888;
   box-shadow: 0px -20px 20px -10px rgba(0,0,0, 0.4);
 }
@@ -359,6 +358,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 }
 
 .help-block {
+  clear: both;
   font-weight: bold;
   font-family: roboto;
   font-style: italic;
@@ -525,7 +525,7 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
 }
 
 .new-panel-choices a:active i {
-  text-shadow: ` -1px 0 #777;
+  text-shadow: -1px 0 #777;
 }
 
 .modal-footer {
@@ -660,7 +660,8 @@ select.form-control {
   font-family: robotoblack;
 }
 
-#panel-login #login-failure {
+/*#panel-login */
+#login-failure {
   border: 1px dashed #d00;
   border-width: 2px 0;
   color: #fdd;
@@ -674,17 +675,17 @@ select.form-control {
   padding: 5px 15px 10px;
 }
 
-#panel-login #login-failure p {
+#login-failure p {
   margin: 0;
   line-height: 20px;
   padding-bottom: 4px;
 }
 
-#panel-login #login-failure p big {
+#login-failure p big {
   font-size: 140%;
 }
 
-#panel-login #login-failure p i {
+#login-failure p i {
   top: 5px;
   right: 0;
   font-size: 28px;
@@ -1378,9 +1379,6 @@ a#dash-add-panel.flash {
   filter: none;
 }
 
-.panel ul.nav-pills li a.pill-danger {
-}
-
 .panel ul.nav-pills li i {
   margin: 0 0 0 9px;
 }
@@ -1390,6 +1388,9 @@ a#dash-add-panel.flash {
   overflow: auto;
   text-align: center;
   clear: both;
+}
+.panel-offline .panel-body {
+  padding: 0px;
 }
 
 #pool-picker .panel-body {
@@ -1674,7 +1675,7 @@ a#dash-add-panel.flash {
 
 .social-box {
   text-align: center;
-  padding: 6px 0;
+  padding: 10px 0;
 }
 
 .social-box .btn {
@@ -1697,7 +1698,7 @@ a#dash-add-panel.flash {
 }
 
 .panel-in-footer .btn {
-  margin: 5px 0;
+  margin: 4px 0 12px;
 }
 
 .panel-in-footer .panel-body .stat-pair {
@@ -1734,9 +1735,6 @@ a#dash-add-panel.flash {
 .panel-in-footer .panel-body .stat-pair-qr .stat-label img {
   max-height: 24px;
   width: auto;
-}
-
-.panel-in-footer .panel-body .stat-pair-qr .stat-value {
 }
 
 .panel-in-footer .panel-body .stat-pair-qr .stat-value img {
@@ -1804,7 +1802,7 @@ a#dash-add-panel.flash {
 .table-responsive {
   margin-bottom: 0;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; // momentum scrolling
+  -webkit-overflow-scrolling: touch;
 }
 
 .panel-body .table-summary {
@@ -1967,7 +1965,7 @@ a#dash-add-panel.flash {
     100% {opacity:0;}
 }
 
-@-ms-keyframes flash {
+@keyframes flash {
     0% {opacity:0;}
     25% {opacity:1;}
     75% {opacity:1;}
@@ -2371,7 +2369,7 @@ a#dash-add-panel.flash {
   }
 
   .panel-in-footer .panel-body .stat-pair-qr .stat-label {
-    min-height: 82px;
+    min-height: 48px;
   }
 
   .panel-body .stat-pair.feed-item .stat-value {

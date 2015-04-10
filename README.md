@@ -48,6 +48,46 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
   <li><strong>MUCH MORE is planned!</strong> Follow our social accounts, or drop by our IRC channel to find out when new features are released!</li>
 </ul>
 
+### **NEW** v2.0 Changes:
+**Recently Added Features:**
+<ul>
+  <li>Total Hashrates are now categorized by Rig Algorithms used</li>
+  <li>Enable/Disable Total Hashrate via Tools dropdown</li>
+  <li>New ability to edit Rigs and Pools</li>
+  <li>Re-amped Rig summary and device details (percentages, etc)</li>
+  <li>New Rig Details</li>
+  <li>Cleaner interface</li>
+  <li>Ability to drag+drop pool priority for a rig</li>
+  <li>Auto-Restart on BITMAIN ASIC failure (chain contains "x" instead of "0")</li>
+  <li>Rig devices have two more types of details showing:
+    <ul>
+      <li>BITMAIN ASIC fan speed (fan 1, fan 2, fan 3, etc)</li>
+      <li>BITMAIN ASIC temperatures (temperature 1, temperature 2, temperature 3, etc)</li>
+    </ul>
+  </li>
+  <li>Rigs have a new option for Algorithm</li>
+  <li>Rigs Algorithm is auto-set when using sgMiner v5+</li>
+  <li>Ability to reset rig stats</li>
+  <li>Ability to reset rig stats on pool change</li>
+  <li>New FIAT conversions for most coins (Thanks to FunkyC: <a href="https://firstrally.com/" rel="external">https://firstrally.com/</a>)</li>
+  <li>New debug command to see raw miner data: CTRL + D</li>
+</ul>
+**Recently Added Features:**
+<ul>
+  <li>[+POOL] Bitcoin Affiliate Network (<a href="http://mining.bitcoinaffiliatenetwork.com/" rel="external">http://mining.bitcoinaffiliatenetwork.com</a>)</li>
+  <li>[+POOL] CkPool</li>
+  <li>[+POOL] Eligius</li>
+  <li>[+POOL] MagicPool</li>
+  <li>[+POOL] Multipool.Us</li>
+  <li>[+POOL] NOMP</li>
+</ul>
+**Recently Added Coins:**
+<ul>
+  <li>[+COIN] NeosCoin</li>
+  <li>[+COIN] ReddCoin</li>
+  <li>[+COIN] PayCoin</li>
+</ul>
+
 ### Video Demo:
 
 <a href="http://www.youtube.com/watch?v=MZF1ZasbT58" rel="external"><img src="images/cryptoGlance-video-intro-landscape.png" alt="cryptoGlance Video Thumb" /></a>
@@ -56,11 +96,11 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
 
 - cgminer / sgminer properly configured with API access allowed
 
-*Windows Version:* 
+*Windows Version:*
 
 - Windows XP or newer
 
-*Running from source:* 
+*Running from source:*
 
 - PHP v5.2+
 - Apache / IIS / mongoose, or whichever web server you prefer
@@ -68,7 +108,7 @@ cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glan
 
 <br>
 
---- 
+---
 
 ### Installation:
 
@@ -98,7 +138,7 @@ _**Windows App Users:**_
 
     "listen_on": ["192.168.1.20", 4041],
 
-...and you should be good to go. 
+...and you should be good to go.
 
 <br>
 
@@ -108,7 +148,7 @@ _**Windows App Users:**_
 
 Upgrading cryptoGlance is easy.  First off, it never hurts to make a backup copy of your entire cryptoGlance folder. Files that should be kept particularly safe are:
 
-- **/user_data** folder 
+- **/user_data** folder
 
 Next, you'll need to **Enable cryptoGlance Updates** on the Settings page. Then, choose your release type:
 
@@ -134,8 +174,8 @@ If you've made edits to {{ install-dir }}\settings.json (optional modification f
 
 With every major **Release**, <a href="changelog.php">we include a concise changelog</a> of all updates contained within. Alternatively, you can check out our live commits if you are running Beta or Nightlies:
 
-- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/beta" rel="external">Live **Beta** changelog</a>
-- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/nightly" rel="external">Live **Nightly** changelog</a>
+- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/beta/CHANGELOG.md" rel="external">Live **Beta** changelog</a>
+- View the <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/nightly/CHANGELOG.md" rel="external">Live **Nightly** changelog</a>
 
 <a name="faq"></a>
 
@@ -143,7 +183,7 @@ _* Remember, you can choose if you'd like to be alerted to cryptoGlance updates 
 
 <br>
 
---- 
+---
 
 ### FAQ:
 
@@ -259,14 +299,8 @@ We've put a lot of our time and effort into cryptoGlance, and it hasn't been eas
 **Bitcoin**<br>
 <small>12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE</small>
 
-**Litecoin**<br>
-<small>LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M</small>
-
-**Vertcoin**<br>
-<small>Vp9izfX1kM3BqGADtvan1Et5nBiU1s32Zp</small>
-
-**Dogecoin**<br>
-<small>D8bcNHYbkBDqwkvZKKpfu8oAyzqezJ5RvW</small>
+**Reddcoin**<br>
+<small>RiJuGDb1e1SLVaTseHeMXMUrzhei2ex5AQ</small>
 
 ---
 

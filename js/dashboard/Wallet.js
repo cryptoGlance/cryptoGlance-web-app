@@ -5,16 +5,17 @@
   =======================================================*/
 
   var Wallet = function (walletId) {
-    this.id              = walletId
-    this.currency        = 'CDN'
-    this.balance         = 0
-    this.btc             = 0
-    this.btc_code        = 'BTC'
-    this.fiat            = 0
-    this.fiat_code       = 0
-    this.currency_code   = 0
-    this.total_addresses = 0
-    this.label           = 'money'
+    this.id                 = walletId
+    this.label              = ''
+    this.currency           = 'bitcoin'
+    this.currency_balance   = 0
+    this.currency_code      = 'BTC'
+    this.coin_balance       = 0
+    this.coin_code          = 'BTC'
+    this.coin_price         = 0
+    this.coin_value         = 0
+    this.fiat_balance       = 0
+    this.fiat_code          = 'USD'
   }
 
   /*-----  End of Wallet Class/Object/Constructor  ------*/
@@ -31,10 +32,10 @@
     this.currency_code      = walletObj.currency_code
     this.coin_balance       = walletObj.coin_balance
     this.coin_code          = walletObj.coin_code
-    this.coin_price          = walletObj.coin_price
+    this.coin_price         = walletObj.coin_price
+    this.coin_value         = walletObj.coin_value
     this.fiat_balance       = walletObj.fiat_balance
     this.fiat_code          = walletObj.fiat_code
-    this.total_addresses    = walletObj.total_addresses
 
     return this._buildStatusHtml()
   }
@@ -53,13 +54,15 @@
         '<span class="green">' + this.currency_balance + ' ' + this.currency_code + '</span>';
 
     if (this.currency_code != this.coin_code) {
-        output += '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>' +
-            '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
-            '<span class="address-label">' + this.coin_balance + ' ' + this.coin_code +' @ (' + this.coin_price + ' ' + this.coin_code +')</span>' +
-            '<span class="address-label"></span>';
-    } else {
         output += '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
-            '<span class="address-label">in ' + '<b>' + this.total_addresses + '</b> address(es)</span>';
+            '<span class="address-label">' + this.coin_balance + ' ' + this.coin_code +' @ (' + this.coin_price + ' ' + this.coin_code +')</span>' +
+            '<span class="address-label">1 ' + this.currency_code + ' = ' + this.coin_value + ' ' + this.fiat_code + '</span>';
+    } else if (this.currency_code == this.coin_code) {
+        output += '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>' +
+            '<span class="address-label">1 ' + this.currency_code + ' = ' + this.coin_value + ' ' + this.fiat_code + '</span>' +
+            '<span class="address-label">&nbsp;</span>';
+    } else {
+        output += '<span class="blue">' + this.fiat_balance + ' ' + this.fiat_code + '</span>';
     }
 
     output += '</div>' +

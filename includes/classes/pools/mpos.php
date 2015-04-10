@@ -43,11 +43,16 @@ class Pools_Mpos extends Pools_Abstract {
                 }
             }
 
+            // Offline Check
+            if (empty($poolData[$this->_actions[0]])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 
-            $data['balance'] = $poolData['getuserbalance']['confirmed'];
-            $data['unconfirmed_balance'] = $poolData['getuserbalance']['unconfirmed'];
+            $data['balance'] = number_format($poolData['getuserbalance']['confirmed'], 8);
+            $data['unconfirmed_balance'] = number_format($poolData['getuserbalance']['unconfirmed'], 8);
 
             $data['network_hashrate'] = formatHashrate($poolData['getpoolstatus']['nethashrate']/1000);
 
@@ -67,6 +72,7 @@ class Pools_Mpos extends Pools_Abstract {
             $data['%_of_expected'] = round(($poolData['public']['shares_this_round'] / $poolData['getpoolstatus']['estshares']) * 100, 2) . '%';
             $data['current_block'] = $poolData['getpoolstatus']['currentnetworkblock'];
             $data['last_block'] = $poolData['getpoolstatus']['lastblock'];
+            $data['last_block_url'] = $this->_apiURL.'/index.php?page=statistics&action=round&height='.$poolData['getpoolstatus']['lastblock'];
             $data['blocks_pool_found'] = $poolData['getblockstats']['TotalValid'];
 
             $data['username'] = $poolData['getuserstatus']['username'];

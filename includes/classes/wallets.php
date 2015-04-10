@@ -11,19 +11,22 @@ class Wallets extends Config_Wallets {
 
     protected $_currencies = array(
         'bitcoin'   => 'BTC',
+        'burstcoin'   => 'BURST',
         'darkcoin'  => 'DRK',
         'dogecoin'  => 'DOGE',
+        'dogecoindark'  => 'DOGED',
         'litecoin'  => 'LTC',
         'neoscoin'  => 'NEOS',
         'paycoin'   => 'XPY',
         'reddcoin'  => 'RDD',
-        // 'vertcoin'  => 'VTC', // Disabled until blockchain works
+        // 'vertcoin'  => 'VTC', // Disabled until blockchain explorer works
     );
 
     protected $_fiat = array(
         'CAD'   => 'Canadian Dollar',
         'EUR'   => 'Euro',
         'GBP'   => 'British Pound',
+        'NZD'   => 'New Zealand Dollar',
         'USD'   => 'US Dollar',
     );
 
@@ -48,7 +51,7 @@ class Wallets extends Config_Wallets {
         $data = array();
         foreach ($this->_objs as $wallet) {
             // Exchange information
-            $btcIndex = new BitcoinIndex();
+            $btcIndex = new FirstRally();
 
             // Get FIAT rate
             $fiatPrice = $btcIndex->convert($wallet['fiat'], $this->_currencies[$wallet['currency']]);
@@ -87,9 +90,9 @@ class Wallets extends Config_Wallets {
                 'coin_balance' => str_replace('.00000000', '', number_format($coinBalance, 8, '.', ',')),
                 'coin_price' => str_replace('.00000000', '', $coinPrice),
                 'coin_code' => 'BTC',
+                'coin_value' => number_format($fiatPrice, 4, '.', ','),
                 'fiat_balance' => number_format($fiatBalance, 2, '.', ','),
                 'fiat_code' => $wallet['fiat'],
-                'total_addresses' => count($wallet['addresses']),
                 'addresses' => $walletAddressData,
             );
         }

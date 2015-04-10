@@ -8,6 +8,7 @@ class Pools_Nomp extends Pools_Abstract {
     // Pool Information
     protected $_address;
     protected $_type = 'nomp';
+    protected $_coin;
 
     public function __construct($params) {
         parent::__construct($params);
@@ -20,6 +21,16 @@ class Pools_Nomp extends Pools_Abstract {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData = array();
             $poolData = curlCall($this->_apiURL  . '/api/stats');
+
+
+            // Offline Check
+            if (empty($poolData)) {
+                return;
+            }
+
+            if (empty($this->_coin)) {
+                $this->findCoin($poolData);
+            }
             $poolData = $poolData['pools'][$this->_coin];
 
             $totalValidShares = 0;
@@ -63,6 +74,15 @@ class Pools_Nomp extends Pools_Abstract {
         }
 
         return json_decode($this->_fileHandler->read(), true);
+    }
+
+    private function findCoin($poolData) {
+        foreach ($poolData['pools'] as $coin => $coinData) {
+            if (array_key_exists($this->_address, $coinData['workers'])) {
+                $this->_coin = $coin;
+                return;
+            }
+        }
     }
 
 }

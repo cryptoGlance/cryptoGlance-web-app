@@ -17,9 +17,20 @@ $jsArray = array(
     'dashboard/Pool',
     'dashboard/WalletCollection',
     'dashboard/Wallet',
-    'dashboard/PoolPicker',
-    'dashboard/script'
+    'dashboard/PoolPicker' //temp
 );
+// If MobileMiner is enabled, load the JS
+if (isset($settings['general']['mobileminer']['enabled']) && $settings['general']['mobileminer']['enabled'] == 1) {
+    $jsArray[] = 'dashboard/MobileMiner';
+}
+
+// If PoolPicker was added, load the JS
+if ($cryptoGlance->isPanelAdded('pool-picker')) {
+    $jsArray[] = 'dashboard/PoolPicker';
+}
+
+// Load Last
+$jsArray[] = 'dashboard/script';
 
 include("includes/header.php");
 ?>
@@ -42,7 +53,6 @@ include("includes/header.php");
         }
         include("templates/modals/switch-pool.php");
     }
-
     ?>
 
       <?php
@@ -83,11 +93,6 @@ include("includes/header.php");
    <?php require_once("includes/footer.php"); ?>
    </div>
    <!-- /page-container -->
-
-
-<?php //require_once("templates/modals/switch_pool.php"); ?>
-
-<?php //require_once("templates/modals/delete_prompt.php"); ?>
 
     <?php require_once("includes/scripts.php"); ?>
 </body>

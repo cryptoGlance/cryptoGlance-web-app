@@ -167,6 +167,10 @@ class Config_Rigs extends Config_Abstract {
         if ($isValid !== true) {
             return $isValid;
         }
+        
+        if (!is_array($this->_data[$id]['settings'])){
+            $this->_data[$id]['settings'] = array();
+        }
 
         $this->_data[$id]['settings'] = array_replace_recursive($this->_data[$id]['settings'], $data);
 

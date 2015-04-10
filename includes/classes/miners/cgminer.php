@@ -83,7 +83,8 @@ class Miners_Cgminer extends Miners_Abstract {
                 'percent' => round($hePercent,3),
             ),
             'work_utility' => $this->_summary['Work Utility'] . '/m',
-            'active_pool' => $this->_activePool,
+            'best_share' => $this->_summary['Best Share'],
+            'active_pool' => (empty($this->_activePool) ? array('url' => '--') : $this->_activePool),
         );
     }
 
@@ -227,6 +228,18 @@ class Miners_Cgminer extends Miners_Abstract {
         return $this->cmd('{"command":"disablepool","parameter":"'. $poolId .'"}');
     }
 
+    public function enablePools() {
+        foreach ($this->pools() as $pool) {
+            $this->enablePool($pool['id']);
+        }
+    }
+
+    public function disablePools() {
+        foreach ($this->pools() as $pool) {
+            $this->disablePool($pool['id']);
+        }
+    }
+
     public function removePool($poolId) {
         return $this->cmd('{"command":"removepool","parameter":"'. $poolId .'"}');
     }
@@ -365,21 +378,23 @@ class Miners_Cgminer extends Miners_Abstract {
         $activePool = array();
         $activePool['Last Share Time'] = 0;
         $totalPools = count($pools);
-        foreach ($pools as $pool) {
+        foreach ($pools as &$pool) {
+            if (strpos($pool['Last Share Time'], ':') !== FALSE) {
+                $pool['Last Share Time'] = preg_replace("/[^0-9]/", "", $pool['Last Share Time']);
+            }
             if (
                 ($totalPools > 1 && $pool['Last Share Time'] > $activePool['Last Share Time'])
                 ||
                 ($totalPools == 1)
+                ||
+                ($pool['Priority'] == 0)
             ) {
                 $activePool = array(
                     'id' => $pool['POOL'],
                     'url' => ltrim(stristr($pool['URL'], '//'), '//'),
                     'Last Share Time' => $pool['Last Share Time'],
-                    'algorithm' => null,
+                    'algorithm' => (array_key_exists('Algorithm Type', $pool) ? $pool['Algorithm Type'] : null),
                 );
-                if (array_key_exists('Algorithm Type', $pool)) {
-                    $this->_settings['algorithm'] = $pool['Algorithm Type'];
-                }
             }
         }
 
@@ -398,6 +413,39 @@ class Miners_Cgminer extends Miners_Abstract {
             // Start with hardware errors
             $status = $this->statusHardwareErrors($dev);
 
+            // If rejects are higher than accepted
+            if (empty($status)) {
+                $shareTypePrefix = '';
+                if ($this->_summary['Difficulty Accepted'] > $this->_summary['Accepted']) {
+                    $shareTypePrefix = 'Difficulty ';
+                }
+                $totalShares = $dev[$shareTypePrefix.'Accepted'] + $dev[$shareTypePrefix.'Rejected'];
+                $acceptedPercent = round(($dev[$shareTypePrefix.'Accepted']/$totalShares)*100, 2);
+                $rejectedPercent = round(($dev[$shareTypePrefix.'Rejected']/$totalShares)*100, 2);
+
+                if ($rejectedPercent > $acceptedPercent) {
+                    $status = array (
+                        'colour' => 'red',
+                        'icon' => 'awstats'
+                    );
+                }
+            }
+
+            // Check temperatures limits
+            if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
+                if ($dev['Temperature'] >= $this->_settings['temps']['danger']) {
+                    $status = array (
+                        'colour' => 'red',
+                        'icon' => 'hot'
+                    );
+                } else if ($dev['Temperature'] >= $this->_settings['temps']['warning']) {
+                    $status = array (
+                        'colour' => 'orange',
+                        'icon' => 'fire'
+                    );
+                }
+            }
+
             // If no hardware errors, check the health
             if (empty($status)) {
                 if ($dev['Status'] == 'Dead') {
@@ -413,20 +461,6 @@ class Miners_Cgminer extends Miners_Abstract {
                 }
             }
 
-            // If no hardware errors and health is okay, do temperatures
-            if (empty($status) && $this->_settings['temps']['enabled'] && $dev['Temperature'] != '0') {
-                if ($dev['Temperature'] >= $this->_settings['temps']['danger']) {
-                    $status = array (
-                        'colour' => 'red',
-                        'icon' => 'hot'
-                    );
-                } else if ($dev['Temperature'] >= $this->_settings['temps']['warning']) {
-                    $status = array (
-                        'colour' => 'orange',
-                        'icon' => 'fire'
-                    );
-                }
-            }
 
             // If all pass somehow... Mark it good to go!
             if (empty($status) && $dev['Enabled'] == 'Y') {

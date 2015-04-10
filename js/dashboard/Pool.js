@@ -5,9 +5,10 @@
   =====================================================*/
 
   var Pool = function (poolId) {
-    this.poolId         = poolId
-    this.$poolEl        = $('#pool-' + poolId)
-    this.$poolContentEl = $('#pool-' + poolId +' .panel-body-stats')
+    this.poolId             = poolId;
+    this.$poolEl            = $('#pool-' + poolId);
+    this.$poolPanelLabel    = $('#pool-' + poolId +' .pool-label');
+    this.$poolContentEl     = $('#pool-' + poolId +' .panel-body-stats');
   }
 
   /*-----  End of Pool Class/Object/Constructor  ------*/
@@ -18,7 +19,18 @@
   ===========================================*/
 
   Pool.prototype.update = function (poolObj) {
+    if (poolObj == null) {
+        this.$poolEl.addClass('panel-offline');
+        this.$poolPanelLabel.text('Pool Offline');
+        this.$poolContentEl.find('img').remove();
+        return;
+    }
+
     var summary = ''
+    if (this.$poolPanelLabel.text() != 'Pool Stats') {
+        this.$poolPanelLabel.text('Pool Stats');
+    }
+    this.$poolEl.removeClass('panel-offline');
 
     for (var key in poolObj) {
       if (null === poolObj[key]) {
@@ -29,10 +41,13 @@
       switch (key) {
         case 'type':
         case 'url_name':
+        case 'last_block_url':
           break
         case 'last_block':
-          if (poolObj.type === 'mpos' &&  'undefined' !== typeof poolObj.url) {
-            summary += this._buildStatusHtml('', key, '<a href="' + poolObj.url + '/index.php?page=statistics&action=round&height=' + poolObj[key] + '" target="_blank" rel="external">' + poolObj[key] + '</a>')
+          if ('undefined' !== typeof poolObj[key+'_url']) {
+            summary += this._buildStatusHtml('', key, '<a href="' + poolObj[key+'_url'] + '" target="_blank" rel="external">' + poolObj[key] + '</a>')
+          } else {
+            summary += this._buildStatusHtml('', key, poolObj[key])
           }
           break
         case 'url':

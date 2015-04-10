@@ -21,6 +21,11 @@ class Pools_TradeMyBit extends Pools_Abstract {
             $payoutData = curlCall($this->_apiURL  . '/api/balance?key='. $this->_apiKey);
             $poolData = curlCall($this->_apiURL  . '/api/hashinfo?key='. $this->_apiKey);
 
+            // Offline Check
+            if (empty($poolData)) {
+                return;
+            }
+
             // Payout Information
             $data['type'] = $this->_type;
             $data['unexchanged'] = $payoutData['autoexchange']['unexchanged'];
@@ -38,7 +43,7 @@ class Pools_TradeMyBit extends Pools_Abstract {
                     unset($data[$key]);
                 }
             }
-            
+
             $data['url'] = $this->_apiURL;
 
             $this->_fileHandler->write(json_encode($data));
