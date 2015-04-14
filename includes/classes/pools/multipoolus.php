@@ -20,9 +20,15 @@ class Pools_MultiPoolUS extends Pools_Abstract {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData =  curlCall($this->_apiURL  . '?api_key='. $this->_apiKey);
 
+
+            // Offline Check
+            if (empty($poolData)) {
+                return;
+            }
+
             // Payout Information
             $data['type'] = $this->_type;
-            
+
             $poolHashrate = 0;
             $userHashrate = 0;
             foreach ($poolData['currency'] as $coin => $values) {
@@ -41,10 +47,10 @@ class Pools_MultiPoolUS extends Pools_Abstract {
                 }
                     $poolHashrate += $values['pool_hashrate'];
             }
-            
+
             $data['pool_hashrate'] = $poolHashrate;
             $data['user_hashrate'] = $userHashrate;
-            
+
             $userWorkers = array();
             foreach ($poolData['workers'] as $coin => $workers) {
                 foreach ($workers as $name => $worker) {
@@ -56,20 +62,20 @@ class Pools_MultiPoolUS extends Pools_Abstract {
                     }
                 }
             }
-            
+
             foreach ($userWorkers as $name => $worker) {
                 $name = explode('.', $name);
                 $data['worker_'.$name[1]] = formatHashrate($worker);
             }
-            
+
             $data['pool_hashrate'] = formatHashrate($data['pool_hashrate']);
             $data['user_hashrate'] = formatHashrate($data['user_hashrate']);
-            
+
             $data['url_name'] = 'https://multipool.us';
             $data['url'] = 'https://multipool.us/';
-            
+
             $this->_fileHandler->write(json_encode($data));
-            
+
             return $data;
         }
 

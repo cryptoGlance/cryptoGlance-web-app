@@ -57,6 +57,11 @@ class Pools_Antpool extends Pools_Abstract {
                 $poolData[$action] = $poolData[$action]['data'];
             }
 
+            // Offline Check
+            if (empty($poolData[$this->_actions[0]])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 

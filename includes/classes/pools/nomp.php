@@ -22,6 +22,12 @@ class Pools_Nomp extends Pools_Abstract {
             $poolData = array();
             $poolData = curlCall($this->_apiURL  . '/api/stats');
 
+
+            // Offline Check
+            if (empty($poolData)) {
+                return;
+            }
+
             if (empty($this->_coin)) {
                 $this->findCoin($poolData);
             }

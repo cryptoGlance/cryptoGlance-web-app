@@ -20,6 +20,11 @@ class Pools_Btcguild extends Pools_Abstract {
 
             $poolData = curlCall($this->_apiURL  . '/api.php?api_key='. $this->_apiKey);
 
+            // Offline Check
+            if (empty($poolData)) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 

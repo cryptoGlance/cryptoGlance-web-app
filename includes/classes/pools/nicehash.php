@@ -59,6 +59,12 @@ class Pools_Nicehash extends Pools_Abstract {
             $poolData['user'] = curlCall($this->_apiURL  . '/api?method=stats.provider&addr='. $this->_btcaddess);
             $poolData['global'] = curlCall($this->_apiURL  . '/api?method=stats.global.current');
 
+
+            // Offline Check
+            if (empty($poolData['user']) || empty($poolData['global'])) {
+                return;
+            }
+
             $algoNetSpeed = array();
             foreach ($poolData['global']['result']['stats'] as $values) {
                 $algoNetSpeed[$values['algo']] = $values['speed'];

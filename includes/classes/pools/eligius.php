@@ -42,6 +42,11 @@ class Pools_Eligius extends Pools_Abstract {
                 $poolData[$action] = curlCall($this->_apiURL  . '/api.php?cmd='.$actionParam);
             }
 
+            // Offline Check
+            if (empty($poolData[$this->_actions[0]])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 

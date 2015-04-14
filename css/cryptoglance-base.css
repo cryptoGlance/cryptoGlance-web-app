@@ -1389,6 +1389,9 @@ a#dash-add-panel.flash {
   text-align: center;
   clear: both;
 }
+.panel-offline .panel-body {
+  padding: 0px;
+}
 
 .full-content .panel-body {
   font-size: 18px;
