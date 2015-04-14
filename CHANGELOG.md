@@ -1,15 +1,26 @@
 
-    [ v2.0.2.799 ]
+    [ v2.0.2.805 ]
+
+    FEATURES
+    ========
+    - Pools have Offline mode. If no data is returned, or fails to connect, it is "offline"
 
     HOTFIXES
     ========
-    - MobileMiner swapped the api key and app key
+    - fixed line-endings for permissionfix.sh
 
     KNOWN ISSUES
     ============
     - Miner Failover may report incorrect active pool
     - Wallets can take a long time to load
-    - Pools do not show an offline mode
+
+---
+
+    [ v2.0.2.799 ]
+
+    HOTFIXES
+    ========
+    - MobileMiner swapped the api key and app key
 
 ---
 
