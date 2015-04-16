@@ -59,6 +59,12 @@ class Config_Pools extends Config_Abstract {
                 'name' => ($label ? $label : 'BTC Guild'),
                 'apikey' => $api,
             );
+        } else if ($type == 'burstninja' && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'Burst.Ninja'),
+                'userid' => $userid,
+            );
         } else if ($type == 'eclipse' && !empty($api)) {
             $pool = array(
                 'type' => $type,
@@ -134,12 +140,12 @@ class Config_Pools extends Config_Abstract {
                 'coin' => $coin,
             );
         } else if ($type == 'p2pool' && !empty($address) && !empty($url)) {
-               $pool = array(
-                   'type' => $type,
-                   'name' => ($label ? $label : 'MagicPool'),
-                   'apiurl' => rtrim($url, '/'),
-                   'address' => $address,
-               );
+           $pool = array(
+               'type' => $type,
+               'name' => ($label ? $label : 'MagicPool'),
+               'apiurl' => rtrim($url, '/'),
+               'address' => $address,
+           );
         } else if ($type == 'nicehash' && !empty($address)) {
             $pool = array(
                 'type' => $type,

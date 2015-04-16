@@ -83,7 +83,8 @@ class Miners_Cgminer extends Miners_Abstract {
                 'percent' => round($hePercent,3),
             ),
             'work_utility' => $this->_summary['Work Utility'] . '/m',
-            'active_pool' => $this->_activePool,
+            'best_share' => $this->_summary['Best Share'],
+            'active_pool' => (empty($this->_activePool) ? array('url' => '--') : $this->_activePool),
         );
     }
 
@@ -225,6 +226,18 @@ class Miners_Cgminer extends Miners_Abstract {
 
     public function disablePool($poolId) {
         return $this->cmd('{"command":"disablepool","parameter":"'. $poolId .'"}');
+    }
+
+    public function enablePools() {
+        foreach ($this->pools() as $pool) {
+            $this->enablePool($pool['id']);
+        }
+    }
+
+    public function disablePools() {
+        foreach ($this->pools() as $pool) {
+            $this->disablePool($pool['id']);
+        }
     }
 
     public function removePool($poolId) {

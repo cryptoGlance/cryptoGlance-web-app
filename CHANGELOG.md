@@ -1,22 +1,9 @@
 
-    [ v2.0.3.1-beta ]
+    [ v2.1-beta ]
 
     FEATURES
     ========
-    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
-
-    KNOWN ISSUES
-    ============
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
-    - Pools do not show an offline mode
-
----
-
-    [ v2.0.3-beta ]
-
-    FEATURES
-    ========
+    - MobileMiner support. Can be enabled via Settings. http://www.mobileminerapp.com/
     - Added app specific way to zoom in/out
         - Zoom Out:     CTRL + <
         - Zoom In:      CTRL + >
@@ -24,13 +11,16 @@
     - Added manual update check in Settings page
     - Added New Zealand Dollar as a Fiat option in wallets
     - Added current FIAT price of a coin
+    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
+    - Pools have Offline mode. If no data is returned, or fails to connect, it is "offline"
 
     POOLS
     =====
-    - [+POOL] NiceHash/WestHash
-    - [+POOL] BitcoinCZ aka Slush
     - [+POOL] AntPool
     - [+POOL] BitMinter
+    - [+POOL] Burst.Ninja
+    - [+POOL] BitcoinCZ aka Slush
+    - [+POOL] NiceHash/WestHash
     - [+POOL] P2Pool
 
     POOLS
@@ -72,6 +62,13 @@
     - MPOS network hash x1000h too high
     - Update page will now display correctly for those with slow connections
     - Attempt to fix issue where the update.zip does not delete in some cases
+    - Fixed issue where offline rigs would randomly appear/disappear in the overview panel
+    - fixed line-endings for permissionfix.sh
+
+    KNOWN ISSUES
+    ============
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
 
 ---
 

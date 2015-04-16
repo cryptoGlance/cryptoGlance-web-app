@@ -14,7 +14,7 @@ require_once('config.php');
 set_time_limit(120); // Allow up to 2 minutes for all APIs to return information
 ini_set("display_errors", 1);
 error_reporting(E_ERROR);
-// error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
 date_default_timezone_set("GMT");
 
@@ -31,7 +31,7 @@ $cryptoGlance = new CryptoGlance();
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
-define('CURRENT_VERSION', 'v2.0.3.1-beta');
+define('CURRENT_VERSION', 'v2.1-beta');
 
 // Misc function used throughout cryptoglance
 require_once('functions.php');

@@ -24,6 +24,17 @@ if (isset($_POST['cryptoglance_version']) &&
     // get settings for update type to get
     $settings = $cryptoGlance->getSettings();
 
+    $osInfo = strtolower(php_uname());
+    $osType = '';
+    $phpUser = null;
+    if (stripos($osInfo, 'windows') !== false) {
+        $osType = 'windows';
+    } else if (stripos($osInfo, 'linux') !== false) {
+        $osType = 'linux';
+        $phpUserInfo = posix_getpwuid(posix_geteuid());
+        $phpUser = $phpUserInfo['name'];
+    }
+
     // Need this late in the script
     function lensort($a,$b){
         return strlen($a)-strlen($b);
@@ -68,11 +79,13 @@ if (isset($_POST['cryptoglance_version']) &&
 
         echo '==> Creating temporary directory to download update and unzip: '.$updateDir.'<br />'; ob_flush(); flush();
 
-        if (!mkdir($currentDir . $updateDir, 0777, true)) {
+        if (!mkdir($currentDir . $updateDir, 0777, true) && !file_exists($currentDir . $updateDir)) {
             echo '==> ERROR: Failed to create the directory: ' . $updateDir . '<br />';  ob_flush(); flush(); sleep(1);
             echo '********************' . '<br />';
             echo 'There is a problem with the user permissions that will not allow CryptoGlance to update.' . '<br />';
-            echo 'Please run the command "sudo sh permissionfix.sh" in the root of the CryptoGlance directory to fix this issue.' . '<br />';
+            if ($osType == 'linux') {
+                echo 'Please run the command "sudo sh permissionfix.sh" in the root of the CryptoGlance directory to fix this issue.' . '<br />';
+            }
             echo '********************' . '<br />';
             die('* Please contact support via reddit, bitcointalk, or IRC if you need assistance!');
         } else {
@@ -83,7 +96,9 @@ if (isset($_POST['cryptoglance_version']) &&
         if (!is_writable($currentDir . 'includes' . DIRECTORY_SEPARATOR . 'inc.php')) {
             echo '********************' . '<br />';
             echo 'There is a problem with the user permissions that will not allow CryptoGlance to update.' . '<br />';
-            echo 'Please run the command "sudo sh permissionfix.sh" in the root of the CryptoGlance directory to fix this issue.' . '<br />';
+            if ($osType == 'linux') {
+                echo 'Please run the command "sudo sh permissionfix.sh" in the root of the CryptoGlance directory to fix this issue.' . '<br />';
+            }
             echo '********************' . '<br />';
             die('* Please contact support via reddit, bitcointalk, or IRC if you need assistance!');
         }
@@ -171,7 +186,13 @@ if (isset($_POST['cryptoglance_version']) &&
                     echo '==> Deleted File: ' . $realFilePath . '<br />'; ob_flush(); flush();
                 } else {
                     echo '==> Cannot Delete File: ' . $realFilePath . '<br />'; ob_flush(); flush();
-                    die('* Please make sure your files are writable. If apache, user:group should be www-data:www-data.');
+                    if (!is_null($phpUser) && $osType == 'linux') {
+                        die('* Please make sure your files are writable. File owner permissions user:group should be ' . $phpUser.':'.$phpUser);
+                    } else if ($osType == 'linux') {
+                        die('* Please make sure your files are writable. Ownership user:group should be www-data:www-data.');
+                    } else {
+                        die('* Please make sure your files are writable.');
+                    }
                 }
             }
         }
@@ -188,7 +209,13 @@ if (isset($_POST['cryptoglance_version']) &&
                 } else {
                     $failedFolders[] = $realFilePath;
                     echo '==> Cannot Delete Folder: ' . $realFilePath . '<br />'; ob_flush(); flush();
-                    die('* Please make sure your directories are writable. If apache, user:group should be www-data:www-data.');
+                    if (!is_null($phpUser) && $osType == 'linux') {
+                        die('* Please make sure your directories are writable. File owner permissions user:group should be ' . $phpUser.':'.$phpUser);
+                    } else if ($osType == 'linux') {
+                        die('* Please make sure your directories are writable. Ownership user:group should be www-data:www-data.');
+                    } else {
+                        die('* Please make sure your directories are writable.');
+                    }
                 }
             }
         }
@@ -199,7 +226,13 @@ if (isset($_POST['cryptoglance_version']) &&
                 echo '==> Deleted Folder: ' . $folderPath . '<br />'; ob_flush(); flush();
             } else {
                 echo '==> Cannot Delete Folder: ' . $folderPath . '<br />'; ob_flush(); flush();
-                die('* Please make sure your directories are writable. If apache, user:group should be www-data:www-data.');
+                if (!is_null($phpUser) && $osType == 'linux') {
+                    die('* Please make sure your directories are writable. File owner permissions user:group should be ' . $phpUser.':'.$phpUser);
+                } else if ($osType == 'linux') {
+                    die('* Please make sure your directories are writable. Ownership user:group should be www-data:www-data.');
+                } else {
+                    die('* Please make sure your directories are writable.');
+                }
             }
         }
         echo '==> Done deleting old files...<br />'; ob_flush(); flush(); sleep(1);
@@ -308,7 +341,7 @@ if (isset($_POST['cryptoglance_version']) &&
                 setcookie($name, '', time()-1000);
                 setcookie($name, '', time()-1000, '/');
             }
-        }        
+        }
     } else {
         echo "==> ERROR: Updates not enabled!";
         ob_flush();

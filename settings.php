@@ -14,6 +14,8 @@ $emailSaveResult = null;
 
 if (isset($_POST) && !empty($_POST)) {
     $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
+    $mobileminerEnabled = ($_POST['mobileminer'] == 'on') ? 1 : 0;
+
     $data = array();
     $data = array(
         'update' => intval($updatesEnabled),
@@ -21,6 +23,9 @@ if (isset($_POST) && !empty($_POST)) {
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
+        'mobileminer' => intval($mobileminerEnabled),
+        'mobileminerUsername' => $_POST['mobileminerUsername'],
+        'mobileminerAppKey' => $_POST['mobileminerAppKey'],
     );
 
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
@@ -118,6 +123,30 @@ require_once("includes/header.php");
                           <option <?php echo ($settings['general']['updateTimes']['wallet'] == 7200000) ? 'selected="selected"' : '' ?> value="7200">2 hours</option>
                         </select>
                       </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="mobileMiner">
+                    <h3>Mobile Miner:</h3>
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <input id="enableMobileMiner" type="checkbox" name="mobileminer" <?php echo ($settings['general']['mobileminer']['enabled']) ? 'checked' : '' ?>>
+                        <label for="enableMobileMiner">Enable Mobile Miner Reporting</label>
+                      </div>
+                    </div>
+                    <div class="form-group mobileminer-settings" style="display: <?php echo ($settings['general']['mobileminer']['enabled']) ? 'block' : 'none' ?>;">
+                        <div class="form-group">
+                          <label class="col-sm-5 control-label">Username:</label>
+                          <div class="col-sm-4 refresh-interval">
+                            <input type="text" class="form-control" name="mobileminerUsername" placeholder="your@email.com" value="<?php echo $settings['general']['mobileminer']['username']; ?>" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-5 control-label">App Key:</label>
+                          <div class="col-sm-4 refresh-interval">
+                            <input type="text" class="form-control" name="mobileminerAppKey" placeholder="xxxx-xxxx-xxxx" value="<?php echo $settings['general']['mobileminer']['appkey']; ?>" />
+                          </div>
+                        </div>
                     </div>
                 </div>
                 <hr />

@@ -21,6 +21,12 @@ $(document).ready(function() {
     $('.app-update-types').fadeToggle();
   });
 
+  // Toggle Mobile Miner Reporting
+  //
+  $('input[name="mobileminer"]', '#settings-wrap').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('.mobileminer-settings').fadeToggle();
+  });
+
   // Hide Manual Update check if setting has changed
   //
   $('input[name="updateType"]').change(function() {

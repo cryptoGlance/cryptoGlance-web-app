@@ -29,6 +29,11 @@ class Pools_P2Pool extends Pools_Abstract {
             foreach ($this->_actions as $action) {
                 $poolData[$action] = curlCall($this->_apiURL  . '/' . $action);
             }
+            
+            // Offline Check
+            if (empty($poolData[$this->_actions[0]])) {
+                return;
+            }
 
             // Data Order
             $data['type'] = $this->_type;

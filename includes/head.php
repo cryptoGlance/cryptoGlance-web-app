@@ -32,7 +32,7 @@
     <!-- Custom cryptoGlance styles -->
     <link href="css/cryptoglance-base.css?v=<?php echo CURRENT_VERSION; ?>" rel="stylesheet">
     <!--/build-->
-    
+
     <script type="text/javascript" src="js/packages/jquery-1.10.2.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -49,7 +49,7 @@
         var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig'] ?>;
         var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool'] ?>;
         var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet'] ?>;
-        
+
         <?php if (isset($_SERVER['PHPDESKTOP_VERSION']) && floatval($_SERVER['PHPDESKTOP_VERSION']) < 31.9) { ?>
         $(document).ready(function() {
             $().toastmessage('showToast', {
