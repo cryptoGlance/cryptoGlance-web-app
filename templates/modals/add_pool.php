@@ -1,11 +1,12 @@
 <!-- Modal -->
-<div class="modal fade" id="addPool" tabindex="-1" role="dialog" aria-labelledby="addPoolLabel" aria-hidden="true">
+<div class="modal fade" id="addPool" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <form class="form-horizontal" role="form">
          <div class="modal-header">
            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-           <h2 class="modal-title" id="addPoolLabel"><i class="icon icon-circleadd"></i> Add a Mining Pool</h2>
+           <h2 class="modal-title title-add" style="display: none;"><i class="icon icon-circleadd"></i> Add a Mining Pool</h2>
+           <h2 class="modal-title title-edit" style="display: none;"><i class="icon icon-circleadd"></i> Edit <span class="pool-name"></span></h2>
          </div>
          <div class="modal-body">
            <div class="form-group all">

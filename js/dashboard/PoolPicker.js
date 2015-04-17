@@ -8,7 +8,7 @@
     this.apiData                 = { type: 'pool-picker', action: 'update' }
     this.ready                   = true
 
-    this.$poolPickerOverview = $('#pool-picker .panel-poolpicker')
+    this.$poolPickerOverview = $('#pool-picker .panel-poolPicker')
   }
 
   /*-----  End of PoolPicker Class/Object/Constructor  ------*/
@@ -38,7 +38,7 @@
                         _self._update(data)
                     })
                 }
-            }, 3600000)
+            }, 3600000);
         })
     }
 
@@ -61,7 +61,6 @@
 
 
   /*-----  End of PoolPicker Public Methods  ------*/
-
 
   /*========================================================
   =            PoolPicker Private Methods            =
@@ -114,7 +113,6 @@
 
   /*-----  End of PoolPicker Private Methods  ------*/
 
-
   /*===============================================
   =            Export PoolPicker            =
   ===============================================*/
@@ -124,3 +122,42 @@
   /*-----  End of Export PoolPicker  ------*/
 
 }(window, window.jQuery)
+
+!function ($){
+
+  /*===================================
+  =          The Pool Picker          =
+  ===================================*/
+
+    var poolPicker = new PoolPicker()
+    poolPicker.start()
+
+
+    // Edit PoolPicker
+    $document.on('click', '.btn-edit-poolPicker', function (evt) {
+        var $editPoolPicker = $('#poolPicker')
+        $('.title-add', $editPoolPicker).hide();
+        $('.title-edit', $editPoolPicker).show();
+
+        // Get Pool Config:
+        $.ajax({
+            type: 'get',
+            data: {
+                type: 'pool-picker',
+                action: 'config'
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function (data) {
+            $.each(data, function(k, v) {
+                $editPoolPicker.find('input[value="'+ v +'"]').bootstrapSwitch('toggleState');
+            });
+        });
+
+        prettifyInputs()
+    });
+
+  /*-----  End of The Pool Picker  ------*/
+
+}(window.jQuery);

@@ -10,8 +10,10 @@
          <div class="new-panel-choices">
             <a class="new-panel-btn" data-toggle="modal" data-target="#addRig" data-backdrop="static" data-dismiss="modal"><i class="icon icon-pixelpickaxe"></i>Rig</a>
             <a class="new-panel-btn" data-toggle="modal" data-target="#addPool" data-backdrop="static" data-dismiss="modal"><i class="icon icon-communitysmall"></i>Pool</a>
+            <?php if (!$cryptoGlance->isPanelAdded('poolpicker')) { ?>
+            <a class="new-panel-btn" data-toggle="modal" data-target="#poolPicker" data-backdrop="static" data-dismiss="modal"><i class="icon icon-trophy"></i>Pool Picker</a>
+            <?php } ?>
             <a href="wallet.php" class="new-panel-btn"><i class="icon icon-walletalt"></i>Wallet</a>
-            <a class="new-panel-btn new-pool-picker" data-backdrop="static" data-dismiss="modal"><i class="icon icon-trophy"></i>Pool Picker</a>
          </div>
       </div>
       <div class="modal-footer">

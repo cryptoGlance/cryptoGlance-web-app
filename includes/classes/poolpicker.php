@@ -11,15 +11,12 @@
  *
  * @author Stoyvo
  */
-class PoolPicker {
-
-    // Settings
-    protected $_url = 'http://poolpicker.eu/api';
+class PoolPicker extends Config_PoolPicker {
 
     public function getUpdate() {
         $fileHandler = new FileHandler('services/poolpicker.json');
 
-        if ($GLOBALS['cached'] == false || $fileHandler->lastTimeModified() >= 3600) { // updates every 1 minute
+        // if ($GLOBALS['cached'] == false || $fileHandler->lastTimeModified() >= 3600) { // updates every 1 minute
             $data = array();
 
             $data = curlCall($this->_url);
@@ -28,9 +25,9 @@ class PoolPicker {
 
             $fileHandler->write(json_encode($data));
             return $data;
-        }
+        // }
 
-        return json_decode($fileHandler->read(), true);
+        // return json_decode($fileHandler->read(), true);
     }
 
     private function _filterData($data) {
@@ -47,7 +44,10 @@ class PoolPicker {
         foreach ($data['pools'] as $pKey => $pool) {
             foreach ($pool['profitability'] as $algo => $profitability) {
                 // Some handling for content
-                $algo = strtolower($algo);
+                $algo = strtolower(str_replace('-', '', $algo));
+                if (!in_array($algo, $this->_data)) {
+                    continue;
+                }
                 $btc = number_format($profitability[0]['btc'], 8);
                 $poolData = array(
                     'name' => $pool['name'],
@@ -82,6 +82,15 @@ class PoolPicker {
         }
 
         return $topPayouts;
+    }
+
+    public function remove() {
+        if (parent::remove()) {
+            header("HTTP/1.0 202 Accepted");
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

@@ -61,7 +61,6 @@
 
   /*-----  End of WalletCollection Public Methods  ------*/
 
-
   /*========================================================
   =            WalletCollection Private Methods            =
   ========================================================*/
@@ -101,7 +100,6 @@
   }
 
   /*-----  End of WalletCollection Private Methods  ------*/
-
 
   /*===============================================
   =            Export WalletCollection            =

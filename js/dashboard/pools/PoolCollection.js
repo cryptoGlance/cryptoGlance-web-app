@@ -12,7 +12,6 @@
 
   /*-----  End of PoolCollection Class/Object/Constructor  ------*/
 
-
   /*=====================================================
   =            PoolCollection Public Methods            =
   =====================================================*/
@@ -44,7 +43,6 @@
   }
 
   /*-----  End of PoolCollection Public Methods  ------*/
-
 
   /*======================================================
   =            PoolCollection Private Methods            =
@@ -79,6 +77,66 @@
 
   /*-----  End of PoolCollection Private Methods  ------*/
 
+  /*====================================================
+  =         PoolCollection Actionable Methods          =
+  ====================================================*/
+
+    PoolCollection.prototype.modal = function (type) {
+        $('#addPool').find('.form-group').hide();
+        $('#addPool').find('.' + type).show();
+        $('#addPool').find('.all').show();
+
+        prettifyInputs();
+    }
+
+    PoolCollection.prototype.edit = function (poolId) {
+        var $editPool = $('#addPool')
+        $editPool.attr('data-attr', poolId)
+        $editPool.find('.pool-name').html($('#pool-' + poolId + ' h1').html());
+        $('.title-add', $editPool).hide();
+        $('.title-edit', $editPool).show();
+
+        // Get Pool Config:
+        $.ajax({
+            type: 'get',
+            data: {
+                type: 'pools',
+                action: 'config',
+                id: poolId
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function (data) {
+            $.each(data, function(k, v) {
+                if (k == 'type') {
+                    $editPool.find('select[name="poolType"]').val(v).change()
+                } else {
+                    switch(k) {
+                        case 'name':
+                            k = 'label'
+                            break
+                        case 'apikey':
+                            k = 'api'
+                            break
+                        case 'apisecret':
+                            k = 'secret'
+                            break
+                        case 'apiurl':
+                            k = 'url'
+                            break
+                    }
+
+                    $editPool.find('input[name="'+ k +'"]').val(v)
+                }
+            });
+            $('<input type="hidden" name="id" value="'+poolId+'" />').appendTo($editPool.find('form'));
+        });
+
+        prettifyInputs()
+    }
+
+  /*-----  End of PoolCollection Actionable Methods  ------*/
 
   /*=============================================
   =            Export PoolCollection            =

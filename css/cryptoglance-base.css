@@ -317,6 +317,9 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   margin: 15px 0;
   text-align: center;
 }
+#poolPicker .form-horizontal .form-left {
+  text-align: left;
+}
 
 .form-horizontal .setting-hwerror {
   text-align: center;
@@ -539,6 +542,9 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   padding-top: 2px;
   font-family: robotolight;
   font-weight: normal;
+}
+#poolPicker .modal-body label.control-label {
+  text-align: center;
 }
 
 form fieldset {
@@ -1408,17 +1414,20 @@ a#dash-add-panel.flash {
 }
 
 .panel-pool .panel-body,
-.panel .panel-poolpicker,
-.panel .panel-poolpicker-body-thanks {
+.panel .panel-poolPicker,
+.panel .panel-poolPicker-body-thanks {
   background: rgba(7, 41, 53, 0.6);
 }
 
-.panel .panel-poolpicker,
-.panel .panel-poolpicker-body-thanks {
+.panel .panel-poolPicker,
+.panel .panel-poolPicker-body-thanks {
     padding: 5px;
 }
+.panel .panel-body .panel-poolPicker-body-thanks {
+    font-size: 14px;
+}
 
-.panel .panel-poolpicker .stat-label {
+.panel .panel-poolPicker .stat-label {
     text-transform: uppercase !important;
 }
 
@@ -1462,9 +1471,10 @@ a#dash-add-panel.flash {
   border-radius: 5px;
   display: inline-block;
   text-align: center;
-  margin: 0px 0px -6px -1px;
+  margin: 0px 1px;
   overflow: hidden;
-    position: relative;
+  position: relative;
+  vertical-align: bottom;
 }
 
 .panel-wallet .panel-body .stat-pair {
@@ -1556,7 +1566,7 @@ a#dash-add-panel.flash {
     border-radius: 0;
     padding: 0 10px;
 }
-.panel-poolpicker .stat-pair .stat-value {
+.panel-poolPicker .stat-pair .stat-value {
     text-align: left;
 }
 
@@ -1805,10 +1815,6 @@ a#dash-add-panel.flash {
   -webkit-overflow-scrolling: touch;
 }
 
-.panel-body .table-summary {
-  margin: 5px 0 0;
-}
-
 .panel-body .table tr th, .panel-body .table tr td,
 .modal-body .table tr th, .modal-body .table tr td {
   font-size: 16px;
@@ -2046,6 +2052,9 @@ a#dash-add-panel.flash {
   .modal-dialog {
     margin: 40px auto;
     width: 720px;
+  }
+  #poolPicker .modal-dialog {
+    width: 500px;
   }
 
   .modal-qrcode img {
@@ -2368,6 +2377,11 @@ a#dash-add-panel.flash {
     line-height: 35px;
   }
 
+  .panel-poolPicker .stat-pair .stat-value {
+    font-size: 26px;
+    line-height: 32px;
+  }
+
   .panel-in-footer .panel-body .stat-pair-qr .stat-label {
     min-height: 48px;
   }
@@ -2382,6 +2396,11 @@ a#dash-add-panel.flash {
 
   .panel-body .stat-pair .stat-value i {
     font-size: 24px;
+  }
+
+  .panel-poolPicker .stat-pair .stat-value i {
+    font-size: 22px;
+    float: left;
   }
 
   .panel-body .stat-pair .stat-value button i {

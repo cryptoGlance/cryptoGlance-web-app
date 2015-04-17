@@ -1,5 +1,5 @@
 <?php
-include('includes/inc.php');
+require_once('includes/inc.php');
 
 if (!$_SESSION['login_string']) {
     header('Location: login.php');
@@ -8,92 +8,94 @@ if (!$_SESSION['login_string']) {
 session_write_close();
 
 $jsArray = array(
-    'Util',
-    'dashboard/RigCollection',
-    'dashboard/Rig',
-    'dashboard/DeviceCollection',
-    'dashboard/Device',
-    'dashboard/PoolCollection',
-    'dashboard/Pool',
-    'dashboard/WalletCollection',
-    'dashboard/Wallet',
-    'dashboard/PoolPicker' //temp
+    'Util'
 );
 // If MobileMiner is enabled, load the JS
 if (isset($settings['general']['mobileminer']['enabled']) && $settings['general']['mobileminer']['enabled'] == 1) {
     $jsArray[] = 'dashboard/MobileMiner';
 }
 
-// If PoolPicker was added, load the JS
-if ($cryptoGlance->isPanelAdded('pool-picker')) {
-    $jsArray[] = 'dashboard/PoolPicker';
-}
+require_once("includes/header.php");
 
-// Load Last
-$jsArray[] = 'dashboard/script';
-
-include("includes/header.php");
+    if ($cryptoGlance->isNoPanels()) {
 ?>
-
-    <?php if ($cryptoGlance->isNoPanels()) { ?>
     <div id="first-run-notice"><b>Start by adding a panel.</b><br>The Dashboard is comprised of a variety of panels, each showing a certain type of info.<span><a href="#add-panel" id="flash-add-panel"><button type="button" class="btn btn-lg btn-warning" data-type="all"><i class="icon icon-newtab"></i> Add Panel</button></a></span></div>
-    <?php } ?>
+<?php } ?>
    <div id="dashboard-wrap" class="container sub-nav">
-    <?php
-    // Overview
-    if ($cryptoGlance->isPanelAdded('miners')) {
-        include("templates/modals/manage_rig.php");
+<?php
 
-        include("templates/panels/overview.php");
+    /* Overview + Rigs */
+    if ($cryptoGlance->isPanelAdded('miners')) {
+        // Load specific JS for this panel
+        $jsArray[] = 'dashboard/rigs/RigCollection';
+        $jsArray[] = 'dashboard/rigs/Rig';
+        $jsArray[] = 'dashboard/rigs/DeviceCollection';
+        $jsArray[] = 'dashboard/rigs/Device';
+        $jsArray[] = 'dashboard/rigs';
+
+        require_once("templates/modals/manage_rig.php");
+
+        require_once("templates/panels/overview.php");
 
         // Miners
         foreach ($cryptoGlance->getMiners() as $minerId => $miner) {
             $minerId++; // Doing this because minerID 0 means all devices in ajax calls
             include("templates/panels/rig.php");
         }
-        include("templates/modals/switch-pool.php");
+        require_once("templates/modals/switch-pool.php");
     }
-    ?>
 
-      <?php
+    /* Pools */
         if ($cryptoGlance->isPanelAdded('pools')) {
+            // Load specific JS for this panel
+            $jsArray[] = 'dashboard/pools/PoolCollection';
+            $jsArray[] = 'dashboard/pools/Pool';
+            $jsArray[] = 'dashboard/pools';
+
             foreach ($cryptoGlance->getPools() as $poolId => $pool) {
                 $poolId++;
                 include("templates/panels/pool.php");
             }
         }
-      ?>
 
-      <?php //require_once("templates/panels/news_feed.php"); ?>
+    /* PoolPicker */
+        if ($cryptoGlance->isPanelAdded('poolpicker')) {
+            // Load specific JS for this panel
+            $jsArray[] = 'dashboard/PoolPicker';
 
-      <?php //require_once("templates/panels/subreddit_feed.php"); ?>
+            require_once("templates/panels/poolpicker.php");
+        }
 
-      <?php
-        //if ($cryptoGlance->isPanelAdded('pool-picker')) {
-            require_once("templates/panels/pool_picker.php");
-        //}
-      ?>
-
-      <?php
+    /* Wallets */
       if ($cryptoGlance->isPanelAdded('wallets')) {
-        include("templates/panels/wallet.php");
+          // Load specific JS for this panel
+          $jsArray[] = 'dashboard/wallets/WalletCollection';
+          $jsArray[] = 'dashboard/wallets/Wallet';
+          $jsArray[] = 'dashboard/wallets';
+
+          require_once("templates/panels/wallet.php");
       }
 
+    /* Misc Modals */
       if (count($cryptoGlance->getMiners()) > 0 || count($cryptoGlance->getPools()) > 0) {
-        include("templates/modals/delete_prompt.php");
+          require_once("templates/modals/delete_prompt.php");
       }
 
-        include("templates/modals/add_rig.php");
-        include("templates/modals/add_pool.php");
-      ?>
-
+      require_once("templates/modals/add_rig.php");
+      require_once("templates/modals/add_pool.php");
+      require_once("templates/modals/poolpicker.php");
+?>
    </div>
    <!-- /container -->
 
-   <?php require_once("includes/footer.php"); ?>
+<?php require_once("includes/footer.php"); ?>
    </div>
    <!-- /page-container -->
 
-    <?php require_once("includes/scripts.php"); ?>
+<?php
+    // Load Last
+    $jsArray[] = 'dashboard/script';
+    require_once("includes/scripts.php");
+?>
 </body>
 </html>

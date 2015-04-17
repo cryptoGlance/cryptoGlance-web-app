@@ -5,8 +5,9 @@ class CryptoGlance {
     private $_configTypes = array(
         'cryptoglance',
         'miners',
-        'panels',
+        // 'panels',
         'pools',
+        'poolpicker',
         'wallets',
     );
 
