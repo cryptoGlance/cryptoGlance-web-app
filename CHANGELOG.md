@@ -1,9 +1,16 @@
 
-    [ v2.0.2.xxx ]
+    [ v2.2.xxx ]
 
     FEATURES
     ========
     - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
+
+    HOTFIXES
+    ========
+    - Fixed modal when editing a pool. Now displays "Edit ..." instead of "Add"
+    - Fixed error messages when adding rig or pool
+    - Fixed issue where JS would load for all features regardless if they are used
+    - Fixed issue with some switch styling
 
     KNOWN ISSUES
     ============
@@ -12,62 +19,11 @@
 
 ---
 
-    [ v2.0.2.805 ]
-
-    FEATURES
-    ========
-    - Pools have Offline mode. If no data is returned, or fails to connect, it is "offline"
-
-    HOTFIXES
-    ========
-    - fixed line-endings for permissionfix.sh
-
----
-
-    [ v2.0.2.799 ]
-
-    HOTFIXES
-    ========
-    - MobileMiner swapped the api key and app key
-
----
-
-    [ v2.0.2.799 ]
-
-    HOTFIXES
-    ========
-    - MobileMiner swapped the api key and app key
-
----
-
-    [ v2.0.2.796 ]
+    [ v2.1 ]
 
     FEATURES
     ========
     - MobileMiner support. Can be enabled via Settings. http://www.mobileminerapp.com/
-
-    POOLS
-    =====
-    - [+POOL] Burst.Ninja
-
-    HOTFIXES
-    ========
-    - Fixed issue where offline rigs would randomly appear/disappear in the overview panel
-
----
-
-    [ v2.0.2.771 ]
-
-    FEATURES
-    ========
-    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
-
----
-
-    [ v2.0.3-beta ]
-
-    FEATURES
-    ========
     - Added app specific way to zoom in/out
         - Zoom Out:     CTRL + <
         - Zoom In:      CTRL + >
@@ -75,6 +31,17 @@
     - Added manual update check in Settings page
     - Added New Zealand Dollar as a Fiat option in wallets
     - Added current FIAT price of a coin
+    - NOMP now detects the coin being mined for a specific address. Useful for profit-switching pools
+    - Pools have Offline mode. If no data is returned, or fails to connect, it is "offline"
+
+    POOLS
+    =====
+    - [+POOL] AntPool
+    - [+POOL] BitMinter
+    - [+POOL] Burst.Ninja
+    - [+POOL] BitcoinCZ aka Slush
+    - [+POOL] NiceHash/WestHash
+    - [+POOL] P2Pool
 
     POOLS
     =====
@@ -115,6 +82,8 @@
     - MPOS network hash x1000h too high
     - Update page will now display correctly for those with slow connections
     - Attempt to fix issue where the update.zip does not delete in some cases
+    - Fixed issue where offline rigs would randomly appear/disappear in the overview panel
+    - fixed line-endings for permissionfix.sh
 
 ---
 
