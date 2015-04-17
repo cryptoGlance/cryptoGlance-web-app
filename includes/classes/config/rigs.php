@@ -39,7 +39,7 @@ class Config_Rigs extends Config_Abstract {
             (empty($data['ip_address']) || empty($data['port']))
         ) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return 'Missing ' . (empty($data['ip_address']) ? 'IP Address' : 'Port');
+            return 'Missing ' . (empty($data['ip_address']) ? 'IP Address' : 'Port') .'!';
         } else if ($dataType == 'thresholds') {
             if ($data['temps']['enabled'] == 'on' &&
             (empty($data['temps']['warning']) || empty($data['temps']['danger']))
@@ -167,7 +167,7 @@ class Config_Rigs extends Config_Abstract {
         if ($isValid !== true) {
             return $isValid;
         }
-        
+
         if (!is_array($this->_data[$id]['settings'])){
             $this->_data[$id]['settings'] = array();
         }
