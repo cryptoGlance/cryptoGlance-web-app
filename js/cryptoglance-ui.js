@@ -456,9 +456,14 @@ $(document).ready(function() {
     $('.btn-delete').click(function() {
         var panelType = $(this).parentsUntil('.panel').parent().attr('data-type');
         var panelId = $(this).parentsUntil('.panel').parent().attr('data-id');
-        $('#deletePrompt').attr('data-type', (panelType+'s'));
-        $('#deletePrompt').attr('data-id', panelId);
-        $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
+        if (typeof panelId != 'undefined') {
+            $('#deletePrompt').attr('data-type', (panelType+'s'));
+            $('#deletePrompt').attr('data-id', panelId);
+            $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
+        } else {
+            $('#deletePrompt').attr('data-type', panelType);
+            $('.panelName', '#deletePrompt').html($('h1', '#' + panelType).text());
+        }
         prettifyInputs();
     });
 
@@ -481,7 +486,7 @@ $(document).ready(function() {
         case 406:
             $().toastmessage('showToast', {
               sticky  : false,
-              text    : '<b>Error!</b> ' + jqxhr.responseText,
+              text    : '<b>Error!</b><br />' + jqxhr.responseJSON,
               type    : 'error'
             });
           break;
