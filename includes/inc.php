@@ -28,6 +28,7 @@ define('DATA_PATH', getcwd() . DIRECTORY_SEPARATOR . DATA_FOLDER . DIRECTORY_SEP
 
 require_once('cryptoglance.php');
 $cryptoGlance = new CryptoGlance();
+$GLOBALS['cryptoGlance'] = $cryptoGlance;
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
