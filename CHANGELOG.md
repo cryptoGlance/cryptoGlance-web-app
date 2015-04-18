@@ -1,4 +1,17 @@
 
+    [ v2.1.0.1-beta ]
+
+    HOTFIXES
+    ========
+    - Fixed issue with Antpool on Windows
+
+    KNOWN ISSUES
+    ============
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+
+---
+
     [ v2.1-beta ]
 
     FEATURES
@@ -64,11 +77,6 @@
     - Attempt to fix issue where the update.zip does not delete in some cases
     - Fixed issue where offline rigs would randomly appear/disappear in the overview panel
     - fixed line-endings for permissionfix.sh
-
-    KNOWN ISSUES
-    ============
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
 
 ---
 
