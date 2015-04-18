@@ -32,7 +32,7 @@ class Pools_Antpool extends Pools_Abstract {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData = array();
             foreach ($this->_actions as $action) {
-                $nonce = (time()*mt_rand());
+                $nonce = number_format((time()*mt_rand()), 0, '', '');
                 $hmacSig = strtoupper(hash_hmac(
                     'sha256',
                     ($this->_userId.$this->_apiKey.$nonce),
