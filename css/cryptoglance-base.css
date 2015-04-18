@@ -289,6 +289,9 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   float: right;
   height: 30px;
 }
+.panel-heading .panel-header-button.toggle-panel-body {
+    margin-right: 10px;
+}
 
 .panel-heading .panel-header-button:hover {
   opacity: 1;

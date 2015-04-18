@@ -271,7 +271,7 @@ function fixApp() {
 
 // Smooth scrolling
 function scrollTo(id){
-  $('html,body').animate({scrollTop: $(id).offset().top},'slow');
+  $('html,body').animate({scrollTop: $(id).offset().top},'fast');
 };
 
 
@@ -414,16 +414,15 @@ $(document).ready(function() {
 
   $('.toggle-panel-body').click(function() {
     var $toggleButton = $(this);
-
-    $(this).parent().nextAll('.panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideToggle('slow');
-
+    $(this).parent().nextAll('.panel-content, .panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideToggle('fast');
     $toggleButton.toggleClass("minimized");
 
     if ($toggleButton.hasClass("minimized")) {
-     $toggleButton.html("<i class='icon icon-chevron-down'></i>");
+        $toggleButton.html("<i class='icon icon-chevron-down'></i>");
     } else {
-     $toggleButton.html("<i class='icon icon-chevron-up'></i>");
+        $toggleButton.html("<i class='icon icon-chevron-up'></i>");
     }
+    $(document).trigger('masonry-update');
   });
   $('.anchor-offset').click(function() {
     var target = $(this).attr('href');

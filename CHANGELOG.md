@@ -4,6 +4,7 @@
     FEATURES
     ========
     - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
+    - Ability to collapse and expand panels
 
     HOTFIXES
     ========
@@ -27,7 +28,7 @@
 
 ---
 
-    [ v2.1-beta ]
+    [ v2.1 ]
 
     FEATURES
     ========

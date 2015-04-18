@@ -5,6 +5,7 @@
         <button type="button" class="panel-header-button btn-delete" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
         <button type="button" class="panel-header-button btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-managedhosting"></i> Manage</button>
         <button type="button" class="panel-header-button btn-edit-rig" data-type="rig" data-url="rig.php" data-attr="<?php echo $minerId?>" style="display:none;"><i class="icon icon-edit"></i> Edit</button>
+        <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>
         <h2 class="panel-title"><i class="icon icon-pixelpickaxe"></i> <span class="rig-label">Rig Stats</span></h2>
     </div>
 
