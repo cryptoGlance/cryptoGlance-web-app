@@ -19,7 +19,15 @@
 
 ---
 
-    [ v2.1 ]
+    [ v2.1.0.1-beta ]
+
+    HOTFIXES
+    ========
+    - Fixed issue with Antpool on Windows
+
+---
+
+    [ v2.1-beta ]
 
     FEATURES
     ========
