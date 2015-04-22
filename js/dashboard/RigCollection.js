@@ -78,7 +78,11 @@
         });
 
         $.when.apply($, promises).done(function () {
-            overviewData = $.map(arguments, function (arr, idx) {
+            var arrData = arguments;
+            if (arguments.length != _self.collection.length && _self.collection.length == 1) {
+                arrData = [arguments];
+            }
+            overviewData = $.map(arrData, function (arr, idx) {
                 _self.collection[idx].update(arr[0])
                 _self._rigsResponded++;
                 return arr[0];
