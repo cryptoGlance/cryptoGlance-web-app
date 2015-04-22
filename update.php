@@ -31,8 +31,12 @@ if (isset($_POST['cryptoglance_version']) &&
         $osType = 'windows';
     } else if (stripos($osInfo, 'linux') !== false) {
         $osType = 'linux';
-        $phpUserInfo = posix_getpwuid(posix_geteuid());
-        $phpUser = $phpUserInfo['name'];
+        if (function_exists('posix_getuid')) {
+            $phpUserInfo = posix_getpwuid(posix_geteuid());
+            $phpUser = $phpUserInfo['name'];
+        } else {
+            $phpUser = 'www-data';
+        }
     }
 
     // Need this late in the script
