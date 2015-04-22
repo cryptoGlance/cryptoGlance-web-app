@@ -1,15 +1,23 @@
 
-    [ v2.1.0.3-beta ]
+    [ v2.1.0.4-beta ]
 
     HOTFIXES
     ========
-    - Fixed issue with Linux users who do not have posix installed
+    - Added additional check for linux users, just incase...
 
     KNOWN ISSUES
     ============
     - Users with lots of rigs may experience a long start-up time
     - Miner Failover may report incorrect active pool
     - Wallets can take a long time to load
+
+---
+
+    [ v2.1.0.3-beta ]
+
+    HOTFIXES
+    ========
+    - Fixed issue with Linux users who do not have posix installed
 
 ---
 

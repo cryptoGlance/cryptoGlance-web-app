@@ -31,7 +31,7 @@ if (isset($_POST['cryptoglance_version']) &&
         $osType = 'windows';
     } else if (stripos($osInfo, 'linux') !== false) {
         $osType = 'linux';
-        if (function_exists('posix_getuid')) {
+        if (function_exists('posix_geteuid') && function_exists('posix_getpwuid')) {
             $phpUserInfo = posix_getpwuid(posix_geteuid());
             $phpUser = $phpUserInfo['name'];
         } else {
