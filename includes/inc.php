@@ -30,7 +30,7 @@ require_once('cryptoglance.php');
 $cryptoGlance = new CryptoGlance();
 $settings = $cryptoGlance->getSettings();
 
-//// Current Build:
+// Current Build:
 define('CURRENT_VERSION', 'v2.1.0.4-beta');
 
 // Misc function used throughout cryptoglance
