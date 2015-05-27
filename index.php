@@ -16,9 +16,15 @@ $jsArray = array(
     'dashboard/PoolCollection',
     'dashboard/Pool',
     'dashboard/WalletCollection',
-    'dashboard/Wallet',
-    'dashboard/script'
+    'dashboard/Wallet'
 );
+// If MobileMiner is enabled, load the JS
+if (isset($settings['general']['mobileminer']['enabled']) && $settings['general']['mobileminer']['enabled'] == 1) {
+    $jsArray[] = 'dashboard/MobileMiner';
+}
+
+// Load Last
+$jsArray[] = 'dashboard/script';
 
 include("includes/header.php");
 ?>
@@ -42,7 +48,6 @@ include("includes/header.php");
         }
         include("templates/modals/switch-pool.php");
     }
-
     ?>
 
       <?php
@@ -77,11 +82,6 @@ include("includes/header.php");
    <?php require_once("includes/footer.php"); ?>
    </div>
    <!-- /page-container -->
-
-
-<?php //require_once("templates/modals/switch_pool.php"); ?>
-
-<?php //require_once("templates/modals/delete_prompt.php"); ?>
 
     <?php require_once("includes/scripts.php"); ?>
 </body>

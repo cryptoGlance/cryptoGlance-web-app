@@ -8,6 +8,11 @@
 
 class Rigs extends Config_Rigs {
 
+    public function __construct() {
+        parent::__construct();
+        set_time_limit(count($this->_objs)*3); // Total Rigs * 3 seconds
+    }
+
     /*
      * POST
      */

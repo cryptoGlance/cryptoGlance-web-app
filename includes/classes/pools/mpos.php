@@ -43,11 +43,16 @@ class Pools_Mpos extends Pools_Abstract {
                 }
             }
 
+            // Offline Check
+            if (empty($poolData[$this->_actions[0]])) {
+                return;
+            }
+
             // Data Order
             $data['type'] = $this->_type;
 
-            $data['balance'] = $poolData['getuserbalance']['confirmed'];
-            $data['unconfirmed_balance'] = $poolData['getuserbalance']['unconfirmed'];
+            $data['balance'] = number_format($poolData['getuserbalance']['confirmed'], 8);
+            $data['unconfirmed_balance'] = number_format($poolData['getuserbalance']['unconfirmed'], 8);
 
             $data['network_hashrate'] = formatHashrate($poolData['getpoolstatus']['nethashrate']/1000);
 

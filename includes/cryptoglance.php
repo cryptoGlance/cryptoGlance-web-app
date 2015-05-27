@@ -10,20 +10,28 @@ class CryptoGlance {
     );
 
     private $_algorithms = array(
+        'BLAKE256'  =>  'Blake-256',
         'FRESH'     =>  'Fresh',
-        'FUGUE'     =>  'Fugue256',
+        'FUGUE'     =>  'Fugue-256',
+        'GROESTL'   =>  'Groestl',
+        'JHA'       =>  'Jackpot',
         'KECCAK'    =>  'Keccak',
-        'NIST'      =>  'NIST',
-        'NSCRYPT'   =>  'NScrypt',
-        'QUARK'     =>  'Quarkcoin',
-        'SHA256'    =>  'SHA-256',
+        'LYRA2RE'   =>  'Lyra2RE',
+        'NEOSBLAKE' =>  'Neos-Blake',
+        'NEOSCRYPT' =>  'NeoScrypt',
+        'NIST'      =>  'Nist5',
+        'QUARK'     =>  'Quark',
         'SCRYPT'    =>  'Scrypt',
+        'NSCRYPT'   =>  'Scrypt-N',
+        'SHA256'    =>  'SHA-256',
         'TWE'       =>  'Twecoin',
         'UNK'       =>  'Unknown',
+        'WHIRL'     =>  'WHIRL',
         'X11'       =>  'X11',
         'X13'       =>  'X13',
         'X14'       =>  'X14',
         'X15'       =>  'X15',
+        'X17'       =>  'X17',
     );
 
     private $_config;
@@ -85,6 +93,15 @@ class CryptoGlance {
         if (empty($settings['general']['updateTimes']['wallet'])) {
             $settings['general']['updateTimes']['wallet'] = 600000;
         }
+        if (empty($settings['general']['mobileminer']['enabled'])) {
+            $settings['general']['mobileminer']['enabled'] = 0;
+        }
+        if (empty($settings['general']['mobileminer']['username'])) {
+            $settings['general']['mobileminer']['username'] = '';
+        }
+        if (empty($settings['general']['mobileminer']['apikey'])) {
+            $settings['general']['mobileminer']['apikey'] = '';
+        }
 
         return $settings;
     }
@@ -103,13 +120,23 @@ class CryptoGlance {
                     'rig' => $data['general']['rigUpdateTime']*1000,
                     'pool' => $data['general']['poolUpdateTime']*1000,
                     'wallet' => $data['general']['walletUpdateTime']*1000,
-                )
+                ),
+                'mobileminer' => array(
+                    'enabled' => $data['general']['mobileminer'],
+                    'username' => $data['general']['mobileminerUsername'],
+                    'appkey' => $data['general']['mobileminerAppKey'],
+                ),
             );
         }
 
         $this->_config['cryptoglance'] = $settings;
 
         if ($fh->write(json_encode($settings)) !== false) {
+            if (isset($_COOKIE['cryptoglance_version'])) {
+                unset($_COOKIE['cryptoglance_version']);
+                setcookie('cryptoglance_version', null, -1, '/');
+            }
+
             return true;
         } else {
             return false;
