@@ -10,7 +10,7 @@
     /* Rig properties */
     this.rigID                   = rigID
     this.$rigEl                  = $('#rig-' + rigID)
-    this.rigPanel                = this.$rigEl.find('.panel-content')
+    this.$rigPanel                = this.$rigEl.find('.panel-content')
     this.$rigNavEl               = this.$rigEl.find('.nav')
     this.$rigTabContentEl        = this.$rigEl.find('.tab-content')
     this.$rigTitle               = this.$rigEl.find('h1')
@@ -183,18 +183,20 @@
     this.$rigEl.find('.btn-manage-rig').hide()
     this.$rigEl.find('.btn-edit-rig').show()
     this.$rigEl.find('.rig-label').text('Rig Offline');
-    this.rigPanel.hide()
+    this.$rigPanel.hide()
     this.$rigNavEl.html('')
     this.$rigSummaryTableBody.html('')
   }
 
   Rig.prototype._on = function() {
-    this.$rigEl.removeClass('panel-offline')
-    this.$rigEl.find('.rig-label').text('Rig Stats');
-    this.$rigEl.find('.btn-manage-rig').show()
-    this.$rigEl.find('.btn-edit-rig').hide()
-    this.$rigSummary.find('table').show()
-    this.rigPanel.show()
+    if (this.$rigEl.hasClass('panel-offline')) {
+      this.$rigEl.removeClass('panel-offline')
+      this.$rigEl.find('.rig-label').text('Rig Stats');
+      this.$rigEl.find('.btn-manage-rig').show()
+      this.$rigEl.find('.btn-edit-rig').hide()
+      this.$rigSummary.find('table').show()
+      this.$rigPanel.show()
+    }
   }
 
   /*-----  End of Rig Private Methods  ------*/

@@ -22,14 +22,16 @@
         this.$poolEl.addClass('panel-offline');
         this.$poolPanelLabel.text('Pool Offline');
         this.$poolContentEl.find('img').remove();
+        this.$poolContentEl.slideUp();
         return;
     }
 
     var summary = ''
-    if (this.$poolPanelLabel.text() != 'Pool Stats') {
+    if (this.$poolEl.hasClass('panel-offline')) {
         this.$poolPanelLabel.text('Pool Stats');
+        this.$poolEl.removeClass('panel-offline');
+        this.$poolContentEl.slideDown();
     }
-    this.$poolEl.removeClass('panel-offline');
 
     for (var key in poolObj) {
       if (null === poolObj[key]) {

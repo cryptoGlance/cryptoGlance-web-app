@@ -203,4 +203,9 @@ class Config_Wallets extends Config_Abstract {
         return ($id+1);
     }
 
+    // Override
+    public function toggle() {
+        return true;
+    }
+
 }

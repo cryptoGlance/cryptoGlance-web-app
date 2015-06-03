@@ -172,7 +172,9 @@ class Config_Pools extends Config_Abstract {
         }
 
         if ($id != 0) {
+            $panel = $this->_data[$id-1]['panel'];
             $this->_data[$id-1] = $pool;
+            $this->_data[$id-1]['panel'] = $panel;
         } else {
             $this->_data[] = $pool;
         }

@@ -106,6 +106,39 @@
         .done()
     });
 
+
+    // Add Show/Hide btn
+    $document.on('click', 'button.toggle-panel-body', function (evt) {
+        var elmPanel = $(this).parent().parent();
+        var elmType = elmPanel.attr('data-type');
+        if (typeof elmType == 'undefined') {
+            elmType = 'CryptoGlance';
+        }
+        var elmId = elmPanel.attr('data-id');
+        if (typeof elmId == 'undefined') {
+            elmId = elmPanel.attr('id');
+        }
+        
+        var $toggleButton = $(this);
+        var $hideElm = $toggleButton.parent().next('.panel-content, .panel-body').slideToggle('fast', function() {
+            if ($(this).is(":visible")) {
+                $toggleButton.html("<i class='icon icon-chevron-up'></i>");
+                var toggleDirection = 'open';
+            } else {
+                $toggleButton.html("<i class='icon icon-chevron-down'></i>");
+                var toggleDirection = 'close';
+            }
+            $(document).trigger('masonry-update');
+
+            // Save this data
+            $.ajax({
+                type: 'post',
+                url: 'ajax.php',
+                data: { type: elmType, action: 'toggle', id: elmId, toggle: toggleDirection }
+            });
+        });
+    });
+
   /*-----  End of Global Event Handling  ------*/
 
 }(window.jQuery)

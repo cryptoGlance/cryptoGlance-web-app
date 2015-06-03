@@ -1,15 +1,15 @@
-<div id="rig-<?php echo $minerId?>" class="panel panel-primary panel-rig" data-type="rig" data-id="<?php echo $minerId?>">
+<?php $minimized = ($miner['panel']['state'] === 'close');  ?>
+<div id="rig-<?php echo $minerId?>" class="panel panel-primary panel-rig" data-type="rigs" data-id="<?php echo $minerId?>">
     <h1><?php echo (empty($miner['name'])) ? $miner['host'] : $miner['name']?></h1>
-
     <div class="panel-heading">
         <button type="button" class="panel-header-button btn-delete" data-toggle="modal" data-target="#deletePrompt" data-backdrop="static" aria-hidden="true"><i class="icon icon-circledelete"></i></button>
         <button type="button" class="panel-header-button btn-manage-rig" data-type="rig" data-toggle="modal" data-target="#manageRig" data-attr="<?php echo $minerId?>"><i class="icon icon-managedhosting"></i> Manage</button>
         <button type="button" class="panel-header-button btn-edit-rig" data-type="rig" data-url="rig.php" data-attr="<?php echo $minerId?>" style="display:none;"><i class="icon icon-edit"></i> Edit</button>
-        <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-up"></i></button>
+        <button type="button" class="panel-header-button toggle-panel-body"><i class="icon icon-chevron-<?php echo ($minimized?'down':'up') ?>"></i></button>
         <h2 class="panel-title"><i class="icon icon-pixelpickaxe"></i> <span class="rig-label">Rig Stats</span></h2>
     </div>
 
-    <div class="panel-content">
+    <div class="panel-content" <?php echo ($minimized?'style="display:none;"':'') ?>>
         <ul class="nav nav-pills"></ul>
         <div class="tab-content">
             <div class="tab-pane fade in active" id="rig-<?php echo $minerId?>-summary">

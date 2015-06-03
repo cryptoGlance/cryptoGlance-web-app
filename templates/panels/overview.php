@@ -1,4 +1,4 @@
-<div id="overview" class="panel panel-primary panel-overview">
+<div id="overview" class="panel panel-primary panel-overview" data-type="overview">
    <h1>Overview</h1>
    <div class="panel-heading">
       <button type="button" class="panel-header-button btn-updater" data-type="rig"><i class="icon icon-refresh"></i> Update</button>

@@ -91,6 +91,13 @@ class CryptoGlance {
         return $this->_config['pools'];
     }
 
+    ////////////////
+    // PoolPicker //
+    ////////////////
+    public function getPoolPicker() {
+        return $this->_config['poolpicker'];
+    }
+
     //////////////
     // Wallets //
     /////////////

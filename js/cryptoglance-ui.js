@@ -412,18 +412,6 @@ $(document).ready(function() {
     return false;
   });
 
-  $('.toggle-panel-body').click(function() {
-    var $toggleButton = $(this);
-    $(this).parent().nextAll('.panel-content, .panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideToggle('fast');
-    $toggleButton.toggleClass("minimized");
-
-    if ($toggleButton.hasClass("minimized")) {
-        $toggleButton.html("<i class='icon icon-chevron-down'></i>");
-    } else {
-        $toggleButton.html("<i class='icon icon-chevron-up'></i>");
-    }
-    $(document).trigger('masonry-update');
-  });
   $('.anchor-offset').click(function() {
     var target = $(this).attr('href');
     $('body').scrollTo(target, 750, { margin: true, offset: -120 });
@@ -456,7 +444,7 @@ $(document).ready(function() {
         var panelType = $(this).parentsUntil('.panel').parent().attr('data-type');
         var panelId = $(this).parentsUntil('.panel').parent().attr('data-id');
         if (typeof panelId != 'undefined') {
-            $('#deletePrompt').attr('data-type', (panelType+'s'));
+            $('#deletePrompt').attr('data-type', panelType);
             $('#deletePrompt').attr('data-id', panelId);
             $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
         } else {
