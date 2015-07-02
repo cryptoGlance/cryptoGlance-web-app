@@ -6,9 +6,15 @@
     - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
     - Ability to collapse and expand panels
 
+    COINS
+    =====
+    - [+COIN] ByteCent
+    - [+COIN] DarkCoin
+
     POOLS
     =====
     - [-POOL] BTC Guild
+    - [+POOL] CkPool Solo
     - [-POOL] MagicPool
     - [-POOL] WafflePool
 
