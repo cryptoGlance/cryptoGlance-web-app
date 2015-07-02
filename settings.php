@@ -21,6 +21,7 @@ if (isset($_POST) && !empty($_POST)) {
         'update' => intval($updatesEnabled),
         'updateType' => $_POST['updateType'],
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
+        'rigUpdateDelay' => ($_POST['rigUpdateDelay'] == 'on' ? 10 : 2),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
         // 'mobileminer' => intval($mobileminerEnabled),
@@ -102,6 +103,13 @@ require_once("includes/header.php");
                           <option <?php echo ($settings['general']['updateTimes']['rig'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
                         </select>
                       </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <input id="enableRigDelay" type="checkbox" name="rigUpdateDelay" <?php echo ($settings['general']['updateTimes']['rig_delay'] == 10) ? 'checked' : '' ?>>
+                            <label for="enableRigDelay">Enable Rig Update Delay</label>
+                        </div>
+                        <span class="help-block"><i class="icon icon-info-sign"></i> Enable this setting if CryptoGlance cannot keep a steady connection with your rigs.</span>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-5 control-label">Pools:</label>

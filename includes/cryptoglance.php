@@ -129,6 +129,11 @@ class CryptoGlance {
         if (empty($settings['general']['updateTimes']['rig'])) {
             $settings['general']['updateTimes']['rig'] = 3000;
         }
+        if (!empty($settings['general']['updateTimes']['rig_delay'])) {
+            define('RIG_UPDATE_DELAY', intval($settings['general']['updateTimes']['rig_delay']));
+        } else {
+            define('RIG_UPDATE_DELAY', 2);
+        }
         if (empty($settings['general']['updateTimes']['pool'])) {
             $settings['general']['updateTimes']['pool'] = 120000;
         }
@@ -160,6 +165,7 @@ class CryptoGlance {
                 ),
                 'updateTimes' => array(
                     'rig' => $data['general']['rigUpdateTime']*1000,
+                    'rig_delay' => $data['general']['rigUpdateDelay'],
                     'pool' => $data['general']['poolUpdateTime']*1000,
                     'wallet' => $data['general']['walletUpdateTime']*1000,
                 ),
