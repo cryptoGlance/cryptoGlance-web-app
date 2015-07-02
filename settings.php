@@ -14,7 +14,7 @@ $emailSaveResult = null;
 
 if (isset($_POST) && !empty($_POST)) {
     $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
-    $mobileminerEnabled = ($_POST['mobileminer'] == 'on') ? 1 : 0;
+    // $mobileminerEnabled = ($_POST['mobileminer'] == 'on') ? 1 : 0;
 
     $data = array();
     $data = array(
@@ -23,9 +23,9 @@ if (isset($_POST) && !empty($_POST)) {
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
-        'mobileminer' => intval($mobileminerEnabled),
-        'mobileminerUsername' => $_POST['mobileminerUsername'],
-        'mobileminerAppKey' => $_POST['mobileminerAppKey'],
+        // 'mobileminer' => intval($mobileminerEnabled),
+        // 'mobileminerUsername' => $_POST['mobileminerUsername'],
+        // 'mobileminerAppKey' => $_POST['mobileminerAppKey'],
     );
 
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
@@ -128,6 +128,7 @@ require_once("includes/header.php");
                       </div>
                     </div>
                 </div>
+                <?php if (true === false) { // removed due to service shutting down ?>
                 <hr />
                 <div id="mobileMiner">
                     <h3>Mobile Miner:</h3>
@@ -152,6 +153,7 @@ require_once("includes/header.php");
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <hr />
                 <div class="form-group">
                   <div class="col-sm-12">

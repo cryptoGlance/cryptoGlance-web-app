@@ -10,10 +10,11 @@ session_write_close();
 $jsArray = array(
     'Util'
 );
+// NOTICE: Removed due to service shutting down
 // If MobileMiner is enabled, load the JS
-if (isset($settings['general']['mobileminer']['enabled']) && $settings['general']['mobileminer']['enabled'] == 1) {
-    $jsArray[] = 'dashboard/MobileMiner';
-}
+// if (isset($settings['general']['mobileminer']['enabled']) && $settings['general']['mobileminer']['enabled'] == 1) {
+//     $jsArray[] = 'dashboard/MobileMiner';
+// }
 
 require_once("includes/header.php");
 
