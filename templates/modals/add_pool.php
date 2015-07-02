@@ -27,6 +27,7 @@
                  <option value="slush">BitcoinCZ aka Slush</option>
                  <option value="burstninja">Burst.Ninja</option>
                  <option value="ckpool">CkPool</option>
+                 <option value="ckpoolsolo">CkPool Solo</option>
                  <option value="eclipse">Eclipse</option>
                  <option value="eligius">Eligius</option>
                  <!-- <option value="magicpool">MagicPool</option> -->
@@ -66,7 +67,7 @@
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">
              </div>
            </div>
-           <div class="form-group wafflepool eligius magicpool nomp p2pool nicehash westhash" style="display: none;">
+           <div class="form-group wafflepool eligius magicpool nomp p2pool nicehash westhash ckpoolsolo" style="display: none;">
              <label for="inputAddress" class="col-sm-3 control-label">Mining Address</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputAddress" name="address" placeholder="12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE">

@@ -120,6 +120,12 @@ class Config_Pools extends Config_Abstract {
                 'apikey' => $api,
                 'userid' => $userid,
             );
+        } else if ($type == 'ckpoolsolo' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'solo.ckpool.org'),
+                'address' => $address,
+            );
         } else if ($type == 'eligius' && !empty($address)) {
             $pool = array(
                 'type' => $type,
