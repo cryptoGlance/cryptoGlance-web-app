@@ -48,6 +48,9 @@ class Pools_CkpoolSolo extends Pools_Abstract {
             $data['pool_users'] = $poolData['pool']['general']['Users'];
             $data['uptime'] = formatTimeElapsed($poolData['pool']['general']['runtime']);
 
+            $data['user_last_update'] = formatTimeElapsed(time() - $poolData['user']['lastupdate']);
+            $data['pool_last_update'] = formatTimeElapsed(time() - $poolData['pool']['general']['lastupdate']);
+
             $data['url'] = $this->_apiURL;
 
             $this->_fileHandler->write(json_encode($data));
