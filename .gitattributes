@@ -1,12 +1,2 @@
-*.text eol=lf
-*.bat eol=lf
-*.sh eol=lf
-
-*.png binary
-*.jpg binary
-*.gif binary
-
-*.eot binary
-*.svg binary
-*.woff binary
-*.ttf binary
+# Disable LF normalization for all files
+* -text
