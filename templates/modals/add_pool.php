@@ -22,14 +22,14 @@
                  <option disabled selected>Select A Pool</option>
                  <option value="antpool">Antpool</option>
                  <option value="bitminter">BitMinter</option>
-                 <option value="btcguild">BTC Guild</option>
+                 <!-- <option value="btcguild">BTC Guild</option> -->
                  <option value="bitcoinaffiliatenetwork">Bitcoin Affiliate Network</option>
                  <option value="slush">BitcoinCZ aka Slush</option>
                  <option value="burstninja">Burst.Ninja</option>
                  <option value="ckpool">CkPool</option>
                  <option value="eclipse">Eclipse</option>
                  <option value="eligius">Eligius</option>
-                 <option value="magicpool">MagicPool</option>
+                 <!-- <option value="magicpool">MagicPool</option> -->
                  <option value="mpos">MPOS</option>
                  <option value="multipoolus">Multipool.us</option>
                  <option value="nicehash">NiceHash</option>
@@ -37,7 +37,7 @@
                  <option value="p2pool">P2Pool</option>
                  <!-- <option value="simplecoin">SimpleCoin</option> -->
                  <!-- <option value="trademybit">TradeMyBit</option> -->
-                 <option value="wafflepool">WafflePool</option>
+                 <!-- <option value="wafflepool">WafflePool</option> -->
                  <option value="westhash">WestHash</option>
               </select>
             </div>
