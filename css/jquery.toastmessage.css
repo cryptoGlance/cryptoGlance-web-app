@@ -1,0 +1,187 @@
+.toast-container {
+  width: 100%;
+	z-index: 10000;
+}
+
+
+* html .toast-container {
+	position: absolute;
+}
+
+.toast-item {
+	height: auto;
+	background: #333;
+  opacity: 1;
+	color: #eee;
+	padding: 14px 1%;
+	border: 1px solid #999;
+  border-width: 1px 0;
+	display: block;
+	position: relative;
+	margin: 0;
+  box-shadow: 0 0 15px #000;
+}
+
+.toast-item p {
+    text-align: left;
+    text-shadow: 0 1px 2px #222;
+    margin: 0 15px 0 45px;
+}
+
+
+.toast-item-close {
+    background:url(../images/toast/close.png);
+    width:22px;
+    height:22px;
+    position: absolute;
+    top:0;
+    right:0;
+    cursor: pointer;
+}
+
+.toast-item-close:hover {
+    background:url(../images/toast/close-hover.png);
+}
+
+.toast-item span {
+  display: block;
+  text-align: center;
+  margin: 7px 0px -5px;
+}
+
+.toast-item-image {
+    width:32px;
+    height: 32px;
+    position: absolute;
+    top: 20%;
+    left: 10px;
+}
+
+.toast-item-image-notice {
+    background:url(../images/toast/notice.png);
+}
+
+.toast-item-image-success {
+    background:url(../images/toast/success.png);
+}
+
+.toast-item-image-warning {
+    background:url(../images/toast/warning.png);
+}
+
+.toast-item-image-error {
+    background:url(../images/toast/error.png);
+}
+
+
+/**
+ * toast types
+ *
+ * pattern: toast-type-[value]
+ * where 'value' is the real value of the plugin option 'type'
+ *
+ */
+.toast-type-notice {
+    color: #D2F3FF;
+    background: rgba(4, 113, 149, 0.95);
+    border-color: #33b5e5;
+}
+
+.toast-type-notice b {
+    color: #90E1FF;
+}
+
+.toast-type-success {
+  background: rgba(0, 90, 0, 0.95);
+  color: #afa;
+  border-color: #0c0;
+}
+
+.toast-type-success b {
+  color: #dfd;
+}
+
+.toast-type-warning {
+    background: rgba(223, 138, 0, 0.95);
+    color: #FFE8C3;
+    border-color: #FCBD57;
+}
+
+.toast-type-error {
+  background: rgba(150, 0, 0, 0.95);
+  color: #FFD0D0;
+  border-color: #c00;
+}
+
+/**
+ * positions
+ *
+ * pattern: toast-position-[value]
+ * where 'value' is the real value of the plugin option 'position'
+ *
+ */
+.toast-position-top-left {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+}
+
+.toast-position-top-center {
+    position: fixed;
+    top: 50px;
+}
+
+.toast-position-top-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.toast-position-middle-left {
+    position: fixed;
+    top: 50px;
+}
+
+.toast-position-middle-center {
+    position: fixed;
+    left: 50%;
+    margin-left: -140px;
+    margin-top: -40px;
+    top: 50%;
+}
+
+.toast-position-middle-right {
+    position: fixed;
+    right: 20px;
+    margin-left: -140px;
+    margin-top: -40px;
+    top: 50%;
+}
+
+/* X-Small devices (small tablets, 680px and up) */
+@media (min-width: 480px) {
+
+  .toast-container {
+    width: 420px;
+  }
+
+  .toast-item {
+    margin: 0 0 12px 0;
+    padding: 14px 6px;
+    border-radius: 7px;
+    border-width: 1px;
+  }
+
+  .toast-item-close {
+      top:-7px;
+      right:-7px;
+  }
+
+  .toast-position-top-center {
+      top: 20px;
+      left: 50%;
+      margin-left: -210px;
+  }
+
+}  
+
