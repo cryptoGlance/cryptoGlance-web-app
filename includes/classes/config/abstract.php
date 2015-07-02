@@ -43,17 +43,15 @@ class Config_Abstract {
     }
 
     public function toggle() {
-        $id = intval($_POST['id'])-1;
+        $panelHandler = new FileHandler('configs/panels.json');
+        $panelData = json_decode($panelHandler->read(), true);
 
-        // Functionality is only available if ID is available
-        if (!isset($_POST['id']) && isset($this->_data[$id])) {
-            header("HTTP/1.0 406 Not Acceptable");
-            return false;
-        }
+        $panelData[$_POST['type']]['state'] = $_POST['toggle'];
 
-        $this->_data[$id]['panel']['state'] = $_POST['toggle'];
+        $panelHandler->write(json_encode($panelData));
 
-        return $this->write();
+        header("HTTP/1.0 202 Accepted");
+        return true;
     }
 
     public function write() {

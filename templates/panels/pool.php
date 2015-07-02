@@ -1,4 +1,4 @@
-<?php $minimized = ($pool['panel']['state'] === 'close');  ?>
+<?php $minimized = ($pool['panel']['state'] === 'close'); ?>
 <div id="pool-<?php echo $poolId?>" class="panel panel-primary panel-pool" data-type="pools" data-id="<?php echo $poolId?>">
    <h1><?php echo (empty($pool['name'])) ? $pool['apiurl'] : $pool['name']?></h1>
    <div class="panel-heading">

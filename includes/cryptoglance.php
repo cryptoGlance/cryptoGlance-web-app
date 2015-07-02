@@ -5,7 +5,7 @@ class CryptoGlance {
     private $_configTypes = array(
         'cryptoglance',
         'miners',
-        // 'panels',
+        'panels',
         'pools',
         'poolpicker',
         'wallets',
@@ -52,10 +52,7 @@ class CryptoGlance {
         return $this->_algorithms;
     }
 
-    public function isPanelAdded($panel) {
-        if ($this->_config['panels'][$panel]) {
-            return $this->_config['panels'][$panel];
-        }
+    public function isConfigAvailable($panel) {
         return $this->_config[$panel];
     }
 
@@ -80,6 +77,9 @@ class CryptoGlance {
     //////////
     // Rigs //
     //////////
+    public function getOverview() {
+        return $this->_config['panels']['overview'];
+    }
     public function getMiners() {
         return $this->_config['miners'];
     }
@@ -95,14 +95,22 @@ class CryptoGlance {
     // PoolPicker //
     ////////////////
     public function getPoolPicker() {
-        return $this->_config['poolpicker'];
+        $config = array();
+        $config['data'] = $this->_config['poolpicker'];
+        $config['panel'] = $this->_config['panels']['pool-picker'];
+
+        return $config;
     }
 
     //////////////
     // Wallets //
     /////////////
     public function getWallets() {
-        return $this->_config['wallets'];
+        $config = array();
+        $config['data'] = $this->_config['wallets'];
+        $config['panel'] = $this->_config['panels']['wallets'];
+
+        return $config;
     }
 
 

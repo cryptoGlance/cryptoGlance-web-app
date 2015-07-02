@@ -37,10 +37,5 @@ class Config_PoolPicker extends Config_Abstract {
     public function remove() {
         return unlink(DATA_PATH . $this->_config);
     }
-    
-    // Override
-    public function toggle() {
-        return true;
-    }
 
 }

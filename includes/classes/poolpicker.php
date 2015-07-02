@@ -16,7 +16,7 @@ class PoolPicker extends Config_PoolPicker {
     public function getUpdate() {
         $fileHandler = new FileHandler('services/poolpicker.json');
 
-        // if ($GLOBALS['cached'] == false || $fileHandler->lastTimeModified() >= 3600) { // updates every 1 minute
+        if ($GLOBALS['cached'] == false || $fileHandler->lastTimeModified() >= 3600) { // updates every 1 minute
             $data = array();
 
             $data = curlCall($this->_url);
@@ -25,9 +25,9 @@ class PoolPicker extends Config_PoolPicker {
 
             $fileHandler->write(json_encode($data));
             return $data;
-        // }
+        }
 
-        // return json_decode($fileHandler->read(), true);
+        return json_decode($fileHandler->read(), true);
     }
 
     private function _filterData($data) {

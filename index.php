@@ -25,7 +25,7 @@ require_once("includes/header.php");
 <?php
 
     /* Overview + Rigs */
-    if ($cryptoGlance->isPanelAdded('miners')) {
+    if ($cryptoGlance->isConfigAvailable('miners')) {
         // Load specific JS for this panel
         $jsArray[] = 'dashboard/rigs/RigCollection';
         $jsArray[] = 'dashboard/rigs/Rig';
@@ -35,6 +35,7 @@ require_once("includes/header.php");
 
         require_once("templates/modals/manage_rig.php");
 
+        $overview = $cryptoGlance->getOverview();
         require_once("templates/panels/overview.php");
 
         // Miners
@@ -46,7 +47,7 @@ require_once("includes/header.php");
     }
 
     /* Pools */
-        if ($cryptoGlance->isPanelAdded('pools')) {
+        if ($cryptoGlance->isConfigAvailable('pools')) {
             // Load specific JS for this panel
             $jsArray[] = 'dashboard/pools/PoolCollection';
             $jsArray[] = 'dashboard/pools/Pool';
@@ -59,20 +60,22 @@ require_once("includes/header.php");
         }
 
     /* PoolPicker */
-        if ($cryptoGlance->isPanelAdded('poolpicker')) {
+        if ($cryptoGlance->isConfigAvailable('poolpicker')) {
             // Load specific JS for this panel
             $jsArray[] = 'dashboard/PoolPicker';
 
+            $poolPicker = $cryptoGlance->getPoolPicker();
             require_once("templates/panels/poolpicker.php");
         }
 
     /* Wallets */
-      if ($cryptoGlance->isPanelAdded('wallets')) {
+      if ($cryptoGlance->isConfigAvailable('wallets')) {
           // Load specific JS for this panel
           $jsArray[] = 'dashboard/wallets/WalletCollection';
           $jsArray[] = 'dashboard/wallets/Wallet';
           $jsArray[] = 'dashboard/wallets';
 
+          $wallet = $cryptoGlance->getWallets();
           require_once("templates/panels/wallet.php");
       }
 
