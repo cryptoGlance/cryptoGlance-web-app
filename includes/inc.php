@@ -32,7 +32,7 @@ $GLOBALS['cryptoGlance'] = $cryptoGlance;
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:
-define('CURRENT_VERSION', 'v2.1.0.4-beta');
+define('CURRENT_VERSION', 'v2.1.0.5');
 
 // Misc function used throughout cryptoglance
 require_once('functions.php');
