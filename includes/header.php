@@ -3,10 +3,7 @@
 <?php require_once("includes/head.php"); ?>
    <body>
       <?php require_once("templates/modals/add_panel.php"); ?>
-
-      <!-- -->
       <?php require_once("templates/modals/qrcode-donate-btc.php"); ?>
-      <!-- -->
 
       <div class="page-container">
       <div class="dark-overlay"></div>
@@ -58,6 +55,7 @@
                         <li><a href="changelog.php"><i class="icon icon-notes"></i> View the CHANGELOG</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Official Links</li>
+                        <li><a href="https://bitcointalk.org/index.php?topic=569924.0" rel="external"><i class="icon icon-post"></i> BitcoinTalk Thread</a></li>
                         <li><a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external"><i class="icon icon-playstore"></i> Android Companion App</a></li>
                         <li><a href="https://github.com/cryptoGlance/cryptoGlance-web-app" rel="external"><i class="icon icon-github"></i> Source on Github</a></li>
                         <li><a href="http://cryptoglance.info" rel="external"><i class="icon icon-glasses"></i> cryptoGlance Homepage</a></li>

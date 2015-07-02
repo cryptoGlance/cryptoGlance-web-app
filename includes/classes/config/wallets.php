@@ -202,5 +202,4 @@ class Config_Wallets extends Config_Abstract {
 
         return ($id+1);
     }
-
 }

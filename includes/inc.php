@@ -14,7 +14,7 @@ require_once('config.php');
 set_time_limit(120); // Allow up to 2 minutes for all APIs to return information
 ini_set("display_errors", 1);
 error_reporting(E_ERROR);
-//error_reporting(E_ALL);
+// error_reporting(E_ALL);
 
 date_default_timezone_set("GMT");
 
@@ -28,6 +28,7 @@ define('DATA_PATH', getcwd() . DIRECTORY_SEPARATOR . DATA_FOLDER . DIRECTORY_SEP
 
 require_once('cryptoglance.php');
 $cryptoGlance = new CryptoGlance();
+$GLOBALS['cryptoGlance'] = $cryptoGlance;
 $settings = $cryptoGlance->getSettings();
 
 //// Current Build:

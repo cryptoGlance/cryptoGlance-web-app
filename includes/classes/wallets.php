@@ -10,15 +10,17 @@
 class Wallets extends Config_Wallets {
 
     protected $_currencies = array(
-        'bitcoin'   => 'BTC',
-        'burstcoin'   => 'BURST',
-        'darkcoin'  => 'DRK',
-        'dogecoin'  => 'DOGE',
+        'bitcoin'       => 'BTC',
+        'blackcoin'     => 'BLK',
+        'burstcoin'     => 'BURST',
+        'bytecent'      => 'BYC',
+        'darkcoin'      => 'DRK',
+        'dogecoin'      => 'DOGE',
         'dogecoindark'  => 'DOGED',
-        'litecoin'  => 'LTC',
-        'neoscoin' => 'NEOS',
-        'paycoin' => 'XPY',
-        'reddcoin'  => 'RDD',
+        'litecoin'      => 'LTC',
+        'neoscoin'      => 'NEOS',
+        'paycoin'       => 'XPY',
+        'reddcoin'      => 'RDD',
         // 'vertcoin'  => 'VTC', // Disabled until blockchain explorer works
     );
 

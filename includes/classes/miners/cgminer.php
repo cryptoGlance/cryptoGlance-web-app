@@ -352,7 +352,7 @@ class Miners_Cgminer extends Miners_Abstract {
     // PRIVATE
     private function cmd($cmd) {
         $response = '';
-        $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, 2);
+        $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, RIG_UPDATE_DELAY);
 
         if (!$socket || $errno != 0) {
             return null;
