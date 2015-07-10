@@ -3,7 +3,6 @@
 
     FEATURES
     ========
-    - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
     - Ability to collapse and expand panels
 
     COINS
@@ -21,6 +20,7 @@
     SERVICE
     =======
     - Removed MobileMiner due to the service shutting down
+    - Removed PoolPicker due to the service shutting down
 
     HOTFIXES
     ========
