@@ -1,5 +1,26 @@
 
-    [ v2.1.0.9 ]
+    [ v2.1.0.14 ]
+
+    FEATURES
+    ========
+    - Added highest temperature to Overview panel
+    
+    SERVICE
+    =======
+    - Removed PoolPicker due to the service shutting down
+
+    HOTFIXES
+    ========
+    - Added CkPool changes (https://bitcointalk.org/index.php?topic=569924.msg11827496#msg11827496)
+
+    KNOWN ISSUES
+    ============
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
+
+---
+
+    [ v2.1.0.13 ]
 
     FEATURES
     ========
@@ -29,11 +50,6 @@
     - Fixed error messages when adding rig or pool
     - Fixed issue where JS would load for all features regardless if they are used
     - Fixed issue with some switch styling
-
-    KNOWN ISSUES
-    ============
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
 
 ---
 
@@ -206,4 +222,8 @@
 
 ---
 
+<<<<<<< HEAD
 /*end CHANGELOG.md*
+=======
+/*end CHANGELOG.md*
+>>>>>>> origin/development

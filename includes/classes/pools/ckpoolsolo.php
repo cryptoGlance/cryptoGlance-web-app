@@ -39,17 +39,15 @@ class Pools_CkpoolSolo extends Pools_Abstract {
             // Data Order
             $data['type'] = $this->_type;
 
-            $data['user_hashrate'] = formatHashrate($this->normalizeHashrate($poolData['user']['hashrate5m']));
-            $data['user_workers'] = $poolData['user']['workers'];
-            $data['user_best_share'] = number_format($poolData['user']['bestshare'], 8);
-
-            $data['pool_hashrate'] = formatHashrate($this->normalizeHashrate($poolData['pool']['hashrate']['hashrate5m']));
-            $data['pool_workers'] = $poolData['pool']['general']['Workers'];
-            $data['pool_users'] = $poolData['pool']['general']['Users'];
-            $data['uptime'] = formatTimeElapsed($poolData['pool']['general']['runtime']);
+            $data['user_hashrate1M'] = formatHashrate($this->normalizeHashrate($userData['hashrate1m']));
+            $data['user_hashrate5M'] = formatHashrate($this->normalizeHashrate($userData['hashrate5m']));
+	        $data['user_hashrate1Hr'] = formatHashrate($this->normalizeHashrate($userData['hashrate1hr']));
+            $data['user_hashrate1D'] = formatHashrate($this->normalizeHashrate($userData['hashrate1d']));
+	        $data['user_hashrate7D'] = formatHashrate($this->normalizeHashrate($userData['hashrate7d']));
+            $data['user_workers'] = $userData['workers'];
+            $data['user_best_share'] = number_format($userData['bestshare'], 1);
 
             $data['user_last_update'] = formatTimeElapsed(time() - $poolData['user']['lastupdate']);
-            $data['pool_last_update'] = formatTimeElapsed(time() - $poolData['pool']['general']['lastupdate']);
 
             $data['url'] = $this->_apiURL;
 

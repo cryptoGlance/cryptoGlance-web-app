@@ -5,6 +5,24 @@
  */
 class Miners_Abstract {
 
+    // Miner Memebers
+    protected $_host;
+    protected $_port;
+
+    // Data
+    protected $_summary = array();
+    protected $_devs = array();
+    protected $_eStats = array();
+    protected $_pools = array();
+
+    // Common Data
+    protected $_devStatus = array();
+    protected $_rigStatus = 'offline';
+    protected $_highTemp = 0;
+    protected $_rigHashrate_avg = 0;
+    protected $_activePool = array();
+    protected $_upTime;
+
     protected $_name;
     protected $_settings = array(
         'algorithm' => 'SHA256',

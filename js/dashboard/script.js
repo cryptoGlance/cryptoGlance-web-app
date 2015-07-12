@@ -4,10 +4,10 @@
   =            MobileMiner            =
   ===================================*/
 
-    if (typeof MobileMiner != 'undefined') {
-        var mobileMiner = new MobileMiner();
-        mobileMiner.start();
-    }
+    // if (typeof MobileMiner != 'undefined') {
+    //     var mobileMiner = new MobileMiner();
+    //     mobileMiner.start();
+    // }
 
   /*-----  End of MobileMiner  ------*/
 
@@ -118,7 +118,7 @@
         if (typeof elmId == 'undefined') {
             elmId = elmPanel.attr('id');
         }
-        
+
         var $toggleButton = $(this);
         var $hideElm = $toggleButton.parent().next('.panel-content, .panel-body').slideToggle('fast', function() {
             if ($(this).is(":visible")) {

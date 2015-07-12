@@ -181,7 +181,10 @@
   RigCollection.prototype._buildOverviewRow = function (overview, index) {
     var icon = overview.status.icon || 'ban-circle'
     var colour = overview.status.colour || 'grey'
-    var hashrate_5s = colour !== 'grey' ? Util.getSpeed(overview.hashrate_5s) : '--'
+    var temperature = '--';
+    if (colour !== 'grey' && overview.temperature.celsius != 0) {
+        temperature = overview.temperature.celsius + '&deg;C / ' + overview.temperature.fahrenheit + '&deg;F';
+    }
     var hashrate_avg = colour !== 'grey' ? Util.getSpeed(overview.hashrate_avg) : '--'
     var active_pool_url = overview.active_pool.url || '--'
     var uptime = overview.uptime || '--'
@@ -189,8 +192,8 @@
            '<td><i class="icon icon-'+ icon +' '+ colour +'"></i></td>' +
            '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
            '<td>'+ overview.algorithm +'</td>' +
+           '<td>'+ temperature +'</td>' +
            '<td>'+ hashrate_avg +'</td>' +
-           '<td>'+ hashrate_5s +'</td>' +
            '<td>'+ active_pool_url +'</td>' +
            '<td>'+ uptime +'</td>' +
            '</tr>'

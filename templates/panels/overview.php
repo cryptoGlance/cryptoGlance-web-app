@@ -14,8 +14,8 @@
                <th></th>
                <th>Name</th>
                <th>Algorithm</th>
+               <th>Highest Temperature</th>
                <th>Hashrate avg</th>
-               <th>Hashrate 5s</th>
                <th>Active Pool</th>
                <th>Uptime</th>
             </tr>
