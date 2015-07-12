@@ -6,3 +6,5 @@
 *.eot binary
 *.woff binary
 *.svg binary
+*.png binary
+*.gif binary
