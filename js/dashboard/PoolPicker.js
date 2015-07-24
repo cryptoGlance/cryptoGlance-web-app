@@ -129,8 +129,8 @@
   =          The Pool Picker          =
   ===================================*/
 
-    // var poolPicker = new PoolPicker()
-    // poolPicker.start()
+    var poolPicker = new PoolPicker()
+    poolPicker.start()
 
 
     // Edit PoolPicker

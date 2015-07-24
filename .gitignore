@@ -3,6 +3,7 @@ user_data/currencies/*
 user_data/dev/*
 user_data/fiat/*
 user_data/pools/*
+user_data/service/*
 user_data/wallets/*
 pure-assets/
 vectorstock/

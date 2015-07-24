@@ -48,27 +48,26 @@ require_once("includes/header.php");
     }
 
     /* Pools */
-        if ($cryptoGlance->isConfigAvailable('pools')) {
-            // Load specific JS for this panel
-            $jsArray[] = 'dashboard/pools/PoolCollection';
-            $jsArray[] = 'dashboard/pools/Pool';
-            $jsArray[] = 'dashboard/pools';
+    if ($cryptoGlance->isConfigAvailable('pools')) {
+        // Load specific JS for this panel
+        $jsArray[] = 'dashboard/pools/PoolCollection';
+        $jsArray[] = 'dashboard/pools/Pool';
+        $jsArray[] = 'dashboard/pools';
 
-            foreach ($cryptoGlance->getPools() as $poolId => $pool) {
-                $poolId++;
-                include("templates/panels/pool.php");
-            }
+        foreach ($cryptoGlance->getPools() as $poolId => $pool) {
+            $poolId++;
+            include("templates/panels/pool.php");
         }
+    }
 
     /* PoolPicker */
-    /* This service has Shut Down */
-        // if ($cryptoGlance->isConfigAvailable('poolpicker')) {
-        //     // Load specific JS for this panel
-        //     $jsArray[] = 'dashboard/PoolPicker';
-        //
-        //     $poolPicker = $cryptoGlance->getPoolPicker();
-        //     require_once("templates/panels/poolpicker.php");
-        // }
+    if ($cryptoGlance->isConfigAvailable('poolpicker')) {
+        // Load specific JS for this panel
+        $jsArray[] = 'dashboard/PoolPicker';
+
+        $poolPicker = $cryptoGlance->getPoolPicker();
+        require_once("templates/panels/poolpicker.php");
+    }
 
     /* Wallets */
       if ($cryptoGlance->isConfigAvailable('wallets')) {
@@ -88,7 +87,7 @@ require_once("includes/header.php");
 
       require_once("templates/modals/add_rig.php");
       require_once("templates/modals/add_pool.php");
-    //   require_once("templates/modals/poolpicker.php");
+      require_once("templates/modals/poolpicker.php");
 ?>
    </div>
    <!-- /container -->
