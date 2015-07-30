@@ -17,22 +17,11 @@ class Pools_CkpoolSolo extends Pools_Abstract {
 
     public function update() {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
-            $poolData = array();
-
-            $poolStatus = explode(PHP_EOL, curlCall($this->_apiURL . '/pool/pool.status'));
-            if (!empty($poolStatus[0])) {
-                $poolData['pool']['general'] = json_decode($poolStatus[0], true);
-            }
-            if (!empty($poolStatus[1])) {
-                $poolData['pool']['hashrate'] = json_decode($poolStatus[1], true);
-            }
-            if (!empty($poolStatus[2])) {
-                $poolData['pool']['shares'] = json_decode($poolStatus[2], true);
-            }
-            $poolData['user'] = curlCall($this->_apiURL . '/users/' . $this->_btcaddess);
+            $userData = array();
+            $userData = curlCall($this->_apiURL . '/users/' . $this->_btcaddess);
 
             // Offline Check
-            if (empty($poolData['pool']) || empty($poolData['user'])) {
+            if (empty($userData)) {
                 return;
             }
 
@@ -47,7 +36,7 @@ class Pools_CkpoolSolo extends Pools_Abstract {
             $data['user_workers'] = $userData['workers'];
             $data['user_best_share'] = number_format($userData['bestshare'], 1);
 
-            $data['user_last_update'] = formatTimeElapsed(time() - $poolData['user']['lastupdate']);
+            $data['user_last_update'] = formatTimeElapsed(time() - $userData['lastupdate']);
 
             $data['url'] = $this->_apiURL;
 
