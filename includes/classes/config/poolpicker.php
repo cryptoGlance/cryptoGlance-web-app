@@ -27,6 +27,7 @@ class Config_PoolPicker extends Config_Abstract {
             $this->_data[] = $algorithm;
         }
 
+        $this->_fileHandler->delete();
         return $this->write();
     }
 
@@ -35,6 +36,7 @@ class Config_PoolPicker extends Config_Abstract {
     }
 
     public function remove() {
+        $this->_fileHandler->delete();
         return unlink(DATA_PATH . $this->_config);
     }
 
