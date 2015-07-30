@@ -30,6 +30,7 @@
                  <option value="ckpoolsolo">CkPool Solo</option>
                  <option value="eclipse">Eclipse</option>
                  <option value="eligius">Eligius</option>
+                 <option value="ghash">GHash</option>
                  <!-- <option value="magicpool">MagicPool</option> -->
                  <option value="mpos">MPOS</option>
                  <option value="multipoolus">Multipool.us</option>
@@ -49,19 +50,19 @@
                <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://pooldomain.com/">
              </div>
            </div>
-           <div class="form-group mpos bitcoinaffiliatenetwork btcguild simplecoin eclipse trademybit multipoolus ckpool slush antpool bitminter" style="display: none;">
+           <div class="form-group mpos bitcoinaffiliatenetwork btcguild simplecoin eclipse trademybit multipoolus ckpool slush antpool bitminter ghash" style="display: none;">
              <label for="inputPoolAPI" class="col-sm-3 control-label">API Key</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolAPI" name="api">
              </div>
            </div>
-           <div class="form-group antpool" style="display: none;">
+           <div class="form-group antpool ghash" style="display: none;">
              <label for="inputPoolSecret" class="col-sm-3 control-label">API Secret</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolSecret" name="secret">
              </div>
            </div>
-           <div class="form-group mpos bitcoinaffiliatenetwork ckpool antpool bitminter burstninja" style="display: none;">
+           <div class="form-group mpos bitcoinaffiliatenetwork ckpool antpool bitminter burstninja ghash" style="display: none;">
              <label for="inputPoolUserId" class="col-sm-3 control-label">User ID</label>
              <div class="col-sm-4">
                <input type="text" class="form-control" id="inputPoolUserId" name="userid">

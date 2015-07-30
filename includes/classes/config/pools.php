@@ -185,6 +185,14 @@ class Config_Pools extends Config_Abstract {
                 'name' => ($label ? $label : 'mining.bitcoin.cz'),
                 'apikey' => $api,
             );
+        } else if ($type == 'ghash' && !empty($api) && !empty($secret) && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'GHash.IO'),
+                'apikey' => $api,
+                'apisecret' => $secret,
+                'userid' => $userid,
+            );
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'All fields are required on this form.';
