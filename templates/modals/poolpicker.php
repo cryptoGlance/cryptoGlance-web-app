@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group form-left">
-                        <table class="col-sm-6">
+                        <table class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <tr>
                                 <td><input type="checkbox" class="form-control" name="algorithms[]" value="lyra2re" id="poolpickerLyra2re"></td>
                                 <td><label for="poolpickerLyra2re">Lyra2RE</label></td>
@@ -32,7 +32,7 @@
                                 <td><label for="poolpickerKeccak">Keccak</label></td>
                             </tr>
                         </table>
-                    <table class="col-sm-6">
+                    <table class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <tr>
                         <td><input type="checkbox" class="form-control" name="algorithms[]" value="scryptn" id="poolpickerScryptN"></td>
                         <td><label for="poolpickerScryptN">Scrypt-N</label></td>
