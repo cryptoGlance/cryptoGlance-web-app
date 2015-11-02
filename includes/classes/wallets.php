@@ -51,7 +51,7 @@ class Wallets extends Config_Wallets {
 
     public function getUpdate() {
         $data = array();
-        
+
         foreach ($this->_objs as $wallet) {
             // Exchange information
             $btcIndex = new Walletapi();
@@ -73,12 +73,7 @@ class Wallets extends Config_Wallets {
             // Wallet actually contains a bunch of addresses and associated data
             foreach ($wallet['addresses'] as $addrKey => $address) {
                 $addressData = $address->update();
-                
-//                echo "<pre>". $wallet['currency'] .": ";
-//                print_r($addressData);
-//                echo "</pre>";
-//                ob_flush(); flush();
-                
+
                 $walletAddressData[$addressData['address']] = array(
                     'id' => $addrKey+1,
                     'label' => $addressData['label'],
