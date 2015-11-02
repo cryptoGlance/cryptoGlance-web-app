@@ -1,10 +1,31 @@
 
+    [ v2.1.0.26 ]
+
+    FEATURES
+    ========
+    - Created/Added WalletAPI support, removed FirstRally
+    - Added GHash, however very little testing. Use at own risk.
+
+    SERVICE
+    =======
+    - Re-Added PoolPicker, service resumed.
+
+    HOTFIXES
+    ========
+    - Fixed issue with wallets/pools sometimes hanging.
+
+    KNOWN ISSUES
+    ============
+    - Wallets can take a long time to load
+
+---
+
     [ v2.1.0.17 ]
 
     FEATURES
     ========
     - Added highest temperature to Overview panel
-    
+
     SERVICE
     =======
     - Removed PoolPicker due to the service shutting down
