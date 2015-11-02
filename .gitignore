@@ -6,6 +6,7 @@ user_data/fiat/*
 user_data/pools/*
 user_data/service/*
 user_data/wallets/*
+user_data/services/*
 pure-assets/
 vectorstock/
 .idea/
