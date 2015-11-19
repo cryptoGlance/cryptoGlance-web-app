@@ -1,4 +1,17 @@
 
+    [ v2.1.0.28 ]
+
+    HOTFIXES
+    ========
+    - Fixed GHash pool
+    - Removed commas from some numbers in wallet
+
+    KNOWN ISSUES
+    ============
+    - Wallets can take a long time to load
+
+---
+
     [ v2.1.0.26 ]
 
     FEATURES
@@ -13,10 +26,6 @@
     HOTFIXES
     ========
     - Fixed issue with wallets/pools sometimes hanging.
-
-    KNOWN ISSUES
-    ============
-    - Wallets can take a long time to load
 
 ---
 
