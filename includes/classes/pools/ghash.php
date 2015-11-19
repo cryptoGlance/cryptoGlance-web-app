@@ -10,10 +10,11 @@ class Pools_Ghash extends Pools_Abstract {
     protected $_apiSecret;
     protected $_userId;
     protected $_type = 'ghash';
+    protected $_nonce;
 
     // api calls to make
     protected $_actions = array(
-        'balance',
+        'balance' => 'balance',
         'hashrate' => 'ghash.io/hashrate',
         'workers' => 'ghash.io/workers',
     );
@@ -23,6 +24,7 @@ class Pools_Ghash extends Pools_Abstract {
         $this->_apiKey = $params['apikey'];
         $this->_apiSecret = $params['apisecret'];
         $this->_userId = $params['userid'];
+        $this->_nonce = time()+100;
         $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. $this->_type . '/' . hash('md4', $params['apikey']) .'.json');
     }
 
@@ -30,17 +32,17 @@ class Pools_Ghash extends Pools_Abstract {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 30) { // updates every 30 seconds
             $poolData = array();
             foreach ($this->_actions as $actionKey => $action) {
-                $nonce = number_format((time()*mt_rand()), 0, '', '');
+                $this->_nonce++;
                 $hmacSig = strtoupper(hash_hmac(
                     'sha256',
-                    ($nonce.$this->_userId.$this->_apiKey),
+                    ($this->_nonce . $this->_userId . $this->_apiKey),
                     $this->_apiSecret
                 ));
 
                 $postParams = http_build_query(array(
                     'key' => $this->_apiKey,
-                    'nonce' => $nonce,
-                    'signature' => $hmacSig
+                    'signature' => $hmacSig,
+                    'nonce' => $this->_nonce,
                 ));
 
                 $poolData[$actionKey] = curlCall(
@@ -55,7 +57,7 @@ class Pools_Ghash extends Pools_Abstract {
             }
 
             // Offline Check
-            if (empty($poolData[$this->_actions[0]])) {
+            if (empty($poolData['hashrate'])) {
                 return;
             }
 
@@ -72,7 +74,7 @@ class Pools_Ghash extends Pools_Abstract {
                 }
             }
 
-            $data['pool_hashrate'] = formatHashrate($poolData['poolStats']['poolHashrate']*1000);
+            // $data['pool_hashrate'] = formatHashrate($poolData['poolStats']['poolHashrate']*1000); // Doesn't exist
 
             // User Hashrate
             $data['user_hashrate_(1_day)'] = formatHashrate($poolData['hashrate']['last1d']*1000);
