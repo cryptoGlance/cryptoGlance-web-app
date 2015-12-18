@@ -77,7 +77,7 @@
         })
     });
 
-    // Cancle BTN
+    // Cancel BTN
     $document.on('click', 'button.btn-cancelConfig, button.close', function (evt) {
         var modal = $(this).parentsUntil('.modal').parent();
         if (typeof $('form', modal)[0] != 'undefined') {
