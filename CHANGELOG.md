@@ -1,5 +1,5 @@
 
-    [ v2.2-beta ]
+    [ v2.2.1-beta ]
 
     FEATURES
     ========
