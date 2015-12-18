@@ -36,8 +36,7 @@ class Config_PoolPicker extends Config_Abstract {
     }
 
     public function remove() {
-        $this->_fileHandler->delete();
-        return unlink(DATA_PATH . $this->_config);
+        return $this->_fileHandler->delete();
     }
 
 }
