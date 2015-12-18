@@ -12,7 +12,6 @@
 
   /*-----  End of DeviceCollection Class/Object/Constructor  ------*/
 
-
   /*=======================================================
   =            DeviceCollection Public Methods            =
   =======================================================*/
@@ -43,16 +42,6 @@
   }
 
   /*-----  End of DeviceCollection Public Methods  ------*/
-
-
-  /*========================================================
-  =            DeviceCollection Private Methods            =
-  ========================================================*/
-
-
-
-  /*-----  End of DeviceCollection Private Methods  ------*/
-
 
   /*===============================================
   =            DeviceCollection Export            =

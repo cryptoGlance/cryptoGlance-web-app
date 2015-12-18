@@ -271,7 +271,7 @@ function fixApp() {
 
 // Smooth scrolling
 function scrollTo(id){
-  $('html,body').animate({scrollTop: $(id).offset().top},'slow');
+  $('html,body').animate({scrollTop: $(id).offset().top},'fast');
 };
 
 
@@ -412,19 +412,6 @@ $(document).ready(function() {
     return false;
   });
 
-  $('.toggle-panel-body').click(function() {
-    var $toggleButton = $(this);
-
-    $(this).parent().nextAll('.panel-body, .panel-footer, .tab-content, .panel-rig .nav-pills').slideToggle('slow');
-
-    $toggleButton.toggleClass("minimized");
-
-    if ($toggleButton.hasClass("minimized")) {
-     $toggleButton.html("<i class='icon icon-chevron-down'></i>");
-    } else {
-     $toggleButton.html("<i class='icon icon-chevron-up'></i>");
-    }
-  });
   $('.anchor-offset').click(function() {
     var target = $(this).attr('href');
     $('body').scrollTo(target, 750, { margin: true, offset: -120 });
@@ -456,9 +443,14 @@ $(document).ready(function() {
     $('.btn-delete').click(function() {
         var panelType = $(this).parentsUntil('.panel').parent().attr('data-type');
         var panelId = $(this).parentsUntil('.panel').parent().attr('data-id');
-        $('#deletePrompt').attr('data-type', (panelType+'s'));
-        $('#deletePrompt').attr('data-id', panelId);
-        $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
+        if (typeof panelId != 'undefined') {
+            $('#deletePrompt').attr('data-type', panelType);
+            $('#deletePrompt').attr('data-id', panelId);
+            $('.panelName', '#deletePrompt').html($('h1', '#' + panelType + '-' + panelId).text());
+        } else {
+            $('#deletePrompt').attr('data-type', panelType);
+            $('.panelName', '#deletePrompt').html($('h1', '#' + panelType).text());
+        }
         prettifyInputs();
     });
 
@@ -481,7 +473,7 @@ $(document).ready(function() {
         case 406:
             $().toastmessage('showToast', {
               sticky  : false,
-              text    : '<b>Error!</b> ' + jqxhr.responseText,
+              text    : '<b>Error!</b><br />' + jqxhr.responseJSON,
               type    : 'error'
             });
           break;

@@ -42,6 +42,18 @@ class Config_Abstract {
         return $this->write();
     }
 
+    public function toggle() {
+        $panelHandler = new FileHandler('configs/panels.json');
+        $panelData = json_decode($panelHandler->read(), true);
+
+        $panelData[$_POST['type']]['state'] = $_POST['toggle'];
+
+        $panelHandler->write(json_encode($panelData));
+
+        header("HTTP/1.0 202 Accepted");
+        return true;
+    }
+
     public function write() {
         $this->_fileHandler->write(json_encode($this->_data));
 

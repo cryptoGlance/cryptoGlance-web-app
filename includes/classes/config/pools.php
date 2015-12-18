@@ -26,6 +26,19 @@ class Config_Pools extends Config_Abstract {
         $this->_objs[] = $obj;
     }
 
+    public function toggle() {
+        $id = intval($_POST['id'])-1;
+
+        // Functionality is only available if ID is available
+        if (!isset($_POST['id']) && isset($this->_data[$id])) {
+            header("HTTP/1.0 406 Not Acceptable");
+            return false;
+        }
+
+        $this->_data[$id]['panel']['state'] = $_POST['toggle'];
+        return $this->write();
+    }
+
     public function create() {
         $id = intval($_POST['id']);
         $label = $_POST['label'];
@@ -107,6 +120,12 @@ class Config_Pools extends Config_Abstract {
                 'apikey' => $api,
                 'userid' => $userid,
             );
+        } else if ($type == 'ckpoolsolo' && !empty($address)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'solo.ckpool.org'),
+                'address' => $address,
+            );
         } else if ($type == 'eligius' && !empty($address)) {
             $pool = array(
                 'type' => $type,
@@ -166,13 +185,23 @@ class Config_Pools extends Config_Abstract {
                 'name' => ($label ? $label : 'mining.bitcoin.cz'),
                 'apikey' => $api,
             );
+        } else if ($type == 'ghash' && !empty($api) && !empty($secret) && !empty($userid)) {
+            $pool = array(
+                'type' => $type,
+                'name' => ($label ? $label : 'GHash.IO'),
+                'apikey' => $api,
+                'apisecret' => $secret,
+                'userid' => $userid,
+            );
         } else {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'All fields are required on this form.';
         }
 
         if ($id != 0) {
+            $panel = $this->_data[$id-1]['panel'];
             $this->_data[$id-1] = $pool;
+            $this->_data[$id-1]['panel'] = $panel;
         } else {
             $this->_data[] = $pool;
         }

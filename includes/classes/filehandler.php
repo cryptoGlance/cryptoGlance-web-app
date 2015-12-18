@@ -20,8 +20,7 @@ class FileHandler {
     public function write($content) {
         if (file_put_contents($this->_fullFilePath, $content) === FALSE) {
             $dirPath = preg_replace('#[^/]*$#', '', $this->_fullFilePath);
-//            $dirPath = preg_replace('#\/[^/]*$#', '', $this->_fullFilePath);
-            
+
             if (!is_dir($dirPath)) {
                 mkdir($dirPath, 0777, true);
             }
@@ -30,7 +29,11 @@ class FileHandler {
         }
     }
 
-    /* 
+    public function delete() {
+        return unlink($this->_fullFilePath);
+    }
+
+    /*
      * Get date/time last time file was modified
      * return (int) seconds since last file modification
      */
@@ -43,22 +46,21 @@ class FileHandler {
         }
 
         $timeDiff = (time() - $last_mod) - 218;
-        
+
         return $timeDiff;
     }
-    
+
     /*
      * Check if the file is writable or not.
      */
     public function isWritable() {
         return is_writable($this->_fullFilePath);
     }
-    
+
     /*
      * Check if the file exists or not.
      */
     public function fileExists() {
         return file_exists($this->_fullFilePath);
     }
-
 }

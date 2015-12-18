@@ -23,13 +23,12 @@
 
   /*-----  End of RigCollection Class/Object/Constructor  ------*/
 
-
   /*====================================================
   =            RigCollection Public Methods            =
   ====================================================*/
 
   RigCollection.prototype.start = function () {
-    var _self = this // caching self ref for passing down in scope
+    var _self = this; // caching self ref for passing down in scope
 
     /*==========  Generate collection  ==========*/
     $('.panel-rig').each(function() {
@@ -54,7 +53,6 @@
   }
 
   /*-----  End of RigCollection Public Methods  ------*/
-
 
   /*=====================================================
   =            RigCollection Private Methods            =
@@ -183,7 +181,10 @@
   RigCollection.prototype._buildOverviewRow = function (overview, index) {
     var icon = overview.status.icon || 'ban-circle'
     var colour = overview.status.colour || 'grey'
-    var hashrate_5s = colour !== 'grey' ? Util.getSpeed(overview.hashrate_5s) : '--'
+    var temperature = '--';
+    if (colour !== 'grey' && overview.temperature.celsius != 0) {
+        temperature = overview.temperature.celsius + '&deg;C / ' + overview.temperature.fahrenheit + '&deg;F';
+    }
     var hashrate_avg = colour !== 'grey' ? Util.getSpeed(overview.hashrate_avg) : '--'
     var active_pool_url = overview.active_pool.url || '--'
     var uptime = overview.uptime || '--'
@@ -191,8 +192,8 @@
            '<td><i class="icon icon-'+ icon +' '+ colour +'"></i></td>' +
            '<td><a href="#rig-'+ index +'" class="anchor-offset rig-'+ index +' '+ colour +'">'+ $('#rig-'+ index + ' h1').html() +'</a></td>' +
            '<td>'+ overview.algorithm +'</td>' +
+           '<td>'+ temperature +'</td>' +
            '<td>'+ hashrate_avg +'</td>' +
-           '<td>'+ hashrate_5s +'</td>' +
            '<td>'+ active_pool_url +'</td>' +
            '<td>'+ uptime +'</td>' +
            '</tr>'
@@ -200,6 +201,124 @@
 
   /*-----  End of RigCollection Private Methods  ------*/
 
+  /*====================================================
+  =          RigCollection Actionable Methods          =
+  ====================================================*/
+
+    RigCollection.prototype.modal = new Object();
+
+    RigCollection.prototype.manage = function (rigId) {
+        var $manageRig = $('#manageRig');
+
+        $manageRig.attr('data-attr', rigId);
+        $manageRig.find('.rig-name').html($('#rig-' + rigId + ' h1').html());
+        $manageRig.find('.btn-details').attr('href', 'rig.php?id=' + rigId);
+
+        prettifyInputs();
+    }
+
+    RigCollection.prototype.modal.switchPools = function (rigId) {
+        var $switchPoolModalBody = $('#switchPool .modal-body');
+        $('.table tbody', $switchPoolModalBody).html('');
+        $('.ajax-loader', $switchPoolModalBody).html('<img src="images/ajax-loader.gif" alt="Loading..." class="ajax-loader" />')
+        $.ajax({
+            url: 'ajax.php',
+            data: {
+                id: rigId,
+                type: 'rigs',
+                action: 'pools'
+            },
+            dataType: 'json'
+        })
+        .done(function (data) {
+            if (typeof data != 'undefined') {
+                $('#switchPool').attr('data-attr', rigId);
+                $.each(data[0], function (v,k) {
+                    var poolUrl = k.url.slice(k.url.indexOf("/") + 2)
+
+                    var active = (k.active == 1) ? 'Yes' : 'No';
+                    var status = (k.status == 1) ? 'Alive' : 'Dead';
+
+                    $('.table tbody', $switchPoolModalBody).append(
+                        '<tr data-pool="'+ k.id +'">' +
+                        '<td>'+ k.id +'</td>' +
+                        '<td>'+ '<input type="radio" name="switchPoolList" id="rig'+ rigId +'-pool'+ k.id +'" value="'+ k.id +'">' +'</td>' +
+                        '<td>'+ status +'</td>' +
+                        '<td>'+ poolUrl +'</td>' +
+                        '<td>'+ k.priority +'</td>' +
+                        '</tr>'
+                    );
+
+                    if (k.active == 1) {
+                        $('input:radio[id=rig'+ rigId +'-pool'+ k.id +']', $switchPoolModalBody).prop('checked', true);
+                    }
+                });
+
+                $switchPoolModalBody.find('.ajax-loader').remove()
+                $('.table', $switchPoolModalBody).show();
+                $('.resetStats', $switchPoolModalBody).show();
+                prettifyInputs()
+            }
+        });
+    }
+
+    RigCollection.prototype.switchPools = function (rigId, selectedPoolId, resetStats) {
+        var _self = this;
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: rigId,
+                type: 'rigs',
+                action: 'switch-pool',
+                pool: parseInt(selectedPoolId, 10) + 1,
+                reset: resetStats
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function (data) {
+            _self._update();
+        });
+    }
+
+    RigCollection.prototype.restart = function (rigId) {
+        var _self = this;
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: rigId,
+                type: 'rigs',
+                action: 'restart'
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function (data) {
+            _self._update();
+        });
+    }
+
+    RigCollection.prototype.reset = function (rigId) {
+        var _self = this;
+
+        $.ajax({
+            type: 'post',
+            data: {
+                id: rigId,
+                type: 'rigs',
+                action: 'reset-stats'
+            },
+            url: 'ajax.php',
+            dataType: 'json'
+        })
+        .done(function (data) {
+            _self._update();
+        });
+    }
+
+  /*-----  End of RigCollection Actionable Methods  ------*/
 
   /*============================================
   =            RigCollection Export            =

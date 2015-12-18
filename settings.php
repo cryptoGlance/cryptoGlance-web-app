@@ -14,18 +14,19 @@ $emailSaveResult = null;
 
 if (isset($_POST) && !empty($_POST)) {
     $updatesEnabled = ($_POST['update'] == 'on') ? 1 : 0;
-    $mobileminerEnabled = ($_POST['mobileminer'] == 'on') ? 1 : 0;
+    // $mobileminerEnabled = ($_POST['mobileminer'] == 'on') ? 1 : 0;
 
     $data = array();
     $data = array(
         'update' => intval($updatesEnabled),
         'updateType' => $_POST['updateType'],
         'rigUpdateTime' => intval($_POST['rigUpdateTime']),
+        'rigUpdateDelay' => ($_POST['rigUpdateDelay'] == 'on' ? 10 : 2),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
-        'mobileminer' => intval($mobileminerEnabled),
-        'mobileminerUsername' => $_POST['mobileminerUsername'],
-        'mobileminerAppKey' => $_POST['mobileminerAppKey'],
+        // 'mobileminer' => intval($mobileminerEnabled),
+        // 'mobileminerUsername' => $_POST['mobileminerUsername'],
+        // 'mobileminerAppKey' => $_POST['mobileminerAppKey'],
     );
 
     $generalSaveResult = $cryptoGlance->saveSettings(array('general' => $data));
@@ -97,8 +98,18 @@ require_once("includes/header.php");
                           <option <?php echo ($settings['general']['updateTimes']['rig'] == 30000) ? 'selected="selected"' : '' ?> value="30">30 seconds</option>
                           <option <?php echo ($settings['general']['updateTimes']['rig'] == 60000) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
                           <option <?php echo ($settings['general']['updateTimes']['rig'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 420000) ? 'selected="selected"' : '' ?> value="420">7 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['rig'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
                         </select>
                       </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <input id="enableRigDelay" type="checkbox" name="rigUpdateDelay" <?php echo ($settings['general']['updateTimes']['rig_delay'] == 10) ? 'checked' : '' ?>>
+                            <label for="enableRigDelay">Enable Rig Update Delay</label>
+                        </div>
+                        <span class="help-block"><i class="icon icon-info-sign"></i> Enable this setting if CryptoGlance cannot keep a steady connection with your rigs.</span>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-5 control-label">Pools:</label>
@@ -125,6 +136,7 @@ require_once("includes/header.php");
                       </div>
                     </div>
                 </div>
+                <?php if (true === false) { // removed due to service shutting down ?>
                 <hr />
                 <div id="mobileMiner">
                     <h3>Mobile Miner:</h3>
@@ -149,6 +161,7 @@ require_once("includes/header.php");
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <hr />
                 <div class="form-group">
                   <div class="col-sm-12">

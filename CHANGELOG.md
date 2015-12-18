@@ -1,44 +1,89 @@
 
-    [ v2.1.0.4-beta ]
+    [ v2.1.0.28 ]
 
     HOTFIXES
     ========
-    - Added additional check for linux users, just incase...
+    - Fixed GHash pool
+    - Removed commas from some numbers in wallet
 
     KNOWN ISSUES
     ============
-    - Users with lots of rigs may experience a long start-up time
+    - Wallets can take a long time to load
+
+---
+
+    [ v2.1.0.26 ]
+
+    FEATURES
+    ========
+    - Created/Added WalletAPI support, removed FirstRally
+    - Added GHash, however very little testing. Use at own risk.
+
+    SERVICE
+    =======
+    - Re-Added PoolPicker, service resumed.
+
+    HOTFIXES
+    ========
+    - Fixed issue with wallets/pools sometimes hanging.
+
+---
+
+    [ v2.1.0.17 ]
+
+    FEATURES
+    ========
+    - Added highest temperature to Overview panel
+
+    SERVICE
+    =======
+    - Removed PoolPicker due to the service shutting down
+
+    HOTFIXES
+    ========
+    - Added CkPool changes (https://bitcointalk.org/index.php?topic=569924.msg11827496#msg11827496)
+
+    KNOWN ISSUES
+    ============
     - Miner Failover may report incorrect active pool
     - Wallets can take a long time to load
 
 ---
 
-    [ v2.1.0.3-beta ]
+    [ v2.1.0.13 ]
+
+    FEATURES
+    ========
+    - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
+    - Ability to collapse and expand panels
+    - Added option in settings for longer update delays for users with rig connection issues
+
+    COINS
+    =====
+    - [+COIN] ByteCent
+    - [+COIN] DarkCoin
+
+    POOLS
+    =====
+    - [-POOL] BTC Guild
+    - [+POOL] CkPool Solo
+    - [-POOL] MagicPool
+    - [-POOL] WafflePool
+
+    SERVICE
+    =======
+    - Removed MobileMiner due to the service shutting down
 
     HOTFIXES
     ========
-    - Fixed issue with Linux users who do not have posix installed
+    - Fixed modal when editing a pool. Now displays "Edit ..." instead of "Add"
+    - Fixed error messages when adding rig or pool
+    - Fixed issue where JS would load for all features regardless if they are used
+    - Fixed issue with some switch styling
 
 ---
 
-    [ v2.1.0.2-beta ]
-
-    HOTFIXES
-    ========
-    - Fixed issue when using only 1 rig
-    - Padded the time-out for users with 60+ rigs
-
----
-
-    [ v2.1.0.1-beta ]
-
-    HOTFIXES
-    ========
-    - Fixed issue with Antpool on Windows
-
----
-
-    [ v2.1-beta ]
+    [ v2.1 ]
 
     FEATURES
     ========
@@ -60,14 +105,6 @@
     - [+POOL] Burst.Ninja
     - [+POOL] BitcoinCZ aka Slush
     - [+POOL] NiceHash/WestHash
-    - [+POOL] P2Pool
-
-    POOLS
-    =====
-    - [+POOL] NiceHash/WestHash
-    - [+POOL] BitcoinCZ aka Slush
-    - [+POOL] AntPool
-    - [+POOL] BitMinter
     - [+POOL] P2Pool
 
     ALGORITHMS
@@ -98,11 +135,19 @@
     - Fixed incorrect BTC Guild pool hashrate
     - Fixed incorrect BTC Guild worker count
     - Removed useless BTC column when looking at a BTC wallet
-    - MPOS network hash x1000h too high
     - Update page will now display correctly for those with slow connections
     - Attempt to fix issue where the update.zip does not delete in some cases
     - Fixed issue where offline rigs would randomly appear/disappear in the overview panel
-    - fixed line-endings for permissionfix.sh
+    - Fixed issue with Antpool on Windows
+    - Fixed issue when using only 1 rig
+    - Padded the time-out for users with 60+ rigs
+    - Fixed issue with Linux users who do not have posix installed
+
+    KNOWN ISSUES
+    ============
+    - Users with lots of rigs may experience a long start-up time
+    - Miner Failover may report incorrect active pool
+    - Wallets can take a long time to load
 
 ---
 

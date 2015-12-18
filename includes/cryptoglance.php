@@ -5,7 +5,9 @@ class CryptoGlance {
     private $_configTypes = array(
         'cryptoglance',
         'miners',
+        'panels',
         'pools',
+        'poolpicker',
         'wallets',
     );
 
@@ -50,9 +52,34 @@ class CryptoGlance {
         return $this->_algorithms;
     }
 
+    public function isConfigAvailable($panel) {
+        return $this->_config[$panel];
+    }
+
+    ///////////
+    // Panels //
+    ///////////
+    public function getPanels() {
+        $panels = $this->_config;
+        unset($panels['cryptoglance']);
+
+        return $panels;
+    }
+    public function isNoPanels() {
+        foreach ($this->getPanels() as $panel) {
+            if ($panel) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     //////////
     // Rigs //
     //////////
+    public function getOverview() {
+        return $this->_config['panels']['overview'];
+    }
     public function getMiners() {
         return $this->_config['miners'];
     }
@@ -64,11 +91,26 @@ class CryptoGlance {
         return $this->_config['pools'];
     }
 
+    ////////////////
+    // PoolPicker //
+    ////////////////
+    public function getPoolPicker() {
+        $config = array();
+        $config['data'] = $this->_config['poolpicker'];
+        $config['panel'] = $this->_config['panels']['pool-picker'];
+
+        return $config;
+    }
+
     //////////////
     // Wallets //
     /////////////
     public function getWallets() {
-        return $this->_config['wallets'];
+        $config = array();
+        $config['data'] = $this->_config['wallets'];
+        $config['panel'] = $this->_config['panels']['wallets'];
+
+        return $config;
     }
 
 
@@ -87,21 +129,26 @@ class CryptoGlance {
         if (empty($settings['general']['updateTimes']['rig'])) {
             $settings['general']['updateTimes']['rig'] = 3000;
         }
+        if (!empty($settings['general']['updateTimes']['rig_delay'])) {
+            define('RIG_UPDATE_DELAY', intval($settings['general']['updateTimes']['rig_delay']));
+        } else {
+            define('RIG_UPDATE_DELAY', 2);
+        }
         if (empty($settings['general']['updateTimes']['pool'])) {
             $settings['general']['updateTimes']['pool'] = 120000;
         }
         if (empty($settings['general']['updateTimes']['wallet'])) {
             $settings['general']['updateTimes']['wallet'] = 600000;
         }
-        if (empty($settings['general']['mobileminer']['enabled'])) {
-            $settings['general']['mobileminer']['enabled'] = 0;
-        }
-        if (empty($settings['general']['mobileminer']['username'])) {
-            $settings['general']['mobileminer']['username'] = '';
-        }
-        if (empty($settings['general']['mobileminer']['apikey'])) {
-            $settings['general']['mobileminer']['apikey'] = '';
-        }
+        // if (empty($settings['general']['mobileminer']['enabled'])) {
+        //     $settings['general']['mobileminer']['enabled'] = 0;
+        // }
+        // if (empty($settings['general']['mobileminer']['username'])) {
+        //     $settings['general']['mobileminer']['username'] = '';
+        // }
+        // if (empty($settings['general']['mobileminer']['apikey'])) {
+        //     $settings['general']['mobileminer']['apikey'] = '';
+        // }
 
         return $settings;
     }
@@ -118,14 +165,15 @@ class CryptoGlance {
                 ),
                 'updateTimes' => array(
                     'rig' => $data['general']['rigUpdateTime']*1000,
+                    'rig_delay' => $data['general']['rigUpdateDelay'],
                     'pool' => $data['general']['poolUpdateTime']*1000,
                     'wallet' => $data['general']['walletUpdateTime']*1000,
                 ),
-                'mobileminer' => array(
-                    'enabled' => $data['general']['mobileminer'],
-                    'username' => $data['general']['mobileminerUsername'],
-                    'appkey' => $data['general']['mobileminerAppKey'],
-                ),
+                // 'mobileminer' => array(
+                //     'enabled' => $data['general']['mobileminer'],
+                //     'username' => $data['general']['mobileminerUsername'],
+                //     'appkey' => $data['general']['mobileminerAppKey'],
+                // ),
             );
         }
 

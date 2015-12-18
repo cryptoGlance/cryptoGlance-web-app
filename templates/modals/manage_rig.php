@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h2 class="modal-title"><i class="icon icon-server"></i> Manage <span class="rig-name"></span></h2>
+        <h2 class="modal-title"><i class="icon icon-pixelpickaxe"></i> Manage <span class="rig-name"></span></h2>
       </div>
       <div class="modal-body">
          <div class="new-panel-choices">

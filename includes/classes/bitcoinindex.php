@@ -30,6 +30,5 @@ class BitcoinIndex {
         
         return json_decode($fileHandler->read(), true);
     }
-    
 
 }

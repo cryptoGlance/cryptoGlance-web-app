@@ -482,6 +482,10 @@ table.table-wallet a, table.table-wallet a:visited, table.table-wallet a:hover {
   font-family: robotolight, sans-serif;
 }
 
+.modal-body table {
+    background-color: transparent;
+}
+
 .new-panel-choices {
   text-align: center;
 }
@@ -1988,6 +1992,12 @@ a#dash-add-panel.flash {
   text-shadow: 0 1px 0 #000;
 }
 
+/* Fixing odd issues with small size devices */
+@media (max-width: 382px) {
+    .modal-body table {
+        width: 100%;
+    }
+}
 /* X-Small devices (small tablets, 680px and up) */
 @media (min-width: 480px) {
 

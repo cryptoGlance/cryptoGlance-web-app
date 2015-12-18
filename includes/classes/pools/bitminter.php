@@ -22,7 +22,6 @@ class Pools_Bitminter extends Pools_Abstract {
             $poolData['global'] = curlCall($this->_apiURL  . '/api/pool/stats');
             $poolData['user'] = curlCall($this->_apiURL  . '/api/users/'.$this->_userId.'?key='. $this->_apiKey);
 
-
             // Offline Check
             if (empty($poolData['global']) || empty($poolData['user'])) {
                 return;

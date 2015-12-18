@@ -5,24 +5,6 @@ require_once('abstract.php');
  */
 class Miners_Cgminer extends Miners_Abstract {
 
-    // Miner Memebers
-    protected $_host;
-    protected $_port;
-
-    // Data
-    protected $_summary = array();
-    protected $_devs = array();
-    protected $_eStats = array();
-    protected $_pools = array();
-
-    // Common Data
-    protected $_devStatus = array();
-    protected $_rigStatus = 'offline';
-    protected $_rigHashrate_5s = 0;
-    protected $_rigHashrate_avg = 0;
-    protected $_activePool = array();
-    protected $_upTime;
-
     // Version Handling
     protected $_shareTypePrefix = ''; // This will set shares to 'Difficulty Accepted' or just 'Accepted'
 
@@ -42,8 +24,11 @@ class Miners_Cgminer extends Miners_Abstract {
             'name' => $this->_name,
             'status' => $this->_rigStatus,
             'algorithm' => $this->_settings['algorithm'],
+            'temperature' => array(
+                'celsius' => $this->_highTemp,
+                'fahrenheit' => ((($this->_highTemp*9)/5)+32),
+            ),
             'hashrate_avg' => $this->_rigHashrate_avg,
-            'hashrate_5s' => $this->_rigHashrate_5s,
             'active_pool' => $this->_activePool,
             'uptime' => $this->_upTime,
         );
@@ -352,7 +337,7 @@ class Miners_Cgminer extends Miners_Abstract {
     // PRIVATE
     private function cmd($cmd) {
         $response = '';
-        $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, 2);
+        $socket = stream_socket_client('tcp://'.$this->_host.':'.$this->_port, $errno, $errstr, RIG_UPDATE_DELAY);
 
         if (!$socket || $errno != 0) {
             return null;
@@ -404,8 +389,11 @@ class Miners_Cgminer extends Miners_Abstract {
 
     private function getDevStatus() {
         foreach ($this->_devs as $devKey => $dev) {
+            // Highest Temperature
+            $this->_highTemp = ($dev['Temperature'] > $this->_highTemp ? $dev['Temperature'] : $this->_highTemp);
+
             // Might as well get the hashrate
-            $this->_rigHashrate_5s += ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']);
+            // $this->_rigHashrate_5s += ($dev['MHS 5s'] ? $dev['MHS 5s'] : $dev['MHS 20s']);
             $this->_rigHashrate_avg += ($dev['MHS av'] ? $dev['MHS av'] : $dev['MHS av']);
 
             $status = array();

@@ -10,15 +10,17 @@
 class Wallets extends Config_Wallets {
 
     protected $_currencies = array(
-        'bitcoin'   => 'BTC',
-        'burstcoin'   => 'BURST',
-        'darkcoin'  => 'DRK',
-        'dogecoin'  => 'DOGE',
+        'bitcoin'       => 'BTC',
+        'blackcoin'     => 'BLK',
+        'burstcoin'     => 'BURST',
+        'bytecent'      => 'BYC',
+        'darkcoin'      => 'DRK',
+        'dogecoin'      => 'DOGE',
         'dogecoindark'  => 'DOGED',
-        'litecoin'  => 'LTC',
-        'neoscoin' => 'NEOS',
-        'paycoin' => 'XPY',
-        'reddcoin'  => 'RDD',
+        'litecoin'      => 'LTC',
+        'neoscoin'      => 'NEOS',
+        'paycoin'       => 'XPY',
+        'reddcoin'      => 'RDD',
         // 'vertcoin'  => 'VTC', // Disabled until blockchain explorer works
     );
 
@@ -49,9 +51,10 @@ class Wallets extends Config_Wallets {
 
     public function getUpdate() {
         $data = array();
+
         foreach ($this->_objs as $wallet) {
             // Exchange information
-            $btcIndex = new FirstRally();
+            $btcIndex = new Walletapi();
 
             // Get FIAT rate
             $fiatPrice = $btcIndex->convert($wallet['fiat'], $this->_currencies[$wallet['currency']]);
@@ -70,12 +73,13 @@ class Wallets extends Config_Wallets {
             // Wallet actually contains a bunch of addresses and associated data
             foreach ($wallet['addresses'] as $addrKey => $address) {
                 $addressData = $address->update();
+
                 $walletAddressData[$addressData['address']] = array(
                     'id' => $addrKey+1,
                     'label' => $addressData['label'],
-                    'balance' => str_replace('.00000000', '', number_format($addressData['balance'], 8)),
-                    'fiat_balance' => number_format($fiatPrice * $addressData['balance'], 2),
-                    'coin_balance' => str_replace('.00000000', '', number_format($coinPrice * $addressData['balance'], 8)),
+                    'balance' => str_replace('.00000000', '', number_format($addressData['balance'], 8, '.', '')),
+                    'fiat_balance' => number_format($fiatPrice * $addressData['balance'], 2, '.', ''),
+                    'coin_balance' => str_replace('.00000000', '', number_format($coinPrice * $addressData['balance'], 8, '.', '')),
                 );
                 $currencyBalance += number_format($addressData['balance'], 8, '.', '');
                 $fiatBalance += number_format($fiatPrice * $addressData['balance'], 2, '.', '');

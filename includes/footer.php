@@ -6,7 +6,7 @@
                </div>
                <div class="stat-label stat-label-donate">
                   <div class="donate-address">
-                      <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate some Bitcoin (BTC)"><img src="images/coin/bitcoin.png" alt="Bitcoin" /></a> <span data-toggle="modal" data-target="#qrDonateBTC">12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE</span>
+                      <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)"><img src="images/coin/bitcoin.png" alt="Bitcoin" /></a> <span data-toggle="modal" data-target="#qrDonateBTC">12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE</span>
                   </div>
                </div>
                <div class="stat-value">
@@ -18,9 +18,9 @@
             <div class="stat-pair">
                <div class="stat-label">
                 <div class="social-box">
-                  <a rel="external" class="social-icon" href="https://plus.google.com/u/0/b/110896112995796953409/communities/111042089628113521779" rel="external"><img src="images/icon/google-plus.png"></a>
-                  <a rel="external" class="social-icon" href="http://reddit.com/r/cryptoglance" rel="external"><img src="images/icon/reddit.png"></a>
-                  <a rel="external" class="social-icon" href="http://twitter.com/cryptoglance" rel="external"><img src="images/icon/twitter.png"></a>
+                  <a rel="external" class="social-icon" href="https://plus.google.com/u/0/b/110896112995796953409/communities/111042089628113521779"><img src="images/icon/google-plus.png"></a>
+                  <a rel="external" class="social-icon" href="http://reddit.com/r/cryptoglance"><img src="images/icon/reddit.png"></a>
+                  <a rel="external" class="social-icon" href="http://twitter.com/cryptoglance"><img src="images/icon/twitter.png"></a>
                 </div>
                 <a href="https://github.com/cryptoglance" rel="external"><button type="button" class="btn btn-default">Source on Github</button></a>
               </div>

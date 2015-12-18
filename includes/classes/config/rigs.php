@@ -31,6 +31,19 @@ class Config_Rigs extends Config_Abstract {
         $this->_objs[] = $obj;
     }
 
+    public function toggle() {
+        $id = intval($_POST['id'])-1;
+
+        // Functionality is only available if ID is available
+        if (!isset($_POST['id']) && isset($this->_data[$id])) {
+            header("HTTP/1.0 406 Not Acceptable");
+            return false;
+        }
+
+        $this->_data[$id]['panel']['state'] = $_POST['toggle'];
+        return $this->write();
+    }
+
     // validate posted data for rig
     protected function postValidate($dataType, $data) {
         // TO-DO: Rethink this... Maybe some kind of validator class that returns true/false
@@ -39,7 +52,7 @@ class Config_Rigs extends Config_Abstract {
             (empty($data['ip_address']) || empty($data['port']))
         ) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
-            return 'Missing ' . (empty($data['ip_address']) ? 'IP Address' : 'Port');
+            return 'Missing ' . (empty($data['ip_address']) ? 'IP Address' : 'Port') .'!';
         } else if ($dataType == 'thresholds') {
             if ($data['temps']['enabled'] == 'on' &&
             (empty($data['temps']['warning']) || empty($data['temps']['danger']))
@@ -167,7 +180,7 @@ class Config_Rigs extends Config_Abstract {
         if ($isValid !== true) {
             return $isValid;
         }
-        
+
         if (!is_array($this->_data[$id]['settings'])){
             $this->_data[$id]['settings'] = array();
         }

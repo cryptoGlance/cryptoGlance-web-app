@@ -91,8 +91,7 @@ class MobileMiner {
     }
 
     protected function _postStatistics() {
-        $cryptoglance = new CryptoGlance();
-        $algorithms = $cryptoglance->supportedAlgorithms();
+        $algorithms = $GLOBALS['cryptoGlance']->supportedAlgorithms();
 
         // build out machine statistics
         $postData = array();
