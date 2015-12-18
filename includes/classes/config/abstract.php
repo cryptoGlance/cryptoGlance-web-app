@@ -10,7 +10,7 @@ class Config_Abstract {
     protected $_data;
 
     // Objects
-    private $_objs;
+    protected $_objs;
 
     public function __construct() {
         $this->_fileHandler = new FileHandler($this->_config);
