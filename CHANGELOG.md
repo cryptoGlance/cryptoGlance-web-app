@@ -1,62 +1,19 @@
 
-    [ v2.1.0.28 ]
-
-    HOTFIXES
-    ========
-    - Fixed GHash pool
-    - Removed commas from some numbers in wallet
-
-    KNOWN ISSUES
-    ============
-    - Wallets can take a long time to load
-
----
-
-    [ v2.1.0.26 ]
+    [ v2.2-beta ]
 
     FEATURES
     ========
-    - Created/Added WalletAPI support, removed FirstRally
+    - Created/Added CryptoGlance WalletAPI support, removed FirstRally
+    - Added highest temperature to Overview panel
+    - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
+    - Ability to collapse and expand panels
+    - Added option in settings for longer update delays for users with rig connection issues
     - Added GHash, however very little testing. Use at own risk.
 
     SERVICE
     =======
-    - Re-Added PoolPicker, service resumed.
-
-    HOTFIXES
-    ========
-    - Fixed issue with wallets/pools sometimes hanging.
-
----
-
-    [ v2.1.0.17 ]
-
-    FEATURES
-    ========
-    - Added highest temperature to Overview panel
-
-    SERVICE
-    =======
-    - Removed PoolPicker due to the service shutting down
-
-    HOTFIXES
-    ========
-    - Added CkPool changes (https://bitcointalk.org/index.php?topic=569924.msg11827496#msg11827496)
-
-    KNOWN ISSUES
-    ============
-    - Miner Failover may report incorrect active pool
-    - Wallets can take a long time to load
-
----
-
-    [ v2.1.0.13 ]
-
-    FEATURES
-    ========
-    - PoolPicker Panel - Display the most profitable Pool per algorithm yesterday
-    - Ability to collapse and expand panels
-    - Added option in settings for longer update delays for users with rig connection issues
+    - Added CryptoGlance Wallet API service for FIAT conversion
+    - Removed MobileMiner due to the service shutting down
 
     COINS
     =====
@@ -70,16 +27,19 @@
     - [-POOL] MagicPool
     - [-POOL] WafflePool
 
-    SERVICE
-    =======
-    - Removed MobileMiner due to the service shutting down
-
     HOTFIXES
     ========
     - Fixed modal when editing a pool. Now displays "Edit ..." instead of "Add"
     - Fixed error messages when adding rig or pool
     - Fixed issue where JS would load for all features regardless if they are used
     - Fixed issue with some switch styling
+    - Removed commas from some numbers in wallet
+    - Fixed issue with wallets/pools sometimes hanging.
+    - Added CkPool changes (https://bitcointalk.org/index.php?topic=569924.msg11827496#msg11827496)
+
+    KNOWN ISSUES
+    ============
+    - Wallets can take a long time to load
 
 ---
 
