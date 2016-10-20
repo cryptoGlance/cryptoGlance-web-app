@@ -9,30 +9,6 @@
  */
 class Wallets extends Config_Wallets {
 
-    protected $_currencies = array(
-        'bitcoin'       => 'BTC',
-        'blackcoin'     => 'BLK',
-        'burstcoin'     => 'BURST',
-        'bytecent'      => 'BYC',
-        'darkcoin'      => 'DRK',
-        'dogecoin'      => 'DOGE',
-        'dogecoindark'  => 'DOGED',
-        'litecoin'      => 'LTC',
-        'neoscoin'      => 'NEOS',
-        'paycoin'       => 'XPY',
-        'reddcoin'      => 'RDD',
-        // 'vertcoin'  => 'VTC', // Disabled until blockchain explorer works
-    );
-
-    protected $_fiat = array(
-        'CAD'   => 'Canadian Dollar',
-        'EUR'   => 'Euro',
-        'GBP'   => 'British Pound',
-        'NZD'   => 'New Zealand Dollar',
-        'USD'   => 'US Dollar',
-    );
-
-
     /*
      * POST
      */
@@ -43,10 +19,44 @@ class Wallets extends Config_Wallets {
      */
 
     public function getCurrencies() {
-        return $this->_currencies;
+        return array_intersect_key($this->getExchanger()->getCurrencies(), self::$currencyClasses);
     }
     public function getFiat() {
-        return $this->_fiat;
+        return $this->getExchanger()->getFiat();
+    }
+
+    public function __get($name){
+        switch ($name){
+            case '_currencies' : return $this->getCurrencies();
+        }
+        return null;
+    }
+
+    public static $currencyClasses = array(
+      'BTC' => 'Wallets_Bitcoin',
+      'BURST' => 'Wallets_Burstcoin',
+      'DARK' => 'Wallets_Darkcoin',
+      'DOGE' => 'Wallets_Dogecoin',
+      'DOGED' => 'Wallets_Dogecoindark',
+      'LTC' => 'Wallets_Litecoin',
+      'NEOS' => 'Wallets_Neoscoin',
+      'XPY' => 'Wallets_Paycoin',
+      'PPC' => 'Wallets_Peercoin',
+      'RDD' => 'Wallets_Reddcoin',
+      'VTC' => 'Wallets_Vertcoin',
+    );
+
+    private $ex = null;
+    /*
+     * @return IExchanger
+    */
+    public function getExchanger(){
+        if ($this->ex === null){
+//            $this->ex = new CoinDesk();
+//			$this->ex = new Walletapi();
+            $this->ex = new Cryptonator();
+        }
+        return $this->ex;
     }
 
     public function getUpdate() {
@@ -54,14 +64,15 @@ class Wallets extends Config_Wallets {
 
         foreach ($this->_objs as $wallet) {
             // Exchange information
-            $btcIndex = new Walletapi();
+            $btcIndex = $this->getExchanger();
+            $this->getCurrencies();
 
             // Get FIAT rate
-            $fiatPrice = $btcIndex->convert($wallet['fiat'], $this->_currencies[$wallet['currency']]);
+            $fiatPrice = $btcIndex->convert($wallet['fiat'], $wallet['currency']);
             $fiatPrice = number_format($fiatPrice['result']['conversion'], 8, '.', '');
 
             // Get COIN rate
-            $coinPrice = $btcIndex->convert('btc', $this->_currencies[$wallet['currency']]); // 'btc' to be dynamic
+            $coinPrice = $btcIndex->convert('BTC', $wallet['currency']); // 'btc' to be dynamic
             $coinPrice = number_format($coinPrice['result']['conversion'], 8, '.', '');
 
             // Wallet information
@@ -90,7 +101,7 @@ class Wallets extends Config_Wallets {
                 'label' => $wallet['label'],
                 'currency' => $wallet['currency'],
                 'currency_balance' => str_replace('.00000000', '', number_format($currencyBalance, 8, '.', ',')),
-                'currency_code' => $this->_currencies[$wallet['currency']],
+                'currency_code' => $wallet['currency'],
                 'coin_balance' => str_replace('.00000000', '', number_format($coinBalance, 8, '.', ',')),
                 'coin_price' => str_replace('.00000000', '', $coinPrice),
                 'coin_code' => 'BTC',
@@ -100,7 +111,6 @@ class Wallets extends Config_Wallets {
                 'addresses' => $walletAddressData,
             );
         }
-
         return $data;
     }
 

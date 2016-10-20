@@ -1,5 +1,9 @@
-<?php $minimized = ($wallet['panel']['state'] === 'close'); ?>
+<?php 
+    require_once('includes/autoloader.inc.php');
+	$minimized = ($wallet['panel']['state'] === 'close'); 
+?>
 <div id="wallet" class="panel panel-primary panel-wallet" data-type="wallets">
+<div id="wallet" class="panel panel-primary panel-wallet">
    <h1>Wallet</h1>
    <div class="panel-heading">
       <button type="button" class="panel-header-button btn-updater" data-type="wallet"><i class="icon icon-refresh"></i> Update</button>
@@ -10,6 +14,6 @@
    </div>
    <div class="panel-body" <?php echo ($minimized?'style="display:none;"':'') ?>>
       <div class="panel-body-addresses"><img src="images/ajax-loader.gif" alt="loading" style="position: relative; float:none; opacity: 1; bottom: 0; left: 0;" /></div>
-      <div class="panel-body-thanks">Conversions powered by the <b>cryptoGlance Team</b>! <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)">Donations keep us online!</a></div>
+      <div class="panel-body-thanks"><?php $w = new Wallets(); echo $w->getExchanger()->getDisclaimer();?></div>
    </div>
 </div>

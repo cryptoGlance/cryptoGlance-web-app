@@ -108,8 +108,8 @@ if ($id != 0) {
                         <label for="inputWalletCurrency" class="control-label col-sm-4">Currency:</label>
                         <div class="col-sm-6">
                             <select class="form-control" name="currency" id="walletCurrency" <?php echo ($id != 0 ? 'disabled' : '') ?>>
-                                <?php foreach ($walletObj->getCurrencies() as $currency => $code) { ?>
-                                <option value="<?php echo $currency ?>" <?php echo ($wallet['currency'] == $currency ? 'selected' : '') ?>>(<?php echo $code ?>) <?php echo ucwords($currency) ?></option>
+                                <?php foreach ($walletObj->getCurrencies() as $code => $currency) { ?>
+                                <option value="<?php echo $code ?>" <?php echo ($wallet['currency'] == $code ? 'selected' : '') ?>><?php echo $code ?> - <?php echo ucwords($currency) ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -122,7 +122,7 @@ if ($id != 0) {
                         <div class="col-sm-6">
                             <select class="form-control" id="walletFiat" name="fiat">
                                  <?php foreach ($walletObj->getFiat() as $code => $fiat) { ?>
-                                     <option value="<?php echo $code ?>" <?php echo ($wallet['fiat_code'] == $code ? 'selected' : '') ?>>(<?php echo $code ?>) <?php echo $fiat; ?></option>
+                                     <option value="<?php echo $code ?>" <?php echo ($wallet['fiat_code'] == $code ? 'selected' : '') ?>><?php echo $code ?> - <?php echo $fiat; ?></option>
                                      <?php } ?>
                             </select>
                         </div>

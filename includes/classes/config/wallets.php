@@ -10,6 +10,7 @@ class Config_Wallets extends Config_Abstract {
 
     protected $_config = 'configs/wallets.json';
 
+    protected $_objs;
 
     /*
     * Specific to class
@@ -42,7 +43,8 @@ class Config_Wallets extends Config_Abstract {
             return false;
         }
 
-        $class = 'Wallets_' . ucwords(strtolower($wallet['currency']));
+        $class = Wallets::$currencyClasses[$wallet['currency']];
+//        $class = 'Wallets_' . ucwords(strtolower($wallet['currency']));
 
         if (class_exists($class)) {
             $walletData = array();

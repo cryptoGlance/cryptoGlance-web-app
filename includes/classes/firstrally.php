@@ -11,7 +11,36 @@
  *
  * @author Stoyvo
  */
-class FirstRally {
+class FirstRally implements IExchanger {
+
+    protected $_currencies = array(
+        'BTC' => 'bitcoin',
+        'BURST' => 'burstcoin',
+        'DRK' => 'darkcoin',
+        'DOGE' => 'dogecoin',
+        'DOGED' => 'dogecoindark',
+        'LTC' => 'litecoin',
+        'NEOS' => 'neoscoin',
+        'XPY' => 'paycoin',
+        'RDD' => 'reddcoin',
+        // 'VTC'  => 'vertcoin', // Disabled until blockchain explorer works
+    );
+
+    protected $_fiat = array(
+        'CAD'   => 'Canadian Dollar',
+        'EUR'   => 'Euro',
+        'GBP'   => 'British Pound',
+        'NZD'   => 'New Zealand Dollar',
+        'USD'   => 'US Dollar',
+    );
+
+    public function getFiat(){
+        return $this->_fiat;
+    }
+
+    public function getCurrencies(){
+        return $this->_currencies;
+    }
 
     // Settings
     protected $_url = 'https://firstrally.com/api';
@@ -31,5 +60,8 @@ class FirstRally {
         return json_decode($fileHandler->read(), true);
     }
 
+    public function getDisclaimer(){
+        return 'Conversions powered by <a href="https://firstrally.com/" target="_external">https://firstrally.com/</a>';
+    }
 
 }
