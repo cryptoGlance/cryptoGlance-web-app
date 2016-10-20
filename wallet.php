@@ -110,7 +110,7 @@ if ($id != 0) {
                         <label for="inputWalletEchanger" class="control-label col-sm-4">Exchanger:</label>
                         <div class="col-sm-7">
                             <select class="form-control" name="exchanger" id="inputWalletEchanger" <?php echo ($id != 0 ? 'disabled' : '') ?>>
-                                <?php foreach ($walletObj->getExchnagers() as $class => $name) { ?>
+                                <?php foreach ($walletObj->getExchangers() as $class => $name) { ?>
                                 <option value="<?php echo $class ?>" <?php echo ($wallet['exchanger'] == $class ? 'selected' : '') ?>><?php echo $name; ?></option>
                                 <?php } ?>
                             </select>
@@ -127,7 +127,7 @@ if ($id != 0) {
                             </select>
                         </div>
                         <div class="col-sm-2 col-has-icon">
-                            <img id="currencyImage" src="images/coin/<?php echo ($wallet['currency']) ? $wallet['currency'] : 'bitcoin' ?>.png" />
+                            <img id="currencyImage" onerror="this.src='images/coin/empty.png'" src="images/coin/<?php echo ($wallet['currency']) ? $wallet['currency'] : 'bitcoin' ?>.png" />
                         </div>
                     </div>
                     <div class="form-group">

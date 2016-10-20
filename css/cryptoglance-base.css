@@ -1484,7 +1484,7 @@ a#dash-add-panel.flash {
 }
 #wallet-wrap .panel-body-thanks,
 .panel-wallet .panel-body .panel-body-thanks {
-    margin-top: 10px;
+    margin-top: 0;
     font-size: 14px;
 }
 #wallet-wrap .panel-body-thanks {

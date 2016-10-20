@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 
 
 /**
@@ -22,7 +22,7 @@ class Wallets extends Config_Wallets {
      */
 
     public function getCurrencies($wallet = null) {
-    	return array_intersect_key($this->getExchanger($wallet)->getCurrencies(), self::$currencyClasses);
+    	return array_intersect_key($this->getExchanger($wallet)->getCurrencies(), self::getSupportedWalets());
     }
     public function getFiat($wallet) {
         return $this->getExchanger($wallet)->getFiat();
@@ -35,27 +35,86 @@ class Wallets extends Config_Wallets {
         return null;
     }
 
-    public static $exchangers = array(
-    	'Exchanger_CoinDesk' => 'CoinDesk',
-    	'Exchanger_Walletapi' => 'Walletapi',
-    	'Exchanger_Cryptonator' => 'Cryptonator',
-    	'Exchanger_FirstRally' => 'FirstRally',
-    );
+    private static $exchangers = null;
+    public function getExchangers(){
+    	if (self::$exchangers === null){
+    		$cache = new FileHandler('wallets/exchangers.json');
+    		$directory = new DirectoryIterator(__DIR__.'/exchanger');
+	    	self::$exchangers = array();
+	    	$process = false;
+    		foreach (array('test', 'process') as $step){
+		    	foreach ($directory as $fileInfo) {
+		    		if (($fileInfo->getExtension() != 'php') || $fileInfo->isDot()) {
+		    			continue;
+		    		}
+					if ($step == 'test'){
+						if ($fileInfo->getMTime() > $cache->getMTime()){
+							$process = true;
+							break;
+						}
+						continue;
+					}
+		    		$classes = get_declared_classes();
+		    		include $fileInfo->getRealPath();
+		    		$classes = array_diff(get_declared_classes(), $classes);
+		    		foreach ($classes as $class){
+		    			$cr = new ReflectionClass($class);
+		    			if ($cr->isSubclassOf('IExchanger')){
+		    				var_dump(self::$exchangers);
+		    				self::$exchangers[$class] = $cr->getMethod('getName')->invoke(null);
+		    			}
+		    		}
+		    	}
+		    	if (!$process){
+		    		return self::$exchangers = (array)json_decode($cache->read());
+		    	}
+    		}
+   			$cache->write(json_encode(self::$exchangers));
+    	}
+    	return self::$exchangers;
+    }
     
-    public static $currencyClasses = array(
-      'BTC' => 'Wallets_Bitcoin',
-      'BURST' => 'Wallets_Burstcoin',
-      'DARK' => 'Wallets_Darkcoin',
-      'DOGE' => 'Wallets_Dogecoin',
-      'DOGED' => 'Wallets_Dogecoindark',
-      'LTC' => 'Wallets_Litecoin',
-      'NEOS' => 'Wallets_Neoscoin',
-      'XPY' => 'Wallets_Paycoin',
-      'PPC' => 'Wallets_Peercoin',
-      'RDD' => 'Wallets_Reddcoin',
-      'VTC' => 'Wallets_Vertcoin',
-    );
-
+    private static $supportedWallets = null;
+    public function getSupportedWalets(){
+    	if (self::$supportedWallets  === null){
+    		self::$supportedWallets = array();
+    		
+    		$cache = new FileHandler('wallets/currencies.json');
+    		$directory = new DirectoryIterator(__DIR__.'/wallets');
+    		$process = false;
+    		foreach (array('test', 'process') as $step){
+	    		foreach ($directory as $fileInfo) {
+	    			if (($fileInfo->getExtension() != 'php') || $fileInfo->isDot()) {
+	    				continue;
+	    			}
+	    			if ($step == 'test'){
+	    				if ($fileInfo->getMTime() > $cache->getMTime()){
+	    					$process = true;
+	    					break;
+	    				}
+	    				continue;
+	    			}
+	    			$classes = get_declared_classes();
+	    			include $fileInfo->getRealPath();
+	    			$classes = array_diff(get_declared_classes(), $classes);
+	    			foreach ($classes as $class){
+	    				$cr = new ReflectionClass($class);
+	    				if ($cr->isSubclassOf('IWallet')){
+	    					foreach ($cr->getMethod('getSupportedWallets')->invoke(null) as $curr){
+	    						self::$supportedWallets[$curr] = $class;
+	    					}
+	    				}
+	    			}
+	    		}
+    		   	if (!$process){
+		    		return self::$supportedWallets = (array)json_decode($cache->read());
+		    	}
+    		}
+    		$cache->write(json_encode(self::$supportedWallets));
+    	}
+    	return self::$supportedWallets;
+    }
+    
     private $ex = array();
     /*
      * @return IExchanger
@@ -76,10 +135,6 @@ class Wallets extends Config_Wallets {
         return $this->ex[$exchnager];
     }
 
-    public function getExchnagers(){
-    	return self::$exchangers; 
-    }
-    
     public function getUpdate() {
         $data = array();
 
@@ -131,6 +186,7 @@ class Wallets extends Config_Wallets {
                 'fiat_balance' => number_format($fiatBalance, 2, '.', ','),
                 'fiat_code' => $wallet['fiat'],
                 'addresses' => $walletAddressData,
+            	'disclaimer' => $btcIndex->getDisclaimer(),
             );
         }
         return $data;

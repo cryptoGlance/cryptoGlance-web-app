@@ -1,9 +1,14 @@
 <?php
-require_once('abstract.php');
 /*
  * @author Stoyvo
  */
-class Wallets_Vertcoin extends Wallets_Abstract {
+class Wallets_Vertcoin extends Wallets_Abstract implements IWallet {
+	
+	public static function getSupportedWallets(){
+		return array(
+			'VTC',	
+		);
+	}
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);

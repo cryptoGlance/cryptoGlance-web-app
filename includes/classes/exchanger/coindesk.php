@@ -55,10 +55,10 @@ class Exchanger_CoinDesk implements IExchanger {
     }
     
     public function getDisclaimer(){
-        return 'Conversions powered by <a href="https://coindesk.com/" target="_external">https://coindesk.com/</a>';
+        return '<a href="https://coindesk.com/" target="_external">https://coindesk.com/</a>';
     }
     
-    public function getName(){
+    public static function getName(){
     	return 'Coindesk';
     }
 }

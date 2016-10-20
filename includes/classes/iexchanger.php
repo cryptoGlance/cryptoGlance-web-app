@@ -5,6 +5,6 @@
         public function convert($to, $from);
 		public function getDisclaimer();
 		
-		public function getName();
+		public static function getName();
 		
     }

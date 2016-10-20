@@ -61,10 +61,10 @@ class Exchanger_FirstRally implements IExchanger {
     }
 
     public function getDisclaimer(){
-        return 'Conversions powered by <a href="https://firstrally.com/" target="_external">https://firstrally.com/</a>';
+        return '<a href="https://firstrally.com/" target="_external">https://firstrally.com/</a>';
     }
 
-    public function getName(){
+    public static function getName(){
     	return 'FirstRally';
     }
 }

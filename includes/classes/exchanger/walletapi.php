@@ -61,10 +61,10 @@ class Exchanger_Walletapi implements IExchanger {
     }
 
     public function getDisclaimer(){
-    	return 'Conversions powered by the <b>cryptoGlance Team</b>! <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)">Donations keep us online!</a>';
+    	return '<b>cryptoGlance Team</b>! <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)">Donations keep us online!</a>';
     }
     
-    public function getName(){
+    public static function getName(){
     	return 'Walletapi';
     }
     

@@ -26,6 +26,7 @@
             $.each(data['currency'], function(index, value){
             	$currency.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
             });
+            $currency.trigger('change');
             $.each(data['fiat'], function(index, value){
             	$fiat.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
             });

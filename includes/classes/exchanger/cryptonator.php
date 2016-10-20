@@ -64,10 +64,10 @@ class Exchanger_Cryptonator implements IExchanger {
     }
     
     public function getDisclaimer(){
-        return 'Conversions powered by <a href="https://www.cryptonator.com/" target="_external">https://www.cryptonator.com/</a>';
+        return '<a href="https://www.cryptonator.com/" target="_external">https://www.cryptonator.com/</a>';
     }
     
-    public function getName(){
+    public static function getName(){
     	return 'Cryptonator';
     }
 }
