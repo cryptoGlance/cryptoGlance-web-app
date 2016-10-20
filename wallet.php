@@ -88,6 +88,7 @@ if ($id != 0) {
                     </form>
                 </div>
             </div>
+			<div class="panel-body-thanks"><?php echo $walletObj->getExchanger($wallet['exchanger'])->getDisclaimer();?></div>
         </div>
         <?php } ?>
 
@@ -104,11 +105,23 @@ if ($id != 0) {
                             <input type="text" class="form-control" id="walletName" placeholder="Donation Addresses" name="label" value="<?php echo $wallet['label'] ?>">
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="inputWalletEchanger" class="control-label col-sm-4">Exchanger:</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" name="exchanger" id="inputWalletEchanger" <?php echo ($id != 0 ? 'disabled' : '') ?>>
+                                <?php foreach ($walletObj->getExchnagers() as $class => $name) { ?>
+                                <option value="<?php echo $class ?>" <?php echo ($wallet['exchanger'] == $class ? 'selected' : '') ?>><?php echo $name; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="inputWalletCurrency" class="control-label col-sm-4">Currency:</label>
                         <div class="col-sm-6">
                             <select class="form-control" name="currency" id="walletCurrency" <?php echo ($id != 0 ? 'disabled' : '') ?>>
-                                <?php foreach ($walletObj->getCurrencies() as $code => $currency) { ?>
+                                <?php foreach ($walletObj->getCurrencies($wallet['exchanger']) as $code => $currency) { ?>
                                 <option value="<?php echo $code ?>" <?php echo ($wallet['currency'] == $code ? 'selected' : '') ?>><?php echo $code ?> - <?php echo ucwords($currency) ?></option>
                                 <?php } ?>
                             </select>
@@ -121,7 +134,7 @@ if ($id != 0) {
                         <label for="inputFiatCurrency" class="control-label col-sm-4">Fiat Conversion:</label>
                         <div class="col-sm-6">
                             <select class="form-control" id="walletFiat" name="fiat">
-                                 <?php foreach ($walletObj->getFiat() as $code => $fiat) { ?>
+                                 <?php foreach ($walletObj->getFiat($wallet['exchanger']) as $code => $fiat) { ?>
                                      <option value="<?php echo $code ?>" <?php echo ($wallet['fiat_code'] == $code ? 'selected' : '') ?>><?php echo $code ?> - <?php echo $fiat; ?></option>
                                      <?php } ?>
                             </select>

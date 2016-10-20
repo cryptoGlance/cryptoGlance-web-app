@@ -1458,6 +1458,7 @@ a#dash-add-panel.flash {
 
 .panel-wallet .panel-body .stat-pair {
     border-color: #656565 #656565 #656565 #555;
+    margin : .2em;
 }
 
 .panel-body .stat-pair-dropzone {
@@ -1481,11 +1482,15 @@ a#dash-add-panel.flash {
   height: 100px;
   width: 260px;
 }
+#wallet-wrap .panel-body-thanks,
 .panel-wallet .panel-body .panel-body-thanks {
     margin-top: 10px;
     font-size: 14px;
 }
-
+#wallet-wrap .panel-body-thanks {
+	text-align : center;
+	margin : 10px 0;
+}
 .panel-body.ui-sortable .stat-pair:hover {
   cursor: move;
 }

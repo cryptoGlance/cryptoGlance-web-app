@@ -1,5 +1,5 @@
 <?php
-class Cryptonator implements IExchanger {
+class Exchanger_Cryptonator implements IExchanger {
 
     // Settings
     protected $_url = 'https://www.cryptonator.com/api';
@@ -65,5 +65,9 @@ class Cryptonator implements IExchanger {
     
     public function getDisclaimer(){
         return 'Conversions powered by <a href="https://www.cryptonator.com/" target="_external">https://www.cryptonator.com/</a>';
+    }
+    
+    public function getName(){
+    	return 'Cryptonator';
     }
 }

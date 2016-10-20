@@ -11,21 +11,21 @@
  *
  * @author Stoyvo
  */
-class Walletapi implements IExchanger {
+class Exchanger_Walletapi implements IExchanger {
 
     // Settings
     protected $_url = 'http://walletapi.cryptoglance.info';
 
     protected $_currencies = array(
-    		'BTC' => 'bitcoin',
-    		'BURST' => 'burstcoin',
-    		'DRK' => 'darkcoin',
-    		'DOGE' => 'dogecoin',
-    		'DOGED' => 'dogecoindark',
-    		'LTC' => 'litecoin',
-    		'NEOS' => 'neoscoin',
-    		'XPY' => 'paycoin',
-    		'RDD' => 'reddcoin',
+    		'BTC' => 'Bitcoin',
+    		'BURST' => 'Burstcoin',
+    		'DRK' => 'Darkcoin',
+    		'DOGE' => 'Dogecoin',
+    		'DOGED' => 'Dogecoin Dark',
+    		'LTC' => 'Litecoin',
+    		'NEOS' => 'Neoscoin',
+    		'XPY' => 'Paycoin',
+    		'RDD' => 'Reddcoin',
     		// 'VTC'  => 'vertcoin', // Disabled until blockchain explorer works
     );
     
@@ -62,6 +62,10 @@ class Walletapi implements IExchanger {
 
     public function getDisclaimer(){
     	return 'Conversions powered by the <b>cryptoGlance Team</b>! <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)">Donations keep us online!</a>';
+    }
+    
+    public function getName(){
+    	return 'Walletapi';
     }
     
 }

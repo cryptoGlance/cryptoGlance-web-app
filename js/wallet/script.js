@@ -9,8 +9,31 @@
     $document.on('change', '#walletCurrency', function (evt) {
         var selectedCurrency = $(this).val();
         $('#currencyImage').attr('src', 'images/coin/'+selectedCurrency+'.png');
+    }).on('change', '#inputWalletEchanger', function(e){
+        var selectedExchanger = $(this).val();
+        $.ajax({
+            url: 'ajax.php',
+            type: 'get',
+            data: {
+            	type: 'wallets',
+            	action: 'currency',
+            	exchanger: selectedExchanger
+            },
+            dataType: 'json'
+        }).done(function(data){
+            var $currency = $('#walletCurrency').empty();
+            var $fiat = $('#walletFiat').empty();
+            $.each(data['currency'], function(index, value){
+            	$currency.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
+            });
+            $.each(data['fiat'], function(index, value){
+            	$fiat.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
+            });
+        });
     });
 
+    
+    
     // Save Button
     $document.on('click', '#btnSaveWallet', function (evt) {
         var btnIcon = $('i', this);
@@ -27,6 +50,7 @@
                 id: walletId,
                 type: 'details',
                 action: 'update',
+                exchanger: $('#inputWalletEchanger').val(),
                 label: $('#walletName').val(),
                 currency: $('#walletCurrency').val(),
                 fiat: $('#walletFiat').val()

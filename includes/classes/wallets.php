@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
+
+
 /**
  * Description of wallets
  *
@@ -18,11 +21,11 @@ class Wallets extends Config_Wallets {
      * GET
      */
 
-    public function getCurrencies() {
-        return array_intersect_key($this->getExchanger()->getCurrencies(), self::$currencyClasses);
+    public function getCurrencies($wallet = null) {
+    	return array_intersect_key($this->getExchanger($wallet)->getCurrencies(), self::$currencyClasses);
     }
-    public function getFiat() {
-        return $this->getExchanger()->getFiat();
+    public function getFiat($wallet) {
+        return $this->getExchanger($wallet)->getFiat();
     }
 
     public function __get($name){
@@ -32,6 +35,13 @@ class Wallets extends Config_Wallets {
         return null;
     }
 
+    public static $exchangers = array(
+    	'Exchanger_CoinDesk' => 'CoinDesk',
+    	'Exchanger_Walletapi' => 'Walletapi',
+    	'Exchanger_Cryptonator' => 'Cryptonator',
+    	'Exchanger_FirstRally' => 'FirstRally',
+    );
+    
     public static $currencyClasses = array(
       'BTC' => 'Wallets_Bitcoin',
       'BURST' => 'Wallets_Burstcoin',
@@ -46,26 +56,37 @@ class Wallets extends Config_Wallets {
       'VTC' => 'Wallets_Vertcoin',
     );
 
-    private $ex = null;
+    private $ex = array();
     /*
      * @return IExchanger
     */
-    public function getExchanger(){
-        if ($this->ex === null){
-//            $this->ex = new CoinDesk();
-//			$this->ex = new Walletapi();
-            $this->ex = new Cryptonator();
+    public function getExchanger($wallet = null){
+    	if(empty($wallet)){
+    		reset(self::$exchangers);
+    		$exchnager = key(self::$exchangers);
+    	} else {
+    		$exchnager = $wallet; 
+    	}
+        if (!array_key_exists($exchnager, $this->ex)){
+        	if (!class_exists($exchnager)){
+        		cgLoader($exchnager);
+        	}
+            $this->ex[$exchnager] = new $exchnager();
         }
-        return $this->ex;
+        return $this->ex[$exchnager];
     }
 
+    public function getExchnagers(){
+    	return self::$exchangers; 
+    }
+    
     public function getUpdate() {
         $data = array();
 
         foreach ($this->_objs as $wallet) {
             // Exchange information
-            $btcIndex = $this->getExchanger();
-            $this->getCurrencies();
+            $btcIndex = $this->getExchanger($wallet['exchanger']);
+            $this->getCurrencies($wallet['exchanger']);
 
             // Get FIAT rate
             $fiatPrice = $btcIndex->convert($wallet['fiat'], $wallet['currency']);
@@ -99,6 +120,7 @@ class Wallets extends Config_Wallets {
 
             $data[] = array (
                 'label' => $wallet['label'],
+            	'exchanger' => $wallet['exchanger'],
                 'currency' => $wallet['currency'],
                 'currency_balance' => str_replace('.00000000', '', number_format($currencyBalance, 8, '.', ',')),
                 'currency_code' => $wallet['currency'],
@@ -114,4 +136,10 @@ class Wallets extends Config_Wallets {
         return $data;
     }
 
+    public function getcurrency(){
+    	return array(
+	    	'currency' => $this->getCurrencies($_REQUEST['exchanger']),
+    		'fiat' => $this->getFiat($_REQUEST['exchanger']),
+    	);
+    }
 }

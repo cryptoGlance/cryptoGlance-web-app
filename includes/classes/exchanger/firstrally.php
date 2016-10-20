@@ -11,7 +11,7 @@
  *
  * @author Stoyvo
  */
-class FirstRally implements IExchanger {
+class Exchanger_FirstRally implements IExchanger {
 
     protected $_currencies = array(
         'BTC' => 'bitcoin',
@@ -64,4 +64,7 @@ class FirstRally implements IExchanger {
         return 'Conversions powered by <a href="https://firstrally.com/" target="_external">https://firstrally.com/</a>';
     }
 
+    public function getName(){
+    	return 'FirstRally';
+    }
 }

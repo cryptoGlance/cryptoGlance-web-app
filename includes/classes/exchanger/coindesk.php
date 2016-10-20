@@ -1,5 +1,5 @@
 <?php
-class CoinDesk implements IExchanger {
+class Exchanger_CoinDesk implements IExchanger {
 
     // Settings
     protected $_url = 'https://api.coindesk.com/v1';
@@ -32,9 +32,7 @@ class CoinDesk implements IExchanger {
 
     public function getCurrencies(){
         return array(
-            'bitcoin' => 'BTC',
-            'peercoin' => 'PPC',
-            'litecoin' => 'LTC',
+            'BTC' => 'Bitcoin',
         );
     }
 
@@ -58,5 +56,9 @@ class CoinDesk implements IExchanger {
     
     public function getDisclaimer(){
         return 'Conversions powered by <a href="https://coindesk.com/" target="_external">https://coindesk.com/</a>';
+    }
+    
+    public function getName(){
+    	return 'Coindesk';
     }
 }
