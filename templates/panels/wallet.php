@@ -1,4 +1,4 @@
-<?php $minimized = ($wallet['panel']['state'] === 'close'); require_once('includes/autoloader.inc.php');?>
+<?php $minimized = ($wallet['panel']['state'] === 'close');?>
 <div id="wallet" class="panel panel-primary panel-wallet" data-type="wallets">
    <h1>Wallet</h1>
    <div class="panel-heading">
