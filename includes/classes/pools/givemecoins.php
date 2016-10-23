@@ -28,6 +28,10 @@ class Pools_GiveMeCoins extends Pools_Abstract {
 			$data['user_hashrate'] = formatHashrate($poolData['total_hashrate']/1000);
 			$data['username'] = $poolData['username'];
 			
+			$data['confirmed_balance'] = $poolData['confirmed_rewards'];
+			$data['estimated_balance'] = $poolData['round_estimate'];
+			$data['payout_history'] = $poolData['payout_history'];
+				
 			$data['pool_hashrate'] = formatHashrate($overalData['hashrate']/1000);
 			$data['pool_workers'] = $overalData['workers'];
 			$data['network_hashrate'] = formatHashrate($overalData['netGhps'] * 1000000);
@@ -35,9 +39,6 @@ class Pools_GiveMeCoins extends Pools_Abstract {
 			$data['difficulty'] = $overalData['difficulty'];
 			$data['shares_this_round'] = $overalData['shares_this_round'];
 			
-			$data['confirmed_balance'] = $poolData['confirmed_rewards'];
-			$data['estimated_balance'] = $poolData['round_estimate'];
-			$data['payout_history'] = $poolData['payout_history'];
 			$data['round_shares'] = $poolData['round_shares'];
 				
 			$data['workers'] = 0;
