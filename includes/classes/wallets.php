@@ -1,7 +1,4 @@
 <?php
-//error_reporting(E_ALL ^ E_NOTICE);
-
-
 /**
  * Description of wallets
  *
@@ -35,6 +32,19 @@ class Wallets extends Config_Wallets {
         return null;
     }
 
+    private function getClassesInFile($file){
+    	$classes = array();
+    	$tokens = token_get_all(file_get_contents($file));
+    	$count = count($tokens);
+    	for ($i = 2; $i < $count; $i++) {
+    		if ($tokens[$i - 2][0] == T_CLASS && $tokens[$i - 1][0] == T_WHITESPACE && $tokens[$i][0] == T_STRING) {
+				$class_name = $tokens[$i][1];
+				$classes[] = $class_name;
+			}
+    	}
+    	return $classes;    	
+    }
+    
     private static $exchangers = null;
     public function getExchangers(){
     	if (self::$exchangers === null){
@@ -54,13 +64,9 @@ class Wallets extends Config_Wallets {
 						}
 						continue;
 					}
-		    		$classes = get_declared_classes();
-		    		include $fileInfo->getRealPath();
-		    		$classes = array_diff(get_declared_classes(), $classes);
-		    		foreach ($classes as $class){
+		    		foreach ($this->getClassesInFile($fileInfo->getRealPath()) as $class){
 		    			$cr = new ReflectionClass($class);
 		    			if ($cr->isSubclassOf('IExchanger')){
-		    				var_dump(self::$exchangers);
 		    				self::$exchangers[$class] = $cr->getMethod('getName')->invoke(null);
 		    			}
 		    		}
@@ -94,10 +100,7 @@ class Wallets extends Config_Wallets {
 	    				}
 	    				continue;
 	    			}
-	    			$classes = get_declared_classes();
-	    			include $fileInfo->getRealPath();
-	    			$classes = array_diff(get_declared_classes(), $classes);
-	    			foreach ($classes as $class){
+	    			foreach ($this->getClassesInFile($fileInfo->getRealPath()) as $class){
 	    				$cr = new ReflectionClass($class);
 	    				if ($cr->isSubclassOf('IWallet')){
 	    					foreach ($cr->getMethod('getSupportedWallets')->invoke(null) as $curr){
