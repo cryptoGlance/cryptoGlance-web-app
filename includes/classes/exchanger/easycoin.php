@@ -48,7 +48,7 @@ class Exchanger_EasyCoin implements IExchanger {
     }
     
     public function getDisclaimer(){
-        return '<a href="https://simplecoin.cz/" target="_external">https://simplecoin.cz/</a>';
+        return '<a href="https://www.easycoin.cz/" target="_external">https://www.easycoin.cz/</a>';
     }
     
     public static function getName(){
