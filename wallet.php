@@ -44,7 +44,7 @@ if ($id != 0) {
             </div>
             <div class="panel-body">
                 <div class="total-wallet-balance">
-                    <span class="green"><?php echo $wallet['currency_balance'] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['currency_code'] ?></span> <span>//</span> <span class="blue"><?php echo $wallet['fiat_balance'] ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code'] ?></span> <?php if (strtolower($wallet['currency_code']) !== 'btc') { ?><span>//</span>  <span class="blue"><?php echo $wallet['coin_balance'] ?> <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code'] ?></span> <?php } ?>
+                    <span class="green"><?php echo $wallet['currency_balance'] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['currency_code'] ?></span> <span>//</span> <span class="blue"><?php echo $wallet['fiat_balance'] ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code'] ?></span> <?php if (strtolower($wallet['currency_code']) !== 'btc') { ?><span>//</span>  <span class="blue"><?php echo $wallet['coin_balance'] ?> <img src="images/coin/BTC.png" /> <?php echo $wallet['coin_code'] ?></span> <?php } ?>
                 </div>
                 <div class="table-responsive">
                     <form role="form">
@@ -68,7 +68,7 @@ if ($id != 0) {
                                     </td>
                                     <td><?php echo $addressData['balance']; ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['currency_code'] ?></td>
                                     <td><?php echo $addressData['fiat_balance']; ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code']; ?></td>
-<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td><?php echo $addressData['coin_balance']; ?> <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
+<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td><?php echo $addressData['coin_balance']; ?> <img src="images/coin/BTC.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
                                     <td data-type="address">
                                         <span><?php echo $addressKey; ?></span>
                                         <input type="hidden" name="address[<?php echo $addressData['id']; ?>][address]" class="form-control" value="<?php echo $addressKey; ?>" placeholder="Address" />
@@ -79,7 +79,7 @@ if ($id != 0) {
                                 <tr>
                                     <td colspan="2" data-type="label"><input type="text" name="label" class="form-control" placeholder="Label"></td>
                                     <td>0.00 <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code']; ?></td>
-<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td>0 <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
+<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td>0 <img src="images/coin/BTC.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
                                     <td data-type="address"><input type="text" name="address" class="form-control" placeholder="Address"></td>
                                     <td><a class="addAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a></td>
                                 </tr>
