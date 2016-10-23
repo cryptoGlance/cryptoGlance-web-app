@@ -9,6 +9,7 @@ class CryptoGlance {
         'pools',
         'poolpicker',
         'wallets',
+    	'panel',
     );
 
     private $_algorithms = array(
@@ -91,6 +92,15 @@ class CryptoGlance {
         return $this->_config['pools'];
     }
 
+    private $panel = null;
+    public function getPanel(){
+    	if ($this->panel === null){
+    		require_once('includes/autoloader.inc.php');
+    		$this->panel = new Panel();
+    	}
+    	return $this->panel;
+    }
+    
     ////////////////
     // PoolPicker //
     ////////////////

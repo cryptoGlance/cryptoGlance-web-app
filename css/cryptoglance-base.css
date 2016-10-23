@@ -2860,3 +2860,11 @@ Roboto:
   font-style: italic;
 
 }
+
+#dashboard-wrap > div.panel > h1 {
+  cursor: move !important;
+}
+
+.placeholder {
+	border : solid 1px red !important;
+}

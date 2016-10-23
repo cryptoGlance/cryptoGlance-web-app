@@ -140,5 +140,37 @@
     });
 
   /*-----  End of Global Event Handling  ------*/
+    $document.on('ready', function(){
+    	var $dashboard = $('#dashboard-wrap');
+    	if (typeof panelOrder == 'object'){
+    		$dashboard.find('>div.panel').sort(function(a, b){
+    			return panelOrder[a.id] > panelOrder[b.id];
+    		}).each(function () {
+    		    var elem = $(this);
+    		    elem.remove();
+    		    $(elem).appendTo("#dashboard-wrap");
+    		});
+    	}
+    	sortable('#dashboard-wrap',{
+    		handle: 'div.panel > h1',
+    		items : 'div.panel[id]',
+    		placeholderClass: 'panel placeholder',
+    		forcePlaceholderSize: true,
+    	})[0].addEventListener('sortupdate', function(e) {
+    		var order = {};
+    		$('#dashboard-wrap > div.panel').each(function(index){
+    			order[$(this).attr('id')] = index;
+    		});
+    		$.ajax({
+    			type: 'post',
+    			url: 'ajax.php',
+    			data: {
+    				type : 'panel',
+    				action : 'order', 
+    				order : order
+    			}
+    		})
+    	});
+    });
 
 }(window.jQuery)
