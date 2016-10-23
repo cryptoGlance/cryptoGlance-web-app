@@ -150,9 +150,13 @@ class Wallets extends Config_Wallets {
             $fiatPrice = $btcIndex->convert($wallet['fiat'], $wallet['currency']);
             $fiatPrice = number_format($fiatPrice['result']['conversion'], 8, '.', '');
 
-            // Get COIN rate
-            $coinPrice = $btcIndex->convert('BTC', $wallet['currency']); // 'btc' to be dynamic
-            $coinPrice = number_format($coinPrice['result']['conversion'], 8, '.', '');
+            if ('BTC' == $wallet['currency']){
+            	$coinPrice = 1;
+            } else {
+	            // Get COIN rate
+	            $coinPrice = $btcIndex->convert('BTC', $wallet['currency']); // 'btc' to be dynamic
+	            $coinPrice = number_format($coinPrice['result']['conversion'], 8, '.', '');
+            }
 
             // Wallet information
             $walletAddressData = array();
