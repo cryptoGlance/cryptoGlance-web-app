@@ -11,6 +11,10 @@
         $('#currencyImage').attr('src', 'images/coin/'+selectedCurrency+'.png');
     }).on('change', '#inputWalletEchanger', function(e){
         var selectedExchanger = $(this).val();
+        var $currency = $('#walletCurrency');
+        var $fiat = $('#walletFiat');
+        var currency = $currency.val();
+        var fiat = $fiat.val();
         $.ajax({
             url: 'ajax.php',
             type: 'get',
@@ -21,15 +25,16 @@
             },
             dataType: 'json'
         }).done(function(data){
-            var $currency = $('#walletCurrency').empty();
-            var $fiat = $('#walletFiat').empty();
+            $currency.empty();
+            $fiat.empty();
             $.each(data['currency'], function(index, value){
             	$currency.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
             });
-            $currency.trigger('change');
+            $currency.val(currency).trigger('change');
             $.each(data['fiat'], function(index, value){
             	$fiat.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
             });
+            $fiat.val(fiat);
         });
     });
 

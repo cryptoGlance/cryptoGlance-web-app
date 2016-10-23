@@ -109,9 +109,21 @@ if ($id != 0) {
                     <div class="form-group">
                         <label for="inputWalletEchanger" class="control-label col-sm-4">Exchanger:</label>
                         <div class="col-sm-7">
-                            <select class="form-control" name="exchanger" id="inputWalletEchanger" <?php echo ($id != 0 ? 'disabled' : '') ?>>
+                           	<?php
+                           		$enabledExchangers = true;
+                           		if (isset($wallet['currency'])){
+                           			$enabledExchangers = array();
+                           			foreach ($walletObj->getExchangers() as $class => $name){
+                           				$ex = new $class();
+                           				if (array_key_exists($wallet['currency'], $ex->getCurrencies())){
+                           					$enabledExchangers[] = $class;
+                           				}
+                           			}
+                           		}
+							?>				
+                            <select class="form-control" name="exchanger" id="inputWalletEchanger">
                                 <?php foreach ($walletObj->getExchangers() as $class => $name) { ?>
-                                <option value="<?php echo $class ?>" <?php echo ($wallet['exchanger'] == $class ? 'selected' : '') ?>><?php echo $name; ?></option>
+                                <option <?php echo (is_array($enabledExchangers) && !in_array($class, $enabledExchangers))?'disabled ':'';?>value="<?php echo $class ?>" <?php echo ($wallet['exchanger'] == $class ? 'selected' : '') ?>><?php echo $name; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
