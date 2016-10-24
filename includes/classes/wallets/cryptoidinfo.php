@@ -2,7 +2,7 @@
 /*
  * @author Blonďák
  */
-class Wallets_Bytecent extends Wallets_Abstract implements IWallet {
+class Wallets_CryptoidInfo extends Wallets_Abstract implements IWallet {
 	
 	public static function getSupportedWallets(){
 		return array(
