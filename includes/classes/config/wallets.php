@@ -46,15 +46,12 @@ class Config_Wallets extends Config_Abstract {
             return false;
         }
 
-        $class = Wallets::getSupportedWalets();
-        $class = $class[$wallet['currency']];
-
-        if (class_exists($class)) {
+        if (($walletClass = Wallets::getWaletClass($wallet['currency'])) && class_exists($walletClass)) {
             $walletData = array();
             $addessData = array();
 
             foreach ($wallet['addresses'] as $address) {
-                $addessData[] = new $class($address['label'], $address['address'], $wallet['currency']);
+                $addessData[] = new $walletClass($address['label'], $address['address'], $wallet['currency']);
             }
 
             $this->_objs[] = array (

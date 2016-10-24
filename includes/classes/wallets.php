@@ -81,8 +81,8 @@ class Wallets extends Config_Wallets {
     }
     
     private static $supportedWallets = null;
-    public function getSupportedWalets(){
-    	if (self::$supportedWallets  === null){
+    public static function getSupportedWalets(){
+    	if (self::$supportedWallets === null){
     		self::$supportedWallets = array();
     		
     		$cache = new FileHandler('wallets/currencies.json');
@@ -116,6 +116,13 @@ class Wallets extends Config_Wallets {
     		$cache->write(json_encode(self::$supportedWallets));
     	}
     	return self::$supportedWallets;
+    }
+    
+    public static function getWaletClass($currency){
+    	if (array_key_exists($currency, $classes = self::getSupportedWalets())){
+    		return $classes[$currency];
+    	}
+    	return null;
     }
     
     private $ex = array();
