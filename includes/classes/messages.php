@@ -43,10 +43,6 @@ class Messages extends Config_Messages {
 		);
 	}
 	
-	public function getTest(){
-		 $this->pushMessage('text');
-	}
-	
 	public function getUpdate(){
 		$messages = $this->messages;
 		array_walk($messages, function(&$a, $b){
