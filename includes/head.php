@@ -49,6 +49,7 @@
         var rigUpdateTime = <?php echo $settings['general']['updateTimes']['rig'] ?>;
         var poolUpdateTime = <?php echo $settings['general']['updateTimes']['pool'] ?>;
         var walletUpdateTime = <?php echo $settings['general']['updateTimes']['wallet'] ?>;
+        var messageUpdateTime = <?php echo $settings['general']['updateTimes']['message'] ?>;
 
         <?php if (isset($_SERVER['PHPDESKTOP_VERSION']) && floatval($_SERVER['PHPDESKTOP_VERSION']) < 31.9) { ?>
         $(document).ready(function() {

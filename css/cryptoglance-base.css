@@ -2868,3 +2868,15 @@ Roboto:
 .placeholder {
 	border : solid 1px red !important;
 }
+#messages table td {
+	width : 1%;
+	white-space : nowrap; 
+}
+#messages table td:nth-of-type(3){
+	width : 100%;
+	text-align : left;
+	white-space : normal;
+}
+#messages table a:hover {
+    border-bottom: 0;
+}

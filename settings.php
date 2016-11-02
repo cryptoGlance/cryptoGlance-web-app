@@ -24,6 +24,7 @@ if (isset($_POST) && !empty($_POST)) {
         'rigUpdateDelay' => ($_POST['rigUpdateDelay'] == 'on' ? 10 : 2),
         'poolUpdateTime' => intval($_POST['poolUpdateTime']),
         'walletUpdateTime' => intval($_POST['walletUpdateTime']),
+    	'messageUpdateTime' => intval($_POST['messageUpdateTime']),
         // 'mobileminer' => intval($mobileminerEnabled),
         // 'mobileminerUsername' => $_POST['mobileminerUsername'],
         // 'mobileminerAppKey' => $_POST['mobileminerAppKey'],
@@ -132,6 +133,17 @@ require_once("includes/header.php");
                           <option <?php echo ($settings['general']['updateTimes']['wallet'] == 2700000) ? 'selected="selected"' : '' ?> value="2700">45 minutes</option>
                           <option <?php echo ($settings['general']['updateTimes']['wallet'] == 3600000) ? 'selected="selected"' : '' ?> value="3600">1 hour</option>
                           <option <?php echo ($settings['general']['updateTimes']['wallet'] == 7200000) ? 'selected="selected"' : '' ?> value="7200">2 hours</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Messages:</label>
+                      <div class="col-sm-3 refresh-interval">
+                        <select class="form-control" name="messageUpdateTime">
+                          <option <?php echo ($settings['general']['updateTimes']['message'] == 60000) ? 'selected="selected"' : '' ?> value="60">1 minute</option>
+                          <option <?php echo ($settings['general']['updateTimes']['message'] == 120000) ? 'selected="selected"' : '' ?> value="120">2 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['message'] == 300000) ? 'selected="selected"' : '' ?> value="300">5 minutes</option>
+                          <option <?php echo ($settings['general']['updateTimes']['message'] == 600000) ? 'selected="selected"' : '' ?> value="600">10 minutes</option>
                         </select>
                       </div>
                     </div>

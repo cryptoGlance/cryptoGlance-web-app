@@ -48,7 +48,11 @@ class Messages extends Config_Messages {
 	}
 	
 	public function getUpdate(){
-		return $this->messages;
+		$messages = $this->messages;
+		array_walk($messages, function(&$a, $b){
+			$a['id'] = $b;
+		});
+		return array_values($messages);
 	}
 	
 	public function __destruct(){
@@ -69,47 +73,6 @@ class Messages extends Config_Messages {
 				$this->writeMessages($messages);
 			}
 		}
+		return $this->getUpdate();
 	}
-	
-/*	
-	private function getSHMKey(){
-		return ftok(__FILE__, 't');
-	}
-	
-	public function getUpdate(){
-		$shm_key = $this->getSHMKey();
-		$shm_id = shmop_open($shm_key, "a", 0, 0);
-		if ($shm_id){
-			$messages = array_map(function($a){
-				return array('time' => DateTime::createFromFormat('U', $a['time'])->format('c')) + $a;
-			},unserialize(shmop_read($shm_id, 0, shmop_size($shm_id))));
-		} else {
-			$messages = array();
-		}
-		shmop_delete($shm_id);
-		shmop_close($shm_id);
-		return $messages;
-	}
-	
-	public function __destruct(){
-		$shm_key = $this->getSHMKey();
-		$shm_id = shmop_open($shm_key, "a", 0, 0);
-		if ($shm_id){
-			$messages = unserialize(shmop_read($shm_id, 0, shmop_size($shm_id)));
-		} else {
-			$messages = array();
-		}
-		$messages = array_merge($messages, $this->messages);
-		shmop_delete($shm_id);
-		shmop_close($shm_id);
-		if ($messages){
-			$data = serialize($messages);
-			$shm_id = shmop_open($shm_key, "c", 0644, strlen($data));
-			if ($shm_id) {
-				shmop_write($shm_id, $data, 0);
-				shmop_close($shm_id);
-			}
-		}
-	}
-*/	
 }

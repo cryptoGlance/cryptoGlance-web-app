@@ -15,5 +15,12 @@ if (!defined('__Wallets_Abstract')){
 	        $this->_label = $label;
 	        $this->_address = $address;
 	    }
+	    
+	    public function getCachedData(){
+	    	if ($this->_fileHandler->fileExists()){
+	    		return json_decode($this->_fileHandler->read(), true);
+	    	}
+	    	return false;
+	    }
 	}
 }

@@ -42,6 +42,9 @@
         } else if (type == 'wallet') {
             updateObject = walletCollection;
             updateReturn = updateObject.update();
+        } else if (type == 'messages') {
+            updateObject = messages;
+            updateReturn = updateObject.update();
         }
 
         var updateReadyCheck = setInterval(function() {

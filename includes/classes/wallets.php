@@ -32,7 +32,7 @@ class Wallets extends Config_Wallets {
         return null;
     }
 
-    private function getClassesInFile($file){
+    private static function getClassesInFile($file){
     	$classes = array();
     	$tokens = token_get_all(file_get_contents($file));
     	$count = count($tokens);
@@ -64,7 +64,7 @@ class Wallets extends Config_Wallets {
 						}
 						continue;
 					}
-		    		foreach ($this->getClassesInFile($fileInfo->getRealPath()) as $class){
+		    		foreach (self::getClassesInFile($fileInfo->getRealPath()) as $class){
 		    			$cr = new ReflectionClass($class);
 		    			if ($cr->isSubclassOf('IExchanger')){
 		    				self::$exchangers[$class] = $cr->getMethod('getName')->invoke(null);
@@ -100,7 +100,7 @@ class Wallets extends Config_Wallets {
 	    				}
 	    				continue;
 	    			}
-	    			foreach ($this->getClassesInFile($fileInfo->getRealPath()) as $class){
+	    			foreach (self::getClassesInFile($fileInfo->getRealPath()) as $class){
 	    				$cr = new ReflectionClass($class);
 	    				if ($cr->isSubclassOf('IWallet')){
 	    					foreach ($cr->getMethod('getSupportedWallets')->invoke(null) as $curr){
@@ -144,6 +144,11 @@ class Wallets extends Config_Wallets {
         }
         return $this->ex[$exchnager];
     }
+    
+    public function notifyBalanceChanged($from, $to, $wallet){
+    	$diff = $to['balance'] - $from['balance'];
+    	Messages::instance()->pushMessage("Wallet ".$wallet['label']." account ".$to['label']." changed <span class='".($diff > 0?"diff-plus":"diff-minus")."'>".($diff > 0?'+':'').str_replace('.00000000', '', number_format($diff, 8, '.', ''))."</span>"); 
+    }
 
     public function getUpdate() {
         $data = array();
@@ -173,7 +178,11 @@ class Wallets extends Config_Wallets {
 
             // Wallet actually contains a bunch of addresses and associated data
             foreach ($wallet['addresses'] as $addrKey => $address) {
+            	$addressCachedData = $address->getCachedData();
                 $addressData = $address->update();
+                if ($addressCachedData && $addressCachedData['balance'] != $addressData['balance']){
+                	$this->notifyBalanceChanged($addressCachedData, $addressData, $wallet);
+                }
 
                 $walletAddressData[$addressData['address']] = array(
                     'id' => $addrKey+1,
