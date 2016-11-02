@@ -50,6 +50,10 @@ class FileHandler {
         return $timeDiff;
     }
 
+    public function getMTime(){
+    	return $this->fileExists()?filemtime($this->_fullFilePath):false;
+    }
+    
     /*
      * Check if the file is writable or not.
      */

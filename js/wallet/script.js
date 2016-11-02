@@ -9,8 +9,37 @@
     $document.on('change', '#walletCurrency', function (evt) {
         var selectedCurrency = $(this).val();
         $('#currencyImage').attr('src', 'images/coin/'+selectedCurrency+'.png');
+    }).on('change', '#inputWalletEchanger', function(e){
+        var selectedExchanger = $(this).val();
+        var $currency = $('#walletCurrency');
+        var $fiat = $('#walletFiat');
+        var currency = $currency.val();
+        var fiat = $fiat.val();
+        $.ajax({
+            url: 'ajax.php',
+            type: 'get',
+            data: {
+            	type: 'wallets',
+            	action: 'currency',
+            	exchanger: selectedExchanger
+            },
+            dataType: 'json'
+        }).done(function(data){
+            $currency.empty();
+            $fiat.empty();
+            $.each(data['currency'], function(index, value){
+            	$currency.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
+            });
+            $currency.val(currency).trigger('change');
+            $.each(data['fiat'], function(index, value){
+            	$fiat.append($('<option value="'+index+'">'+index+' - '+value+'</option>'));
+            });
+            $fiat.val(fiat);
+        });
     });
 
+    
+    
     // Save Button
     $document.on('click', '#btnSaveWallet', function (evt) {
         var btnIcon = $('i', this);
@@ -27,6 +56,7 @@
                 id: walletId,
                 type: 'details',
                 action: 'update',
+                exchanger: $('#inputWalletEchanger').val(),
                 label: $('#walletName').val(),
                 currency: $('#walletCurrency').val(),
                 fiat: $('#walletFiat').val()

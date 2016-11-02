@@ -1,21 +1,30 @@
 <?php
-require_once('abstract.php');
 /*
- * @author Stoyvo
+ * @author Blonďák
  */
-class Wallets_Bitcoin extends Wallets_Abstract {
+class Wallets_BlockrIO extends Wallets_Abstract implements IWallet {
 
-    public function __construct($label, $address) {
+	public static function getSupportedWallets(){
+		return array(
+			'BTC',
+			'TBTC',
+			'LTC',
+			'DGC',
+			'QRK',
+//			'PPC',
+			'MEC',
+		);
+	}
+	
+    public function __construct($label, $address, $currency) {
         parent::__construct($label, $address);
-//        $this->_apiURL = 'http://blockchain.info/address/' . $address . '?format=json&limit=0';
-        $this->_apiURL = 'http://blockr.io/api/v1/address/balance/' . $address;
-        $this->_fileHandler = new FileHandler('wallets/bitcoin/' . $this->_address . '.json');
+        $this->_apiURL = 'http://'.strtolower($currency).'.blockr.io/api/v1/address/balance/' . $address;
+        $this->_fileHandler = new FileHandler('wallets/'.$currency.'/' . $this->_address . '.json');
     }
     
     public function update() {
         if ($GLOBALS['cached'] == false || $this->_fileHandler->lastTimeModified() >= 3600) { // updates every 60 minutes. How much are you being paid out that this must change? We take donations :)
             $walletData = curlCall($this->_apiURL);
-            
             $data = array (
                 'label' => $this->_label,
                 'address' => $this->_address,

@@ -35,6 +35,7 @@
     this.coin_value         = walletObj.coin_value
     this.fiat_balance       = walletObj.fiat_balance
     this.fiat_code          = walletObj.fiat_code
+    this.disclaimer			= walletObj.disclaimer
 
     return this._buildStatusHtml()
   }
@@ -47,7 +48,7 @@
 
   Wallet.prototype._buildStatusHtml = function () {
     var  output = '<div class="stat-pair" id="wallet-address-' + this.id + '">' +
-        '<img src="images/coin/' + this.currency + '.png" alt="' + this.currency + '" />' +
+        '<img src="images/coin/' + this.currency + '.png" onerror="this.src=\'images/coin/empty.png\'" alt="' + this.currency + '" />' +
         '<div class="stat-value">' +
         '<span class="green">' + this.currency_balance + ' ' + this.currency_code + '</span>';
 
@@ -67,6 +68,7 @@
         '<div class="stat-label">' +
         '<a href="wallet.php?id=' + this.id + '" class="stat-pair-icon">' + this.label + ' <i class="icon icon-walletalt"></i></a>' +
         '</div>' +
+        '<div class="panel-body-thanks">'+this.disclaimer+'</div>'+
         '</div>';
 
     return output;

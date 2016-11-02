@@ -5,6 +5,7 @@
 <script type="text/javascript" src="js/packages/bootstrap.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/packages/jquery.toastmessage.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/packages/bootstrap-switch.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
+<script type="text/javascript" src="js/packages/html.sortable.min.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/cryptoglance-ui.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <script type="text/javascript" src="js/version.js?v=<?php echo CURRENT_VERSION; ?>"></script>
 <!--build:js scripts.js-->
@@ -24,3 +25,9 @@
     });</script>
 <?php } ?>
 <!--/build-->
+<?php
+	if ($cryptoGlance->isConfigAvailable('panel')){
+		?><script type="text/javascript">var panelOrder = <?php echo json_encode($cryptoGlance->getPanel()->getOrder());?>;</script>
+		<?php 
+	}
+?>

@@ -6,7 +6,7 @@
                </div>
                <div class="stat-label stat-label-donate">
                   <div class="donate-address">
-                      <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)"><img src="images/coin/bitcoin.png" alt="Bitcoin" /></a> <span data-toggle="modal" data-target="#qrDonateBTC">12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE</span>
+                      <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)"><img src="images/coin/BTC.png" alt="Bitcoin" /></a> <span data-toggle="modal" data-target="#qrDonateBTC">12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE</span>
                   </div>
                </div>
                <div class="stat-value">

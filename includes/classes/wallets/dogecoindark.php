@@ -1,9 +1,14 @@
 <?php
-require_once('abstract.php');
 /*
  * @author Stoyvo
  */
-class Wallets_Dogecoindark extends Wallets_Abstract {
+class Wallets_Dogecoindark extends Wallets_Abstract implements IWallet {
+	
+	public static function getSupportedWallets(){
+		return array(
+			'DOGED'	
+		);
+	}
 
     public function __construct($label, $address) {
         parent::__construct($label, $address);

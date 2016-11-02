@@ -47,6 +47,16 @@ require_once("includes/header.php");
         require_once("templates/modals/switch-pool.php");
     }
 
+    if (true || $cryptoGlance->isConfigAvailable('messages')) {
+    	// Load specific JS for this panel
+    	$jsArray[] = 'dashboard/messages/Messages';
+    	$jsArray[] = 'dashboard/messages';
+
+    	$messages = $cryptoGlance->getMessages();
+    	include("templates/panels/messages.php");
+    }
+    
+    
     /* Pools */
     if ($cryptoGlance->isConfigAvailable('pools')) {
         // Load specific JS for this panel

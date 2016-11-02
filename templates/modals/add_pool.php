@@ -41,10 +41,11 @@
                  <!-- <option value="trademybit">TradeMyBit</option> -->
                  <!-- <option value="wafflepool">WafflePool</option> -->
                  <option value="westhash">WestHash</option>
+                 <option value="givemecoins">Give Me Coins</option>
               </select>
             </div>
           </div>
-           <div class="form-group mpos simplecoin nomp ckpool p2pool" style="display: none;">
+           <div class="form-group mpos simplecoin nomp ckpool p2pool givemecoins" style="display: none;">
              <label for="inputPoolURL" class="col-sm-3 control-label">Pool URL</label>
              <div class="col-sm-7">
                <input type="text" class="form-control" id="inputPoolURL" name="url" placeholder="http://pooldomain.com/">

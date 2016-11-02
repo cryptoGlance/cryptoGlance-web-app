@@ -11,7 +11,7 @@ class Pools_Slush extends Pools_Abstract {
     protected $_type = 'slush';
 
     public function __construct($params) {
-        parent::__construct(array('apiurl' => 'https://mining.bitcoin.cz'));
+        parent::__construct(array('apiurl' => 'https://slushpool.com'));
         $this->_apiKey = $params['apikey'];
         $this->_fileHandler = new FileHandler('pools/' . $this->_type . '/'. hash('md4', $params['apikey']) .'.json');
     }

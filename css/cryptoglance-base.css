@@ -1458,6 +1458,7 @@ a#dash-add-panel.flash {
 
 .panel-wallet .panel-body .stat-pair {
     border-color: #656565 #656565 #656565 #555;
+    margin : .2em;
 }
 
 .panel-body .stat-pair-dropzone {
@@ -1481,11 +1482,15 @@ a#dash-add-panel.flash {
   height: 100px;
   width: 260px;
 }
+#wallet-wrap .panel-body-thanks,
 .panel-wallet .panel-body .panel-body-thanks {
-    margin-top: 10px;
+    margin-top: 0;
     font-size: 14px;
 }
-
+#wallet-wrap .panel-body-thanks {
+	text-align : center;
+	margin : 10px 0;
+}
 .panel-body.ui-sortable .stat-pair:hover {
   cursor: move;
 }
@@ -2854,4 +2859,24 @@ Roboto:
   font-weight: normal;
   font-style: italic;
 
+}
+
+#dashboard-wrap > div.panel > h1 {
+  cursor: move !important;
+}
+
+.placeholder {
+	border : solid 1px red !important;
+}
+#messages table td {
+	width : 1%;
+	white-space : nowrap; 
+}
+#messages table td:nth-of-type(3){
+	width : 100%;
+	text-align : left;
+	white-space : normal;
+}
+#messages table a:hover {
+    border-bottom: 0;
 }

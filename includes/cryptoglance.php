@@ -9,6 +9,8 @@ class CryptoGlance {
         'pools',
         'poolpicker',
         'wallets',
+    	'panel',
+    	'messages',
     );
 
     private $_algorithms = array(
@@ -91,6 +93,19 @@ class CryptoGlance {
         return $this->_config['pools'];
     }
 
+    public function getMessages(){
+    	return $this->_config['messages'];
+    }
+    
+    private $panel = null;
+    public function getPanel(){
+    	if ($this->panel === null){
+    		require_once('includes/autoloader.inc.php');
+    		$this->panel = new Panel();
+    	}
+    	return $this->panel;
+    }
+    
     ////////////////
     // PoolPicker //
     ////////////////
@@ -128,6 +143,9 @@ class CryptoGlance {
         }
         if (empty($settings['general']['updateTimes']['rig'])) {
             $settings['general']['updateTimes']['rig'] = 3000;
+        }
+        if (empty($settings['general']['updateTimes']['message'])) {
+            $settings['general']['updateTimes']['message'] = 600000;
         }
         if (!empty($settings['general']['updateTimes']['rig_delay'])) {
             define('RIG_UPDATE_DELAY', intval($settings['general']['updateTimes']['rig_delay']));
@@ -168,6 +186,7 @@ class CryptoGlance {
                     'rig_delay' => $data['general']['rigUpdateDelay'],
                     'pool' => $data['general']['poolUpdateTime']*1000,
                     'wallet' => $data['general']['walletUpdateTime']*1000,
+                    'message' => $data['general']['messageUpdateTime']*1000,
                 ),
                 // 'mobileminer' => array(
                 //     'enabled' => $data['general']['mobileminer'],

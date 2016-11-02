@@ -10,6 +10,7 @@ class Config_Wallets extends Config_Abstract {
 
     protected $_config = 'configs/wallets.json';
 
+    protected $_objs;
 
     /*
     * Specific to class
@@ -22,6 +23,9 @@ class Config_Wallets extends Config_Abstract {
         } else if ($dataType == 'details' && empty($data['currency'])) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'Missing requires a crypto currency.';
+        } else if ($dataType == 'details' && empty($data['exchanger'])) {
+            header("HTTP/1.0 406 Not Acceptable"); // not accepted
+            return 'Missing requires a Exchanger.';
         } else if ($dataType == 'details' && empty($data['fiat'])) {
             header("HTTP/1.0 406 Not Acceptable"); // not accepted
             return 'Missing requires a fiat conversion.';
@@ -42,20 +46,19 @@ class Config_Wallets extends Config_Abstract {
             return false;
         }
 
-        $class = 'Wallets_' . ucwords(strtolower($wallet['currency']));
-
-        if (class_exists($class)) {
+        if (($walletClass = Wallets::getWaletClass($wallet['currency'])) && class_exists($walletClass)) {
             $walletData = array();
             $addessData = array();
 
             foreach ($wallet['addresses'] as $address) {
-                $addessData[] = new $class($address['label'], $address['address']);
+                $addessData[] = new $walletClass($address['label'], $address['address'], $wallet['currency']);
             }
 
             $this->_objs[] = array (
                 'currency' => $wallet['currency'],
                 'fiat' => (!empty($wallet['fiat']) ? $wallet['fiat'] : 'USD'),
                 'label' => $wallet['label'],
+            	'exchanger' => $wallet[exchanger],
                 'addresses' => $addessData,
             );
         }
@@ -175,7 +178,8 @@ class Config_Wallets extends Config_Abstract {
 
         $this->_data[] = array(
             'label' => $_POST['label'],
-            'currency' => $_POST['currency'],
+        	'exchanger' => $_POST['exchanger'],
+        	'currency' => $_POST['currency'],
             'fiat' => $_POST['fiat'],
             'addresses' => array(),
         );
@@ -193,6 +197,7 @@ class Config_Wallets extends Config_Abstract {
 
         $this->_data[$id] = array(
             'label' => $_POST['label'],
+        	'exchanger' => $_POST['exchanger'],
             'currency' => $_POST['currency'],
             'fiat' => $_POST['fiat'],
             'addresses' => $this->_data[$id]['addresses'],

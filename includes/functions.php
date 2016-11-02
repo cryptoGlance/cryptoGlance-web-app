@@ -1,7 +1,8 @@
 <?php
 
-function curlCall($url, $params = null, $contentType = 'application/json', $options = array()) {
+function curlCall($url, $params = null, $contentType = 'application/json', $options = array(), $extraCURL = array()) {
     $curl = curl_init($url);
+    if ($extraCURL) curl_setopt_array($curl, $extraCURL);
     curl_setopt($curl, CURLOPT_FAILONERROR, true);
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -9,7 +10,7 @@ function curlCall($url, $params = null, $contentType = 'application/json', $opti
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl, CURLOPT_SSLVERSION, 4);
+    curl_setopt($curl, CURLOPT_SSLVERSION, 6);
 
     if (!is_null($params) && !is_null($options['key']) && !is_null($options['sig'])) {
         curl_setopt($curl, CURLOPT_POST, TRUE);

@@ -1,4 +1,4 @@
-<?php $minimized = ($wallet['panel']['state'] === 'close'); ?>
+<?php $minimized = ($wallet['panel']['state'] === 'close');?>
 <div id="wallet" class="panel panel-primary panel-wallet" data-type="wallets">
    <h1>Wallet</h1>
    <div class="panel-heading">
@@ -10,6 +10,5 @@
    </div>
    <div class="panel-body" <?php echo ($minimized?'style="display:none;"':'') ?>>
       <div class="panel-body-addresses"><img src="images/ajax-loader.gif" alt="loading" style="position: relative; float:none; opacity: 1; bottom: 0; left: 0;" /></div>
-      <div class="panel-body-thanks">Conversions powered by the <b>cryptoGlance Team</b>! <a href="bitcoin:12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE?label=cryptoGlance" data-toggle="modal" data-target="#qrDonateBTC" title="Donate Bitcoin (BTC)">Donations keep us online!</a></div>
    </div>
 </div>

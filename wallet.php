@@ -44,7 +44,7 @@ if ($id != 0) {
             </div>
             <div class="panel-body">
                 <div class="total-wallet-balance">
-                    <span class="green"><?php echo $wallet['currency_balance'] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['currency_code'] ?></span> <span>//</span> <span class="blue"><?php echo $wallet['fiat_balance'] ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code'] ?></span> <?php if (strtolower($wallet['currency_code']) !== 'btc') { ?><span>//</span>  <span class="blue"><?php echo $wallet['coin_balance'] ?> <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code'] ?></span> <?php } ?>
+                    <span class="green"><?php echo $wallet['currency_balance'] ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" onerror="this.src='images/coin/empty.png';"/> <?php echo $wallet['currency_code'] ?></span> <span>//</span> <span class="blue"><?php echo $wallet['fiat_balance'] ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code'] ?></span> <?php if (strtolower($wallet['currency_code']) !== 'btc') { ?><span>//</span>  <span class="blue"><?php echo $wallet['coin_balance'] ?> <img src="images/coin/BTC.png" /> <?php echo $wallet['coin_code'] ?></span> <?php } ?>
                 </div>
                 <div class="table-responsive">
                     <form role="form">
@@ -66,9 +66,9 @@ if ($id != 0) {
                                         <span><?php echo $addressData['label']?></span>
                                         <input type="hidden" name="address[<?php echo $addressData['id']; ?>][label]" class="form-control" value="<?php echo $addressData['label']; ?>" placeholder="Label" />
                                     </td>
-                                    <td><?php echo $addressData['balance']; ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png" /> <?php echo $wallet['currency_code'] ?></td>
+                                    <td><?php echo $addressData['balance']; ?> <img src="images/coin/<?php echo $wallet['currency'] ?>.png"  onerror="this.src='images/coin/empty.png';"/> <?php echo $wallet['currency_code'] ?></td>
                                     <td><?php echo $addressData['fiat_balance']; ?> <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code']; ?></td>
-<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td><?php echo $addressData['coin_balance']; ?> <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
+<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td><?php echo $addressData['coin_balance']; ?> <img src="images/coin/BTC.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
                                     <td data-type="address">
                                         <span><?php echo $addressKey; ?></span>
                                         <input type="hidden" name="address[<?php echo $addressData['id']; ?>][address]" class="form-control" value="<?php echo $addressKey; ?>" placeholder="Address" />
@@ -79,7 +79,7 @@ if ($id != 0) {
                                 <tr>
                                     <td colspan="2" data-type="label"><input type="text" name="label" class="form-control" placeholder="Label"></td>
                                     <td>0.00 <img src="images/coin/fiat.png" /> <?php echo $wallet['fiat_code']; ?></td>
-<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td>0 <img src="images/coin/bitcoin.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
+<?php if ($wallet['currency_code'] != $wallet['coin_code']) { ?><td>0 <img src="images/coin/BTC.png" /> <?php echo $wallet['coin_code']; ?></td><?php } ?>
                                     <td data-type="address"><input type="text" name="address" class="form-control" placeholder="Address"></td>
                                     <td><a class="addAddress"><span class="blue"><i class="icon icon-save-floppy"></i></span></a></td>
                                 </tr>
@@ -88,6 +88,7 @@ if ($id != 0) {
                     </form>
                 </div>
             </div>
+			<div class="panel-body-thanks"><?php echo $walletObj->getExchanger($wallet['exchanger'])->getDisclaimer();?></div>
         </div>
         <?php } ?>
 
@@ -104,25 +105,49 @@ if ($id != 0) {
                             <input type="text" class="form-control" id="walletName" placeholder="Donation Addresses" name="label" value="<?php echo $wallet['label'] ?>">
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="inputWalletEchanger" class="control-label col-sm-4">Exchanger:</label>
+                        <div class="col-sm-7">
+                           	<?php
+                           		$enabledExchangers = true;
+                           		if (isset($wallet['currency'])){
+                           			$enabledExchangers = array();
+                           			foreach ($walletObj->getExchangers() as $class => $name){
+                           				$ex = new $class();
+                           				if (array_key_exists($wallet['currency'], $ex->getCurrencies())){
+                           					$enabledExchangers[] = $class;
+                           				}
+                           			}
+                           		}
+							?>				
+                            <select class="form-control" name="exchanger" id="inputWalletEchanger">
+                                <?php foreach ($walletObj->getExchangers() as $class => $name) { ?>
+                                <option <?php echo (is_array($enabledExchangers) && !in_array($class, $enabledExchangers))?'disabled ':'';?>value="<?php echo $class ?>" <?php echo ($wallet['exchanger'] == $class ? 'selected' : '') ?>><?php echo $name; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="inputWalletCurrency" class="control-label col-sm-4">Currency:</label>
                         <div class="col-sm-6">
                             <select class="form-control" name="currency" id="walletCurrency" <?php echo ($id != 0 ? 'disabled' : '') ?>>
-                                <?php foreach ($walletObj->getCurrencies() as $currency => $code) { ?>
-                                <option value="<?php echo $currency ?>" <?php echo ($wallet['currency'] == $currency ? 'selected' : '') ?>>(<?php echo $code ?>) <?php echo ucwords($currency) ?></option>
+                                <?php foreach ($walletObj->getCurrencies($wallet['exchanger']) as $code => $currency) { ?>
+                                <option value="<?php echo $code ?>" <?php echo ($wallet['currency'] == $code ? 'selected' : '') ?>><?php echo $code ?> - <?php echo ucwords($currency) ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-sm-2 col-has-icon">
-                            <img id="currencyImage" src="images/coin/<?php echo ($wallet['currency']) ? $wallet['currency'] : 'bitcoin' ?>.png" />
+                            <img id="currencyImage" onerror="this.src='images/coin/empty.png'" src="images/coin/<?php echo ($wallet['currency']) ? $wallet['currency'] : 'bitcoin' ?>.png" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputFiatCurrency" class="control-label col-sm-4">Fiat Conversion:</label>
                         <div class="col-sm-6">
                             <select class="form-control" id="walletFiat" name="fiat">
-                                 <?php foreach ($walletObj->getFiat() as $code => $fiat) { ?>
-                                     <option value="<?php echo $code ?>" <?php echo ($wallet['fiat_code'] == $code ? 'selected' : '') ?>>(<?php echo $code ?>) <?php echo $fiat; ?></option>
+                                 <?php foreach ($walletObj->getFiat($wallet['exchanger']) as $code => $fiat) { ?>
+                                     <option value="<?php echo $code ?>" <?php echo ($wallet['fiat_code'] == $code ? 'selected' : '') ?>><?php echo $code ?> - <?php echo $fiat; ?></option>
                                      <?php } ?>
                             </select>
                         </div>
