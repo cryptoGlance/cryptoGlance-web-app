@@ -1,4 +1,5 @@
 <br>
+
 _[Skip to **FAQs**](#faq)_ &bull; _[Skip to **Changelog**](#changelog)_ &bull; <a href="http://cryptoglance.info/" rel="external">http://cryptoglance.info</a>
 
 ----
