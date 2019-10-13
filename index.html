@@ -13,8 +13,8 @@
       <meta property="og:image" content="http://cryptoglance.info/images/cryptoglance-icon.png" />
       <meta property="og:description" content="cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot." />
       <link rel="shortcut icon" href="favicon.png">
-      <link rel="icon" type="image/png" href="favicon.png">      
-      <title>cryptoGlance :: Crypto-Currency Companion</title>
+      <link rel="icon" type="image/png" href="favicon.png">
+      <title>[ARCHIVED] cryptoGlance :: Crypto-Currency Companion</title>
       <!-- Bootstrap core CSS -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <!-- Glyph Icon Font from WebHostingHub (http://www.webhostinghub.com/glyphs/) styles -->
@@ -22,7 +22,7 @@
       <!-- Custom cryptoGlance styles -->
       <link href="css/jquery.fancybox.css" rel="stylesheet">
       <link href="css/cryptoglance-base.css" rel="stylesheet">
-      
+
       <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -30,8 +30,9 @@
       <![endif]-->
    </head>
    <body>
-      <a href="https://plus.google.com/110896112995796953409" rel="publisher"></a>
       <div class="page-container">
+         <div class="message-bar">Please note that <em>the cryptoGlance project has been archived</em>, and is no longer actively developed. The <a href="https://github.com/cryptoGlance/cryptoGlance-web-app">code repository is available on Github</a> in an archived, read-only state for legacy purposes.
+         </div>
          <!-- Fixed navbar -->
          <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
@@ -40,16 +41,13 @@
                   <span class="sr-only">Toggle navigation</span>
                   <i class="icon icon-dropmenu"></i>
                   </button>
-                  <a class="navbar-brand anchor-offset" href="#top"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
+                  <a class="navbar-brand anchor-offset"><img src="images/cryptoglance-logo-landscape.png" alt="cryptoGlance" /></a>
                </div>
                <div class="navbar-collapse collapse">
                   <ul class="nav nav-pills navbar-nav">
-                     <li class="active"><a href="#top" class="anchor-offset"><i class="icon icon-speed"></i> Dashboard<span id="dashboard-tag">monitoring console</span><span id="dash-add-panel" class="grad-green" data-toggle="modal" data-target="#editPool" data-backdrop="static">+ add new panel</span></a></li>
+                     <li class="active"><a class="anchor-offset"><i class="icon icon-speed"></i> Dashboard<span id="dashboard-tag">monitoring console</span><span id="dash-add-panel" class="grad-green" data-toggle="modal" data-target="#editPool" data-backdrop="static">+ add new panel</span></a></li>
                      <li><a href="#panel-features" class="anchor-offset"><i class="icon icon-managedhosting"></i> Features<span>you'll love (we hope)</span></a></li>
                      <li><a href="#jumbo-cta" class="anchor-offset"><i class="icon icon-download-alt"></i> Download <span>standalone or source</span></a></li>
-                     <!-- <li><a href="#panel-chat" class="anchor-offset"><i class="icon icon-chat"></i> Chat<span>Support + Dev Ideas</span></a></li> -->
-                     <li><a href="#panel-social" class="anchor-offset"><i class="icon icon-groups-friends"></i> Social<span>spread the word</span></a></li>
-                     <li><a href="#panel-donations" class="anchor-offset"><i class="icon icon-bitcoin"></i> Donations<span>are greatly appreciated!</span></a></li>
                   </ul>
                </div>
                <!--/.nav-collapse -->
@@ -58,19 +56,18 @@
          <div id="top" class="jumbotron">
             <img src="images/cryptoglance-devices.png" />
             <h1>Real-time updates in one spot, for all of your crypto components <i class="icon icon-pixelpickaxe"></i></h1>
-            <p class="jumbo-desc">cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot. Designed for large and small screens, you can easily monitor and control many aspects of your crypto/mining devices. There's also an <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android companion app</a> which connects to your cryptoGlance installation remotely.</p>
+            <p class="jumbo-desc">cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot. Designed for large and small screens, you can easily monitor and control many aspects of your crypto/mining devices.<br><br></p>
             <p class="jumbo-copy jumbo-cta" id="jumbo-cta">
+                  <br><br>
                <a class="btn btn-success btn-lg" rel="external"  href="https://sourceforge.net/projects/cryptoglance/files/latest/download?source=files" role="button"><i class="icon icon-windowseight"></i> Download for Windows<span>standalone server, ready-to-run</span></a>
                <a class="btn btn-warning btn-lg" rel="external" href="https://github.com/cryptoGlance/cryptoGlance-web-app/archive/master.zip"" rel="external" role="button"><i class="icon icon-github"></i> Latest Source Code (.zip)<span>run on your own php web server</span></a>
-               <a class="btn btn-default btn-lg" href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external" role="button"><i class="icon icon-play"></i> Get the Android App<span>at the Google Play store</span></a>
-               <a class="btn btn-danger btn-lg" href="https://www.youtube.com/watch?v=MZF1ZasbT58" rel="external" role="button"><i class="icon icon-youtube"></i> Video Tour / Setup Guide<span>check cryptoGlance in action</span></a>
                <br>
             </p>
          </div>
          <div id="panel-features" class="panel panel-primary">
             <div class="panel-lighter">
                <h1>Features</h1>
-            </div>         
+            </div>
             <div class="panel-body">
                <div class="feature">
                   <img src="images/feature-overview.jpg" />
@@ -131,15 +128,13 @@
                   </li>
                   <li>Configurable warning and danger status with visual cues</li>
                   <li>Void of malware or donation mining (does <strong>NOT</strong> require your private keys at all -- code is open source!)</li>
-                  <li>Companion <a href="https://play.google.com/store/apps/details?id=com.scar45.cryptoGlance" rel="external">Android app</a> which easily allows you to quickly access your cryptoGlance instance while on the go</li>
-                  <li><strong>MUCH MORE is planned, and <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/master/CHANGELOG.md">check our CHANGELOG.md</a> for the absolute latest changes!</strong> Follow our social accounts, or drop by our IRC channel to find out when new features are released!</li>
                 </ul>
             </div>
          </div>
          <div id="panel-screenies" class="panel panel-primary">
             <div class="panel-lighter">
                <h1>Screenies</h1>
-            </div>         
+            </div>
             <div class="panel-body">
                <a class="fancybox" rel="group" href="images/screenie-desktop-1.png" title="Overview - Grid View"><img src="images/screenie-desktop-1-thumb.png" alt="screenie-1" /></a>
                <a class="fancybox" rel="group" href="images/screenie-desktop-2.png" title="Overview - Stacked View"><img src="images/screenie-desktop-2-thumb.png" alt="screenie-2" /></a>
@@ -153,7 +148,7 @@
          <div id="panel-source" class="panel panel-primary">
             <div class="panel-lighter">
                <h1>Source Code / Changelog</h1>
-            </div>         
+            </div>
             <div class="panel-body">
                <a href="https://github.com/cryptoglance/cryptoGlance-web-app" rel="external"><img src="images/splash-source.png" /></a>
                <br>
@@ -161,8 +156,6 @@
                   <div class="stat-label">
                      Inspect ALL of the code, no malware or shady stuff here!
                      <br>
-                     <h3>Changelog:</h3>
-                     <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/blob/development/CHANGELOG.md" rel="external"><b>Release</b></a> // <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/beta" rel="external"><b>Beta</b></a> // <a href="https://github.com/cryptoGlance/cryptoGlance-web-app/commits/nightly" rel="external"><b>Nightly</b></a>
                   </div>
                </div>
                <!--
@@ -171,82 +164,14 @@
                -->
             </div>
          </div>
-         <div id="panel-social" class="panel panel-primary">
-            <div class="panel-lighter">
-               <h1>find cryptoGlance elsewhere</h1>
-            </div>         
-            <div class="panel-body social-icons">
-               <div class="container">
-                  <div class="social-box">
-                     <a class="social-icon" href="https://plus.google.com/u/0/b/110896112995796953409/communities/111042089628113521779" rel="external"><img src="images/icon-google-plus.png" />Google+</a>
-                     <div class="social-count">
-                        <div class="g-follow" data-annotation="bubble" data-height="20" data-href="//plus.google.com/110896112995796953409" data-rel="publisher"></div>
-                     </div>
-                  </div>
-                  <div class="social-box">
-                     <a class="social-icon" href="http://reddit.com/r/cryptoglance" rel="external"><img src="images/icon-reddit.png" />(sub)Reddit</a>
-                     <a class="social-count" href="http://reddit.com/r/cryptoglance" rel="external"><button type="button" class="btn btn-xs btn-warning"><i class="icon icon-reddit"></i> Subscribe</button></a>
-                  </div>
-                  <div class="social-box">
-                     <a class="social-icon" href="http://twitter.com/cryptoglance" rel="external"><img src="images/icon-twitter.png" />Twitter</a>
-                     <a class="twitter-follow-button social-count" href="https://twitter.com/cryptoglance" data-show-count="true" data-show-screen-name="false" data-width="85px" data-lang="en">Follow @cryptoglance</a>
-                  </div>
-               </div>
-               <div class="stat-pair stat-pair-devs">
-                  <div class="stat-label">
-                     follow the project, get in touch, and/or help spread the word!
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div id="panel-chat" class="panel panel-primary">
-            <div class="panel-lighter">
-               <h1>Chat (support + dev ideas)</h1>
-            </div>         
-            <div class="panel-body">
-               <div class="container social-icons">
-                  <a class="social-icon" href="http://webchat.freenode.net?channels=%23cryptoGlance&uio=OT10cnVlJjExPTIwNQa5" rel="external"><h3>Enter IRC Chatroom</h3><img src="images/icon-chat.png" /></a>
-                  <p>...or, connect to <span class="orange">Freenode</span> and join <span class="orange">#cryptoGlance</span> with your favourite mobile IRC client.</p>
-                  <iframe src="http://webchat.freenode.net?channels=%23cryptoGlance&uio=OT10cnVlJjExPTIwNQa5"></iframe>
-               </div>
-               <div class="stat-pair stat-pair-devs">
-                  <div class="stat-label">
-                     Please be respectful and patient when waiting for answers&hellip;Thanks!
-                  </div>
-               </div>
-            </div>
-         </div>
          <div id="panel-donations" class="panel panel-primary panel-in-footer">
             <div class="panel-body">
-               <div class="stat-pair stat-pair-devs">
-                  <div class="stat-value">
-                     Donations make us feel like champs <i class="icon icon-medal"></i>
-                  </div>
-                  <div class="stat-label stat-label-donate">
-                    <div class="donate-address">
-                        <a href="images/qr-donate-btc.png" rel="external" title="Donate some Bitcoin (BTC)"><img src="images/icon-bitcoin.png" alt="Bitcoin"></a> 12PqYifLLTHuU2jRxTtbbJBFjkuww3zeeE
-                    </div>
-                    <!-- div class="donate-address">
-                        <a href="images/qr-donate-ltc.png" rel="external" title="Donate some Litecoin (LTC)"><img src="images/icon-litecoin.png" alt="Litecoin"></a> LKUceKGBJwcmL4uVykL9CzKjmEqo6Fcx9M
-                    </div>
-                    <div class="donate-address">
-                        <a href="images/qr-donate-vtc.png" rel="external" title="Donate some Vertcoin (VTC)"><img src="images/icon-vertcoin.png" alt="Vertcoin"></a> Vp9izfX1kM3BqGADtvan1Et5nBiU1s32Zp
-                    </div>
-                    <div class="donate-address">
-                        <a href="images/qr-donate-doge.png" rel="external" title="Donate some Dogecoin (DOGE)"><img src="images/icon-dogecoin.png" alt="Dogecoin"></a> D8bcNHYbkBDqwkvZKKpfu8oAyzqezJ5RvW
-                    </div -->
-                  </div>
-                  <div class="stat-value">
-                     Long live crypto-currency!
-                  </div>
-               </div>
-               <div class="clearfix"></div>
                <br>
                <a href="https://github.com/cryptoglance/cryptoglance-app/tree/gh-pages" rel="external"><button type="button" class="btn btn-lg btn-default"><i class="icon icon-github"></i>&nbsp; this site's source on Github</button></a>
                <h3>Licensed under GPLv2</h3>
             </div>
          </div>
-      </div>      
+      </div>
       <script src="js/jquery-1.10.2.min.js"></script>
       <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
       <script src="js/jquery.fancybox.pack.js"></script>
@@ -254,7 +179,7 @@
       <script src="js/jquery.scrollTo.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/cryptoglance-ui.js"></script>
-      
+
       <!-- G+ button -->
       <script type="text/javascript">
         (function() {

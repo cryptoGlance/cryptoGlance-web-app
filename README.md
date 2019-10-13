@@ -1,6 +1,19 @@
-cryptoGlance
-============
+# CRYPTOGLANCE HAS BEEN ARCHIVED
 
-Responsive "Promo/Marketing" website for cryptoGlance.
+### The Git repository will be left accessible in a read-only, archived state.
 
-More info about the project itself @ http://cryptoGlance.info (Please consider donating if you appreciate all of the hard work we've put into this!)
+----
+
+### This `gh-pages` repository contains the responsive "Promo/Marketing" website for cryptoGlance.
+
+----
+
+<img src="images/cryptoGlance-thread-header.png" alt="cryptoGlance" />
+
+### What is cryptoGlance?
+
+cryptoGlance is an open-source, self-hosted PHP webapp providing you with a glance at all of your crypto-currency components in one spot. Designed for large and small screens, you can easily monitor and control many aspects of your crypto/mining devices.
+
+---
+
+/*end README.md*
