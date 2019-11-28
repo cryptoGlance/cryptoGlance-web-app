@@ -23,7 +23,7 @@ class Pools_Nicehash extends Pools_Abstract {
 
             0 = Scrypt
             1 = SHA256
-            2 = Scrypt-A.-Nf.
+            2 = ScryptNf
             3 = X11
             4 = X13
             5 = Keccak
@@ -31,7 +31,25 @@ class Pools_Nicehash extends Pools_Abstract {
             7 = Nist5
             8 = NeoScrypt
             9 = Lyra2RE
-            100 = Multi-algorithm (only valid for global statistics)
+            10 = WhirlpoolX
+            11 = Qubit
+            12 = Quark
+            13 = Axiom
+            14 = Lyra2REv2
+            15 = ScryptJaneNf16
+            16 = Blake256r8
+            17 = Blake256r14
+            18 = Blake256r8vnl
+            19 = Hodl
+            20 = DaggerHashimoto
+            21 = Decred
+            22 = CryptoNight
+            23 = Lbry
+            24 = Equihash
+            25 = Pascal
+            26 = X11Gost
+            27 = Sia
+            28 = Blake2s
         */
         $algoTypes = array (
             0 => 'Scrypt',
@@ -44,7 +62,26 @@ class Pools_Nicehash extends Pools_Abstract {
             7 => 'Nist5',
             8 => 'NeoScrypt',
             9 => 'Lyra2RE',
-            100=>'Multi-algorithm'
+            10 => 'WhirlpoolX',
+            11 => 'Qubit',
+            12 => 'Quark',
+            13 => 'Axiom',
+            14 => 'Lyra2REv2',
+            15 => 'ScryptJaneNf16',
+            16 => 'Blake256r8',
+            17 => 'Blake256r14',
+            18 => 'Blake256r8vnl',
+            19 => 'Hodl',
+            20 => 'DaggerHashimoto',
+            21 => 'Decred',
+            22 => 'CryptoNight',
+            23 => 'Lbry',
+            24 => 'Equihash',
+            25 => 'Pascal',
+            26 => 'X11Gost',
+            27 => 'Sia',
+            28 => 'Blake2s',
+            100 => 'Multi-algorithm'
         );
         if (array_key_exists($algoId, $algoTypes)) {
             return $algoTypes[$algoId];
